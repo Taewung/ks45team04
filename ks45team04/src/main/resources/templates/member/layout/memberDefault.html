@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
+<head th:replace="/member/fragments/headFragment :: headFragment"></head>
+<body>
+	<div id="wrapper">
+	
+		<!-- begin header -->
+		<div th:replace="/member/fragments/headerFragment :: headerFragment"></div>
+		<!-- end header -->			
+		
+		
+		<!-- begin license -->
+		<div th:replace="/member/fragments/licenseSectionFragment :: licenseSectionFragment"></div>
+		<!-- end license -->	
+			
+		
+		<!-- begin footer -->
+		<div th:replace="/member/fragments/footerFragment :: footerFragment"></div>
+		<!-- end footer -->
+		
+	</div>
+
+</body>
+</html>
