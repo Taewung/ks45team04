@@ -6,12 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/enwManagement")
-public class ENWManagement {
-
-	@GetMapping("/examComponentMain")
-	public String examComponentMain(Model model) {
-		model.addAttribute("title", "시험요소관리메인화면");
-		return "admin/enwManagement/exam_component_main";
+@RequestMapping("/pay")
+public class APayController {
+	
+	//결제 취소(삭제)
+	@GetMapping("/payDelete")
+	public String payDelete(Model model) {
+		model.addAttribute("title", "결제 취소(삭제)");
+		
+		return "admin/pay/pay_delete";
 	}
 }
