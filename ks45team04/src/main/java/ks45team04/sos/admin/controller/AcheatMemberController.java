@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/cheatMember") //큰폴더명
-public class CheatMemberController {
+public class AcheatMemberController {
 
 	
 	@GetMapping("/cheatMemberList")
