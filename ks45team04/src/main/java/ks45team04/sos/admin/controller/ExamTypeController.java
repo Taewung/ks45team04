@@ -6,12 +6,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value="/addexamType")
+@RequestMapping("/examType")
 public class ExamTypeController {
 
 	@GetMapping("/addExamType")
-	public String addEnamType(Model model) {
+	public String addExamType(Model model) {
 		model.addAttribute("title", "시험유형등록");
-		return "member/examType/add_exam_type";
+		return "admin/examType/add_exam_type";
+	}	
+	@GetMapping("/checkExamType")
+	public String checkExamType(Model model) {
+		model.addAttribute("title", "시험유형상세정보");
+		return "admin/examType/check_exam_type";
+	}	
+	@GetMapping("/examTypeList")
+	public String examTypeList(Model model) {
+		model.addAttribute("title", "시험유형목록");
+		return "admin/examType/exam_type_list";
+	}	
+	@GetMapping("/modifyExamType")
+	public String modifyExamType(Model model) {
+		model.addAttribute("title", "시험유형수정");
+		return "admin/examType/modify_exam_type";
 	}	
 }
