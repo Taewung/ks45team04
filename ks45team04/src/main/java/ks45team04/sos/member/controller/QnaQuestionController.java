@@ -5,7 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import ks45team04.sos.member.dto.QnaQuestion;
+import ks45team04.sos.member.dto.Qnaquestion;
+
 
 
 
@@ -15,7 +16,7 @@ public class QnaQuestionController {
 	
 			// qna 질문 삭제 처리
 			@PostMapping("/deleteQnaQuestion")
-			public String deleteQnaQuestion(QnaQuestion QnaQuestion) {
+			public String deleteQnaQuestion(Qnaquestion Qnaquestion) {
 				
 				return "";
 			}
@@ -32,7 +33,7 @@ public class QnaQuestionController {
 		
 			// qna 질문 수정 처리
 			@PostMapping("/modifyQnaQuestion")
-			public String modifyQnaQuestion(QnaQuestion QnaQuestion) {
+			public String modifyQnaQuestion(Qnaquestion Qnaquestion) {
 				
 				return "";
 			}
@@ -48,7 +49,7 @@ public class QnaQuestionController {
 		
 			// qna 질문 등록 처리
 			@PostMapping("/addQnaQuestionAnswer")
-			public String addQnaQuestionAnswer(QnaQuestion QnaQuestion) {
+			public String addQnaQuestionAnswer(Qnaquestion Qnaquestion) {
 				
 				return "";
 			}
