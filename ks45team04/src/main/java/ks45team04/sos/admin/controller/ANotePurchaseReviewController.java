@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class NotePurchaseReviewController {
+public class ANotePurchaseReviewController {
 	
 	@GetMapping("/notePurchaseReviewDelete")
 	public String notePurchaseReviewDelete(Model model) {
