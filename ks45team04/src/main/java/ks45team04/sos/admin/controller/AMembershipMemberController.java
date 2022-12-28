@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/membershipMember") //큰폴더명
 public class AMembershipMemberController {
 
-	@GetMapping("/membershipMPeriod")
+	@GetMapping("/membershipPeriod")
 	public String membershipPeriod(Model model) {
 		model.addAttribute("title", "전체 회원 멤버십 남은 기간 조회");
 		return  "admin/membershipMember/membership_period";
