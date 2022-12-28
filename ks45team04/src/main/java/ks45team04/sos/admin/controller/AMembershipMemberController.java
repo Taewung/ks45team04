@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/membershipMember") //큰폴더명
+@RequestMapping("/admin")
 public class AMembershipMemberController {
 
 	@GetMapping("/totalMembershipPeriod")
