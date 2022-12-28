@@ -4,10 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import ks45team04.sos.admin.dto.LicenseSubject;
 
 @Controller
+@RequestMapping("/admin")
 public class ALicenseSubjectController {
 
 	// 자격증 과목 삭제 처리
