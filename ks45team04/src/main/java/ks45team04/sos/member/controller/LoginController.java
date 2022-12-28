@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController {
 
 
-	@GetMapping("/loginHistory")
+	@GetMapping("/login")
 	public String login(Model model) {
 		model.addAttribute("title", "로그인");
 		return  "member/login/login";
