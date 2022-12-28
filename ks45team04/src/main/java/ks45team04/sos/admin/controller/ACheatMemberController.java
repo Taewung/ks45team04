@@ -1,5 +1,5 @@
 package ks45team04.sos.admin.controller;
 
-public class CheatMemberController {
+public class ACheatMemberController {
 
 }

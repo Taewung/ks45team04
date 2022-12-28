@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/enwManagement")
-public class ENWManagement {
+public class AENWManagement {
 
 	@GetMapping("/examComponentMain")
 	public String examComponentMain(Model model) {
