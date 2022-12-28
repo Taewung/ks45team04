@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<div class="col-md-3 left_col" th:fragment="asideFragment">
+
+	<!-- 플랫폼로고&플랫폼명 -->
+    <div class="left_col scroll-view">
+        <div class="navbar nav_title" style="border: 0;">
+            <a th:href="@{index.html}" class="site_title"><img src="/admin/images/logo2.png" alt=""> <span>SOS</span></a>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <!-- 로그인한 관리자의 간단 정보 -->
+        <div class="profile clearfix">
+            <div class="profile_info">
+                <span>Welcome,</span>
+                <h2>관리자명</h2>
+            </div>
+        </div>
+        <!-- /menu profile quick info -->
+
+        <br />
+
+		<!-- sidebar menu / 사이드 메뉴 -->
+
+		<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+		    <div class="menu_section">
+		        <h3>자격증</h3>
+		        <ul class="nav side-menu">
+		            <li><a><i class="fa fa-home"></i> 자격증1 <span class="fa fa-chevron-down"></span></a>
+		                <ul class="nav child_menu">
+		                    <li><a href="#">Dashboard</a></li>
+		                    <li><a href="#">Dashboard</a></li>
+		                    <li><a href="#">Dashboard</a></li>
+		                </ul>
+		            </li>
+		            <li><a><i class="fa fa-home"></i> 자격증2 <span class="fa fa-chevron-down"></span></a>
+		                <ul class="nav child_menu">
+		                    <li><a href="#">Dashboard</a></li>
+		                    <li><a href="#">Dashboard</a></li>
+		                    <li><a href="#">Dashboard</a></li>
+		                </ul>
+		            </li>
+		            <li><a><i class="fa fa-home"></i> 자격증3 <span class="fa fa-chevron-down"></span></a>
+		                <ul class="nav child_menu">
+		                    <li><a href="#">Dashboard</a></li>
+		                    <li><a href="#">Dashboard</a></li>
+		                    <li><a href="#">Dashboard</a></li>
+		                </ul>
+		            </li>
+
+		           
+		    </div>
+		    <div class="menu_section">
+		        <h3>매출</h3>
+		        <ul class="nav side-menu">
+		            <li><a><i class="fa fa-home"></i> 매출1 <span class="fa fa-chevron-down"></span></a>
+		                <ul class="nav child_menu">
+		                    <li><a href="#">Dashboard</a></li>
+		                    <li><a href="#">Dashboard</a></li>
+		                    <li><a href="#">Dashboard</a></li>
+		                </ul>
+		            </li>
+		            <li><a><i class="fa fa-home"></i> 매출2 <span class="fa fa-chevron-down"></span></a>
+		                <ul class="nav child_menu">
+		                    <li><a href="#">Dashboard</a></li>
+		                    <li><a href="#">Dashboard</a></li>
+		                    <li><a href="#">Dashboard</a></li>
+		                </ul>
+		            </li>
+		            <li><a><i class="fa fa-home"></i> 매출3 <span class="fa fa-chevron-down"></span></a>
+		                <ul class="nav child_menu">
+		                    <li><a href="#">Dashboard</a></li>
+		                    <li><a href="#">Dashboard</a></li>
+		                    <li><a href="#">Dashboard</a></li>
+		                </ul>
+		            </li>
+
+		           
+		    </div>
+	</div>
+        <!-- /sidebar menu -->
+
+        <!-- /menu footer buttons / 하단 버튼 -->
+        <div class="sidebar-footer hidden-small">
+            <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+            </a>
+        </div>
+        <!-- /menu footer buttons -->
+    </div>
+</div>
+
+</html>
