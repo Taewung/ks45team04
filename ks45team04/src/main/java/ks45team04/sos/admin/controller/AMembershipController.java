@@ -26,5 +26,11 @@ public class AMembershipController {
 		model.addAttribute("title", "멤버십 수정 화면");
 		return  "admin/membership/remove_membership";		
 	}	
+
+	@GetMapping("/membershipList")
+	public String membershipList(Model model) {
+		model.addAttribute("title", "멤버십 조회");
+		return  "admin/membership/membership_list";		
+	}		
 	
 }

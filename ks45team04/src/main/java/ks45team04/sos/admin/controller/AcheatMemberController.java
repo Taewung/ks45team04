@@ -12,13 +12,13 @@ public class AcheatMemberController {
 	
 	@GetMapping("/cheatMemberList")
 	public String cheatMemberList(Model model) {
-		model.addAttribute("title", "부정 회원 조회 화면");
+		model.addAttribute("title", "부정 회원 조회");
 		return  "admin/cheatMember/cheat_member_list";
 	}	
 	
 	@GetMapping("/cheatMemberJudge")
 	public String cheatMemberJudge(Model model) {
-		model.addAttribute("title", "부정 회원 심사 화면");
+		model.addAttribute("title", "부정 회원 심사");
 		return  "admin/cheatMember/cheat_member_judge";		
 	}
 }
