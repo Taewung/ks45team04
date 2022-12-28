@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/withdrawalMember") //큰폴더명
-public class WithdrawalMemberController {
+public class AWithdrawalMemberController {
 
 	@GetMapping("/withdrawalMemberList")
 	public String withdrawalMemberList(Model model) {
