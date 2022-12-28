@@ -5,11 +5,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class NoteSellTotalListController {
+public class ANoteSellTotalListController {
+	
 
+	// 노트 판매내역 조회
 	@GetMapping("/noteSellTotalList")
 	public String noteSellTotalList(Model model) {
-		model.addAttribute("title", "노트총판매목록");
+		model.addAttribute("title", "노트 판매내역 조회");
+		
 		return "admin/note/note_sell_total_list";
+
 	}
 }
