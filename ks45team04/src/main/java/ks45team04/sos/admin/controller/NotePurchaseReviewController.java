@@ -7,29 +7,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class NotePurchaseReviewController {
 	
-	@GetMapping("/dwonloadCountStandardDelete")
-	public String dwonloadCountStandardDelete(Model model) {
-		model.addAttribute("title", "다운로드횟수기준삭제");
-		return "admin/noteDownloadCountStandard/dwonload_count_standard_delete";
+	@GetMapping("/notePurchaseReviewDelete")
+	public String notePurchaseReviewDelete(Model model) {
+		model.addAttribute("title", "노트구매리뷰삭제");
+		return "admin/noteDownloadPurchaseReview/note_purchase_review_delete";
 	}
-	@GetMapping("/dwonloadCountStandardInsert")
-	public String dwonloadCountStandardInsert(Model model) {
-		model.addAttribute("title", "다운로드횟수기준등록");
-		return "admin/noteDownloadCountStandard/dwonload_count_standard_insert";
+	@GetMapping("/notePurchaseReviewDetail")
+	public String notePurchaseReviewDetail(Model model) {
+		model.addAttribute("title", "노트구매리뷰상세");
+		return "admin/noteDownloadPurchaseReview/note_purchase_review_detail";
 	}
-	@GetMapping("/dwonloadCountStandardList")
-	public String dwonloadCountStandardList(Model model) {
-		model.addAttribute("title", "다운로드횟수기준목록");
-		return "admin/noteDownloadCountStandard/dwonload_count_standard_list";
+	@GetMapping("/notePurchaseReviewInsert")
+	public String notePurchaseReviewInsert(Model model) {
+		model.addAttribute("title", "노트구매리뷰등록");
+		return "admin/noteDownloadPurchaseReview/note_purchase_review_insert";
 	}
-	@GetMapping("/dwonloadCountStandardModify")
-	public String dwonloadCountStandardModify(Model model) {
-		model.addAttribute("title", "다운로드횟수기준수정");
-		return "admin/noteDownloadCountStandard/dwonload_count_standard_modify";
+	@GetMapping("/notePurchaseReviewList")
+	public String notePurchaseReviewList(Model model) {
+		model.addAttribute("title", "노트구매리뷰목록");
+		return "admin/noteDownloadPurchaseReview/note_purchase_review_list";
 	}
-	@GetMapping("/dwonloadCountStandard")
-	public String dwonloadCountStandard(Model model) {
-		model.addAttribute("title", "다운로드횟수기준");
-		return "admin/noteDownloadCountStandard/dwonload_count_standard";
+	@GetMapping("/notePurchaseReviewModify")
+	public String notePurchaseReviewModify(Model model) {
+		model.addAttribute("title", "노트구매리뷰수정");
+		return "admin/noteDownloadPurchaseReview/note_purchase_review_modify";
 	}
 }
