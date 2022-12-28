@@ -17,10 +17,10 @@ public class PointController {
 		return "member/point/point_save_standard_list";
 	}
 	
-	//포인트 적립 기준 조회
+	//포인트 환급 수수료율 조회
 	@GetMapping("/pointFeeRateList")
 	public String pointFeeRateList(Model model) {
-		model.addAttribute("title", "포인트 적립 기준 조회");
+		model.addAttribute("title", "포인트 환급 수수료율 조회");
 		
 		return "member/point/point_fee_rate_list";
 	}
