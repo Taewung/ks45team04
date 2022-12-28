@@ -12,7 +12,7 @@ public class SearchMemberController {
 	@GetMapping("/searchMember")
 	public String searchMember(Model model) {
 		model.addAttribute("title", "회원 정보 검색");
-		return  "admin/searchMember/search_member";		
+		return  "admin/search/search_member";		
 	}
 	
 }
