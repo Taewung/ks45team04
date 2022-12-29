@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MemberMainController {
 
-	@GetMapping("/")
+	@GetMapping("/main")
 	public String memberMain(Model model) {
 		model.addAttribute("title", "메인화면");
-		return "member/memberMain";
+		return "member/Mainlayout/mainDefault";
 	}
 }

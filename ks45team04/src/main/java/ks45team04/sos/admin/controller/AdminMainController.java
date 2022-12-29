@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class AdminMainController {
 	
-	@GetMapping("")
+	@GetMapping("/main")
 	public String adminMain(Model model) {
-		return "admin/adminMain";
+		return "admin/layout/adminDefault";
 	}
 }
