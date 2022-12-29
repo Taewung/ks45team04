@@ -11,7 +11,7 @@ public class ExamController {
 
 	@GetMapping("/addExamAnswer")
 	public String addExamAnswer(Model model) {
-		model.addAttribute("title", "답안지등록");
+		model.addAttribute("title", "시험풀이");
 		return "member/exam/add_exam_answer";
 	}
 	@GetMapping("/addExamPaper")
