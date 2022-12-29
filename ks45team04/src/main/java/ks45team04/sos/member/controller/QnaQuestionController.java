@@ -26,7 +26,7 @@ public class QnaQuestionController {
 			public String deleteQnaQuestion(Model model) {
 				model.addAttribute("title", "qna 질문 삭제");
 					
-				return "admin/QnA/qna_question_delete";
+				return "member/QnA/qna_question_delete";
 			}
 		
 		
@@ -43,7 +43,7 @@ public class QnaQuestionController {
 			public String modifyQnaQuestion(Model model) {
 				model.addAttribute("title", "qna 질문 수정");
 					
-				return "admin/QnA/qna_question_modify";
+				return "member/QnA/qna_question_modify";
 			}
 
 		
@@ -59,7 +59,7 @@ public class QnaQuestionController {
 			public String addQnaQuestionAnswer(Model model) {
 				model.addAttribute("title", "qna 질문 등록");
 				
-				return "admin/QnA/qna_question_insert";
+				return "member/QnA/qna_question_insert";
 			}
 		
 			
