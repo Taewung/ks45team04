@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/membership") //큰폴더명
+@RequestMapping("/admin")
 public class AMembershipController {
 	
 	@GetMapping("/addMembership")
@@ -26,5 +26,11 @@ public class AMembershipController {
 		model.addAttribute("title", "멤버십 수정 화면");
 		return  "admin/membership/remove_membership";		
 	}	
+
+	@GetMapping("/membershipList")
+	public String membershipList(Model model) {
+		model.addAttribute("title", "멤버십 조회");
+		return  "admin/membership/membership_list";		
+	}		
 	
 }

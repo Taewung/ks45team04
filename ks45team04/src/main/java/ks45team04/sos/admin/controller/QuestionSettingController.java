@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/questionSetting")
+@RequestMapping("/admin")
 public class QuestionSettingController {
 
 	@GetMapping("/addQSetting")

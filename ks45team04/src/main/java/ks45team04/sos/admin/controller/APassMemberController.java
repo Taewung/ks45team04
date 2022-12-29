@@ -6,12 +6,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/adminPassMember")
+@RequestMapping("/admin")
 public class APassMemberController {
 
 	@GetMapping("/passMemberList")
 	public String passMemberList(Model model) {
 		model.addAttribute("title", "전체 합격 인증 멤버 조회");
-				return "admin/passMember/pass_member";
+				return "admin/passMember/pass_member_list";
+	}
+	
+	@GetMapping("/passMemberJudge")
+	public String passMemberJudge(Model model) {
+		model.addAttribute("title", "합격 인증 신청 회원 심사");
+				return "admin/passMember/pass_member_judge";
 	}
 }

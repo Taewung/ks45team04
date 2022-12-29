@@ -11,6 +11,6 @@ public class CheatMemberController {
 	@GetMapping("/cheatMemberRequest")
 	public String cheatMemberRequest(Model model) {
 		model.addAttribute("title", "부정 회원 심사 화면");
-		return "member/cheatMember/cheat_member/request";
+		return "member/cheatMember/cheat_member_request";
 	}
 }

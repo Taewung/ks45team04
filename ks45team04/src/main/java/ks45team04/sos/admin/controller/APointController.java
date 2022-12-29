@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("/point")
+@RequestMapping("/admin")
 public class APointController {
 	
 	//포인트 적립 기준 등록
