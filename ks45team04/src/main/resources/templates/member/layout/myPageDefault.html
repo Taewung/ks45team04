@@ -18,27 +18,28 @@
     <link rel="stylesheet" th:href="@{/css/animate.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-    <body style="background-color: var(--pxpMainColorLight);">
+    <body style="background-color: var(--pxpSecondaryColorLight);">
         <div class="pxp-dashboard-content">
         
         <!-- begin aside -->
-		<div th:replace="~{admin/fragments/adminAside :: asideFragment}"></div>
+		<div th:replace="~{member/fragments/myPageAside :: asideFragment}"></div>
 		<!-- end aside -->
 		
         <!-- begin header -->
-		<div th:replace="~{admin/fragments/adminHeader :: headerFragment}"></div>
+		<div th:replace="~{member/fragments/myPageHeader :: headerFragment}"></div>
 		<!-- end header -->
 		
 		<!-- begin contents --> 
             <div class="pxp-dashboard-content-details">
-                  
-             <h1>디폴트</h1>     
+
+                    
+             
 
             </div>
         <!-- end contents -->     
             
         <!-- begin footer -->
-			<div th:replace="~{admin/fragments/adminFooter :: footerFragment}"></div>
+			<div th:replace="~{member/fragments/myPageFooter :: footerFragment}"></div>
 		<!-- end footer -->
         </div>
         <script src="js/jquery-3.4.1.min.js"></script>
