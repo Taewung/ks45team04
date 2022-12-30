@@ -11,7 +11,6 @@ import ks45team04.sos.admin.dto.DownloadCountStandard;
 
 
 @Controller
-@RequestMapping("/admin")
 public class ADownloadCountStandardController {
 
 		// 다운로드 횟수 기준 삭제 처리

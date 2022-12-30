@@ -17,4 +17,9 @@ public class MemberMainController {
 		model.addAttribute("title", "메인화면");
 		return "member/myPage";
 	}
+	@GetMapping("/customerCenter")
+	public String customerCenter(Model model) {
+		model.addAttribute("title", "고객센터");
+		return "member/customerCenter";
+	}
 }
