@@ -10,7 +10,7 @@ public class MemberMainController {
 	@GetMapping("/main")
 	public String memberMain(Model model) {
 		model.addAttribute("title", "메인화면");
-		return "member/Mainlayout/mainDefault";
+		return "member/main";
 	}
 	@GetMapping("/myPage")
 	public String myPage(Model model) {
