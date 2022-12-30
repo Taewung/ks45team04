@@ -18,31 +18,35 @@
     <link rel="stylesheet" th:href="@{/css/animate.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-
-<body>
-	<div class="pxp-preloader"><span>Loading...</span></div>
-	
-		<!-- begin header -->
-		<div th:replace="~{member/fragments/contentsHeader :: headerFragment}"></div>
-		<!-- end header -->			
+    <body style="background-color: var(--pxpSecondaryColorLight);">
+        <div class="pxp-dashboard-content">
+        
+        <!-- begin aside -->
+		<div th:replace="~{member/fragments/myPageAside :: asideFragment}"></div>
+		<!-- end aside -->
 		
-		<!--  begin contents -->
-		<section>
-			<div class="pxp-container">
-				point_save_use_list.html
-			</div>
-		</section>
-		<!--  end contents -->
+        <!-- begin header -->
+		<div th:replace="~{member/fragments/myPageHeader :: headerFragment}"></div>
+		<!-- end header -->
+		
+		<!-- begin contents --> 
+            <div class="pxp-dashboard-content-details">
 
-			
-		<!-- begin footer -->
-		<div th:replace="~{member/fragments/contentsFooter :: footerFragment}"></div>
+                   point_save_use_list.html 
+             
+
+            </div>
+        <!-- end contents -->     
+            
+        <!-- begin footer -->
+			<div th:replace="~{member/fragments/myPageFooter :: footerFragment}"></div>
 		<!-- end footer -->
-			
-	<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
-    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/js/owl.carousel.min.js}"></script>
-    <script th:src="@{/js/nav.js}"></script>
-    <script th:src="@{/js/main.js}"></script>
-</body>
+        </div>
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/nav.js"></script>
+        <script src="js/Chart.min.js"></script>
+        <script src="js/main.js"></script>
+    </body>
 </html>
