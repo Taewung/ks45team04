@@ -48,15 +48,15 @@ public class QnaQuestionController {
 
 		
 			// qna 질문 등록 처리
-			@PostMapping("/addQnaQuestionAnswer")
-			public String addQnaQuestionAnswer(Qnaquestion Qnaquestion) {
+			@PostMapping("/addQnaQuestion")
+			public String addQnaQuestion(Qnaquestion Qnaquestion) {
 				
 				return "";
 			}
 
 			// qna 질문 등록 화면
-			@GetMapping("/addQnaQuestionAnswer")
-			public String addQnaQuestionAnswer(Model model) {
+			@GetMapping("/addQnaQuestion")
+			public String addQnaQuestion(Model model) {
 				model.addAttribute("title", "qna 질문 등록");
 				
 				return "member/QnA/qna_question_insert";
