@@ -12,4 +12,9 @@ public class MemberMainController {
 		model.addAttribute("title", "메인화면");
 		return "member/Mainlayout/mainDefault";
 	}
+	@GetMapping("/myPage")
+	public String myPage(Model model) {
+		model.addAttribute("title", "메인화면");
+		return "member/myPage";
+	}
 }
