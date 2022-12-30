@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ks45team04.sos.admin.dto.QnaAnswer;
 
 @Controller
+@RequestMapping("/admin")
 public class AQnaAnswerController {
 		
 	

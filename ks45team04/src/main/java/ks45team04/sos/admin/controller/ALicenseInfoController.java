@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ks45team04.sos.admin.dto.LicenseInfo;
 
 @Controller
+@RequestMapping("/admin")
 public class ALicenseInfoController {
 		
 		// 자격증 정보 삭제 처리

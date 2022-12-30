@@ -11,6 +11,7 @@ import ks45team04.sos.admin.dto.DownloadRecord;
 
 
 @Controller
+@RequestMapping("/admin")
 public class ADownloadRecordController {
 
 		// 다운로드 기록 삭제 처리
