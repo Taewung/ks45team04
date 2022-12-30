@@ -1,5 +1,5 @@
 package ks45team04.sos.admin.mapper;
 
-public class LicenseMainmapper {
+public class LicenseInfoMapper {
 
 }
