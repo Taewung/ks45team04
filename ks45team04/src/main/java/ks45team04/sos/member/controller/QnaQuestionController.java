@@ -72,12 +72,4 @@ public class QnaQuestionController {
 					
 				}
 			
-			// qna 질문 목록 조회
-			@GetMapping("/qnaQuestionList")
-			public String qnaQuestionList(Model model) {
-				model.addAttribute("title", "qna 질문 목록 조회");
-				
-				return "member/QnA/qna_question_list";
-		
-			}
 }

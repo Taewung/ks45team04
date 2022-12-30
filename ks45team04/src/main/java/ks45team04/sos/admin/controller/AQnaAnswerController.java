@@ -60,5 +60,13 @@ public class AQnaAnswerController {
 			
 			return "admin/QnA/qna_answer_insert";
 		}
+		
+		// qna 질문 목록 조회
+				@GetMapping("/QnaQuestionList")
+				public String QnaQuestionList(Model model) {
+					model.addAttribute("title", "qna 질문 조회");
+					
+					return "admin/QnA/qna_question.list";
+				}
 
 }
