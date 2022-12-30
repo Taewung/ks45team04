@@ -62,7 +62,7 @@ public class APointController {
 	//포인트 적립 등록
 	@GetMapping("/pointSaveUsePointAdd")
 	public String pointSaveUsePointAdd(Model model) {
-		model.addAttribute("title", "포인트 수수료율 등록");
+		model.addAttribute("title", "포인트 적립 등록");
 		
 		return "admin/point/point_save_use_add";
 	}
@@ -70,7 +70,7 @@ public class APointController {
 	//포인트 적립/사용 내역 수정
 	@GetMapping("/modifySaveUsePointList")
 	public String modifySaveUsePointList(Model model) {
-		model.addAttribute("title", "포인트 수수료율 수정");
+		model.addAttribute("title", "포인트 적립/사용 내역 수정");
 		
 		return "admin/point/point_save_use_modify";
 	}
@@ -78,7 +78,7 @@ public class APointController {
 	//포인트 적립/사용 내역 삭제
 	@GetMapping("/deleteSaveUsePointList")
 	public String deleteSaveUsePointList(Model model) {
-		model.addAttribute("title", "포인트 수수료율 삭제");
+		model.addAttribute("title", "포인트 적립/사용 내역 삭제");
 		
 		return "admin/point/point_save_use_delete";
 	}	
@@ -86,7 +86,7 @@ public class APointController {
 	//포인트 환급 승인(수정/삭제)
 	@GetMapping("/pointRefundApproval")
 	public String pointRefundApproval(Model model) {
-		model.addAttribute("title", "포인트 수수료율 등록");
+		model.addAttribute("title", "포인트 환급 승인(수정/삭제)");
 		
 		return "admin/point/point_refund_approval";
 	}		
