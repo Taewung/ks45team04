@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class APassMemberController {
 
-	@GetMapping("/passMemberList")
-	public String passMemberList(Model model) {
+	@GetMapping("/totalPassMemberList")
+	public String totalPassMemberList(Model model) {
 		model.addAttribute("title", "전체 합격 인증 멤버 조회");
-				return "admin/passMember/pass_member_list";
+				return "admin/passMember/total_pass_member_list";
 	}
 	
 	@GetMapping("/passMemberJudge")
