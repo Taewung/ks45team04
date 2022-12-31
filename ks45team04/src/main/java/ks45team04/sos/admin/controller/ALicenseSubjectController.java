@@ -13,7 +13,6 @@ import ks45team04.sos.admin.service.LicenseSubService;
 import ks45team04.sos.admin.service.LicenseSubjectService;
 
 @Controller
-@RequestMapping("/admin")
 public class ALicenseSubjectController {
 	
 	private final LicenseSubjectService licenseSubjectService;

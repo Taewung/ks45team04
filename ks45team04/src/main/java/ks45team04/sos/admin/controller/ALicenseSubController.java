@@ -12,7 +12,6 @@ import ks45team04.sos.admin.dto.LicenseSub;
 import ks45team04.sos.admin.service.LicenseSubService;
 
 @Controller
-@RequestMapping("/admin")
 public class ALicenseSubController {
 	
 private final LicenseSubService licenseSubService;

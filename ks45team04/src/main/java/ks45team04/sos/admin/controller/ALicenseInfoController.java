@@ -13,7 +13,6 @@ import ks45team04.sos.admin.service.LicenseInfoService;
 
 
 @Controller
-@RequestMapping("/admin")
 public class ALicenseInfoController {
 	
 private final LicenseInfoService licenseInfoService;

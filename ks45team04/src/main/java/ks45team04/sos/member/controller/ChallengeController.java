@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/challenge") //큰폴더명
 public class ChallengeController {
 	
 	@GetMapping("/challengeGoal")
