@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/cheatMember")
 public class CheatMemberController {
 	@GetMapping("/cheatMemberRequest")
 	public String cheatMemberRequest(Model model) {

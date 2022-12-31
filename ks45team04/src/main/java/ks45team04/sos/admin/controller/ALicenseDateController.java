@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ks45team04.sos.admin.dto.LicenseDate;
 
 @Controller
-@RequestMapping("/admin")
 public class ALicenseDateController {
 
 			// 자격증 일정 삭제 처리
