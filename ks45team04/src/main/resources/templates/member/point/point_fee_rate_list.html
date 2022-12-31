@@ -18,7 +18,7 @@
     <link rel="stylesheet" th:href="@{/css/animate.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <style>
-    h1{
+    h1,p{
     text-align:center;
     }
     th,td{
@@ -37,28 +37,39 @@
 		<!--  begin contents -->
 		<section>
 			<div class="pxp-container">
-			<div class="mt-4 mt-lg-5">
-			<h1>포인트 수수료율</h1><br>
-                    <div class="table-responsive">
-                        <table class="table align-middle">
-	                        <tr>
-	                        	<th scope="col">번호</th>
-	                        	<th scope="col">수수료율 내용</th>
-	                        	<th scope="col">수수료율</th>
-	                        </tr>
-                            <tr>
-                                <td style="width: 25%;"><div class="pxp-company-dashboard-candidate-title">1</div></td>
-                                <td style="width: 45%;"><div class="pxp-company-dashboard-candidate-title">노트 판매 적립율</div></td>
-                                <td><div class="pxp-company-dashboard-candidate-location">100%</div></td>
-                            </tr>
-                            <tr>
-                                <td style="width: 25%;"><div class="pxp-company-dashboard-candidate-title">2</div></td>
-                                <td style="width: 45%;"><div class="pxp-company-dashboard-candidate-title">포인트 환급 수수료율</div></td>
-                                <td><div class="pxp-company-dashboard-candidate-location">10%</div></td>
-                            </tr>
-                        </table>
-                    </div>
-			</div>
+				<div class="mt-4 mt-lg-5">
+                	<div class="pxp-dashboard-content-details">
+	                <h1>포인트 수수료율</h1>
+	                <p class="pxp-text-light">Point fee rate</p>
+	
+	                <div class="mt-4 mt-lg-5">
+	                    <div class="table-responsive">
+	                        <table class="table table-hover align-middle">
+	                            <thead>
+	                                <tr>
+	                                    <th style="width: 30%;">번호</th>
+	                                    <th style="width: 30%;">수수료 적용</th>
+	                                    <th style="width: 30%;">수수료율</th>
+	                                </tr>
+	                            </thead>
+	                            <tbody>
+	                                <tr>
+	                                    <td><div class="pxp-company-dashboard-subscriptions-plan">1</div></td>
+	                                    <td><div class="pxp-company-dashboard-subscriptions-status">노트 판매 적립율</div></td>
+	                                    <td><div class="pxp-company-dashboard-job-date">100%</div></td>
+	                                </tr>
+	                                <tr>
+	                                    <td><div class="pxp-company-dashboard-subscriptions-plan">2</div></td>
+	                                    <td><div class="pxp-company-dashboard-subscriptions-status">포인트 환급 수수료율</div></td>
+	                                    <td><div class="pxp-company-dashboard-job-date">10%</div></td>
+	                                </tr>
+	                            </tbody>
+	                        </table>
+	                    </div>
+                	</div>
+            	</div>
+               </div>
+            </div>
 		</section>
 		<!--  end contents -->
 
