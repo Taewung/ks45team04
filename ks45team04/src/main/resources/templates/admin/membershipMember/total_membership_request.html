@@ -18,28 +18,28 @@
     <link rel="stylesheet" th:href="@{/css/animate.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-    <body style="background-color: var(--pxpSecondaryColorLight);">
+    <body style="background-color: var(--pxpMainColorLight);">
         <div class="pxp-dashboard-content">
         
         <!-- begin aside -->
-		<div th:replace="~{member/fragments/myPageAside :: asideFragment}"></div>
+		<div th:replace="~{admin/fragments/adminAside :: asideFragment}"></div>
 		<!-- end aside -->
 		
         <!-- begin header -->
-		<div th:replace="~{member/fragments/myPageHeader :: headerFragment}"></div>
+		<div th:replace="~{admin/fragments/adminHeader :: headerFragment}"></div>
 		<!-- end header -->
 		
 		<!-- begin contents --> 
             <div class="pxp-dashboard-content-details">
-	.modify_member.html
+
                     
-             
+                total_membership_request.html  
 
             </div>
         <!-- end contents -->     
             
         <!-- begin footer -->
-			<div th:replace="~{member/fragments/myPageFooter :: footerFragment}"></div>
+			<div th:replace="~{admin/fragments/adminFooter :: footerFragment}"></div>
 		<!-- end footer -->
         </div>
         <script src="js/jquery-3.4.1.min.js"></script>

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MembershipController {
 	
 	@GetMapping("/membershipRequest")
-	public String addMember(Model model) {
+	public String membershipRequest(Model model) {
 		model.addAttribute("title", "멤버십 신청");
 		return  "member/member/membership_request";		
 	}	
