@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ks45team04.sos.admin.dto.LicenseSub;
 
 @Controller
-@RequestMapping("/admin")
 public class ALicenseSubController {
 	
 		// 자격증 중분류 정보 삭제 처리
