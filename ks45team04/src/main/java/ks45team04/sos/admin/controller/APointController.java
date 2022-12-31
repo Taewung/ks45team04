@@ -80,6 +80,13 @@ public class APointController {
 		model.addAttribute("title", "포인트 적립/사용 내역 삭제");
 		
 		return "admin/point/point_save_use_delete";
+	}
+	//포인트 적립/사용 내역 조회
+	@GetMapping("/pointSaveUseList")
+	public String pointSaveUseList(Model model) {
+		model.addAttribute("title", "포인트 적립/사용 내역 삭제");
+		
+		return "admin/point/point_save_use_list";
 	}	
 
 	//포인트 환급 승인(수정/삭제)
