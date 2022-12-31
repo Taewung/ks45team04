@@ -23,19 +23,71 @@
 	<div class="pxp-preloader"><span>Loading...</span></div>
 	
 		<!-- begin header -->
-		<div th:replace="~{member/fragments/contentsHeader :: headerFragment}"></div>
+		<div th:replace="~{member/fragments/contentsHeader :: headerFragment}" ></div>
 		<!-- end header -->			
 		
 		<!--  begin contents -->
-		<section>
-			<div class="pxp-container">
-				membership_request.html
-			</div>
-		</section>
-		<!--  end contents -->
+	<h2 class="pxp-section-h2">원하는 멤버십을 선택하세요.</h2>
+                <p class="pxp-text-light">무제한으로 즐기세요.</p>
+                <p class="pxp-text-light">챌린지 기능을 사용하세요.</p>
 
-			
-		<!-- begin footer -->
+                <div class="row mt-3 mt-md-4 pxp-animate-in pxp-animate-in-top";>
+                    <div class="col-md-6 col-xl-4 col-xxl-3 pxp-plans-card-1-container">
+                        <div class="pxp-plans-card-1">
+                            <div class="pxp-plans-card-1-top">
+                                <div class="pxp-plans-card-1-title">10일</div>
+                                <div class="pxp-plans-card-1-price">
+                                    <div class="pxp-plans-price-monthly">
+                                        3,900원<span class="pxp-period"></span>
+                                    </div>
+                                </div>
+                                <div class="pxp-plans-card-1-list">
+                                    <ul class="list-unstyled">
+                                        <li><img src="images/check.svg" alt="">챌린지를 이용해 능률을 높이세요!</li>
+                                        <li><img src="images/check.svg" alt="">다양한 기출문제를 풀어보세요!</li>
+                                        <li><img src="images/check.svg" alt="">10일간의 집중!</li>
+                                        <li><img src="images/check.svg" alt="">더 많은 혜택을 누리세요!</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="pxp-plans-card-1-bottom">
+                                <div class="pxp-plans-card-1-cta">
+                                    <a href="#" class="btn rounded-pill pxp-card-btn">선택</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-xl-4 col-xxl-3 pxp-plans-card-1-container">
+                        <div class="pxp-plans-card-1 pxp-is-featured">
+                            <div class="pxp-plans-card-1-top">
+                                <div class="pxp-plans-card-1-featured-label">추천</div>
+                                <div class="pxp-plans-card-1-title">30일</div>
+                                <div class="pxp-plans-card-1-price">
+                                    <div class="pxp-plans-price-monthly">
+                                        9,900원<span class="pxp-period"></span>
+                                    </div>
+                                </div>
+                                <div class="pxp-plans-card-1-list">
+                                    <ul class="list-unstyled">
+                                        <li><img src="images/check-light.svg" alt="">챌린지를 이용해 능률을 높이세요!</li>
+                                        <li><img src="images/check-light.svg" alt="">다양한 기출문제를 풀어보세요!</li>
+                                        <li><img src="images/check-light.svg" alt="">30일의 넉넉한 기간!</li>
+                                        <li><img src="images/check-light.svg" alt="">더 많은 혜택을 누리세요!</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="pxp-plans-card-1-bottom">
+                                <div class="pxp-plans-card-1-cta">
+                                    <a href="#" class="btn rounded-pill pxp-card-btn">선택</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+		<!--  end contents -->
+		
+		
+				<!-- begin footer -->
 		<div th:replace="~{member/fragments/contentsFooter :: footerFragment}"></div>
 		<!-- end footer -->
 			
