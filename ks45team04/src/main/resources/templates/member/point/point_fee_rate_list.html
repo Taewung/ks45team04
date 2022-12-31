@@ -17,6 +17,14 @@
     <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
     <link rel="stylesheet" th:href="@{/css/animate.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+    h1{
+    text-align:center;
+    }
+    th,td{
+    text-align:center;
+    }
+    </style>
 </head>
 
 <body>
@@ -29,7 +37,27 @@
 		<!--  begin contents -->
 		<section>
 			<div class="pxp-container">
-				point_fee_rate_list.html
+			<div class="mt-4 mt-lg-5">
+			<h1>포인트 수수료율</h1><br>
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+	                        <tr>
+	                        	<th scope="col">번호</th>
+	                        	<th scope="col">수수료율 내용</th>
+	                        	<th scope="col">수수료율</th>
+	                        </tr>
+                            <tr>
+                                <td style="width: 25%;"><div class="pxp-company-dashboard-candidate-title">1</div></td>
+                                <td style="width: 45%;"><div class="pxp-company-dashboard-candidate-title">노트 판매 적립율</div></td>
+                                <td><div class="pxp-company-dashboard-candidate-location">100%</div></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 25%;"><div class="pxp-company-dashboard-candidate-title">2</div></td>
+                                <td style="width: 45%;"><div class="pxp-company-dashboard-candidate-title">포인트 환급 수수료율</div></td>
+                                <td><div class="pxp-company-dashboard-candidate-location">10%</div></td>
+                            </tr>
+                        </table>
+                    </div>
 			</div>
 		</section>
 		<!--  end contents -->
