@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import ks45team04.sos.admin.dto.LicenseSub;
-import ks45team04.sos.admin.mapper.LicenseMainMapper;
 import ks45team04.sos.admin.mapper.LicenseSubMapper;
 
 @Service

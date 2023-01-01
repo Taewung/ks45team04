@@ -17,6 +17,11 @@
     <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
     <link rel="stylesheet" th:href="@{/css/animate.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- 부트스트랩  -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>자격증 일정 목록 조회</title>
+    
 </head>
     <body style="background-color: var(--pxpMainColorLight);">
         <div class="pxp-dashboard-content">
@@ -31,9 +36,46 @@
 		
 		<!-- begin contents --> 
             <div class="pxp-dashboard-content-details">
-
+			 <table class="table">
+			<thead>
+				    <tr>
+				      <th scope="col">자격증일정코드</th>
+				      <th scope="col">자격증코드</th>
+				      <th scope="col">접수기간</th>
+				      <th scope="col">시험날짜</th>
+				      <th scope="col">응시비용</th>
+				      <th scope="col">등록자</th>
+				      <th scope="col">등록날짜</th>
+				      <th>수정</th>
+					  <th>삭제</th>
+				    </tr>
+				
+			</thead>
+			<tbody>
+				<tr th:if="${not #lists.isEmpty(licenseDateList)}"
+					th:each="l : ${licenseDateList}">
+					<td th:text="${l.ldCode}"></td>
+					<td th:text="${l.liCode}"></td>
+					<td th:text="${l.ldPeriod}"></td>
+					<td th:text="${l.ldDate}"></td>
+					<td th:text="${l.ldAcceptanceDate}"></td>
+					<td th:text="${l.ldCost}"></td>
+					<td th:text="${l.ldRegId}"></td>
+					<td th:text="${l.ldRegDatetime}"></td>
+					<td>
+						<a th:href="@{#}">수정</a>
+					</td>
+					<td>					
+						<a th:href="@{#}">삭제</a>
+					</td>
+				</tr>
+				<tr th:unless="${not #lists.isEmpty(licenseDateList)}">
+					<td colspan="9">등록된 자격증 정보 없습니다.</td>
+				</tr>
+			</tbody>
+		</table>
                     
-               license_date_list.html   
+               
 
             </div>
         <!-- end contents -->     

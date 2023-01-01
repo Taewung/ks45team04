@@ -17,11 +17,6 @@
     <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
     <link rel="stylesheet" th:href="@{/css/animate.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <!-- 부트스트랩  -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>노트 다운로드 횟수 기준 조회</title>
-    
 </head>
     <body style="background-color: var(--pxpMainColorLight);">
         <div class="pxp-dashboard-content">
@@ -37,38 +32,8 @@
 		<!-- begin contents --> 
             <div class="pxp-dashboard-content-details">
 
-     	 <table class="table">
-			<thead>
-				    <tr>
-				      <th scope="col">다운로드횟수기준코드</th>
-				      <th scope="col">다운로드가능횟수</th>
-				      <th scope="col">다운로드기준등록자</th>
-				      <th scope="col">다운로드기준등록일시</th>
-
-				      <th>수정</th>
-					  <th>삭제</th>
-				    </tr>
-				
-			</thead>
-			<tbody>
-				<tr th:if="${not #lists.isEmpty(downloadCountStandardList)}"
-					th:each="l : ${downloadCountStandardList}">
-					<td th:text="${l.dscCode}"></td>
-					<td th:text="${l.downloadCount}"></td>
-					<td th:text="${l.downloadCountWriter}"></td>
-					<td th:text="${l.downloadCountDatetime}"></td>
-					<td>
-						<a th:href="@{#}">수정</a>
-					</td>
-					<td>					
-						<a th:href="@{#}">삭제</a>
-					</td>
-				</tr>
-				<tr th:unless="${not #lists.isEmpty(downloadCountStandardList)}">
-					<td colspan="9">등록된 정보가 없습니다.</td>
-				</tr>
-			</tbody>
-		</table>   
+                    
+                total_membership_request.html  
 
             </div>
         <!-- end contents -->     

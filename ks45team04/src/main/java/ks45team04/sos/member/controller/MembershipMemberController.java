@@ -7,10 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MembershipMemberController {
 
-	@GetMapping("/membershipRequest")
-	public String membershipRequest(Model model) {
+	@GetMapping("/totalMembershipRequest")
+	public String totalMembershipRequest(Model model) {
 		model.addAttribute("title", "멤버십 신청");
+
 		return  "membershipMember/membership_request";
+
+
 	}
 	
 	@GetMapping("/membershipPeriod")
@@ -19,4 +22,5 @@ public class MembershipMemberController {
 		return  "membershipMember/membership_period";
 	}
 		
+	
 }
