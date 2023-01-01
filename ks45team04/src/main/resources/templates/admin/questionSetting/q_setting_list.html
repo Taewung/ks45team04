@@ -29,24 +29,30 @@
 		<div th:replace="~{admin/fragments/adminHeader :: headerFragment}"></div>
 		<!-- end header -->
 		
-		<!-- begin contents --> 
-		<div class="pxp-dashboard-content-details">
-				<h1>문제/답안/해설</h1>
-                <p class="pxp-text-light"></p>
-
+		<!-- begin contents --> 	
+            <div class="pxp-dashboard-content-details">
+ 				<h1>문제/답안/해설</h1>
                 <div class="mt-4 mt-lg-5">
-                    <!-- 검색 start -->
                     <div class="row justify-content-between align-content-center">
                         <div class="col-auto order-1 order-sm-2">
                             <div class="pxp-company-dashboard-jobs-search mb-3">
                                 <div class="pxp-company-dashboard-jobs-search-search-form">
                                     <div class="input-group">
                                         <span class="input-group-text"><span class="fa fa-search"></span></span>
-                                        <input type="text" class="form-control" placeholder="Search jobs...">
+                                        <input type="text" class="form-control" placeholder="Search">
                                     </div>
                                 </div>
                             </div>
                         </div>
+						<div class="pxp-dashboard-table-options">
+	                        <ul class="list-unstyled">
+	                        <!-- 등록버튼 start -->
+	                            <a href="/addQSetting">
+	                            	<li><button title="Add"><span class="fa fa-plus"></span></button></li>
+	                            </a>
+	                        <!-- 등록버튼 end -->                                              
+	                        </ul>
+	                    </div>
                     </div>
                     <!-- 검색 end -->   
                     <!-- 목록 start -->                   
@@ -55,12 +61,11 @@
                             <thead>                    
                                 <tr>
                                     <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
-                                    <th style="width: 15%;">컬럼명</th>
-                                    <th style="width: 10%;">컬럼명</th>
-                                    <th style="width: 15%;">컬럼명</th>
-                                    <th style="width: 15%;">컬럼명</th>
-                                    <th style="width: 15%;">컬럼명</th>
-                                    <th style="width: 10%;">컬럼명</th>
+                                    <th style="width: 15%;">자격증명</th>
+                                    <th style="width: 10%;">과목</th>
+                                    <th style="width: 15%;">과목명</th>
+                                    <th style="width: 15%;">문제코드</th>
+                                    <th style="width: 15%;">등록자</th>
                                     <th style="width: 30%;">등록일시</th>
                                     <th>&nbsp;</th>
                                 </tr>
@@ -69,11 +74,10 @@
                                 <tr>
                                     <td><input type="checkbox" class="form-check-input"></td>
                                     <td>
-                                        <a href="#">
+                                        <a href="/checkQSetting">
                                             <div class="pxp-company-dashboard-job-title">데이터</div>                                           
                                         </a>
                                     </td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
                                     <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
                                     <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
                                     <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
@@ -84,7 +88,7 @@
                                         <div class="pxp-dashboard-table-options">
                                             <ul class="list-unstyled">
                                             <!-- 수정버튼 start -->
-                                                <a href="#">
+                                                <a href="/modifyQSetting">
                                                 	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
                                                 </a>
                                             <!-- 수정버튼 end -->
@@ -115,8 +119,8 @@
                     </div>
                 <!-- 목록 end -->    
                 </div>
-            </div>
-        <!-- end contents -->     
+            </div>     
+        <!-- end contents -->      
             
         <!-- begin footer -->
 			<div th:replace="~{admin/fragments/adminFooter :: footerFragment}"></div>
