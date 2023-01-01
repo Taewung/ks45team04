@@ -29,24 +29,30 @@
 		<div th:replace="~{member/fragments/myPageHeader :: headerFragment}"></div>
 		<!-- end header -->
 		
-		<!-- begin contents --> 
+		<!-- begin contents --> 	
             <div class="pxp-dashboard-content-details">
-				<h1>오답노트목록</h1>
-                <p class="pxp-text-light"></p>
-
+ 				<h1>오답노트목록</h1>
                 <div class="mt-4 mt-lg-5">
-                    <!-- 검색 start -->
                     <div class="row justify-content-between align-content-center">
                         <div class="col-auto order-1 order-sm-2">
                             <div class="pxp-company-dashboard-jobs-search mb-3">
                                 <div class="pxp-company-dashboard-jobs-search-search-form">
                                     <div class="input-group">
                                         <span class="input-group-text"><span class="fa fa-search"></span></span>
-                                        <input type="text" class="form-control" placeholder="Search jobs...">
+                                        <input type="text" class="form-control" placeholder="Search">
                                     </div>
                                 </div>
                             </div>
                         </div>
+					<div class="pxp-dashboard-table-options">
+                        <ul class="list-unstyled">
+                        <!-- 등록버튼 start -->
+                            <a href="#">
+                            	<li><button title="Add"><span class="fa fa-plus"></span></button></li>
+                            </a>
+                        <!-- 등록버튼 end -->                                              
+                        </ul>
+                    </div>
                     </div>
                     <!-- 검색 end -->   
                     <!-- 목록 start -->                   
@@ -84,7 +90,7 @@
                                         <div class="pxp-dashboard-table-options">
                                             <ul class="list-unstyled">
                                             <!-- 수정버튼 start -->
-                                                <a href="#">
+                                                <a href="/modifyLicensePassScore">
                                                 	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
                                                 </a>
                                             <!-- 수정버튼 end -->
@@ -115,8 +121,8 @@
                     </div>
                 <!-- 목록 end -->    
                 </div>
-            </div>
-        <!-- end contents -->     
+            </div>     
+        <!-- end contents -->       
             
         <!-- begin footer -->
 			<div th:replace="~{member/fragments/myPageFooter :: footerFragment}"></div>
