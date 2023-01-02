@@ -29,7 +29,51 @@
 		<!--  begin contents -->
 		<section>
 			<div class="pxp-container">
-				challenge_board_write.html
+			
+            <div class="pxp-dashboard-content-details">
+                <h1>챌린지 인증하기</h1>
+
+                <form>
+                    <div class="row mt-4 mt-lg-5">
+                        <div class="col-xxl-6">
+                            <div class="mb-3">
+                                <label for="pxp-company-job-title" class="form-label">제목</label>
+                                <input type="text" id="pxp-company-job-title" class="form-control" placeholder="제목을 입력하세요">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3">
+                                <label for="pxp-company-job-category" class="form-label">도전하고 있는 챌린지</label>
+                                <select id="pxp-company-job-category" class="form-select">
+                                    <option>Select a category</option>
+                                    <option>Marketing & Communication</option>
+                                    <option>Software Engineering</option>
+                                    <option>Project Management</option>
+                                    <option>Finance</option>
+                                    <option>Retail</option>
+                                    <option>Sales</option>
+                                    <option>Manufacturing</option>
+                                    <option>IT</option>
+                                    <option>Business Development</option>
+                                    <option>Human Resources</option>
+                                    <option>Customer Service</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="pxp-company-job-description" class="form-label">내용</label>
+                        <textarea class="form-control" id="pxp-company-job-description" placeholder="내용을 입력하세요"></textarea>
+                    </div>
+                    <div class="mt-4 mt-lg-5">
+                        <a href="/challengeBoardList" class="btn rounded-pill pxp-section-cta"  onclick="alert('게시물이 등록되었습니다.')">등록하기</a>
+                        &ensp;&ensp;&ensp;<a href="/challengeBoardList" class="btn rounded-pill pxp-section-cta"  onclick="if(!confirm('정말 취소하시겠습니까?')) {return false;}">취소</a>
+                    </div>
+                 
+                </form>
+            </div>
 			</div>
 		</section>
 		<!--  end contents -->

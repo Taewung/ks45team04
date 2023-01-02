@@ -26,13 +26,154 @@
 		<div th:replace="~{member/fragments/contentsHeader :: headerFragment}"></div>
 		<!-- end header -->			
 		
-		<!--  begin contents -->
-		<section>
-			<div class="pxp-container">
-				challenge_goal.html
-			</div>
-		</section>
-		<!--  end contents -->
+		<!-- begin contents --> 
+        <section class="pxp-page-header-simple" style="background-color: var(--pxpMainColorLight);">
+            <div class="pxp-container">
+                <h1>챌린지 목표 등록</h1>
+                <form>
+            </div>
+        </section>
+          <div class="row mt-4 mt-lg-5">
+             <!-- 챌린지 목표 제목 입력 start -->
+               <div class="row mt-4 mt-lg-5">
+                 <h2><strong></span>챌린지 목표</strong></h2>	                    
+	               <div class="mb-3">
+		             <textarea class="form-control" id="pxp-company-job-description" placeholder="챌린지 목표를 입력해주세요."></textarea>
+	               </div>	                        
+               </div>
+              <!-- 챌린지 목표 제목 입력 end --> 
+                    <!-- 자격증선택 start -->                
+                	<h2><strong></span>자격증 선택</strong></h2>
+                        <div class="col-md-6 col-xxl-3">
+                            <label for="pxp-company-job-category" class="form-label">대분류</label>
+                                <select id="pxp-company-job-category" class="form-select">
+                                    <option>Select a category</option>
+                                </select>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3">
+                                <label for="pxp-company-job-category" class="form-label">중분류</label>
+                                <select id="pxp-company-job-category" class="form-select">
+                                    <option>Select a category</option>
+                                </select>
+                            </div>
+                        </div>                       
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3">
+                                <label for="pxp-company-job-category" class="form-label">자격증명</label>
+                                <select id="pxp-company-job-category" class="form-select">
+                                    <option>Select a category</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 자격증선택 end -->                      
+                    <!-- 과목선택 start --> 
+                    <div class="row mt-4 mt-lg-5">
+                    <h2><strong></span>과목 선택</strong></h2>
+                        <div class="col-md-6 col-xxl-3">
+                            <label for="pxp-company-job-category" class="form-label">과목</label>
+                                <select id="pxp-company-job-category" class="form-select">
+                                    <option>Select a category</option>
+                                </select>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3">
+                                <label for="pxp-company-job-category" class="form-label">과목명</label>
+                                <select id="pxp-company-job-category" class="form-select">
+                                    <option>Select a category</option>
+                                </select>
+                            </div>
+                       </div>
+                      <!-- 과목선택 end -->   
+
+                     	<!-- 목표 시간 설정start -->   
+		                <div class="mt-4 mt-lg-5">
+		                    <div class="row justify-content-between align-content-center">
+		                		<h2><strong></span>목표 시간 설정</strong></h2>
+								<div class="pxp-dashboard-table-options">
+			                        <ul class="list-unstyled">                                       
+			                        </ul>
+			                    </div>
+		                    </div>
+		                    <!-- 목록 start -->                   
+		                    <div class="table-responsive">
+		                        <table class="table table-hover align-middle">                      	
+		                            <thead>                    
+		                                <tr>
+		                                    <th style="width: 50%">시간</th>
+		                               		<th style="width: 50%">분</th>   
+		                                    <th>&nbsp;</th>
+		                                </tr>
+		                            </thead>    
+		                            <tbody>
+		                                <tr>
+		                                    <td>
+			                                    <div>
+					                                <select id="hour" class="form-select">
+					                                    <option>1</option>
+					                                    <option>2</option>
+					                                    <option>3</option>
+					                                    <option>4</option>
+					                                    <option>5</option>
+					                                    <option>6</option>
+					                                    <option>7</option>
+					                                    <option>8</option>
+					                                    <option>9</option>
+					                                    <option>10</option>
+					                                    <option>11</option>
+					                                    <option>12</option>
+					                                    <option>13</option>
+					                                    <option>14</option>
+					                                    <option>15</option>
+					                                    <option>16</option>
+					                                    <option>17</option>
+					                                    <option>18</option>
+					                                    <option>19</option>
+					                                    <option>20</option>
+					                                    <option>21</option>
+					                                    <option>22</option>
+					                                    <option>23</option>
+					                                    <option>24</option>
+					                                    <option>25</option>
+					                                    <option>26</option>
+					                                    <option>27</option>
+					                                    <option>28</option>	
+					                                    <option>29</option>
+					                                    <option>30</option>
+					                                    
+					                                </select>				                                
+				                        		</div>				                        		
+		                                    </td>
+		                                    <td>
+				                                <select id="minute" class="form-select">
+					                                    <option>00</option>
+					                                    <option>10</option>
+					                                    <option>20</option>
+					                                    <option>30</option>
+					                                    <option>40</option>
+					                                    <option>50</option>
+					                                </select>			                                                                   
+		                                    </td>
+		                                </tr>                      
+		                            </tbody>
+		                        </table>
+		                    </div>
+		                <!-- 목록 end -->    
+		                </div>
+		            </div>                            
+                    <!-- 답안입력란 end -->
+                        
+	                   <div class="mt-4 mt-lg-5">
+	                        <button type="button" onclick="location.href='/challengeState'" class="btn rounded-pill pxp-section-cta">등록</button>
+	                        &nbsp;&nbsp;&nbsp;&nbsp;
+	                        <button type="button" onclick="location.href='/main'" class="btn rounded-pill pxp-section-cta">취소(메인으로)</button>
+                    	</div>                                      
+                    	</div>
+                    </div>
+                </form>
+            </div>        
+            <!-- end contents -->
 
 			
 		<!-- begin footer -->
