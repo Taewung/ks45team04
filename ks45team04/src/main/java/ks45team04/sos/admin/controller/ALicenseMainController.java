@@ -1,15 +1,26 @@
 package ks45team04.sos.admin.controller;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 
 import ks45team04.sos.admin.dto.LicenseMain;
+import ks45team04.sos.admin.service.LicenseMainService;
 
 @Controller
 public class ALicenseMainController {
+	
+private final LicenseMainService licenseMainService;
+	
+	public ALicenseMainController(LicenseMainService licenseMainService) {
+		this.licenseMainService = licenseMainService;
+	}
+	
 	
 	// 자격증 대분류 삭제 처리
 		@PostMapping("/deletelicenseMain")
@@ -63,7 +74,13 @@ public class ALicenseMainController {
 	// 자격증 대분류 정보 조회
 	@GetMapping("/licenseMainList")
 	public String licenseMainList(Model model) {
+		
+		List<LicenseMain> licenseMainList = licenseMainService.LicenseMainList();
+		
 		model.addAttribute("title", "자격증 대분류 조회");
+		model.addAttribute("licenseMainList", licenseMainList);
+		
+		
 		
 		return "admin/licenseMain/license_main_list";
 		

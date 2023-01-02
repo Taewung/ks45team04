@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team04.sos.admin.mapper.NoteSellTotalListMapper">
+	
+	<resultMap type="NoteSellTotalList" id="noteSellTotalListResultMap">
+		<id property="nstlCode" 						column="nstl_code"/>
+		<result property="noteCode" 					column="note_code"/>
+		<result property="nstlId" 						column="nstl_id"/>
+		<result property="liCode" 						column="li_code"/>
+		<result property="noteReviewCount" 				column="note_review_count"/>
+		<result property="noteSellCount" 				column="note_sell_count"/>
+		<result property="notePurchaseReviewAccumlate" 	column="note_purchase_review_accumlate"/>
+		<result property="reviewAccumlateFinal" 		column="review_accumlate_final"/>
+	</resultMap>
+	
+	<select id="NoteSellTotalList" resultMap="noteSellTotalListResultMap">
+			
+	SELECT
+		*
+	FROM
+		note_sell_total_list AS nstl;
+	</select>
+</mapper>

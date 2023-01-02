@@ -1,18 +1,28 @@
 package ks45team04.sos.admin.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import ks45team04.sos.admin.dto.DownloadCountStandard;
+import ks45team04.sos.admin.service.DownloadCountStandardService;
+
+
 
 
 
 @Controller
 public class ADownloadCountStandardController {
-
+	
+private final DownloadCountStandardService downloadCountStandardService;
+	
+	public ADownloadCountStandardController(DownloadCountStandardService downloadCountStandardService) {
+		this.downloadCountStandardService = downloadCountStandardService;
+	}
+	
+		
 		// 다운로드 횟수 기준 삭제 처리
 		@PostMapping("/deletedownloadCountStandard")
 		public String deletedownloadCountStandard(DownloadCountStandard DownloadCountStandard) {
@@ -63,7 +73,11 @@ public class ADownloadCountStandardController {
 		// 다운로드 횟수 기준 조회
 		@GetMapping("/downloadCountStandardList")
 		public String downloadCountStandardList(Model model) {
-		model.addAttribute("title", "다운로드 횟수 기준 조회");
+			
+			List<DownloadCountStandard> downloadCountStandardList = downloadCountStandardService.DownloadCountStandardList();
+
+			model.addAttribute("title", "다운로드 횟수 기준 조회");
+			model.addAttribute("downloadCountStandardList", downloadCountStandardList);
 						
 			return "admin/noteDownloadCountStandard/dwonload_count_standard_list";
 			}

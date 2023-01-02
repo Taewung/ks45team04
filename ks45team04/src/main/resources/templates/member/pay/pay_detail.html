@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  class="pxp-root" >
+<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
+    <link rel="stylesheet" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+    tbody,thead{
+    text-align:center;
+    }
+   	tfoot{
+   	text-align:right;
+   	}
+    </style>
+</head>
+    <body style="background-color: var(--pxpSecondaryColorLight);">
+        <div class="pxp-dashboard-content">
+        
+        <!-- begin aside -->
+		<div th:replace="~{member/fragments/myPageAside :: asideFragment}"></div>
+		<!-- end aside -->
+		
+        <!-- begin header -->
+		<div th:replace="~{member/fragments/myPageHeader :: headerFragment}"></div>
+		<!-- end header -->
+		
+		<!-- begin contents --> 
+            <div class="pxp-dashboard-content-details">
+             <h1>결제 상세 내역</h1>
+                <p class="pxp-text-light">Pay detail list</p>
+                <div class="mt-4 mt-lg-5">
+                    <div class="table-responsive">
+                    <h4>결제 정보</h4>
+                        <table class="table table-hover align-middle">
+                            <thead>
+                                <tr>
+                                    <th colspan="1" style="width: 20%;">결제 완료 코드</th>
+                                    <th style="width: 20%;">결제 금액</th>
+                                    <th style="width: 20%;">사용 포인트</th>
+                                    <th style="width: 20%;">총 결제 금액</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <a><div class="pxp-company-dashboard-job-title">20221202-001-1</div></a>
+                                    </td>
+                                    <td><div class="pxp-company-dashboard-job-status">11,000</div></td>
+                                    <td><div class="pxp-company-dashboard-job-status">1000</div></td>
+                                    <td><div class="pxp-company-dashboard-job-date">10,000</div></td>
+                                </tr>
+                            </tbody>
+                        </table><br><br><br>
+                        
+                        <h4>결제 상품 정보</h4>
+						<table class="table table-hover align-middle">						
+						<thead>
+                                <tr>
+                                    <th colspan="1" style="width: 30%;">상품정보</th>
+                                    <th style="width: 40%;">수량</th>
+                                    <th style="width: 40%;">판매가격</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <a><div class="pxp-company-dashboard-job-title">노트1</div></a>
+                                    </td>
+                                    <td><div class="pxp-company-dashboard-job-status">1</div></td>
+                                    <td><div class="pxp-company-dashboard-job-date">5,000</div></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a><div class="pxp-company-dashboard-job-title">노트2</div></a>
+                                    </td>
+                                    <td><div class="pxp-company-dashboard-job-status">1</div></td>
+                                    <td><div class="pxp-company-dashboard-job-date">6,000</div></td>
+                                </tr>
+                                <tfoot>
+                                	<tr>
+                                		<td colspan="3">상품구매금액 11,000 - 포인트사용금액 1,000 = 합계 : 10,000</td>
+                                	</tr>
+                                </tfoot>
+                            </tbody>
+						</table>
+                        
+                    </div>
+                </div>
+            </div>
+        <!-- end contents --> 
+    
+            
+        <!-- begin footer -->
+			<div th:replace="~{member/fragments/myPageFooter :: footerFragment}"></div>
+		<!-- end footer -->
+        </div>
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/nav.js"></script>
+        <script src="js/Chart.min.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>

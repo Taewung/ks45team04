@@ -30,13 +30,31 @@
 		<!-- end header -->
 		
 		<!-- begin contents --> 
-        <div class="pxp-dashboard-content-details">
+        <div class="pxp-dashboard-content-details">      
+          <h1>환불 신청</h1>
+            <p class="pxp-text-light">Refund request.</p>
 
-        refund_request.html       
-             
+            <form>
+                <div class="row mt-4 mt-lg-5">
+                    <div class="col-md-6">
+	                    <div class="mb-3">
+	                        <label for="pxp-company-job-description" class="form-label">환불 신청 사유</label>
+	                        <textarea class="form-control" id="pxp-company-job-description" placeholder="환불 신청 사유를 입력해주세요"></textarea>
+	                    </div> 
+                    </div>
+                </div>
+                <div class="mt-4 mt-lg-5">
+                        <button type="button" class="btn rounded-pill pxp-section-cta" onclick="location.href='/refundList' ">Save</button>
+                        <button type="button" class="btn rounded-pill pxp-section-cta-o ms-3" onclick="location.href='/mpayList'">Cancel</button>
+                </div>
+		</div>
+                
+                
+            </form>
+        </div>
 
         </div>
-        <!-- end contents -->     
+        <!-- end contents -->         
             
         <!-- begin footer -->
 			<div th:replace="~{member/fragments/myPageFooter :: footerFragment}"></div>
