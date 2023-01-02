@@ -26,14 +26,57 @@
 		<div th:replace="~{member/fragments/contentsHeader :: headerFragment}"></div>
 		<!-- end header -->			
 		
-		<!--  begin contents -->
-		<section>
-			<div class="pxp-container">
-				cheat_member_request.html
-			</div>
-		</section>
-		<!--  end contents -->
+		<!-- begin contents --> 
+            <div class="pxp-dashboard-content-details">
+                <h1>부정회원 신고</h1>
+                <p class="pxp-text-light">Cheat Member Request</p>
+                <form>
+                    <div class="row mt-4 mt-lg-5"> 
+                    
+                    
+                    
+                    
+                    
+                     
+                    <!-- 자격증선택 start -->                
+                	<h2><strong><span class="fa fa-check"></span>신고 사유</strong></h2>
+                        <div class="col-md-6 col-xxl-3">
+                            <label for="pxp-company-job-category" class="form-label">신고 사유</label>
+                                <select id="pxp-company-job-category" class="form-select">
+                                    <option>욕설 / 인신공격</option>
+                                    <option>홍보성 게시물</option>
+                                    <option>도배글(같은정보반복게시)</option>
+                                </select>
+                        </div>
+                    <!-- 자격증선택 end -->  
+                    
+             <!-- 신고 내용 입력 start -->
+               <div class="row mt-4 mt-lg-5">
+                	<h2><strong><span class="fa fa-check"></span>신고 내용</strong></h2>                    
+	               <div class="mb-3">
+		             <textarea class="form-control" id="pxp-company-job-description" placeholder="신고 내용을 입력해주세요."></textarea>
+	               </div>	                        
+               </div>
+              <!-- 신고 내용 입력 end -->                     
+                                        
+                      	<!-- 첨부파일 start -->
+                        <div class="row mt-4 mt-lg-5">
+                        <h2><strong><span class="fa fa-check"></span>부정 증빙 자료</strong></h2>	                    
+	                        <div class="mb-3">
+		   <input type="file" id="cheatFile" name="cheatFile" accept="image/png, image/jpeg">
+	                    	</div>	                        
+                        </div>
+                     	<!-- 첨부파일 end --> 
+	                   <div class="mt-4 mt-lg-5">
+	                        <button type="button" onclick="location.href='/customerCenter'" class="btn rounded-pill pxp-section-cta">신고</button>
+	                        <button type="button" onclick="location.href='/cheatMemberRequest'" class="btn rounded-pill pxp-section-cta-o ms-3">취소</button>
+                    	</div>
+                    	                </form>                                      
+                    	</div>
+                    </div>
 
+            <!-- end contents -->
+		<br><br>
 			
 		<!-- begin footer -->
 		<div th:replace="~{member/fragments/contentsFooter :: footerFragment}"></div>
