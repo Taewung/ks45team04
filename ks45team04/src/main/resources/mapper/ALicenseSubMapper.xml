@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team04.sos.admin.mapper.LicenseSubMapper">
+	
+	<resultMap type="LicenseSub" id="licenseSubResultMap">
+		<id property="lscCode" 				column="lsc_code"/>
+		<result property="lmcCode" 			column="lmc_code"/>
+		<result property="lmcName" 			column="lmc_name"/>
+		<result property="lscName" 			column="lsc_name"/>
+		<result property="lscRegId" 		column="lsc_name"/>
+		<result property="lscRegId" 		column="lsc_reg_id"/>
+		<result property="lscRegDatetime" 	column="lsc_reg_datetime"/>
+	</resultMap>
+	
+	<select id="LicenseSubList" resultMap="licenseSubResultMap">
+			
+		SELECT
+			 lsc.lsc_code
+			,lsc.lmc_code
+			,lsc.lmc_name
+			,lsc.lsc_name
+			,lsc.lsc_reg_id
+			,lsc.lsc_reg_datetime
+		FROM
+			license_sub_category AS lsc;
+			
+	</select>
+</mapper>
