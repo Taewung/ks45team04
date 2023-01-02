@@ -17,6 +17,11 @@
     <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
     <link rel="stylesheet" th:href="@{/css/animate.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+    th,td{
+    text-align:center;
+    }
+    </style>
 </head>
     <body style="background-color: var(--pxpMainColorLight);">
         <div class="pxp-dashboard-content">
@@ -31,29 +36,36 @@
 		
 		<!-- begin contents --> 
             <div class="pxp-dashboard-content-details">
-
-<h1>회원 전체 목록</h1>
-                <p class="pxp-text-light"></p>
+             <h1>회원 목록</h1>
+                <p class="pxp-text-light">Member list</p>
 
                 <div class="mt-4 mt-lg-5">
-                    <!-- 검색 start -->
                     <div class="row justify-content-between align-content-center">
-                        <div class="col-auto order-1 order-sm-2">
-                            <div class="pxp-company-dashboard-jobs-search mb-3">
-                                <div class="pxp-company-dashboard-jobs-search-search-form">
-                                    <div class="input-group">
-                                        <span class="input-group-text"><span class="fa fa-search"></span></span>
-                                        <input type="text" class="form-control" placeholder="검색어를 입력하세요">
-                                    </div>
-                                </div>
+                        <div class="col-auto order-2 order-sm-1">
+                            <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
+                                <div class="pxp-company-dashboard-jobs-search mb-3">
+                                <select class="form-select">
+                                    <option>회원 아이디</option>
+                                    <option>이름</option>
+                                    <option>이메일</option>
+                                </select>
+                                	<div class="col-auto order-1 order-sm-2">
+                                		<div class="pxp-company-dashboard-jobs-search-search-form">
+                                    		<div class="input-group">
+                                        		<span class="input-group-text"><span class="fa fa-search"></span></span>
+                                        		<input type="text" class="form-control" placeholder="Search ID">
+                                        		<button class="btn ms-2">Search</button>
+                                    		</div>
+                                		</div>
+                            		</div>
+                        		</div> 
                             </div>
                         </div>
+                        
                     </div>
-                    <!-- 검색 end -->   
-                    <!-- 목록 start -->                   
                     <div class="table-responsive">
-                        <table class="table table-hover align-middle">                      	
-                            <thead>                    
+                        <table class="table table-hover align-middle">
+                            <thead>
                                 <tr>
                                     <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
                                     <th style="width: 15%;">ID</th>
@@ -65,7 +77,7 @@
                                     <th style="width: 30%;">가입일시</th>
                                     <th>&nbsp;</th>
                                 </tr>
-                            </thead>    
+                            </thead>
                             <tbody>
                                 <tr>
                                     <td><input type="checkbox" class="form-check-input"></td>
@@ -80,7 +92,6 @@
                                     <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
                                     <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
                                     <td><div class="pxp-company-dashboard-job-date mt-1">2022/08/24 at 11:56 am</div></td>
-                                    
                                     <td>
                                         <div class="pxp-dashboard-table-options">
                                             <ul class="list-unstyled">
@@ -91,17 +102,20 @@
                                             <!-- 수정버튼 end -->
                                             <!-- 삭제버튼 start -->
                                                 <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
-                                            <!-- 삭제버튼 end -->                                               
+                                            <!-- 삭제버튼 end --> 
                                             </ul>
                                         </div>
                                     </td>
-                                </tr>                      
+                                </tr>
+
+
+
                             </tbody>
                         </table>
-						<!-- page 넘김 start -->
+
                         <div class="row mt-4 mt-lg-5 justify-content-between align-items-center">
                             <div class="col-auto">
-                                <nav class="mt-3 mt-sm-0" aria-label="Jobs list pagination">
+                                <nav class="mt-3 mt-sm-0" aria-label="Candidates pagination">
                                     <ul class="pagination pxp-pagination">
                                         <li class="page-item active" aria-current="page">
                                             <span class="page-link">1</span>
@@ -111,15 +125,13 @@
                                     </ul>
                                 </nav>
                             </div>
+	
                         </div>
-                        <!-- page 넘김 end -->
                     </div>
-                <!-- 목록 end -->    
                 </div>
-                  
-
             </div>
-        <!-- end contents -->     
+        <!-- end contents --> 
+
             
         <!-- begin footer -->
 			<div th:replace="~{admin/fragments/adminFooter :: footerFragment}"></div>
