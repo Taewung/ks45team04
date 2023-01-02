@@ -30,16 +30,53 @@
 		<!-- end header -->
 		
 		<!-- begin contents --> 
-            <div class="pxp-dashboard-content-details">
+         <div class="pxp-dashboard-content-details">
+                <h1>포인트 환급 신청</h1>
+                <p class="pxp-text-light">Point refund request</p>
 
-                point_refund_request.html    
-             
+                <form>
 
+                <div class="row">
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3">
+                                <label for="pxp-company-job-experience" class="form-label">이름</label>
+                                <input type="text" id="pxp-company-job-experience" class="form-control" placeholder="이름을 입력해주세요">
+ 							</div>
+                            <div class="mb-3">
+ 								<label for="pxp-company-job-type" class="form-label">환급 신청 포인트</label>
+ 								<input type="text" id="pxp-company-job-experience" class="form-control" placeholder="환급 신청 포인트를 입력해주세요">
+                            </div>
+						</div>                            
+                       	<div class="row mt-4 mt-lg-5">
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3"> 
+                                <label for="pxp-company-job-category" class="form-label">은행</label>
+                                <select id="pxp-company-job-category" class="form-select">
+                                    <option>국민은행</option>
+                                    <option>우리은행</option>
+                                    <option>농협은행</option>
+                                    <option>전북은행</option>
+                                    <option>카카오뱅크</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <label for="pxp-company-job-location" class="form-label">계좌번호</label>
+                            <input type="text" id="pxp-company-job-location" class="form-control" placeholder="계좌번호를 입력해주세요">
+                        </div>
+                    	</div>
+				</div>
+                    <div class="mt-4 mt-lg-5">
+                        <button type="button" class="btn rounded-pill pxp-section-cta" onclick="location.href='/pointRefundList' ">Save</button>
+                        <button type="button" class="btn rounded-pill pxp-section-cta-o ms-3" onclick="location.href='/pointRefundRequest'">Cancel</button>
+                    </div>
+                </form>
             </div>
+
         <!-- end contents -->     
             
         <!-- begin footer -->
-			<div th:replace="~{member/fragments/myPageFooter :: footerFragment}"></div>
+		<div th:replace="~{member/fragments/myPageFooter :: footerFragment}"></div>
 		<!-- end footer -->
         </div>
         <script src="js/jquery-3.4.1.min.js"></script>

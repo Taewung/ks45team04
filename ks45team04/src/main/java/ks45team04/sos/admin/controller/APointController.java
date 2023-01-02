@@ -34,6 +34,14 @@ public class APointController {
 		return "admin/point/point_save_standard_delete";
 	}
 	
+	//포인트 적립 기준 조회
+	@GetMapping("pointSaveStandardList")
+	public String pointSaveStandardList(Model model) {
+		model.addAttribute("title", "포인트 적립 기준 조회");
+		
+		return "admin/point/point_save_standard_list";
+	}
+	
 	//포인트 수수료율 등록
 	@GetMapping("/addPointfeeRate")
 	public String addPointfeeRate(Model model) {
@@ -58,6 +66,14 @@ public class APointController {
 		return "admin/point/point_fee_rate_delete";
 	}
 	
+	//포인트 수수료율 조회
+	@GetMapping("pointFeeRateList")
+	public String pointFeeRateList(Model model) {
+		model.addAttribute("title", "포인트 수수료율 조회");
+		
+		return "admin/point/point_fee_rate_list";
+	}
+	
 	//포인트 적립 등록
 	@GetMapping("/pointSaveUsePointAdd")
 	public String pointSaveUsePointAdd(Model model) {
@@ -65,7 +81,15 @@ public class APointController {
 		
 		return "admin/point/point_save_use_add";
 	}
-			
+	
+	//포인트 적립/사용 내역 조회
+	@GetMapping("/pointSaveUseList")
+	public String pointSaveUseList(Model model) {
+		model.addAttribute("title", "포인트 적립/사용 내역 삭제");
+		
+		return "admin/point/point_save_use_list";
+	}	
+	
 	//포인트 적립/사용 내역 수정
 	@GetMapping("/modifySaveUsePointList")
 	public String modifySaveUsePointList(Model model) {
@@ -81,13 +105,6 @@ public class APointController {
 		
 		return "admin/point/point_save_use_delete";
 	}
-	//포인트 적립/사용 내역 조회
-	@GetMapping("/pointSaveUseList")
-	public String pointSaveUseList(Model model) {
-		model.addAttribute("title", "포인트 적립/사용 내역 삭제");
-		
-		return "admin/point/point_save_use_list";
-	}	
 
 	//포인트 환급 승인(수정/삭제)
 	@GetMapping("/pointRefundApproval")
