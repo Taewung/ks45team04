@@ -18,35 +18,120 @@
     <link rel="stylesheet" th:href="@{/css/animate.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-
-<body>
-	<div class="pxp-preloader"><span>Loading...</span></div>
-	
-		<!-- begin header -->
-		<div th:replace="~{member/fragments/contentsHeader :: headerFragment}"></div>
-		<!-- end header -->			
+    <body style="background-color: var(--pxpSecondaryColorLight);">
+        <div class="pxp-dashboard-content">
+        
+        <!-- begin aside -->
+		<div th:replace="~{member/fragments/myPageAside :: asideFragment}"></div>
+		<!-- end aside -->
 		
-		<!--  begin contents -->
+        <!-- begin header -->
+		<div th:replace="~{member/fragments/myPageHeader :: headerFragment}"></div>
+		<!-- end header -->
+		
+		<!-- begin contents --> 
 		<section>
-    	<div class="pxp-container">
-		<section>
-			<div class="pxp-container">
-				add_wrong_answer_note.html
-			</div>
+            <div class="pxp-dashboard-content-details">
+                <h1>오답노트등록</h1>
+                <p class="pxp-text-light">Add WrongAnswer Note</p>
+                <form>
+                    <div class="row mt-4 mt-lg-5"> 
+					<!-- 제목입력란 start -->
+                        <div class="row mt-4 mt-lg-5">
+                        <h2><strong><span class="fa fa-check"></span>제목 입력</strong></h2>	                    
+	                        <div class="mb-3">
+		                        <input type="text" class="form-control" placeholder="제목을 입력해주세요.">
+	                    	</div>	                        
+                        </div>
+                    <!-- 제목입력란 end --> 
+                    <!-- 자격증선택 start -->                
+                	<h2><strong><span class="fa fa-check"></span>자격증 선택</strong></h2>
+                        <div class="col-md-6 col-xxl-3">
+                            <label for="pxp-company-job-category" class="form-label">대분류</label>
+                                <select id="pxp-company-job-category" class="form-select">
+                                    <option>Select a category</option>
+                                </select>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3">
+                                <label for="pxp-company-job-category" class="form-label">중분류</label>
+                                <select id="pxp-company-job-category" class="form-select">
+                                    <option>Select a category</option>
+                                </select>
+                            </div>
+                        </div>                       
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3">
+                                <label for="pxp-company-job-category" class="form-label">자격증명</label>
+                                <select id="pxp-company-job-category" class="form-select">
+                                    <option>Select a category</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 자격증선택 end -->                      
+                    <!-- 과목선택 start --> 
+                    <div class="row mt-4 mt-lg-5">
+                    <h2><strong><span class="fa fa-check"></span>과목 선택</strong></h2>
+                        <div class="col-md-6 col-xxl-3">
+                            <label for="pxp-company-job-category" class="form-label">과목</label>
+                                <select id="pxp-company-job-category" class="form-select">
+                                    <option>Select a category</option>
+                                </select>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3">
+                                <label for="pxp-company-job-category" class="form-label">과목명</label>
+                                <select id="pxp-company-job-category" class="form-select">
+                                    <option>Select a category</option>
+                                </select>
+                            </div>
+                       </div>
+                      <!-- 과목선택 end -->   
+                      	<!-- 문제입력란 start -->
+                        <div class="row mt-4 mt-lg-5">
+                        <h2><strong><span class="fa fa-check"></span>문제 입력</strong></h2>	                    
+	                        <div class="mb-3">
+		                        <textarea class="form-control" id="pxp-company-job-description" placeholder="문제를 입력해주세요."></textarea>
+	                    	</div>	                        
+                        </div>
+                     	<!-- 문제입력란 end -->                 	
+                        <!-- 틀린이유입력란 start -->
+                        <div class="row mt-4 mt-lg-5">
+                        <h2><strong><span class="fa fa-check"></span>틀린이유입력</strong></h2>
+	                        <div class="mb-3">
+		                        <textarea class="form-control" id="pxp-company-job-description" placeholder="틀린이유를 입력해주세요."></textarea>
+	                    	</div>
+                        </div>
+                       <!-- 틀린이유입력란 end -->
+                       <!-- 풀이입력란 start -->
+                        <div class="row mt-4 mt-lg-5">
+                        <h2><strong><span class="fa fa-check"></span>풀이입력</strong></h2>
+	                        <div class="mb-3">
+		                        <textarea class="form-control" id="pxp-company-job-description" placeholder="풀이를 입력해주세요."></textarea>
+	                    	</div>
+                        </div>
+                       <!-- 해설입력란 end -->
+	                   <div class="mt-4 mt-lg-5">
+	                        <button type="button" onclick="location.href='/wrongAnswerNoteList'" class="btn rounded-pill pxp-section-cta">등록</button>
+	                        <button type="button" onclick="location.href='/wrongAnswerNoteList'" class="btn rounded-pill pxp-section-cta-o ms-3">취소</button>
+                    	</div>                                      
+                    	</div>
+                    </div>
+                </form>
+            </div>        
 		</section>
-		</div>
-		</section>
-		<!--  end contents -->
-
-			
-		<!-- begin footer -->
-		<div th:replace="~{member/fragments/contentsFooter :: footerFragment}"></div>
+        <!-- end contents -->     
+            
+        <!-- begin footer -->
+			<div th:replace="~{member/fragments/myPageFooter :: footerFragment}"></div>
 		<!-- end footer -->
-			
-	<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
-    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/js/owl.carousel.min.js}"></script>
-    <script th:src="@{/js/nav.js}"></script>
-    <script th:src="@{/js/main.js}"></script>
-</body>
+        </div>
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/nav.js"></script>
+        <script src="js/Chart.min.js"></script>
+        <script src="js/main.js"></script>
+    </body>
 </html>

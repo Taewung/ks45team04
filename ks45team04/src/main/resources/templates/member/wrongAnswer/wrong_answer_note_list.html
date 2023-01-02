@@ -32,28 +32,43 @@
 		<!-- begin contents --> 	
             <div class="pxp-dashboard-content-details">
  				<h1>오답노트목록</h1>
+ 				<p class="pxp-text-light">Wrong Answer Note List</p>
                 <div class="mt-4 mt-lg-5">
-                    <div class="row justify-content-between align-content-center">
-                        <div class="col-auto order-1 order-sm-2">
-                            <div class="pxp-company-dashboard-jobs-search mb-3">
-                                <div class="pxp-company-dashboard-jobs-search-search-form">
-                                    <div class="input-group">
-                                        <span class="input-group-text"><span class="fa fa-search"></span></span>
-                                        <input type="text" class="form-control" placeholder="Search">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-					<div class="pxp-dashboard-table-options">
-                        <ul class="list-unstyled">
-                        <!-- 등록버튼 start -->
-                            <a href="#">
-                            	<li><button title="Add"><span class="fa fa-plus"></span></button></li>
-                            </a>
-                        <!-- 등록버튼 end -->                                              
-                        </ul>
-                    </div>
-                    </div>
+	  				<div class="row justify-content-between align-content-center">
+	                        <div class="col-auto order-2 order-sm-1">
+	                            <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
+	                                <div class="pxp-company-dashboard-jobs-search mb-3">
+	                                <select class="form-select">
+	                                    <option>자격증명</option>
+	                                </select>
+	                                	<div class="col-auto order-1 order-sm-2">
+	                                		<div class="pxp-company-dashboard-jobs-search-search-form">
+	                                    		<div class="input-group">
+	                                        		<span class="input-group-text"><span class="fa fa-search"></span></span>
+	                                        		<input type="text" class="form-control" placeholder="Search">
+	                                        		<button class="btn ms-2">Search</button>
+	                                    		</div>
+	                                		</div>
+	                            		</div>
+	                        		</div>
+	                        		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+	                        		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+	                        		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+									<div class="pxp-dashboard-table-options">
+				                        <ul class="list-unstyled">
+				                        <!-- 등록버튼 start -->
+				                            <a href="/addWrongAnswerNote">
+				                            	<li><button title="Add"><span class="fa fa-plus"></span></button></li>
+				                            </a>
+			                        	<!-- 등록버튼 end --> 
+										<!-- 삭제버튼 start -->
+											<li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
+                                        <!-- 삭제버튼 end -->                                               
+				                        </ul>
+				                    </div>
+	                            </div>
+	                        </div>
+	                    </div>
                     <!-- 검색 end -->   
                     <!-- 목록 start -->                   
                     <div class="table-responsive">
@@ -61,12 +76,10 @@
                             <thead>                    
                                 <tr>
                                     <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
-                                    <th style="width: 15%;">컬럼명</th>
-                                    <th style="width: 10%;">컬럼명</th>
-                                    <th style="width: 15%;">컬럼명</th>
-                                    <th style="width: 15%;">컬럼명</th>
-                                    <th style="width: 15%;">컬럼명</th>
-                                    <th style="width: 10%;">컬럼명</th>
+                                    <th style="width: 20%;">제목</th>
+                                    <th style="width: 20%;">자격증명</th>
+                                    <th style="width: 10%;">과목</th>
+                                    <th style="width: 20%;">과목명</th>
                                     <th style="width: 30%;">등록일시</th>
                                     <th>&nbsp;</th>
                                 </tr>
@@ -75,28 +88,22 @@
                                 <tr>
                                     <td><input type="checkbox" class="form-check-input"></td>
                                     <td>
-                                        <a href="#">
+                                        <a href="/checkWrongAnswerNote">
                                             <div class="pxp-company-dashboard-job-title">데이터</div>                                           
                                         </a>
                                     </td>
                                     <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
                                     <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
                                     <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
                                     <td><div class="pxp-company-dashboard-job-date mt-1">2022/08/24 at 11:56 am</div></td>
-                                    
-                                    <td>
-                                        <div class="pxp-dashboard-table-options">
+                                    <td>                                   
+                                    	<div class="pxp-dashboard-table-options">
                                             <ul class="list-unstyled">
                                             <!-- 수정버튼 start -->
-                                                <a href="/modifyLicensePassScore">
+                                                <a href="/modifyWrongAnswerNote">
                                                 	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
                                                 </a>
-                                            <!-- 수정버튼 end -->
-                                            <!-- 삭제버튼 start -->
-                                                <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
-                                            <!-- 삭제버튼 end -->                                               
+                                            <!-- 수정버튼 end -->                                             
                                             </ul>
                                         </div>
                                     </td>
@@ -122,7 +129,7 @@
                 <!-- 목록 end -->    
                 </div>
             </div>     
-        <!-- end contents -->       
+        <!-- end contents -->        
             
         <!-- begin footer -->
 			<div th:replace="~{member/fragments/myPageFooter :: footerFragment}"></div>
