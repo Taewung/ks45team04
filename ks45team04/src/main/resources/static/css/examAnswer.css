@@ -1,0 +1,52 @@
+h1 {
+    text-align: center;
+}
+#quiz {
+    text-indent: 40px;
+    display:none;
+}
+
+.button {
+    border:1px solid white;
+    border-radius:5px;
+    width: 78px;
+    position:absolute;
+    padding-left:5px;
+    padding-right:5px;
+    position: relative;
+    background-color: var(--pxpMainColorLight);
+    color: black;
+    margin: 0 2px 0 50px;
+}
+
+.button.active {
+    background-color: #F8F8FF;
+    color: #525252;
+}
+
+#container {
+    width:80%;
+    margin:auto;
+    padding: 0 25px 40px 10px;
+    background-color: white;
+    border:2px solid white;
+    border-radius:5px;
+    color: black;
+    font-weight: bold;
+    box-shadow: 5px 5px 5px #888;
+}
+
+ul {
+    list-style-type: none;
+    padding: 10;
+    margin: 0;
+}
+
+#prev {
+    display:none;
+}
+
+#start {
+    display:none;
+    width: 90px;
+}

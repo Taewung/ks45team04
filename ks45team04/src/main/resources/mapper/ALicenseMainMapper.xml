@@ -11,9 +11,21 @@
 		<result property="lmcRegDatetime" 	column="lmc_reg_datetime"/>
 	</resultMap>
 	
+	<insert id="addLicenseMain" parameterType="LicenseMain">
+		/* 자격증 대분류 등록 */
+		INSERT INTO license_main_category
+		( lmc_code
+		 ,lmc_reg_id
+		 ,lmc_name
+		 ,lmc_reg_datetime) 
+		VALUES 
+		(#{lmcCode}, #{lmcRegId}, #{lmcName}, CURDATE());
+
+	</insert>
+	
+	
 	<select id="LicenseMainList" resultMap="licenseMainResultMap">
-			
-			
+			/* 자격증 대분류 목록 조회 */
 			SELECT
 				lmc.lmc_code,
 				lmc.lmc_reg_id,

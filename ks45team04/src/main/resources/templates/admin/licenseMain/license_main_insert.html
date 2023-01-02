@@ -17,8 +17,9 @@
     <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
     <link rel="stylesheet" th:href="@{/css/animate.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-    <body style="background-color: var(--pxpMainColorLight);">
+</head>	
+
+	<body style="background-color: var(--pxpMainColorLight);">
         <div class="pxp-dashboard-content">
         
         <!-- begin aside -->
@@ -31,10 +32,44 @@
 		
 		<!-- begin contents --> 
             <div class="pxp-dashboard-content-details">
-
-           license_main_insert.html         
-                  
-
+				<h1>자격증 대분류 등록</h1>
+                <form id="addLicenseMainForm" th:action="@{/addlicenseMain}" method="post">
+                    <div class="row mt-4 mt-lg-5">
+                        <div class="col-xxl-8">
+                            <div class="row">
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        <label for="lmcCode" class="form-label">자격증 대분류코드</label>
+                                        <input type="text" id="lmcCode" class="form-control" name="lmcCode" placeholder="자격증 대분류코드">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        <label for="lmcCode" class="form-label">자격증 대분류 등록자</label>
+                                        <input type="text" id="lmcRegId" class="form-control" name="lmcRegId" placeholder="자격증 대분류코드">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        <label for="lmcName" class="form-label">자격증 대분류명</label>
+                                        <input type="text" id="lmcName" class="form-control" name="lmcName" placeholder="자격증 대분류명">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 mt-lg-5">
+                        <button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>&nbsp;&nbsp;
+                        <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
+                    </div>
+                </form>
+            </div>
             </div>
         <!-- end contents -->     
             

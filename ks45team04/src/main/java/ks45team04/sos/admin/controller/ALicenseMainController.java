@@ -2,6 +2,7 @@ package ks45team04.sos.admin.controller;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,15 +11,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 import ks45team04.sos.admin.dto.LicenseMain;
+import ks45team04.sos.admin.mapper.LicenseMainMapper;
 import ks45team04.sos.admin.service.LicenseMainService;
 
 @Controller
 public class ALicenseMainController {
 	
 private final LicenseMainService licenseMainService;
+private final LicenseMainMapper licenseMainMapper;
 	
-	public ALicenseMainController(LicenseMainService licenseMainService) {
+	public ALicenseMainController(LicenseMainService licenseMainService
+								 ,LicenseMainMapper licenseMainMapper) {
+		
 		this.licenseMainService = licenseMainService;
+		this.licenseMainMapper = licenseMainMapper;
+		
 	}
 	
 	
@@ -58,15 +65,22 @@ private final LicenseMainService licenseMainService;
 	//자격증 대분류 등록 처리
 	@PostMapping("/addlicenseMain")
 	public String addlicenseMain(LicenseMain LicenseMain) {
+		System.out.println(LicenseMain);
+		licenseMainService.addLicenseMain(LicenseMain);
 		
-		return "";
+		
+		return "redirect:/licenseMainList";
 	}
+	
 	
 	// 자격증 대분류 등록 화면
 	@GetMapping("/addlicenseMain")
 	public String addlicenseMain(Model model) {
-		model.addAttribute("title", "자격증 대분류 정보 등록");
 		
+		List<LicenseMain> licenseMainList = licenseMainMapper.LicenseMainList();
+		
+		model.addAttribute("title", "자격증 대분류 정보 등록");
+		model.addAttribute("licenseMainList", licenseMainList);
 		return "admin/licenseMain/license_main_insert";
 	}
 	
