@@ -17,11 +17,6 @@
     <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
     <link rel="stylesheet" th:href="@{/css/animate.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <!-- 부트스트랩  -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>판매노트 판매내역 조회</title>
-    
 </head>
     <body style="background-color: var(--pxpMainColorLight);">
         <div class="pxp-dashboard-content">
@@ -36,47 +31,9 @@
 		
 		<!-- begin contents --> 
             <div class="pxp-dashboard-content-details">
-	<table class="table">
-			<thead>
-				    <tr>
-				      <th scope="col">판매내역코드</th>
-				      <th scope="col">노트코드</th>
-				      <th scope="col">작성자아이디</th>
-				      <th scope="col">자격증코드</th>
-				      <th scope="col">노트리뷰개수</th>
-				      <th scope="col">노트판매개수</th>
-				      <th scope="col">노트리뷰누적점수</th>
-				      <th scope="col">리뷰누적최종일시</th>
-				      <th>수정</th>
-					  <th>삭제</th>
-				    </tr>
-				
-			</thead>
-			<tbody>
-				<tr th:if="${not #lists.isEmpty(noteSellTotalList)}"
-					th:each="l : ${noteSellTotalList}">
-					<td th:text="${l.nstlCode}"></td>
-					<td th:text="${l.noteCode}"></td>
-					<td th:text="${l.nstlId}"></td>
-					<td th:text="${l.liCode}"></td>
-					<td th:text="${l.noteReviewCount}"></td>
-					<td th:text="${l.noteSellCount}"></td>
-					<td th:text="${l.notePurchaseReviewAccumlate}"></td>
-					<td th:text="${l.reviewAccumlateFinal}"></td>
-					<td>
-						<a th:href="@{#}">수정</a>
-					</td>
-					<td>					
-						<a th:href="@{#}">삭제</a>
-					</td>
-				</tr>
-				<tr th:unless="${not #lists.isEmpty(noteSellTotalList)}">
-					<td colspan="9">조회할 목록이 없습니다.</td>
-				</tr>
-			</tbody>
-		</table>
+
                     
-                
+                 qna_answer_delete.html 
 
             </div>
         <!-- end contents -->     

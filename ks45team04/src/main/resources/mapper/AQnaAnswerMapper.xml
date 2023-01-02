@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team04.sos.admin.mapper.QnaAnswerMapper">
+	
+	<resultMap type="QnaAnswer" id="qnaAnswerResultMap">
+		<id property="qnaCode" 					column="QnA_code"/>
+		<result property="questionId" 			column="question_id"/>
+		<result property="questionTitle" 		column="question_title"/>
+		<result property="questionContent" 		column="question_content"/>
+		<result property="questionDatetime" 	column="question_datetime"/>
+		<result property="answerId" 			column="answer_id"/>
+		<result property="answerContent" 		column="answer_content"/>
+		<result property="answerDatetime" 		column="answer_datetime"/>
+	</resultMap>
+	
+	<select id="qnaAnswerList" resultMap="qnaAnswerResultMap">
+		SELECT
+			*
+		FROM
+			qna AS q;
+	</select>
+</mapper>

@@ -36,7 +36,8 @@
 		<!-- begin contents --> 
             <div class="pxp-dashboard-content-details">
 		
-		<h1>자격증대분류</h1>
+
+			<h1>자격증대분류</h1><br>
                 <p class="pxp-text-light"></p>
                 <div class="mt-4 mt-lg-5">
                     <!-- 검색 start -->
@@ -46,10 +47,13 @@
                                 <div class="pxp-company-dashboard-jobs-search-search-form">
                                     <div class="input-group">
                                         <span class="input-group-text"><span class="fa fa-search"></span></span>
-                                        <input type="text" class="form-control" placeholder="검색">
+                                        <input type="text" class="form-control" placeholder="검색">&nbsp;&nbsp;
                                     </div>
                                 </div>
-                            </div>
+                                <button  class="btn rounded-pill pxp-section-cta-o ms-3">
+                                <a th:href="@{/addlicenseMain}">자격증 대분류 등록</a>	
+                                </button>
+                            	</div>
                         </div>
                     </div>
                     <!-- 검색 end -->   
