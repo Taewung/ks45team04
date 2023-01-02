@@ -32,28 +32,41 @@
 		<!-- begin contents --> 	
             <div class="pxp-dashboard-content-details">
  				<h1>시험유형</h1>
+ 				<p class="pxp-text-light">Exam Type List</p>
                 <div class="mt-4 mt-lg-5">
-                    <div class="row justify-content-between align-content-center">
-                        <div class="col-auto order-1 order-sm-2">
-                            <div class="pxp-company-dashboard-jobs-search mb-3">
-                                <div class="pxp-company-dashboard-jobs-search-search-form">
-                                    <div class="input-group">
-                                        <span class="input-group-text"><span class="fa fa-search"></span></span>
-                                        <input type="text" class="form-control" placeholder="Search">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-					<div class="pxp-dashboard-table-options">
-                        <ul class="list-unstyled">
-                        <!-- 등록버튼 start -->
-                            <a href="/addExamType">
-                            	<li><button title="Add"><span class="fa fa-plus"></span></button></li>
-                            </a>
-                        <!-- 등록버튼 end -->                                              
-                        </ul>
-                    </div>
-                    </div>
+	  				<div class="row justify-content-between align-content-center">
+	                        <div class="col-auto order-2 order-sm-1">
+	                            <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
+	                                <div class="pxp-company-dashboard-jobs-search mb-3">
+	                                <select class="form-select">
+	                                    <option>등록자</option>
+	                                    <option>시험유형코드</option>
+	                                </select>
+	                                	<div class="col-auto order-1 order-sm-2">
+	                                		<div class="pxp-company-dashboard-jobs-search-search-form">
+	                                    		<div class="input-group">
+	                                        		<span class="input-group-text"><span class="fa fa-search"></span></span>
+	                                        		<input type="text" class="form-control" placeholder="Search ID">
+	                                        		<button class="btn ms-2">Search</button>
+	                                    		</div>
+	                                		</div>
+	                            		</div>
+	                        		</div>
+	                        		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+	                        		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+	                        		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+									<div class="pxp-dashboard-table-options">
+				                        <ul class="list-unstyled">
+				                        <!-- 등록버튼 start -->
+				                            <a href="/addExamType">
+				                            	<li><button title="Add"><span class="fa fa-plus"></span></button></li>
+				                            </a>
+				                        <!-- 등록버튼 end -->                                              
+				                        </ul>
+				                    </div>
+	                            </div>
+	                        </div>
+	                    </div>
                     <!-- 검색 end -->   
                     <!-- 목록 start -->                   
                     <div class="table-responsive">
