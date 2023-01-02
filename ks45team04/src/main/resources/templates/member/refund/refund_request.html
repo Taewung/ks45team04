@@ -30,13 +30,45 @@
 		<!-- end header -->
 		
 		<!-- begin contents --> 
-        <div class="pxp-dashboard-content-details">
+        <div class="pxp-dashboard-content-details">      
+          <h1>환불 신청</h1>
+            <p class="pxp-text-light">Refund request.</p>
 
-        refund_request.html       
-             
+            <form>
+                <div class="row mt-4 mt-lg-5">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="pxp-company-old-password" class="form-label">결제 완료 코드</label>
+                            <input type="password" id="pxp-company-old-password" class="form-control" placeholder="결제 완료 코드를 입력해주세요">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="pxp-company-new-password" class="form-label">결제 상품</label>
+                            <input type="password" id="pxp-company-new-password" class="form-control" placeholder="결제 상품명을 입력해주세요">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="pxp-company-new-password-repeat" class="form-label">결제 금액</label>
+                            <input type="password" id="pxp-company-new-password-repeat" class="form-control" placeholder="결제 금액을 입력해주세요">
+                        </div>
+                    </div>
+				</div>
+                <div class="mt-4 mt-lg-5">
+                        <button type="button" class="btn rounded-pill pxp-section-cta" onclick="location.href='/refundList' ">Save</button>
+                        <button type="button" class="btn rounded-pill pxp-section-cta-o ms-3" onclick="location.href='/mpayList'">Cancel</button>
+                    </div>
+            </form>
+        </div>
 
         </div>
-        <!-- end contents -->     
+        <!-- end contents -->         
             
         <!-- begin footer -->
 			<div th:replace="~{member/fragments/myPageFooter :: footerFragment}"></div>

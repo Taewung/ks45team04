@@ -36,8 +36,8 @@
 		
 		<!-- begin contents --> 
             <div class="pxp-dashboard-content-details">
-             <h1>포인트 적립 기준 내역</h1>
-                <p class="pxp-text-light">Point save standard list</p>
+             <h1>결제 내역</h1>
+                <p class="pxp-text-light">Pay list</p>
 
                 <div class="mt-4 mt-lg-5">
                     <div class="row justify-content-between align-content-center">
@@ -45,7 +45,7 @@
                             <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
                                 <div class="pxp-company-dashboard-jobs-search mb-3">
                                 <select class="form-select">
-                                    <option>내용</option>
+                                    <option>회원 아이디</option>
                                 </select>
                                 	<div class="col-auto order-1 order-sm-2">
                                 		<div class="pxp-company-dashboard-jobs-search-search-form">
@@ -66,29 +66,29 @@
                             <thead>
                                 <tr>
                                     <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
-                                    <th colspan="1" style="width: 12%;">번호</th>
-                                    <th style="width: 20%;">내용</th>
-                                    <th style="width: 20%;">적립 포인트</th>
-                                    <th style="width: 20%;">등록 일시</th>
-                                    <th style="width: 20%;">등록자</th>
+                                    <th colspan="1" style="width: 15%;">아이디</th>
+                                    <th style="width: 20%;">결제 완료 코드</th>
+                                    <th style="width: 15%;">결제 상품</th>
+                                    <th style="width: 15%;">결제 금액</th>
+                                    <th style="width: 20%;">결제 일시</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td><input type="checkbox" class="form-check-input"></td>
                                     <td>
-                                        <a><div class="pxp-company-dashboard-job-title">1</div></a>
+                                        <a><div class="pxp-company-dashboard-job-title">id006</div></a>
                                     </td>
-                                    <td><div class="pxp-company-dashboard-job-category">회원가입</div></td>
-                                    <td><div class="pxp-company-dashboard-job-status">500</div></td>
+                                    <td><div class="pxp-company-dashboard-job-category">20221202-001</div></td>
+                                    <td><div class="pxp-company-dashboard-job-status">노트1, 노트2</div></td>
+                                    <td><div class="pxp-company-dashboard-job-status">10,000</div></td>
                                     <td><div class="pxp-company-dashboard-job-date">2022/12/31 at 11:56 am</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">id001</div></td>
-                                    
                                     <td>
                                         <div class="pxp-dashboard-table-options">
                                             <ul class="list-unstyled">
-                                                <li><button title="Reject"><span class="fa fa-pencil"></span></button></li>
+                                            <a href="/payDelete">
                                                 <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
+                                             </a>
                                             </ul>
                                         </div>
                                     </td>
@@ -96,18 +96,18 @@
                                 <tr>
                                     <td><input type="checkbox" class="form-check-input"></td>
                                     <td>
-                                        <a><div class="pxp-company-dashboard-job-title">2</div></a>
+                                        <a><div class="pxp-company-dashboard-job-title">id007</div></a>
                                     </td>
-                                    <td><div class="pxp-company-dashboard-job-category">챌린지 성공</div></td>
-                                    <td><div class="pxp-company-dashboard-job-status">300</div></td>
+                                    <td><div class="pxp-company-dashboard-job-category">20221202-002</div></td>
+                                    <td><div class="pxp-company-dashboard-job-status">노트3</div></td>
+                                    <td><div class="pxp-company-dashboard-job-status">4,000</div></td>
                                     <td><div class="pxp-company-dashboard-job-date">2022/12/31 at 11:56 am</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">id001</div></td>
-                                    
                                     <td>
                                         <div class="pxp-dashboard-table-options">
                                             <ul class="list-unstyled">
-                                                <li><button title="Reject"><span class="fa fa-pencil"></span></button></li>
+                                            <a href="/payDelete">
                                                 <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
+                                             </a>
                                             </ul>
                                         </div>
                                     </td>
@@ -115,18 +115,18 @@
                                 <tr>
                                     <td><input type="checkbox" class="form-check-input"></td>
                                     <td>
-                                        <a><div class="pxp-company-dashboard-job-title">3</div></a>
+                                        <a><div class="pxp-company-dashboard-job-title">id007</div></a>
                                     </td>
-                                    <td><div class="pxp-company-dashboard-job-category">노트 구매 리뷰</div></td>
-                                    <td><div class="pxp-company-dashboard-job-status">300</div></td>
+                                    <td><div class="pxp-company-dashboard-job-category">20221202-003</div></td>
+                                    <td><div class="pxp-company-dashboard-job-status">멤버십</div></td>
+                                    <td><div class="pxp-company-dashboard-job-status">9,000</div></td>
                                     <td><div class="pxp-company-dashboard-job-date">2022/12/31 at 11:56 am</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">id001</div></td>
-                                    
                                     <td>
                                         <div class="pxp-dashboard-table-options">
                                             <ul class="list-unstyled">
-                                                <li><button title="Reject"><span class="fa fa-pencil"></span></button></li>
+                                            <a href="/payDelete">
                                                 <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
+                                             </a>
                                             </ul>
                                         </div>
                                     </td>
@@ -134,23 +134,22 @@
                                 <tr>
                                     <td><input type="checkbox" class="form-check-input"></td>
                                     <td>
-                                        <a><div class="pxp-company-dashboard-job-title">4</div></a>
+                                        <a><div class="pxp-company-dashboard-job-title">id007</div></a>
                                     </td>
-                                    <td><div class="pxp-company-dashboard-job-category">합격자 리뷰 작성</div></td>
-                                    <td><div class="pxp-company-dashboard-job-status">1000</div></td>
+                                    <td><div class="pxp-company-dashboard-job-category">20221202-004</div></td>
+                                    <td><div class="pxp-company-dashboard-job-status">노트1</div></td>
+                                    <td><div class="pxp-company-dashboard-job-status">1,500</div></td>
                                     <td><div class="pxp-company-dashboard-job-date">2022/12/31 at 11:56 am</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">id001</div></td>
-                                    
                                     <td>
                                         <div class="pxp-dashboard-table-options">
                                             <ul class="list-unstyled">
-                                                <li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
+                                            <a href="/payDelete">
                                                 <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
+                                             </a>
                                             </ul>
                                         </div>
                                     </td>
                                 </tr>
-                                
                             </tbody>
                         </table>
 
@@ -171,14 +170,15 @@
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
+        <!-- end contents --> 
 
-        <!-- end contents -->     
             
         <!-- begin footer -->
 			<div th:replace="~{admin/fragments/adminFooter :: footerFragment}"></div>
 		<!-- end footer -->
-
+        </div>
         <script src="js/jquery-3.4.1.min.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
