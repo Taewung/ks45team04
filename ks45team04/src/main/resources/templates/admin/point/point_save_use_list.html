@@ -46,172 +46,55 @@
                     <div class="row justify-content-between align-content-center">
                         <div class="col-auto order-2 order-sm-1">
                             <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
+                        	<form th:action="@{/pointSaveUseList}" method="get">
                                 <div class="pxp-company-dashboard-jobs-search mb-3">
+                                
                                 <select class="form-select">
-                                    <option>회원 아이디</option>
+                                    <option value="pointSaveUseId">아이디</option>
                                 </select>
                                 	<div class="col-auto order-1 order-sm-2">
                                 		<div class="pxp-company-dashboard-jobs-search-search-form">
                                     		<div class="input-group">
                                         		<span class="input-group-text"><span class="fa fa-search"></span></span>
-                                        		<input type="text" class="form-control" placeholder="Search ID">
-                                        		<button class="btn ms-2">Search</button>
+                                        		<input type="text" name="searchValue" class="form-control" placeholder="Search ID">
+                                        		<button type="submit" class="btn ms-2">Search</button>
                                     		</div>
                                 		</div>
                             		</div>
-                        		</div> 
+                        		</div>
+                        		</form> 
                             </div>
                         </div>
-                        
+                       
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover align-middle">
                             <thead>
                                 <tr>
-                                    <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
-                                    <th colspan="1" style="width: 12%;">아이디</th>
+                                    <th colspan="1" style="width: 15%;">코드</th>
+                                    <th style="width: 15%;">아이디</th>
                                     <th style="width: 15%;">내역</th>
-                                    <th style="width: 10%;">적립/사용</th>
-                                    <th style="width: 15%;">포인트</th>
+                                    <th style="width: 15%;">적립/사용</th>
+                                    <th style="width: 10%;">포인트</th>
                                     <th style="width: 10%;">총 보유 포인트</th>
                                     <th>일시</th>
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><input type="checkbox" class="form-check-input"></td>
-                                    <td>
-                                        <a><div class="pxp-company-dashboard-job-title">id008</div></a>
-                                    </td>
-                                    <td><div class="pxp-company-dashboard-job-category">합격자 리뷰</div></td>
-                                    <td><div class="pxp-company-dashboard-job-status"><span class="badge rounded-pill bg-success">적립</span></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">1000</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">1300</div></td>
-                                    <td><div class="pxp-company-dashboard-job-date">2022/12/31 at 11:56 am</div></td>
-                                    <td>
-                                        <div class="pxp-dashboard-table-options">
-                                            <ul class="list-unstyled">
-                                                <li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
-                                                <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
-                                            </ul>
-                                        </div>
-                                    </td>
+                                <tr th:if="${not #lists.isEmpty(pointSaveUseList)}"
+									th:each="l : ${pointSaveUseList}">
+                                    <td><div class="pxp-company-dashboard-job-title" th:text="${l.pointSaveUseCode}"></div>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.pointSaveUseId}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-status" th:text="${l.pointSaveUseReason}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" ><span class="badge rounded-pill bg-success" th:text="${l.saveUse}"></span></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${#numbers.formatInteger(l.pointSaveUsePoint, 3, 'COMMA')}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${#numbers.formatInteger(l.totalPoint, 3, 'COMMA')}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.saveUseDatetime}"></div></td>
                                 </tr>
-                                <tr>
-                                    <td><input type="checkbox" class="form-check-input"></td>
-                                    <td>
-                                        <a><div class="pxp-company-dashboard-job-title">id008</div></a>
-                                    </td>
-                                    <td><div class="pxp-company-dashboard-job-category">노트 구매</div></td>
-                                    <td><div class="pxp-company-dashboard-job-status"><span class="badge rounded-pill bg-danger">사용</span></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">1000</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">300</div></td>
-                                    <td><div class="pxp-company-dashboard-job-date">2022/12/31 at 11:56 am</div></td>
-                                    <td>
-                                        <div class="pxp-dashboard-table-options">
-                                            <ul class="list-unstyled">
-                                                <li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
-                                                <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" class="form-check-input"></td>
-                                    <td>
-                                        <a><div class="pxp-company-dashboard-job-title">id006</div></a>
-                                    </td>
-                                    <td><div class="pxp-company-dashboard-job-category">회원가입</div></td>
-                                    <td><div class="pxp-company-dashboard-job-status"><span class="badge rounded-pill bg-success">적립</span></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">500</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">1000</div></td>
-                                    <td><div class="pxp-company-dashboard-job-date">2022/12/31 at 11:56 am</div></td>
-                                    <td>
-                                        <div class="pxp-dashboard-table-options">
-                                            <ul class="list-unstyled">
-                                                <li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
-                                                <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" class="form-check-input"></td>
-                                    <td>
-                                        <a><div class="pxp-company-dashboard-job-title">id007</div></a>
-                                    </td>
-                                    <td><div class="pxp-company-dashboard-job-category">회원가입</div></td>
-                                    <td><div class="pxp-company-dashboard-job-status"><span class="badge rounded-pill bg-success">적립</span></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">500</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">500</div></td>
-                                    <td><div class="pxp-company-dashboard-job-date">2022/12/31 at 11:56 am</div></td>
-                                    <td>
-                                        <div class="pxp-dashboard-table-options">
-                                            <ul class="list-unstyled">
-                                                <li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
-                                                <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" class="form-check-input"></td>
-                                    <td>
-                                        <a><div class="pxp-company-dashboard-job-title">id008</div></a>
-                                    </td>
-                                    <td><div class="pxp-company-dashboard-job-category">챌린지 성공</div></td>
-                                    <td><div class="pxp-company-dashboard-job-status"><span class="badge rounded-pill bg-success">적립</span></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">300</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">300</div></td>
-                                    <td><div class="pxp-company-dashboard-job-date">2022/12/31 at 11:56 am</div></td>
-                                    <td>
-                                        <div class="pxp-dashboard-table-options">
-                                            <ul class="list-unstyled">
-                                                <li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
-                                                <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" class="form-check-input"></td>
-                                    <td>
-                                        <a><div class="pxp-company-dashboard-job-title">id009</div></a>
-                                    </td>
-                                    <td><div class="pxp-company-dashboard-job-category">노트 구매 리뷰</div></td>
-                                    <td><div class="pxp-company-dashboard-job-status"><span class="badge rounded-pill bg-success">적립</span></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">300</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">300</div></td>
-                                    <td><div class="pxp-company-dashboard-job-date">2022/12/31 at 11:56 am</div></td>
-                                    <td>
-                                        <div class="pxp-dashboard-table-options">
-                                            <ul class="list-unstyled">
-                                                <li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
-                                                <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" class="form-check-input"></td>
-                                    <td>
-                                        <a><div class="pxp-company-dashboard-job-title">id010</div></a>
-                                    </td>
-                                    <td><div class="pxp-company-dashboard-job-category">포인트 환급</div></td>
-                                    <td><div class="pxp-company-dashboard-job-status"><span class="badge rounded-pill bg-danger">사용</span></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">100</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">900</div></td>
-                                    <td><div class="pxp-company-dashboard-job-date">2022/12/31 at 11:56 am</div></td>
-                                    <td>
-                                        <div class="pxp-dashboard-table-options">
-                                            <ul class="list-unstyled">
-                                                <li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
-                                                <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <tr th:unless="${not #lists.isEmpty(pointSaveUseList)}">
+									<td colspan="9">조회된 포인트 적립/사용 내역이 없습니다.</td>
+								</tr> 
                             </tbody>
                         </table>
 
@@ -229,8 +112,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
-
+</div>
         <!-- end contents -->     
             
         <!-- begin footer -->
