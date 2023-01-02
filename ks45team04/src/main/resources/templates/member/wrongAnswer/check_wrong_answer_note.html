@@ -18,31 +18,115 @@
     <link rel="stylesheet" th:href="@{/css/animate.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-
-<body>
-	<div class="pxp-preloader"><span>Loading...</span></div>
-	
-		<!-- begin header -->
-		<div th:replace="~{member/fragments/contentsHeader :: headerFragment}"></div>
-		<!-- end header -->			
+    <body style="background-color: var(--pxpSecondaryColorLight);">
+        <div class="pxp-dashboard-content">
+        
+        <!-- begin aside -->
+		<div th:replace="~{member/fragments/myPageAside :: asideFragment}"></div>
+		<!-- end aside -->
 		
-		<!--  begin contents -->
+        <!-- begin header -->
+		<div th:replace="~{member/fragments/myPageHeader :: headerFragment}"></div>
+		<!-- end header -->
+		
+		<!-- begin contents --> 
 		<section>
-			<div class="pxp-container">
-				check_wrong_answer_note.html
-			</div>
+            <div class="pxp-dashboard-content-details">
+                <h1>오답노트</h1>
+                <p class="pxp-text-light">WrongAnswer Note</p>
+				<div class="pxp-dashboard-table-options">                             
+                	<ul class="list-unstyled">
+                    <!-- 수정버튼 start -->
+                     <a href="/modifyWrongAnswerNote">
+                     	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
+                     </a>
+                 	<!-- 수정버튼 end -->
+                 	<!-- 삭제버튼 start -->
+                     	<li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
+                 	<!-- 삭제버튼 end -->                                              
+                    </ul>
+                </div>
+                <form>
+                     <!-- 제목입력란 start -->
+                     <div class="row mt-4 mt-lg-5">
+                     	<h2><strong><span class="fa fa-check"></span>제목</strong></h2>	                    
+                        <div class="mb-3">
+	                        <input type="text" class="form-control" disabled>
+                    	</div>	                        
+                     </div>
+                     <!-- 제목입력란 end -->
+                    <div class="row mt-4 mt-lg-5">  
+                    <!-- 자격증 start -->                
+                	<h2><strong><span class="fa fa-check"></span>자격증</strong></h2>
+                        <div class="col-md-6 col-xxl-3">
+                            <label for="pxp-company-job-experience" class="form-label">대분류</label>
+                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <label for="pxp-company-job-experience" class="form-label">중분류</label>
+                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
+                        </div>                     
+                        <div class="col-md-6 col-xxl-3">
+                            <label for="pxp-company-job-experience" class="form-label">자격증명</label>
+                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
+                        </div>
+                    </div>
+                    <!-- 자격증 end -->                      
+                    <!-- 과목 start --> 
+                    <div class="row mt-4 mt-lg-5">
+                    <h2><strong><span class="fa fa-check"></span>과목</strong></h2>
+                        <div class="col-md-6 col-xxl-3">
+                            <label for="pxp-company-job-experience" class="form-label">과목</label>
+                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <label for="pxp-company-job-experience" class="form-label">과목명</label>
+                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
+                        </div>
+                      <!-- 과목 end --   
+                      	<!-- 문제 start -->
+                        <div class="row mt-4 mt-lg-5">
+                        <h2><strong><span class="fa fa-check"></span>문제</strong></h2>	                    
+	                        <div class="mb-3">
+		                        <textarea class="form-control" id="pxp-company-job-description" disabled></textarea>
+	                    	</div>	                        
+                        </div>
+                     	<!-- 문제 end -->                 	
+                        <!-- 틀린이유 start -->
+                        <div class="row mt-4 mt-lg-5">
+                        <h2><strong><span class="fa fa-check"></span>틀린이유</strong></h2>
+	                        <div class="mb-3">
+		                        <textarea class="form-control" id="pxp-company-job-description" disabled></textarea>
+	                    	</div>
+                        </div>
+                       <!-- 틀린이유 end -->
+                       <!-- 풀이 start -->
+                        <div class="row mt-4 mt-lg-5">
+                        <h2><strong><span class="fa fa-check"></span>풀이</strong></h2>
+	                        <div class="mb-3">
+		                        <textarea class="form-control" id="pxp-company-job-description" disabled></textarea>
+	                    	</div>
+                        </div>
+                       <!-- 풀이 end -->
+	                   <div class="mt-4 mt-lg-5">
+	                        <button type="button" onclick="location.href='/wrongAnswerNoteList'" class="btn rounded-pill pxp-section-cta">목록으로</button>
+                    	</div>                                      
+                    	</div>
+                    </div>
+                </form>
+            </div>        
 		</section>
-		<!--  end contents -->
-
-			
-		<!-- begin footer -->
-		<div th:replace="~{member/fragments/contentsFooter :: footerFragment}"></div>
+        <!-- end contents -->     
+            
+        <!-- begin footer -->
+			<div th:replace="~{member/fragments/myPageFooter :: footerFragment}"></div>
 		<!-- end footer -->
-			
-	<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
-    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/js/owl.carousel.min.js}"></script>
-    <script th:src="@{/js/nav.js}"></script>
-    <script th:src="@{/js/main.js}"></script>
-</body>
+        </div>
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/nav.js"></script>
+        <script src="js/Chart.min.js"></script>
+        <script src="js/main.js"></script>
+    </body>
 </html>

@@ -18,10 +18,10 @@ public class ExamController {
 		model.addAttribute("title", "시험지생성");
 		return "member/exam/add_exam_paper";
 	}
-	@GetMapping("/checkExamResultList")
+	@GetMapping("/checkExamResult")
 	public String checkExamResultList(Model model) {
 		model.addAttribute("title", "응시결과상세조회");
-		return "member/exam/check_exam_result_list";
+		return "member/exam/check_exam_result";
 	}
 	@GetMapping("/examResultList")
 	public String examResultList(Model model) {
