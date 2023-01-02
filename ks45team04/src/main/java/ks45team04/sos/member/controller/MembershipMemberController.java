@@ -15,7 +15,7 @@ public class MembershipMemberController {
 
 
 	}
-	
+
 	@GetMapping("/membershipPeriod")
 	public String membershipPeriod(Model model) {
 		model.addAttribute("title", "개인 멤버십 남은 기간 조회");
