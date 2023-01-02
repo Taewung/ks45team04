@@ -27,116 +27,63 @@
 		<!-- end header -->			
 		
 		<!--  begin contents -->
-		<section>
-			<div class="pxp-container">
+        <section class="pxp-hero vh-100" style="background-color: var(--pxpMainColorLight);">
+            <div class="row align-items-center pxp-sign-hero-container">
 
 
-
-	<th:block layout:fragment="customContents">
-		<form id="addMemberForm" th:action="@{/member/addMember}" method="post">
-			<table>
-				<tbody>
-					<tr>
-						<td>
-							<label for="memId">회원아이디</label>
-						</td>
-						<td>
-							<input type="text" id="memId" name="memId"
-								   placeholder="회원아이디를 입력해주세요"
-							/>
-						</td>
-						<td>
-							<button type="button" id="checkBtn">아이디 중복체크</button>
-						</td>					
-					</tr>
-					<tr>
-						<td>
-							<label for="memPw">회원비밀번호</label>
-						</td>
-						<td colspan="2">
-							<input type="text" id="memPw" name="memPw"
-								   placeholder="회원비밀번호를 입력해주세요"
-								   disabled="disabled"
-							/>
-						</td>								
-					</tr>
-					<tr>
-						<td>
-							<label for="memName">회원이름</label>
-						</td>
-						<td colspan="2">
-							<input type="text" id="memName" name="memName" 
-								   placeholder="회원의 이름을 입력해주세요"
-								   disabled="disabled"
-							/>
-						</td>								
-					</tr>
-					<tr>
-						<td>
-							<label for="memEmail">회원이메일</label>
-						</td>
-						<td colspan="2">
-							<input type="text" id="memEmail" name="memEmail" 
-								   placeholder="회원의 이메일을 입력해주세요"
-								   disabled="disabled"
-							/>
-						</td>								
-					</tr>
-					<tr>
-						<td>
-							<label for="memAddr">회원생일</label>
-						</td>
-						<td colspan="2">
-							<input type="text" id="memBirth" name="memBirth" 
-								   placeholder="회원의 주소를 입력해주세요"
-								   disabled="disabled"
-							/>
-						</td>								
-					</tr>
-					
-					
-					<tr>
-						<td>
-							<label for="memEmail">회원이메일</label>
-						</td>
-						<td colspan="2">
-							<input type="text" id="memEmail" name="memEmail" 
-								   placeholder="회원의 이메일을 입력해주세요"
-								   disabled="disabled"
-							/>
-						</td>								
-					</tr>
-					<tr>
-						<td>
-							<label for="memPhone">회원전화번호</label>
-						</td>
-						<td colspan="2">
-							<input type="text" id="memBirth" name="memBirth" 
-								   placeholder="회원의 주소를 입력해주세요"
-								   disabled="disabled"
-							/>
-						</td>								
-					</tr>	
-					
-									
-				</tbody>
-				<tfoot>
-					<tr>
-						<td colspan="3">	
-							<button type="button" id="submitBtn" disabled="disabled">회원가입</button>
-							<button type="reset" id="resetBtn" disabled="disabled">취소</button>
-						</td>
-					</tr>
-				</tfoot>
-			</table>
-		</form>
-	</th:block>
-
-
-
-
-
-				
+                <div class="col-xl-6 pxp-column">
+                    <div class="pxp-sign-hero-fig text-center pb-100 pt-100">
+                        <img src="/images/signup-big-fig.png" alt="Sign up">
+                        <h1 class="mt-4 mt-lg-5">Create an account</h1>
+                    </div>
+                </div>
+                <div class="col-xl-6 pxp-column pxp-is-light">
+                    <div class="pxp-sign-hero-form pb-100 pt-100">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-6 col-xl-7 col-xxl-5">
+                                <div class="pxp-sign-hero-form-content">
+                                    <h5 class="text-center">회원 가입</h5> 
+                                    <form class="mt-4">
+                                        <div class="form-floating mb-3">
+                                            <input type="memId" class="form-control" id="pxp-signup-page-email" placeholder="Email address">
+                                            <label for="pxp-signup-page-email">ID</label>
+                                            <span class="fa fa-id-card-o"></span>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="password" class="form-control" id="pxp-signup-page-password" placeholder="Create password">
+                                            <label for="pxp-signup-page-password">Password</label>
+                                            <span class="fa fa-lock"></span>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="email" class="form-control" id="pxp-signup-page-email" placeholder="Email address">
+                                            <label for="pxp-signup-page-email">Name</label>
+                                            <span class="fa fa-user"></span>
+                                        </div>       
+                                        <div class="form-floating mb-3">
+                                            <input type="email" class="form-control" id="pxp-signup-page-email" placeholder="Email address">
+                                            <label for="pxp-signup-page-email">Email</label>
+                                            <span class="fa fa-envelope-o"></span>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="email" class="form-control" id="pxp-signup-page-email" placeholder="Email address">
+                                            <label for="pxp-signup-page-email">Birth</label>
+                                            <span class="fa fa-birthday-cake"></span>
+                                        </div> 
+                                        <div class="form-floating mb-3">
+                                            <input type="email" class="form-control" id="pxp-signup-page-email" placeholder="Email address">
+                                            <label for="pxp-signup-page-email">Phone</label>
+                                            <span class="fa fa-mobile"></span>
+                                        </div>                                                                                                                                                        
+                                        <a href="#" class="btn rounded-pill pxp-sign-hero-form-cta">Continue</a>
+                                        <div class="mt-4 text-center pxp-sign-hero-form-small">
+                                            이미 가입 된 계정이 있다면 <a href="/login">로그인하기</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>				
 				
 				
 			</div>

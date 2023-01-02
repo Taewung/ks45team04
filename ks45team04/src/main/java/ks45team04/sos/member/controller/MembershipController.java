@@ -10,7 +10,9 @@ public class MembershipController {
 	@GetMapping("/membershipRequest")
 	public String membershipRequest(Model model) {
 		model.addAttribute("title", "멤버십 신청");
-		return  "member/membership_request";		
+
+		return  "member/membership/membership_request";		
+
 	}	
 
 }

@@ -19,21 +19,21 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
-
 <body>
 	<div class="pxp-preloader"><span>Loading...</span></div>
 	
-	
 		<!-- begin header -->
-		<div th:replace="~{member/fragments/contentsHeader :: headerFragment}" ></div>
+		<div th:replace="~{member/fragments/contentsHeader :: headerFragment}"></div>
 		<!-- end header -->			
 		
 		<!--  begin contents -->
-	<h2 class="pxp-section-h2">원하는 멤버십을 선택하세요.</h2>
-                <p class="pxp-text-light">무제한으로 즐기세요.</p>
-                <p class="pxp-text-light">챌린지 기능을 사용하세요.</p>
-
-                <div class="row mt-3 mt-md-4 pxp-animate-in pxp-animate-in-top";>
+	<section class="mt-50 pxp-no-hero">
+            <div class="pxp-container">
+			<h2 class="pxp-section-h2">원하는 멤버십을 선택하세요.</h2>
+			<br/>
+                <p class="pxp-plans-card-1-title">무제한으로 즐기세요.</p>
+                <p class="pxp-plans-card-1-title">챌린지 기능을 사용하세요.</p>
+                <div class="row mt-4 mt-md-5 justify-content-center pxp-animate-in pxp-animate-in-top">
                     <div class="col-md-6 col-xl-4 col-xxl-3 pxp-plans-card-1-container">
                         <div class="pxp-plans-card-1">
                             <div class="pxp-plans-card-1-top">
@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="pxp-plans-card-1-list">
                                     <ul class="list-unstyled">
-                                        <li><img src="images/check.svg" alt="">챌린지를 이용해 능률을 높이세요!</li>
+                                        <li><img src="images/check.svg" alt="">챌린지 사용해 능률을 높이세요!</li>
                                         <li><img src="images/check.svg" alt="">다양한 기출문제를 풀어보세요!</li>
                                         <li><img src="images/check.svg" alt="">10일간의 집중!</li>
                                         <li><img src="images/check.svg" alt="">더 많은 혜택을 누리세요!</li>
@@ -59,7 +59,7 @@
                             </div>
                         </div>
                     </div>
-                    
+                    	
                     <div class="col-md-6 col-xl-4 col-xxl-3 pxp-plans-card-1-container">
                         <div class="pxp-plans-card-1 pxp-is-featured">
                             <div class="pxp-plans-card-1-top">
@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="pxp-plans-card-1-list">
                                     <ul class="list-unstyled">
-                                        <li><img src="images/check-light.svg" alt="">챌린지를 이용해 능률을 높이세요!</li>
+                                        <li><img src="images/check-light.svg" alt="">챌린지 사용해 능률을 높이세요!</li>
                                         <li><img src="images/check-light.svg" alt="">다양한 기출문제를 풀어보세요!</li>
                                         <li><img src="images/check-light.svg" alt="">30일의 넉넉한 기간!</li>
                                         <li><img src="images/check-light.svg" alt="">더 많은 혜택을 누리세요!</li>
@@ -85,12 +85,14 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                       </div>
+                      </div>
+</div>
+</section>
 		<!--  end contents -->
-
-
+		<br><br>
+			
 		<!-- begin footer -->
-
 		<div th:replace="~{member/fragments/contentsFooter :: footerFragment}"></div>
 		<!-- end footer -->
 			
