@@ -1,15 +1,24 @@
 package ks45team04.sos.admin.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import ks45team04.sos.admin.dto.QnaAnswer;
+import ks45team04.sos.admin.service.QnaAnswerService;
 
 @Controller
 public class AQnaAnswerController {
+	
+	private final QnaAnswerService qnaAnswerService;
+	
+	public AQnaAnswerController(QnaAnswerService qnaAnswerService) {
+		this.qnaAnswerService = qnaAnswerService;
+	}
+	
 		
 	
 		// qna 답변 삭제 처리
@@ -63,7 +72,11 @@ public class AQnaAnswerController {
 		// qna 질문 목록 조회
 				@GetMapping("/QnaQuestionList")
 				public String QnaQuestionList(Model model) {
+					
+				List<QnaAnswer> qnaAnswerList = qnaAnswerService.QnaAnswerList();
+				
 					model.addAttribute("title", "qna 질문 조회");
+					model.addAttribute("qnaAnswerList", qnaAnswerList);
 					
 					return "admin/QnA/qna_question.list";
 				}
