@@ -17,6 +17,9 @@
     <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
     <link rel="stylesheet" th:href="@{/css/animate.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/examAnswer.css}">
+    <link type='text/css' rel='stylesheet' href='stylesheet.css'/>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open Sans"/>           
 </head>
 
 <body>
@@ -24,20 +27,74 @@
 	
 		<!-- begin header -->
 		<div th:replace="~{member/fragments/contentsHeader :: headerFragment}"></div>
-		<!-- end header -->			
+		<!-- end header -->		
 		
-		<!--  begin contents -->
-		<section>
-			<div class="pxp-container">
-				add_exam_answer.html
-			</div>
-		</section>
+		<!--  begin contents -->	
+		<br><br><br>
+		<div align="center">		
+			<h1><strong>기출문제 풀이</strong></h1>
+	        <div class="pxp-hero-subtitle pxp-text-light">가나다라마바사아자차카타파하가나다라마바사아</div>
+		</div>
+		<section class="pxp-page-header-simple" style="background-color: var(--pxpMainColorLight);">
+            <div class="pxp-container">
+                <div class="pxp-hero-form pxp-hero-form-round pxp-large mt-3 mt-lg-4">
+                    <form class="row gx-3 align-items-center">
+                        <div class="col-12 col-lg">
+                            <div class="input-group mb-3 mb-lg-0">
+                                <span class="input-group-text">&emsp;&emsp;<strong>자격증명</strong>
+                                	<input type="text" class="form-control" value="정보처리기사" disabled="disabled">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg">
+                            <div class="input-group mb-3 mb-lg-0 pxp-has-left-border">
+                                <span class="input-group-text"><strong>과목</strong>
+                                	<input type="text" class="form-control" value="1과목 " disabled="disabled">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg">
+                            <div class="input-group mb-3 mb-lg-0 pxp-has-left-border">
+                                <span class="input-group-text"><strong>과목명</strong>
+                                	<input type="text" class="form-control" value="소프트웨어 설계" disabled="disabled">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg">
+                            <div class="input-group mb-3 mb-lg-0 pxp-has-left-border">
+                                <span class="input-group-text"><strong>풀이시간</strong>
+                                	<input type="text" class="form-control" value="00:20:00" disabled="disabled">&emsp;&emsp;
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+       
+        <br><br>
+			<div id="container">
+	   			<br/>
+	  			<div id='quiz'></div>
+	  			<div class="row">
+		  			<div class="btn-group col-12 justify-content-center">
+			    		<div class="button" id="prev"><a href="#">이전문제</a></div>
+						<div class="button" id="next"><a href="#">다음문제</a></div>
+		  			</div>
+	  			</div>
+	    		<div class="button" id='start' onclick="location.href='/checkExamResult'">풀이완료</div>
+    		</div>
+        </section>
 		<!--  end contents -->
 
 			
 		<!-- begin footer -->
 		<div th:replace="~{member/fragments/contentsFooter :: footerFragment}"></div>
 		<!-- end footer -->
+		
+	<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+	<script type="text/javascript" src='questions.json'></script>
+	<script type='text/javascript' src='jsquiz.js'></script>
+	<script type='text/javascript' src='/js/examAnswer.js'></script>
 			
 	<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
