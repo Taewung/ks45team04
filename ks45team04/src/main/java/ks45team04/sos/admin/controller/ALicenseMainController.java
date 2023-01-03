@@ -62,12 +62,12 @@ private final LicenseMainMapper licenseMainMapper;
 		return "admin/licenseMain/license_main_modify";
 	}
 	
-	@GetMapping("checkCode")
+	// 관리자 아이디 인증
+	@GetMapping("/idCheck")
 	@ResponseBody
-	public boolean checklmcCode(@RequestParam(value="lmcCode") String lmcCode) {
-		boolean isChecked = false;
+	public boolean idCheck(@RequestParam(value="inputId") String inputId) {
 		
-		isChecked = licenseMainMapper.checkLicenseCode(lmcCode);
+		boolean isChecked = licenseMainMapper.getIdCheck(inputId);
 		
 		return isChecked;
 	}

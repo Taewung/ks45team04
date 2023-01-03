@@ -1,52 +1,158 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  class="pxp-root" >
+	  layout:decorate="~{admin/layout/adminDefault}">
 <!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<th:block layout:fragment="customScript">
+		<script>
+			$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+				function validateValue(checkValue) {
+					if(    typeof checkValue == 'undefined' 
+							|| checkValue == null 
+							|| checkValue == ''					){
+						return true;
+					}
+					return false;
+					
+				}
+			
+			// 관리자 인증
+				$('#lscRegId').on('input', function(){
+					$('#addLicenseSubForm input').not('#lscRegId').prop('disabled', true);
+				  	$('#addLicenseSubForm select').prop('disabled', true);
+				  	$('#addLicenseSubForm button').not('#checkBtn').prop('disabled', true);
+				});
+			
+				$('#checkBtn').click(function(){
+					let lmcRegId = $('#lscRegId').val();
+					
+					if(validateValue(lmcRegId)){
+						alert('관리자 인증을 해주세요');
+						$('#lscRegId').focus();
+						return false;					
+					}					
 
-    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
-    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-    <body style="background-color: var(--pxpMainColorLight);">
-        <div class="pxp-dashboard-content">
-        
-        <!-- begin aside -->
-		<div th:replace="~{admin/fragments/adminAside :: asideFragment}"></div>
-		<!-- end aside -->
+					let request = $.ajax({
+						  url: '/lscIdCheck',
+						  method: 'GET',
+						  data: { 'inputId' : lmcRegId },
+						  dataType: 'json'
+					});
+					
+					//성공 
+					request.done(function( isChecked ) {
+						console.log(isChecked, '데이터타입 확인');
+					  	  
+						if(isChecked){
+							alert('인증 완료')
+						  	$('#addLicenseSubForm input').not('#lscRegId').prop('disabled', false);
+						  	$('#addLicenseSubForm select').prop('disabled', false);
+						  	$('#addLicenseSubForm button').not('#checkBtn').prop('disabled', false);
+								
+						}else{
+					  	  	alert('관리자 아이디가 일치하지 않습니다.');
+					  	  	$('#lscRegId').val('');
+						  	$('#addLicenseSubForm input').not('#lscRegId').prop('disabled', true);
+						  	$('#addLicenseSubForm select').prop('disabled', true);
+						  	$('#addLicenseSubForm button').not('#checkBtn').prop('disabled', true);
+							$('#lscRegId').focus();
+						}
+					});
+					
+					//실패 
+					request.fail(function( jqXHR, textStatus ) {
+					  	  console.log('Request failed: ' + textStatus );
+					});
+				});
+				
+				
 		
-        <!-- begin header -->
-		<div th:replace="~{admin/fragments/adminHeader :: headerFragment}"></div>
-		<!-- end header -->
-		
-		<!-- begin contents --> 
-            <div class="pxp-dashboard-content-details">
+				/* 유효성검사를 구현하시오. (#submitBtn 를 클릭 시) */
+				$('#submitBtn').click(function(){
+					let isSubmit = true;
+					
+					$('#addLicenseSubForm input').each(function(idx, item){
+						let checkValue = $(item).val();
+						let labelValue = $(item).parent('.mb-3').find('label').text();
+						if(validateValue(checkValue)){
+							
+							alert(`${labelValue}를 입력해주세요`);
+							$(item).focus();
+							isSubmit = false;
+							return false;
+						}
+						
+					});   
+					
 
-                    
-            license_sub_insert.html      
 
-            </div>
-        <!-- end contents -->     
-            
-        <!-- begin footer -->
-			<div th:replace="~{admin/fragments/adminFooter :: footerFragment}"></div>
-		<!-- end footer -->
-        </div>
-        <script src="js/jquery-3.4.1.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/nav.js"></script>
-        <script src="js/Chart.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+					if(isSubmit) $('#addLicenseSubForm').submit();
+				});
+			});
+			
+
+			
+		</script>
+	</th:block> 
+	<th:block layout:fragment="customContents">
+		<form id="addLicenseSubForm" th:action="@{/addlicenseSub}" name="myform" method="post">
+              <div class="row mt-4 mt-lg-5">
+                  <div class="col-xxl-8">
+                      <div class="row">
+                      </div>
+                      <div class="row">
+                      </div><br>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lscRegId" class="form-label"><h6>관리자 아이디</h6></label>
+                                  <button type="button" id="checkBtn" class="btn rounded-pill pxp-section-cta-o ms-3">관리자 인증</button>
+                                  <input type="text" id="lscRegId" class="form-control" name="lscRegId" placeholder="관리자 아이디">
+                              </div>
+                          </div>
+                      </div><br><br>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lscCode" class="form-label"><h4>자격증 중분류코드</h4></label><h12>&nbsp;&nbsp;예시)lsc000</h12>
+                                  <input type="text" id="lscCode" class="form-control" name="lscCode" placeholder="자격증 중분류코드" disabled="disabled">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lmcCode" class="form-label"><h4>자격증 대분류코드</h4></label><h12>&nbsp;&nbsp;예시)lmc000</h12>
+                                  <input type="text" id="lmcCode" class="form-control" name="lmcCode" placeholder="자격증 대분류코드" disabled="disabled">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lmcName" class="form-label"><h4>자격증 대분류명</h4></label>
+                                  <input type="text" id="lmcName" class="form-control" name="lmcName" placeholder="자격증 대분류명" disabled="disabled">
+                              </div>
+                          </div>
+                      </div>                      
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lscName" class="form-label"><h4>자격증 중분류명</h4></label>
+                                  <input type="text" id="lscName" class="form-control" name="lscName" placeholder="자격증 중분류명" disabled="disabled">
+                              </div>
+                          </div>
+                      </div>
+                      
+                  </div>
+              </div>
+              <div class="mt-4 mt-lg-5">
+                  <button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>&nbsp;&nbsp;
+                  <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
+                  
+              </div>
+          </form>
+	
+	</th:block>
+	
 </html>

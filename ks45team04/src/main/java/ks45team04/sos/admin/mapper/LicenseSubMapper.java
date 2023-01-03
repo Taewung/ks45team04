@@ -9,6 +9,9 @@ import ks45team04.sos.admin.dto.LicenseSub;
 @Mapper
 public interface LicenseSubMapper {
 	
+	//관리자 아이디 인증
+	public boolean getIdCheck(String inputId);
+	
 	// 자격증 중분류 등록
 	public int addLicenseSub(LicenseSub licenseSub);
 	

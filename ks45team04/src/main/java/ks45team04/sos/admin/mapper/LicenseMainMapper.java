@@ -10,8 +10,8 @@ import ks45team04.sos.admin.dto.LicenseMain;
 public interface LicenseMainMapper {
 	
 
-	// 자격증 코드 중복 조회
-	public boolean checkLicenseCode(String lmcCode);
+	// 관리자 아이디 인증
+	public boolean getIdCheck(String inputId);
 	
 	// 자격증 대분류 등록
 	public int addLicenseMain(LicenseMain licenseMain);
