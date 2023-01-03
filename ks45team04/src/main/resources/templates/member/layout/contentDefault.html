@@ -26,11 +26,10 @@
 		<div th:replace="~{member/fragments/contentsHeader :: headerFragment}"></div>
 		<!-- end header -->			
 		
-		<!--  begin contents -->
-		여기에 만들면됨미다
-		<!--  end contents -->
+		<!-- begin contents --> 
+         <th:block layout:fragment="customContents"></th:block>  	   
+        <!-- end contents --> 
 
-			
 		<!-- begin footer -->
 		<div th:replace="~{member/fragments/contentsFooter :: footerFragment}"></div>
 		<!-- end footer -->
