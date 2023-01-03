@@ -2,23 +2,23 @@ package ks45team04.sos.admin.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import ks45team04.sos.admin.dto.Member;
-import ks45team04.sos.admin.mapper.adminMemberMapper;
+import ks45team04.sos.admin.mapper.AdminMemberMapper;
 import ks45team04.sos.admin.service.MemberService;
 
 @Controller
 public class AMemberController {
 	
 private final MemberService memberService;
-private final adminMemberMapper memberMapper;
+private final AdminMemberMapper memberMapper;
 
-public AMemberController(MemberService memberService,
-						adminMemberMapper membermapper) {
+public AMemberController(@Qualifier("adminMemberService") MemberService memberService,
+						AdminMemberMapper membermapper) {
 	this.memberService = memberService;
 	this.memberMapper = membermapper;
 }
@@ -43,6 +43,10 @@ public AMemberController(MemberService memberService,
 	public String totalRemoveMember(Model model) {
 		model.addAttribute("title", "회원 삭제");
 		return  "admin/adminMember/total_remove_member";		
+	}
+
+	public AdminMemberMapper getMemberMapper() {
+		return memberMapper;
 	}		
 	
 }

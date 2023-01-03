@@ -1,17 +1,33 @@
 package ks45team04.sos.admin.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
+import ks45team04.sos.admin.dto.CheatMember;
+import ks45team04.sos.admin.mapper.AdminCheatMemberMapper;
+import ks45team04.sos.admin.service.CheatMemberService;
 
 @Controller
 public class AcheatMemberController {
 
+private final CheatMemberService cheatMemberService;
+private final AdminCheatMemberMapper cheatMemberMapper;
+
+public AcheatMemberController(@Qualifier("adminChaetMemberService") CheatMemberService cheatMemberService,
+							AdminCheatMemberMapper cheatMemberMapper) {
+	this.cheatMemberService = cheatMemberService;
+	this.cheatMemberMapper = cheatMemberMapper;
+}
 	
 	@GetMapping("/cheatMemberList")
 	public String cheatMemberList(Model model) {
+		
 		model.addAttribute("title", "부정 회원 조회");
+		model.addAttribute("cheatMemberList", "cheatMemberList");
 		return  "admin/cheatMember/cheat_member_list";
 	}	
 	

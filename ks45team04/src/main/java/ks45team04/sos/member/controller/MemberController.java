@@ -1,15 +1,32 @@
 package ks45team04.sos.member.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ks45team04.sos.member.dto.Member;
+import ks45team04.sos.member.mapper.MemberMapper;
+import ks45team04.sos.member.service.MemberService;
+
 @Controller
 public class MemberController {
 	
+	private final MemberService memberService;
+	private final MemberMapper memberMapper;
+	
+public MemberController(MemberService memberService,
+						MemberMapper membermapper) {
+	this.memberService = memberService;
+	this.memberMapper = membermapper;
+}
+	
+	
 	@GetMapping("/addMember")
 	public String addMember(Model model) {
+		
 		model.addAttribute("title", "회원 가입");
 		return  "member/member/add_member";		
 	}	
@@ -28,7 +45,10 @@ public class MemberController {
 
 	@GetMapping("/memberList")
 	public String memberList(Model model) {
+		
+		List<Member> memberList = memberService.MemberList();
 		model.addAttribute("title", "회원 개인 정보 조회");
+		model.addAttribute("memberList", memberList);
 		return  "member/member/member_list";		
 	}
 	
