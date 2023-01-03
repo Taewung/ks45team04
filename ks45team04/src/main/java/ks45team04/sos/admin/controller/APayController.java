@@ -19,6 +19,8 @@ public class APayController {
 	//결제 내역
 	@GetMapping("/payList")
 	public String payList(Model model) {
+		
+		
 		model.addAttribute("title", "결제 내역");
 		
 		return "admin/pay/pay_list";
