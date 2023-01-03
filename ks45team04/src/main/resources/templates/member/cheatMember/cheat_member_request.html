@@ -27,15 +27,17 @@
 		<!-- end header -->			
 		
 		<!-- begin contents -->
-		
-            <div class="pxp-dashboard-content-details">
-                <h1>부정회원 신고</h1>
-                <p class="pxp-text-light">Cheat Member Request</p>
-                <form>
-              
-          <section class="pxp-page-header-simple" style="background-color: var(--pxpSecondaryColor);">                                   
+        <section class="pxp-page-header-simple" style="background-color: var(--pxpMainColorLight);">
+            <div class="pxp-container">
+                <h1>부정 회원 신고</h1>
+                <div class="pxp-hero-subtitle pxp-text-ligh">Challenge Goal</div>
+            </div>
+        </section>
+
+        <section class="mt-100">
+            <div class="pxp-container">
                     <!-- 자격증선택 start -->                
-                	<h2><strong><span class="fa fa-check"></span>신고 사유</strong></h2>
+                	<h2><strong><span class="fa fa-check"></span>&nbsp;신고 사유</strong></h2>
                         <div class="col-md-6 col-xxl-3">
                             <label for="pxp-company-job-category" class="form-label">신고 사유</label>
                                 <select id="pxp-company-job-category" class="form-select">
@@ -48,7 +50,7 @@
                     
              <!-- 신고 내용 입력 start -->
                <div class="row mt-4 mt-lg-5">
-                	<h2><strong><span class="fa fa-check"></span>신고 내용</strong></h2>                    
+                	<h2><strong><span class="fa fa-check"></span>&nbsp;신고 내용</strong></h2>                    
 	               <div class="mb-3">
 		             <textarea class="form-control" id="pxp-company-job-description" placeholder="신고 내용을 입력해주세요."></textarea>
 	               </div>	                        
@@ -57,7 +59,7 @@
                                         
                       	<!-- 첨부파일 start -->
                         <div class="row mt-4 mt-lg-5">
-                        <h2><strong><span class="fa fa-check"></span>부정 증빙 자료</strong></h2>	                    
+                        <h2><strong><span class="fa fa-check"></span>&nbsp;부정 증빙 자료</strong></h2>	                    
 	                        <div class="mb-3">
 		   <input type="file" id="cheatFile" name="cheatFile" accept="image/png, image/jpeg">
 	                    	</div>	                        
@@ -67,9 +69,7 @@
 	                        <button type="button" onclick="location.href='/customerCenter'" class="btn rounded-pill pxp-section-cta")>신고</button>
 	                        <button type="button" onclick="location.href='/cheatMemberRequest'" class="btn rounded-pill pxp-section-cta-o ms-3">취소</button>
                     	</div>
-                    	                </form>                                      
                     	</div>
-                    </div>
          </section>     
             <!-- end contents -->
 		<br><br>
