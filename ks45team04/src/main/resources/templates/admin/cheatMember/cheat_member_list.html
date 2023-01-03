@@ -22,8 +22,6 @@
                                 <div class="pxp-company-dashboard-jobs-search mb-3">
                                 <select class="form-select">
                                     <option>회원 아이디</option>
-                                    <option>이름</option>
-                                    <option>이메일</option>
                                 </select>
                                 	<div class="col-auto order-1 order-sm-2">
                                 		<div class="pxp-company-dashboard-jobs-search-search-form">
@@ -46,30 +44,41 @@
                             <thead>                    
                                 <tr>
                                     <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
-                                    <th style="width: 15%;">ID</th>
-                                    <th style="width: 10%;">PW</th>
-                                    <th style="width: 15%;">이름</th>
-                                    <th style="width: 15%;">이메일</th>
-                                    <th style="width: 15%;">생년월일</th>
-                                    <th style="width: 10%;">전화번호</th>
-                                    <th style="width: 30%;">가입일시</th>
+                                    <th style="width: 9%;">신고자아이디</th>
+                                    <th style="width: 9%;">부정회원아이디</th>
+                                    <th style="width: 9%;">정지사유</th>
+                                    <th style="width: 9%;">신고내용</th>
+                                    <th style="width: 9%;">신고관련첨부파일</th>
+                                    <th style="width: 9%;">신고일시</th>
+                                    <th style="width: 9%;">진행상태</th>
+                                    <th style="width: 9%;">승인자</th>
+                                    <th style="width: 9%;">심사완료일시</th>
+                                    <th style="width: 9%;">정지기간</th>
+                                    <th style="width: 10%;">정지시작일시</th>
+                                    <th style="width: 10%;">정지종료일시</th>
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>    
                             <tbody>
-                                <tr>
+                                <tr th:if="${not #lists.isEmpty(cheatMemberList)}" th:each="cm : ${cheatMemberList}">
                                     <td><input type="checkbox" class="form-check-input"></td>
                                     <td>
                                         <a href="#">
-                                            <div class="pxp-company-dashboard-job-title">데이터</div>                                           
+                                            <div class="pxp-company-dashboard-job-title" th:text="${cm.cmReportId}"></div>                                           
                                         </a>
                                     </td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-date mt-1">2022/08/24 at 11:56 am</div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmId}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportReason}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportContent}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportContent}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportFile}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportDatetime}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportState}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportManager}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportJudgeDatetime}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmStopDate}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmStartDatetime}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${cm.cmEndDatetime}"></div></td>
                                     
                                     <td>
                                         <div class="pxp-dashboard-table-options">

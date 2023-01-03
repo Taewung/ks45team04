@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team04.sos.admin.mapper.AdminCheatMemberMapper">
+	
+	<resultMap type="CheatMember" id="CheatMemberResultMap">
+		<id property="cmReportCode" 							column="cm_report_code"/>
+		<result property="cmId" 								column="cm_id"/>
+		<result property="cmReportId" 							column="cm_report_id"/>
+		<result property="cmReportReason" 						column="cm_report_reason"/>
+		<result property="cmReportContent" 						column="cm_report_content"/>
+		<result property="cmReportFile" 						column="cm_report_file"/>
+		<result property="cmReportDatetime" 					column="cm_report_datetime"/>
+		<result property="cmReportState" 						column="cm_report_state"/>
+		<result property="cmReportManager" 						column="cm_report_manager"/>
+		<result property="cmReportJudgeDatetime" 				column="cm_report_judge_datetime"/>
+		<result property="cmStopDate" 							column="cm_stop_date"/>
+		<result property="cmStartDatetime" 						column="cm_start_datetime"/>
+		<result property="cmEndDatetime" 						column="cm_end_datetime"/>
+	</resultMap>
+	
+	
+	<select id="CheatMemberList" resultMap="CheatMemberResultMap">
+			SELECT
+				cm.cm_report_id,
+				cm.cm_id,
+				cm.cm_report_reason,
+				cm.cm_report_content,
+				cm.cm_report_file,
+				cm.cm_report_datetime,
+				cm.cm_report_state,
+				cm.cm_report_manager,
+				cm.cm_report_judge_datetime,
+				cm.cm_stop_date,
+				cm.cm_start_datetime,
+				cm.cm_end_datetime
+			FROM
+				cheat_member AS cm;
+	</select>
+	</mapper>
+	
