@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team04.sos.admin.mapper.LicensePassScoreMapper">
+	
+	<resultMap type="LicensePassScore" id="licensePassScoreResultMap">
+		<id 	property="liPScoreCode" 			column="li_p_score_code"/>
+		<result property="liCode" 					column="li_code"/>		
+		<result property="liName" 					column="li_name"/>		
+		<result property="liPStandardScore" 		column="li_p_standard_score"/>		
+		<result property="liPScoreRegId" 			column="li_p_score_reg_id"/>		
+		<result property="liPScoreRegDateTime" 		column="li_p_score_reg_datetime"/>	
+	</resultMap>
+	
+	<select id="getLicensePassScoreList" resultMap="licensePassScoreResultMap">
+		/* 자격증별  합격기준 점수 조회 */
+		SELECT
+			 li_p_score_code
+			,li_code
+			,li_name
+			,li_p_standard_score
+			,li_p_score_reg_id
+			,li_p_score_reg_datetime
+		FROM
+			license_pass_score;			
+	</select>
+</mapper>
