@@ -9,15 +9,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ks45team04.sos.admin.dto.LicenseSub;
+import ks45team04.sos.admin.mapper.LicenseSubMapper;
 import ks45team04.sos.admin.service.LicenseSubService;
 
 @Controller
 public class ALicenseSubController {
 	
 private final LicenseSubService licenseSubService;
+private final LicenseSubMapper licenseSubMapper;
 
-	public ALicenseSubController(LicenseSubService licenseSubService) {
+
+	public ALicenseSubController(LicenseSubService licenseSubService
+								,LicenseSubMapper licenseSubMapper) {
+		
 		this.licenseSubService = licenseSubService;
+		this.licenseSubMapper = licenseSubMapper;
 	}
 	
 	
@@ -60,14 +66,20 @@ private final LicenseSubService licenseSubService;
 		@PostMapping("/addlicenseSub")
 		public String addlicenseSub(LicenseSub LicenseSub) {
 			
-			return "";
+			licenseSubService.addLicenseSub(LicenseSub);
+			
+			return "redirect:/licenseSubList";
 		}
 	
 	
 		// 자격증 중분류 정보 등록 화면
 		@GetMapping("/addlicenseSub")
 		public String addlicenseSub(Model model) {
+			
+			List<LicenseSub> licenseSubList = licenseSubMapper.LicenseSubList();
+			
 			model.addAttribute("title", "자격증 중분류 등록");
+			model.addAttribute("licenseSubList", licenseSubList);
 			
 			return "admin/licenseSub/license_sub_insert";
 			

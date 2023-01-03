@@ -32,7 +32,8 @@
 		<!-- begin contents --> 
             <div class="pxp-dashboard-content-details">
                   
-             <h1>디폴트</h1>     
+             
+             <th:block layout:fragment="customContents"></th:block>     
 
             </div>
         <!-- end contents -->     
@@ -47,5 +48,7 @@
         <script src="js/nav.js"></script>
         <script src="js/Chart.min.js"></script>
         <script src="js/main.js"></script>
+        <th:block layout:fragment="customJs"></th:block> 
+        <th:block layout:fragment="customScript"></th:block> 
     </body>
 </html>

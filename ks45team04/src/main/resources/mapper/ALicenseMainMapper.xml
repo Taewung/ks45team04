@@ -10,7 +10,19 @@
 		<result property="lmcName" 			column="lmc_name"/>
 		<result property="lmcRegDatetime" 	column="lmc_reg_datetime"/>
 	</resultMap>
+
+	<select id="checkLicenseCode" parameterType="String" resultType="boolean">
+		/* 코드 중복체크 */
+		SELECT
+			if(COUNT(*)=1, 1, 0)
+		FROM
+			license_main_category AS lmc
+		WHERE
+			lmc.lmc_code = #{lmcCode};
+	</select>
 	
+	
+
 	<insert id="addLicenseMain" parameterType="LicenseMain">
 		/* 자격증 대분류 등록 */
 		INSERT INTO license_main_category
