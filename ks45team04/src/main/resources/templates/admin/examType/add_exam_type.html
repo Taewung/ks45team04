@@ -1,66 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  class="pxp-root" >
-<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  layout:decorate="~{admin/layout/adminDefault}">
 
-    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
-    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-    <body style="background-color: var(--pxpMainColorLight);">
-        <div class="pxp-dashboard-content">
-        
-        <!-- begin aside -->
-		<div th:replace="~{admin/fragments/adminAside :: asideFragment}"></div>
-		<!-- end aside -->
-		
-        <!-- begin header -->
-		<div th:replace="~{admin/fragments/adminHeader :: headerFragment}"></div>
-		<!-- end header -->
-		
-		<!-- begin contents --> 
-            <div class="pxp-dashboard-content-details">
-  			<h1>시험유형등록</h1>
-  			<p class="pxp-text-light">Add Exam Type</p>
-                <form>
-                    <div class="row mt-4 mt-lg-5">                  
-                	<h2><strong><span class="fa fa-check"></span>유형</strong></h2>
-                        <div class="col-md-6 col-xxl-3">
-							<label for="pxp-company-job-experience" class="form-label">유형명</label>
-                            <input type="text" id="pxp-company-job-experience" class="form-control" placeholder="유형을 입력해주세요."> 
-                        </div>
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	<script>
+	</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+
+			<h1>시험유형등록</h1>
+			<p class="pxp-text-light">Add Exam Type</p>
+           <form>
+               <div class="row mt-4 mt-lg-5">                  
+           			<h2><strong><span class="fa fa-check"></span>유형</strong></h2>
+                    <div class="col-md-6 col-xxl-3">
+						<label for="pxp-company-job-experience" class="form-label">유형명</label>
+                    	<input type="text" id="pxp-company-job-experience" class="form-control" placeholder="유형을 입력해주세요."> 
                     </div>
-                    <div class="row mt-4 mt-lg-5">
-	                   <div class="mt-4 mt-lg-5">
-	                        <button type="button" onclick="location.href='/examTypeList'" class="btn rounded-pill pxp-section-cta">등록</button>
-	                        <button type="button" onclick="location.href='/examTypeList'" class="btn rounded-pill pxp-section-cta-o ms-3">취소</button>
-                    	</div>                                      
-                    </div>
-                 </div>
-                </form>            
+               </div>
+               <div class="row mt-4 mt-lg-5">
+               <div class="mt-4 mt-lg-5">
+                    <button type="button" onclick="location.href='/examTypeList'" class="btn rounded-pill pxp-section-cta">등록</button>
+                 <button type="button" onclick="location.href='/examTypeList'" class="btn rounded-pill pxp-section-cta-o ms-3">취소</button>
+            	</div>                                      
             </div>
-        <!-- end contents -->     
-            
-        <!-- begin footer -->
-			<div th:replace="~{admin/fragments/adminFooter :: footerFragment}"></div>
-		<!-- end footer -->
-        </div>
-        <script src="js/jquery-3.4.1.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/nav.js"></script>
-        <script src="js/Chart.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+         </div>
+        </form>            
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	</th:block>
+	<!-- customJs end -->
 </html>
