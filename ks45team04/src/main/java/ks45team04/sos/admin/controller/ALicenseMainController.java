@@ -8,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.annotation.RequestScope;
 
 import ks45team04.sos.admin.dto.LicenseMain;
 import ks45team04.sos.admin.mapper.LicenseMainMapper;
@@ -27,7 +29,6 @@ private final LicenseMainMapper licenseMainMapper;
 		this.licenseMainMapper = licenseMainMapper;
 		
 	}
-	
 	
 	// 자격증 대분류 삭제 처리
 		@PostMapping("/deletelicenseMain")
@@ -61,7 +62,17 @@ private final LicenseMainMapper licenseMainMapper;
 		return "admin/licenseMain/license_main_modify";
 	}
 	
-
+	@GetMapping("checkCode")
+	@ResponseBody
+	public boolean checklmcCode(@RequestParam(value="lmcCode") String lmcCode) {
+		boolean isChecked = false;
+		
+		isChecked = licenseMainMapper.checkLicenseCode(lmcCode);
+		
+		return isChecked;
+	}
+	
+	
 	//자격증 대분류 등록 처리
 	@PostMapping("/addlicenseMain")
 	public String addlicenseMain(LicenseMain LicenseMain) {

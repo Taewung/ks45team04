@@ -17,7 +17,22 @@ private final LicenseSubMapper licenseSubMapper;
 	}
 	
 	
-	// 자격증 중분류 목록 조회
+	/**
+	 * 자격증 중분류 등록
+	 * @param LicenseSub
+	 * @return int
+	 */
+	public int addLicenseSub(LicenseSub licenseSub) {
+		
+		return licenseSubMapper.addLicenseSub(licenseSub);
+	}
+	
+	
+	
+	/**
+	 * 자격증 중분류 목록 조회
+	 * @return List<LicenseSub>
+	 */
 	public List<LicenseSub> LicenseSubList(){
 		
 		List<LicenseSub> licenseSubList = licenseSubMapper.LicenseSubList();

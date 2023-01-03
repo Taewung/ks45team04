@@ -17,8 +17,7 @@ private final LicenseMainMapper licenseMainMapper;
 		this.licenseMainMapper = licenseMainMapper;
 	}
 
-	
-	
+
 	/**
 	 * 자격증 대분류 등록
 	 * @param LicenseMain

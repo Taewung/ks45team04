@@ -9,6 +9,9 @@ import ks45team04.sos.admin.dto.LicenseMain;
 @Mapper
 public interface LicenseMainMapper {
 	
+
+	// 자격증 코드 중복 조회
+	public boolean checkLicenseCode(String lmcCode);
 	
 	// 자격증 대분류 등록
 	public int addLicenseMain(LicenseMain licenseMain);
