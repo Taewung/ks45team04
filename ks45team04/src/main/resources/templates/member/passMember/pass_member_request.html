@@ -31,17 +31,57 @@
 		
 		<!-- begin contents --> 
             <div class="pxp-dashboard-content-details">
+                <h1>합격회원 인증 신청</h1>
+                <p class="pxp-text-light">Pass Member Request</p>
+                <form>
+                    <div class="row mt-4 mt-lg-5">  
+                    <!-- 자격증선택 start -->                
+                	<h2><strong><span class="fa fa-check"></span>자격증 선택</strong></h2>
+                        <div class="col-md-6 col-xxl-3">
+                            <label for="pxp-company-job-category" class="form-label">대분류</label>
+                                <select id="pxp-company-job-category" class="form-select">
+                                    <option>Select a category</option>
+                                </select>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3">
+                                <label for="pxp-company-job-category" class="form-label">중분류</label>
+                                <select id="pxp-company-job-category" class="form-select">
+                                    <option>Select a category</option>
+                                </select>
+                            </div>
+                        </div>                       
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3">
+                                <label for="pxp-company-job-category" class="form-label">자격증명</label>
+                                <select id="pxp-company-job-category" class="form-select">
+                                    <option>Select a category</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 자격증선택 end -->                      
+                      	<!-- 첨부파일 start -->
+                        <div class="row mt-4 mt-lg-5">
+                        <h2><strong><span class="fa fa-check"></span>합격인증자료</strong></h2>	                    
+	                        <div class="mb-3">
+		   <input type="file" id="passFile" name="passFile" accept="image/png, image/jpeg">
+	                    	</div>	                        
+                        </div>
+                     	<!-- 첨부파일 end --> 
+	                   <div class="mt-4 mt-lg-5">
+	                        <button type="button" onclick="location.href='/passMemberList'" class="btn rounded-pill pxp-section-cta">수정</button>
+	                        <button type="button" onclick="location.href='/passMemberRequest'" class="btn rounded-pill pxp-section-cta-o ms-3">취소</button>
+                    	</div>
+                    	                </form>                                      
+                    	</div>
+                    </div>
 
-                    pass_member_request.html 수지가 올리면 쌔비기 modify_g_setting
-             
-
-            </div>
-        <!-- end contents -->     
+            <!-- end contents -->     
             
         <!-- begin footer -->
-			<div th:replace="~{member/fragments/myPageFooter :: footerFragment}"></div>
+			<div th:replace="~{admin/fragments/adminFooter :: footerFragment}"></div>
 		<!-- end footer -->
-        </div>
         <script src="js/jquery-3.4.1.min.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
