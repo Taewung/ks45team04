@@ -19,7 +19,7 @@ public class PointSaveUseService {
 	//포인트 적립/사용 내역 조회
 	public List<PointSaveUse> PointSaveUseList(){
 		
-		List<PointSaveUse> pointSaveUseList = pointSaveUseMapper.PointSaveUseList();
+		List<PointSaveUse> pointSaveUseList = pointSaveUseMapper.pointSaveUseList();
 		
 		return pointSaveUseList;
 	}

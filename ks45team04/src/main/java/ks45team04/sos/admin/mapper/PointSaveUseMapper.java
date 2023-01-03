@@ -10,7 +10,8 @@ import ks45team04.sos.admin.dto.PointSaveUse;
 public interface PointSaveUseMapper {
 	
 	//포인트 적립/사용 내역 조회
-	public List<PointSaveUse> PointSaveUseList();
+	public List<PointSaveUse> pointSaveUseList();
+	
 	
 
 }

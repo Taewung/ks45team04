@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team04.sos.admin.mapper.PointFeeRateMapper">
+	
+	<resultMap type="PointFeeRate" id="pointFeeRateResultMap">
+		<id property="pointFeeRateCode" 			column="point_fee_rate_code"/>
+		<result property="pointFeeRate" 			column="point_fee_rate"/>
+		<result property="pointFeeRateContents" 	column="point_fee_rate_contents"/>
+		<result property="pointFeeRateId" 			column="point_fee_rate_id"/>
+		<result property="pointFeeRateDatetime" 	column="point_fee_rate_datetime"/>
+	</resultMap>
+	
+	<select id="pointFeeRateList" resultMap="pointFeeRateResultMap">
+		SELECT
+			point_fee_rate_code,
+			point_fee_rate,
+			point_fee_rate_contents,
+			point_fee_rate_id,
+			point_fee_rate_datetime
+		FROM
+			point_fee_rate;
+	</select>
+	
+	
+</mapper>
