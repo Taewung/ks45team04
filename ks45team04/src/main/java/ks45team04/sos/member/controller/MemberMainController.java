@@ -20,6 +20,6 @@ public class MemberMainController {
 	@GetMapping("/customerCenter")
 	public String customerCenter(Model model) {
 		model.addAttribute("title", "고객센터");
-		return "/member/customerCenter";
+		return "member/customerCenter";
 	}
 }
