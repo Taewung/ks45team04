@@ -1,46 +1,125 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  class="pxp-root" >
-<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  layout:decorate="~{member/layout/contentDefault}">
 
-    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
-    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-
-<body>
-	<div class="pxp-preloader"><span>Loading...</span></div>
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	<script>
+	</script>
+	</th:block> 
+	<!-- script end -->
 	
-		<!-- begin header -->
-		<div th:replace="~{member/Mainfragments/headerFragment :: headerFragment}"></div>
-		<!-- end header -->			
-		
-		
-		<!-- begin license -->
-		<section th:replace="~{member/Mainfragments/mainFragment :: mainFragment}"></section>
-		<!-- end license -->	
-			
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+  		<section class="pxp-hero vh-100" style="background-color: var(--pxpMainColorLight);" th:fragment="mainFragment">
+            <div class="pxp-hero-caption">
+                <div class="pxp-container">
+                    <div class="row pxp-pl-80 align-items-center justify-content-between">
+                        <div class="col-12 col-xl-6 col-xxl-5">
+                            <h1>100% 합격보장<br><span style="color: var(--pxpMainColor);">자격증</span> 취득 플랫폼</h1>
+                            <div class="pxp-hero-subtitle mt-3 mt-lg-4">Search your career opportunity through <strong>12,800</strong> jobs</div>
 
-		<!-- begin footer -->
-		<div th:replace="~{member/Mainfragments/footerFragment :: footerFragment}"></div>
-		<!-- end footer -->
-		
+                            <div class="pxp-hero-form pxp-hero-form-round mt-3 mt-lg-4">
+                                <form class="row gx-3 align-items-center" action="jobs-list-1.html">
+                                    <div class="col-12 col-sm">
+                                        <div class="mb-3 mb-sm-0">
+                                            <input type="text" class="form-control" placeholder="Job Title or Keyword">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm pxp-has-left-border">
+                                        <div class="mb-3 mb-sm-0">
+                                            <input type="text" class="form-control" placeholder="Location">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-auto">
+                                        <button><span class="fa fa-search"></span></button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="pxp-hero-searches-container">
+                                <div class="pxp-hero-searches-label">Popular Searches</div>
+                                <div class="pxp-hero-searches">
+                                    <div class="pxp-hero-searches-items">
+                                        <a href="jobs-list-1.html">Work from home</a>
+                                        <a href="jobs-list-1.html">Part-time</a>
+                                        <a href="jobs-list-1.html">Administration</a>
+                                        <a href="jobs-list-1.html">Finance</a>
+                                        <a href="jobs-list-1.html">Retail</a>
+                                        <a href="jobs-list-1.html">IT</a>
+                                        <a href="jobs-list-1.html">Engineering</a>
+                                        <a href="jobs-list-1.html">Sales</a>
+                                        <a href="jobs-list-1.html">Manufacturing</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-none d-xl-block col-xl-5 position-relative">
+                            <div class="pxp-hero-cards-container pxp-animate-cards pxp-mouse-move" data-speed="160">
+                                <div class="pxp-hero-card pxp-cover pxp-cover-top" style="background-image: url(images/ph-big.jpg);"></div>
+                                <div class="pxp-hero-card-dark"></div>
+                                <div class="pxp-hero-card-light"></div>
+                            </div>
+
+                            <div class="pxp-hero-card-info-container pxp-mouse-move" data-speed="60">
+                                <div class="pxp-hero-card-info pxp-animate-bounce">
+                                    <div class="pxp-hero-card-info-item">
+                                        <div class="pxp-hero-card-info-item-number">286<span>job offers</span></div>
+                                        <div class="pxp-hero-card-info-item-description">in Business Development</div>
+                                    </div>
+                                    <div class="pxp-hero-card-info-item">
+                                        <div class="pxp-hero-card-info-item-number">154<span>job offers</span></div>
+                                        <div class="pxp-hero-card-info-item-description">in Marketing & Communication</div>
+                                    </div>
+                                    <div class="pxp-hero-card-info-item">
+                                        <div class="pxp-hero-card-info-item-number">319<span>job offers</span></div>
+                                        <div class="pxp-hero-card-info-item-description">in Human Resources</div>
+                                    </div>
+                                    <div class="pxp-hero-card-info-item">
+                                        <div class="pxp-hero-card-info-item-number">120<span>job offers</span></div>
+                                        <div class="pxp-hero-card-info-item-description">in Project Management</div>
+                                    </div>
+                                    <div class="pxp-hero-card-info-item">
+                                        <div class="pxp-hero-card-info-item-number">176<span>job offers</span></div>
+                                        <div class="pxp-hero-card-info-item-description">in Customer Service</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pxp-hero-logos-carousel-container">
+                <div class="pxp-container">
+                    <div class="row pxp-pl-80">
+                        <div class="col-12 col-xl-6">
+                            <div class="pxp-hero-logos-carousel owl-carousel">
+                                <img src="images/hero-logo-1.svg" alt="Logo 1">
+                                <img src="images/hero-logo-2.svg" alt="Logo 2">
+                                <img src="images/hero-logo-3.svg" alt="Logo 3">
+                                <img src="images/hero-logo-4.svg" alt="Logo 4">
+                                <img src="images/hero-logo-5.svg" alt="Logo 5">
+                                <img src="images/hero-logo-6.svg" alt="Logo 6">
+                                <img src="images/hero-logo-7.svg" alt="Logo 7">
+                                <img src="images/hero-logo-1.svg" alt="Logo 8">
+                                <img src="images/hero-logo-2.svg" alt="Logo 9">
+                                <img src="images/hero-logo-3.svg" alt="Logo 10">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pxp-hero-right-bg-card pxp-has-animation"></div>
+        </section>
+	</th:block>
+	<!-- customContents end -->
 	
-	<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
-    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/js/owl.carousel.min.js}"></script>
-    <script th:src="@{/js/nav.js}"></script>
-    <script th:src="@{/js/main.js}"></script>
-</body>
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
 </html>

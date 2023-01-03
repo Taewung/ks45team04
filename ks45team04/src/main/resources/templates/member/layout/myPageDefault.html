@@ -29,13 +29,10 @@
 		<div th:replace="~{member/fragments/myPageHeader :: headerFragment}"></div>
 		<!-- end header -->
 		
-		<!-- begin contents --> 
-            <div class="pxp-dashboard-content-details">
-
-                    
-             
-
-            </div>
+		<!-- begin contents -->
+        <div class="pxp-dashboard-content-details" style="margin-left:30px">
+			<th:block layout:fragment="customContents"></th:block> 
+        </div>
         <!-- end contents -->     
             
         <!-- begin footer -->
