@@ -8,6 +8,9 @@ public class Member {
 	private String memEmail;
 	private String memBirth;
 	private String memPhone;
+	private String memLevelName;
+	private String memRegDate;
+	
 	public String getMemId() {
 		return memId;
 	}
@@ -44,9 +47,23 @@ public class Member {
 	public void setMemPhone(String memPhone) {
 		this.memPhone = memPhone;
 	}
+	public String getMemLevelName() {
+		return memLevelName;
+	}
+	public void setMemLevelName(String memLevelName) {
+		this.memLevelName = memLevelName;
+	}
+	public String getMemRegDate() {
+		return memRegDate;
+	}
+	public void setMemRegDate(String memRegDate) {
+		this.memRegDate = memRegDate;
+	}
 	@Override
 	public String toString() {
 		return "Member [memId=" + memId + ", memPw=" + memPw + ", memName=" + memName + ", memEmail=" + memEmail
-				+ ", memBirth=" + memBirth + ", memPhone=" + memPhone + "]";
+				+ ", memBirth=" + memBirth + ", memPhone=" + memPhone + ", memLevelName=" + memLevelName
+				+ ", memRegDate=" + memRegDate + "]";
 	}
+	
 }

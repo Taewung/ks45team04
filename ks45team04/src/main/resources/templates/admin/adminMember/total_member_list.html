@@ -79,19 +79,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr th:if="${not #lists.isEmpty(totalMemberList)}" th:each="m : ${totalMemberList}">
                                     <td><input type="checkbox" class="form-check-input"></td>
                                     <td>
                                         <a href="#">
-                                            <div class="pxp-company-dashboard-job-title">데이터</div>                                           
+                                            <div class="pxp-company-dashboard-job-title" th:text="${m.memId}"></div>                                           
                                         </a>
                                     </td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-date mt-1">2022/08/24 at 11:56 am</div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${m.memPw}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${m.memName}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${m.memEmail}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${m.memBirth}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${m.memPhone}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${m.memRegDatetime}"></div></td>
                                     <td>
                                         <div class="pxp-dashboard-table-options">
                                             <ul class="list-unstyled">
