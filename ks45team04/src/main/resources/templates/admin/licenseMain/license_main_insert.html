@@ -2,9 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{admin/layout/adminDefault}">
-<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
+
+	<!-- script start -->
 	<th:block layout:fragment="customScript">
-		<script>
+	<script>
 			$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
 				function validateValue(checkValue) {
 					if(    typeof checkValue == 'undefined' 
@@ -39,6 +40,9 @@
 			});
 		</script>
 	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
 		<form id="addLicenseMainForm" th:action="@{/addlicenseMain}" name="myform" method="post">
               <div class="row mt-4 mt-lg-5">
@@ -81,7 +85,12 @@
                   
               </div>
           </form>
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
 	
 	</th:block>
-	
+	<!-- customJs end -->
 </html>
