@@ -7,9 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MemberMainController {
 
-	@GetMapping("/")
+	@GetMapping("/main")
 	public String memberMain(Model model) {
 		model.addAttribute("title", "메인화면");
-		return "member/memberMain";
+		return "member/main";
+	}
+	@GetMapping("/myPage")
+	public String myPage(Model model) {
+		model.addAttribute("title", "메인화면");
+		return "member/myPage";
+	}
+	@GetMapping("/customerCenter")
+	public String customerCenter(Model model) {
+		model.addAttribute("title", "고객센터");
+		return "/member/customerCenter";
 	}
 }

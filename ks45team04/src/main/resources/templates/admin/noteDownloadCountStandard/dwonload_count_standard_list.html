@@ -1,10 +1,102 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  class="pxp-root" >
+<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
+    <link rel="stylesheet" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- 부트스트랩  -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>노트 다운로드 횟수 기준 조회</title>
+    
 </head>
-<body>
-dwonload_count_standard_list.html
-</body>
+    <body style="background-color: var(--pxpMainColorLight);">
+        <div class="pxp-dashboard-content">
+        
+        <!-- begin aside -->
+		<div th:replace="~{admin/fragments/adminAside :: asideFragment}"></div>
+		<!-- end aside -->
+		
+        <!-- begin header -->
+		<div th:replace="~{admin/fragments/adminHeader :: headerFragment}"></div>
+		<!-- end header -->
+		
+		<!-- begin contents --> 
+            <div class="pxp-dashboard-content-details">
+
+     	 <h1>노트 다운로드 횟수 기준</h1>
+                <p class="pxp-text-light"></p>
+                <div class="mt-4 mt-lg-5">  
+                    <!-- 목록 start -->                   
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">                      	
+                            <thead>                    
+                                <tr>
+                                	<th></th>
+                                    <th style="width: 20%;">다운로드횟수기준코드</th>
+                                    <th style="width: 20%;">다운로드가능횟수</th>
+                                    <th style="width: 20%;">다운로드기준등록자</th>
+                                    <th style="width: 20%;">다운로드기준등록일시</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>    
+                            <tbody>
+                                <tr th:if="${not #lists.isEmpty(downloadCountStandardList)}"
+									th:each="l : ${downloadCountStandardList}">
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><div class="pxp-company-dashboard-job-title" th:text="${l.dscCode}"></div>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.downloadCount}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.downloadCountWriter}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.downloadCountDatetime}"></div></td>
+                                    <td>
+                                        <div class="pxp-dashboard-table-options">
+                                            <ul class="list-unstyled">
+                                            <!-- 수정버튼 start -->
+                                                <a href="#">
+                                                	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
+                                                </a>
+                                            <!-- 수정버튼 end -->
+                                            <!-- 삭제버튼 start -->
+                                                <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
+                                            <!-- 삭제버튼 end -->                                               
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr th:unless="${not #lists.isEmpty(downloadCountStandardList)}">
+									<td colspan="9">등록된 자격증 정보가 없습니다.</td>
+								</tr>                    
+                            </tbody>
+                        </table>
+                    </div>
+                <!-- 목록 end -->    
+                </div>
+
+            </div>
+        <!-- end contents -->     
+            
+        <!-- begin footer -->
+			<div th:replace="~{admin/fragments/adminFooter :: footerFragment}"></div>
+		<!-- end footer -->
+        </div>
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/nav.js"></script>
+        <script src="js/Chart.min.js"></script>
+        <script src="js/main.js"></script>
+    </body>
 </html>

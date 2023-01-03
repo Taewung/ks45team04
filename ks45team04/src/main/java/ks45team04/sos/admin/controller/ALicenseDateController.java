@@ -1,5 +1,7 @@
 package ks45team04.sos.admin.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,10 +9,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ks45team04.sos.admin.dto.LicenseDate;
+import ks45team04.sos.admin.service.LicenseDateService;
 
 @Controller
-@RequestMapping("/admin")
 public class ALicenseDateController {
+	
+private final LicenseDateService licenseDateService;
+	public ALicenseDateController(LicenseDateService licenseDateService) {
+		this.licenseDateService = licenseDateService;
+	}
 
 			// 자격증 일정 삭제 처리
 			@PostMapping("/deletelicenseDate")
@@ -63,9 +70,12 @@ public class ALicenseDateController {
 	
 			// 자격증 일정 조회
 			@GetMapping("/licenseDateList")
-			public String licenseDateList(Model model) {
+			public String licenseDateList(Model model) {		
+				List<LicenseDate> licenseDateList = licenseDateService.licenseDateList();
+				
 				model.addAttribute("title", "자격증 일정 조회");
-						
+				model.addAttribute("licenseDateList", licenseDateList);
+					
 				return "admin/licenseDate/license_date_list.html";
 			}
 

@@ -26,7 +26,7 @@ public class QnaQuestionController {
 			public String deleteQnaQuestion(Model model) {
 				model.addAttribute("title", "qna 질문 삭제");
 					
-				return "admin/QnA/qna_question_delete";
+				return "member/QnA/qna_question_delete";
 			}
 		
 		
@@ -43,23 +43,23 @@ public class QnaQuestionController {
 			public String modifyQnaQuestion(Model model) {
 				model.addAttribute("title", "qna 질문 수정");
 					
-				return "admin/QnA/qna_question_modify";
+				return "member/QnA/qna_question_modify";
 			}
 
 		
 			// qna 질문 등록 처리
-			@PostMapping("/addQnaQuestionAnswer")
-			public String addQnaQuestionAnswer(Qnaquestion Qnaquestion) {
+			@PostMapping("/addQnaQuestion")
+			public String addQnaQuestion(Qnaquestion Qnaquestion) {
 				
 				return "";
 			}
 
 			// qna 질문 등록 화면
-			@GetMapping("/addQnaQuestionAnswer")
-			public String addQnaQuestionAnswer(Model model) {
+			@GetMapping("/addQnaQuestion")
+			public String addQnaQuestion(Model model) {
 				model.addAttribute("title", "qna 질문 등록");
 				
-				return "admin/QnA/qna_question_insert";
+				return "member/QnA/qna_question_insert";
 			}
 		
 			
@@ -72,12 +72,4 @@ public class QnaQuestionController {
 					
 				}
 			
-			// qna 질문 목록 조회
-			@GetMapping("/qnaQuestionList")
-			public String qnaQuestionList(Model model) {
-				model.addAttribute("title", "qna 질문 목록 조회");
-				
-				return "member/QnA/qna_question_list";
-		
-			}
 }

@@ -1,11 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  class="pxp-root" >
+<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
+    <link rel="stylesheet" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
+
 <body>
-membership_request 멤버십 신청 화면
-http://localhost:8088/membership/membershipRequest
+	<div class="pxp-preloader"><span>Loading...</span></div>
+	
+		<!-- begin header -->
+		<div th:replace="~{member/fragments/contentsHeader :: headerFragment}"></div>
+		<!-- end header -->			
+		
+		<!--  begin contents -->
+	<section class="mt-50 pxp-no-hero">
+            <div class="pxp-container">
+			<h2 class="pxp-section-h2" ><span class="fa fa-check">&nbsp;&nbsp;원하는 멤버십을 선택하세요.</span></h2>
+			<br/>
+                <p class="pxp-plans-card-1-title">무제한으로 즐기세요.</p>
+                <p class="pxp-plans-card-1-title">챌린지 기능을 사용하세요.</p>
+                <div class="row mt-4 mt-md-5 justify-content-center pxp-animate-in pxp-animate-in-top">
+                    <div class="col-md-6 col-xl-4 col-xxl-3 pxp-plans-card-1-container">
+                        <div class="pxp-plans-card-1">
+                            <div class="pxp-plans-card-1-top">
+                                <div class="pxp-plans-card-1-title">10일</div>
+                                <div class="pxp-plans-card-1-price">
+                                    <div class="pxp-plans-price-monthly">
+                                        3,900원<span class="pxp-period"></span>
+                                    </div>
+                                </div>
+                                <div class="pxp-plans-card-1-list">
+                                    <ul class="list-unstyled">
+                                        <li><img src="images/check.svg" alt="">챌린지 사용해 능률을 높이세요!</li>
+                                        <li><img src="images/check.svg" alt="">다양한 기출문제를 풀어보세요!</li>
+                                        <li><img src="images/check.svg" alt="">투두리스트, 스톱워치, 디데이로</br>효율적으로 공부하세요!</li>
+                                        <li><img src="images/check.svg" alt="">10일간의 집중!</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="pxp-plans-card-1-bottom">
+                                <div class="pxp-plans-card-1-cta">
+                                    <a href="#" class="btn rounded-pill pxp-card-btn">결제하기</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    	
+                    <div class="col-md-6 col-xl-4 col-xxl-3 pxp-plans-card-1-container">
+                        <div class="pxp-plans-card-1 pxp-is-featured">
+                            <div class="pxp-plans-card-1-top">
+                                <div class="pxp-plans-card-1-featured-label">추천</div>
+                                <div class="pxp-plans-card-1-title">30일</div>
+                                <div class="pxp-plans-card-1-price">
+                                    <div class="pxp-plans-price-monthly">
+                                        9,900원<span class="pxp-period"></span>
+                                    </div>
+                                </div>
+                                <div class="pxp-plans-card-1-list">
+                                    <ul class="list-unstyled">
+                                        <li><img src="images/check-light.svg" alt="">챌린지 사용해 능률을 높이세요!</li>
+                                        <li><img src="images/check-light.svg" alt="">다양한 기출문제를 풀어보세요!</li>
+                                        <li><img src="images/check.svg" alt="">투두리스트, 스톱워치, 디데이로</br>효율적으로 공부하세요!</li>
+                                        <li><img src="images/check-light.svg" alt="">30일의 넉넉한 기간!</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="pxp-plans-card-1-bottom">
+                                <div class="pxp-plans-card-1-cta">
+                                    <a href="#" class="btn rounded-pill pxp-card-btn">결제하기</a>
+                                </div>
+                            </div>
+                        </div>
+                       </div>
+                      </div>
+</div>
+</section>
+		<!--  end contents -->
+		<br><br>
+			
+		<!-- begin footer -->
+		<div th:replace="~{member/fragments/contentsFooter :: footerFragment}"></div>
+		<!-- end footer -->
+			
+	<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/js/nav.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
 </body>
 </html>

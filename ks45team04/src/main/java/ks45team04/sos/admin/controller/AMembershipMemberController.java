@@ -6,11 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/admin")
 public class AMembershipMemberController {
 
 	@GetMapping("/totalMembershipPeriod")
-	public String membershipPeriod(Model model) {
+	public String totalmembershipPeriod(Model model) {
 		model.addAttribute("title", "전체 회원 멤버십 남은 기간 조회");
 		return  "admin/membershipMember/total_membership_period";
 	}

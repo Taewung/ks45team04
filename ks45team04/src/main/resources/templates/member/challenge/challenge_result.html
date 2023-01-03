@@ -1,11 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  class="pxp-root" >
+<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
+    <link rel="stylesheet" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+    h1,p{
+    text-align:center;
+    }
+    th,td{
+    text-align:center;
+    }
+    </style>
 </head>
+
 <body>
-challenge_result 챌린지 결과 조회
-http://localhost:8088/challenge/challengeResult
+	<div class="pxp-preloader"><span>Loading...</span></div>
+	
+		<!-- begin header -->
+		<div th:replace="~{member/fragments/contentsHeader :: headerFragment}"></div>
+		<!-- end header -->			
+		
+		<!--  begin contents -->
+		<section>
+            <div class="pxp-container">
+                <h3 class="pxp-section-h2 text-center">챌린지 성공!!!!</h3>
+                <p class="pxp-text-light text-center">고생 많으셨어요~~</p>
+                <div class="row justify-content-evenly mt-4 mt-md-5 pxp-animate-in pxp-animate-in-top">
+                    <div class="col-lg-4 col-xl-3 pxp-services-1-item-container">
+                        <div class="pxp-services-1-item text-center pxp-animate-icon">
+                            <div class="pxp-services-1-item-icon">
+                                <img src="images/challengesucces.png" alt="challengeSucces">
+                            </div>
+                            <div class="pxp-services-1-item-cta">
+                                <a href="#">뽀너스 300포인트!!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="pxp-container">
+                <h3 class="pxp-section-h2 text-center">챌린지 실패!!!!</h3>
+                <p class="pxp-text-light text-center">아쉬워요~~</p>
+                <div class="row justify-content-evenly mt-4 mt-md-5 pxp-animate-in pxp-animate-in-top">
+                    <div class="col-lg-4 col-xl-3 pxp-services-1-item-container">
+                        <div class="pxp-services-1-item text-center pxp-animate-icon">
+                            <div class="pxp-services-1-item-icon">
+                                <img src="images/challengefail.png" alt="challengeFail">
+                            </div>
+                            <div class="pxp-services-1-item-cta">
+                                <a href="#">다시 한번 도전해봐요!!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</section>
+
+
+			
+		<!--  end contents -->
+
+			
+		<!-- begin footer -->
+		<div th:replace="~{member/fragments/contentsFooter :: footerFragment}"></div>
+		<!-- end footer -->
+			
+	<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/js/nav.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
 </body>
 </html>

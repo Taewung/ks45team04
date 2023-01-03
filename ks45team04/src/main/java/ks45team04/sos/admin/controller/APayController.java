@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/admin")
 public class APayController {
 	
 	//결제 취소(삭제)
@@ -15,5 +14,13 @@ public class APayController {
 		model.addAttribute("title", "결제 취소(삭제)");
 		
 		return "admin/pay/pay_delete";
+	}
+	
+	//결제 내역
+	@GetMapping("/payList")
+	public String payList(Model model) {
+		model.addAttribute("title", "결제 내역");
+		
+		return "admin/pay/pay_list";
 	}
 }

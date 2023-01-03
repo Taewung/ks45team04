@@ -6,12 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/admin")
 public class LoginHistoryController {
 
-	@GetMapping("/loginHistory")
-	public String loginHistory(Model model) {
+	@GetMapping("/totalLoginHistory")
+	public String totalLoginHistory(Model model) {
 		model.addAttribute("title", "전체 회원 로그인 /로그아웃 내역 조회");
-		return  "admin/login/login_history";
+		return  "admin/login/total_login_history";
 	}
 }

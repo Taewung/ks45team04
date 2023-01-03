@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	  	  
+	<aside>
+		<div class="pxp-dashboard-side-panel d-none d-lg-block" th:fragment="asideFragment">
+             <div class="pxp-logo">
+                <a href="/main" class="pxp-animate"><span style="color: var(--pxpMainColor)">S</span>aveY<span style="color: var(--pxpMainColor)">O</span>urLicen<span style="color: var(--pxpMainColor)">S</span>e</a>
+             </div>
+
+            <nav class="mt-3 mt-lg-4 d-flex justify-content-between flex-column pb-100">
+                <ul class="list-unstyled">
+                    <li class="pxp-active"><a href="/admin"><span class="fa fa-home"></span>#HOME</a></li>
+		                <li class="dropdown">
+							<a class="dropdown-toggle" data-bs-toggle="dropdown"><span class="fa fa-pencil"></span>#회원 관리</a>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="/totalMemberList">#회원전체목록</a></li>
+									<li><a class="dropdown-item" href="/withdrawalMemberList">#탈퇴회원목록</a></li>
+									<li><a class="dropdown-item" href="/cheatMemberJudge">#부정회원신고목록</a></li>
+									<li><a class="dropdown-item" href="/cheatMemberList">#부정회원목록</a></li>
+									<li><a class="dropdown-item" href="/passMemberJudge">#합격인증신청목록</a></li>
+									<li><a class="dropdown-item" href="/totalPassMemberList">#합격회원목록</a></li>
+								</ul>
+		                </li>
+		                <li class="dropdown">
+							<a class="dropdown-toggle" data-bs-toggle="dropdown"><span class="fa fa-pencil"></span>#멤버십 관리</a>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="/addMembership">#멤버십 등록</a></li>
+									<li><a class="dropdown-item" href="/membershipList">#멤버십 회원목록</a></li>
+								</ul>
+		                </li>
+		                <li class="dropdown">
+							<a class="dropdown-toggle" data-bs-toggle="dropdown"><span class="fa fa-pencil"></span>#로그인 / 로그아웃 관리</a>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="/totalLoginHistory">#로그인/로그아웃 내역</a></li>
+								</ul>
+		                </li>
+		                <li class="dropdown">
+							<a class="dropdown-toggle" data-bs-toggle="dropdown"><span class="fa fa-pencil"></span>#결제 / 환불</a>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="/payList">#결제 내역</a></li>
+									<li><a class="dropdown-item" href="/refundApproval">#환불 승인</a></li>
+								</ul>
+		                </li>
+		                <li class="dropdown">
+							<a class="dropdown-toggle" data-bs-toggle="dropdown"><span class="fa fa-pencil"></span>#포인트 관리</a>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="/pointSaveUseList">#포인트 내역</a></li>								
+									<li><a class="dropdown-item" href="/addPointSaveStandard">#적립기준 등록</a></li>
+									<li><a class="dropdown-item" href="/pointSaveStandardList">#적립기준 목록</a></li>
+									<li><a class="dropdown-item" href="/addPointfeeRate">#수수료율 등록</a></li>
+									<li><a class="dropdown-item" href="/pointFeeRateList">#수수료율 목록</a></li>
+									<li><a class="dropdown-item" href="/pointRefundApproval">#환급 승인 목록</a></li>
+								</ul>
+		                </li>
+		                <li class="dropdown">
+							<a class="dropdown-toggle" data-bs-toggle="dropdown"><span class="fa fa-pencil"></span>#매출 관리</a>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="/mainSales">#매출 메인</a></li>
+									<li><a class="dropdown-item" href="/listDailySales">#일별매출관리</a></li>
+									<li><a class="dropdown-item" href="/listMonthlySales">#월별매출관리</a></li>
+									<li><a class="dropdown-item" href="/listAnnualSales">#년별매출관리</a></li>
+								</ul>
+		                </li>
+		                <li class="dropdown">
+							<a class="dropdown-toggle" data-bs-toggle="dropdown"><span class="fa fa-pencil"></span>자격증 관리</a>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="/licenseMainList">자격증대분류</a></li>
+									<li><a class="dropdown-item" href="/licenseSubList">자격증중분류</a></li>
+									<li><a class="dropdown-item" href="/licenseInofoList">자격증 정보</a></li>
+									<li><a class="dropdown-item" href="/licenseSubjectList">자격증 과목</a></li>
+									<li><a class="dropdown-item" href="/licenseDateList">자격증 일정</a></li>
+								</ul>
+		                </li>
+		                <li class="dropdown">
+							<a class="dropdown-toggle" data-bs-toggle="dropdown"><span class="fa fa-pencil"></span>#시험 관리</a>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="/licensePassScoreList">#합격기준점수관리</a></li>
+									<li><a class="dropdown-item" href="/qSettingList">#문제/답안/해설관리</a></li>
+									<li><a class="dropdown-item" href="/examTypeList">#시험유형관리</a></li>
+								</ul>
+		                </li>
+		                <li class="dropdown">
+
+							<a href="#" class="dropdown-toggle" data-bs-toggle="dropdown"><span class="fa fa-pencil"></span>노트 관리</a>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="/noteSellTotalList">노트판매내역</a></li>
+									<li><a class="dropdown-item" href="/downloadCountStandardList">노트 다운로드횟수 기준 </a></li>
+									<li><a class="dropdown-item" href="/downloadRecordList">노트구매자 다운로드 횟수 조회</a></li>
+								</ul>
+		                </li>
+		                <li class="dropdown">
+
+							<a href="#" class="dropdown-toggle" data-bs-toggle="dropdown"><span class="fa fa-pencil"></span>1:1문의</a>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="/QnaQuestionList">1:1 문의 조회</a></li>
+								</ul>
+		                </li>
+               		</ul>
+            	</nav>
+            </div>
+        </div>
+	</aside>	  	  
+</html>

@@ -6,13 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/admin")
 public class AMemberController {
 	
-	@GetMapping("/memberList")
-	public String memberList(Model model) {
+	@GetMapping("/totalMemberList")
+	public String totalMemberList(Model model) {
 		model.addAttribute("title", "회원 전체 정보 조회");
-		return  "admin/adminMember/member_list";		
+		return  "admin/adminMember/total_member_list";		
 	}
 
 	@GetMapping("/memberSavePoint")
@@ -21,10 +20,10 @@ public class AMemberController {
 		return  "admin/adminMember/member_save_point";		
 	}	
 	
-	@GetMapping("/removeMember")
-	public String removeMember(Model model) {
+	@GetMapping("/totalRemoveMember")
+	public String totalRemoveMember(Model model) {
 		model.addAttribute("title", "회원 삭제");
-		return  "admin/adminMember/remove_member";		
+		return  "admin/adminMember/total_remove_member";		
 	}		
 	
 }

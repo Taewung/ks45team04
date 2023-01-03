@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team04.sos.admin.mapper.LicenseDateMapper">
+	
+	<resultMap type="LicenseDate" id="licenseDateResultMap">
+		<id property="ldCode" 					column="ld_code"/>
+		<result property="liCode" 				column="li_code"/>
+		<result property="ldPeriod" 			column="ld_period"/>
+		<result property="ldDate" 				column="ld_date"/>
+		<result property="ldAcceptanceDate" 	column="ld_acceptance_date"/>
+		<result property="ldCost" 				column="ld_cost"/>
+		<result property="ldRegId" 				column="ld_reg_id"/>
+		<result property="ldRegDatetime" 		column="ld_reg_datetime"/>
+	</resultMap>
+	
+	<select id="LicenseDateList" resultMap="licenseDateResultMap">
+			
+		SELECT
+				*
+		FROM
+			license_date AS ld;
+				
+
+			
+	</select>
+</mapper>

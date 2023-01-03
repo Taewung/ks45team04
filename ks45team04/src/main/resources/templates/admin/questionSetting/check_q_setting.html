@@ -1,10 +1,151 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  class="pxp-root" >
+<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
+    <link rel="stylesheet" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body>
-check_q_setting.html
-</body>
+    <body style="background-color: var(--pxpMainColorLight);">
+        <div class="pxp-dashboard-content">
+        
+        <!-- begin aside -->
+		<div th:replace="~{admin/fragments/adminAside :: asideFragment}"></div>
+		<!-- end aside -->
+		
+        <!-- begin header -->
+		<div th:replace="~{admin/fragments/adminHeader :: headerFragment}"></div>
+		<!-- end header -->
+		
+		<!-- begin contents --> 
+            <div class="pxp-dashboard-content-details">
+                <h1>문제/답안/해설</h1>
+                <p class="pxp-text-light">Question Setting</p>
+                <div class="pxp-dashboard-table-options">                             
+                	<ul class="list-unstyled">
+                      <!-- 수정버튼 start -->
+                     <a href="/modifyQSetting">
+                     	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
+                     </a>
+                 	<!-- 수정버튼 end -->
+                 	<!-- 삭제버튼 start -->
+                     	<li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
+                 	<!-- 삭제버튼 end -->                                              
+                    </ul>
+                </div>
+                <form>
+                    <div class="row mt-4 mt-lg-5">  
+                    <!-- 자격증 start -->                
+                	<h2><strong><span class="fa fa-check"></span>자격증</strong></h2>
+                        <div class="col-md-6 col-xxl-3">
+                            <label for="pxp-company-job-experience" class="form-label">대분류</label>
+                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <label for="pxp-company-job-experience" class="form-label">중분류</label>
+                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
+                        </div>                     
+                        <div class="col-md-6 col-xxl-3">
+                            <label for="pxp-company-job-experience" class="form-label">자격증명</label>
+                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
+                        </div>
+                    </div>
+                    <!-- 자격증 end -->                      
+                    <!-- 과목 start --> 
+                    <div class="row mt-4 mt-lg-5">
+                    <h2><strong><span class="fa fa-check"></span>과목</strong></h2>
+                        <div class="col-md-6 col-xxl-3">
+                            <label for="pxp-company-job-experience" class="form-label">과목</label>
+                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <label for="pxp-company-job-experience" class="form-label">과목명</label>
+                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
+                        </div>
+                      <!-- 과목 end -->   
+                      	<!-- 문제입력란 start -->
+                        <div class="row mt-4 mt-lg-5">
+                        <h2><strong><span class="fa fa-check"></span>문제</strong></h2>	                    
+	                        <div class="mb-3">
+		                        <textarea class="form-control" id="pxp-company-job-description" disabled></textarea>
+	                    	</div>	                        
+                        </div>
+                     	<!-- 문제입력란 end --> 
+                     	<!-- 답안입력란 start -->   
+		                <div class="mt-4 mt-lg-5">
+		                    <div class="row justify-content-between align-content-center">
+		                		<h2><strong><span class="fa fa-check"></span>답안</strong></h2>
+		                    </div>
+		                    <!-- 목록 start -->                   
+		                    <div class="table-responsive">
+		                        <table class="table table-hover align-middle">                      	
+		                            <thead>                    
+		                                <tr>
+		                                    <th style="width: 70%;">답안</th>
+		                               		<th style="width: 15%;">정답여부</th>   
+											<th style="width: 15%;">배점</th>
+		                                    <th>&nbsp;</th>
+		                                </tr>
+		                            </thead>    
+		                            <tbody>
+		                                <tr>
+		                                    <td>
+		                                    	<input type="text" class="form-control" disabled>                                    
+		                                    </td> 
+		                                    <td>
+			                                    <div>
+					                                <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
+				                        		</div>
+		                                    </td>
+		                                    <td>
+		                                    	<input type="text" class="form-control" disabled>                                    
+		                                    </td>
+		                                </tr>                      
+		                            </tbody>
+		                        </table>
+		                    </div>
+		                <!-- 목록 end -->    
+		                </div>
+		            </div>                            
+                    <!-- 답안입력란 end -->
+                        <!-- 해설입력란 start -->
+                        <div class="row mt-4 mt-lg-5">
+                        <h2><strong><span class="fa fa-check"></span>해설</strong></h2>
+	                       <div class="mb-3">
+		                        <textarea class="form-control" id="pxp-company-job-description" disabled></textarea>
+	                       </div>
+                        </div>
+                       <!-- 해설입력란 end -->
+	                    <div class="mt-4 mt-lg-5">
+	                        <button type="button" onclick="location.href='/qSettingList'" class="btn rounded-pill pxp-section-cta">목록으로</button>
+                    	</div>                                      
+                    	</div>
+                    </div>
+                </form>
+            </div>        
+            <!-- end contents -->     
+            
+        <!-- begin footer -->
+			<div th:replace="~{admin/fragments/adminFooter :: footerFragment}"></div>
+		<!-- end footer -->
+        </div>
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/nav.js"></script>
+        <script src="js/Chart.min.js"></script>
+        <script src="js/main.js"></script>
+    </body>
 </html>

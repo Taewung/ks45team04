@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/member") //큰폴더명
 public class MemberController {
 	
 	@GetMapping("/addMember")
@@ -44,5 +43,17 @@ public class MemberController {
 		model.addAttribute("title", "비밀번호 찾기");
 		return  "member/member/find_pw";		
 	}
+	
+	@GetMapping("/findIdResult")
+	public String findIdResult(Model model) {
+		model.addAttribute("title", "아이디 찾기 결과");
+		return  "member/member/find_id_result";		
+	}
+	
+	@GetMapping("/findPwResult")
+	public String findPwResult(Model model) {
+		model.addAttribute("title", "비밀번호 찾기 결과");
+		return  "member/member/find_pw_result";		
+	}	
 	
 }

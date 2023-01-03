@@ -1,11 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  class="pxp-root" >
+<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
+    <link rel="stylesheet" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
+
 <body>
-find_pw 비밀번호 찾기
-http://localhost:8088/member/findPw
+	<div class="pxp-preloader"><span>Loading...</span></div>
+	
+		<!-- begin header -->
+		<div th:replace="~{member/fragments/contentsHeader :: headerFragment}"></div>
+		<!-- end header -->			
+		
+		<!--  begin contents -->
+        <section class="pxp-hero vh-100" style="background-color: var(--pxpMainColorLight);">
+            <div class="row align-items-center pxp-sign-hero-container">
+
+
+                <div class="col-xl-6 pxp-column">
+                    <div class="pxp-sign-hero-fig text-center pb-100 pt-100">
+                        <img src="/images/findid.png" alt="Sign up">
+                        <h1 class="mt-4 mt-lg-5">이걸 잊어먹네...... 기억좀 잘하자?</h1>
+                    </div>
+                </div>
+                <div class="col-xl-6 pxp-column pxp-is-light">
+                    <div class="pxp-sign-hero-form pb-100 pt-100">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-6 col-xl-7 col-xxl-5">
+                                <div class="pxp-sign-hero-form-content">
+                                    <h5 class="text-center">비밀번호 찾기</h5> 
+                                    <form class="mt-4">
+                                          <div class="form-floating mb-3">
+                                            <input type="email" class="form-control" id="pxp-signin-page-email" placeholder="Email address">
+                                            <label for="pxp-signin-page-email">ID</label>
+                                            <span class="fa fa-envelope-o"></span>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="email" class="form-control" id="pxp-signup-page-email" placeholder="Email address">
+                                            <label for="pxp-signup-page-email">Name</label>
+                                            <span class="fa fa-user"></span>
+                                        </div>       
+                                        <div class="form-floating mb-3">
+                                            <input type="email" class="form-control" id="pxp-signup-page-email" placeholder="Email address">
+                                            <label for="pxp-signup-page-email">Email</label>
+                                            <span class="fa fa-envelope-o"></span>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="email" class="form-control" id="pxp-signup-page-email" placeholder="Email address">
+                                            <label for="pxp-signup-page-email">Birth</label>
+                                            <span class="fa fa-birthday-cake"></span>
+                                        </div>                                                                                                                                                     
+                                        <a href="/findPwResult" class="btn rounded-pill pxp-sign-hero-form-cta">찾기</a>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>				
+		</section>
+		<!--  end contents -->
+
+			
+		<!-- begin footer -->
+		<div th:replace="~{member/fragments/contentsFooter :: footerFragment}"></div>
+		<!-- end footer -->
+			
+	<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/js/nav.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
 </body>
 </html>
