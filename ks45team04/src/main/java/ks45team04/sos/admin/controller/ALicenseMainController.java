@@ -50,17 +50,25 @@ private final LicenseMainMapper licenseMainMapper;
 	@PostMapping("/modifylicenseMain")
 	public String modifylicenseMain(LicenseMain LicenseMain) {
 		
-		return "";
+		licenseMainService.modifyLicenseMain(LicenseMain);
+		
+		return "redirect:/licenseMainList";
 	}
 
 
 	// 자격증 대분류 수정 화면
 	@GetMapping("/modifylicenseMain")
-	public String modifylicenseMain(Model model) {
+	public String modifylicenseMain(@RequestParam(value="lmcCode") String lmcCode
+									,Model model) {
+		
+		LicenseMain licenseMain = licenseMainService.getLicenseMainInfoByCode(lmcCode);
+		
 		model.addAttribute("title", "자격증 대분류 정보 수정");
+		model.addAttribute("licenseMainInfo", licenseMain);
 		
 		return "admin/licenseMain/license_main_modify";
 	}
+	
 	
 	// 관리자 아이디 인증
 	@GetMapping("/idCheck")

@@ -7,7 +7,6 @@ public class LicenseSub {
 	private String lscName;
 	private String lscRegId;
 	private String lscRegDatetime;
-	
 	public String getLscCode() {
 		return lscCode;
 	}
@@ -49,7 +48,6 @@ public class LicenseSub {
 		return "LicenseSub [lscCode=" + lscCode + ", lmcCode=" + lmcCode + ", lmcName=" + lmcName + ", lscName="
 				+ lscName + ", lscRegId=" + lscRegId + ", lscRegDatetime=" + lscRegDatetime + "]";
 	}
-	
 	
 
 }

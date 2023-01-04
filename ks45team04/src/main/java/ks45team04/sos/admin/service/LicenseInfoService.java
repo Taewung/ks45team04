@@ -17,6 +17,28 @@ private final LicenseInfoMapper licenseInfoMapper;
 	}
 	
 	/**
+	 * 특정 자격증 정보 수정
+	 * @param licenseInfo
+	 * @return int (update 쿼리 실행 결과)
+	 */
+	public int modifyLicenseInfo(LicenseInfo licenseInfo) {
+		
+		return licenseInfoMapper.modifyLicenseInfo(licenseInfo);
+	}
+	
+	
+	/**
+	 * 특정 자격증 정보 조회
+	 * @param liCode
+	 * @return licenseInfo
+	 */
+	public LicenseInfo getLicenseInfoByCode(String liCode) {
+		
+		return licenseInfoMapper.getLicenseInfoByCode(liCode);
+	}
+	
+	
+	/**
 	 * 자격증 대분류 등록
 	 * @param LicenseInfo
 	 * @return int

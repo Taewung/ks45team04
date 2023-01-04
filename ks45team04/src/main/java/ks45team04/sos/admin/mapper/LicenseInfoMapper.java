@@ -9,6 +9,12 @@ import ks45team04.sos.admin.dto.LicenseInfo;
 @Mapper
 public interface LicenseInfoMapper {
 	
+	// 틁정 자격증 정보 수정
+	public int modifyLicenseInfo(LicenseInfo licenseInfo);
+	
+	// 특정 자격증 정보 조회
+	public LicenseInfo getLicenseInfoByCode(String liCode);
+	
 	// 관리자 아이디 인증
 	public boolean getIdCheck(String inputId);
 	

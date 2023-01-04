@@ -11,12 +11,34 @@
 		<result property="downloadCountDatetime" 		column="download_count_datetime"/>
 	</resultMap>
 	
-	<select id="DownloadCountStandardList" resultMap="downloadCountStandardResultMap">
-			
+	<select id="getIdCheck" parameterType="String" resultType="boolean">
+		/* 관리자 아이디 인증 */
+		SELECT
+			if(COUNT(dcs.download_count_writer) > 0, 1, 0)
+		FROM
+			download_count_standard as dcs
+		WHERE
+			dcs.download_count_writer = #{"downloadCountWriter"};
+	</select>
+
+	<insert id="addDownloadCountStandard" parameterType="DownloadCountStandard">
+		/* 자격증 일정 등록 */
+			INSERT INTO download_count_standard
+			( dcs_code
+			 ,download_count
+			 ,download_count_writer
+			 ,download_count_datetime)
+			VALUES 
+			(#{dscCode}, #{downloadCount}, #{downloadCountWriter}, CURDATE());
+	</insert>	
+	
+	
+	<select id="DownloadCountStandardList" resultMap="downloadCountStandardResultMap">	
+	/* 다운로드 횟수 기준 목록 조회*/
+	
 	SELECT
 		*
 	FROM
 		download_count_standard AS dcs;
-			
 	</select>
 </mapper>

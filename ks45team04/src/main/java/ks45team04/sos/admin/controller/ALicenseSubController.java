@@ -33,7 +33,7 @@ private final LicenseSubMapper licenseSubMapper;
 		@PostMapping("/deletelicenseSub")
 		public String deletelicenseSub(LicenseSub LicenseSub) {
 				
-		return "";
+		return "redirect:/";
 		}
 			
 			
@@ -49,16 +49,24 @@ private final LicenseSubMapper licenseSubMapper;
 	
 		// 자격증 중분류 정부 수정 처리
 		@PostMapping("/modifylicenseSub")
-		public String modifylicenseSub(LicenseSub LicenseSub) {
+		public String modifylicenseSub(LicenseSub licenseSub) {
+			System.out.println(licenseSub);
+			
+			licenseSubService.modifyLicenseSub(licenseSub);
 				
-				return "";
+				return "redirect:/licenseSubList";
 			}
 		
 		
 		// 자격증 중분류 정보 수정 화면
 		@GetMapping("/modifylicenseSub")
-		public String modifylicenseSub(Model model) {
-				model.addAttribute("title", "자격증 중분류 등록");
+		public String modifylicenseSub(@RequestParam(value="lscCode") String lscCode
+									  ,Model model) {
+			
+			LicenseSub licenseSub = licenseSubService.getLicenseSubInfoByCode(lscCode);
+			
+			model.addAttribute("title", "자격증 중분류 등록");
+			model.addAttribute("licenseSubInfo", licenseSub);
 				
 			return "admin/licenseSub/license_sub_modify";
 			}

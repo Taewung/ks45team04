@@ -6,21 +6,59 @@
 	<!-- script start -->
 	<th:block layout:fragment="customScript">
 	<script>
+		$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+			$('#resetBtn').click(function(){
+				location.href = '/licenseMainList';
+			});
+		});
+		
 	</script>
 	</th:block> 
 	<!-- script end -->
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-	
-
-
-
-license_main_modify.html
-
-
-
-
+		<h1>자격증 대분류 수정</h1>
+		<form id="modifyLicenseMainForm" th:action="@{/modifylicenseMain}" name="myform" method="post">
+              <div class="row mt-4 mt-lg-5">
+                  <div class="col-xxl-8">
+                      <div class="row">
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lmcRegId" class="form-label"><h4>관리자 아이디</h4></label>
+                                  <input type="text" id="lmcRegId" class="form-control" name="lmcRegId" placeholder="관리자 아이디"
+                                  		 th:value="${licenseMainInfo.lmcRegId}" readonly="readonly">
+                              </div>
+                          </div>
+                      </div><br><br>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lmcCode" class="form-label"><h6>자격증 대분류코드</h6></label><h12></h12>
+                                  <input type="text" id="lmcCode" class="form-control" name="lmcCode" placeholder="자격증 대분류코드"
+                                  		 th:value="${licenseMainInfo.lmcCode}" readonly="readonly">
+                              </div>
+                          </div>
+                      </div>                     
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lmcName" class="form-label"><h6>자격증 대분류명</h6></label>
+                                  <input type="text" id="lmcName" class="form-control" name="lmcName" placeholder="자격증 대분류명"
+                                         th:value="${licenseMainInfo.lmcName}">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
+              <div class="mt-4 mt-lg-5">
+                  <button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>&nbsp;&nbsp;
+                  <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
+                  
+              </div>
+          </form>
 	</th:block>
 	<!-- customContents end -->
 	

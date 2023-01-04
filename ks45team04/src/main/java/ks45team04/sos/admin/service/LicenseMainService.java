@@ -17,7 +17,29 @@ private final LicenseMainMapper licenseMainMapper;
 		this.licenseMainMapper = licenseMainMapper;
 	}
 
-
+	
+	/**
+	 * 특정 자격증 대분류 수정
+	 * @param licenseMain
+	 * @return int (update 쿼리 실행 결과)
+	 */
+	public int modifyLicenseMain(LicenseMain licenseMain) {
+		
+		return licenseMainMapper.modifyLicenseMain(licenseMain);
+		
+	}
+	
+	/**
+	 * 특정 자격증 대분류 조회
+	 * @param lmcCode
+	 * @return licenseMain
+	 */
+	public LicenseMain getLicenseMainInfoByCode(String lmcCode) {
+		
+		return licenseMainMapper.getLicenseMainByCode(lmcCode);
+	}
+	
+	
 	/**
 	 * 자격증 대분류 등록
 	 * @param LicenseMain
