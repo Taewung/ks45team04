@@ -12,7 +12,8 @@
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-		<h1>제목</h1>
+		 <div class="pxp-dashboard-content-details">
+ 				<h1>년별 매출</h1>
                 <div class="mt-4 mt-lg-5">
                     <div class="row justify-content-between align-content-center">
                         <div class="col-auto order-1 order-sm-2">
@@ -27,11 +28,7 @@
                         </div>
 					<div class="pxp-dashboard-table-options">
                         <ul class="list-unstyled">
-                        <!-- 등록버튼 start -->
-                            <a href="#">
-                            	<li><button title="Add"><span class="fa fa-plus"></span></button></li>
-                            </a>
-                        <!-- 등록버튼 end -->                                              
+                                                
                         </ul>
                     </div>
                     </div>
@@ -42,45 +39,60 @@
                             <thead>                    
                                 <tr>
                                     <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
-                                    <th style="width: 15%;">컬럼명</th>
-                                    <th style="width: 10%;">컬럼명</th>
-                                    <th style="width: 15%;">컬럼명</th>
-                                    <th style="width: 15%;">컬럼명</th>
-                                    <th style="width: 15%;">컬럼명</th>
-                                    <th style="width: 10%;">컬럼명</th>
-                                    <th style="width: 30%;">등록일시</th>
+                                    <th style="width: 15%;">년_월별상품매출</th>
+                                    <th style="width: 10%;">년도</th>
+                                    <th style="width: 15%;">1월</th>
+                                    <th style="width: 15%;">2월</th>
+                                    <th style="width: 15%;">3월</th>
+                                    <th style="width: 10%;">4월</th>
+                                    <th style="width: 30%;">5월</th>
+                                    <th style="width: 30%;">6월</th>
+                                    <th style="width: 30%;">7월</th>
+                                    <th style="width: 30%;">8월</th>
+                                    <th style="width: 30%;">9월</th>
+                                    <th style="width: 30%;">10월</th>
+                                    <th style="width: 30%;">11월</th>
+                                    <th style="width: 30%;">12월</th>
+                            
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>    
                             <tbody>
-                                <tr>
+                                 <tr th:if="${not #lists.isEmpty(annualSalesList)}"
+									th:each="l : ${annualSalesList}">
                                     <td><input type="checkbox" class="form-check-input"></td>
-                                    <td>
-                                        <a href="#">
-                                            <div class="pxp-company-dashboard-job-title">데이터</div>                                           
-                                        </a>
-                                    </td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-date mt-1">2022/08/24 at 11:56 am</div></td>
+                                    <td><div class="pxp-company-dashboard-job-title" th:text="${l.annualSalesCode}"></div>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualSalesYear}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualSalesJan}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualSalesFeb}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualSalesMar}"></div></td>                      
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualSalesApr}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualSalesMay}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualSalesJun}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualSalesJul}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualSalesAug}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualSalesSept}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualSalesOct}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualSalesNov}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualSalesDec}"></div></td>   
                                     
                                     <td>
                                         <div class="pxp-dashboard-table-options">
                                             <ul class="list-unstyled">
-                                                                 
+                                                                       
                                             </ul>
                                         </div>
                                     </td>
-                                </tr>                      
+                                </tr>
+                                <tr th:unless="${not #lists.isEmpty(annualSalesList)}">
+									<td colspan="9">등록된 정보가 없습니다.</td>
+								</tr>                    
+                                    
                             </tbody>
                         </table>
-						<!-- page 넘김 start -->
-                        <div class="row mt-4 mt-lg-5 justify-content-center align-items-center">
+						   <div class="row mt-4 mt-lg-5 justify-content-center align-items-center">
                             <div class="col-auto">
-                                <nav class="mt-3 mt-sm-0" aria-label="Jobs list pagination">
+                                <nav class="mt-3 mt-sm-0" aria-label="Candidates pagination">
                                     <ul class="pagination pxp-pagination">
                                         <li class="page-item active" aria-current="page">
                                             <span class="page-link">1</span>
@@ -90,11 +102,204 @@
                                     </ul>
                                 </nav>
                             </div>
+	
                         </div>
-                        <!-- page 넘김 end -->
                     </div>
                 <!-- 목록 end -->    
                 </div>
+            </div>     
+           <div class="pxp-dashboard-content-details">
+ 				<h1>년별 환불</h1>
+                <div class="mt-4 mt-lg-5">
+                    <div class="row justify-content-between align-content-center">
+                        <div class="col-auto order-1 order-sm-2">
+                            <div class="pxp-company-dashboard-jobs-search mb-3">
+                                <div class="pxp-company-dashboard-jobs-search-search-form">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><span class="fa fa-search"></span></span>
+                                        <input type="text" class="form-control" placeholder="Search">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+					<div class="pxp-dashboard-table-options">
+                        <ul class="list-unstyled">
+                                                
+                        </ul>
+                    </div>
+                    </div>
+                    <!-- 검색 end -->   
+                    <!-- 목록 start -->                   
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">                      	
+                            <thead>                    
+                                <tr>
+                                    <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
+                                    <th style="width: 15%;">년_월별상품환불</th>
+                                    <th style="width: 10%;">년도</th>
+                                    <th style="width: 15%;">1월</th>
+                                    <th style="width: 15%;">2월</th>
+                                    <th style="width: 15%;">3월</th>
+                                    <th style="width: 10%;">4월</th>
+                                    <th style="width: 30%;">5월</th>
+                                    <th style="width: 30%;">6월</th>
+                                    <th style="width: 30%;">7월</th>
+                                    <th style="width: 30%;">8월</th>
+                                    <th style="width: 30%;">9월</th>
+                                    <th style="width: 30%;">10월</th>
+                                    <th style="width: 30%;">11월</th>
+                                    <th style="width: 30%;">12월</th>
+                            
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>    
+                            <tbody>
+                                 <tr th:if="${not #lists.isEmpty(annualRefundList)}"
+									th:each="l : ${annualRefundList}">
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><div class="pxp-company-dashboard-job-title" th:text="${l.annualRefundCode}"></div>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualRefundYear}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualRefundJan}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualRefundFeb}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualRefundMar}"></div></td>                      
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualRefundApr}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualRefundMay}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualRefundJun}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualRefundJul}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualRefundAug}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualRefundSept}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualRefundOct}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualRefundNov}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualRefundDec}"></div></td>   
+                                    
+                                    <td>
+                                        <div class="pxp-dashboard-table-options">
+                                            <ul class="list-unstyled">
+                                                                       
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr th:unless="${not #lists.isEmpty(annualRefundList)}">
+									<td colspan="9">등록된 정보가 없습니다.</td>
+								</tr>                    
+                                    
+                            </tbody>
+                        </table>
+						   <div class="row mt-4 mt-lg-5 justify-content-center align-items-center">
+                            <div class="col-auto">
+                                <nav class="mt-3 mt-sm-0" aria-label="Candidates pagination">
+                                    <ul class="pagination pxp-pagination">
+                                        <li class="page-item active" aria-current="page">
+                                            <span class="page-link">1</span>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+	
+                        </div>
+                    </div>
+                <!-- 목록 end -->    
+                </div>
+            </div>    
+              <div class="pxp-dashboard-content-details">
+ 				<h1>년별 손익</h1>
+                <div class="mt-4 mt-lg-5">
+                    <div class="row justify-content-between align-content-center">
+                        <div class="col-auto order-1 order-sm-2">
+                            <div class="pxp-company-dashboard-jobs-search mb-3">
+                                <div class="pxp-company-dashboard-jobs-search-search-form">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><span class="fa fa-search"></span></span>
+                                        <input type="text" class="form-control" placeholder="Search">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+					<div class="pxp-dashboard-table-options">
+                        <ul class="list-unstyled">
+                                                
+                        </ul>
+                    </div>
+                    </div>
+                    <!-- 검색 end -->   
+                    <!-- 목록 start -->                   
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">                      	
+                            <thead>                    
+                                <tr>
+                                    <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
+                                    <th style="width: 15%;">년_월별상품손익</th>
+                                    <th style="width: 10%;">년도</th>
+                                    <th style="width: 15%;">1월</th>
+                                    <th style="width: 15%;">2월</th>
+                                    <th style="width: 15%;">3월</th>
+                                    <th style="width: 10%;">4월</th>
+                                    <th style="width: 30%;">5월</th>
+                                    <th style="width: 30%;">6월</th>
+                                    <th style="width: 30%;">7월</th>
+                                    <th style="width: 30%;">8월</th>
+                                    <th style="width: 30%;">9월</th>
+                                    <th style="width: 30%;">10월</th>
+                                    <th style="width: 30%;">11월</th>
+                                    <th style="width: 30%;">12월</th>
+                            
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>    
+                            <tbody>
+                                 <tr th:if="${not #lists.isEmpty(annualTotalList)}"
+									th:each="l : ${annualTotalList}">
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><div class="pxp-company-dashboard-job-title" th:text="${l.annualTotalCode}"></div>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualTotalYear}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualTotalJan}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualTotalFeb}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualTotalMar}"></div></td>                      
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualTotalApr}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualTotalMay}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualTotalJun}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualTotalJul}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualTotalAug}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualTotalSept}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualTotalOct}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualTotalNov}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualTotalDec}"></div></td>   
+                                    
+                                    <td>
+                                        <div class="pxp-dashboard-table-options">
+                                            <ul class="list-unstyled">
+                                                                       
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr th:unless="${not #lists.isEmpty(annualTotalList)}">
+									<td colspan="9">등록된 정보가 없습니다.</td>
+								</tr>                    
+                                    
+                            </tbody>
+                        </table>
+						   <div class="row mt-4 mt-lg-5 justify-content-center align-items-center">
+                            <div class="col-auto">
+                                <nav class="mt-3 mt-sm-0" aria-label="Candidates pagination">
+                                    <ul class="pagination pxp-pagination">
+                                        <li class="page-item active" aria-current="page">
+                                            <span class="page-link">1</span>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+	
+                        </div>
+                    </div>
+                <!-- 목록 end -->    
+                </div>
+            </div>    
 	</th:block>
 	<!-- customContents end -->
 	
