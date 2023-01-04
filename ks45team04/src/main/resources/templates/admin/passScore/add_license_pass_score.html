@@ -4,9 +4,87 @@
 	  layout:decorate="~{admin/layout/adminDefault}">
 
 	<!-- script start -->
-	<th:block layout:fragment="customScript">
-	<script>
-	</script>
+    <th:block layout:fragment="customScript">
+		<script>
+			$(function(){
+				function validationCheck(data){
+					if(typeof data == 'undefined' || data == '' || data == null || data == '대분류'){	
+						return false;
+					}
+					return true;
+				}
+								
+				$(document).on('change','#licenseMainCategory', function(){
+					$('#licenseSubCategory').prop('disabled', false);
+					let lmcCode = $(this).val();
+					
+					if(validationCheck(lmcCode)){						
+						var request = $.ajax({
+						  url: '/getLicenseSubCategory',
+						  method: 'GET',
+						  data: { 'lmcCode' : lmcCode },
+						  dataType: 'json'
+						});
+						 
+						request.done(function( data ) {
+						  console.log(data);
+						  $('#licenseSubCategory').children().remove();
+						  for(let subCategory of data){
+							  $('#licenseSubCategory').append(`<option value="${subCategory.lscCode}">${subCategory.lscName}</option>`);
+						  }
+						});
+						 
+						request.fail(function( jqXHR, textStatus ) {
+						  alert( "Request failed: " + textStatus );
+						});
+					}
+					
+				});
+				
+				$(document).on('click','.licenseSubCategoryDiv', function(){
+					let isDisabled = $('#licenseSubCategory').prop('disabled');
+					if(isDisabled) {
+						alert('대분류를 선택해주세요');
+						return false;
+					}
+				});
+			});
+			
+
+			$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+				function validateValue(checkValue) {
+					if(    typeof checkValue == 'undefined' 
+							|| checkValue == null 
+							|| checkValue == ''					){
+						return true;
+					}
+					return false;
+					
+				}
+			
+				/* 유효성검사를 구현하시오. (#submitBtn 를 클릭 시) */
+				$('#submitBtn').click(function(){
+					let isSubmit = true;
+					
+					$('#addLicensePassScore input').each(function(idx, item){
+						let checkValue = $(item).val();
+						let labelValue = $(item).parents('div').find('label').text();
+						if(validateValue(checkValue)){
+							
+							alert(`${labelValue}를 입력해주세요`);
+							$(item).focus();
+							isSubmit = false;
+							
+							return false;
+						}
+						
+					});
+				
+					if(isSubmit) $('#addLicensePassScore').submit();
+				});
+			});
+	
+		</script>
 	</th:block> 
 	<!-- script end -->
 	
@@ -14,72 +92,38 @@
 	<th:block layout:fragment="customContents">
 	<h1>합격기준점수등록</h1>
                 <p class="pxp-text-light">Add License Pass Score</p>
-                <form>
+                <form id="addLicensePassScore" th:action="@{/addLicensePassScore}" method="post">
                     <div class="row mt-4 mt-lg-5">                  
                 	<h2><strong><span class="fa fa-check"></span>자격증 선택</strong></h2>
                         <div class="col-md-6 col-xxl-3">
-                            <label for="pxp-company-job-category" class="form-label">대분류</label>
-                                <select id="pxp-company-job-category" class="form-select">
-                                    <option>Select a category</option>
-                                </select>
+                            <label for="licenseMainCategory" class="form-label">대분류</label>
+                             <select  id="licenseMainCategory" class="form-select" name="mainCate">
+                             	<option>대분류</option>
+                                <option th:if="${not #lists.isEmpty(licenseMainList)}" th:each="l : ${licenseMainList}" th:value="${l.lmcCode}" th:text="${l.lmcName}"></option>
+                             </select>
                         </div>
                         <div class="col-md-6 col-xxl-3">
-                            <div class="mb-3">
-                                <label for="pxp-company-job-category" class="form-label">중분류</label>
-                                <select id="pxp-company-job-category" class="form-select">
-                                    <option>Select a category</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xxl-3">
-                            <div class="mb-3">
-                                <label for="pxp-company-job-category" class="form-label">자격증명</label>
-                                <select id="pxp-company-job-category" class="form-select">
-                                    <option>Select a category</option>
-                                </select>
+                            <div class="mb-3 licenseSubCategoryDiv">
+	                               <label for="licenseSubCategory" class="form-label">자격증명</label>
+	                               <select id="licenseSubCategory" class="form-select" name="subCate" disabled="disabled">
+	                                   
+	                               </select>
                             </div>
                         </div>
                         <div class="col-md-6 col-xxl-3">
                             <div class="mb-3">
                                 <label for="pxp-company-job-experience" class="form-label">자격증합격기준점수</label>
-                                <input type="text" id="pxp-company-job-experience" class="form-control" placeholder="점수를 입력해주세요.">   
+                                <input type="text" id="pxp-company-job-experience" class="form-control" name="liPStandardScore" placeholder="점수를 입력해주세요.">   
                             </div>
                         </div>
                     </div>
                     <div class="row mt-4 mt-lg-5">
-                    <h2><strong><span class="fa fa-check"></span>과목 선택</strong></h2>
-                        <div class="col-md-6 col-xxl-3">
-                            <label for="pxp-company-job-category" class="form-label">과목</label>
-                                <select id="pxp-company-job-category" class="form-select">
-                                    <option>Select a category</option>
-                                </select>
-                        </div>
-                        <div class="col-md-6 col-xxl-3">
-                            <div class="mb-3">
-                                <label for="pxp-company-job-category" class="form-label">과목명</label>
-                                <select id="pxp-company-job-category" class="form-select">
-                                    <option>Select a category</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xxl-3">
-                            <div class="mb-3">
-                                <label for="pxp-company-job-experience" class="form-label">문항수</label>
-                                <input type="text" id="pxp-company-job-experience" class="form-control" placeholder="점수를 입력해주세요.">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xxl-3">
-                            <div class="mb-3">
-                                <label for="pxp-company-job-experience" class="form-label">과목합격점수</label>
-                                <input type="text" id="pxp-company-job-experience" class="form-control" placeholder="점수를 입력해주세요.">
-                            </div>
-                        </div>
+
 	                   <div class="mt-4 mt-lg-5">
-	                        <button type="button" onclick="location.href='/licensePassScoreList'" class="btn rounded-pill pxp-section-cta">등록</button>
-	                        <button type="button" onclick="location.href='/licensePassScoreList'" class="btn rounded-pill pxp-section-cta-o ms-3">취소</button>
+	                        <button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>
+	                        <button type="reset" id="resetBtn" class="btn rounded-pill pxp-section-cta-o ms-3">취소</button>
                     	</div>                                      
                     	</div>
-                    </div>
                 </form>
 	</th:block>
 	<!-- customContents end -->
