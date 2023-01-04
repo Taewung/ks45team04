@@ -35,7 +35,7 @@
                         		</div>
                         		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                         		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                        		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                      			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 								<div class="pxp-dashboard-table-options">
 			                        <ul class="list-unstyled">
 			                        <!-- 등록버튼 start -->
@@ -51,37 +51,37 @@
                             </div>
                         </div>
                     </div>
-                    <!-- 검색 end -->   
+
+                    
+                     
                     <!-- 목록 start -->                   
                     <div class="table-responsive" style="overflow-x: hidden">
                         <table class="table table-hover align-middle">                      	
                             <thead>                    
                                 <tr>
                                     <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
+                                    <th style="width: 15%;">자격증합격점수코드</th>
+                                    <th style="width: 10%;">자격증코드</th>
                                     <th style="width: 15%;">자격증명</th>
-                                    <th style="width: 10%;">과목</th>
-                                    <th style="width: 15%;">과목명</th>
-                                    <th style="width: 15%;">과목합격점수</th>
                                     <th style="width: 15%;">자격증합격점수</th>
-                                    <th style="width: 10%;">등록자</th>
+                                    <th style="width: 15%;">등록자</th>
                                     <th style="width: 30%;">등록일시</th>
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>    
                             <tbody>
-                                <tr>
+                                <tr th:if="${not #lists.isEmpty(licensePassScoreList)}" th:each="l : ${licensePassScoreList}">
                                     <td><input type="checkbox" class="form-check-input"></td>
                                     <td>
                                         <a href="/checkLicensePassScore">
-                                            <div class="pxp-company-dashboard-job-title">정보처리기사</div>                                           
+                                            <div class="pxp-company-dashboard-job-title" th:text="${l.liPScoreCode}"></div>                                           
                                         </a>
                                     </td>
-                                    <td><div class="pxp-company-dashboard-job-category">1과목</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">소프트웨어 설계</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">40</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">60</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">id001</div></td>
-                                    <td><div class="pxp-company-dashboard-job-date mt-1">2022/08/24 at 11:56 am</div></td>                                   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.liCode}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.liName}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.liPStandardScore}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${l.liPScoreRegId}"></div></td>                                   
+                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${l.liPScoreRegDateTime}"></div></td>                                                                                                        
                                     <td>
                                         <div class="pxp-dashboard-table-options">
                                             <ul class="list-unstyled">
@@ -93,12 +93,16 @@
                                             </ul>
                                         </div>
                                     </td>
-                                </tr>                      
+                                </tr>
+                                <tr th:unless="${not #lists.isEmpty(licensePassScoreList)}">
+									<td colspan="9">등록된 합격기준점수가 없습니다.</td>
+								</tr>                                                      
                             </tbody>
                         </table>
                     </div>
                 <!-- 목록 end -->    
                 </div>
+                <br><br><br><br><br>
 				<!-- page 넘김 start -->
                  <div class="row mt-4 mt-lg-5 justify-content-center align-items-center">
                      <div class="col-auto">
