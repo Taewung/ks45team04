@@ -81,7 +81,7 @@
                 </div>
             </div>
              <div class="pxp-dashboard-content-details">
- 				<h1>월별상품매출</h1>
+ 				<h1>월별손익합계</h1>
                 <div class="mt-4 mt-lg-5">
                     <div class="row justify-content-between align-content-center">
                         <div class="col-auto order-1 order-sm-2">
@@ -107,27 +107,33 @@
                             <thead>                    
                                 <tr>
                                     <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
-                                    <th style="width: 15%;">월별상품매출</th>
-                                    <th style="width: 10%;">월_매출및환불마감그룹</th>
-                                    <th style="width: 15%;">최종결제합계</th>
-                                    <th style="width: 15%;">매출/환불구분</th>
-                                    <th style="width: 15%;">년월</th>
+                                    <th style="width: 10%;">월별손익합계</th>
+                                    <th style="width: 15%;">월_매출및환불마감그룹</th>
+                                    <th style="width: 8%;">매출합계</th>
+                                    <th style="width: 8%;">환불합계</th>
+                                    <th style="width: 5%;">손익</th>
+                                    <th style="width: 13%;">손익계산시작일</th>
+                                    <th style="width: 13%;">손익계산종료일</th>
                                     <th style="width: 10%;">등록일자</th>
-                                    <th style="width: 30%;">등록자아이디</th>
+                                    <th style="width: 10%;">등록자아이디</th>
+                                    <th style="width: 20%;">년월</th>
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>    
                             <tbody>
-                                 <tr th:if="${not #lists.isEmpty(monthlySalesAndRefundList)}"
-									th:each="l : ${monthlySalesAndRefundList}">
+                                 <tr th:if="${not #lists.isEmpty(monthlyTotalList)}"
+									th:each="l : ${monthlyTotalList}">
                                     <td><input type="checkbox" class="form-check-input"></td>
-                                    <td><div class="pxp-company-dashboard-job-title" th:text="${l.msarCode}"></div>
+                                    <td><div class="pxp-company-dashboard-job-title" th:text="${l.mtCode}"></div>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.msarEndGroup}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.msarTotalPayment}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.salesOrRefund}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.msarYearAndMonth}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.msarRegDate}"></div></td>                      
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.memrId}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.mtSalesPayment}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.mtRefundPayment}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.monthlyIncome}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.incomeCalculationStartDate}"></div></td>                      
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.incomeCalculationEndDate}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.mtRegDate}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.memId}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.mtYearAndMonth}"></div></td>   
                                     
                                     <td>
                                         <div class="pxp-dashboard-table-options">
@@ -137,7 +143,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr th:unless="${not #lists.isEmpty(monthlySalesAndRefundList)}">
+                                <tr th:unless="${not #lists.isEmpty(monthlyTotalList)}">
 									<td colspan="9">등록된 정보가 없습니다.</td>
 								</tr>                    
                                     
