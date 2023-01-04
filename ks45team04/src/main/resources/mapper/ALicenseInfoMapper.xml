@@ -15,7 +15,7 @@
 	</resultMap>
 		
 		<update id="modifyLicenseInfo" parameterType="LicenseInfo">
-		/* 특정 자격증 수정*/
+		/* 특정 자격증 정보 수정*/
 		UPDATE 
 			license_info
 		SET 

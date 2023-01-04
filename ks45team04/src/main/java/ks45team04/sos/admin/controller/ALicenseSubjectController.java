@@ -47,18 +47,26 @@ public class ALicenseSubjectController {
 
 	// 자격증 과목 수정 처리
 	@PostMapping("/modifylicenseSubject")
-	public String modifylicenseSubject(LicenseSubject LicenseSubject) {
+	public String modifylicenseSubject(LicenseSubject licenseSubject) {
 		
-		return "";
+		licenseSubjectMapper.modifyLicenseSubject(licenseSubject);
+		
+		return "redirect:/licenseSubjectList";
 	}
 	
 	// 자격증 과목 수정 화면
 	@GetMapping("/modifylicenseSubject")
-	public String modifylicenseSubject(Model model) {
+	public String modifylicenseSubject(@RequestParam(value="lsCode") String lsCode
+									   ,Model model) {
+		
+		LicenseSubject licenseSubject = licenseSubjectService.getLicenseSubjectInfoByCode(lsCode);
+		
 		model.addAttribute("title", "자격증 과목 수정");
+		model.addAttribute("licenseSubjectInfo", licenseSubject);
 			
 		return "admin/licenseSubject/license_subject_modify";
 	}
+	
 	
 	//관리자 아이디 인증
 	@GetMapping("/lsIdCheck")

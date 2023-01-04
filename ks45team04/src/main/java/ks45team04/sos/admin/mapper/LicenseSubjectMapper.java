@@ -10,6 +10,12 @@ import ks45team04.sos.admin.dto.LicenseSubject;
 @Mapper
 public interface LicenseSubjectMapper {
 	
+	// 특정 자격증 과목 수정
+	public int modifyLicenseSubject(LicenseSubject licenseSubject);
+	
+	// 특정 자격증 과목 조회
+	public LicenseSubject getLicenseSubjectByCode(String lsCode);
+	
 	// 관리자 아이디 인증
 	public boolean getIdCheck(String inputId);
 	

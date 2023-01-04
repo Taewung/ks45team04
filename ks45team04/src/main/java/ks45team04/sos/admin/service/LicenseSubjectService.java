@@ -17,9 +17,32 @@ private final LicenseSubjectMapper licenSubjectMapper;
 	public LicenseSubjectService(LicenseSubjectMapper licenSubjectMapper) {
 		this.licenSubjectMapper = licenSubjectMapper;
 	}
-
+	
+	
 	/**
-	 * 자격증 대분류 등록
+	 * 특정 자격증 과목 등록
+	 * @param licenseSubject
+	 * @return int(update 쿼리 실행 결과)
+	 */
+	public int modifyLicenseSubject(LicenseSubject licenseSubjecti) {
+		
+		return licenSubjectMapper.modifyLicenseSubject(licenseSubjecti);
+	}
+	
+	
+	/**
+	 * 특정 자격증 과목 조회
+	 * @param lsCode
+	 * @return licenseSubject
+	 */
+	
+	public LicenseSubject getLicenseSubjectInfoByCode(String lsCode) {
+		
+		return licenSubjectMapper.getLicenseSubjectByCode(lsCode);
+	}
+	
+	/**
+	 * 자격증 과목 등록
 	 * @param LicenseSubject
 	 * @return int
 	 */
@@ -30,7 +53,7 @@ private final LicenseSubjectMapper licenSubjectMapper;
 	
 	
 	/**
-	 * 자격증 대분류 목록 조회
+	 * 자격증 과목 목록 조회
 	 * @return List<LicenseSubject>
 	 */
 	public List<LicenseSubject> LicenseSubjectList(){

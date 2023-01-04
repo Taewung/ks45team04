@@ -13,6 +13,35 @@
 		<result property="lsRegDatetime" 	column="ls_reg_datetime"/>
 	</resultMap>
 	
+	<update id="modifyLicenseSubject" parameterType="LicenseSubject">
+			/* 특정 자격증 과목 수정*/
+		UPDATE 
+			license_subject
+		SET 
+			 ls_subject = #{lsSubject}
+			,ls_name = #{lsName}
+		WHERE 
+			ls_code= #{lsCode};
+	</update>
+	
+	<select id="getLicenseSubjectByCode" parameterType="String" resultMap="licenseSubjectResultMap">
+		/* 특정 자격증 과목 정보 조회 */
+		SELECT
+			 ls.ls_code
+			,ls.li_code
+			,ls.ls_subject
+			,ls.ls_name
+			,ls.ls_reg_id
+			,ls.ls_reg_datetime
+		FROM
+			license_subject AS ls
+		WHERE
+			ls.ls_code = #{lsCode};
+		
+	
+	</select>
+	
+	
 	<select id="getIdCheck" parameterType="String" resultType="boolean">
 		/* 관리자 아이디 인증 */
 		SELECT
