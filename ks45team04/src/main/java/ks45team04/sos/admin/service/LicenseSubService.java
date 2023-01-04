@@ -16,6 +16,27 @@ private final LicenseSubMapper licenseSubMapper;
 		this.licenseSubMapper = licenseSubMapper;
 	}
 	
+	/**
+	 * 특정 자격증 중분류 수정
+	 * @param licenseSub
+	 * @return int (update 쿼리 실행 결과)
+	 */
+	public int modifyLicenseSub(LicenseSub licenseSub) {
+		
+		return licenseSubMapper.modifyLicenseSub(licenseSub);
+	}
+	
+	/**
+	 * 특정 자격증 중분류 조회
+	 * @param lscCode
+	 * @return licenseSub
+	 */
+	public LicenseSub getLicenseSubInfoByCode(String lscCode) {
+		
+		return licenseSubMapper.getLicenseSubByCode(lscCode);
+	}
+	
+
 	
 	/**
 	 * 자격증 중분류 등록

@@ -12,7 +12,33 @@
 		<result property="lscRegId" 		column="lsc_reg_id"/>
 		<result property="lscRegDatetime" 	column="lsc_reg_datetime"/>
 	</resultMap>
+		<update id="modifyLicenseSub" parameterType="String">
+		/* 특정 자격증 중분류 수정*/
+		UPDATE 
+			license_sub_category
+		SET 
+			 lmc_name = #{lmcName}
+			,lsc_name = #{lscName}
+		WHERE 
+			lsc_code= #{lscCode};
+		</update>
+
+		<select id="getLicenseSubByCode" parameterType="String" resultMap="licenseSubResultMap">
+		/* 특정 자격증 중분류 정보 조회 */
+		SELECT
+			 lsc.lsc_code
+			,lsc.lmc_code
+			,lsc.lmc_name
+			,lsc.lsc_name
+			,lsc_reg_id
+			,lsc_reg_datetime
+		FROM
+			license_sub_category AS lsc
+		WHERE
+			lsc.lsc_code = #{lscCode};
+	</select>
 	
+
 	<select id="getIdCheck" parameterType="String" resultType="boolean">
 		/* 관리자 아이디 인증 */
 		SELECT

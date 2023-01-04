@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team04.sos.admin.mapper.QuestionSettingMapper">
+
+	<resultMap type="Answer" id="answerResultMap">
+		<id 	property="answerCode" 			column="answer_code"/>
+		<result property="questionCode" 		column="question_code"/>		
+		<result property="answer" 				column="answer"/>		
+		<result property="answerState" 			column="answer_state"/>		
+		<result property="answerRegId" 			column="answer_reg_id"/>		
+		<result property="answerRegDateTime" 	column="answer_reg_datetime"/>		
+	</resultMap>
+	<resultMap type="Explanation" id="explanationResultMap">
+		<id 	property="explainCode" 				column="explain_code"/>
+		<result property="questionCode" 			column="question_code"/>				
+		<result property="explanation" 				column="explanation"/>				
+		<result property="explanationRegId" 		column="explanation_reg_id"/>				
+		<result property="explanationRegDateTime" 	column="explanation_reg_datetime"/>				
+	</resultMap>
+	<resultMap type="Question" id="questionResultMap">
+		<id 	property="questionCode" 			column="question_code"/>
+		<result property="liCode" 					column="li_code"/>			
+		<result property="lsCode" 					column="ls_code"/>			
+		<result property="liName" 					column="li_name"/>			
+		<result property="lsNum" 					column="ls_num"/>			
+		<result property="lsName" 					column="ls_name"/>			
+		<result property="question" 				column="question"/>			
+		<result property="questionScore" 			column="question_score"/>			
+		<result property="questionRegId" 			column="question_reg_id"/>				
+		<result property="questionRegId" 			column="question_reg_datetime"/>				
+	</resultMap>
+	
+	<select id="getQuestionList" resultMap="questionResultMap">
+		/* 전체 문제목록 조회 */
+		SELECT
+			 q.question_code
+			,q.li_code
+			,q.ls_code
+			,q.li_name
+			,q.ls_num
+			,q.ls_name
+			,q.question
+			,q.question_score
+			,q.question_reg_id
+			,q.question_reg_datetime
+		FROM
+			question AS q;
+	</select>
+</mapper>

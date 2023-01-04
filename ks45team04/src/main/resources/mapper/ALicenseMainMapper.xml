@@ -9,7 +9,33 @@
 		<result property="lmcRegId" 		column="lmc_reg_id"/>
 		<result property="lmcName" 			column="lmc_name"/>
 		<result property="lmcRegDatetime" 	column="lmc_reg_datetime"/>
+	
+	
 	</resultMap>
+		<update id="modifyLicenseMain" parameterType="LicenseMain">
+		/* 특정 자격증 대분류 수정*/
+		UPDATE 
+			license_main_category
+		SET 
+			lmc_name = #{lmcName}
+		WHERE 
+			lmc_code= #{lmcCode};
+		</update>
+		
+		
+	<select id="getLicenseMainByCode" parameterType="String" resultMap="licenseMainResultMap">
+		/* 특정 자격증 대분류 정보 조회 */
+		SELECT
+			 lmc.lmc_code
+			,lmc.lmc_reg_id
+			,lmc.lmc_name
+			,lmc.lmc_reg_datetime
+		FROM
+			license_main_category AS lmc
+		WHERE
+			lmc.lmc_code = #{lmcCode};
+	</select>
+
 
 	<select id="getIdCheck" parameterType="String" resultType="boolean">
 		/* 관리자 아이디 인증 */

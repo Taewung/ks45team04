@@ -22,7 +22,7 @@ var calendar = $('#calendar').fullCalendar({
                               },
   eventLimitClick           : 'week', //popover
   navLinks                  : true,
-  defaultDate               : moment('2019-05'), //실제 사용시 현재 날짜로 수정
+  defaultDate               : moment(), //실제 사용시 현재 날짜로 수정
   timeFormat                : 'HH:mm',
   defaultTimedEventDuration : '01:00:00',
   editable                  : true,
@@ -97,7 +97,7 @@ var calendar = $('#calendar').fullCalendar({
       container: 'body'
     });
 
-    return filtering(event);
+    return true;
 
   },
 
@@ -107,7 +107,7 @@ var calendar = $('#calendar').fullCalendar({
   events: function (start, end, timezone, callback) {
     $.ajax({
       type: "get",
-      url: "data.json",
+      url: "/fullcal/data.json",
       data: {
         // 화면이 바뀌면 Date 객체인 start, end 가 들어옴
         //startDate : moment(start).format('YYYY-MM-DD'),
@@ -264,6 +264,7 @@ function getDisplayEventDate(event) {
   return displayEventDate;
 }
 
+/* 필터 기능 필요시 eventRender return 부분에 함수 호출*/ 
 function filtering(event) {
   var show_username = true;
   var show_type = true;

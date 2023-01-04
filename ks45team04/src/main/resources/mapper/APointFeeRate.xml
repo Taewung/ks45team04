@@ -12,7 +12,31 @@
 		<result property="pointFeeRateDatetime" 	column="point_fee_rate_datetime"/>
 	</resultMap>
 	
-	<select id="pointFeeRateList" resultMap="pointFeeRateResultMap">
+	<select id="getPointFeeRateIdCheck" parameterType="String" resultType="boolean">
+		/* 관리자 아이디 인증 */
+			SELECT
+				if(COUNT(point_fee_rate_id) > 0, 1, 0)
+			FROM
+				point_fee_rate
+			WHERE
+				point_fee_rate_id = #{pointFeeRateId};
+	</select>
+	
+	<insert id="addPointFeeRate" parameterType="PointFeeRate">
+		/* 포인트 수수료율 등록 */
+		INSERT INTO point_fee_rate
+		(
+			point_fee_rate_code, 
+			point_fee_rate_contents, 
+			point_fee_rate, 
+			point_fee_rate_id, 
+			point_fee_rate_datetime
+		)VALUES(
+			#{pointFeeRateCode},#{pointFeeRateContents}, #{pointFeeRate}, #{pointFeeRateId}, NOW()
+		);
+	</insert>
+	
+		<select id="pointFeeRateList" resultMap="pointFeeRateResultMap">
 		/*포인트 수수료율 내역 조회*/
 		SELECT
 			point_fee_rate_code,
@@ -23,14 +47,4 @@
 		FROM
 			point_fee_rate;
 	</select>
-	
-	<insert id="addPointFeeRate" parameterType="PointFeeRate">
-		/* 포인트 수수료율 등록 */
-		INSERT INTO point_fee_rate
-				(
-					refund_code, point_fee_rate_contents, point_fee_rate, point_fee_rate_id
-				)VALUES(
-					#{refund_code}, #{point_fee_rate_contents}, #{point_fee_rate}, #{point_fee_rate_id}
-				);
-	</insert>
 </mapper>

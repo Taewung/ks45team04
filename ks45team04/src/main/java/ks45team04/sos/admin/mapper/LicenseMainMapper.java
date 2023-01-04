@@ -10,6 +10,12 @@ import ks45team04.sos.admin.dto.LicenseMain;
 public interface LicenseMainMapper {
 	
 
+	// 특정 자격증 대분류 수정
+	public int modifyLicenseMain(LicenseMain licenseMain);
+	
+	// 특정 자격증 대분류 조회
+	public LicenseMain getLicenseMainByCode(String lmcCode);
+	
 	// 관리자 아이디 인증
 	public boolean getIdCheck(String inputId);
 	

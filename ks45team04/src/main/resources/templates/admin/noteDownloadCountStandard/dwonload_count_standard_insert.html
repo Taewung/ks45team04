@@ -6,13 +6,141 @@
 	<!-- script start -->
 	<th:block layout:fragment="customScript">
 	<script>
-	</script>
+			$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+				function validateValue(checkValue) {
+					if(    typeof checkValue == 'undefined' 
+							|| checkValue == null 
+							|| checkValue == ''					){
+						return true;
+					}
+					return false;
+					
+				}
+			
+			// 관리자 인증
+				$('#downloadCountWriter').on('input', function(){
+					$('#addDownloadCountStandardForm input').not('#downloadCountWriter').prop('disabled', true);
+				  	$('#addDownloadCountStandardForm select').prop('disabled', true);
+				  	$('#addDownloadCountStandardForm button').not('#checkBtn').prop('disabled', true);
+				});
+			
+				$('#checkBtn').click(function(){
+					let lmcRegId = $('#downloadCountWriter').val();
+					
+					if(validateValue(lmcRegId)){
+						alert('관리자 인증을 해주세요');
+						$('#downloadCountWriter').focus();
+						return false;					
+					}					
+
+					let request = $.ajax({
+						  url: '/dcsIdCheck',
+						  method: 'GET',
+						  data: { 'inputId' : lmcRegId },
+						  dataType: 'json'
+					});
+					
+					//성공 
+					request.done(function( isChecked ) {
+						console.log(isChecked, '데이터타입 확인');
+					  	  
+						if(isChecked){
+							alert('인증 완료')
+						  	$('#addDownloadCountStandardForm input').not('#downloadCountWriter').prop('disabled', false);
+						  	$('#addDownloadCountStandardForm select').prop('disabled', false);
+						  	$('#addDownloadCountStandardForm button').not('#checkBtn').prop('disabled', false);
+								
+						}else{
+					  	  	alert('관리자 아이디가 일치하지 않습니다.');
+					  	  	$('#downloadCountWriter').val('');
+						  	$('#addDownloadCountStandardForm input').not('#downloadCountWriter').prop('disabled', true);
+						  	$('#addDownloadCountStandardForm select').prop('disabled', true);
+						  	$('#addDownloadCountStandardForm button').not('#checkBtn').prop('disabled', true);
+							$('#downloadCountWriter').focus();
+						}
+					});
+					
+					//실패 
+					request.fail(function( jqXHR, textStatus ) {
+					  	  console.log('Request failed: ' + textStatus );
+					});
+				});
+				
+				
+		
+				/* 유효성검사를 구현하시오. (#submitBtn 를 클릭 시) */
+				$('#submitBtn').click(function(){
+					let isSubmit = true;
+					
+					$('#addDownloadCountStandardForm input').each(function(idx, item){
+						let checkValue = $(item).val();
+						let labelValue = $(item).parent('.mb-3').find('label').text();
+						if(validateValue(checkValue)){
+							
+							alert(`${labelValue}를 입력해주세요`);
+							$(item).focus();
+							isSubmit = false;
+							return false;
+						}
+						
+					});   
+					
+
+
+					if(isSubmit) $('#addDownloadCountStandardForm').submit();
+				});
+			});
+			
+
+			
+		</script>
 	</th:block> 
 	<!-- script end -->
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-dwonload_count_standard_insert.html
+	<h1>다운로드 횟수 기준 등록</h1>
+		<form id="addDownloadCountStandardForm" th:action="@{/adddownloadCountStandard}" name="myform" method="post">
+              <div class="row mt-4 mt-lg-5">
+                  <div class="col-xxl-8">
+                      <div class="row">
+                      </div>
+                      <div class="row">
+                      </div><br>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="downloadCountWriter" class="form-label"><h4>관리자 아이디</h4></label>
+                                  <button type="button" id="checkBtn" class="btn rounded-pill pxp-section-cta-o ms-3">관리자 인증</button>
+                                  <input type="text" id="downloadCountWriter" class="form-control" name="downloadCountWriter" placeholder="관리자 아이디">
+                              </div>
+                          </div>
+                      </div><br><br>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="dscCode" class="form-label"><h6>다운로드 횟수 기준 코드</h6></label><h12>&nbsp;&nbsp;예시) down000</h12>
+                                  <input type="text" id="dscCode" class="form-control" name="dscCode" placeholder="다운로드 횟수 기준 코드" disabled="disabled">
+                              </div>
+                          </div>
+                      </div>                     
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="downloadCount" class="form-label"><h6>다운로드 가능횟수</h6></label>
+                                  <input type="text" id="downloadCount" class="form-control" name="downloadCount" placeholder="다운로드 가능횟수" disabled="disabled">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
+              <div class="mt-4 mt-lg-5">
+                  <button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>&nbsp;&nbsp;
+                  <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
+                  
+              </div>
+          </form>
 	</th:block>
 	<!-- customContents end -->
 	

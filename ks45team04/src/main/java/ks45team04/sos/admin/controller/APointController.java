@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ks45team04.sos.admin.dto.PointFeeRate;
 import ks45team04.sos.admin.dto.PointRefundApproval;
@@ -65,6 +67,27 @@ public class APointController {
 		return "admin/point/point_save_standard_delete";
 	}
 
+	
+	//포인트 적립 기준 등록 관리자 인증
+	@GetMapping("/pointSaveStandardIdCheck")
+	@ResponseBody
+	public boolean pointSaveStandardIdCheck(@RequestParam(value="inputId") String inputId){
+		
+		boolean isChecked = pointSaveStandardMapper.getPointSaveStandardIdCheck(inputId);
+		
+		return isChecked;
+	}
+	
+	//포인트 수수율 등록 관리자 인증
+	@GetMapping("/pointFeeRateIdCheck")
+	@ResponseBody
+	public boolean pointFeeRateIdCheck(@RequestParam(value="inputId") String inputId){
+	
+		boolean isChecked = pointFeeRateMapper.getPointFeeRateIdCheck(inputId);
+		
+		return isChecked;
+	}
+
 	// 포인트 적립 기준 등록 처리
 	@PostMapping("/addpointSaveStandard")
 	public String addPointSaveStandard(PointSaveStandard PointSaveStandard) {
@@ -73,6 +96,7 @@ public class APointController {
 		
 		return "redirect:/pointSaveStandardList";
 	}
+	
 	
 	// 포인트 적립 기준 등록 화면
 	@GetMapping("/addPointSaveStandard")
