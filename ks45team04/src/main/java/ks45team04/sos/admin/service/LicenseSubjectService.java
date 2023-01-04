@@ -18,7 +18,21 @@ private final LicenseSubjectMapper licenSubjectMapper;
 		this.licenSubjectMapper = licenSubjectMapper;
 	}
 
-	// 자격증 과목 목록 조회
+	/**
+	 * 자격증 대분류 등록
+	 * @param LicenseSubject
+	 * @return int
+	 */
+	public int addLicenseSubject(LicenseSubject licenseSubject) {
+		
+		return licenSubjectMapper.addLicenseSubject(licenseSubject);
+	}
+	
+	
+	/**
+	 * 자격증 대분류 목록 조회
+	 * @return List<LicenseSubject>
+	 */
 	public List<LicenseSubject> LicenseSubjectList(){
 		
 		List<LicenseSubject> licenseSubjectList = licenSubjectMapper.LicenseSubjectList();

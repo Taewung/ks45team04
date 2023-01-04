@@ -14,7 +14,7 @@
 		<result property="saveUseDatetime" 		column="save_use_datetime"/>
 	</resultMap>
 	
-	<select id="PointSaveUseList" resultMap="pointSaveUseResultMap">
+	<select id="pointSaveUseList" resultMap="pointSaveUseResultMap">
 		/* 포인트 적립/사용 내역 조회*/
 		SELECT 
 			point_save_use_code,

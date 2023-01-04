@@ -13,10 +13,35 @@
 		<result property="liRegId" 			column="li_reg_id"/>
 		<result property="liRegDatetime" 	column="li_reg_datetime"/>
 	</resultMap>
+		<select id="getIdCheck" parameterType="String" resultType="boolean">
+		/* 관리자 아이디 인증 */
+		SELECT
+			if(COUNT(li.li_reg_id) > 0, 1, 0)
+		FROM
+			license_info AS li
+		WHERE
+			li.li_reg_id = #{liRegId};
+	</select>
 	
-	<select id="LicenseInfoList" resultMap="licenseInfoResultMap">
+	
+	<insert id="addLicenseInfo" parameterType="LicenseInfo">
+		/* 자격증 정보 등록 */
+		INSERT INTO license_info
+		( li_code
+		 ,lsc_code
+		 ,li_name
+		 ,li_overview
+		 ,li_qualification
+		 ,li_reg_id
+		 ,li_reg_datetime) 
+		VALUES 
+		(#{liCode}, #{lscCode}, #{liName},#{liOverview}, #{liQualification}, #{liRegId}, 
+			CURDATE());
 			
-			
+	</insert>
+	
+	<select id="LicenseInfoList" resultMap="licenseInfoResultMap">	
+	/* 자격증 정보 목록 조회*/
 		SELECT
 			*
 		FROM

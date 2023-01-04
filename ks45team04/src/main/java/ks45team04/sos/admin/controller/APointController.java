@@ -5,30 +5,41 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import ks45team04.sos.admin.dto.PointFeeRate;
+import ks45team04.sos.admin.dto.PointSaveStandard;
 import ks45team04.sos.admin.dto.PointSaveUse;
+import ks45team04.sos.admin.mapper.PointFeeRateMapper;
+import ks45team04.sos.admin.mapper.PointSaveStandardMapper;
 import ks45team04.sos.admin.mapper.PointSaveUseMapper;
+import ks45team04.sos.admin.service.PointFeeRateService;
+import ks45team04.sos.admin.service.PointSaveStandardService;
 import ks45team04.sos.admin.service.PointSaveUseService;
 
 @Controller
 public class APointController {
 
 	private final PointSaveUseService pointSaveUseService;
-
-	public APointController(PointSaveUseService pointSaveUseService) {
+	private final PointSaveStandardService pointSaveStandardService;
+	private final PointSaveStandardMapper pointSaveStandardMapper;
+	private final PointFeeRateService pointFeeRateService;
+	
+	public APointController(PointSaveUseService pointSaveUseService, 
+							PointSaveUseMapper pointSaveUseMapper , 
+							PointSaveStandardService pointSaveStandardService,
+							PointSaveStandardMapper pointSaveStandardMapper,
+							PointFeeRateService pointFeeRateService,
+							PointFeeRateMapper pointFeeRateMapper) {
+		
 		this.pointSaveUseService = pointSaveUseService;
-
+		this.pointSaveStandardService = pointSaveStandardService;
+		this.pointSaveStandardMapper = pointSaveStandardMapper;
+		this.pointFeeRateService = pointFeeRateService;
 	}
 
-	// 포인트 적립 기준 등록
-	@GetMapping("/addPointSaveStandard")
-	public String addPointSaveStandard(Model model) {
-		model.addAttribute("title", "포인트 적립 기준 등록");
 
-		return "admin/point/point_save_standard_insert";
-	}
-
+	
 	// 포인트 적립 기준 수정
 	@GetMapping("/modifyPointSaveStandard")
 	public String modifyPointSaveStandard(Model model) {
@@ -45,17 +56,56 @@ public class APointController {
 		return "admin/point/point_save_standard_delete";
 	}
 
+	// 포인트 적립 기준 등록 처리
+	@PostMapping("/addpointSaveStandard")
+	public String addPointSaveStandard(PointSaveStandard PointSaveStandard) {
+		System.out.println(PointSaveStandard);
+		pointSaveStandardService.addPointSaveStandard(PointSaveStandard);
+		
+		return "redirect:/pointSaveStandardList";
+	}
+	
+	
+	// 포인트 적립 기준 등록 화면
+	@GetMapping("/addPointSaveStandard")
+	public String addPointSaveStandard(Model model) {
+		
+		List<PointSaveStandard> pointSaveStandardList = pointSaveStandardMapper.pointSaveStandardList();
+		
+		model.addAttribute("title", "포인트 적립 기준 등록");
+		model.addAttribute("pointSaveStandardList", pointSaveStandardList);
+		
+		return "admin/point/point_save_standard_insert";
+	}
+	
 	// 포인트 적립 기준 조회
 	@GetMapping("pointSaveStandardList")
 	public String pointSaveStandardList(Model model) {
-		model.addAttribute("title", "포인트 적립 기준 조회");
+		
+		List<PointSaveStandard> pointSaveStandardList = pointSaveStandardService.PointSaveStandardList();
 
+		model.addAttribute("title", "포인트 적립 기준 조회");
+		model.addAttribute("pointSaveStandardList", pointSaveStandardList);
+		
 		return "admin/point/point_save_standard_list";
+	}
+	
+	// 포인트 수수료율 조회
+	@GetMapping("pointFeeRateList")
+	public String pointFeeRateList(Model model) {
+			
+		List<PointFeeRate> pointFeeRateList = pointFeeRateService.PointFeeRateList();
+			
+		model.addAttribute("title", "포인트 수수료율 조회");
+		model.addAttribute("pointFeeRateList", pointFeeRateList);
+
+		return "admin/point/point_fee_rate_list";
 	}
 
 	// 포인트 수수료율 등록
 	@GetMapping("/addPointfeeRate")
 	public String addPointfeeRate(Model model) {
+		
 		model.addAttribute("title", "포인트 수수료율 등록");
 
 		return "admin/point/point_fee_rate_insert";
@@ -77,14 +127,7 @@ public class APointController {
 		return "admin/point/point_fee_rate_delete";
 	}
 
-	// 포인트 수수료율 조회
-	@GetMapping("pointFeeRateList")
-	public String pointFeeRateList(Model model) {
-		model.addAttribute("title", "포인트 수수료율 조회");
-
-		return "admin/point/point_fee_rate_list";
-	}
-
+	
 	// 포인트 적립 등록
 	@GetMapping("/pointSaveUsePointAdd")
 	public String pointSaveUsePointAdd(Model model) {

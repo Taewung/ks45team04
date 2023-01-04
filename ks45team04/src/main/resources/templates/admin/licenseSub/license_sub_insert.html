@@ -95,6 +95,7 @@
 		</script>
 	</th:block> 
 	<th:block layout:fragment="customContents">
+		<h1>자격증중분류 등록</h1>
 		<form id="addLicenseSubForm" th:action="@{/addlicenseSub}" name="myform" method="post">
               <div class="row mt-4 mt-lg-5">
                   <div class="col-xxl-8">
@@ -105,7 +106,7 @@
                       <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3">
-                                  <label for="lscRegId" class="form-label"><h6>관리자 아이디</h6></label>
+                                  <label for="lscRegId" class="form-label"><h4>관리자 아이디</h4></label>
                                   <button type="button" id="checkBtn" class="btn rounded-pill pxp-section-cta-o ms-3">관리자 인증</button>
                                   <input type="text" id="lscRegId" class="form-control" name="lscRegId" placeholder="관리자 아이디">
                               </div>
@@ -114,7 +115,7 @@
                       <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3">
-                                  <label for="lscCode" class="form-label"><h4>자격증 중분류코드</h4></label><h12>&nbsp;&nbsp;예시)lsc000</h12>
+                                  <label for="lscCode" class="form-label"><h6>자격증 중분류코드</h6></label><h12>&nbsp;&nbsp;예시)lsc000</h12>
                                   <input type="text" id="lscCode" class="form-control" name="lscCode" placeholder="자격증 중분류코드" disabled="disabled">
                               </div>
                           </div>
@@ -122,7 +123,7 @@
                       <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3">
-                                  <label for="lmcCode" class="form-label"><h4>자격증 대분류코드</h4></label><h12>&nbsp;&nbsp;예시)lmc000</h12>
+                                  <label for="lmcCode" class="form-label"><h6>자격증 대분류코드</h6></label><h12>&nbsp;&nbsp;예시)lmc000</h12>
                                   <input type="text" id="lmcCode" class="form-control" name="lmcCode" placeholder="자격증 대분류코드" disabled="disabled">
                               </div>
                           </div>
@@ -130,7 +131,7 @@
                       <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3">
-                                  <label for="lmcName" class="form-label"><h4>자격증 대분류명</h4></label>
+                                  <label for="lmcName" class="form-label"><h6>자격증 대분류명</h6></label>
                                   <input type="text" id="lmcName" class="form-control" name="lmcName" placeholder="자격증 대분류명" disabled="disabled">
                               </div>
                           </div>
@@ -138,7 +139,7 @@
                       <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3">
-                                  <label for="lscName" class="form-label"><h4>자격증 중분류명</h4></label>
+                                  <label for="lscName" class="form-label"><h6>자격증 중분류명</h6></label>
                                   <input type="text" id="lscName" class="form-control" name="lscName" placeholder="자격증 중분류명" disabled="disabled">
                               </div>
                           </div>

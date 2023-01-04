@@ -1,74 +1,55 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  class="pxp-root" >
-<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  layout:decorate="~{member/layout/myPageDefault}">
 
-    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
-    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-    <body style="background-color: var(--pxpSecondaryColorLight);">
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	<script>
+	</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+         <h1>회원 탈퇴</h1>
+         <p class="pxp-text-light">Remove Member</p>
 
-        <div class="pxp-dashboard-content">
-        
-        <!-- begin aside -->
-		<div th:replace="~{member/fragments/myPageAside :: asideFragment}"></div>
-		<!-- end aside -->
-		
-        <!-- begin header -->
-		<div th:replace="~{member/fragments/myPageHeader :: headerFragment}"></div>
-		<!-- end header -->
-		
-		<!-- begin contents --> 
-            <div class="pxp-dashboard-content-details">
-
-
-
-           <div class="pxp-dashboard-content-details">
-                <h1>회원 탈퇴</h1>
-                <p class="pxp-text-light">비밀번호를 인증해주세요.</p>
-
-                <form>
-                    <div class="row mt-4 mt-lg-5">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="pxp-company-old-password" class="form-label">PW</label>
-                                <input type="password" id="pxp-company-old-password" class="form-control" placeholder="PW를 입력해주세요">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-4 mt-lg-2">
-                        <a href="/main" class="btn rounded-pill pxp-section-cta"  onclick="if(!confirm('정말 탈퇴하시겠습니까?')){return false;}">탈퇴하기</a>
-                    </div>
-                    </div>
-                </form>
-            </div>
-
-             
-
-            </div>
-        <!-- end contents -->     
-            
-        <!-- begin footer -->
-			<div th:replace="~{member/fragments/myPageFooter :: footerFragment}"></div>
-		<!-- end footer -->
-        </div>
-        <script src="js/jquery-3.4.1.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/nav.js"></script>
-        <script src="js/Chart.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+         <form>
+             <div class="row mt-4 mt-lg-5" >
+                 <div class="col-md-6">
+                     <div class="mb-3">
+                         <label for="pxp-company-old-password" class="form-label">PW</label>
+                         <input type="password" id="pxp-company-old-password" class="form-control" placeholder="PW를 입력해주세요">
+                     </div>
+                     
+                 <div class="row mt-10 mt-lg-3" style="line-height: 1">
+                 <div class="col-xxl-10">
+                     <div class="mb-3">                        
+                     <label for="pxp-company-job-category" class="form-label">탈퇴 사유</label>
+                         <select id="pxp-company-job-category" class="form-select">
+                             <option>서비스가 마음에 들지 않음</option>
+                             <option>자격증 합격</option>
+                             <option>기타</option>
+                         </select>
+                         </div>
+                         </div>
+                                                  
+                 </div>
+             </div>
+             <br>
+             <div class="mt-4 mt-lg-2">
+                 <a href="/main" class="btn rounded-pill pxp-section-cta"  onclick="if(!confirm('정말 탈퇴하시겠습니까?')){return false;}">탈퇴하기</a>
+             </div>
+             </div>
+         </form>
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
 </html>
+

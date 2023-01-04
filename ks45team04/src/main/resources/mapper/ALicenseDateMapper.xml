@@ -15,8 +15,36 @@
 		<result property="ldRegDatetime" 		column="ld_reg_datetime"/>
 	</resultMap>
 	
+	
+	<select id="getIdCheck" parameterType="String" resultType="boolean">
+		/* 관리자 아이디 인증 */
+		SELECT
+			if(COUNT(ld.ld_reg_id) > 0, 1, 0)
+		FROM
+			license_date AS ld
+		WHERE
+			ld.ld_reg_id = #{ldRegId};
+	</select>
+	
+
+	<insert id="addLicenseDate" parameterType="LicenseDate">
+		/* 자격증 일정 등록 */
+			INSERT INTO license_date
+			( ld_code
+			 ,li_code
+			 ,ld_period
+			 ,ld_date
+			 ,ld_acceptance_date
+			 ,ld_cost
+			 ,ld_reg_id
+			 ,ld_reg_datetime) 
+			VALUES 
+			(#{ldCode}, #{liCode}, #{ldPeriod}, #{ldDate}, #{ldAcceptanceDate}, #{ldCost}, #{ldRegId}, CURDATE());
+	</insert>	
+
+	
 	<select id="LicenseDateList" resultMap="licenseDateResultMap">
-			
+		/* 자격증 일정 목록 조회*/
 		SELECT
 				*
 		FROM
