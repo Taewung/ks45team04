@@ -12,7 +12,51 @@
 		<result property="liPScoreRegId" 			column="li_p_score_reg_id"/>		
 		<result property="liPScoreRegDateTime" 		column="li_p_score_reg_datetime"/>	
 	</resultMap>
+	<resultMap type="LicenseSub" id="licenseSubResultMap">
+		<id property="lscCode" 				column="lsc_code"/>
+		<result property="lmcCode" 			column="lmc_code"/>
+		<result property="lmcName" 			column="lmc_name"/>
+		<result property="lscName" 			column="lsc_name"/>
+		<result property="lscRegId" 		column="lsc_reg_id"/>
+		<result property="lscRegDatetime" 	column="lsc_reg_datetime"/>
+	</resultMap>
+		<resultMap type="LicenseMain" id="licenseMainResultMap">
+		<id property="lmcCode" 				column="lmc_code"/>
+		<result property="lmcRegId" 		column="lmc_reg_id"/>
+		<result property="lmcName" 			column="lmc_name"/>
+		<result property="lmcRegDatetime" 	column="lmc_reg_datetime"/>
+	</resultMap>
 	
+	<insert id="addLicensePassScore" parameterType="LicensePassScore">
+		/* 자격증별 합격기준 점수 등록 */
+		INSERT INTO license_pass_score
+		(li_p_score_code, li_code, li_name, li_p_standard_score, li_p_score_reg_id, li_p_score_reg_datetime)
+		VALUES
+		(sf_new_li_pass_score_code(), #{liCode}, #{liName}, #{liPStandardScore}, 'id001', CURDATE());
+	</insert>
+	
+	<select id="getLicenseSubList" resultMap="licenseSubResultMap" parameterType="String">
+		/* 자격증 대분류별 중분류 목록 조회*/	
+		SELECT 
+			 l.lmc_code
+			,l.lmc_name
+			,l.lsc_code
+			,l.lsc_name
+		FROM
+			license_sub_category AS l
+		WHERE 
+			l.lmc_code = #{lmcCode};		
+	</select>
+	<select id="getLicenseMainList" resultMap="licenseMainResultMap">
+			/* 자격증 대분류 목록 조회 */
+			SELECT
+				lmc.lmc_code,
+				lmc.lmc_reg_id,
+				lmc.lmc_name,
+				lmc.lmc_reg_datetime
+			FROM
+				license_main_category AS lmc;			
+	</select>	
 	<select id="getLicensePassScoreList" resultMap="licensePassScoreResultMap">
 		/* 자격증별  합격기준 점수 조회 */
 		SELECT
