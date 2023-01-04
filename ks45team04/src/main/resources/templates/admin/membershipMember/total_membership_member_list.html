@@ -12,16 +12,17 @@
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-		<h1>멤버십</h1>
-                <p class="pxp-text-light">Membership List</p>
+		<h1>멤버십 회원 목록</h1>
+                <p class="pxp-text-light">MembershipMember List</p>
                 <div class="mt-4 mt-lg-5">
                     <div class="row justify-content-between align-content-center">
                         <div class="col-auto order-2 order-sm-1">
                             <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
                                 <div class="pxp-company-dashboard-jobs-search mb-3">
                                 <select class="form-select">
-                                    <option>멤버십명</option>
+                                    <option>멤버십아이디</option>
                                     <option>기간</option>
+                                    <option>상태</option>
                                </select>
                                 	<div class="col-auto order-1 order-sm-2">
                                 		<div class="pxp-company-dashboard-jobs-search-search-form">
@@ -37,15 +38,6 @@
                         </div>
                         
                     </div>
-					<div class="pxp-dashboard-table-options">
-                        <ul class="list-unstyled">
-                        <!-- 등록버튼 start -->
-                            <a href="/addMembership">
-                            	<li><button title="Add"><span class="fa fa-plus"></span></button></li>
-                            </a>
-                        <!-- 등록버튼 end -->                                              
-                        </ul>
-                    </div>
                     </div>
                     <!-- 검색 end -->   
                     <!-- 목록 start -->                   
@@ -54,45 +46,35 @@
                             <thead>                    
                                 <tr>
                                     <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
-                                    <th style="width: 20%;">멤버십명</th>
-                                    <th style="width: 15%;">기간</th>
-                                    <th style="width: 15%;">가격</th>
-                                    <th style="width: 15%;">등록자</th>
-                                    <th style="width: 20%;">등록일시</th>
+                                    <th style="width: 10%;">멤버십아이디</th>
+                                    <th style="width: 10%;">멤버십기간</th>
+                                    <th style="width: 20%;">멤버십시작일시</th>
+                                    <th style="width: 20%;">멤버십만료일시</th>
+                                    <th style="width: 15%;">멤버십상태</th>
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead> 
                             <tbody>
-        				<th:block th:if="${not #lists.isEmpty(membershipList)}" th:each="ms : ${membershipList}">
+                        
+        				<th:block th:if="${not #lists.isEmpty(totalMembershipMemberList)}" th:each="mm : ${totalMembershipMemberList}">
                                 <tr>
                                     <td><input type="checkbox" class="form-check-input"></td>
                                     <td>
-                                        <a  th:href="@{/membershipList(membershipCode=${ms.getMembershipCode})}"  class="pxp-company-dashboard-job-title" 
-                                        	th:text="${ms.getMembershipCode}">
+                                        <a  th:href="@{/totalMembershipMemberList(mmId=${mm.getMmId})}"  class="pxp-company-dashboard-job-title" 
+                                        	th:text="${mm.mmId}">
                                         </a>
                                     </td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${ms.membershipPeriod}"></div> </td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${ms.membershipAmount}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${ms.membershipRegManager}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${ms.membershipRegDatetime}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${mm.mmPeriod}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${mm.mmStartDatetime}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${mm.mmEndDatetime}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${mm.mmState}"></div></td>
                                     <td>
                                     </td>
                                  </tr>
                                 </th:block>    
                             </tbody>
                         </table>                                                                 
-                                        <div class="pxp-dashboard-table-options">
-                                            <ul class="list-unstyled">
-                                            <!-- 수정버튼 start -->
-                                                <a href="/#">
-                                                	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
-                                                </a>
-                                            <!-- 수정버튼 end -->
-                                            <!-- 삭제버튼 start -->
-                                                <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
-                                            <!-- 삭제버튼 end -->                                               
-                                            </ul>
-                                        </div>
+ 
 						<!-- page 넘김 start -->
                         <div class="row mt-4 mt-lg-5 justify-content-center align-items-center">
                             <div class="col-auto">
