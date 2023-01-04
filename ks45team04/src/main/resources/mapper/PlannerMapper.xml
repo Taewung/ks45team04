@@ -8,7 +8,7 @@
 		<id property="toDoListCode" 					column="to_do_list_code"/>
 		<result property="memId" 						column="mem_id"/>
 		<result property="liCode" 						column="li_code"/>
-		<result property="lsCode" 						column="ls_code"/>
+		<result property="liName" 						column="li_name"/>
 		<result property="toDoListTitle" 				column="to_do_list_title"/>
 		<result property="toDoListDay" 				column="to_do_list_day"/>
 		<result property="toDoListRegTime" 			column="to_do_list_reg_time"/>

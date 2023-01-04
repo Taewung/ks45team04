@@ -1,16 +1,7 @@
 package ks45team04.sos.member.dto;
 
 public class ToDoList {
-	 private String toDoListCode;
-	 private String memId;
-	 private String liCode;
-	 private String lsCode;
-	 private String toDoListTitle;
-	 private String toDoListDay;
-	 private String toDoListRegTime;
-	 private String toDayStudyTime;
-	 
-	public String getToDoListCode() {
+	 public String getToDoListCode() {
 		return toDoListCode;
 	}
 	public void setToDoListCode(String toDoListCode) {
@@ -28,11 +19,11 @@ public class ToDoList {
 	public void setLiCode(String liCode) {
 		this.liCode = liCode;
 	}
-	public String getLsCode() {
-		return lsCode;
+	public String getLiName() {
+		return liName;
 	}
-	public void setLsCode(String lsCode) {
-		this.lsCode = lsCode;
+	public void setLiName(String liName) {
+		this.liName = liName;
 	}
 	public String getToDoListTitle() {
 		return toDoListTitle;
@@ -58,6 +49,14 @@ public class ToDoList {
 	public void setToDayStudyTime(String toDayStudyTime) {
 		this.toDayStudyTime = toDayStudyTime;
 	}
+	private String toDoListCode;
+	 private String memId;
+	 private String liCode;
+	 private String liName;
+	 private String toDoListTitle;
+	 private String toDoListDay;
+	 private String toDoListRegTime;
+	 private String toDayStudyTime;
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -67,8 +66,8 @@ public class ToDoList {
 		builder.append(memId);
 		builder.append(", liCode=");
 		builder.append(liCode);
-		builder.append(", lsCode=");
-		builder.append(lsCode);
+		builder.append(", liName=");
+		builder.append(liName);
 		builder.append(", toDoListTitle=");
 		builder.append(toDoListTitle);
 		builder.append(", toDoListDay=");
@@ -80,6 +79,8 @@ public class ToDoList {
 		builder.append("]");
 		return builder.toString();
 	}
+	 
+	
 	
 	 
 }
