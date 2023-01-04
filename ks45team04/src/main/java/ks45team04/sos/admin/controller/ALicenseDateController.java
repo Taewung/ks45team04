@@ -59,7 +59,7 @@ private final LicenseDateMapper licenseDateMapper;
 			}
 			
 			// 관리자 아이디 인증
-			@GetMapping
+			@GetMapping("/ldCheck")
 			@ResponseBody
 			public boolean ldCodeCheck(@RequestParam(value="inputId") String inputId) {
 				

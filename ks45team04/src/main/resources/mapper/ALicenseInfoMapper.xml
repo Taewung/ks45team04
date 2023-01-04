@@ -13,6 +13,36 @@
 		<result property="liRegId" 			column="li_reg_id"/>
 		<result property="liRegDatetime" 	column="li_reg_datetime"/>
 	</resultMap>
+		
+		<update id="modifyLicenseInfo" parameterType="LicenseInfo">
+		/* 특정 자격증 수정*/
+		UPDATE 
+			license_info
+		SET 
+			 li_name = #{liName}
+			,li_overview = #{liOverview}
+			,li_qualification = #{liQualification}
+		WHERE 
+			li_code= #{liCode};
+		</update>
+		
+		<select id="getLicenseInfoByCode" parameterType="String" resultMap="licenseInfoResultMap">
+			/* 특정 자격증 정보 조회 */
+			SELECT
+				 li.li_code
+				,li.lsc_code
+				,li.li_name
+				,li.li_overview
+				,li_qualification
+				,li_reg_id
+				,li_reg_datetime
+			FROM
+				license_info AS li
+			WHERE
+				li.li_code = #{liCode};
+		</select>
+
+		
 		<select id="getIdCheck" parameterType="String" resultType="boolean">
 		/* 관리자 아이디 인증 */
 		SELECT

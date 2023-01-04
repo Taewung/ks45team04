@@ -18,7 +18,7 @@ public class LicenseDateService {
 	
 	/**
 	 * 자격증 일정 등록
-	* @param LicenseDate
+	 * @param LicenseDate
 	 * @return int
 	 */
 	public int addLicenseDate(LicenseDate licenseDate) {

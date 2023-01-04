@@ -47,14 +47,21 @@ private final LicenseInfoMapper licenseInfoMapper;
 		//자격증 정보 수정 처리
 		@PostMapping("/modifylicenseInfo")
 		public String modifylicenseInfo(LicenseInfo LicenseInfo) {
+			
+			licenseInfoService.modifyLicenseInfo(LicenseInfo);
 				
-			return "";
+			return "redirect:/licenseInofoList";
 		}
 			
 		// 자격증 정보 수정 화면
 		@GetMapping("/modifylicenseInfo")
-		public String modifylicenseInfo(Model model) {
+		public String modifylicenseInfo(@RequestParam(value="liCode") String liCode
+										,Model model) {
+			LicenseInfo licenseInfo = licenseInfoService.getLicenseInfoByCode(liCode);
+			
+			
 			model.addAttribute("title", "자격증 정보 수정");
+			model.addAttribute("licenseInfo", licenseInfo);
 				
 			return "admin/licenseInfo/license_info_modify";
 		}

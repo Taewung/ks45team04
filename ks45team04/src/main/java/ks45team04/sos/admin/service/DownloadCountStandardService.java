@@ -17,8 +17,24 @@ private final DownloadCountStandardMapper downloadCountStandardMapper;
 	}
 	
 	
-	// 노트 다운로드 횟수 기준 조회
-public List<DownloadCountStandard> DownloadCountStandardList(){
+	/**
+	 * 노트 다운로드 횟수 기준 등록
+	 * @Param DownloadCountStandard
+	 * @return int
+	 */
+	public int addDownloadCountStandard(DownloadCountStandard downloadCountStandard) {
+		
+		return downloadCountStandardMapper.addDownloadCountStandard(downloadCountStandard);
+	}
+	
+	
+
+	
+	/**
+	 * 노트 다운로드 횟수 기준 목록 조회
+	 * @return List<DownloadCountStandard>
+	 */
+	public List<DownloadCountStandard> DownloadCountStandardList(){
 		
 		List<DownloadCountStandard> downloadCountStandardList = downloadCountStandardMapper.DownloadCountStandardList();
 		
