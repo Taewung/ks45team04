@@ -20,9 +20,8 @@ private final LicensePassScoreMapper licensePassScoreMapper;
 	
 	// 자격증별 합격기준점수 목록 조회
 	public List<LicensePassScore> getLicensePassScoreList(){
-		
-		List<LicensePassScore> licensePassScoreList = licensePassScoreMapper.getLicensePassScoreList();
-		
+	
+		List<LicensePassScore> licensePassScoreList = licensePassScoreMapper.getLicensePassScoreList();	
 		return licensePassScoreList;
 	}
 
