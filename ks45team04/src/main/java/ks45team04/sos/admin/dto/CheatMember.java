@@ -14,7 +14,7 @@ public class CheatMember {
 	private String cmReportJudgeDatetime;
 	private String cmStopDate;
 	private String cmStartDatetime;
-	private String cmendDatetime;
+	private String cmEndDatetime;
 	public String getCmReportCode() {
 		return cmReportCode;
 	}
@@ -87,11 +87,11 @@ public class CheatMember {
 	public void setCmStartDatetime(String cmStartDatetime) {
 		this.cmStartDatetime = cmStartDatetime;
 	}
-	public String getCmendDatetime() {
-		return cmendDatetime;
+	public String getCmEndDatetime() {
+		return cmEndDatetime;
 	}
-	public void setCmendDatetime(String cmendDatetime) {
-		this.cmendDatetime = cmendDatetime;
+	public void setCmEndDatetime(String cmEndDatetime) {
+		this.cmEndDatetime = cmEndDatetime;
 	}
 	@Override
 	public String toString() {
@@ -99,8 +99,9 @@ public class CheatMember {
 				+ ", cmReportReason=" + cmReportReason + ", cmReportContent=" + cmReportContent + ", cmReportFile="
 				+ cmReportFile + ", cmReportDatetime=" + cmReportDatetime + ", cmReportState=" + cmReportState
 				+ ", cmReportManager=" + cmReportManager + ", cmReportJudgeDatetime=" + cmReportJudgeDatetime
-				+ ", cmStopDate=" + cmStopDate + ", cmStartDatetime=" + cmStartDatetime + ", cmendDatetime="
-				+ cmendDatetime + "]";
+				+ ", cmStopDate=" + cmStopDate + ", cmStartDatetime=" + cmStartDatetime + ", cmEndDatetime="
+				+ cmEndDatetime + "]";
 	}
 	
+
 }

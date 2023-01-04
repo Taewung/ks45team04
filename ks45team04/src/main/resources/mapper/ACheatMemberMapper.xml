@@ -23,20 +23,18 @@
 	
 	<select id="CheatMemberList" resultMap="CheatMemberResultMap">
 			SELECT
-				cm.cm_report_id,
-				cm.cm_id,
-				cm.cm_report_reason,
-				cm.cm_report_content,
-				cm.cm_report_file,
-				cm.cm_report_datetime,
-				cm.cm_report_state,
-				cm.cm_report_manager,
-				cm.cm_report_judge_datetime,
-				cm.cm_stop_date,
-				cm.cm_start_datetime,
-				cm.cm_end_datetime
+				cm_id,
+				cm_report_id,
+				cm_report_reason,
+				cm_report_content,
+				cm_report_datetime,
+				cm_report_manager,
+				cm_report_judge_datetime,
+				cm_stop_date,
+				cm_start_datetime,
+				cm_end_datetime
 			FROM
-				cheat_member AS cm;
+				cheat_member;
 	</select>
 	</mapper>
 	

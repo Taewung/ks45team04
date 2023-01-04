@@ -57,7 +57,7 @@
                                 <tr th:if="${not #lists.isEmpty(totalMemberList)}" th:each="m : ${totalMemberList}">
                                     <td><input type="checkbox" class="form-check-input"></td>
                                     <td>
-                                        <a href="/#">
+                                        <a href="/totalRemoveMember">
                                             <div class="pxp-company-dashboard-job-title" th:text="${m.memId}"></div>                                           
                                         </a>
                                     </td>
@@ -68,18 +68,7 @@
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${m.memPhone}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${m.memRegDatetime}"></div></td>
                                     <td>
-                                        <div class="pxp-dashboard-table-options">
-                                            <ul class="list-unstyled">
-                                            <!-- 수정버튼 start -->
-                                                <a href="#">
-                                                	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
-                                                </a>
-                                            <!-- 수정버튼 end -->
-                                            <!-- 삭제버튼 start -->
-                                                <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
-                                            <!-- 삭제버튼 end --> 
-                                            </ul>
-                                        </div>
+
                                     </td>
                                 </tr>
 

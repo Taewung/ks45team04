@@ -12,8 +12,8 @@
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
- 	<h1>합격 회원 목록</h1>
-                <p class="pxp-text-light">Pass Member list</p>
+ 		<h1>합격 회원 목록</h1>
+        <p class="pxp-text-light">Pass Member list</p>
 
                 <div class="mt-4 mt-lg-5">
                     <div class="row justify-content-between align-content-center">
@@ -46,45 +46,35 @@
                             <thead>                    
                                 <tr>
                                     <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
-                                    <th style="width: 10%;">ID</th>
-                                    <th style="width: 10%;">자격증</th>                                   
-                                    <th style="width: 15%;">이름</th>
-                                    <th style="width: 15%;">이메일</th>
-                                    <th style="width: 15%;">생년월일</th>
-                                    <th style="width: 15%;">전화번호</th>
+                                    <th style="width: 15%;">ID</th>
+                                    <th style="width: 15%;">자격증코드</th>                                   
+                                    <th style="width: 15%;">합격인증자료</th>
+                                    <th style="width: 15%;">신청일시</th>
+                                    <th style="width: 15%;">승인 / 반려일시</th>
+                                    <th style="width: 15%;">반려사유</th>
+                                    <th style="width: 15%;">승인자</th>
                                     <th>&nbsp;</th>
                                 </tr>
-                            </thead>    
-                            <tbody>
+                            </thead> 
+                            <tbody>   
+               				<th:block th:if="${not #lists.isEmpty(passMemberList)}" th:each="pm : ${passMemberList}">
                                 <tr>
                                     <td><input type="checkbox" class="form-check-input"></td>
                                     <td>
-                                        <a href="#">
-                                            <div class="pxp-company-dashboard-job-title">id007</div>                                           
+                                        <a  th:href="@{/totalRemoveMember(pmId=${pm.getPmId})}"  class="pxp-company-dashboard-job-title" 
+                                        	th:text="${pm.getPmId}">
                                         </a>
                                     </td>
-                                    <td><div class="pxp-company-dashboard-job-category">li001</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">칠길동</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">7gildong@naver.com</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">1990-01-02</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">010-0007-0007</div></td>
-                                    <td><div class="pxp-company-dashboard-job-date mt-1"></div></td>
-                                    
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${pm.pmLiCode}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${pm.pmCertificationData}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${pm.pmDatetime}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${pm.pmRegDatetime}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${pm.pmRefuseReason}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${pm.pmReportManager}"></div></td>
                                     <td>
-                                        <div class="pxp-dashboard-table-options">
-                                            <ul class="list-unstyled">
-                                            <!-- 수정버튼 start -->
-                                                <a href="#">
-                                                	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
-                                                </a>
-                                            <!-- 수정버튼 end -->
-                                            <!-- 삭제버튼 start -->
-                                                <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
-                                            <!-- 삭제버튼 end -->                                               
-                                            </ul>
-                                        </div>
                                     </td>
-                                </tr>                      
+                                </tr>
+                                </th:block>                      
                             </tbody>
                         </table>
 						<!-- page 넘김 start -->

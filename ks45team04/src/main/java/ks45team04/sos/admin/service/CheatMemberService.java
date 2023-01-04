@@ -10,25 +10,24 @@ import ks45team04.sos.admin.mapper.AdminCheatMemberMapper;
 
 @Service("adminChaetMemberService")
 @Transactional
-
 public class CheatMemberService {
 
-private final AdminCheatMemberMapper cheatMemberMapper;
+private final AdminCheatMemberMapper adminCheatMemberMapper;
 
-public CheatMemberService(AdminCheatMemberMapper cheatMemberMapper) {
-	this.cheatMemberMapper = cheatMemberMapper;
+public CheatMemberService(AdminCheatMemberMapper adminCheatMemberMapper) {
+	this.adminCheatMemberMapper = adminCheatMemberMapper;
 }
 
 
 
 /**
  * 부정 회원 목록 조회
- * @return list<CheatMemberList>
+ * @return List<CheatMemberList>
  */
 
 public List<CheatMember> CheatMemberList() {
 	
-	List<CheatMember> cheatMemberList = cheatMemberMapper.CheatMemberList();
+	List<CheatMember> cheatMemberList = adminCheatMemberMapper.CheatMemberList();
 
 	return cheatMemberList;
 }
