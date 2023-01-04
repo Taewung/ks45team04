@@ -18,7 +18,6 @@ public class PointSaveStandardService {
 		this.pointSaveStandardMapper = pointSaveStandardMapper;
 	}
 
-
 	//포인트 적립 기준 내역 조회
 	public List<PointSaveStandard> PointSaveStandardList(){
 		

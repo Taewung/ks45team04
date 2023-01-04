@@ -5,13 +5,14 @@
 <mapper namespace="ks45team04.sos.admin.mapper.RefundMapper">
 	
 	<resultMap type="Refund" id="refundResultMap">
-		<id property="refundCode" 					column="refund_code"/>
+		<id property="refundCode" 				column="refund_code"/>
 		<result property="payComPleteCode" 		column="pay_complete_code"/>
-		<result property="payId" 			column="pay_id"/>
+		<result property="payId" 				column="pay_id"/>
+		<result property="refundReason" 		column="refund_reason"/>
 		<result property="finalPayPrice" 		column="final_pay_price"/>
 		<result property="refundPrice" 			column="refund_price"/>
-		<result property="refundPoint" 		column="refund_point"/>
-		<result property="refundState" 	column="refund_state"/>
+		<result property="refundPoint" 			column="refund_point"/>
+		<result property="refundState" 			column="refund_state"/>
 		<result property="refundDatetime" 		column="refund_datetime"/>
 		<result property="refundApprovalId" 	column="refund_approval_id"/>
 	</resultMap>
@@ -22,16 +23,15 @@
 			refund_code,
 			pay_complete_code,
 			pay_id,
+			refund_reason,
 			final_pay_price,
 			refund_price,
 			refund_point,
 			refund_state,
 			refund_datetime,
 			refund_approval_id
-				
 		FROM
 			refund_info;
-
 	
 	</select>
 	

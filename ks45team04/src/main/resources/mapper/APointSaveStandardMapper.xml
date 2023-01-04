@@ -11,15 +11,16 @@
 		<result property="pointSaveStandardId" 			column="point_save_standard_id"/>
 	</resultMap>
 	
-	
-	<select id="pointSaveStandardList" resultMap="pointSaveStandardResultMap">
-		/* 포인트 적립 기준 내역 조회*/
+	<select id="checkPointSaveStandardCode" parameterType="String" resultType="boolean">
+		/* 코드 중복체크 */
 		SELECT
-			*
+			if(COUNT(*)=1, 1, 0)
 		FROM
-			point_save_standard;
-			
+			point_save_standard
+		WHERE
+			point_save_standard_code = #{pointSaveStandardCode};
 	</select>
+	
 	
 	<insert id="addPointSaveStandard" parameterType="PointSaveStandard">
 		/* 포인트 적립 기준 등록 */
@@ -31,5 +32,13 @@
 		);
 	</insert>
 	
+	<select id="pointSaveStandardList" resultMap="pointSaveStandardResultMap">
+		/* 포인트 적립 기준 내역 조회*/
+		SELECT
+			*
+		FROM
+			point_save_standard;
+			
+	</select>
 	
 </mapper>

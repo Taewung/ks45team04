@@ -13,6 +13,7 @@ import ks45team04.sos.admin.service.PayService;
 public class APayController {
 	
 	private final PayService payService;
+	
 	public APayController(PayService payService,
 						  PayMapper payMapper) {
 		
