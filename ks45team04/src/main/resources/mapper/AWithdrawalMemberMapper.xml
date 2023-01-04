@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="ks45team04.sos.admin.mapper.WithdrawalMemberMapper">
+	
+	<resultMap type="WithdrawalMember" id="WithdrawalMemberResultMap">
+		<id property="wdmId" 							column="wdm_id"/>
+		<result property="wdmPw" 						column="wdm_pw"/>
+		<result property="wdmName" 						column="wdm_name"/>
+		<result property="wdmEmail" 					column="wdm_email"/>
+		<result property="wdmBirth" 					column="wdm_birth"/>
+		<result property="wdmPhone" 					column="wdm_phone"/>
+		<result property="wdmLevelName" 				column="wdm_level_name"/>
+		<result property="wdmTotalPoint" 				column="wdm_total_point"/>
+		<result property="wdmRegDatetime" 				column="wdm_reg_datetime"/>
+		<result property="wdmDatetime" 					column="wdm_datetime"/>
+	</resultMap>
+	
+	
+	<select id="WithdrawalMemberList" resultMap="WithdrawalMemberResultMap">
+			SELECT
+			wm.wdm_id,
+			wm.wdm_pw,
+			wm.wdm_name,
+			wm.wdm_email,
+			wm.wdm_birth,
+			wm.wdm_phone,
+			wm.wdm_total_point,
+			wm.wdm_reg_datetime,
+			wm.wdm_datetime
+			FROM
+			withdrawal_member AS wm;
+	</select>
+</mapper>

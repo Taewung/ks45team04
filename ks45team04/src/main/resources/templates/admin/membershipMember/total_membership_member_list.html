@@ -11,19 +11,19 @@
 	<!-- script end -->
 	
 	<!-- customContents start -->
-	<th:block layout:fragment="customContents">
-		<h1>탈퇴 회원 목록</h1>
-             <p class="pxp-text-light">Withdrawal Member list</p>
+	<th:block layout:fragment="customContents"> 
+		<h1>멤버십 회원 목록</h1>
+                <p class="pxp-text-light">MembershipMember List</p>
                 <div class="mt-4 mt-lg-5">
                     <div class="row justify-content-between align-content-center">
                         <div class="col-auto order-2 order-sm-1">
                             <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
                                 <div class="pxp-company-dashboard-jobs-search mb-3">
                                 <select class="form-select">
-                                    <option>회원 아이디</option>
-                                    <option>이름</option>
-                                    <option>이메일</option>
-                                </select>
+                                    <option>멤버십아이디</option>
+                                    <option>기간</option>
+                                    <option>상태</option>
+                               </select>
                                 	<div class="col-auto order-1 order-sm-2">
                                 		<div class="pxp-company-dashboard-jobs-search-search-form">
                                     		<div class="input-group">
@@ -38,6 +38,7 @@
                         </div>
                         
                     </div>
+                    </div>
                     <!-- 검색 end -->   
                     <!-- 목록 start -->                   
                     <div class="table-responsive">
@@ -45,35 +46,29 @@
                             <thead>                    
                                 <tr>
                                     <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
-                                    <th style="width: 10%;">ID</th>
-                                    <th style="width: 10%;">PW</th>
-                                    <th style="width: 10%;">이름</th>
-                                    <th style="width: 15%;">이메일</th>
-                                    <th style="width: 15%;">생년월일</th>
-                                    <th style="width: 15%;">전화번호</th>
-                                    <th style="width: 10%;">포인트</th>
-                                    <th style="width: 30%;">가입일시</th>
-                                    <th style="width: 30%;">탈퇴일시</th>
+                                    <th style="width: 15%;">멤버십아이디</th>
+                                    <th style="width: 15%;">멤버십기간</th>
+                                    <th style="width: 25%;">멤버십시작일시</th>
+                                    <th style="width: 25%;">멤버십만료일시</th>
+                                    <th style="width: 15%;">멤버십상태</th>
                                     <th>&nbsp;</th>
                                 </tr>
-                            </thead>    
-			<th:block th:if="${not #lists.isEmpty(withdrawalMemberList)}" th:each="wm : ${withdrawalMemberList}">
+                            </thead> 
+                            <tbody>
+                        
+        				<th:block th:if="${not #lists.isEmpty(totalMembershipMemberList)}" th:each="mm : ${totalMembershipMemberList}">
                                 <tr>
                                     <td><input type="checkbox" class="form-check-input"></td>
                                     <td>
-                                        <a  th:href="@{/withdrawalMemberList(wdmId=${wm.getWdmId})}"  class="pxp-company-dashboard-job-title" 
-                                        	th:text="${wm.wdmId}">
+                                        <a  th:href="@{/totalMembershipMemberList(mmId=${mm.getMmId})}"  class="pxp-company-dashboard-job-title" 
+                                        	th:text="${mm.mmId}">
                                         </a>
                                     </td>
-                                    <td><div class="pxp-company-dashboard-job-category"  th:text="${wm.wdmPw}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category"  th:text="${wm.wdmName}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category"  th:text="${wm.wdmEmail}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category"  th:text="${wm.wdmBirth}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category"  th:text="${wm.wdmPhone}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category"  th:text="${wm.wdmTotalPoint}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-date mt-1"  th:text="${wm.wdmRegDatetime}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-date mt-1"  th:text="${wm.wdmDatetime}"></div></td>
-                                       </tr>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${mm.mmPeriod}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${mm.mmStartDatetime}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${mm.mmEndDatetime}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${mm.mmState}"></div></td>
+                                 </tr>
                                 </th:block>    
                             </tbody>
                         </table>                                                                 
@@ -105,3 +100,4 @@
 	</th:block>
 	<!-- customJs end -->
 </html>
+             
