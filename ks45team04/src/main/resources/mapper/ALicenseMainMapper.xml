@@ -11,14 +11,14 @@
 		<result property="lmcRegDatetime" 	column="lmc_reg_datetime"/>
 	</resultMap>
 
-	<select id="checkLicenseCode" parameterType="String" resultType="boolean">
-		/* 코드 중복체크 */
+	<select id="getIdCheck" parameterType="String" resultType="boolean">
+		/* 관리자 아이디 인증 */
 		SELECT
-			if(COUNT(*)=1, 1, 0)
+			if(COUNT(lmc.lmc_reg_id) > 0, 1, 0)
 		FROM
 			license_main_category AS lmc
 		WHERE
-			lmc.lmc_code = #{lmcCode};
+			lmc.lmc_reg_id = #{lmcRegId};
 	</select>
 	
 	

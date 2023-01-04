@@ -2,31 +2,158 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{admin/layout/adminDefault}">
-
-	<!-- script start -->
+<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
 	<th:block layout:fragment="customScript">
-	<script>
-	</script>
+		<script>
+			$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+				function validateValue(checkValue) {
+					if(    typeof checkValue == 'undefined' 
+							|| checkValue == null 
+							|| checkValue == ''					){
+						return true;
+					}
+					return false;
+					
+				}
+			
+			// 관리자 인증
+				$('#lscRegId').on('input', function(){
+					$('#addLicenseSubForm input').not('#lscRegId').prop('disabled', true);
+				  	$('#addLicenseSubForm select').prop('disabled', true);
+				  	$('#addLicenseSubForm button').not('#checkBtn').prop('disabled', true);
+				});
+			
+				$('#checkBtn').click(function(){
+					let lmcRegId = $('#lscRegId').val();
+					
+					if(validateValue(lmcRegId)){
+						alert('관리자 인증을 해주세요');
+						$('#lscRegId').focus();
+						return false;					
+					}					
+
+					let request = $.ajax({
+						  url: '/lscIdCheck',
+						  method: 'GET',
+						  data: { 'inputId' : lmcRegId },
+						  dataType: 'json'
+					});
+					
+					//성공 
+					request.done(function( isChecked ) {
+						console.log(isChecked, '데이터타입 확인');
+					  	  
+						if(isChecked){
+							alert('인증 완료')
+						  	$('#addLicenseSubForm input').not('#lscRegId').prop('disabled', false);
+						  	$('#addLicenseSubForm select').prop('disabled', false);
+						  	$('#addLicenseSubForm button').not('#checkBtn').prop('disabled', false);
+								
+						}else{
+					  	  	alert('관리자 아이디가 일치하지 않습니다.');
+					  	  	$('#lscRegId').val('');
+						  	$('#addLicenseSubForm input').not('#lscRegId').prop('disabled', true);
+						  	$('#addLicenseSubForm select').prop('disabled', true);
+						  	$('#addLicenseSubForm button').not('#checkBtn').prop('disabled', true);
+							$('#lscRegId').focus();
+						}
+					});
+					
+					//실패 
+					request.fail(function( jqXHR, textStatus ) {
+					  	  console.log('Request failed: ' + textStatus );
+					});
+				});
+				
+				
+		
+				/* 유효성검사를 구현하시오. (#submitBtn 를 클릭 시) */
+				$('#submitBtn').click(function(){
+					let isSubmit = true;
+					
+					$('#addLicenseSubForm input').each(function(idx, item){
+						let checkValue = $(item).val();
+						let labelValue = $(item).parent('.mb-3').find('label').text();
+						if(validateValue(checkValue)){
+							
+							alert(`${labelValue}를 입력해주세요`);
+							$(item).focus();
+							isSubmit = false;
+							return false;
+						}
+						
+					});   
+					
+
+
+					if(isSubmit) $('#addLicenseSubForm').submit();
+				});
+			});
+			
+
+			
+		</script>
 	</th:block> 
-	<!-- script end -->
-	
-	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
+		<h1>자격증중분류 등록</h1>
+		<form id="addLicenseSubForm" th:action="@{/addlicenseSub}" name="myform" method="post">
+              <div class="row mt-4 mt-lg-5">
+                  <div class="col-xxl-8">
+                      <div class="row">
+                      </div>
+                      <div class="row">
+                      </div><br>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lscRegId" class="form-label"><h4>관리자 아이디</h4></label>
+                                  <button type="button" id="checkBtn" class="btn rounded-pill pxp-section-cta-o ms-3">관리자 인증</button>
+                                  <input type="text" id="lscRegId" class="form-control" name="lscRegId" placeholder="관리자 아이디">
+                              </div>
+                          </div>
+                      </div><br><br>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lscCode" class="form-label"><h6>자격증 중분류코드</h6></label><h12>&nbsp;&nbsp;예시)lsc000</h12>
+                                  <input type="text" id="lscCode" class="form-control" name="lscCode" placeholder="자격증 중분류코드" disabled="disabled">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lmcCode" class="form-label"><h6>자격증 대분류코드</h6></label><h12>&nbsp;&nbsp;예시)lmc000</h12>
+                                  <input type="text" id="lmcCode" class="form-control" name="lmcCode" placeholder="자격증 대분류코드" disabled="disabled">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lmcName" class="form-label"><h6>자격증 대분류명</h6></label>
+                                  <input type="text" id="lmcName" class="form-control" name="lmcName" placeholder="자격증 대분류명" disabled="disabled">
+                              </div>
+                          </div>
+                      </div>                      
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lscName" class="form-label"><h6>자격증 중분류명</h6></label>
+                                  <input type="text" id="lscName" class="form-control" name="lscName" placeholder="자격증 중분류명" disabled="disabled">
+                              </div>
+                          </div>
+                      </div>
+                      
+                  </div>
+              </div>
+              <div class="mt-4 mt-lg-5">
+                  <button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>&nbsp;&nbsp;
+                  <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
+                  
+              </div>
+          </form>
 	
-
-
-
-license_sub_insert.html
-
-
-
-
 	</th:block>
-	<!-- customContents end -->
 	
-	<!-- customJs start -->
-	<th:block layout:fragment="customJs">
-	
-	</th:block>
-	<!-- customJs end -->
 </html>

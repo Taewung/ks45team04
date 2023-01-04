@@ -6,17 +6,164 @@
 	<!-- script start -->
 	<th:block layout:fragment="customScript">
 	<script>
+	$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+		function validateValue(checkValue) {
+			if(    typeof checkValue == 'undefined' 
+					|| checkValue == null 
+					|| checkValue == ''					){
+				return true;
+			}
+			return false;
+			
+		}
+	
+	// 관리자 인증
+		$('#liRegId').on('input', function(){
+			$('#addLicenseInfoForm input').not('#liRegId').prop('disabled', true);
+		  	$('#addLicenseInfoForm select').prop('disabled', true);
+		  	$('#addLicenseInfoForm button').not('#checkBtn').prop('disabled', true);
+		});
+	
+		$('#checkBtn').click(function(){
+			let lmcRegId = $('#liRegId').val();
+			
+			if(validateValue(lmcRegId)){
+				alert('관리자 인증을 해주세요');
+				$('#liRegId').focus();
+				return false;					
+			}					
+
+			let request = $.ajax({
+				  url: '/liCodeCheck',
+				  method: 'GET',
+				  data: { 'inputId' : lmcRegId },
+				  dataType: 'json'
+			});
+			
+			//성공 
+			request.done(function( isChecked ) {
+				console.log(isChecked, '데이터타입 확인');
+			  	  
+				if(isChecked){
+					alert('인증 완료')
+				  	$('#addLicenseInfoForm input').not('#liRegId').prop('disabled', false);
+				  	$('#addLicenseInfoForm select').prop('disabled', false);
+				  	$('#addLicenseInfoForm button').not('#checkBtn').prop('disabled', false);
+						
+				}else{
+			  	  	alert('관리자 아이디가 일치하지 않습니다.');
+			  	  	$('#liRegId').val('');
+				  	$('#addLicenseInfoForm input').not('#liRegId').prop('disabled', true);
+				  	$('#addLicenseInfoForm select').prop('disabled', true);
+				  	$('#addLicenseInfoForm button').not('#checkBtn').prop('disabled', true);
+					$('#liRegId').focus();
+				}
+			});
+			
+			//실패 
+			request.fail(function( jqXHR, textStatus ) {
+			  	  console.log('Request failed: ' + textStatus );
+			});
+		});
+
+		/* 유효성검사를 구현하시오. (#submitBtn 를 클릭 시) */
+		$('#submitBtn').click(function(){
+			let isSubmit = true;
+			
+			$('#addLicenseInfoForm input').each(function(idx, item){
+				let checkValue = $(item).val();
+				let labelValue = $(item).parent('.mb-3').find('label').text();
+				if(validateValue(checkValue)){
+					
+					alert(`${labelValue}를 입력해주세요`);
+					$(item).focus();
+					isSubmit = false;
+					return false;
+				}
+				
+			});   
+			
+
+
+			if(isSubmit) $('#addLicenseInfoForm').submit();
+		});
+	});
+
 	</script>
 	</th:block> 
 	<!-- script end -->
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-	
+	<h1>자격증 정보 등록</h1>
+		<form id="addLicenseInfoForm" th:action="@{/addlicenseInfo}" name="myform" method="post">
+              <div class="row mt-4 mt-lg-5">
+                  <div class="col-xxl-8">
+                      <div class="row">
+                      </div>
+                      <div class="row">
+                      </div><br>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="liRegId" class="form-label"><h4>관리자 아이디</h4></label>
+                                  <button type="button" id="checkBtn" class="btn rounded-pill pxp-section-cta-o ms-3">관리자 인증</button>
+                                  <input type="text" id="liRegId" class="form-control" name="liRegId" placeholder="관리자 아이디">
+                              </div>
+                          </div>
+                      </div><br><br>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="liCode" class="form-label"><h6>자격증 정보 코드</h6></label><h12>&nbsp;&nbsp;예시) li000</h12>
+                                  <input type="text" id="liCode" class="form-control" name="liCode" placeholder="자격증 정보 코드" disabled="disabled">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lscCode" class="form-label"><h6>자격증 중분류 코드</h6></label><h12>&nbsp;&nbsp;예시) lsc000</h12>
+                                  <input type="text" id="lscCode" class="form-control" name="lscCode" placeholder="자격증 중분류 코드" disabled="disabled">
+                              </div>
+                          </div>
+                      </div> 
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="liName" class="form-label"><h6>자격증 이름</h6></label><h12>&nbsp;&nbsp;</h12>
+                                  <input type="text" id="liName" class="form-control" name="liName" placeholder="자격증 이름" disabled="disabled">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="liOverview" class="form-label"><h6>자격증 개요</h6></label><h12>&nbsp;&nbsp;</h12>
+                                  <input type="text" id="liOverview" class="form-control" name="liOverview" placeholder="자격증 개요" disabled="disabled">
+                              </div>
+                          </div>
+                      </div>                    
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="liQualification" class="form-label"><h6>자격증 응시자격</h6></label>
+                                  <input type="text" id="liQualification" class="form-control" name="liQualification" placeholder="자격증 응시자격" disabled="disabled">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
+              <div class="mt-4 mt-lg-5">
+                  <button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>&nbsp;&nbsp;
+                  <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
+                  
+              </div>
+          </form>
 
 
 
-license_info_list.html
 
 
 

@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ks45team04.sos.admin.dto.LicenseSub;
 import ks45team04.sos.admin.mapper.LicenseSubMapper;
@@ -61,7 +63,17 @@ private final LicenseSubMapper licenseSubMapper;
 			return "admin/licenseSub/license_sub_modify";
 			}
 		
-	
+		//관리자 아이디 인증
+		@GetMapping("/lscIdCheck")
+		@ResponseBody
+		public boolean idCheck(@RequestParam(value="inputId") String inputId) {
+			
+			boolean isChecked = licenseSubMapper.getIdCheck(inputId);
+			
+			return isChecked;
+		}
+		
+		
 		// 자격증 중분류 정부 등록 처리
 		@PostMapping("/addlicenseSub")
 		public String addlicenseSub(LicenseSub LicenseSub) {

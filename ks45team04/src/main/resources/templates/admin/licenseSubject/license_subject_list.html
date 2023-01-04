@@ -13,7 +13,7 @@
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
 
-			<h1>자격증과목</h1>
+			<h1>자격증 과목</h1>
                 <p class="pxp-text-light"></p>
                 <div class="mt-4 mt-lg-5">
                     <!-- 검색 start -->
@@ -26,6 +26,9 @@
                                         <input type="text" class="form-control" placeholder="검색">
                                     </div>
                                 </div>
+                                <button  class="btn rounded-pill pxp-section-cta-o ms-3">
+                                <a th:href="@{/addlicenseSubject}">자격증 과목 등록</a>	
+                                </button>
                             </div>
                         </div>
                     </div>

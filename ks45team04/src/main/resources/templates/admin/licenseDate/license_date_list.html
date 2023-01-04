@@ -12,7 +12,93 @@
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-	license_date_list.html
+			 <h1>자격증 일정</h1>
+                <p class="pxp-text-light"></p>
+                <div class="mt-4 mt-lg-5">
+                    <!-- 검색 start -->
+                    <div class="row justify-content-between align-content-center">
+                        <div class="col-auto order-1 order-sm-2">
+                            <div class="pxp-company-dashboard-jobs-search mb-3">
+                                <div class="pxp-company-dashboard-jobs-search-search-form">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><span class="fa fa-search"></span></span>
+                                        <input type="text" class="form-control" placeholder="검색">
+                                    </div>
+                                </div>
+                                <button  class="btn rounded-pill pxp-section-cta-o ms-3">
+                                <a th:href="@{/addlicenseDate}">자격증 일정 등록</a>	
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 검색 end -->   
+                    <!-- 목록 start -->                   
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">                      	
+                            <thead>                    
+                                <tr>
+                                	<th></th>
+                                    <th style="width: 10%;">일정코드</th>
+                                    <th style="width: 10%;">자격증코드</th>
+                                    <th style="width: 15%;">접수기간</th>
+                                    <th style="width: 15%;">시험날짜</th>
+                                    <th style="width: 15%;">합격자발표일</th>
+                                    <th style="width: 15%;">응시비용</th>
+                                    <th style="width: 10%;">등록자</th>
+                                    <th style="width: 25%;">등록날짜</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>    
+                            <tbody>
+                                <tr th:if="${not #lists.isEmpty(licenseDateList)}"
+									th:each="l : ${licenseDateList}">
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><div class="pxp-company-dashboard-job-title" th:text="${l.ldCode}"></div>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.liCode}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.ldPeriod}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.ldDate}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.ldAcceptanceDate}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.ldCost}"></div></td>                      
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.ldRegId}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.ldRegDatetime}"></div></td>  
+                                    <td>
+                                        <div class="pxp-dashboard-table-options">
+                                            <ul class="list-unstyled">
+                                            <!-- 수정버튼 start -->
+                                                <a href="#">
+                                                	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
+                                                </a>
+                                            <!-- 수정버튼 end -->
+                                            <!-- 삭제버튼 start -->
+                                                <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
+                                            <!-- 삭제버튼 end -->                                               
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr th:unless="${not #lists.isEmpty(licenseDateList)}">
+									<td colspan="9">등록된 자격증 정보가 없습니다.</td>
+								</tr>                    
+                            </tbody>
+                        </table>
+						<!-- page 넘김 start -->
+                        <div class="row mt-4 mt-lg-5 justify-content-between align-items-center">
+                            <div class="col-auto">
+                                <nav class="mt-3 mt-sm-0" aria-label="Jobs list pagination">
+                                    <ul class="pagination pxp-pagination">
+                                        <li class="page-item active" aria-current="page">
+                                            <span class="page-link">1</span>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <!-- page 넘김 end -->
+                    </div>
+                <!-- 목록 end -->    
+                </div>
 	
 	</th:block>
 	<!-- customContents end -->

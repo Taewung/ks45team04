@@ -16,7 +16,21 @@ private final LicenseInfoMapper licenseInfoMapper;
 		this.licenseInfoMapper = licenseInfoMapper;
 	}
 	
-	// 자격증 정보 목록 조회
+	/**
+	 * 자격증 대분류 등록
+	 * @param LicenseInfo
+	 * @return int
+	 */
+	public int addLicenseInfo(LicenseInfo licenseInfo) {
+		
+		return licenseInfoMapper.addLicenseInfo(licenseInfo);
+	}
+	
+	
+	/**
+	 * 자격증 정보 목록 조회
+	 * @return List<LicenseInfo>
+	 */
 	public List<LicenseInfo> LicenseInfoList(){
 		
 		List<LicenseInfo> licenseInfoList = licenseInfoMapper.LicenseInfoList();

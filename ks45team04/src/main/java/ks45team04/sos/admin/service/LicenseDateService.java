@@ -16,8 +16,21 @@ public class LicenseDateService {
 		this.licenseDateMapper = licenseDateMapper;
 	}
 	
+	/**
+	 * 자격증 일정 등록
+	* @param LicenseDate
+	 * @return int
+	 */
+	public int addLicenseDate(LicenseDate licenseDate) {
+		
+		return licenseDateMapper.addLicenseDate(licenseDate);
+	}
 	
-	// 자격증 일정 목록 조회
+	
+	/**
+	 * 자격증 일정 목록 조회
+	 * @return List<LicenseDate>
+	 */
 	public List<LicenseDate> licenseDateList(){
 		
 		List<LicenseDate> licenseDateList = licenseDateMapper.LicenseDateList();

@@ -7,8 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ks45team04.sos.admin.dto.LicenseInfo;
+import ks45team04.sos.admin.mapper.LicenseInfoMapper;
 import ks45team04.sos.admin.service.LicenseInfoService;
 
 
@@ -16,9 +19,13 @@ import ks45team04.sos.admin.service.LicenseInfoService;
 public class ALicenseInfoController {
 	
 private final LicenseInfoService licenseInfoService;
+private final LicenseInfoMapper licenseInfoMapper;
 	
-	public ALicenseInfoController(LicenseInfoService licenseInfoService) {
+	public ALicenseInfoController(LicenseInfoService licenseInfoService
+								 ,LicenseInfoMapper licenseInfoMapper) {
+		
 		this.licenseInfoService = licenseInfoService;
+		this.licenseInfoMapper = licenseInfoMapper;
 	}	
 		
 		// 자격증 정보 삭제 처리
@@ -52,17 +59,34 @@ private final LicenseInfoService licenseInfoService;
 			return "admin/licenseInfo/license_info_modify";
 		}
 		
+		// 관리자 아이디 인증
+		@GetMapping("/liCodeCheck")
+		@ResponseBody
+		public boolean idCheck(@RequestParam(value="inputId") String inputId) {
+			
+			boolean isChecked = licenseInfoMapper.getIdCheck(inputId);
+			
+			return isChecked;
+		}
+		
 		//자격증 정보 등록 처리
 		@PostMapping("/addlicenseInfo")
+		
 		public String addlicenseInfo(LicenseInfo LicenseInfo) {
 			
-			return "";
+			licenseInfoService.addLicenseInfo(LicenseInfo);
+			
+			return "redirect:/licenseInofoList";
 		}
 		
 		// 자격증 정보 등록 화면
 		@GetMapping("/addlicenseInfo")
 		public String addlicenseInfo(Model model) {
+			
+			List<LicenseInfo> licenseInfoList = licenseInfoMapper.LicenseInfoList();
+			
 			model.addAttribute("title", "자격증 정보 등록");
+			model.addAttribute("licenseInfoList", licenseInfoList);
 			
 			return "admin/licenseInfo/license_info_insert";
 		}
