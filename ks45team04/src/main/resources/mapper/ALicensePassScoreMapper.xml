@@ -26,7 +26,7 @@
 		<result property="lmcName" 			column="lmc_name"/>
 		<result property="lmcRegDatetime" 	column="lmc_reg_datetime"/>
 	</resultMap>
-	
+
 	<insert id="addLicensePassScore" parameterType="LicensePassScore">
 		/* 자격증별 합격기준 점수 등록 */
 		INSERT INTO license_pass_score
