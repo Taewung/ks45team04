@@ -10,9 +10,8 @@ import ks45team04.sos.admin.dto.PointSaveStandard;
 @Mapper
 public interface PointSaveStandardMapper {
 	
-	
-	//포인트 적립 기준 코드 중복 조회
-	public boolean checkPointSaveStandardCode(String pointSaveStandardCode);
+	//관리자 아이디 인증
+	public boolean getPointSaveStandardIdCheck(String inputId);
 	
 	//포인트 적립 기준 등록
 	public int addPointSaveStandard(PointSaveStandard pointSaveStandard);
