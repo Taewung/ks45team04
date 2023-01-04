@@ -17,6 +17,28 @@ public class LicenseDateService {
 	}
 	
 	/**
+	 * 특정 자격증 일정 수정 
+	 * @param licenseDate
+	 * @return int (update 쿼리 실행 결과)
+	 */
+	public int modifyLicenseInfoDate(LicenseDate licenseDate) {
+		
+		return licenseDateMapper.modifyLicenseDate(licenseDate);
+
+	}
+	
+	
+	/**
+	 * 특정 자격증 일정 조회 
+	 * @param ldCode
+	 * @return licenseDate
+	 */
+	public LicenseDate getLicenseDateInfoByCode(String ldCode) {
+		
+		return licenseDateMapper.getLicenseDateInfoByCode(ldCode);
+	}
+	
+	/**
 	 * 자격증 일정 등록
 	 * @param LicenseDate
 	 * @return int

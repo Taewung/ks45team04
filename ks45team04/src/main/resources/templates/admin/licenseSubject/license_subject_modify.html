@@ -6,17 +6,80 @@
 	<!-- script start -->
 	<th:block layout:fragment="customScript">
 	<script>
+	$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+		$('#resetBtn').click(function(){
+			location.href = '/licenseSubjectList';
+		});
+	});
+	
 	</script>
 	</th:block> 
 	<!-- script end -->
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-	
+	<h1>자격증 과목 수정</h1>
+		<form id="modifyLicenseSubjectForm" th:action="@{/modifylicenseSubject}" name="myform" method="post">
+              <div class="row mt-4 mt-lg-5">
+                  <div class="col-xxl-8">
+                      <div class="row">
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lsRegId" class="form-label"><h4>관리자 아이디</h4></label>
+                                  <input type="text" id="lsRegId" class="form-control" name="lsRegId" placeholder="관리자 아이디"
+                                  		 th:value="${licenseSubjectInfo.lsRegId}" readonly="readonly">
+                              </div>
+                          </div>
+                      </div><br><br>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lsCode" class="form-label"><h6>자격증 과목코드</h6></label><h12></h12>
+                                  <input type="text" id="lsCode" class="form-control" name="lsCode" placeholder="자격증 과목코드"
+                                  		 th:value="${licenseSubjectInfo.lsCode}" readonly="readonly">
+                              </div>
+                          </div>
+                      </div>                     
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="liCode" class="form-label"><h6>자격증 코드</h6></label>
+                                  <input type="text" id="liCode" class="form-control" name="liCode" placeholder="자격증 코드"
+                                         th:value="${licenseSubjectInfo.liCode}" readonly="readonly">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lsSubject" class="form-label"><h6>자격증 과목</h6></label>
+                                  <input type="text" id="lsSubject" class="form-control" name="lsSubject" placeholder="자격증 과목"
+                                         th:value="${licenseSubjectInfo.lsSubject}">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lsName" class="form-label"><h6>자격증 과목명</h6></label>
+                                  <input type="text" id="lsName" class="form-control" name="lsName" placeholder="자격증 대분류명"
+                                         th:value="${licenseSubjectInfo.lsName}">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
+              <div class="mt-4 mt-lg-5">
+                  <button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>&nbsp;&nbsp;
+                  <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
+                  
+              </div>
+          </form>
 
 
 
-license_subject_modify.html
 
 
 

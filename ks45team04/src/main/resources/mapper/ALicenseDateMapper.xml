@@ -14,6 +14,36 @@
 		<result property="ldRegId" 				column="ld_reg_id"/>
 		<result property="ldRegDatetime" 		column="ld_reg_datetime"/>
 	</resultMap>
+
+		<update id="modifyLicenseDate" parameterType="LicenseDate">
+		/* 특정 자격증 일정 수정*/
+		UPDATE 
+			license_date
+		SET 
+			 ld_period = #{ldPeriod}
+			,ld_date = #{ldDate}
+			,ld_acceptance_date = #{ldAcceptanceDate}
+			,ld_cost = #{ldCost}
+		WHERE 
+			ld_code= #{ldCode};
+		</update>
+	
+	<select id="getLicenseDateInfoByCode" parameterType="String" resultMap="licenseDateResultMap">
+			/* 특정 자격증 일정 조회 */
+			SELECT
+				 ld.ld_code
+				,ld.li_code
+				,ld.ld_period
+				,ld.ld_date
+				,ld.ld_acceptance_date
+				,ld.ld_cost
+				,ld.ld_reg_id
+				,ld.ld_reg_datetime
+			FROM
+				license_date AS ld
+			WHERE
+				ld.ld_code = #{ldCode};
+	</select>
 	
 	
 	<select id="getIdCheck" parameterType="String" resultType="boolean">

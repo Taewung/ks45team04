@@ -9,6 +9,12 @@ import ks45team04.sos.admin.dto.LicenseDate;
 @Mapper
 public interface LicenseDateMapper {
 	
+	// 특정 자격증 일정 수정
+	public int modifyLicenseDate(LicenseDate licenseDate);
+	
+	// 특정 자격증 일정 조회
+	public LicenseDate getLicenseDateInfoByCode(String ldCode);
+	
 	// 관리자 인증
 	public boolean getIdCheck(String inputId);
 	

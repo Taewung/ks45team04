@@ -6,13 +6,95 @@
 	<!-- script start -->
 	<th:block layout:fragment="customScript">
 	<script>
+	$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+		$('#resetBtn').click(function(){
+			location.href = '/licenseSubjectList';
+		});
+	});
 	</script>
 	</th:block> 
 	<!-- script end -->
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-	license_date_modify.html
+	<h1>자격증 대분류 수정</h1>
+		<form id="modifyLicenseDateForm" th:action="@{/modifylicenseDate}" name="myform" method="post">
+              <div class="row mt-4 mt-lg-5">
+                  <div class="col-xxl-8">
+                      <div class="row">
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="ldRegId" class="form-label"><h4>관리자 아이디</h4></label>
+                                  <input type="text" id="ldRegId" class="form-control" name="ldRegId" placeholder="관리자 아이디"
+                                  		 th:value="${licenseDateInfo.ldRegId}" readonly="readonly">
+                              </div>
+                          </div>
+                      </div><br><br>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="ldCode" class="form-label"><h6>자격증 일정 코드</h6></label><h12></h12>
+                                  <input type="text" id="ldCode" class="form-control" name="ldCode" placeholder="자격증 일정 코드"
+                                  		 th:value="${licenseDateInfo.ldCode}" readonly="readonly">
+                              </div>
+                          </div>
+                      </div>                     
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="liCode" class="form-label"><h6>자격증 코드</h6></label>
+                                  <input type="text" id="liCode" class="form-control" name="liCode" placeholder="자격증 코드"
+                                         th:value="${licenseDateInfo.liCode}" readonly="readonly">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="ldPeriod" class="form-label"><h6>접수기간</h6></label>
+                                  <input type="text" id="ldPeriod" class="form-control" name="ldPeriod" placeholder="접수기간"
+                                         th:value="${licenseDateInfo.ldPeriod}">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="ldDate" class="form-label"><h6>시험일</h6></label>
+                                  <input type="text" id="ldDate" class="form-control" name="ldDate" placeholder="시험일"
+                                         th:value="${licenseDateInfo.ldDate}">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="ldAcceptanceDate" class="form-label"><h6>합격자 발표일</h6></label>
+                                  <input type="text" id="ldAcceptanceDate" class="form-control" name="ldAcceptanceDate" placeholder="합격자 발표일"
+                                         th:value="${licenseDateInfo.ldAcceptanceDate}">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="ldCost" class="form-label"><h6>시험비용</h6></label>
+                                  <input type="text" id="ldCost" class="form-control" name="ldCost" placeholder="시험비용"
+                                         th:value="${licenseDateInfo.ldCost}">
+                              </div>
+                          </div>
+                      </div>
+                      
+                  </div>
+              </div>
+              
+              <div class="mt-4 mt-lg-5">
+                  <button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>&nbsp;&nbsp;
+                  <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
+                  
+              </div>
+          </form>
 	</th:block>
 	<!-- customContents end -->
 	

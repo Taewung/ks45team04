@@ -46,14 +46,20 @@ private final LicenseDateMapper licenseDateMapper;
 			//자격증 일정 수정 처리
 			@PostMapping("/modifylicenseDate")
 			public String modifylicenseDate(LicenseDate LicenseDate) {
+				
+				licenseDateService.modifyLicenseInfoDate(LicenseDate);
 					
-				return "";
+				return "redirect:/licenseDateList";
 			}
 				
 			// 자격증 일정 수정 화면
 			@GetMapping("/modifylicenseDate")
-			public String modifylicenseDate(Model model) {
+			public String modifylicenseDate(@RequestParam(value="ldCode") String ldCode
+										    ,Model model) {
+				LicenseDate licenseDate = licenseDateMapper.getLicenseDateInfoByCode(ldCode);
+				
 				model.addAttribute("title", "자격증 일정 수정");
+				model.addAttribute("licenseDateInfo", licenseDate);
 					
 				return "admin/licenseDate/license_date_modify";
 			}
