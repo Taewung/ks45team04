@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team04.sos.admin.mapper.AdminPassMemberMapper">
+	
+	<resultMap type="PassMember" id="PassMemberResultMap">
+		<id property="pmCode" 							column="pm_code"/>
+		<result property="pmId" 						column="pm_id"/>
+		<result property="pmLiCode" 					column="pm_li_code"/>
+		<result property="pmCertificationData" 			column="pm_certification_data"/>
+		<result property="pmDatetime" 					column="pm_datetime"/>
+		<result property="pmState" 						column="pm_state"/>
+		<result property="pmRegDatetime" 				column="pm_reg_datetime"/>
+		<result property="pmRefuseReason" 				column="pm_refuse_reason"/>
+		<result property="pmReportManager" 				column="pm_report_manager"/>
+	</resultMap>
+	
+	
+	<select id="PassMemberList" resultMap="PassMemberResultMap">
+			/* 합격 회원 목록 조회 */
+			SELECT
+				pm_id,
+				pm_li_code,
+				pm_certification_data,
+				pm_datetime,
+				pm_reg_datetime,
+				pm_report_manager,
+				pm_refuse_reason
+			FROM
+				pass_member;
+	</select>
+</mapper>

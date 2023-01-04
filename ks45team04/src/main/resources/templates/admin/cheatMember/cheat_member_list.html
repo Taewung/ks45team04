@@ -21,7 +21,9 @@
                             <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
                                 <div class="pxp-company-dashboard-jobs-search mb-3">
                                 <select class="form-select">
-                                    <option>회원 아이디</option>
+                                    <option>신고자ID</option>
+                                    <option>부정회원ID</option>
+                                    <option>승인자</option>
                                 </select>
                                 	<div class="col-auto order-1 order-sm-2">
                                 		<div class="pxp-company-dashboard-jobs-search-search-form">
@@ -44,59 +46,43 @@
                             <thead>                    
                                 <tr>
                                     <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
-                                    <th style="width: 9%;">신고자아이디</th>
-                                    <th style="width: 9%;">부정회원아이디</th>
-                                    <th style="width: 9%;">정지사유</th>
-                                    <th style="width: 9%;">신고내용</th>
-                                    <th style="width: 9%;">신고관련첨부파일</th>
-                                    <th style="width: 9%;">신고일시</th>
-                                    <th style="width: 9%;">진행상태</th>
-                                    <th style="width: 9%;">승인자</th>
-                                    <th style="width: 9%;">심사완료일시</th>
+                                    <th style="width: 10%;">부정회원ID</th>
+                                    <th style="width: 9%;">신고자ID</th>
+                                    <th style="width: 10%;">신고사유</th>
+                                    <th style="width: 10%;">신고내용</th>
+                                    <th style="width: 10%;">신고일시</th>
+                                    <th style="width: 7%;">승인자</th>
+                                    <th style="width: 13%;">심사완료일시</th>
                                     <th style="width: 9%;">정지기간</th>
-                                    <th style="width: 10%;">정지시작일시</th>
-                                    <th style="width: 10%;">정지종료일시</th>
+                                    <th style="width: 13%;">정지시작일시</th>
+                                    <th style="width: 13%;">정지종료일시</th>
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>    
                             <tbody>
-                                <tr th:if="${not #lists.isEmpty(cheatMemberList)}" th:each="cm : ${cheatMemberList}">
+                                <th:block th:if="${not #lists.isEmpty(cheatMemberList)}" th:each="cm : ${cheatMemberList}">
+ 		                          <tr>
                                     <td><input type="checkbox" class="form-check-input"></td>
                                     <td>
-                                        <a href="#">
-                                            <div class="pxp-company-dashboard-job-title" th:text="${cm.cmReportId}"></div>                                           
+                                        <a  th:href="@{/totalRemoveMember(cmId=${cm.getCmId})}"  class="pxp-company-dashboard-job-title" 
+                                        	th:text="${cm.getCmId}">
                                         </a>
                                     </td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmId}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportId}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportReason}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportContent}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportContent}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportFile}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportDatetime}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportState}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportManager}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportJudgeDatetime}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmStopDate}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmStartDatetime}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${cm.cmEndDatetime}"></div></td>
-                                    
                                     <td>
-                                        <div class="pxp-dashboard-table-options">
-                                            <ul class="list-unstyled">
-                                            <!-- 수정버튼 start -->
-                                                <a href="#">
-                                                	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
-                                                </a>
-                                            <!-- 수정버튼 end -->
-                                            <!-- 삭제버튼 start -->
-                                                <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
-                                            <!-- 삭제버튼 end -->                                                 
-                                            </ul>
-                                        </div>
                                     </td>
-                                </tr>                      
-                            </tbody>
-                        </table>
+                                   </tr>
+                                  </th:block>
+                               </tbody>
+                         </table>
 						<!-- page 넘김 start -->
                         <div class="row mt-4 mt-lg-5 justify-content-center align-items-center">
                             <div class="col-auto">
