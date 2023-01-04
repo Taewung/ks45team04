@@ -4,6 +4,7 @@ public class Refund {
 	private String refundCode;
 	private String payComPleteCode;
 	private String payId;
+	private String refundReason;
 	private int finalPayPrice;
 	private int refundPrice;
 	private int refundPoint;
@@ -28,6 +29,12 @@ public class Refund {
 	}
 	public void setPayId(String payId) {
 		this.payId = payId;
+	}
+	public String getRefundReason() {
+		return refundReason;
+	}
+	public void setRefundReason(String refundReason) {
+		this.refundReason = refundReason;
 	}
 	public int getFinalPayPrice() {
 		return finalPayPrice;
@@ -69,9 +76,9 @@ public class Refund {
 	@Override
 	public String toString() {
 		return "Refund [refundCode=" + refundCode + ", payComPleteCode=" + payComPleteCode + ", payId=" + payId
-				+ ", finalPayPrice=" + finalPayPrice + ", refundPrice=" + refundPrice + ", refundPoint=" + refundPoint
-				+ ", refundState=" + refundState + ", refundDatetime=" + refundDatetime + ", refundApprovalId="
-				+ refundApprovalId + "]";
+				+ ", refundReason=" + refundReason + ", finalPayPrice=" + finalPayPrice + ", refundPrice=" + refundPrice
+				+ ", refundPoint=" + refundPoint + ", refundState=" + refundState + ", refundDatetime=" + refundDatetime
+				+ ", refundApprovalId=" + refundApprovalId + "]";
 	}
 	
 }

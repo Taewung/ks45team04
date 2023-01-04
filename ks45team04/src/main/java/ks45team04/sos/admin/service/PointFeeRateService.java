@@ -25,4 +25,11 @@ public class PointFeeRateService {
 		return pointFeeRateList;
 	}
 	
+	//포인트 수수료율 등록
+	public int addPointFeeRate(PointFeeRate pointFeeRate) {
+		
+		return pointFeeRateMapper.addPointFeeRate(pointFeeRate);
+	}
+	
+	
 }

@@ -16,10 +16,11 @@ public class RefundService {
 		this.refundMapper = refundMapper;
 	}
 
-	//환불 내역 조회
+	//환불 승인 내역 조회
 	public List<Refund> RefundList(){
 		
 		List<Refund> refundList = refundMapper.refundList();
+		
 		return refundList;
 	}
 }

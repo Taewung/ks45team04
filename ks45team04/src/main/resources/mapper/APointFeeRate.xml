@@ -13,6 +13,7 @@
 	</resultMap>
 	
 	<select id="pointFeeRateList" resultMap="pointFeeRateResultMap">
+		/*포인트 수수료율 내역 조회*/
 		SELECT
 			point_fee_rate_code,
 			point_fee_rate,
@@ -23,5 +24,13 @@
 			point_fee_rate;
 	</select>
 	
-	
+	<insert id="addPointFeeRate" parameterType="PointFeeRate">
+		/* 포인트 수수료율 등록 */
+		INSERT INTO point_fee_rate
+				(
+					refund_code, point_fee_rate_contents, point_fee_rate, point_fee_rate_id
+				)VALUES(
+					#{refund_code}, #{point_fee_rate_contents}, #{point_fee_rate}, #{point_fee_rate_id}
+				);
+	</insert>
 </mapper>

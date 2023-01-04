@@ -6,6 +6,80 @@
 	<!-- script start -->
 	<th:block layout:fragment="customScript">
 	<script>
+		$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+			function validateValue(checkValue) {
+				if(    typeof checkValue == 'undefined' 
+						|| checkValue == null 
+						|| checkValue == ''					){
+					return true;
+				}
+				return false;
+				
+			}
+			$('#pointSaveStandardCode').on('input', function(){
+				$('#addPointSaveStandardForm input').not('#pointSaveStandardCode').prop('disabled', true);
+			  	$('#addPointSaveStandardForm select').prop('disabled', true);
+			  	$('#addPointSaveStandardForm button').not('#checkBtn').prop('disabled', true);
+			});
+		
+			$('#checkBtn').click(function(){
+				let memberId = $('#pointSaveStandardCode').val();
+				
+				if(validateValue(pointSaveStandardCode)){
+					alert('포인트 적립 기준 코드를 입력해주세요');
+					$('#pointSaveStandardCode').focus();
+					return false;					
+				}					
+
+				);
+				
+				//성공 
+				request.done(function( isChecked ) {
+					console.log(isChecked, '데이터타입 확인');
+				  	  
+					if(isChecked){
+				  	  	alert('중복된 아이디가 존재합니다.');
+				  	  	$('#pointSaveStandardCode').val('');
+					  	$('#addPointSaveStandardForm input').not('#pointSaveStandardCode').prop('disabled', true);
+					  	$('#addPointSaveStandardForm select').prop('disabled', true);
+					  	$('#addPointSaveStandardForm button').not('#checkBtn').prop('disabled', true);
+						$('#pointSaveStandardCode').focus();
+						return false;		
+					}else{
+					  	$('#addPointSaveStandardForm input').not('#pointSaveStandardCode').prop('disabled', false);
+					  	$('#addPointSaveStandardForm select').prop('disabled', false);
+					  	$('#addPointSaveStandardForm button').not('#checkBtn').prop('disabled', false);
+					}
+				});
+				
+				//실패 
+				request.fail(function( jqXHR, textStatus ) {
+				  	  console.log('Request failed: ' + textStatus );
+				});
+			});
+	
+			/* 유효성검사를 구현하시오. (#submitBtn 를 클릭 시) */
+			$('#submitBtn').click(function(){
+				let isSubmit = true;
+				
+				$('#addPointSaveStandardForm input').each(function(idx, item){
+					let checkValue = $(item).val();
+					let labelValue = $(item).find('label').text();
+					if(validateValue(checkValue)){
+						
+						alert(`${labelValue}를 입력해주세요`);
+						$(item).focus();
+						isSubmit = false;
+						
+						return false;
+					}
+					
+				});                                                                                                                                                            
+			
+				if(isSubmit) $('#addPointSaveStandardForm').submit();
+			});
+		});
+	
 	</script>
 	</th:block> 
 	<!-- script end -->
