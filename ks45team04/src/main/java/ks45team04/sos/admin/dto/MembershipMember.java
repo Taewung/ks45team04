@@ -3,7 +3,7 @@ package ks45team04.sos.admin.dto;
 public class MembershipMember {
 
 	private String mmCode;
-	private String mmId;
+	private String mmId; 
 	private String mmMembershipCode;
 	private String mmPeriod;
 	private String mmStartDatetime;

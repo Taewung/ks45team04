@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 
 import ks45team04.sos.admin.dto.MembershipMember;
 import ks45team04.sos.admin.mapper.AdminMembershipMemberMapper;
-
+ 
 @Service("adminMembershipMemberService")
 public class MembershipMemberService {
-
+ 
 private final AdminMembershipMemberMapper adminMembershipMemberMapper;
 
 public MembershipMemberService(AdminMembershipMemberMapper adminMembershipMember) {

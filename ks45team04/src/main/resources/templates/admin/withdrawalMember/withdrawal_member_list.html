@@ -13,8 +13,7 @@
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
 		<h1>탈퇴 회원 목록</h1>
-                <p class="pxp-text-light">Withdrawal Member list</p>
-
+             <p class="pxp-text-light">Withdrawal Member list</p>
                 <div class="mt-4 mt-lg-5">
                     <div class="row justify-content-between align-content-center">
                         <div class="col-auto order-2 order-sm-1">
@@ -58,34 +57,27 @@
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>    
-                            <tbody>
+			<th:block th:if="${not #lists.isEmpty(withdrawalMemberList)}" th:each="wm : ${withdrawalMemberList}">
                                 <tr>
                                     <td><input type="checkbox" class="form-check-input"></td>
                                     <td>
-                                        <a href="#">
-                                            <div class="pxp-company-dashboard-job-title">id001</div>                                           
+                                        <a  th:href="@{/withdrawalMemberList(wdmId=${wm.getWdmId})}"  class="pxp-company-dashboard-job-title" 
+                                        	th:text="${wm.wdmId}">
                                         </a>
                                     </td>
-                                    <td><div class="pxp-company-dashboard-job-category">pw001</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">십일길동</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">11gildong@naver.com</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">1990-01-03</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">010-0011-0011</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">1,000</div></td>
-                                    <td><div class="pxp-company-dashboard-job-date mt-1">2022/08/20 at 11:56 am</div></td>
-                                    <td><div class="pxp-company-dashboard-job-date mt-1">2022/08/24 at 11:56 am</div></td>
-                                    
-                                    <td>
-                                        <div class="pxp-dashboard-table-options">
-                                            <ul class="list-unstyled">
-
-                                          
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>                      
+                                    <td><div class="pxp-company-dashboard-job-category"  th:text="${wm.wdmPw}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category"  th:text="${wm.wdmName}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category"  th:text="${wm.wdmEmail}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category"  th:text="${wm.wdmBirth}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category"  th:text="${wm.wdmPhone}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category"  th:text="${wm.wdmTotalPoint}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-date mt-1"  th:text="${wm.wdmRegDatetime}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-date mt-1"  th:text="${wm.wdmDatetime}"></div></td>
+                                       </tr>
+                                </th:block>    
                             </tbody>
-                        </table>
+                        </table>                                                                 
+ 
 						<!-- page 넘김 start -->
                         <div class="row mt-4 mt-lg-5 justify-content-center align-items-center">
                             <div class="col-auto">

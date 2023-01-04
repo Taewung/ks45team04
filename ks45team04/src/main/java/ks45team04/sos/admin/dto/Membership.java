@@ -6,7 +6,7 @@ public class Membership {
 	private String membershipPeriod;
 	private String membershipAmount;
 	private String membershipRegManager;
-	private String membershipRegDatetime;
+	private String membershipRegDatetime; 
 	public String getMembershipCode() {
 		return membershipCode;
 	}

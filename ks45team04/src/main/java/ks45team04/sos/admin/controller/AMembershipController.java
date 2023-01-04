@@ -16,7 +16,7 @@ import ks45team04.sos.admin.service.MembershipService;
 @Controller
 public class AMembershipController {
 	
-private final MembershipService membershipService;
+private final MembershipService membershipService; 
 private final AdminMembershipMapper membershipMapper;
 
 public AMembershipController(@Qualifier("adminMembershipService") MembershipService membershipService,

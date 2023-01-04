@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import ks45team04.sos.admin.dto.Member;
 
-@Mapper
+@Mapper 
 public interface AdminMemberMapper {
 
 	//전체 회원 정보 조회

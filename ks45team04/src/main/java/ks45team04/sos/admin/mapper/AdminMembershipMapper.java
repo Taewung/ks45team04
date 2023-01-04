@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import ks45team04.sos.admin.dto.Membership;
 
-
+ 
 @Mapper
 public interface AdminMembershipMapper {
 

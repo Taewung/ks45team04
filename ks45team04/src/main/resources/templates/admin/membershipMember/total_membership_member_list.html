@@ -11,7 +11,7 @@
 	<!-- script end -->
 	
 	<!-- customContents start -->
-	<th:block layout:fragment="customContents">
+	<th:block layout:fragment="customContents"> 
 		<h1>멤버십 회원 목록</h1>
                 <p class="pxp-text-light">MembershipMember List</p>
                 <div class="mt-4 mt-lg-5">
@@ -46,10 +46,10 @@
                             <thead>                    
                                 <tr>
                                     <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
-                                    <th style="width: 10%;">멤버십아이디</th>
-                                    <th style="width: 10%;">멤버십기간</th>
-                                    <th style="width: 20%;">멤버십시작일시</th>
-                                    <th style="width: 20%;">멤버십만료일시</th>
+                                    <th style="width: 15%;">멤버십아이디</th>
+                                    <th style="width: 15%;">멤버십기간</th>
+                                    <th style="width: 25%;">멤버십시작일시</th>
+                                    <th style="width: 25%;">멤버십만료일시</th>
                                     <th style="width: 15%;">멤버십상태</th>
                                     <th>&nbsp;</th>
                                 </tr>
@@ -68,8 +68,6 @@
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${mm.mmStartDatetime}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${mm.mmEndDatetime}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${mm.mmState}"></div></td>
-                                    <td>
-                                    </td>
                                  </tr>
                                 </th:block>    
                             </tbody>

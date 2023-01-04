@@ -18,7 +18,7 @@ import ks45team04.sos.admin.service.MembershipMemberService;
 public class AMembershipMemberController {
 
 	private final MembershipMemberService membershipMemberService;
-	private final AdminMembershipMemberMapper membershipMemberMapper;
+	private final AdminMembershipMemberMapper membershipMemberMapper; 
 	
 	public AMembershipMemberController(@Qualifier("adminMembershipMemberService") MembershipMemberService membershipMemberService,
 													AdminMembershipMemberMapper membershipMemberMapper) {

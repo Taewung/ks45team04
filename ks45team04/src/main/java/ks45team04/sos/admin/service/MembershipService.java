@@ -8,7 +8,7 @@ import ks45team04.sos.admin.dto.Membership;
 import ks45team04.sos.admin.mapper.AdminMembershipMapper;
 
 @Service("adminMembershipService")
-public class MembershipService {
+public class MembershipService { 
 
 private final AdminMembershipMapper adminMembershipMapper;
 

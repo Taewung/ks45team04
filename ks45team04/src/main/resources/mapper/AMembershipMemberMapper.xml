@@ -13,7 +13,7 @@
 		<result property="mmEndDatetime" 				column="mm_end_datetime"/>
 		<result property="mmState" 						column="mm_state"/>
 	</resultMap>
-	
+	 
 	
 	<select id="TotalMembershipMemberList" resultMap="MembershipMemberResultMap">
 			SELECT
