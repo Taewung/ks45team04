@@ -1,13 +1,23 @@
 package ks45team04.sos.member.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ks45team04.sos.member.dto.ToDoList;
+import ks45team04.sos.member.service.PlannerService;
+
 @Controller
 public class PlannerController {
 	
+private final 	PlannerService plannerService;
+
+	public PlannerController(PlannerService plannerService) {
+		this.plannerService = plannerService;
+	}
 		//일정 등록
 		@GetMapping("/addToDoList")
 		public String addToDoList(Model model) {
@@ -39,7 +49,12 @@ public class PlannerController {
 		//일정 상세
 		@GetMapping("/detailToDoList")
 		public String detailToDoList(Model model) {
+			
+			List<ToDoList> toDoListDetailList = plannerService.toDoListDetailList();
+			
 			model.addAttribute("title", "일정 상세");
+			model.addAttribute("toDoListDetailList", toDoListDetailList);
+			
 			return "member/planner/to_do_list_detail";
 		}
 		
