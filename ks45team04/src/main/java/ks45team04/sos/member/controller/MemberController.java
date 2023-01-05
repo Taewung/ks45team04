@@ -7,18 +7,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import ks45team04.sos.member.dto.Member;
-import ks45team04.sos.member.mapper.MemberMapper;
-import ks45team04.sos.member.service.MemberService;
+import ks45team04.sos.member.dto.MMember;
+import ks45team04.sos.member.mapper.MMemberMapper;
+import ks45team04.sos.member.service.MMemberService;
 
 @Controller
 public class MemberController {
 	
-	private final MemberService memberService;
-	private final MemberMapper memberMapper;
+	private final MMemberService memberService;
+	private final MMemberMapper memberMapper;
 	
-public MemberController(MemberService memberService,
-						MemberMapper membermapper) {
+public MemberController(MMemberService memberService,
+						MMemberMapper membermapper) {
 	this.memberService = memberService;
 	this.memberMapper = membermapper;
 }
@@ -46,7 +46,7 @@ public MemberController(MemberService memberService,
 	@GetMapping("/memberList")
 	public String memberList(Model model) {
 		
-		List<Member> memberList = memberService.MemberList();
+		List<MMember> memberList = memberService.MemberList();
 		model.addAttribute("title", "회원 개인 정보 조회");
 		model.addAttribute("memberList", memberList);
 		return  "member/member/member_list";		

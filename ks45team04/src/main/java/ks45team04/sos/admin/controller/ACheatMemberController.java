@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import ks45team04.sos.admin.dto.CheatMember;
 import ks45team04.sos.admin.mapper.AdminCheatMemberMapper;
@@ -26,6 +27,9 @@ public ACheatMemberController(@Qualifier("adminChaetMemberService") CheatMemberS
 }
 	
 private static final Logger log = LoggerFactory.getLogger(ACheatMemberController.class);
+
+
+ 	// 부정회원 목록 조회 화면
 	@GetMapping("/cheatMemberList")
 	public String cheatMemberList(Model model) {
 		
@@ -35,12 +39,31 @@ private static final Logger log = LoggerFactory.getLogger(ACheatMemberController
 		log.info("cheatMemberList :{}", cheatMemberList);
 		return  "admin/cheatMember/cheat_member_list";
 	}	
-	
+
+	// 부정회원 신고 화면
 	@GetMapping("/cheatMemberJudge")
 	public String cheatMemberJudge(Model model) {
 		model.addAttribute("title", "부정 회원 심사");
 		return  "admin/cheatMember/cheat_member_judge";		
 	}
+	
+	// 부정회원 신고 처리
+	@PostMapping("/cheatMemberJudge")
+	public String cheatMemberJudge(CheatMember CheatMember) {
+		System.out.println(CheatMember);
+		cheatMemberService.addCheatMember(CheatMember);
+		
+		return "redirect:/cheatMemberList";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public AdminCheatMemberMapper getCheatMemberMapper() {
 		return cheatMemberMapper;
 	}
