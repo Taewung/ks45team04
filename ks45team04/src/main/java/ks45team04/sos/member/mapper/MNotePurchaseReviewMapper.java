@@ -1,5 +1,5 @@
 package ks45team04.sos.member.mapper;
 
-public class LicenseDateMapper {
+public class MNotePurchaseReviewMapper {
 
 }

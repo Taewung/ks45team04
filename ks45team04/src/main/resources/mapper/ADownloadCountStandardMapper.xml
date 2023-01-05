@@ -11,6 +11,32 @@
 		<result property="downloadCountDatetime" 		column="download_count_datetime"/>
 	</resultMap>
 	
+		<update id="modifyDownloadCountStandard" parameterType="DownloadCountStandard">
+		/* 특정 다운로두 횟수 기준 수정*/
+		UPDATE 
+			download_count_standard
+		SET 
+			download_count = #{downloadCount}
+		WHERE 
+			dcs_code= #{dscCode};
+		</update>
+	
+	
+	
+	<select id="getDownloadCountStandardInfoByCode" parameterType="String" resultMap="downloadCountStandardResultMap">
+		/* 특정 다운로드 횟수 기준 정보 조회 */
+		SELECT
+			 dcs.dcs_code
+			,dcs.download_count
+			,dcs.download_count_writer
+			,dcs.download_count_datetime
+		FROM
+			download_count_standard as dcs
+		WHERE
+			dcs.dcs_code = #{dscCode};
+	</select>
+
+
 	<select id="getIdCheck" parameterType="String" resultType="boolean">
 		/* 관리자 아이디 인증 */
 		SELECT
