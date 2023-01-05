@@ -5,24 +5,45 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ks45team04.sos.member.dto.ToDoList;
+import ks45team04.sos.member.mapper.PlannerMapper;
 import ks45team04.sos.member.service.PlannerService;
 
 @Controller
 public class PlannerController {
 	
 private final 	PlannerService plannerService;
+private final 	PlannerMapper plannerMapper;
 
-	public PlannerController(PlannerService plannerService) {
+	public PlannerController(PlannerService plannerService
+									  ,PlannerMapper plannerMapper) {
+		
 		this.plannerService = plannerService;
+		this.plannerMapper = plannerMapper;
 	}
-		//일정 등록
+		//일정 등록 처리
+		@PostMapping("/addToDoList")
+		
+		public String addToDoList(ToDoList toDoList) {
+			
+			plannerService.addToDoList(toDoList);
+			
+			return "redirect:/listToDoList";
+		}
+	
+		//일정 등록 화면
 		@GetMapping("/addToDoList")
 		public String addToDoList(Model model) {
+			
+			List<ToDoList> toDoListDetailList = plannerMapper.toDoListDetailList();
+		
 			model.addAttribute("title", "일정 등록");
-			return "member/planner/to_do_list_insert";
+			model.addAttribute("toDoListDetailList", toDoListDetailList);
+			
+			return "member/planner/to_do_list_list";
 		}
 	
 		//일정 수정

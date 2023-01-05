@@ -46,7 +46,7 @@
                                     <th style="width: 13%;">일정실행날짜</th>
                                     <th style="width: 11%;">일정등록일시</th>
                                     <th style="width: 11%;">일일총공부시간</th>
-                                    <th style="width: 12%;">스톱워치/수정/삭제</th>
+                                    <th style="width: 12%;">스톱워치</th>
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>    
@@ -68,21 +68,12 @@
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.toDoListRegTime}"></div></td>   
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.toDayStudyTime}"></div></td>   
                                    <td>
-                                        <div class="pxp-dashboard-table-options">
+                                        <div class="pxp-dashboard-table-options" style="margin-right: 80px;">
                                             <ul class="list-unstyled">
                                             <a href="/recordStopwatch">
                                                 	<li><button title="stopwatch"><i class="fa fa-clock-o" aria-hidden="true"></i></button></li>
                                                 </a>
-                                            <!-- 수정버튼 start -->
-                                                <a href="#">
-                                                	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
-                                                </a>
-                                            <!-- 수정버튼 end -->
-                                            <!-- 삭제버튼 start -->
-                                                <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
-                                            <!-- 삭제버튼 end -->     
-                                             
-                                                </a>                                          
+                                                        
                                             </ul>
                                         </div>
                                     </td>  

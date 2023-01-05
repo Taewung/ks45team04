@@ -16,11 +16,24 @@ public class PlannerService {
 		this.plannerMapper = plannerMapper;
 	}
 	
-	//투두리스트 상세 조회
+	/**
+	 * 일정 상세 리스트
+	 * @return List<ToDoList>
+	 */
 	public List<ToDoList> toDoListDetailList(){
 		List<ToDoList> toDoListDetailList = plannerMapper.toDoListDetailList();
 		
 		return toDoListDetailList;
 		
+	}
+	
+	/**
+	 * 일정 등록
+	 * @param toDoList
+	 * @return int
+	 */
+	public int addToDoList(ToDoList toDoList) {
+		
+		return plannerMapper.addToDoList(toDoList);
 	}
 }
