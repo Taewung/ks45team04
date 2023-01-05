@@ -11,4 +11,9 @@ public interface WithdrawalMemberMapper {
 
 	//탈퇴회원 조회
 	public List<WithdrawalMember> WithdrawalMemberList();
+
+
+	//특정 탈퇴회원 조회
+	public WithdrawalMember getWithdrawalInfoByCode(String wdmId);
+	
 }
