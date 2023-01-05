@@ -9,6 +9,9 @@ import ks45team04.sos.member.dto.ToDoList;
 @Mapper	
 public interface PlannerMapper {
 	
-	//투두리스트 상세 조회
+	//일정 상세 조회
 		public List<ToDoList> toDoListDetailList();
+		
+	//일정 등록
+		public int addToDoList(ToDoList toDoList);
 }

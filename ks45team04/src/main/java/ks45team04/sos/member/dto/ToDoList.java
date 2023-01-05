@@ -1,7 +1,16 @@
 package ks45team04.sos.member.dto;
 
 public class ToDoList {
-	 public String getToDoListCode() {
+	private String toDoListCode;
+	 private String memId;
+	 private String liCode;
+	 private String liName;
+	 private String toDoListTitle;
+	 private String toDoListDay;
+	 private String toDoListRegTime;
+	 private String toDayStudyTime;
+	 
+	public String getToDoListCode() {
 		return toDoListCode;
 	}
 	public void setToDoListCode(String toDoListCode) {
@@ -49,14 +58,7 @@ public class ToDoList {
 	public void setToDayStudyTime(String toDayStudyTime) {
 		this.toDayStudyTime = toDayStudyTime;
 	}
-	private String toDoListCode;
-	 private String memId;
-	 private String liCode;
-	 private String liName;
-	 private String toDoListTitle;
-	 private String toDoListDay;
-	 private String toDoListRegTime;
-	 private String toDayStudyTime;
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

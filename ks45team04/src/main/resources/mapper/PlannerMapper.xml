@@ -25,4 +25,21 @@
 
 			
 	</select>
+	
+	<insert id="addToDoList" parameterType="ks45team04.sos.member.dto.ToDoList">
+		/* 일정 등록 */
+		INSERT INTO to_do_list
+		( to_do_list_code
+		 ,mem_id
+		 ,li_code
+		 ,li_name
+		 ,to_do_list_title
+		 ,to_do_list_day
+		 ,to_do_list_reg_time
+		 ,total_day_study_time) 
+		VALUES 
+		(#{toDoListCode}, #{memId}, #{liCode},#{liName}, #{toDoListTitle}, #{toDoListDay},NOW(), 
+			#{toDayStudyTime});
+			
+	</insert>
 </mapper>
