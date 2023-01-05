@@ -1,5 +1,5 @@
 package ks45team04.sos.member.service;
 
-public class LicenseDateService {
+public class MLicenseInfoService {
 
 }
