@@ -16,7 +16,20 @@ public class WithdrawalMemberService {
 			this.withdrawalMemberMapper = withdrawalMemberMapper;
 	}
 
+	/** 특정 탈퇴 회원 정보 조회
+	 * 
+	 * @param wdmId
+	 * @return WithdrawalMember
+	 */
+	public WithdrawalMember getWithdrawalInfoByCode(String wdmId) {
+
+		return withdrawalMemberMapper.getWithdrawalInfoByCode(wdmId);
+	}
 	
+	/**
+	 * 탈퇴 회원 정보 조회
+	 * @return List<WithdrawalMember>
+	 */
 	public List<WithdrawalMember> WithdrawalMemberList() {
 			List<WithdrawalMember> withdrawalMemberList = withdrawalMemberMapper.WithdrawalMemberList();
 			

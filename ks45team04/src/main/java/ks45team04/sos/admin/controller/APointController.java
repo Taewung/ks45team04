@@ -48,17 +48,6 @@ public class APointController {
 		
 	}
 	
-
-
-	
-	// 포인트 적립 기준 수정
-	@GetMapping("/modifyPointSaveStandard")
-	public String modifyPointSaveStandard(Model model) {
-		model.addAttribute("title", "포인트 적립 기준 수정");
-
-		return "admin/point/point_save_standard_modify";
-	}
-
 	// 포인트 적립 기준 삭제
 	@GetMapping("deletePointSaveStandard")
 	public String deletePointSaveStandard(Model model) {
@@ -66,7 +55,29 @@ public class APointController {
 
 		return "admin/point/point_save_standard_delete";
 	}
+	
+	//포인트 적립 기준 수정 처리
+	@PostMapping("/modifyPointSaveStandard")
+	public String modifyPointSaveStandard(PointSaveStandard pointSaveStandard) {
+		
+		pointSaveStandardService.modifyPointSaveStandard(pointSaveStandard);
+		
+		return "redirect:/pointSaveStandardList";
+	}
+	
+	
+	// 포인트 적립 기준 수정 화면
+	@GetMapping("/modifyPointSaveStandard")
+	public String modifyPointSaveStandard(@RequestParam(value="pointSaveStandardCode") String pointSaveStandardCode
+										  ,Model model) {
+		
+		PointSaveStandard pointSaveStandard = pointSaveStandardService.getPointSaveStandardInfoByCode(pointSaveStandardCode);
+		
+		model.addAttribute("title", "포인트 적립 기준 수정");
+		model.addAttribute("pointSaveStandardInfo", pointSaveStandard);
 
+		return "admin/point/point_save_standard_modify";
+	}
 	
 	//포인트 적립 기준 등록 관리자 인증
 	@GetMapping("/pointSaveStandardIdCheck")

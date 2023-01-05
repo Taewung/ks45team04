@@ -16,6 +16,27 @@ private final DownloadCountStandardMapper downloadCountStandardMapper;
 		this.downloadCountStandardMapper = downloadCountStandardMapper;
 	}
 	
+	/**
+	 * 특정 노트 다운로드 횟수 기준 수정
+	 * @Param DownloadCountStandard
+	 * @return int
+	 */
+	public int modifyDownloadCountStandard(DownloadCountStandard downloadCountStandard) {
+		
+		return downloadCountStandardMapper.modifyDownloadCountStandard(downloadCountStandard);
+	}
+	
+	
+	/**
+	 * 특정 노트 다운로드 횟수 기준 조회
+	 * @Param dscCode
+	 * @return DownloadCountStandard
+	 */
+	public DownloadCountStandard getDownloadCountStandardInfoByCode(String dscCode) {
+		
+		return downloadCountStandardMapper.getDownloadCountStandardInfoByCode(dscCode);
+	}
+	
 	
 	/**
 	 * 노트 다운로드 횟수 기준 등록

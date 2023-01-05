@@ -50,14 +50,21 @@ private final DownloadCountStandardMapper downloadCountStandardMapper;
 		// 다운로드 횟수 기준 수정 처리
 		@PostMapping("/modifydownloadCountStandard")
 		public String modifydownloadCountStandard(DownloadCountStandard DownloadCountStandard) {
+			
+			downloadCountStandardService.modifyDownloadCountStandard(DownloadCountStandard);
 					
-			return "";
+			return "redirect:/downloadCountStandardList";
 		}
 				
 		// 다운로드 횟수 기준 수정 화면
 		@GetMapping("/modifydownloadCountStandard")
-		public String modifydownloadCountStandard(Model model) {
+		public String modifydownloadCountStandard(@RequestParam(value="dscCode") String dscCode
+												  ,Model model) {
+			
+			DownloadCountStandard downloadCountStandard = downloadCountStandardMapper.getDownloadCountStandardInfoByCode(dscCode);
+			
 			model.addAttribute("title", "다운로드 횟수 기준 정보 수정");
+			model.addAttribute("downloadCountStandardInfo", downloadCountStandard);
 				
 			return "admin/noteDownloadCountStandard/dwonload_count_standard_modify";
 		}

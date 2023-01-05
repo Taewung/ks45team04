@@ -11,6 +11,27 @@
 		<result property="pointSaveStandardId" 			column="point_save_standard_id"/>
 	</resultMap>
 	
+	<update id="modifyPointSaveStandard" parameterType="PointSaveStandard">
+	/* 특정 포인트 적립 기준 수정*/
+	UPDATE 
+			point_save_standard
+	SET 
+			point_save_standard_code = #{pointSaveStandardCode}
+	WHERE 
+			point_save_standard_code= #{pointSaveStandardCode};
+	
+	</update>
+	
+	<select id="getPointSaveStandardByCode" parameterType="String" resultMap="pointSaveStandardResultMap">
+		/* 특정 포인트 적립 기준 정보 조회 */
+		SELECT
+			 *
+		FROM
+			point_save_standard
+		WHERE
+			point_save_standard_code = #{pointSaveStandardCode};
+	</select>
+	
 	<select id="getPointSaveStandardIdCheck" parameterType="String" resultType="boolean">
 		/* 관리자 아이디 인증 */
 		SELECT

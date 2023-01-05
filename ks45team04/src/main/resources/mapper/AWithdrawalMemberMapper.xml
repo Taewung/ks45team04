@@ -17,8 +17,30 @@
 		<result property="wdmDatetime" 					column="wdm_datetime"/>
 	</resultMap>
 	
+	<select id="getWithdrawalInfoByCode" parameterType= "String" resultMap="WithdrawalMemberResultMap">
+			/*특정 탈퇴 회원 정보 조회*/
+			SELECT
+			wm.wdm_id,
+			wm.wdm_pw,
+			wm.wdm_name,
+			wm.wdm_email,
+			wm.wdm_birth,
+			wm.wdm_phone,
+			wm.wdm_total_point,
+			wm.wdm_reg_datetime,
+			wm.wdm_datetime
+			FROM
+			withdrawal_member AS wm
+			WHERE
+			wm.wdm_id = #{wdmId};
+	</select>
+
+
+
+
 	
 	<select id="WithdrawalMemberList" resultMap="WithdrawalMemberResultMap">
+			/*탈퇴 회원 정보 조회*/
 			SELECT
 			wm.wdm_id,
 			wm.wdm_pw,

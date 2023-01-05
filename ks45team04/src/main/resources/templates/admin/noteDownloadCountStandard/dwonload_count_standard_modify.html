@@ -6,13 +6,56 @@
 	<!-- script start -->
 	<th:block layout:fragment="customScript">
 	<script>
+	$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+		$('#resetBtn').click(function(){
+			location.href = '/downloadCountStandardList';
+		});
+	});
 	</script>
 	</th:block> 
 	<!-- script end -->
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-dwonload_count_standard_modify.html
+	<h1>노트 다운로드 횟수 기준 수정</h1>
+		<form id="modifyDownloadCountStandardForm" th:action="@{/modifydownloadCountStandard}" name="myform" method="post">
+              <div class="row mt-4 mt-lg-5">
+                  <div class="col-xxl-8">
+                      <div class="row">
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="downloadCountWriter" class="form-label"><h4>관리자 아이디</h4></label>
+                                  <input type="text" id="downloadCountWriter" class="form-control" name="downloadCountWriter" placeholder="관리자 아이디"
+                                  		 th:value="${downloadCountStandardInfo.downloadCountWriter}" readonly="readonly">
+                              </div>
+                          </div>
+                      </div><br><br>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="dscCode" class="form-label"><h6>다운로드 횟수 기준 코드</h6></label><h12></h12>
+                                  <input type="text" id="dscCode" class="form-control" name="dscCode" placeholder="다운로드 횟수 기준 코드"
+                                  		 th:value="${downloadCountStandardInfo.dscCode}" readonly="readonly">
+                              </div>
+                          </div>
+                      </div>                     
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for=downloadCount class="form-label"><h6>다운로드 가능횟수</h6></label>
+                                  <input type="text" id="downloadCount" class="form-control" name="downloadCount" placeholder="다운로드 가능횟수"
+                                         th:value="${downloadCountStandardInfo.downloadCount}">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="mt-4 mt-lg-5">
+                  <button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>&nbsp;&nbsp;
+                  <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
+              </div>
+          </form>
 	</th:block>
 	<!-- customContents end -->
 	
