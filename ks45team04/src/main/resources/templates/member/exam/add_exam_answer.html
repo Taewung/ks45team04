@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{member/layout/contentDefault}">
-
+	  
 	<!-- script start -->
 	<th:block layout:fragment="customScript">
 	<script>
@@ -69,14 +69,6 @@
         <br><br><br><br><br>
 	</th:block>
 	<!-- customContents end -->
-	
-	<!-- customJs start -->
-	<th:block layout:fragment="customJs">
-		<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
-		<script type="text/javascript" src='questions.json'></script>
-		<script type='text/javascript' src='jsquiz.js'></script>
-		<script type='text/javascript' src='/js/examAnswer.js'></script>
-	</th:block>
-	<!-- customJs end -->
+
 </html>
 
