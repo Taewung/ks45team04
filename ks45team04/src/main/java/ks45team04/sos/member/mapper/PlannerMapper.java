@@ -14,4 +14,10 @@ public interface PlannerMapper {
 		
 	//일정 등록
 		public int addToDoList(ToDoList toDoList);
+		
+	//특정 일정 정보 수정
+		public int modifyToDoList(ToDoList toDoList);
+		
+	//특정 일정 정보 조회	
+		public ToDoList getToDoListByCode(String toDoListCode);
 }

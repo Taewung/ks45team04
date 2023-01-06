@@ -7,7 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.member.dto.ToDoList;
 import ks45team04.sos.member.mapper.PlannerMapper;
 import ks45team04.sos.member.service.PlannerService;
@@ -46,10 +48,25 @@ private final 	PlannerMapper plannerMapper;
 			return "member/planner/to_do_list_list";
 		}
 	
-		//일정 수정
+		//일정 정보 수정 처리
+		@PostMapping("/modifyToDoList")
+		public String modifyToDoList(ToDoList ToDoList) {
+			
+			plannerService.modifyToDoList(ToDoList);
+			
+			return "redirect:/detailToDoList";
+		}
+		
+		//일정 수정 화면
 		@GetMapping("/modifyToDoList")
-		public String modifyToDoList(Model model) {
-			model.addAttribute("title", "일정 수정");
+		public String modifyToDoList(@RequestParam(value="toDoListCode") String toDoListCode
+				,Model model) {
+			ToDoList toDoList = plannerService.getToDoListByCode(toDoListCode);
+
+
+			model.addAttribute("title", "일정 정보 수정");
+			model.addAttribute("toDoList", toDoList);
+
 			return "member/planner/to_do_list_modify";
 		}
 	
