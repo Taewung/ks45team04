@@ -79,8 +79,8 @@
                                                 </a>
                                             <!-- 수정버튼 end -->
                                             <!-- 삭제버튼 start -->
-                                               <a href="/deleteToDoList">
-                                            		 <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
+                                             <a th:href="@{/deleteToDoList(toDoListCode=${l.toDoListCode})}">
+                                              		 <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
                                            		</a>
                                             <!-- 삭제버튼 end -->               
                                             </ul>

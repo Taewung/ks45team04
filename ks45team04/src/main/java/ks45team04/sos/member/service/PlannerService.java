@@ -17,6 +17,19 @@ public class PlannerService {
 	}
 	
 	/**
+	 * 
+	 * @param toDoListCode
+	 * @return toDoList
+	 */
+	public void deleteToDoList(String toDoListCode) {
+		
+		plannerMapper.deleteToDoListByCode(toDoListCode);
+		
+		
+		
+	}
+	
+	/**
 	 * 특정 일정 정보 수정
 	 * @param toDoList
 	 * @return int (update 쿼리 실행 결과)
