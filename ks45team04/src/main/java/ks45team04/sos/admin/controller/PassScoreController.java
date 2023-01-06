@@ -38,9 +38,19 @@ public class PassScoreController {
 	// 자격증별 합격기준점수 등록
 	@PostMapping("/addLicensePassScore")
 	public String addLicensePassScore(LicensePassScore licensePassScore) {
-		licensePassScoreService.addLicensePassScore(licensePassScore);
-		return "redirect:/licensePassScoreList";		
+			
+	   //테이블명과 pk 자동 완성 할 컬럼명 입력 후 pk조회 후 DTO 셋팅 후 -> 입력처리 하면 된다
+	   String newLiPScoreCode = licensePassScoreService.getNewLiPassScoreCode("license_pass_score", "li_p_score_code");
+	   System.out.println(newLiPScoreCode+"<--- newLiPScoreCode addLicensePassScore PassScoreController.java");
+	   licensePassScore.setLiPScoreCode(newLiPScoreCode);
+	   licensePassScore.setLiCode("li001");
+	   licensePassScore.setLiName("정보처리기사");
+	   System.out.println(licensePassScore+"<--- licensePassScore  PassScoreController.java");
+
+	   licensePassScoreService.addLicensePassScore(licensePassScore);
+	   return "redirect:/licensePassScoreList";		
 	}
+	
 	// 자격증별 합격기준점수 등록
 	@GetMapping("/addLicensePassScore")
 	public String addLicensePassScore(Model model) {
@@ -48,14 +58,7 @@ public class PassScoreController {
 		model.addAttribute("licenseMainList", licenseMainList);
 		return "admin/passScore/add_license_pass_score";
 	}
-	// 자격증 합격기준점수코드 생성
-	@GetMapping("/getNewLiPassScoreCode")
-	@ResponseBody
-	public String getNewLiPassScoreCode(@RequestParam(value="liPScoreCode") String liPScoreCode) {
-		String newLiPScoreCode = licensePassScoreService.getNewLiPassScoreCode(liPScoreCode, liPScoreCode);
-		return newLiPScoreCode;
-	}
-	
+
 	// 중분류별 자격증목록 조회
 	@GetMapping("/getLicenseCategory")
 	@ResponseBody
