@@ -8,7 +8,7 @@
 	<script>
 		$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
 			$('#resetBtn').click(function(){
-				location.href = '/totalMemberList';
+				location.href = '/totalMemberInfo';
 			});
 		});
 		
@@ -19,52 +19,61 @@
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents"> 
                 <h1>회원 정보 조회 / 수정</h1>
-                <p class="pxp-text-light">MemberInfo</p>
-                <form id="totalMemberInfoForm" th:action="@{/totalMemberInfo}" name="totalMemberInfoform" method="post">
+                <p class="pxp-text-light">MemberInfoModify</p>
+                <form id="totalModifyMemberInfoForm" th:action="@{/totalModifyMemberInfo}" name="totalMemberInfoform" method="post">
                     <div class="row mt-2 mt-lg-3">
                         <div class="col-xxl-8">
                             <div class="mb-1">
-                                <label for="pxp-candidate-Password" class="form-label">ID</label>
-                                <input type="text" id="memId" class="form-control" name="memId" th:value="${totalMemberInfo.memId}">
+                                <label for="memId" class="form-label">ID</label>
+                                <input type="text" id="memId" class="form-control" name="memId" th:value="${totalModifyMemberInfo.memId}">
                             </div>
                          </div>                            
                      </div>                 
                     <div class="row mt-1 mt-lg-3">
                         <div class="col-xxl-8">
                             <div class="mb-1">
-                                <label for="pxp-candidate-Password" class="form-label">PW</label>
-                                <input type="text" id="memPw" class="form-control" name="memPw" th:value="${totalMemberInfo.memPw}">
+                                <label for=""memPw"" class="form-label">PW</label>
+                                <input type="text" id="memPw" class="form-control" name="memPw" th:value="${totalModifyMemberInfo.memPw}">
                             </div>
                          </div>                            
                      </div>
                     <div class="row mt-1 mt-lg-3">
                         <div class="col-xxl-8">
                             <div class="mb-1">
-                                <label for="pxp-candidate-Password" class="form-label">이름</label>
-                                <input type="text" id="memName" class="form-control" name="memName" th:value="${totalMemberInfo.memName}">
+                                <label for="memName" class="form-label">이름</label>
+                                <input type="text" id="memName" class="form-control" name="memName" th:value="${totalModifyMemberInfo.memName}">
                             </div>
                          </div>                            
                      </div>                                               
                     <div class="row mt-1 mt-lg-3">                          
                         <div class="col-xxl-8">
                             <div class="mb-1">
-                                <label for="pxp-candidate-Email" class="form-label">이메일</label>
-                                <input type="text" id="memEmail" class="form-control" name="memEmail" th:value="${totalMemberInfo.memEmail}">
+                                <label for="memEmail" class="form-label">이메일</label>
+                                <input type="text" id="memEmail" class="form-control" name="memEmail" th:value="${totalModifyMemberInfo.memEmail}">
                             </div>                            
                             </div>
-                         </div>                                                                                       
+                         </div>
                     <div class="row mt-1 mt-lg-3">                           
                         <div class="col-xxl-8">
                             <div class="mb-1">
-                                <label for="pxp-candidate-Phone" class="form-label">전화번호</label>
-                                <input type="text" id="memPhone" class="form-control" name="memPhone" th:value="${totalMemberInfo.memPhone}">
+                                <label for="memBirth" class="form-label">생년월일</label>
+                                <input type="text" id="memBirth" class="form-control" name="memBirth" th:value="${totalModifyMemberInfo.memBirth}">
+                            </div>                            
+                            </div>
+                         </div>                                                                                                                
+                    <div class="row mt-1 mt-lg-3">                           
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="memPhone" class="form-label">전화번호</label>
+                                <input type="text" id="memPhone" class="form-control" name="memPhone" th:value="${totalModifyMemberInfo.memPhone}">
                             </div>                            
                             </div>
                          </div> 
               <div class="mt-4 mt-lg-5">
                   <button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">수정</button>&nbsp;&nbsp;
                   <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
-              </div>   
+              </div> 
+             </form> 
 	</th:block>
 	<!-- customContents end -->	
 	<!-- customJs start -->

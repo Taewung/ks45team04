@@ -55,7 +55,7 @@
 			<th:block th:if="${not #lists.isEmpty(totalMemberList)}" th:each="m : ${totalMemberList}">
                                 <tr>
                                     <td>
-                                        <a  th:href="@{/totalMemberInfo(memId=${m.getMemId})}"  class="pxp-company-dashboard-job-title" 
+                                        <a  th:href="@{/totalModifyMemberInfo(memId=${m.memId})}"  class="pxp-company-dashboard-job-title" 
                                         	th:text="${m.memId}">
                                         </a>
                                     </td>
