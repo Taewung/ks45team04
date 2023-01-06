@@ -17,14 +17,24 @@ public class PlannerService {
 	}
 	
 	/**
-	 * 일정 상세 리스트
-	 * @return List<ToDoList>
+	 * 특정 일정 정보 수정
+	 * @param toDoList
+	 * @return int (update 쿼리 실행 결과)
 	 */
-	public List<ToDoList> toDoListDetailList(){
-		List<ToDoList> toDoListDetailList = plannerMapper.toDoListDetailList();
+	public int modifyToDoList(ToDoList toDoList) {
 		
-		return toDoListDetailList;
+		return plannerMapper.modifyToDoList(toDoList);
+	}
+	
+	
+	/**
+	 * 특정 일정 정보 조회
+	 * @param toDoListCode
+	 * @return toDoList
+	 */
+	public ToDoList getToDoListByCode(String toDoListCode) {
 		
+		return plannerMapper.getToDoListByCode(toDoListCode);
 	}
 	
 	/**
@@ -36,4 +46,16 @@ public class PlannerService {
 		
 		return plannerMapper.addToDoList(toDoList);
 	}
+	
+	/**
+	 * 일정 상세 리스트
+	 * @return List<ToDoList>
+	 */
+	public List<ToDoList> toDoListDetailList(){
+		List<ToDoList> toDoListDetailList = plannerMapper.toDoListDetailList();
+		
+		return toDoListDetailList;
+		
+	}
+	
 }
