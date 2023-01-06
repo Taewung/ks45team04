@@ -9,6 +9,12 @@ import ks45team04.sos.admin.dto.Refund;
 @Mapper
 public interface RefundMapper {
 
+	//특정 환불 내역 수정
+	public int modifyRefundApproval(Refund refund);
+	
+	//특정 환불 내역 조회
+	public Refund getRefundByCode(String refundCode);
+	
 	//환불 내역 조회
 	public List<Refund> refundList();
 }

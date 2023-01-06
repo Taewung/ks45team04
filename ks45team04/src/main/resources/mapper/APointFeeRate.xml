@@ -12,6 +12,29 @@
 		<result property="pointFeeRateDatetime" 	column="point_fee_rate_datetime"/>
 	</resultMap>
 	
+	<update id="modifyPointFeeRate" parameterType="PointFeeRate">
+	/* 특정 포인트 적립 기준 수정*/
+	UPDATE 
+			point_fee_rate
+	SET 
+			point_fee_rate_contents = #{pointFeeRateContents},
+			point_fee_rate = #{pointFeeRate}
+	WHERE 
+			point_fee_rate_code= #{pointFeeRateCode};
+	
+	</update>
+	
+	<select id="getPointFeeRateByCode" parameterType="String" resultMap="pointFeeRateResultMap">
+		/* 특정 포인트 적립 기준 정보 조회 */
+		SELECT
+			 *
+		FROM
+			point_fee_rate
+		WHERE
+			point_fee_rate_code = #{pointFeeRateCode};
+	</select>
+	
+	
 	<select id="getPointFeeRateIdCheck" parameterType="String" resultType="boolean">
 		/* 관리자 아이디 인증 */
 			SELECT

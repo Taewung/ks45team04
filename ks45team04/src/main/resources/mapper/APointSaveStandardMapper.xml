@@ -16,7 +16,8 @@
 	UPDATE 
 			point_save_standard
 	SET 
-			point_save_standard_code = #{pointSaveStandardCode}
+			point_save_standard_content = #{pointSaveStandardContent},
+			save_point = #{savePoint}
 	WHERE 
 			point_save_standard_code= #{pointSaveStandardCode};
 	

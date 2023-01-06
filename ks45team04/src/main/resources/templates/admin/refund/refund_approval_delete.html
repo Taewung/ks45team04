@@ -12,7 +12,7 @@
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-         <h1>환불 신청 내역</h1>
+         <h1>환불 승인</h1>
             <p class="pxp-text-light">Refund approval</p>
 
             <div class="mt-4 mt-lg-5">
@@ -48,8 +48,9 @@
                                 <th style="width: 8%;">결제금액</th>
                                 <th style="width: 8%;">환불금액</th>
                                 <th style="width: 8%;">환불포인트</th>
-                                <th style="width: 8%;">상태</th>
-                                <th style="width: 15%;">환불신청일시</th>
+                                <th style="width: 8%;">환불상태</th>
+                                <th style="width: 10%;">환불일시</th>
+                                <th style="width: 8%;">환불승인자</th>
                                 <th>승인/삭제</th>
                             </tr>
                         </thead>
@@ -58,7 +59,7 @@
 									th:each="l : ${refundList}">
                             
                                 <td><div class="pxp-company-dashboard-job-title" th:text="${l.refundCode}"></div>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.payCompleteCode}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.payComPleteCode}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${l.payId}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${l.refundReason}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${#numbers.formatInteger(l.finalPayPrice, 3, 'COMMA')}"></div></td>
@@ -66,11 +67,12 @@
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${l.refundPoint}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${l.refundState}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${l.refundDatetime}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-status" th:text="${l.refundApprovalId}"></div></td>
                                 <td>
                                     <div class="pxp-dashboard-table-options">
                                         <ul class="list-unstyled">
-                                        <a href="/modifyRefundApproval">
-                                            <li><button title="Modify"><span class="fa fa-check"></span></button></li>
+                                        <a href="/refundApproval">
+                                            <li><button title="Approval"><span class="fa fa-check"></span></button></li>
                                          </a>
                                             <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
                                        
