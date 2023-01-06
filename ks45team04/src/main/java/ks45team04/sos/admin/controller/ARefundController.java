@@ -7,12 +7,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ks45team04.sos.admin.dto.Refund;
 import ks45team04.sos.admin.mapper.RefundMapper;
 import ks45team04.sos.admin.service.RefundService;
 
 @Controller
+
 public class ARefundController {
 
 	private final RefundService refundService;
@@ -25,7 +27,8 @@ public class ARefundController {
 	//환불 승인 수정 처리
 	@PostMapping("/modifyRefundApproval")
 	public String modifyRefundApproval(Refund refund) {
-		
+		System.out.println(refund + "<- refund modifyRefundApproval");
+
 		refundService.modifyRefundApproval(refund);
 		
 		return "redirect:/refundApproval";
@@ -33,8 +36,11 @@ public class ARefundController {
 	
 	//환불 승인 수정 화면
 	@GetMapping("/modifyRefundApproval")
-	public String modifyRefundApproval(@RequestParam(value="refundCode", required = false) String refundCode,
+	public String modifyRefundApproval(@RequestParam(value="refundCode") String refundCode , 
 									   Model model) {
+		
+		
+		System.out.println(refundCode + "<- refundCode modifyRefundApproval");
 		Refund refund = refundService.getRefundInfoByCode(refundCode);
 		
 		model.addAttribute("title", "환불 승인 수정");

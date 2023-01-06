@@ -198,9 +198,6 @@ public class APointController {
 	}
 
 
-
-
-
 	// 포인트 수수료율 삭제
 	@GetMapping("/deletePointfeeRate")
 	public String deletePointfeeRate(Model model) {
