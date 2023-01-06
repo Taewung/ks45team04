@@ -18,8 +18,17 @@ public MemberService(AdminMemberMapper adminMemberMapper ) {
 	this.adminMemberMapper = adminMemberMapper;
 }
 
+/** 회원 상세 조회
+ * 
+ * @param memId
+ * @return Member
+ */
 
 
+public Member getTotalMemberInfo(String memId){
+
+	return adminMemberMapper.getTotalMemberInfo(memId);
+}
 
 
 
