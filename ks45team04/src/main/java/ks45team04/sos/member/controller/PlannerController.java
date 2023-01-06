@@ -31,7 +31,7 @@ private final 	PlannerMapper plannerMapper;
 			
 			plannerService.addToDoList(toDoList);
 			
-			return "redirect:/listToDoList";
+			return "redirect:/detailToDoList";
 		}
 	
 		//일정 등록 화면

@@ -43,10 +43,10 @@
 			        <div id="contextMenu" class="dropdown clearfix">
 			            <ul class="dropdown-menu dropNewEvent" role="menu" aria-labelledby="dropdownMenu"
 			                style="display:block;position:static;margin-bottom:5px;">
-			                <li><a tabindex="-1" href="#">일정등록1 230105_1</a></li>
-			                <li><a tabindex="-1" href="#">일정등록2 230105_1</a></li>
-			                <li><a tabindex="-1" href="#">일정등록3 230105_1</a></li>
-			                <li><a tabindex="-1" href="#">일정등록4 230105_1</a></li>
+			                <li><a tabindex="-1" href="#">일정등록1 </a></li>
+			                <li><a tabindex="-1" href="#">일정등록2 </a></li>
+			                <li><a tabindex="-1" href="#">일정등록3 </a></li>
+			                <li><a tabindex="-1" href="#">일정등록4 </a></li>
 			                <li class="divider"></li>
 			                <li><a tabindex="-1" href="#" data-role="close">Close</a></li>
 			            </ul>
@@ -87,18 +87,28 @@ src\main\resources\static\fullcal\js\addEvent.js
 -->
 			                    
 <!-- 								    <form id="save-event" th:action="@{/addToDoList}" name="save-event" method="post"> -->
-								    <form th:action="@{/addToDoList}"  method="post">
+								    <form th:action= "@{/addToDoList}"  method="post">
 								    
 								    <!-- to_do_list_code 일정코드 todo005 로 테스트 -->
 								    	<!-- <input type="hidden" name="toDoListCode" value="세션아이디변수명"> -->
-								    	<input type="hidden" name="toDoListCode" value="todo005">
-								    <!-- li_code 자격증 코드 li002 로 테스트 -->								    	
-								    	<input type="hidden" name="liCode" value="li002">
+								    	 <div class="row">
+			                            <div class="col-xs-12"> 
+			                             <label class="col-xs-4 new-date" style="width:25%;" for="toDoListCode">일정코드</label>
+								    	<input type="text" name="toDoListCode" >
+								    	</div>
+			                        </div>
+								    <!-- li_code 자격증 코드 li002 로 테스트 -->					
+								     <div class="row">
+			                            <div class="col-xs-12"> 
+			                             <label class="col-xs-4 new-date" style="width:25%;" for="liCode">자격증코드</label>
+								    			<input type="text" name="liCode" >
+		 								</div>
+			                        </div>
 
 			                              <div class="row">
 			                            <div class="col-xs-12"> 
 			                                <label class="col-xs-4 new-date" style="width:25%;" for="memId">아이디</label>
-			                                <input class="inputModal" type="text" value="id006" name="memId" id="memId"
+			                                <input class="inputModal" type="text"  name="memId" id="memId"
 			                                    required="required" />
 			                            </div>
 			                        </div>
@@ -106,7 +116,7 @@ src\main\resources\static\fullcal\js\addEvent.js
 			                        <div class="row">
 			                            <div class="col-xs-12">
 			                                <label class="col-xs-4 new-date" style="width:25%;" for="toDoListTitle">제목</label>
-			                                <input class="inputModal" type="text" value="컴활 1과목 공부 230105" name="toDoListTitle" id="toDoListTitle"
+			                                <input class="inputModal" type="text"  name="toDoListTitle" id="toDoListTitle"
 			                                    required="required" />
 			                            </div>
 			                        </div>
@@ -124,8 +134,8 @@ src\main\resources\static\fullcal\js\addEvent.js
 			                        </div>
 			                          <div class="row">
 			                            <div class="col-xs-12">
-			                                <label class="col-xs-4 new-date" style="width:25%;" for="edit-title">자격증이름</label>
-			                                <input class="inputModal" type="text" value="컴퓨터활용능력" name="liName" id="liName"
+			                                <label class="col-xs-4 new-date" style="width:25%;" for="liName">자격증이름</label>
+			                                <input class="inputModal" type="text" name="liName" id="liName"
 			                                    required="required" />
 			                            </div>
 			                        </div>
@@ -165,7 +175,7 @@ src\main\resources\static\fullcal\js\addEvent.js
 			                    <div class="modal-footer modalBtnContainer-addEvent">
 			                        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 			                        <!-- <button type="submit" class="btn btn-primary" id="save-event">저장 1 </button> -->
-			                        <input type="submit"  value="저장3">
+			                        <input type="submit"  value="저장">
 <!-- 			                        <button type="button" class="btn btn-primary" id="save-event">저장 1 </button> -->
 			                    </div>
 			                    
