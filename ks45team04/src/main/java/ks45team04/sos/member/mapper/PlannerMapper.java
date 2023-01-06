@@ -20,4 +20,7 @@ public interface PlannerMapper {
 		
 	//특정 일정 정보 조회	
 		public ToDoList getToDoListByCode(String toDoListCode);
+		
+	//일정 코드로 일정 삭제
+		public int deleteToDoListByCode(String toDoListCode);
 }

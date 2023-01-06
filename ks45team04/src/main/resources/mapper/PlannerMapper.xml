@@ -4,6 +4,15 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ks45team04.sos.member.mapper.PlannerMapper">
 	
+		<delete id="deleteToDoListByCode" parameterType="String">
+		/* 일정코드로 일정삭제 */
+		DELETE
+		FROM 
+			to_do_list
+		WHERE 
+			to_do_list_code = #{toDoListCode};
+	</delete>
+	
 	<resultMap type="ks45team04.sos.member.dto.ToDoList" 						id="toDoListDetailListResultMap">
 		<id property="toDoListCode" 					column="to_do_list_code"/>
 		<result property="memId" 						column="mem_id"/>
