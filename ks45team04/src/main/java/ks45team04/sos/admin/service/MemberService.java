@@ -18,7 +18,23 @@ public MemberService(AdminMemberMapper adminMemberMapper ) {
 	this.adminMemberMapper = adminMemberMapper;
 }
 
-/** 회원 상세 조회
+
+
+
+/**
+ * 특정 회원 수정
+ * @param member
+ * @return
+ */
+
+
+public int modifyMemberInfo(Member member) {
+	
+	return adminMemberMapper.modifyMemberInfo(member);
+}
+
+
+/** 특정 회원 상세 조회
  * 
  * @param memId
  * @return Member

@@ -15,6 +15,28 @@
 	</resultMap>
 	
 	
+		<select id="checkMemberId" resultMap="MemberResultMap">	
+		/*아이디 중복체크*/
+		SELECT
+				IF(COUNT(*)=1, 1, 0)
+			FROM
+				member as m
+			WHERE
+				m.mem_id = #{memId};
+		</select>	
+	
+	
+	
+		<select id="AddMember" resultMap="MemberResultMap">
+			/* 회원 가입 */
+			INSERT INTO member
+			(mem_id, mem_pw, mem_name, mem_email, mem_birth, mem_phone, mem_level_name)
+			VALUES
+			(#{memId}, #{memPw}, #{memName}, #{memEmail}, #{memBirth}, #{memPhone}, 회원, curdate());
+	</select>
+	
+	
+	
 	<select id="MemberList" resultMap="MemberResultMap">
 			/* 본인 정보 조회 */
 			SELECT

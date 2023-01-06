@@ -29,7 +29,7 @@ public List<MMember> MemberList() {
 	 * 회원 가입
 	 * @param member
 	 */
-public void addMember(MMember member) {
+	public void addMember(MMember member) {
 	memberMapper.addMember(member);
 }
 

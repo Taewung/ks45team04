@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ks45team04.sos.admin.dto.Member;
 import ks45team04.sos.admin.mapper.AdminMemberMapper;
@@ -23,7 +25,32 @@ public AMemberController(@Qualifier("adminMemberService") MemberService memberSe
 	this.memberService = memberService;
 	this.memberMapper = membermapper;
 }
-	//상세 회원 조회 화면
+
+	//특정 회원 정보 수정 처리
+	@PostMapping("/totalModifyMemberInfo")
+	public String modifyMemberInfo(Member member) {
+		
+		memberService.modifyMemberInfo(member);
+		
+		return "redirect:/totalMemberList";
+	}
+
+
+	//특정 회원 정보 수정 화면
+	@GetMapping("/totalModifyMemberInfo")
+	public String modifyMemberInfo(@RequestParam(value="memId") String memId
+							,Model model) {
+		Member member = memberService.getTotalMemberInfo(memId);
+		
+		model.addAttribute("title", "특정 회원 정보 수정");
+		model.addAttribute("totalModifyMemberInfo", member);
+		
+		return "admin/adminMember/total_modify_member_info";
+		
+	}
+
+
+	//특정 회원 상세 조회 화면
 	@GetMapping("/totalMemberInfo")
 	public String totalMemberInfo(@RequestParam(value="memId") String memId 
 			,Model model) {
