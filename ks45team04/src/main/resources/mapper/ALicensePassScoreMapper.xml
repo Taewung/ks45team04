@@ -52,8 +52,8 @@
 		SELECT
 			CASE
 			WHEN COUNT(1) = 0 THEN CONCAT(#{li_pass_score}, '_1')
-			ELSE
-				CONCAT(#{li_pass_score}, MAX(CAST(SUBSTRING_INDEX(${liPScoreCode}, CONCAT(#{li_pass_score}, '_'), -1) AS UNSIGNED))+1)
+		ELSE
+			CONCAT('li_pass_score_', MAX(CAST(SUBSTRING_INDEX(${liPScoreCode}, 'li_pass_score_', -1)AS UNSIGNED))+1)
 			END AS newCode
 		FROM
 			${li_pass_score};
