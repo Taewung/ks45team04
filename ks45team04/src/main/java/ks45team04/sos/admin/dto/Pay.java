@@ -8,8 +8,6 @@ public class Pay {
 	private int payUsePoint;
 	private int finalPayPrice;
 	private String payCompleteDatetime;
-	
-
 	public String getPayId() {
 		return payId;
 	}
@@ -52,11 +50,13 @@ public class Pay {
 	public void setPayCompleteDatetime(String payCompleteDatetime) {
 		this.payCompleteDatetime = payCompleteDatetime;
 	}
-	
 	@Override
 	public String toString() {
 		return "Pay [payId=" + payId + ", payCompleteCode=" + payCompleteCode + ", goodsName=" + goodsName
 				+ ", totalPayPrice=" + totalPayPrice + ", payUsePoint=" + payUsePoint + ", finalPayPrice="
 				+ finalPayPrice + ", payCompleteDatetime=" + payCompleteDatetime + "]";
 	}
+	
+
+
 }

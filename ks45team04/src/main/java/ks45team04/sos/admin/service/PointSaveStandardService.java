@@ -21,10 +21,11 @@ public class PointSaveStandardService {
 
 	// 포인트 적립 기준 수정
 	public int modifyPointSaveStandard(PointSaveStandard pointSaveStandard) {
+		
 		return pointSaveStandardMapper.modifyPointSaveStandard(pointSaveStandard);
 	}
 	
-	//특정 포인트 적립 기준 조회
+	//특정 포인트 적립 기준 내역 조회
 	public PointSaveStandard getPointSaveStandardInfoByCode(String pointSaveStandardCode) {
 		
 		return pointSaveStandardMapper.getPointSaveStandardByCode(pointSaveStandardCode);

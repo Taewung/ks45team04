@@ -2,7 +2,7 @@ package ks45team04.sos.admin.dto;
 
 public class Refund {
 	private String refundCode;
-	private String payComPleteCode;
+	private String payCompleteCode;
 	private String payId;
 	private String refundReason;
 	private int finalPayPrice;
@@ -18,11 +18,11 @@ public class Refund {
 	public void setRefundCode(String refundCode) {
 		this.refundCode = refundCode;
 	}
-	public String getPayComPleteCode() {
-		return payComPleteCode;
+	public String getPayCompleteCode() {
+		return payCompleteCode;
 	}
-	public void setPayComPleteCode(String payComPleteCode) {
-		this.payComPleteCode = payComPleteCode;
+	public void setPayCompleteCode(String payCompleteCode) {
+		this.payCompleteCode = payCompleteCode;
 	}
 	public String getPayId() {
 		return payId;
@@ -72,13 +72,13 @@ public class Refund {
 	public void setRefundApprovalId(String refundApprovalId) {
 		this.refundApprovalId = refundApprovalId;
 	}
-	
 	@Override
 	public String toString() {
-		return "Refund [refundCode=" + refundCode + ", payComPleteCode=" + payComPleteCode + ", payId=" + payId
+		return "Refund [refundCode=" + refundCode + ", payCompleteCode=" + payCompleteCode + ", payId=" + payId
 				+ ", refundReason=" + refundReason + ", finalPayPrice=" + finalPayPrice + ", refundPrice=" + refundPrice
 				+ ", refundPoint=" + refundPoint + ", refundState=" + refundState + ", refundDatetime=" + refundDatetime
 				+ ", refundApprovalId=" + refundApprovalId + "]";
 	}
 	
+
 }
