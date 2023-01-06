@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ks45team04.sos.admin.dto.Membership;
 import ks45team04.sos.admin.mapper.AdminMembershipMapper;
@@ -45,6 +47,19 @@ private static final Logger log = LoggerFactory.getLogger(AMembershipController.
 		return  "admin/membership/remove_membership";		
 	}	
 
+	//상세 멤버십 조회 화면
+	@GetMapping("totalMembershipInfo")
+	public String totalMembershipInfo(@RequestParam(value="membershipCode") String membershipCode
+									,Model model) {
+		Membership totalMembershipInfo = membershipService.getTotalMembershipInfo(membershipCode);
+		
+		model.addAttribute("title", "상세 멤버십 조회");
+		model.addAttribute("totalMembershipInfo", totalMembershipInfo);
+		
+		return "admin/membership/total_membership_info";
+	}
+	
+	//멤버십 목록 조회
 	@GetMapping("/membershipList")
 	public String membershipList(Model model) {
 		List<Membership> membershipList = membershipService.MembershipList();

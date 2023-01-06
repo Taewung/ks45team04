@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ks45team04.sos.admin.dto.Member;
 import ks45team04.sos.admin.mapper.AdminMemberMapper;
@@ -22,10 +23,24 @@ public AMemberController(@Qualifier("adminMemberService") MemberService memberSe
 	this.memberService = memberService;
 	this.memberMapper = membermapper;
 }
-	
+	//상세 회원 조회 화면
+	@GetMapping("/totalMemberInfo")
+	public String totalMemberInfo(@RequestParam(value="memId") String memId 
+			,Model model) {
+		
+		Member totalMemberInfo = memberService.getTotalMemberInfo(memId);
+
+		model.addAttribute("title", "상세 회원 조회");
+		model.addAttribute("totalMemberInfo", totalMemberInfo);
+
+		return "admin/adminMember/total_member_info";		
+	}
+
+
+	//회원 목록 조회
 	@GetMapping("/totalMemberList")
 	public String totalMemberList(Model model) {
-		
+
 		List<Member> totalMemberList = memberService.TotalMemberList();		
 		model.addAttribute("title", "회원 전체 정보 조회");
 		model.addAttribute("totalMemberList", totalMemberList);

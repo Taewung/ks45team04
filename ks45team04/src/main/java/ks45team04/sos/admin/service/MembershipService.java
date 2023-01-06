@@ -17,6 +17,16 @@ public MembershipService(AdminMembershipMapper adminMembershipMapper) {
 	
 	}
 
+
+/**
+ * 멤버십 상세 조회
+ * @param membershipCode
+ * @return Membership
+ */
+public Membership getTotalMembershipInfo(String membershipCode) {
+	return adminMembershipMapper.getTotalMembershipInfo(membershipCode);
+}
+
 /**
  * 멤버십 조회
  * @return List<Membership>

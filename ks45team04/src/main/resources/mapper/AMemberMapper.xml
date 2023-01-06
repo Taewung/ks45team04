@@ -14,6 +14,24 @@
 		<result property="memLevelName" 			column="mem_level_name"/>
 		<result property="memRegDatetime" 			column="mem_reg_datetime"/>
 	</resultMap>
+
+	<select id="getTotalMemberInfo" parameterType="String" resultMap="MemberResultMap">
+			/* 특정 회원 목록 조회 */
+			SELECT
+				m.mem_id,
+				m.mem_pw,
+				m.mem_name,
+				m.mem_email,
+				m.mem_birth,
+				m.mem_phone,
+				m.mem_reg_datetime
+			FROM
+				member as m
+			WHERE
+				m.mem_id = #{memId};
+				
+	</select>
+
 	
 	
 	<select id="TotalMemberList" resultMap="MemberResultMap">
@@ -29,22 +47,5 @@
 			FROM
 				member;
 	</select>
-					
-<!-- 	<select id="TotalMemberList" resultMap="MemberResultMap">				
-			/*탈퇴 회원 전체 목록 조회*/
-			SELECT
-				wm.wdm_id,
-				wm.wdm_pw,
-				wm.wdm_name,
-				wm.wdm_email,
-				wm.wdm_birth,
-				wm.wdm_phone,
-				tp.total_point,
-				wm.wdm_reg_datetime,
-				wm.wdm_datetime
-			FROM
-				withdrawal_member as wm
-				INNER JOIN
-				total_point as tp 		
-		</select>  -->
+
 </mapper>
