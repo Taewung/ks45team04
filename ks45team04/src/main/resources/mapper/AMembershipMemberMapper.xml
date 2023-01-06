@@ -25,4 +25,27 @@
 			FROM
 			membership_member;
 	</select>
+	
+	
+	<select id="getTotalMembershipMemberInfo" resultMap="MembershipMemberResultMap">
+			/*특정 멤버십 회원 조회*/
+			SELECT
+			mm.mm_code,
+			mm.mm_id,
+			mm.mm_membership_code,
+			mm.mm_period,
+			mm.mm_start_datetime,
+			mm.mm_end_datetime
+			FROM
+			membership_member AS mm
+			WHERE
+			mm.mm_id = #{mmId};
+	</select>		
+	
+	
+	
+	
+	
+	
+	
 </mapper>

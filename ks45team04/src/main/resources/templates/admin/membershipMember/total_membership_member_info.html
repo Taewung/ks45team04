@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{admin/layout/adminDefault}">
+
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	<script>
+	</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents"> 
+                <h1>멤버십 정보 조회 / 수정</h1>
+                <p class="pxp-text-light">MembershipInfo</p>
+                <form id="totalMembershipMemberInfoForm" th:action="@{/totalMembershipMemberInfo}" name="totalMembershipMemberInfoform" method="post">               
+                    <div class="row mt-1 mt-lg-3">
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Password" class="form-label">멤버십등록코드</label>
+                                <input type="text" id="mmCode" class="form-control" name="mmCode" th:value="${totalMembershipMemberInfo.mmCode}" disabled>
+                            </div>
+                         </div>                            
+                     </div>
+                    <div class="row mt-1 mt-lg-3">
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Password" class="form-label">ID</label>
+                                <input type="text" id="mmId" class="form-control" name="mmId" th:value="${totalMembershipMemberInfo.mmId}" disabled>
+                            </div>
+                         </div>                            
+                     </div>
+                    <div class="row mt-1 mt-lg-3">
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Password" class="form-label">멤버십코드</label>
+                                <input type="text" id="mmMembershipCode" class="form-control" name="mmMembershipCode" th:value="${totalMembershipMemberInfo.mmMembershipCode}">
+                            </div>
+                         </div>                            
+                     </div>                                               
+                    <div class="row mt-1 mt-lg-3">                          
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Email" class="form-label">멤버십기간</label>
+                                <input type="text" id="mmPeriod" class="form-control" name="mmPeriod" th:value="${totalMembershipMemberInfo.mmPeriod}">
+                            </div>                            
+                            </div>
+                         </div>
+                    <div class="row mt-1 mt-lg-3">                          
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Email" class="form-label">멤버십시작일시</label>
+                                <input type="text" id="mmStartDatetime" class="form-control" name="mmStartDatetime" th:value="${totalMembershipMemberInfo.mmStartDatetime}">
+                            </div>                            
+                            </div>
+                         </div>
+                     <div class="row mt-1 mt-lg-3">                          
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Email" class="form-label">멤버십종료일시</label>
+                                <input type="text" id="mmEndDatetime" class="form-control" name="mmEndDatetime" th:value="${totalMembershipMemberInfo.mmEndDatetime}">
+                            </div>                            
+                            </div>
+                         </div>
+                     <div class="row mt-1 mt-lg-3">                          
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Email" class="form-label">멤버십상태</label>
+                                <input type="text" id="mmState" class="form-control" name="mmState" th:value="${totalMembershipMemberInfo.mmState}">
+                            </div>                            
+                            </div>
+                         </div>                                                                                                                                                                       
+                      <div class="mt-2 mt-lg-4">
+                            <a href="/MembershipList" class="btn rounded-pill pxp-section-cta"  onclick="alert('수정이 완료되었습니다.')">수정하기</a></button>  &emsp;&emsp; <a href="/totalMemberList"  class="btn rounded-pill pxp-section-cta">취소</a>
+                    </div>   
+	</th:block>
+	<!-- customContents end -->	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
+</html>

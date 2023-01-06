@@ -45,7 +45,7 @@
                         <table class="table table-hover align-middle">                      	
                             <thead>                    
                                 <tr>
-                                    <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
+                                    <th class="pxp-is-checkbox" style="width: 1%;"></th>
                                     <th style="width: 15%;">멤버십아이디</th>
                                     <th style="width: 15%;">멤버십기간</th>
                                     <th style="width: 25%;">멤버십시작일시</th>
@@ -58,9 +58,9 @@
                         
         				<th:block th:if="${not #lists.isEmpty(totalMembershipMemberList)}" th:each="mm : ${totalMembershipMemberList}">
                                 <tr>
-                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td></td>
                                     <td>
-                                        <a  th:href="@{/totalMembershipMemberList(mmId=${mm.getMmId})}"  class="pxp-company-dashboard-job-title" 
+                                        <a  th:href="@{/totalMembershipMemberInfo(mmId=${mm.getMmId})}"  class="pxp-company-dashboard-job-title" 
                                         	th:text="${mm.mmId}">
                                         </a>
                                     </td>
