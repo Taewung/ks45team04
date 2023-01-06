@@ -31,6 +31,7 @@
 						  $('#licenseSubCategory').children().remove();
 						  for(let subCategory of data){
 							  $('#licenseSubCategory').append(`<option value="${subCategory.lscCode}">${subCategory.lscName}</option>`);
+							 
 						  }
 						});
 						 
@@ -68,7 +69,7 @@
 					
 					$('#addLicensePassScore input').each(function(idx, item){
 						let checkValue = $(item).val();
-						let labelValue = $(item).parents('div').find('label').text();
+						let labelValue = $(item).parents('.mb-3').find('label').text();
 						if(validateValue(checkValue)){
 							
 							alert(`${labelValue}를 입력해주세요`);
@@ -116,14 +117,14 @@
                                 <input type="text" id="pxp-company-job-experience" class="form-control" name="liPStandardScore" placeholder="점수를 입력해주세요.">   
                             </div>
                         </div>
+                        
                     </div>
                     <div class="row mt-4 mt-lg-5">
-
 	                   <div class="mt-4 mt-lg-5">
-	                        <button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>
-	                        <button type="reset" id="resetBtn" class="btn rounded-pill pxp-section-cta-o ms-3">취소</button>
+	                        <button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>
+							<a th:href="@{/licensePassScoreList}" class="btn rounded-pill pxp-section-cta-o ms-3">취소</a>                                                
                     	</div>                                      
-                    	</div>
+                    </div>                   
                 </form>
 	</th:block>
 	<!-- customContents end -->

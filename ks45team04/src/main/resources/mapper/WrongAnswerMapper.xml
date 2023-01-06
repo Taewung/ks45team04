@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team04.sos.admin.mapper.WrongAnswerMapper">
+	
+	<resultMap type="WrongAnswer" id="wrongAnswerResultMap">
+		<id 	property="waCode" 				column="wa_code"/>
+		<result property="examAnswerCode" 		column="exam_answer_code"/>		
+		<result property="explainCode" 			column="explain_code"/>		
+		<result property="examMemid" 			column="exam_mem_id"/>		
+		<result property="question" 			column="question"/>		
+		<result property="wrongAnswer" 			column="wrong_answer"/>	
+		<result property="explanation" 			column="explanation"/>	
+		<result property="waRegDateTime" 		column="wa_reg_datetime"/>	
+	</resultMap>
+	
+	<select id="getWrongAnswerList" resultMap="wrongAnswerResultMap">
+	
+	</select>
+</mapper>
