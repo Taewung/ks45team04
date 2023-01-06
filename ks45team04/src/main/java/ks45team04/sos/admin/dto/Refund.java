@@ -11,6 +11,7 @@ public class Refund {
 	private String refundState;
 	private String refundDatetime;
 	private String refundApprovalId;
+		
 	
 	public String getRefundCode() {
 		return refundCode;

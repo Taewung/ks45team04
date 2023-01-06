@@ -55,7 +55,7 @@
 			point_fee_rate_id, 
 			point_fee_rate_datetime
 		)VALUES(
-			#{pointFeeRateCode},#{pointFeeRateContents}, #{pointFeeRate}, #{pointFeeRateId}, NOW()
+			sf_point_fee_rate_code(), #{pointFeeRateContents}, #{pointFeeRate}, #{pointFeeRateId}, NOW()
 		);
 	</insert>
 	

@@ -50,7 +50,7 @@
 		(
 			point_save_standard_code, point_save_standard_content, save_point, point_save_standard_id
 		)VALUES(
-			#{pointSaveStandardCode}, #{pointSaveStandardContent}, #{savePoint}, #{pointSaveStandardId}
+			sf_point_save_standard_code(), #{pointSaveStandardContent}, #{savePoint}, #{pointSaveStandardId}
 		);
 	</insert>
 	

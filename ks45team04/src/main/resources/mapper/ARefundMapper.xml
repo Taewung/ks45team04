@@ -20,7 +20,7 @@
 	<update id="modifyRefundApproval" parameterType="Refund">
 		/* 특정 환불 승인 내역 수정*/
 		UPDATE 
-				point_refund
+				refund_info
 		SET 
 				refund_state = #{refundState}
 		WHERE 
