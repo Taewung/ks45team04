@@ -49,7 +49,7 @@
                                 <tr th:if="${not #lists.isEmpty(licenseMainList)}"
 									th:each="l : ${licenseMainList}">
                                     <td><input type="checkbox" class="form-check-input"></td>
-                                    <td><div class="pxp-company-dashboard-job-title" th:text="${l.lmcCode}"></div>
+                                    <td><div class="pxp-company-dashboard-job-title" 	th:text="${l.lmcCode}"></div>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.lmcRegId}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.lmcName}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.lmcRegDatetime}"></div></td>                      

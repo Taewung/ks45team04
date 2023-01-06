@@ -39,12 +39,21 @@
                                   		 th:value="${licenseInfo.liCode}" readonly="readonly">
                               </div>
                           </div>
+                      </div> 
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lmcCode" class="form-label"><h6>자격증 대분류 코드</h6></label><h12></h12>
+                                  <input type="text" id="lmcCode" class="form-control" name="lmcCode" placeholder="자격증 대분류 코드"
+                                  		 th:value="${licenseInfo.lmcCode}" readonly="readonly">
+                              </div>
+                          </div>
                       </div>                     
                       <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3">
                                   <label for="lscCode" class="form-label"><h6>자격증 중분류 코드</h6></label>
-                                  <input type="text" id="lscCode" class="form-control" name="lscCode" placeholder="자격증 대분류명"
+                                  <input type="text" id="lscCode" class="form-control" name="lscCode" placeholder="자격증 중분류 코드"
                                          th:value="${licenseInfo.lscCode}" readonly="readonly">
                               </div>
                           </div>

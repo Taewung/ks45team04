@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team04.sos.member.mapper.MNoteMapper">
+	
+	<resultMap type="Note" id="noteResultMap">
+		
+		<id property="noteCode" 			column="note_code"/>
+		<result property="noteWriterId" 	column="note_writer_id"/>
+		<result property="liCode" 			column="li_code"/>
+		<result property="liName" 			column="li_name"/>
+		<result property="lsCode" 			column="ls_code"/>
+		<result property="noteName" 		column="note_name"/>
+		<result property="noteInfo" 		column="note_info"/>
+		<result property="notePrevFile" 	column="note_prev_file"/>
+		<result property="noteFile" 		column="note_file"/>
+		<result property="notePrice" 		column="note_price"/>
+		<result property="noteRegDate" 		column="note_reg_date"/>
+		
+	</resultMap>
+	
+	
+	<select id="getNoteById" parameterType="String" resultMap="noteResultMap">
+		/* 노트 상세보기 */
+		SELECT
+			 note_writer_id
+			,note_name
+			,note_info
+			,li_name
+			,note_price
+			,note_prev_file
+			,note_file
+		FROM
+			note
+		WHERE
+			note_writer_id = #{noteWriterId};
+	</select>
+	
+	<select id="noteList" resultMap="noteResultMap">
+
+			/* 공부노트 목록 조회 */
+			SELECT
+				note_writer_id,
+				li_name,
+				note_name,
+				note_price
+			FROM
+				note;
+			
+	</select>
+	
+	
+	
+	
+	
+	
+</mapper>

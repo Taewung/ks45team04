@@ -2,6 +2,7 @@ package ks45team04.sos.admin.dto;
 
 public class LicenseInfo {
 	private String liCode;
+	private String lmcCode;
 	private String lscCode;
 	private String liName;
 	private String liOverview;
@@ -53,10 +54,19 @@ public class LicenseInfo {
 		this.liRegDatetime = liRegDatetime;
 	}
 	
+	public String getLmcCode() {
+		return lmcCode;
+	}
+	public void setLmcCode(String lmcCode) {
+		this.lmcCode = lmcCode;
+	}
+	
 	@Override
 	public String toString() {
-		return "LicenseInfo [liCode=" + liCode + ", lscCode=" + lscCode + ", liName=" + liName + ", liOverview="
-				+ liOverview + ", liQualification=" + liQualification + ", liRegId=" + liRegId + ", liRegDatetime="
-				+ liRegDatetime + "]";
+		return "LicenseInfo [liCode=" + liCode + ", lmcCode=" + lmcCode + ", lscCode=" + lscCode + ", liName=" + liName
+				+ ", liOverview=" + liOverview + ", liQualification=" + liQualification + ", liRegId=" + liRegId
+				+ ", liRegDatetime=" + liRegDatetime + "]";
 	}
+	
+	
 }

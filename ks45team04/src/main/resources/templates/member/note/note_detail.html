@@ -12,11 +12,72 @@
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-		<section>
-			<div class="pxp-container">
-				note_detail.html
-			</div>
-		</section>
+          <section class="pxp-page-header-simple" style="background-color: var(--pxpMainColorLight);">
+            <div class="pxp-container">
+                <h1>100% 합격보장 공부노트</h1><br>
+                <h3><div class="pxp-hero-subtitle pxp-text-ligh">합격을 위한 한걸음!</div></h3>
+            </div>
+        </section>
+         <section>
+            <div class="pxp-container">
+                <div class="pxp-single-candidate-container pxp-has-columns">
+                    <div class="row">
+                        <div class="col-lg-7 col-xl-8 col-xxl-9">
+                            <div class="pxp-single-candidate-hero pxp-cover pxp-boxed" style="background-image: url(images/ph-big.jpg);">
+                                <div class="pxp-hero-opacity"></div>
+                                <div class="pxp-single-candidate-hero-caption">
+                                    <div class="pxp-container">
+                                        <div class="pxp-single-candidate-hero-content">
+                                            <div class="pxp-single-candidate-hero-avatar" style="background-image: url(images/ph-small.jpg);"></div>
+                                            <div class="pxp-single-candidate-hero-name">
+                                                <h1>Rebecca Eason</h1>
+                                                <div class="pxp-single-candidate-hero-title">UX/UI Designer</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <section class="mt-4 mt-lg-5">
+                                <div class="pxp-single-candidate-content">
+                                    <h2>노트 설명</h2>
+                                    <div th:text="${noteInfo.noteInfo}"></div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-lg-8 col-xl-5 col-xxl-3">
+                            <div class="pxp-single-candidate-side-panel mt-5 mt-lg-0">
+                                <div class="mt-4">
+                                    <h1>노트정보</h1>
+                                    <h4><div class="pxp-single-candidate-side-info-label pxp-text-light"></div></h4>
+                                </div><br><br>
+                                <div>
+                                    <h3><div class="pxp-single-candidate-side-info-data"></div>노트 작성자</h3>
+                                    <h4><div class="pxp-single-candidate-side-info-label pxp-text-light"
+                                    	 th:text="${noteInfo.noteWriterId}"></div></h4>
+                                </div>
+                                <div class="mt-4">
+                                     <h3><div class="pxp-single-candidate-side-info-data"></div>노트 이름</h3>
+                                     <h4><div class="pxp-single-candidate-side-info-label pxp-text-light"
+                                    	 th:text="${noteInfo.noteName}"></div></h4>
+                                </div>
+                                <div class="mt-4">
+                                    <h3><div class="pxp-single-candidate-side-info-data"></div>관련 자격증</h3>
+                                    <h4><div class="pxp-single-candidate-side-info-label pxp-text-light"
+                                    	 th:text="${noteInfo.liName}"></div></h4>
+                                </div>
+                                <div class="mt-4">
+                                    <h3><div class="pxp-single-candidate-side-info-data"></div>노트 가격</h3>
+                                    <h4><div class="pxp-single-candidate-side-info-label pxp-text-light"
+                                    	 th:text="${noteInfo.notePrice}"></div></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br><br><br>
 	</th:block>
 	<!-- customContents end -->
 	

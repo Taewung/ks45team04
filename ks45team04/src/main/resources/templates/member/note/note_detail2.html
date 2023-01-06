@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{member/layout/contentDefault}">
+
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	<script>
+	</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+          <section class="pxp-page-header-simple" style="background-color: var(--pxpMainColorLight);">
+            <div class="pxp-container">
+                <h1>100% 합격보장 공부노트</h1><br>
+                <h3><div class="pxp-hero-subtitle pxp-text-ligh">합격을 위한 한걸음!</div></h3>
+            </div>
+        </section>
+         <section>
+            <div class="pxp-container">
+                <div class="pxp-single-candidate-container pxp-has-columns">
+                    <div class="row">
+                        <div class="col-lg-7 col-xl-8 col-xxl-9">
+                            <div class="pxp-single-candidate-hero pxp-cover pxp-boxed" style="background-image: url(images/ph-big.jpg);">
+                                <div class="pxp-hero-opacity"></div>
+                                <div class="pxp-single-candidate-hero-caption">
+                                    <div class="pxp-container">
+                                        <div class="pxp-single-candidate-hero-content">
+                                            <div class="pxp-single-candidate-hero-avatar" style="background-image: url(images/ph-small.jpg);"></div>
+                                            <div class="pxp-single-candidate-hero-name">
+                                                <h1>미리보기</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-4 mt-lg-5">
+                                <div class="col-lg-7 col-xxl-8">
+                                    <div class="pxp-single-candidate-content">
+                                        <h2>노트 설명</h2>
+                                    <div class="col-md-8" th:text="${noteInfo.noteInfo}"></div><br><br><br>
+                                
+                                <div class="col-lg-5 col-xxl-4">
+                                	<h2 style='margin-left:45px;'>노트 정보</h2>
+                                    <div class="pxp-single-candidate-side-panel mt-5 mt-lg-0">
+                                        <div>
+                                         	<h3><div class="pxp-single-candidate-side-info-data">노트이름</div></h3>
+                                            <div class="pxp-single-candidate-side-info-label pxp-text-light"
+                                            	 th:text="${noteInfo.noteName}"></div>
+                                           
+                                        </div>
+                                        <div class="mt-4">
+                                            <h3><div class="pxp-single-candidate-side-info-data">관련자격증</div></h3>
+                                            <div class="pxp-single-candidate-side-info-label pxp-text-light"
+                                            	 th:text="${noteInfo.liName}"></div>
+                                        </div>
+                                        <div class="mt-4">
+                                            <h3><div class="pxp-single-candidate-side-info-data">노트가격</div></h3>
+                                            <div class="pxp-single-candidate-side-info-label pxp-text-light"
+                                            	 th:text="${noteInfo.notePrice}"></div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </section><br><br><br>
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
+</html>
