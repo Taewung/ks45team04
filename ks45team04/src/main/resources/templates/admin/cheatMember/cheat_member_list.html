@@ -45,7 +45,6 @@
                         <table class="table table-hover align-middle">                      	
                             <thead>                    
                                 <tr>
-                                    <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
                                     <th style="width: 10%;">부정회원ID</th>
                                     <th style="width: 9%;">신고자ID</th>
                                     <th style="width: 10%;">신고사유</th>
@@ -62,10 +61,9 @@
                             <tbody>
                                 <th:block th:if="${not #lists.isEmpty(cheatMemberList)}" th:each="cm : ${cheatMemberList}">
  		                          <tr>
-                                    <td><input type="checkbox" class="form-check-input"></td>
                                     <td>
-                                        <a  th:href="@{/totalRemoveMember(cmId=${cm.getCmId})}"  class="pxp-company-dashboard-job-title" 
-                                        	th:text="${cm.getCmId}">
+                                        <a  th:href="@{/totalModifyCheatMemberInfo(cmId=${cm.cmId})}"  class="pxp-company-dashboard-job-title" 
+                                        	th:text="${cm.cmId}">
                                         </a>
                                     </td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportId}"></div></td>

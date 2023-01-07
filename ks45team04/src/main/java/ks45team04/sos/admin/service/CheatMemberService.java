@@ -19,6 +19,31 @@ public CheatMemberService(AdminCheatMemberMapper adminCheatMemberMapper) {
 }
 
 
+
+/**
+ * 특정 부정 회원 수정
+ * @param cheatMember
+ * @return 
+ */
+public int modifyCheatMemberInfo(CheatMember cheatMember) {
+	
+	return adminCheatMemberMapper.modifyCheatMemberInfo(cheatMember);
+	
+}
+
+
+
+/**
+ * 특정 부정 회원 상세 조회
+ * @param cmId
+ * @return CheatMember
+ */
+public CheatMember getTotalCheatMemberInfo(String cmId) {
+	return adminCheatMemberMapper.getTotalCheatMemberInfo(cmId);
+}
+
+
+
 /**
  * 부정 회원 등록
  * @param cheatMember
