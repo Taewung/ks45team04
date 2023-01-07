@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ks45team04.sos.admin.dto.CheatMember;
 import ks45team04.sos.admin.mapper.AdminCheatMemberMapper;
@@ -29,6 +30,41 @@ public ACheatMemberController(@Qualifier("adminChaetMemberService") CheatMemberS
 private static final Logger log = LoggerFactory.getLogger(ACheatMemberController.class);
 
 
+	//특정 부정회원 정보 수정 처리
+	@PostMapping("/totalModifyCheatMemberInfo")
+	public String modifyCheatMemberInfo(CheatMember cheatMember) {
+		
+		cheatMemberService.modifyCheatMemberInfo(cheatMember);
+		
+		return "redirect:/cheatMemberList";
+	}
+
+
+	//특정 부정회원 정보 수정 화면
+	@GetMapping("/totalModifyCheatMemberInfo")
+	public String modifyCheatMemberInfo(@RequestParam(value="cmId") String cmId
+										,Model model) {
+	CheatMember cheatMember = cheatMemberService.getTotalCheatMemberInfo(cmId);
+	
+	model.addAttribute("title", "특정 부정회원 정보 수정");
+	model.addAttribute("totalModifyCheatMemberInfo", cheatMember);
+	
+	return "admin/cheatMember/total_modify_cheat_member_info";
+	}
+
+	//특정 부정회원 상세 조회 화면
+	@GetMapping("/totalCheatMemberInfo")
+	public String totalCheatMemberInfo(@RequestParam(value="cmId") String cmId
+			,Model model) {
+	CheatMember toalCheatMemberInfo = cheatMemberService.getTotalCheatMemberInfo(cmId);
+	
+	model.addAttribute("title", "부정회원 상세 조회");
+	model.addAttribute("totalCheatMemberInfo", toalCheatMemberInfo);
+	
+	return "admin/cheatMember/total_cheat_member_info";
+	}
+	
+	
  	// 부정회원 목록 조회 화면
 	@GetMapping("/cheatMemberList")
 	public String cheatMemberList(Model model) {
@@ -55,14 +91,6 @@ private static final Logger log = LoggerFactory.getLogger(ACheatMemberController
 		
 		return "redirect:/cheatMemberList";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	public AdminCheatMemberMapper getCheatMemberMapper() {
 		return cheatMemberMapper;

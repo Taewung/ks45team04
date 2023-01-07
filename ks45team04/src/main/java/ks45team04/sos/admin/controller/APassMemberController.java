@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ks45team04.sos.admin.dto.PassMember;
 import ks45team04.sos.admin.mapper.AdminPassMemberMapper;
@@ -28,6 +30,45 @@ public APassMemberController(@Qualifier("adminPassMemberService") PassMemberServ
 private static final Logger log = LoggerFactory.getLogger(APassMemberController.class);
 
 
+	// 특정 합격 회원 정보 수정 처리
+	@PostMapping("/totalModifyPassMemberInfo")
+	public String modifyPassMemberInfo(PassMember passMember) {
+		
+		passMemberService.modifyPassMemberInfo(passMember);
+		
+		return "redirect:/totalPassMemberList";
+	}
+
+
+	// 특정 합격 회원 정보 수정 화면
+	@GetMapping("/totalModifyPassMemberInfo")
+	public String modifyMemberInfo(@RequestParam(value="pmId") String pmId
+									,Model model) {
+		PassMember passMember = passMemberService.getTotalPassMemberInfo(pmId);
+		
+		model.addAttribute("title", "합격 회원 정보 수정 화면");
+		model.addAttribute("totalModifyPassMemberInfo", passMember);
+		
+		return "admin/passMember/total_modify_pass_member_info";
+	}
+
+
+
+	//합격 회원 상세 조회 화면
+	@GetMapping("/totalPassMemberInfo")
+	public String totalPassMemberInfo(@RequestParam(value="pmId") String pmId
+			,Model model) {
+		
+		PassMember totalPassMemberInfo = passMemberService.getTotalPassMemberInfo(pmId);
+		
+		model.addAttribute("title", "상세 합격 회원 조회");
+		model.addAttribute("totalPassMemberInfo", totalPassMemberInfo);
+		
+		return "admin/passMember/total_pass_member_info";
+	}
+
+
+	//합격 회원 목록 조회
 	@GetMapping("/totalPassMemberList")
 	public String passMemberList(Model model) {
 		

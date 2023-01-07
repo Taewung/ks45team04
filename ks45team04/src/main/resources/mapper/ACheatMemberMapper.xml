@@ -19,9 +19,41 @@
 		<result property="cmStartDatetime" 						column="cm_start_datetime"/>
 		<result property="cmEndDatetime" 						column="cm_end_datetime"/>
 	</resultMap>
-	
+
+
+	<update id="modifyCheatMemberInfo" parameterType="CheatMember">
+			/* 특정 부정 회원 정보 수정 */
+		UPDATE 
+			cheat_member
+		SET 
+			cm_stop_date = #{cmStopDate},
+			cm_start_datetime = #{cmStartDatetime},
+			cm_end_datetime = #{cmEndDatetime}
+		WHERE 
+			cm_id= #{cmId};
+	</update>
+
+
+
+	<select id="getTotalCheatMemberInfo" parameterType="String" resultMap="CheatMemberResultMap">
+			/* 특정 부정 회원 목록 조회 */
+			SELECT
+			cm.cm_id,
+			cm.cm_report_id,
+			cm.cm_report_reason,
+			cm.cm_stop_date,
+			cm.cm_start_datetime,
+			cm.cm_end_datetime
+			FROM
+				cheat_member as cm
+			WHERE
+				cm.cm_id = #{cmId};
+				
+	</select>
+
 	
 	<select id="CheatMemberList" resultMap="CheatMemberResultMap">
+			/*전체 회원 목록 조회*/
 			SELECT
 				cm_id,
 				cm_report_id,

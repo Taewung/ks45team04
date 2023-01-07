@@ -75,10 +75,15 @@
                         <div class="col-xxl-8">
                             <div class="mb-1">
                                 <label for="pxp-candidate-Phone" class="form-label">탈퇴일시</label>
-                                <input type="text" id="wdmDatetime" class="form-control" name="wdmDatetime" th:value="${withdrawalMemberInfo.wdmDatetime}">
+                                <input type="text" id="wdmDatetime" class="form-control" name="wdmDatetime" th:value="${withdrawalMemberInfo.wdmDatetime}" readonly>
                             </div>                            
                             </div>
-                         </div>                                                      
+                         </div> 
+                      <div class="mt-2 mt-lg-4">
+                            <a href="/withdrawalMemberList" class="btn rounded-pill pxp-section-cta" >목록으로</a></button>
+                    </div> 
+                  
+                                                                             
 	</th:block>
 	<!-- customContents end -->	
 	<!-- customJs start -->

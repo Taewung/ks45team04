@@ -18,6 +18,29 @@ public PassMemberService(AdminPassMemberMapper adminPassMemberMapper) {
 	this.adminPassMemberMapper = adminPassMemberMapper;
 }
 
+
+/**
+ * 특정 합격 회원 수정
+ * @param passMember
+ * @return
+ */
+public int modifyPassMemberInfo(PassMember passMember) {
+	
+	return adminPassMemberMapper.modifyPassMemberInfo(passMember);
+}
+
+/**
+ *  특정 회원 상세 조회
+ * @param pmId
+ * @return
+ */
+public PassMember getTotalPassMemberInfo(String pmId) {
+	
+	return adminPassMemberMapper.getTotalPassMemberInfo(pmId);
+}
+
+
+
 /**
  * 합격 회원 조회
  * @return List<PassMember>

@@ -34,8 +34,8 @@ public int modifyMemberInfo(Member member) {
 }
 
 
-/** 특정 회원 상세 조회
- * 
+/** 
+ * 특정 회원 상세 조회
  * @param memId
  * @return Member
  */
