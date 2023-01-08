@@ -14,8 +14,21 @@
 		<result property="mmState" 						column="mm_state"/>
 	</resultMap>
 	 
+	<update id="modifyMembershipMemberInfo" parameterType="String">
+	 		/*특정 멤버십 회원 정보 수정*/	
+		UPDATE 
+			membership_member
+		SET 
+			mm_period = #{mmPeriod},
+			mm_start_datetime = #{mmStartDatetime},
+			mm_end_datetime = #{mmEndDatetime},
+			mm_state = #{mmState}
+		WHERE 
+			mm_code= #{mmCode};			
+	</update>
 	
 	<select id="TotalMembershipMemberList" resultMap="MembershipMemberResultMap">
+			/*멤버십 회원 조회*/
 			SELECT
 			mm_id,
 			mm_period,

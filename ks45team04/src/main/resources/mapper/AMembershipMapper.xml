@@ -12,21 +12,22 @@
 		<result property="membershipRegDatetime" 				column="membership_reg_datetime"/>
 	</resultMap>
 	
+
+	<update id="modifyMembershipInfo" parameterType="String">
+			/* 특정 멤버십 정보 수정 */
+		UPDATE 
+			membership
+		SET 
+			membership_period = #{membershipPeriod},
+			membership_amount = #{membershipAmount}
+		WHERE 
+			membership_code= #{membershipCode};
+	</update>
+
+
 	
-	<select id="MembershipList" resultMap="MembershipResultMap">
-			/*멤버십 조회*/
-			SELECT
-			ms.membership_code,
-			ms.membership_period,
-			ms.membership_amount,
-			ms.membership_reg_manager,
-			ms.membership_reg_datetime
-			FROM
-			membership AS ms;	
-	</select>
 	
-	
-	<select id="getTotalMembershipInfo" resultMap="MembershipResultMap">
+	<select id="getTotalMembershipInfo" parameterType= "String" resultMap="MembershipResultMap">
 			/*특정 멤버십 조회*/
 			SELECT
 			ms.membership_code,
@@ -39,6 +40,17 @@
 			WHERE
 			ms.membership_code = #{membershipCode};
 	</select>	
-	
+
+	<select id="MembershipList" resultMap="MembershipResultMap">
+			/*멤버십 조회*/
+			SELECT
+			ms.membership_code,
+			ms.membership_period,
+			ms.membership_amount,
+			ms.membership_reg_manager,
+			ms.membership_reg_datetime
+			FROM
+			membership AS ms;	
+	</select>	
 	
 </mapper>

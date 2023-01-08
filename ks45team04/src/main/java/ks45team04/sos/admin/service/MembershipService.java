@@ -19,6 +19,16 @@ public MembershipService(AdminMembershipMapper adminMembershipMapper) {
 
 
 /**
+ * 특정 멤버십 수정
+ * @param membership
+ * @return
+ */
+public int modifyMembershipInfo(Membership membership) {
+	
+	return adminMembershipMapper.modifyMembershipInfo(membership);
+}
+
+/**
  * 멤버십 상세 조회
  * @param membershipCode
  * @return Membership

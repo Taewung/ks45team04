@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{admin/layout/adminDefault}">
+
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	<script>
+		$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+			$('#resetBtn').click(function(){
+				location.href = '/totalMembershipMemberList';
+			});
+		});
+	</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents"> 
+                <h1>합격 회원 정보 조회 / 수정</h1>
+                <p class="pxp-text-light">PassMemberInfo Modify</p>
+                 <form id="totalModifyMembershipMemberInfoForm" th:action="@{/totalModifyMembershipMemberInfo}" name="totalMembershipMemberInfoform" method="post">
+                  <div class="row mt-1 mt-lg-3">
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="mmId" class="form-label">ID</label>
+                                <input type="text" id="mmId" class="form-control" name="mmId" th:value="${totalModifyMembershipMemberInfo.mmId}" readonly>
+                            </div>
+                         </div>                            
+                     </div>               
+                    <div class="row mt-1 mt-lg-3">
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="mmMembershipCode" class="form-label">멤버십 코드</label>
+                                <input type="text" id="mmMembershipCode" class="form-control" name="mmMembershipCode" th:value="${totalModifyMembershipMemberInfo.mmMembershipCode}">
+                            </div>
+                         </div>                            
+                     </div>                                               
+                    <div class="row mt-1 mt-lg-3">                          
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="mmPeriod" class="form-label">멤버십 기간</label>
+                                <input type="text" id="mmPeriod" class="form-control" name="mmPeriod" th:value="${totalModifyMembershipMemberInfo.mmMembershipPeriod}">
+                            </div>                            
+                            </div>
+                         </div>
+                    <div class="row mt-1 mt-lg-3">                           
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="mmStartDateteime" class="form-label">멤버십시작일시</label>
+                                <input type="text" id="mmStartDateteime" class="form-control" name="mmStartDateteime" th:value="${totalModifyMembershipMemberInfo.mmStartDatetime}">
+                            </div>                            
+                            </div>
+                         </div>
+                    <div class="row mt-1 mt-lg-3">                           
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="mmEndDateteime" class="form-label">멤버십종료일시</label>
+                                <input type="text" id="mmEndDateteime" class="form-control" name="mmEndDateteime" th:value="${totalModifyMembershipMemberInfo.mmEndDatetime}">
+                            </div>                            
+                            </div>
+                         </div>                                                                                                                                           
+                    <div class="row mt-1 mt-lg-3">                           
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="mmState" class="form-label">상태</label>
+                                <input type="text" id="mmState" class="form-control" name="mmState" th:value="${totalModifyMembershipMemberInfo.mmState}">
+                            </div>                            
+                            </div>
+                         </div> 
+              <div class="mt-4 mt-lg-5">
+			      <button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">수정</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
+              </div> 
+             </form> 
+	</th:block>
+	<!-- customContents end -->	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
+</html>
