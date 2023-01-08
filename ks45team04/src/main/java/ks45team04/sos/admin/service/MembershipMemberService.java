@@ -17,6 +17,15 @@ public MembershipMemberService(AdminMembershipMemberMapper adminMembershipMember
 }
 
 
+/**
+ * 특정 멤버십 회원 수정
+ * @param membershipMember
+ * @return
+ */
+public int modifyMembershipMemberInfo(MembershipMember membershipMember) {
+	return adminMembershipMemberMapper.modifyMembershipMemberInfo(membershipMember);
+}
+
 /**멤버십 회원 상세 조회
  * 
  * @param mmCode

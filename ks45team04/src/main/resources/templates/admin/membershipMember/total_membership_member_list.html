@@ -6,23 +6,22 @@
 	<!-- script start -->
 	<th:block layout:fragment="customScript">
 	<script>
-	</script>
+	</script>  
 	</th:block> 
 	<!-- script end -->
 	
 	<!-- customContents start -->
-	<th:block layout:fragment="customContents"> 
-		<h1>멤버십 회원 목록</h1>
-                <p class="pxp-text-light">MembershipMember List</p>
+	<th:block layout:fragment="customContents">
+		<h1>멤버십 회원 정보 조회 / 수정</h1>
+                <p class="pxp-text-light">MembershipInfo</p>
                 <div class="mt-4 mt-lg-5">
                     <div class="row justify-content-between align-content-center">
                         <div class="col-auto order-2 order-sm-1">
                             <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
                                 <div class="pxp-company-dashboard-jobs-search mb-3">
                                 <select class="form-select">
-                                    <option>멤버십아이디</option>
+                                    <option>멤버십명</option>
                                     <option>기간</option>
-                                    <option>상태</option>
                                </select>
                                 	<div class="col-auto order-1 order-sm-2">
                                 		<div class="pxp-company-dashboard-jobs-search-search-form">
@@ -38,6 +37,9 @@
                         </div>
                         
                     </div>
+					<div class="pxp-dashboard-table-options">
+    
+                    </div>
                     </div>
                     <!-- 검색 end -->   
                     <!-- 목록 start -->                   
@@ -45,29 +47,30 @@
                         <table class="table table-hover align-middle">                      	
                             <thead>                    
                                 <tr>
-                                    <th class="pxp-is-checkbox" style="width: 1%;"></th>
                                     <th style="width: 15%;">멤버십아이디</th>
-                                    <th style="width: 15%;">멤버십기간</th>
-                                    <th style="width: 25%;">멤버십시작일시</th>
-                                    <th style="width: 25%;">멤버십만료일시</th>
+                                    <th style="width: 15%;">멤버십코드</th>
+                                    <th style="width: 10%;">멤버십기간</th>
+                                    <th style="width: 20%;">멤버십시작일시</th>
+                                    <th style="width: 20%;">멤버십만료일시</th>
                                     <th style="width: 15%;">멤버십상태</th>
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead> 
                             <tbody>
-                        
         				<th:block th:if="${not #lists.isEmpty(totalMembershipMemberList)}" th:each="mm : ${totalMembershipMemberList}">
                                 <tr>
-                                    <td></td>
                                     <td>
-                                        <a  th:href="@{/totalMembershipMemberInfo(mmId=${mm.getMmId})}"  class="pxp-company-dashboard-job-title" 
+                                        <a  th:href="@{/totalModifyMembershipMemberInfo(mmId=${mm.mmId})}"  class="pxp-company-dashboard-job-title" 
                                         	th:text="${mm.mmId}">
                                         </a>
                                     </td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${mm.mmPeriod}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${mm.mmStartDatetime}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${mm.mmEndDatetime}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${mm.mmMembershipCode}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${mm.mmPeriod}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${mm.mmStartDatetime}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${mm.mmEndDatetime}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${mm.mmState}"></div></td>
+                                    <td>
+                                    </td>
                                  </tr>
                                 </th:block>    
                             </tbody>
@@ -90,7 +93,6 @@
                         <!-- page 넘김 end -->
                     </div>
                 <!-- 목록 end -->    
-                </div>
 	</th:block>
 	<!-- customContents end -->
 	
