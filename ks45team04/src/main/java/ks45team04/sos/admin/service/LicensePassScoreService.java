@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.admin.dto.LicenseMain;
 import ks45team04.sos.admin.dto.LicensePassScore;
 import ks45team04.sos.admin.dto.LicenseSub;
@@ -25,6 +26,26 @@ private final LicensePassScoreMapper licensePassScoreMapper;
 	 */
 	public void addLicensePassScore(LicensePassScore licensePassScore) {
 		licensePassScoreMapper.addLicensePassScore(licensePassScore);
+	}
+	
+	/**
+	 * 자격증 합격기준점수코드 자동생성
+	 * @param li_pass_score
+	 * @param liPScoreCode
+	 * @return newLiPScoreCode
+	 */
+	public String getNewLiPassScoreCode(String li_pass_score, String liPScoreCode) {
+		String newLiPScoreCode = licensePassScoreMapper.getNewLiPassScoreCode(li_pass_score, liPScoreCode);
+		return newLiPScoreCode; 
+	}
+	
+	/**
+	 * 자격증 중분류별 자격증목록 조회
+	 * @return List<licenseList>
+	 */
+	public List<LicenseInfo> getLicenseList(String lscCode){
+		List<LicenseInfo> licenseList = licensePassScoreMapper.getLicenseList(lscCode);
+		return licenseList;
 	}
 	
 	/**

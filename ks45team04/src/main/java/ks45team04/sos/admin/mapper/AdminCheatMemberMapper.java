@@ -10,6 +10,12 @@ import ks45team04.sos.admin.dto.CheatMember;
 public interface AdminCheatMemberMapper {
 
 	
+	//부정 회원 정보 수정 처리
+	public int modifyCheatMemberInfo(CheatMember cheatMember);
+
+	//부정 회원 상세 정보 조회
+	public CheatMember getTotalCheatMemberInfo(String cmReportCode);
+	
 	//부정 회원 추가
 	public int addCheatMember(CheatMember cheatMember);
 	

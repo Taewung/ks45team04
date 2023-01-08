@@ -1,36 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  class="pxp-root" >
-<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  layout:decorate="~{admin/layout/adminDefault}">
 
-    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
-    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-    <body style="background-color: var(--pxpMainColorLight);">
-        <div class="pxp-dashboard-content">
-        
-        <!-- begin aside -->
-		<div th:replace="~{admin/fragments/adminAside :: asideFragment}"></div>
-		<!-- end aside -->
-		
-        <!-- begin header -->
-		<div th:replace="~{admin/fragments/adminHeader :: headerFragment}"></div>
-		<!-- end header -->
-		
-		<!-- begin contents --> 	
-            <div class="pxp-dashboard-content-details">
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	<script>
+	</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
  				<h1>문제/답안/해설</h1>
  				<p class="pxp-text-light">Question Setting List</p>
                 <div class="mt-4 mt-lg-5">
@@ -52,9 +33,9 @@
 	                                		</div>
 	                            		</div>
 	                        		</div>
-	                        		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-	                        		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-	                        		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+	                        		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+	                        		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+	                        		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 									<div class="pxp-dashboard-table-options">
 				                        <ul class="list-unstyled">
 				                        <!-- 등록버튼 start -->
@@ -87,18 +68,18 @@
                                 </tr>
                             </thead>    
                             <tbody>
-                                <tr>
+                                <tr th:if="${not #lists.isEmpty(questionList)}" th:each="l : ${questionList}">
                                     <td><input type="checkbox" class="form-check-input"></td>
                                     <td>
                                         <a href="/checkQSetting">
-                                            <div class="pxp-company-dashboard-job-title">문제코드</div>                                           
+                                            <div class="pxp-company-dashboard-job-title" th:text="${l.questionCode}"></div>                                           
                                         </a>
                                     </td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-date mt-1">2022/08/24 at 11:56 am</div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.liName}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.lsNum}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.lsName}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.questionRegId}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${l.questionRegDateTime}"></div></td>
                                     
                                     <td>
                                         <div class="pxp-dashboard-table-options">
@@ -111,9 +92,13 @@
                                             </ul>
                                         </div>
                                     </td>
-                                </tr>                      
+                                </tr>
+                                 <tr th:unless="${not #lists.isEmpty(questionList)}">
+									<td colspan="9">등록된 문제가 없습니다.</td>
+								</tr>                      
                             </tbody>
                         </table>
+                        <br><br><br><br>
 						<!-- page 넘김 start -->
                         <div class="row mt-4 mt-lg-5 justify-content-center align-items-center">
                             <div class="col-auto">
@@ -131,19 +116,15 @@
                         <!-- page 넘김 end -->
                     </div>
                 <!-- 목록 end -->    
-                </div>
-            </div>     
-        <!-- end contents -->      
-            
-        <!-- begin footer -->
-			<div th:replace="~{admin/fragments/adminFooter :: footerFragment}"></div>
-		<!-- end footer -->
-        </div>
-        <script src="js/jquery-3.4.1.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/nav.js"></script>
-        <script src="js/Chart.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
-</html>
+                
+                </div>  	
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
+</html>	
+  

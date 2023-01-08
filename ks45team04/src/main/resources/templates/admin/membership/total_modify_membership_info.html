@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{admin/layout/adminDefault}">
+
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	<script>
+		$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+			$('#resetBtn').click(function(){
+				location.href = '/membershipList';
+			});
+		});
+	</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents"> 
+                <h1>멤버십 정보 조회 / 수정</h1>
+                <p class="pxp-text-light">MembershipInfo modify</p>
+                <form id="totalModifyMembershipInfoForm" th:action="@{/totalModifyMembershipInfo}" name="totalModifyMembershipInfoform" method="post">
+                    <div class="row mt-1 mt-lg-3">
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Password" class="form-label">멤버십등록코드</label>
+                                <input type="text" id="membershipCode" class="form-control" name="membershipCode" th:value="${totalModifyMembershipInfo.membershipCode}" readonly>
+                            </div>
+                         </div>                            
+                     </div>
+                    <div class="row mt-1 mt-lg-3">
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Password" class="form-label">멤버십 기간</label>
+                                <input type="text" id="membershipPeriod" class="form-control" name="membershipPeriod" th:value="${totalModifyMembershipInfo.membershipPeriod}" >
+                            </div>
+                         </div>                            
+                     </div>
+                    <div class="row mt-1 mt-lg-3">
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Password" class="form-label">금액</label>
+                                <input type="text" id="membershipAmount" class="form-control" name="membershipAmount" th:value="${totalModifyMembershipInfo.membershipAmount}">
+                            </div>
+                         </div>                            
+                     </div>                                               
+                    <div class="row mt-1 mt-lg-3">                          
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Email" class="form-label">등록자</label>
+                                <input type="text" id="membershipRegManager" class="form-control" name="membershipRegManager" th:value="${totalModifyMembershipInfo.membershipRegManager}" readonly>
+                            </div>                            
+                            </div>
+                         </div>
+                    <div class="row mt-1 mt-lg-3">                          
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Email" class="form-label">멤버십시작일시</label>
+                                <input type="text" id="membershipRegDatetime" class="form-control" name="membershipRegDatetime" th:value="${totalModifyMembershipInfo.membershipRegDatetime}" readonly>
+                            </div>                            
+                            </div>
+                         </div>                                                                                                                                                                   
+           <div class="mt-4 mt-lg-5">
+			      <button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">수정</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
+              </div> 
+	</th:block>
+	<!-- customContents end -->	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
+</html>

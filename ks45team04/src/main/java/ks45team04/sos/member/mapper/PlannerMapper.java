@@ -9,6 +9,18 @@ import ks45team04.sos.member.dto.ToDoList;
 @Mapper	
 public interface PlannerMapper {
 	
-	//투두리스트 상세 조회
+	//일정 상세 조회
 		public List<ToDoList> toDoListDetailList();
+		
+	//일정 등록
+		public int addToDoList(ToDoList toDoList);
+		
+	//특정 일정 정보 수정
+		public int modifyToDoList(ToDoList toDoList);
+		
+	//특정 일정 정보 조회	
+		public ToDoList getToDoListByCode(String toDoListCode);
+		
+	//일정 코드로 일정 삭제
+		public int deleteToDoListByCode(String toDoListCode);
 }

@@ -43,10 +43,10 @@
 			        <div id="contextMenu" class="dropdown clearfix">
 			            <ul class="dropdown-menu dropNewEvent" role="menu" aria-labelledby="dropdownMenu"
 			                style="display:block;position:static;margin-bottom:5px;">
-			                <li><a tabindex="-1" href="#">일정등록1</a></li>
-			                <li><a tabindex="-1" href="#">일정등록2</a></li>
-			                <li><a tabindex="-1" href="#">일정등록3</a></li>
-			                <li><a tabindex="-1" href="#">일정등록4</a></li>
+			                <li><a tabindex="-1" href="#">일정등록1 </a></li>
+			                <li><a tabindex="-1" href="#">일정등록2 </a></li>
+			                <li><a tabindex="-1" href="#">일정등록3 </a></li>
+			                <li><a tabindex="-1" href="#">일정등록4 </a></li>
 			                <li class="divider"></li>
 			                <li><a tabindex="-1" href="#" data-role="close">Close</a></li>
 			            </ul>
@@ -67,40 +67,80 @@
 			                        <h4 class="modal-title"></h4>
 			                    </div>
 			                    <div class="pxp-user-modal modal-body">
-			
-			                        <div class="row">
-			                            <div class="col-xs-12">
-			                                <label class="col-xs-4 new-date" style="width:25%;" for="edit-allDay">하루종일</label>
-			                                <input class='allDayNewEvent' id="edit-allDay" type="checkbox"></label>
+			                    
+<!-- 
+src\main\resources\static\fullcal\js\addEvent.js 
+82번 라인에서 수정하면 처리 가능
+        //새로운 일정 저장
+        $.ajax({
+            type: "get",
+            url: "",
+            data: {
+                //.....
+            },
+            success: function (response) {
+                //DB연동시 중복이벤트 방지를 위한
+                //$('#calendar').fullCalendar('removeEvents');
+                //$('#calendar').fullCalendar('refetchEvents');
+            }
+        });
+-->
+			                    
+<!-- 								    <form id="save-event" th:action="@{/addToDoList}" name="save-event" method="post"> -->
+								    <form th:action= "@{/addToDoList}"  method="post">
+								    
+								    <!-- to_do_list_code 일정코드 todo005 로 테스트 -->
+								    	<!-- <input type="hidden" name="toDoListCode" value="세션아이디변수명"> -->
+								    	 <div class="row">
+			                            <div class="col-xs-12"> 
+			                             <label class="col-xs-4 new-date" style="width:25%;" for="toDoListCode">일정코드</label>
+								    	<input type="text" name="toDoListCode" >
+								    	</div>
+			                        </div>
+								    <!-- li_code 자격증 코드 li002 로 테스트 -->					
+								     <div class="row">
+			                            <div class="col-xs-12"> 
+			                             <label class="col-xs-4 new-date" style="width:25%;" for="liCode">자격증코드</label>
+								    			<input type="text" name="liCode" >
+		 								</div>
+			                        </div>
+
+			                              <div class="row">
+			                            <div class="col-xs-12"> 
+			                                <label class="col-xs-4 new-date" style="width:25%;" for="memId">아이디</label>
+			                                <input class="inputModal" type="text"  name="memId" id="memId"
+			                                    required="required" />
 			                            </div>
 			                        </div>
 			
 			                        <div class="row">
 			                            <div class="col-xs-12">
-			                                <label class="col-xs-4 new-date" style="width:25%;" for="edit-title">일정명</label>
-			                                <input class="inputModal" type="text" name="edit-title" id="edit-title"
+			                                <label class="col-xs-4 new-date" style="width:25%;" for="toDoListTitle">제목</label>
+			                                <input class="inputModal" type="text"  name="toDoListTitle" id="toDoListTitle"
 			                                    required="required" />
 			                            </div>
 			                        </div>
 			                        <div class="row">
 			                            <div class="col-xs-12">
 			                                <label class="col-xs-4 new-date" style="width:25%;" for="edit-start">시작</label>
-			                                <input class="inputModal" type="text" name="edit-start" id="edit-start" />
+			                                <input class="inputModal" type="date" name="toDoListDay" id="toDoListDay" />
 			                            </div>
 			                        </div>
 			                        <div class="row">
 			                            <div class="col-xs-12">
 			                                <label class="col-xs-4 new-date" style="width:25%;" for="edit-end">끝</label>
-			                                <input class="inputModal" type="text" name="edit-end" id="edit-end" />
+			                                <input class="inputModal" type="date" name="toDoListRegTime" id="toDoListRegTime" />
 			                            </div>
 			                        </div>
 			                          <div class="row">
 			                            <div class="col-xs-12">
-			                                <label class="col-xs-4 new-date" style="width:25%;" for="edit-title">자격증이름</label>
-			                                <input class="inputModal" type="text" name="edit-title" id="edit-title"
+			                                <label class="col-xs-4 new-date" style="width:25%;" for="liName">자격증이름</label>
+			                                <input class="inputModal" type="text" name="liName" id="liName"
 			                                    required="required" />
 			                            </div>
 			                        </div>
+			                        
+<!-- 			                        
 			                        <div class="row">
 			                            <div class="col-xs-12">
 			                                <label class="col-xs-4 new-date" style="width:25%;" for="edit-type">구분</label>
@@ -128,23 +168,29 @@
 			                                </select>
 			                            </div>
 			                        </div>
-			                        <div class="row">
-			                            <div class="col-xs-12">
-			                                <label class="col-xs-4 new-date" style="width:25%;" for="edit-desc">설명</label>
-			                                <textarea rows="4" cols="50" class="inputModal" name="edit-desc"
-			                                    id="edit-desc"></textarea>
-			                            </div>
-			                        </div>
+			                      
+			                       -->
+			                      
 			                    </div>
 			                    <div class="modal-footer modalBtnContainer-addEvent">
 			                        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-			                        <button type="button" class="btn btn-primary" id="save-event">저장</button>
+			                        <!-- <button type="submit" class="btn btn-primary" id="save-event">저장 1 </button> -->
+			                        <input type="submit"  value="저장">
+<!-- 			                        <button type="button" class="btn btn-primary" id="save-event">저장 1 </button> -->
 			                    </div>
+			                    
+<!-- 			                    
 			                    <div class="modal-footer modalBtnContainer-modifyEvent">
 			                        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 			                        <button type="button" class="btn btn-danger" id="deleteEvent">삭제</button>
-			                        <button type="button" class="btn btn-primary" id="updateEvent">저장</button>
-			                    </div>
+			                        <button type="button" class="btn btn-primary" id="updateEvent">저장 2 </button>
+			                       </div> -->
+			                       
+			                       
+			                    </form>
+			                    
+			                    
+			                    
 			                </div><!-- /.modal-content -->
 			            </div><!-- /.modal-dialog -->
 			        </div><!-- /.modal -->

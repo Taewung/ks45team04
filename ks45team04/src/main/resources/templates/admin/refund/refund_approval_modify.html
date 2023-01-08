@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{admin/layout/adminDefault}">
+
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	<script>
+		$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+			$('#resetBtn').click(function(){
+				location.href='/refundApproval';
+			});
+		});
+	
+	</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+          <h1>환불 신청 승인 수정</h1>
+            <p class="pxp-text-light">Refund Approval.</p>
+            <form id="modifyRefundForm" th:action="@{/modifyRefundApproval}" method="post">
+                <div class="row mt-4 mt-lg-5">
+                <div class="row justify-content-between align-content-center">
+                        <!-- <div class="col-auto order-2 order-sm-1"> -->
+                    <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
+                    <div class="col-md-6">
+	                    <div class="row">
+			               	<div class="col-md-6">
+			                	<div class="mb-3">
+			                    	<label for="refundCode" class="form-label">환불코드</label>
+			                    	<input type="text" id="refundCode" name="refundCode" class="form-control"
+			                        	   th:value ="${refundInfo.refundCode}" readonly="readonly">
+			                    </div>    
+			                </div>
+						</div>
+						<div class="row">
+		                	<div class="mb-3">
+		                    	<label for="payCompleteCode" class="form-label">결제완료코드</label>
+		                        <input type="text" id="payCompleteCode" name="payCompleteCode" class="form-control"
+		                        	   th:value ="${refundInfo.payCompleteCode}" readonly="readonly">
+		                    </div>
+                    	</div>
+		                <div class="row">
+			                <div class="mb-3">
+				                <label for="payId" class="form-label">아이디</label>
+				                <input type="text" id="payId" name="payId" class="form-control"
+				                	   th:value ="${refundInfo.payId}" readonly="readonly">
+			                </div>
+		                </div>
+		                <div class="row">
+			                <div class="mb-3">
+				                <label for="refundReason" class="form-label">환불사유</label>
+				                <input type="text" id="refundReason" name="refundReason" class="form-control"
+				                	   th:value ="${refundInfo.refundReason}" readonly="readonly">
+			                </div>
+		                </div>
+		                <div class="row">
+			                <div class="mb-3">
+				                <label for="refundDatetime" class="form-label">환불신청일시</label>
+				                <input type="text" id="refundDatetime" name="refundDatetime" class="form-control"
+				                	   th:value ="${refundInfo.refundDatetime}" readonly="readonly">
+			                </div>
+		                </div>
+		                <div class="row">
+		                	<div class="mb-3">
+		                	<label for="refundState" class="form-label">상태</label>
+	                        	<input type="text" id="refundState" name="refundState" class="form-control"
+				                	   th:value ="${refundInfo.refundState}">
+		                    </div>
+		                </div>
+					</div>
+					</div>
+					</div>
+               		<div class="mt-4 mt-lg-5">
+                  		<button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">Save</button>
+                   		<button type="reset" id="resetBtn" 	 class="btn rounded-pill pxp-section-cta">Cancel</button>
+               		</div>
+				</div>	
+           </form>
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
+</html>   

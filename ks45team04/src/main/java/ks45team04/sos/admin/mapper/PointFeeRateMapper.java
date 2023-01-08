@@ -9,6 +9,11 @@ import ks45team04.sos.admin.dto.PointFeeRate;
 @Mapper
 public interface PointFeeRateMapper {
 	
+	//포인트 수수료율 수정
+	public int modifyPointFeeRate(PointFeeRate pointFeeRate);
+	
+	//특정 포인트 수수료율 조회
+	public PointFeeRate getPointFeeRateByCode(String pointFeeRateCode);
 	//관리자 아이디 인증
 	public boolean getPointFeeRateIdCheck(String inputId);
 	

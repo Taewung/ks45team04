@@ -10,6 +10,9 @@ import ks45team04.sos.member.dto.MMember;
 public interface MMemberMapper {
 
 	
+	//회원 중복체크
+	public boolean checkMemberId(String memId);
+	
 	//회원 가입
 	public int addMember(MMember member);
 	

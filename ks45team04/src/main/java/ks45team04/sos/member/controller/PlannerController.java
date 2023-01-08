@@ -5,36 +5,90 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.member.dto.ToDoList;
+import ks45team04.sos.member.mapper.PlannerMapper;
 import ks45team04.sos.member.service.PlannerService;
 
 @Controller
 public class PlannerController {
 	
 private final 	PlannerService plannerService;
+private final 	PlannerMapper plannerMapper;
 
-	public PlannerController(PlannerService plannerService) {
+	public PlannerController(PlannerService plannerService
+									  ,PlannerMapper plannerMapper) {
+		
 		this.plannerService = plannerService;
+		this.plannerMapper = plannerMapper;
 	}
-		//일정 등록
-		@GetMapping("/addToDoList")
-		public String addToDoList(Model model) {
-			model.addAttribute("title", "일정 등록");
-			return "member/planner/to_do_list_insert";
+		//일정 등록 처리
+		@PostMapping("/addToDoList")
+		
+		public String addToDoList(ToDoList toDoList) {
+			
+			plannerService.addToDoList(toDoList);
+			
+			return "redirect:/detailToDoList";
 		}
 	
-		//일정 수정
+		//일정 등록 화면
+		@GetMapping("/addToDoList")
+		public String addToDoList(Model model) {
+			
+			List<ToDoList> toDoListDetailList = plannerMapper.toDoListDetailList();
+		
+			model.addAttribute("title", "일정 등록");
+			model.addAttribute("toDoListDetailList", toDoListDetailList);
+			
+			return "member/planner/to_do_list_list";
+		}
+	
+		//일정 정보 수정 처리
+		@PostMapping("/modifyToDoList")
+		public String modifyToDoList(ToDoList ToDoList) {
+			
+			plannerService.modifyToDoList(ToDoList);
+			
+			return "redirect:/detailToDoList";
+		}
+		
+		//일정 수정 화면
 		@GetMapping("/modifyToDoList")
-		public String modifyToDoList(Model model) {
-			model.addAttribute("title", "일정 수정");
+		public String modifyToDoList(@RequestParam(value="toDoListCode") String toDoListCode
+				,Model model) {
+			ToDoList toDoList = plannerService.getToDoListByCode(toDoListCode);
+
+
+			model.addAttribute("title", "일정 정보 수정");
+			model.addAttribute("toDoList", toDoList);
+
 			return "member/planner/to_do_list_modify";
 		}
 	
-		//일정 삭제
-		@GetMapping("/deleteToDoList")
-		public String deleteToDoList(Model model) {
+		//일정 삭제 처리
+		@PostMapping("/deleteToDoList")
+		public String deleteToDoList(ToDoList toDoList
+												,RedirectAttributes reAttr) {
+			String toDoListCode = toDoList.getToDoListCode();
+			String redirectURI = "redirect:/planner/to_do_list_detail";
+			
+			plannerService.deleteToDoList(toDoListCode);
+		
+			return redirectURI;
+		}
+		
+		
+		//일정 삭제 화면
+		@GetMapping("/deleteToDoList/{toDoListCode}")
+		public String deleteToDoList( @PathVariable(value="toDoListCode") String toDoListCode
+													,Model model){
 			model.addAttribute("title", "일정 삭제");
 			return "member/planner/to_do_list_delete";
 		}

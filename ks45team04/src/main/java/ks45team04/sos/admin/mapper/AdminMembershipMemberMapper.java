@@ -9,6 +9,12 @@ import ks45team04.sos.admin.dto.MembershipMember;
 @Mapper
 public interface AdminMembershipMemberMapper {
 
-		//멤버십 회원 조회
+	//멤버십 회원 정보 수정 처리
+	public int modifyMembershipMemberInfo(MembershipMember membershipMember);
+	
+	//멤버십 회원 상세 정보 조회
+	public MembershipMember getTotalMembershipMemberInfo(String mmId);
+	
+	//멤버십 회원 조회
 	public List<MembershipMember> TotalMembershipMemberList();
 }

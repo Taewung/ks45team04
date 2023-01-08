@@ -29,7 +29,7 @@
 		<result property="question" 				column="question"/>			
 		<result property="questionScore" 			column="question_score"/>			
 		<result property="questionRegId" 			column="question_reg_id"/>				
-		<result property="questionRegId" 			column="question_reg_datetime"/>				
+		<result property="questionRegDateTime" 			column="question_reg_datetime"/>				
 	</resultMap>
 	
 	<select id="getQuestionList" resultMap="questionResultMap">

@@ -16,6 +16,18 @@ public class RefundService {
 		this.refundMapper = refundMapper;
 	}
 
+	//환불 승인 내역 수정
+	public int modifyRefundApproval(Refund refund) {
+		
+		return refundMapper.modifyRefundApproval(refund);
+	}
+	
+	//특정 환불 승인 내역 조회
+	public Refund getRefundInfoByCode(String refundCode) {
+		
+		return refundMapper.getRefundByCode(refundCode);
+	}
+	
 	//환불 승인 내역 조회
 	public List<Refund> RefundList(){
 		

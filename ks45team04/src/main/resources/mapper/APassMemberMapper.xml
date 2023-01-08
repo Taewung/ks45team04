@@ -16,9 +16,39 @@
 		<result property="pmReportManager" 				column="pm_report_manager"/>
 	</resultMap>
 	
-	
+
+	<update id="modifyPassMemberInfo" parameterType="PassMember">
+			/* 특정 부정 회원 정보 수정 */
+		UPDATE 
+			pass_member
+		SET
+			pm_reg_datetime = #{pmRegDatetime},
+			pm_refuse_reason = #{pmRefuseReason},
+			pm_state = #{pmState}
+		WHERE 
+			pm_id= #{pmId};
+	</update>
+
+
+
+	<select id="getTotalPassMemberInfo" parameterType="String" resultMap="PassMemberResultMap">
+			/* 특정 합격 회원 목록 조회 */
+			SELECT
+			pm.pm_id,
+			pm.pm_li_code,
+			pm.pm_datetime,
+			pm.pm_reg_datetime,
+			pm.pm_refuse_reason,
+			pm.pm_state
+			FROM
+				pass_member as pm
+			WHERE
+				pm.pm_id = #{pmId};
+				
+	</select>
+
 	<select id="PassMemberList" resultMap="PassMemberResultMap">
-			/* 합격 회원 목록 조회 */
+			/* 합격 회원 전체 목록 조회 */
 			SELECT
 				pm_id,
 				pm_li_code,

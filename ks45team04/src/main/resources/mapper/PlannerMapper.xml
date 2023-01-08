@@ -4,6 +4,15 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ks45team04.sos.member.mapper.PlannerMapper">
 	
+		<delete id="deleteToDoListByCode" parameterType="String">
+		/* 일정코드로 일정삭제 */
+		DELETE
+		FROM 
+			to_do_list
+		WHERE 
+			to_do_list_code = #{toDoListCode};
+	</delete>
+	
 	<resultMap type="ks45team04.sos.member.dto.ToDoList" 						id="toDoListDetailListResultMap">
 		<id property="toDoListCode" 					column="to_do_list_code"/>
 		<result property="memId" 						column="mem_id"/>
@@ -15,6 +24,51 @@
 		<result property="totalDayStudyTime" 			column="total_day_study_time"/>
 	</resultMap>
 	
+	<update id="modifyToDoList" parameterType="String">
+		/* 특정 일정 정보 수정*/
+		UPDATE 
+			to_do_list
+		SET 
+			 li_name = #{liName}
+			,to_do_list_title = #{toDoListTitle}
+		WHERE 
+			to_do_list_code= #{toDoListCode};
+		</update>
+		
+		<select id="getToDoListByCode" parameterType="String" resultMap="toDoListDetailListResultMap">
+			/* 특정 일정 정보 조회 */
+			SELECT
+				 td.to_do_list_code
+				,td.mem_id
+				,td.li_code
+				,td.li_name
+				,td.to_do_list_title
+				,td.to_do_list_day
+				,td.to_do_list_reg_time
+				,td.total_day_study_time
+			FROM
+				to_do_list AS td
+			WHERE
+				td.to_do_list_code = #{toDoListCode};
+		</select>
+		
+	<insert id="addToDoList" parameterType="ks45team04.sos.member.dto.ToDoList">
+		/* 일정 등록 */
+		INSERT INTO to_do_list
+		( to_do_list_code
+		 ,mem_id
+		 ,li_code
+		 ,li_name
+		 ,to_do_list_title
+		 ,to_do_list_day
+		 ,to_do_list_reg_time
+		 ,total_day_study_time) 
+		VALUES 
+		(#{toDoListCode}, #{memId}, #{liCode},#{liName}, #{toDoListTitle}, #{toDoListDay},NOW(), 
+			#{toDayStudyTime});
+			
+	</insert>
+	
 	<select id="toDoListDetailList" resultMap="toDoListDetailListResultMap">
 			
 			
@@ -25,4 +79,6 @@
 
 			
 	</select>
+	
+	
 </mapper>
