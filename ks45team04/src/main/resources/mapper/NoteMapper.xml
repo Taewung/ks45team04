@@ -6,19 +6,49 @@
 	
 	<resultMap type="Note" id="noteResultMap">
 		
-		<id property="noteCode" 			column="note_code"/>
-		<result property="noteWriterId" 	column="note_writer_id"/>
-		<result property="liCode" 			column="li_code"/>
-		<result property="liName" 			column="li_name"/>
-		<result property="lsCode" 			column="ls_code"/>
-		<result property="noteName" 		column="note_name"/>
-		<result property="noteInfo" 		column="note_info"/>
-		<result property="notePrevFile" 	column="note_prev_file"/>
-		<result property="noteFile" 		column="note_file"/>
-		<result property="notePrice" 		column="note_price"/>
-		<result property="noteRegDate" 		column="note_reg_date"/>
+		<id property="noteCode" 				column="note_code"/>
+		<result property="noteWriterId" 		column="note_writer_id"/>
+		<result property="liCode" 				column="li_code"/>
+		<result property="liName" 				column="li_name"/>
+		<result property="lsCode" 				column="ls_code"/>
+		<result property="noteName" 			column="note_name"/>
+		<result property="noteInfo" 			column="note_info"/>
+		<result property="notePrevFile" 		column="note_prev_file"/>
+		<result property="noteFile" 			column="note_file"/>
+		<result property="notePrice" 			column="note_price"/>
+		<result property="noteRegDate" 			column="note_reg_date"/>
 		
+		<association property="notePurchaseReview" javaType="NotePurchaseReview">
+			<id property="nprCode" 						column="npr_code" />
+			<result property="noteCode" 				column="note_code" />
+			<result property="noteWriterId" 			column="note_writer_id" />
+			<result property="liCode" 					column="li_code" />
+			<result property="noteReviewContent" 		column="note_review_content" />
+			<result property="noteReviewScore" 			column="note_review_score" />
+			<result property="noteReviewPoint" 			column="note_review_point" />
+			<result property="pointDetailGroup" 		column="point_detail_group" />
+			<result property="noteReviewRegDatetime" 	column="note_review_reg_datetime" />
+			<result property="noteReviewWriter" 		column="note_review_writer" />
+				
+		</association>
 	</resultMap>
+	
+	<select id="noteReviewList" parameterType="Note" resultMap="noteResultMap">
+		/* 노트 리뷰 목록 조회 */
+		SELECT
+			 npr.note_review_writer
+			,npr.note_review_content
+			,npr.note_review_score
+		FROM
+			note AS n
+			INNER JOIN
+			note_purchase_review AS npr
+			on
+			n.note_code = npr.note_code
+			where
+			n.note_code=#{noteCode};
+			
+	</select>
 	
 	
 	<select id="getNoteById" parameterType="String" resultMap="noteResultMap">
@@ -41,18 +71,9 @@
 
 			/* 공부노트 목록 조회 */
 			SELECT
-				note_writer_id,
-				li_name,
-				note_name,
-				note_price
+				*
 			FROM
 				note;
 			
 	</select>
-	
-	
-	
-	
-	
-	
 </mapper>

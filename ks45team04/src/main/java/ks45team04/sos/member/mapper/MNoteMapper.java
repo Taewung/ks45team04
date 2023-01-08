@@ -9,7 +9,9 @@ import ks45team04.sos.member.dto.Note;
 @Mapper
 public interface MNoteMapper {
 
-
+	// 구매노트 리뷰 목록 조회
+	public List<Note> noteReviewList();
+	
 	// 구매노트 수정
 	public int modifyNote(Note note);
 	

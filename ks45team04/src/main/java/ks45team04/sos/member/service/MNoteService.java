@@ -15,6 +15,17 @@ public class MNoteService {
 		this.mNoteMapper = mNoteMapper;
 	}
 	
+	/**
+	 * 공부노트 리뷰목록
+	 * return List<Note>
+	 */
+	public List<Note> noteReviewList(){
+		
+		List<Note> noteReviewList = mNoteMapper.noteReviewList();
+		
+		return noteReviewList;
+	}
+	
 	
 	
 	/**

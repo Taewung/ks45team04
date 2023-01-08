@@ -22,7 +22,7 @@
                 <h1>공부노트 등록</h1>
               
 
-                <form>
+                <form id="addNoteForm" th:action="@{/addNote}" name="myform" method="post">
                     <div class="row mt-4 mt-lg-5">
                         <div class="col-xxl-8">
                             <div class="mb-3">
@@ -33,12 +33,9 @@
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                       <label for="pxp-candidate-name" class="form-label">관련자격증</label>
-                                       <select id="pxp-company-job-category" class="form-select">
-		                                    <option>정보처리기사</option>
-		                                    <option>간호조무사</option>
-		                                    <option>한국사능력검정</option>
-		                                    <option>SQLD</option>
-		                                    <option>CCDA</option>
+                                       <select id="pxp-company-job-category" class="form-select" name="licenseInfo">
+		                                   <th:block th:each="l: ${getLicenseInfoByCode}">
+		                                   <option th:value="${l.liCode}" th:text="${l.liName}"></option>
                                		 </select>
                                     </div>
                                 </div>
@@ -79,7 +76,7 @@
                     </div>
 
                     <div class="mt-4 mt-lg-5" style='text-align:center'>
-                        <button class="btn rounded-pill pxp-section-cta">등록 완료</button>
+                        <button type="button" class="btn rounded-pill pxp-section-cta">등록</button>
                     </div>
                 </form>
             </div>

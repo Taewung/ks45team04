@@ -37,7 +37,6 @@ public class NoteController {
 	}
 
 
-
 	// 판매노트 수정 처리
 	@PostMapping("/modifyNote")
 	public String modifyNote(Note Note) {
@@ -75,9 +74,11 @@ public class NoteController {
 								 ,Model model) {
 			
 			Note note = mNoteService.getNoteById(noteWriterId);
+			List<Note> noteReviewList = mNoteService.noteReviewList();
 			
 			model.addAttribute("title", "판매노트 상세보기 화면");
 			model.addAttribute("noteInfo", note);
+			model.addAttribute("noteReviewList", noteReviewList);
 			
 			
 			return "member/note/note_detail";

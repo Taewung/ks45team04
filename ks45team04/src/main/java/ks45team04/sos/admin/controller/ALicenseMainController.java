@@ -85,6 +85,7 @@ private final LicenseMainMapper licenseMainMapper;
 	@PostMapping("/addlicenseMain")
 	public String addlicenseMain(LicenseMain LicenseMain) {
 		System.out.println(LicenseMain);
+		
 		licenseMainService.addLicenseMain(LicenseMain);
 		
 		
@@ -100,6 +101,7 @@ private final LicenseMainMapper licenseMainMapper;
 		
 		model.addAttribute("title", "자격증 대분류 정보 등록");
 		model.addAttribute("licenseMainList", licenseMainList);
+		
 		return "admin/licenseMain/license_main_insert";
 	}
 	
