@@ -12,11 +12,83 @@
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-		<section>
-			<div class="pxp-container">
-				note_list.html
-			</div>
-		</section>
+	<section class="pxp-page-header-simple">
+            <div class="pxp-container">
+                <h1>100% 합격보장 공부노트</h1><br>
+                <h3><div class="pxp-hero-subtitle pxp-text-ligh">합격을 위한 한걸음!</div></h3>
+                <div class="pxp-hero-form pxp-hero-form-round pxp-large mt-3 mt-lg-4 pxp-has-border">
+                    <form class="row gx-3 align-items-center">
+                        <div class="col-12 col-lg pxp-has-left-border">
+                            <div class="input-group mb-3 mb-lg-0">
+                                <span class="input-group-text"><span class="fa fa-folder-o"></span></span>
+                                <select class="form-select">
+                                    <option selected>자격증 종류</option>
+                                    <option>Business Development</option>
+                                    <option>Construction</option>
+                                    <option>Customer Service</option>
+                      
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-auto">
+                            <button>검색</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section class="mt-4 mt-lg-5 pt-100 pb-100" style='background-color: var(--pxpSecondaryColorLight);'>
+
+            <div class="pxp-container">
+                
+                <div class="pxp-candidates-list-top">
+                    <div>
+                        <div class="col-auto">
+                            <h1>공부 노트</h1>
+                            <div style='text-align:right'>
+                            <a th:href="@{/addNote}" class="btn rounded-pill pxp-section-cta">공부노트 등록</a>
+                            </div>
+                          
+                        </div>
+                    </div>
+                </div><br>
+
+                <div class="row">
+                    <div class="col-md-6 col-xl-4 col-xxl-3 pxp-candiadates-card-1-container"
+                    	 th:if="${not #lists.isEmpty(noteList)}"
+									th:each="l : ${noteList}">
+                        <div class="pxp-candiadates-card-1 pxp-has-shadow text-center">
+                            <div class="pxp-candiadates-card-1-top">
+                                <div class="pxp-candiadates-card-1-avatar pxp-cover" style="background-image: url(images/ph-small.jpg);"></div>
+                                <div class="pxp-candiadates-card-1-name"  th:text="${l.noteName}"></div>
+                                <div class="pxp-candiadates-card-1-title" th:text="${l.liName}"></div>
+                                <div class="pxp-candiadates-card-1-title" th:text="${l.notePrice}"></div>
+                                <div class="pxp-candiadates-card-1-title" th:text="${l.noteWriterId}"></div>
+                            </div>
+                            <div class="pxp-candiadates-card-1-bottom">
+                                <div class="pxp-candiadates-card-1-cta">
+                                    <a th:href="@{/noteDetial(noteWriterId=${l.noteWriterId})}">상세보기<span class="fa fa-angle-right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4 mt-lg-5 justify-content-between align-items-center">
+                    <div class="col-auto">
+                        <nav class="mt-3 mt-sm-0" aria-label="Candidates pagination">
+                            <ul class="pagination pxp-pagination">
+                                <li class="page-item active" aria-current="page">
+                                    <span class="page-link">1</span>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
 	</th:block>
 	<!-- customContents end -->
 	

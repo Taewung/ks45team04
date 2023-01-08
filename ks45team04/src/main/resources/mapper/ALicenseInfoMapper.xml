@@ -6,12 +6,13 @@
 	
 	<resultMap type="LicenseInfo" id="licenseInfoResultMap">
 		<id property="liCode" 				column="li_code"/>
+		<result property="lmcCode" 			column="lmc_code"/>
 		<result property="lscCode" 			column="lsc_code"/>
 		<result property="liName" 			column="li_name"/>
 		<result property="liOverview" 		column="li_overview"/>
 		<result property="liQualification" 	column="li_qualification"/>
 		<result property="liRegId" 			column="li_reg_id"/>
-		<result property="liRegDatetime" 	column="li_reg_datetime"/>
+		<result property="liRegDatetime" 	column="li_reg_date"/>
 	</resultMap>
 		
 		<update id="modifyLicenseInfo" parameterType="LicenseInfo">
@@ -30,12 +31,13 @@
 			/* 특정 자격증 정보 조회 */
 			SELECT
 				 li.li_code
+				,li.lmc_code
 				,li.lsc_code
 				,li.li_name
 				,li.li_overview
 				,li_qualification
 				,li_reg_id
-				,li_reg_datetime
+				,li_reg_date
 			FROM
 				license_info AS li
 			WHERE
@@ -58,14 +60,15 @@
 		/* 자격증 정보 등록 */
 		INSERT INTO license_info
 		( li_code
+		 ,lmc_code
 		 ,lsc_code
 		 ,li_name
 		 ,li_overview
 		 ,li_qualification
 		 ,li_reg_id
-		 ,li_reg_datetime) 
+		 ,li_reg_date) 
 		VALUES 
-		(#{liCode}, #{lscCode}, #{liName},#{liOverview}, #{liQualification}, #{liRegId}, 
+		(#{liCode}, #{lmcCode}, #{lscCode}, #{liName},#{liOverview}, #{liQualification}, #{liRegId}, 
 			CURDATE());
 			
 	</insert>

@@ -11,7 +11,8 @@ public class LicenseInfo {
 	private String liQualification;
 	private String liRegId;
 	private String liRegDatetime;
-	public String getLiCode() {
+	
+  public String getLiCode() {
 		return liCode;
 	}
 	public void setLiCode(String liCode) {
@@ -70,7 +71,14 @@ public class LicenseInfo {
 	}
 	public void setLiRegDatetime(String liRegDatetime) {
 		this.liRegDatetime = liRegDatetime;
+	}	
+	public String getLmcCode() {
+		return lmcCode;
 	}
+	public void setLmcCode(String lmcCode) {
+		this.lmcCode = lmcCode;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -97,6 +105,4 @@ public class LicenseInfo {
 		builder.append("]");
 		return builder.toString();
 	}
-
-	
 }

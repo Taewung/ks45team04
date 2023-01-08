@@ -12,11 +12,74 @@
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-		<section>
-			<div class="pxp-container">
-				note_insert.html
-			</div>
-		</section>
+		<section class="pxp-page-header-simple" style="background-color: var(--pxpMainColorLight);">
+            <div class="pxp-container">
+                <h1>100% 합격보장 공부노트</h1><br>
+                <h3><div class="pxp-hero-subtitle pxp-text-ligh">합격을 위한 한걸음!</div></h3>
+            </div>
+        </section>
+		<div class="pxp-dashboard-content-details" >
+                <h1>공부노트 등록</h1>
+              
+
+                <form id="addNoteForm" th:action="@{/addNote}" name="myform" method="post">
+                    <div class="row mt-4 mt-lg-5">
+                        <div class="col-xxl-8">
+                            <div class="mb-3">
+                                <label for="pxp-candidate-name" class="form-label">노트이름</label>
+                                <input type="text" id="pxp-candidate-name" class="form-control" placeholder="노트이름">
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                      <label for="pxp-candidate-name" class="form-label">관련자격증</label>
+                                       <select id="pxp-company-job-category" class="form-select" name="licenseInfo">
+		                                   <th:block th:each="l: ${getLicenseInfoByCode}">
+		                                   <option th:value="${l.liCode}" th:text="${l.liName}"></option>
+                               		 </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        <label for="pxp-candidate-location" class="form-label">노트가격</label>
+                                        <input type="tel" id="pxp-candidate-location" class="form-control" placeholder="노트가격">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        <label for="pxp-candidate-email" class="form-label">등록자 아이디</label>
+                                        <input type="email" id="pxp-candidate-email" class="form-control" placeholder="등록자 아이디">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        <label for="pxp-candidate-phone" class="form-label">노트코드</label>
+                                        <input type="tel" id="pxp-candidate-phone" class="form-control" placeholder="노트코드">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-4">
+                            <div class="form-label">&nbsp;</div>
+                            <div class="pxp-candidate-cover mb-3">
+                                <input type="file" id="pxp-candidate-cover-choose-file" accept="image/*">
+                                <label for="pxp-candidate-cover-choose-file" class="pxp-cover"><span>사진 첨부</span></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="pxp-candidate-about" class="form-label">노트설명</label>
+                        <textarea class="form-control" id="pxp-candidate-about" placeholder="노트설명"></textarea>
+                    </div>
+
+                    <div class="mt-4 mt-lg-5" style='text-align:center'>
+                        <button type="button" class="btn rounded-pill pxp-section-cta">등록</button>
+                    </div>
+                </form>
+            </div>
 	</th:block>
 	<!-- customContents end -->
 	

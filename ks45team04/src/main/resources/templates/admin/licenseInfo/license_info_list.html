@@ -37,22 +37,22 @@
                         <table class="table table-hover align-middle">                      	
                             <thead>                    
                                 <tr>
-                                	<th></th>
                                     <th style="width: 10%;">자격증코드</th>
+                                    <th style="width: 10%;">대분류코드</th>                                
                                     <th style="width: 10%;">중분류코드</th>
                                     <th style="width: 10%;">자격증명</th>
-                                    <th style="width: 40%;">개요</th>
-                                    <th style="width: 20%;">응시자격</th>
-                                    <th style="width: 8%;">등록자</th>
-                                    <th style="width: 15%;">등록날짜</th>
+                                    <th style="width: 35%;">개요</th>
+                                    <th style="width: 15%;">응시자격</th>
+                                    <th style="width: 10%;">등록자</th>
+                                    <th style="width: 15%;">등록일</th>
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>    
                             <tbody>
                                 <tr th:if="${not #lists.isEmpty(licenseInfoList)}"
 									th:each="l : ${licenseInfoList}">
-                                    <td><input type="checkbox" class="form-check-input"></td>
                                     <td><div class="pxp-company-dashboard-job-title" th:text="${l.liCode}"></div>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.lmcCode}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.lscCode}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.liName}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.liOverview}"></div></td>
