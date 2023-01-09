@@ -3,7 +3,6 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ks45team04.sos.admin.mapper.LicensePassScoreMapper">
-	
 	<resultMap type="LicensePassScore" id="licensePassScoreResultMap">
 		<id 	property="liPScoreCode" 			column="li_p_score_code"/>
 		<result property="liCode" 					column="li_code"/>		
@@ -38,13 +37,39 @@
 		<result property="lscRegId" 		column="lsc_reg_id"/>
 		<result property="lscRegDatetime" 	column="lsc_reg_datetime"/>
 	</resultMap>
+
+	<update id="modifyLicensePassScore" parameterType="LicensePassScore">
+		/* 특정 자격증합격기준점수 수정 */
+		UPDATE license_pass_score
+		SET 
+			 li_p_standard_score = #{liPStandardScore}
+			,li_p_score_reg_id = #{liPScoreRegId}
+			,li_p_score_reg_datetime = CURDATE()
+		WHERE 
+			li_p_score_code = #{liPScoreCode};
+	</update>
+
+	<select id="getLicensePassScoreByCode" parameterType="String" resultMap="licensePassScoreResultMap">
+		/* 특정 자격증합격기준점수 조회 */
+		SELECT
+			 lp.li_p_score_code
+			,lp.li_code
+			,lp.li_name
+			,lp.li_p_standard_score
+			,lp.li_p_score_reg_id
+			,lp.li_p_score_reg_datetime
+		FROM
+			license_pass_score AS lp
+		WHERE
+			li_p_score_code = #{liPScoreCode};
+	</select>
 	
 	<insert id="addLicensePassScore" parameterType="LicensePassScore">
 		/* 자격증별 합격기준 점수 등록 */
 		INSERT INTO license_pass_score
 		(li_p_score_code, li_code, li_name, li_p_standard_score, li_p_score_reg_id, li_p_score_reg_datetime)
 		VALUES
-		(#{liPScoreCode}, #{liCode}, #{liName}, #{liPStandardScore}, 'id001', CURDATE());
+		(#{liPScoreCode}, #{liCode}, #{liName}, #{liPStandardScore}, #{liPScoreRegId}, CURDATE());
 	</insert>
 
 	<select id="getNewLiPassScoreCode" parameterType="String" resultType="String">
@@ -101,7 +126,7 @@
 			FROM
 				license_main_category AS lm;	
 	</select>	
-	<select id="getLicensePassScoreList" resultMap="licensePassScoreResultMap">
+	<select id="getLicensePassScoreList" resultType="LicensePassScore" parameterType="String" resultMap="licensePassScoreResultMap">
 		/* 자격증별  합격기준 점수 조회 */
 		SELECT
 			 li_p_score_code
@@ -111,6 +136,11 @@
 			,li_p_score_reg_id
 			,li_p_score_reg_datetime
 		FROM
-			license_pass_score;			
+			license_pass_score	
+		<where>
+			<if  test="searchKey != null and searchKey != ''">
+				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
+			</if>
+		</where>		
 	</select>
 </mapper>
