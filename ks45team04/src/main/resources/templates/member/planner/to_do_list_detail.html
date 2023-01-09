@@ -58,42 +58,44 @@
                                     </td>
                                     <tr th:if="${not #lists.isEmpty(toDoListDetailList)}"
 									th:each="l : ${toDoListDetailList}">
-                                     
-                                    <td><div class="pxp-company-dashboard-job-title" th:text="${l.toDoListCode}"></div>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.memId}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.liCode}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.liName}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.toDoListTitle}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.toDoListDay}"></div></td>                      
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.toDoListRegTime}"></div></td>   
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.toDayStudyTime}"></div></td>   
-                                   <td>
-                                        <div class="pxp-dashboard-table-options" style="margin-right: 80px;">
-                                            <ul class="list-unstyled">
-                                            <a href="/recordStopwatch">
-                                                	<li><button title="stopwatch"><i class="fa fa-clock-o" aria-hidden="true"></i></button></li>
-                                                </a>
-                                                      <!-- 수정버튼 start -->
-                                               <a th:href="@{/modifyToDoList(toDoListCode=${l.toDoListCode})}">
-                                                	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
-                                                </a>
-                                            <!-- 수정버튼 end -->
-                                            <!-- 삭제버튼 start -->
-                                             <a th:href="@{/deleteToDoList(toDoListCode=${l.toDoListCode})}">
-                                              		 <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
-                                           		</a>
-                                            <!-- 삭제버튼 end -->               
-                                            </ul>
-                                        </div>
-                                    </td>  
+                                    	<td>
+	                                     	<input type="hidden"  th:value="${l.toDoListCode}" name="toDoListCode" readonly="readonly" />
+                                    		<div class="pxp-company-dashboard-job-title" th:text="${l.toDoListCode}">
+                                    	</div>
+                                    	<td><div class="pxp-company-dashboard-job-category" th:text="${l.memId}"></div></td>
+                                    	<td><div class="pxp-company-dashboard-job-category" th:text="${l.liCode}"></div></td>
+                                    	<td><div class="pxp-company-dashboard-job-category" th:text="${l.liName}"></div></td>
+                                    	<td><div class="pxp-company-dashboard-job-category" th:text="${l.toDoListTitle}"></div></td>
+                                    	<td><div class="pxp-company-dashboard-job-category" th:text="${l.toDoListDay}"></div></td>                      
+                                    	<td><div class="pxp-company-dashboard-job-category" th:text="${l.toDoListRegTime}"></div></td>   
+                                    	<td><div class="pxp-company-dashboard-job-category" th:text="${l.toDayStudyTime}"></div></td>   
+	                                   <td>
+	                                        <div class="pxp-dashboard-table-options" style="margin-right: 80px;">
+	                                            <ul class="list-unstyled">
+	                                            <a href="/recordStopwatch">
+	                                                	<li><button title="stopwatch"><i class="fa fa-clock-o" aria-hidden="true"></i></button></li>
+	                                                </a>
+	                                                      <!-- 수정버튼 start -->
+	                                               <a th:href="@{/modifyToDoList(toDoListCode=${l.toDoListCode})}">
+	                                                	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
+	                                                </a>
+	                                            <!-- 수정버튼 end -->
+	                                            <!-- 삭제버튼 start -->
+	                                            <a th:href="@{/deleteToDoList(toDoListCode=${l.toDoListCode})}">
+	                                              	  <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
+	                                           	</a>
+	                                            <!-- 삭제버튼 end -->               
+	                                            </ul>
+	                                        </div>
+	                                    </td>  
                                     
-                                    <td>
-                                        <div class="pxp-dashboard-table-options">
-                                            <ul class="list-unstyled">
-                                                                       
-                                            </ul>
-                                        </div>
-                                    </td>
+	                                    <td>
+	                                        <div class="pxp-dashboard-table-options">
+	                                            <ul class="list-unstyled">
+	                                                                       
+	                                            </ul>
+	                                        </div>
+	                                    </td>
                                 </tr>
                                 <tr th:unless="${not #lists.isEmpty(toDoListDetailList)}">
 									<td colspan="9">등록된 정보가 없습니다.</td>
@@ -131,4 +133,3 @@
 	</th:block>
 	<!-- customJs end -->
 </html>
-		

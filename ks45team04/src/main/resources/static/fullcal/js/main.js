@@ -83,10 +83,10 @@ var calendar = $('#calendar').fullCalendar({
       }),
       content: $('<div />', {
           class: 'popoverInfoCalendar'
-        }).append('<p><strong>등록자:</strong> ' + event.username + '</p>')
+        }).append('<p><strong>자격증이름:</strong> ' + event.username + '</p>')
         .append('<p><strong>구분:</strong> ' + event.type + '</p>')
         .append('<p><strong>시간:</strong> ' + getDisplayEventDate(event) + '</p>')
-        .append('<div class="popoverDescCalendar"><strong>설명:</strong> ' + event.description + '</div>'),
+        .append('<div class="popoverDescCalendar"><strong>제목:</strong> ' + event.description + '</div>'),
       delay: {
         show: "800",
         hide: "50"
@@ -107,7 +107,8 @@ var calendar = $('#calendar').fullCalendar({
   events: function (start, end, timezone, callback) {
     $.ajax({
       type: "get",
-      url: "/fullcal/data.json",
+      url: "/ajax/detailToDoList",
+      dataType:"json",
       data: {
         // 화면이 바뀌면 Date 객체인 start, end 가 들어옴
         //startDate : moment(start).format('YYYY-MM-DD'),
@@ -244,7 +245,8 @@ var calendar = $('#calendar').fullCalendar({
 
   //이벤트 클릭시 수정이벤트
   eventClick: function (event, jsEvent, view) {
-    editEvent(event);
+	location.href='/detailToDoList';
+    //editEvent(event);
   }
 
 });

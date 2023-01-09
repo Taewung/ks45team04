@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import ks45team04.sos.member.dto.DDay;
 import ks45team04.sos.member.dto.ToDoList;
 
 @Mapper	
@@ -23,4 +24,7 @@ public interface PlannerMapper {
 		
 	//일정 코드로 일정 삭제
 		public int deleteToDoListByCode(String toDoListCode);
+		
+	//디데이 조회
+		public List<DDay> dDayDetailList();
 }
