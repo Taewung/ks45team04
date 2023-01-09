@@ -1,37 +1,134 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  class="pxp-root" >
-<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  layout:decorate="~{admin/layout/adminDefault}">
 
-    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
-    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-    <body style="background-color: var(--pxpMainColorLight);">
-        <div class="pxp-dashboard-content">
-        
-        <!-- begin aside -->
-		<div th:replace="~{admin/fragments/adminAside :: asideFragment}"></div>
-		<!-- end aside -->
-		
-        <!-- begin header -->
-		<div th:replace="~{admin/fragments/adminHeader :: headerFragment}"></div>
-		<!-- end header -->
-		
-		<!-- begin contents --> 
-		<section>
-            <div class="pxp-dashboard-content-details" style="margin-left:30px">
+	<!-- script start -->
+    <th:block layout:fragment="customScript">
+		<script>
+			$(function(){
+				function validationCheck(data){
+					if(typeof data == 'undefined' || data == '' || data == null || data == '대분류'){	
+						return false;
+					}
+					return true;
+				}
+				// 자격증 대분류값 선택
+				$(document).on('change','#licenseMainCategory', function(){
+					$('#licenseSubCategory').prop('disabled', false);
+					let lmcCode = $(this).val();
+					
+					if(validationCheck(lmcCode)){						
+						var request = $.ajax({
+						  url: '/getLicenseSubCategoryForQSet',
+						  method: 'GET',
+						  data: { 'lmcCode' : lmcCode },
+						  dataType: 'json'
+						});	
+						// 대분류값 선택 성공시 중분류명 조회
+						request.done(function( data ) {
+						  console.log(data);
+						  $('#licenseSubCategory').children().remove();
+						  for(let subCategory of data){
+							  $('#licenseSubCategory').append(`<option value="${subCategory.lscCode}">${subCategory.lscName}</option>`);							 
+						  }
+						});
+						// 대분류값 선택 실패시
+						request.fail(function( jqXHR, textStatus ) {
+						  alert( "Request failed: " + textStatus );
+						});
+					}
+					
+				});
+				//대분류값 선택없이 중분류값 선택시
+				$(document).on('click','.licenseSubCategoryDiv', function(){
+					let isDisabled = $('#licenseSubCategory').prop('disabled');
+					if(isDisabled) {
+						alert('대분류를 선택해주세요');
+						return false;
+					}
+				});
+				// 자격증 중분류값 선택시 자격증코드,자격증명 조회
+				$(document).on('change','#licenseSubCategory', function(){
+					$('#licenseCategory').prop('disabled', false);
+					let lscCode = $(this).val();
+					
+					if(validationCheck(lscCode)){						
+						var request = $.ajax({
+						  url: '/getLicenseCategoryForQSet',
+						  method: 'GET',
+						  data: { 'lscCode' : lscCode },
+						  dataType: 'json'
+						});
+					// 중분류값 선택 성공시 
+					request.done(function( data ) {
+						  console.log(data);
+						  $('#licenseCategory').children().remove();
+						  for(let licenseCategory of data){
+							  $('#licenseCategory').append(`<option value="${licenseCategory.liName}">${licenseCategory.liName}</option>`);								  
+						  }
+						  $('#liCodeCategory').children().remove();
+						  $('#liCodeCategory').prop('disabled', false);
+						  for(let licenseCategory of data){
+							  $('#liCodeCategory').append(`<option value="${licenseCategory.liCode}">${licenseCategory.liCode}</option>`);							  
+						  }
+
+						});
+					// 중분류 선택 실패시
+					request.fail(function( jqXHR, textStatus ) {
+						  alert( "Request failed: " + textStatus );
+						});
+					}
+				});
+				// 중분류값 선택없이 자격증명값 선택시
+				$(document).on('click','.licenseCategoryDiv', function(){
+					let isDisabled = $('#licenseCategory').prop('disabled');
+					if(isDisabled) {
+						alert('중분류를 선택해주세요');
+						return false;
+					}
+				});
+			});
+			
+
+			$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+				function validateValue(checkValue) {
+					if(    typeof checkValue == 'undefined' 
+							|| checkValue == null 
+							|| checkValue == ''					){
+						return true;
+					}
+					return false;
+					
+				}			
+
+				$(document).on('click', '#submitBtn', function(){
+					let isSubmit = true;
+					
+					$('#addLicensePassScore input').each(function(idx, item){
+						let checkValue = $(item).val();
+						let labelValue = $(item).parents('.mb-3').find('label').text();
+						if(validateValue(checkValue)){
+							
+							alert(`${labelValue}를 입력해주세요`);
+							$(item).focus();
+							isSubmit = false;
+							
+							return false;
+						}
+						
+					});
+				
+					if(isSubmit) $('#addLicensePassScore').submit();
+				});
+			});
+	
+		</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
                 <h1>문제/답안/해설등록</h1>
                 <p class="pxp-text-light">Add Question Setting</p>
                 <form>
@@ -39,25 +136,27 @@
                     <!-- 자격증선택 start -->                
                 	<h2><strong><span class="fa fa-check"></span>자격증 선택</strong></h2>
                         <div class="col-md-6 col-xxl-3">
-                            <label for="pxp-company-job-category" class="form-label">대분류</label>
-                                <select id="pxp-company-job-category" class="form-select">
-                                    <option>Select a category</option>
-                                </select>
+                        	<label for="licenseSubCategory" class="form-label">대분류</label>
+                             <select  id="licenseMainCategory" class="form-select" name="mainCate">
+                                <option th:if="${not #lists.isEmpty(licenseMainListForQSet)}" th:each="l : ${licenseMainListForQSet}" th:value="${l.lmcCode}" th:text="${l.lmcName}"></option>
+                             </select>
                         </div>
                         <div class="col-md-6 col-xxl-3">
-                            <div class="mb-3">
-                                <label for="pxp-company-job-category" class="form-label">중분류</label>
-                                <select id="pxp-company-job-category" class="form-select">
-                                    <option>Select a category</option>
-                                </select>
+                            <div class="mb-3 licenseSubCategoryDiv">
+	                               <label for="licenseSubCategory" class="form-label">중분류</label>
+	                               <select id="licenseSubCategory" class="form-select" name="subCate" disabled="disabled"></select>
                             </div>
-                        </div>                       
+                        </div>
                         <div class="col-md-6 col-xxl-3">
-                            <div class="mb-3">
-                                <label for="pxp-company-job-category" class="form-label">자격증명</label>
-                                <select id="pxp-company-job-category" class="form-select">
-                                    <option>Select a category</option>
-                                </select>
+                            <div class="mb-3 licenseCategoryDiv">
+	                               <label for="licenseCategory" class="form-label">자격증명</label>
+	                               <select id="licenseCategory" class="form-select" name="liName" disabled="disabled"></select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 liCodeCategoryDiv">
+	                               <label for="liCodeCategory" class="form-label">자격증코드</label>
+	                               <select id="liCodeCategory" class="form-select" name="liCode" disabled="disabled"></select>
                             </div>
                         </div>
                     </div>
@@ -150,22 +249,13 @@
 	                        <button type="button" onclick="location.href='/qSettingList'" class="btn rounded-pill pxp-section-cta">등록</button>
 	                        <button type="button" onclick="location.href='/qSettingList'" class="btn rounded-pill pxp-section-cta-o ms-3">취소</button>
                     	</div>                                      
-                    	</div>
-                    </div>
                 </form>
-            </div>        
-		</section>
-            <!-- end contents -->    
-            
-        <!-- begin footer -->
-			<div th:replace="~{admin/fragments/adminFooter :: footerFragment}"></div>
-		<!-- end footer -->
-        </div>
-        <script src="js/jquery-3.4.1.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/nav.js"></script>
-        <script src="js/Chart.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
 </html>

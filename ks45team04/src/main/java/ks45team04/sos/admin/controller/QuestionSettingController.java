@@ -6,7 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import ks45team04.sos.admin.dto.LicenseInfo;
+import ks45team04.sos.admin.dto.LicenseMain;
+import ks45team04.sos.admin.dto.LicenseSub;
 import ks45team04.sos.admin.dto.Question;
 import ks45team04.sos.admin.service.QuestionSettingService;
 
@@ -19,11 +24,6 @@ public class QuestionSettingController {
 		this.questionSettingService = questionSettingService;
 	}
 
-	@GetMapping("/addQSetting")
-	public String addQSetting(Model model) {
-		model.addAttribute("title", "문제요소등록");
-		return "admin/questionSetting/add_q_setting";
-	}
 	@GetMapping("/checkQSetting")
 	public String checkQSetting(Model model) {
 		model.addAttribute("title", "문제요소상세정보");
@@ -35,8 +35,28 @@ public class QuestionSettingController {
 		return "admin/questionSetting/modify_q_setting";
 	}
 	
-	
-	
+	// 문제요소등록
+	@GetMapping("/addQSetting")
+	public String addQSetting(Model model) {
+		model.addAttribute("title", "문제요소등록");
+		List<LicenseMain> licenseMainListForQSet = questionSettingService.getLicenseMainListForQSet();
+		model.addAttribute("licenseMainListForQSet", licenseMainListForQSet);
+		return "admin/questionSetting/add_q_setting";
+	}
+	// 중분류별 자격증목록 조회
+	@GetMapping("/getLicenseCategoryForQSet")
+	@ResponseBody
+	public List<LicenseInfo> getLicenseCategoryForQSet (@RequestParam(value="lscCode") String lscCode){
+		List<LicenseInfo> licenseListForQSet = questionSettingService.getLicenseListForQSet(lscCode);
+		return licenseListForQSet;
+	}	
+	// 대분류별 중분류 조회
+	@GetMapping("/getLicenseSubCategoryForQSet")
+	@ResponseBody
+	public List<LicenseSub> getLicenseSubCategoryForQSet (@RequestParam(value="lmcCode") String lmcCode){
+		List<LicenseSub> licenseSubListForQSet = questionSettingService.getLicenseSubListForQSet(lmcCode);
+		return licenseSubListForQSet;
+	}	
 	// 문제 목록조회
 	@GetMapping("/qSettingList")
 	public String qSettingList(Model model) {
