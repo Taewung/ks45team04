@@ -88,6 +88,51 @@
 						return false;
 					}
 				});
+				// 자격증값 선택시 과목조회
+				$(document).on('change','#licenseCategory', function(){
+					$('#subjectCategory').prop('disabled', false);
+					let liCode = $(this).val();
+					
+					if(validationCheck(liCode)){						
+						var request = $.ajax({
+						  url: '/getSubjectCategoryForQSet',
+						  method: 'GET',
+						  data: { 'liCode' : liCode },
+						  dataType: 'json'
+						});
+					// 자격증값 선택 성공시 
+					request.done(function( data ) {
+						  console.log(data);
+						  $('#subjectCategory').children().remove();
+						  for(let subjectCategory of data){
+							  $('#subjectCategory').append(`<option value="${subjectCategory.lsSubject}">${subjectCategory.lsSubject}</option>`);								  
+						  }
+						  $('#subjectNameCategory').children().remove();
+						  $('#subjectNameCategory').prop('disabled', false);
+						  for(let subjectCategory of data){
+							  $('#subjectNameCategory').append(`<option value="${subjectCategory.lsName}">${subjectCategory.lsName}</option>`);							  
+						  }
+						  $('#subjectCodeCategory').children().remove();
+						  $('#subjectCodeCategory').prop('disabled', false);
+						  for(let subjectCategory of data){
+							  $('#subjectCodeCategory').append(`<option value="${subjectCategory.lsCode}">${subjectCategory.lsCode}</option>`);							  
+						  }
+
+						});
+					// 자격증값 선택 실패시
+					request.fail(function( jqXHR, textStatus ) {
+						  alert( "Request failed: " + textStatus );
+						});
+					}
+				});
+				// 자격증값 선택없이 과목값 선택시
+				$(document).on('click','.subjectCategoryDiv', function(){
+					let isDisabled = $('#subjectCategory').prop('disabled');
+					if(isDisabled) {
+						alert('자격증을 선택해주세요');
+						return false;
+					}
+				});
 			});
 			
 
@@ -123,6 +168,27 @@
 				});
 			});
 	
+			
+			
+		// 답안등록폼
+		// 답안 행 추가
+		$('#addRows').click(function(){
+			let trLength = $('#trCount').val();
+			if(Number(trLength) < 1 ){
+				alert('1 이상의 값을 입력해주세요');
+				return false;
+			}
+			for(let i=0; i < trLength; i++){
+				const $targetEle = $('#addAnswerBody').children().last();
+				const $cloneEle = $targetEle.clone(true);
+				$targetEle.find('.addButton')
+									.toggleClass('addButton')
+									.addClass('delButton')
+									.text('삭제');
+				$('#addAnswerBody').append($cloneEle);
+			}
+		});
+		
 		</script>
 	</th:block> 
 	<!-- script end -->
@@ -136,7 +202,7 @@
                     <!-- 자격증선택 start -->                
                 	<h2><strong><span class="fa fa-check"></span>자격증 선택</strong></h2>
                         <div class="col-md-6 col-xxl-3">
-                        	<label for="licenseSubCategory" class="form-label">대분류</label>
+                        	<label for="licenseMainCategory" class="form-label">대분류</label>
                              <select  id="licenseMainCategory" class="form-select" name="mainCate">
                                 <option th:if="${not #lists.isEmpty(licenseMainListForQSet)}" th:each="l : ${licenseMainListForQSet}" th:value="${l.lmcCode}" th:text="${l.lmcName}"></option>
                              </select>
@@ -164,20 +230,24 @@
                     <!-- 과목선택 start --> 
                     <div class="row mt-4 mt-lg-5">
                     <h2><strong><span class="fa fa-check"></span>과목 선택</strong></h2>
-                        <div class="col-md-6 col-xxl-3">
-                            <label for="pxp-company-job-category" class="form-label">과목</label>
-                                <select id="pxp-company-job-category" class="form-select">
-                                    <option>Select a category</option>
-                                </select>
-                        </div>
-                        <div class="col-md-6 col-xxl-3">
-                            <div class="mb-3">
-                                <label for="pxp-company-job-category" class="form-label">과목명</label>
-                                <select id="pxp-company-job-category" class="form-select">
-                                    <option>Select a category</option>
-                                </select>
+                   		<div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 subjectCategoryDiv">
+	                               <label for="subjectCategory" class="form-label">과목</label>
+	                               <select id="subjectCategory" class="form-select" name="lsSubject" disabled="disabled"></select>
                             </div>
-                       </div>
+                        </div>
+                   		<div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 subjectNameCategoryDiv">
+	                               <label for="subjectNameCategory" class="form-label">과목명</label>
+	                               <select id="subjectNameCategory" class="form-select" name="lsName" disabled="disabled"></select>
+                            </div>
+                        </div>
+                   		<div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 subjectCodeCategoryDiv">
+	                               <label for="subjectCodeCategory" class="form-label">과목코드</label>
+	                               <select id="subjectCodeCategory" class="form-select" name="lsCode" disabled="disabled"></select>
+                            </div>
+                        </div>
                       <!-- 과목선택 end -->   
                       	<!-- 문제입력란 start -->
                         <div class="row mt-4 mt-lg-5">
@@ -194,14 +264,15 @@
 								<div class="pxp-dashboard-table-options">
 			                        <ul class="list-unstyled">
 			                       		<!-- 추가버튼 start -->
-			                           	<li><button title="Add"><span class="fa fa-plus"></span></button></li>
-			                           	<li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
+			                           	<li><button id="addRows" class="addRows" type="button"><span class="fa fa-plus"></span></button></li>		                       
+			                           	<li><button id="removeRows"class="removeRows" type="button"><span class="fa fa-trash-o"></span></button></li>
 			                       		<!-- 추가버튼 end -->                                              
 			                        </ul>
 			                    </div>
 		                    </div>
-		                    <!-- 목록 start -->                   
-		                    <div class="table-responsive">
+		                    <!-- 목록 start -->
+		                    <form id="addAnswerForm">
+		                    <div class="table-responsive">              
 		                        <table class="table table-hover align-middle">                      	
 		                            <thead>                    
 		                                <tr>
@@ -212,11 +283,11 @@
 		                                    <th>&nbsp;</th>
 		                                </tr>
 		                            </thead>    
-		                            <tbody>
+		                            <tbody id="addAnswerBody">
 		                                <tr>
 		                                    <td><input type="checkbox" class="form-check-input"></td>
 		                                    <td>
-		                                    	<input type="text" class="form-control" placeholder="답안을 입력해주세요.">                                    
+		                                    	<input type="text" class="form-control" placeholder="답안을 입력해주세요." name="answer" />                                    
 		                                    </td> 
 		                                    <td>
 			                                    <div>
@@ -233,9 +304,9 @@
 		                            </tbody>
 		                        </table>
 		                    </div>
+		                    </form>                   
 		                <!-- 목록 end -->    
 		                </div>
-		            </div>                            
                     <!-- 답안입력란 end -->
                         <!-- 해설입력란 start -->
                         <div class="row mt-4 mt-lg-5">
@@ -249,13 +320,14 @@
 	                        <button type="button" onclick="location.href='/qSettingList'" class="btn rounded-pill pxp-section-cta">등록</button>
 	                        <button type="button" onclick="location.href='/qSettingList'" class="btn rounded-pill pxp-section-cta-o ms-3">취소</button>
                     	</div>                                      
+		            </div>                            
                 </form>
 	</th:block>
 	<!-- customContents end -->
 	
 	<!-- customJs start -->
 	<th:block layout:fragment="customJs">
-	
+		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	</th:block>
 	<!-- customJs end -->
 </html>

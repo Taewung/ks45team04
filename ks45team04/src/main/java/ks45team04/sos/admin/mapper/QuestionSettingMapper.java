@@ -7,10 +7,14 @@ import org.apache.ibatis.annotations.Mapper;
 import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.admin.dto.LicenseMain;
 import ks45team04.sos.admin.dto.LicenseSub;
+import ks45team04.sos.admin.dto.LicenseSubject;
 import ks45team04.sos.admin.dto.Question;
 
 @Mapper
 public interface QuestionSettingMapper {
+	// 자격증별 과목조회
+	public List<LicenseSubject> getSubjectListForQSet(String liCode);
+	
 	// 자격증 중분류별 자격증목록 조회
 	public List<LicenseInfo> getLicenseListForQSet(String lscCode);
 	

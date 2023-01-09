@@ -57,7 +57,32 @@
 		<result property="lscRegId" 		column="lsc_reg_id"/>
 		<result property="lscRegDatetime" 	column="lsc_reg_datetime"/>
 	</resultMap>
-		<select id="getLicenseListForQSet" resultMap="licenseInfoResultMap" parameterType="String">
+		<resultMap type="LicenseSubject" id="licenseSubjectResultMap">
+		<id property="lsCode" 				column="ls_code"/>
+		<result property="liCode" 			column="li_code"/>
+		<result property="liName" 			column="li_name"/>
+		<result property="lsSubject" 		column="ls_subject"/>
+		<result property="lsName" 			column="ls_name"/>
+		<result property="lsRegId" 			column="ls_reg_id"/>
+		<result property="lsRegDatetime" 	column="ls_reg_datetime"/>
+	</resultMap>
+	
+	<select id="getSubjectListForQSet" resultMap="licenseSubjectResultMap" parameterType="String">
+		/* 특정 자격증 과목 정보 조회 */
+		SELECT
+			 ls.ls_code
+			,ls.li_code
+			,ls.li_name
+			,ls.ls_subject
+			,ls.ls_name
+			,ls.ls_reg_id
+			,ls.ls_reg_datetime
+		FROM
+			license_subject AS ls
+		WHERE
+			ls.li_code = #{liCode};
+	</select>
+	<select id="getLicenseListForQSet" resultMap="licenseInfoResultMap" parameterType="String">
 		/* 자격증 중분류별 자격증 목록 조회*/				
 		SELECT 
 			 li.li_code

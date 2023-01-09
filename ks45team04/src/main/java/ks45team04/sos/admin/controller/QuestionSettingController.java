@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.admin.dto.LicenseMain;
 import ks45team04.sos.admin.dto.LicenseSub;
+import ks45team04.sos.admin.dto.LicenseSubject;
 import ks45team04.sos.admin.dto.Question;
 import ks45team04.sos.admin.service.QuestionSettingService;
 
@@ -43,6 +44,14 @@ public class QuestionSettingController {
 		model.addAttribute("licenseMainListForQSet", licenseMainListForQSet);
 		return "admin/questionSetting/add_q_setting";
 	}
+	// 자격증별 과목목록 조회
+	@GetMapping("/getSubjectCategoryForQSet")
+	@ResponseBody
+	public List<LicenseSubject> getSubjectListForQSet (@RequestParam(value="liCode") String liCode){
+		List<LicenseSubject> subjectListForQSet = questionSettingService.getSubjectListForQSet(liCode);
+		System.out.println(subjectListForQSet+"<------------------------------------subjectListForQSet");
+		return subjectListForQSet;
+	}	
 	// 중분류별 자격증목록 조회
 	@GetMapping("/getLicenseCategoryForQSet")
 	@ResponseBody
