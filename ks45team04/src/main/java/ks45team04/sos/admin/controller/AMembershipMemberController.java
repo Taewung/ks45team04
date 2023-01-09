@@ -54,10 +54,10 @@ public class AMembershipMemberController {
 	@GetMapping("/totalModifyMembershipMemberInfo")
 	public String totalMembershipMemberInfo(@RequestParam(value="mmId") String mmId
 			, Model model) {
-		MembershipMember membershipMember = membershipMemberService.getTotalMembershipInfo(mmId);
+		MembershipMember totalMembershipMemberInfo = membershipMemberService.getTotalMembershipInfo(mmId);
 	
 		model.addAttribute("title", "상세 멤버십 회원 조회");
-		model.addAttribute("totalMembershipMemberInfo", membershipMember);
+		model.addAttribute("totalMembershipMemberInfo", totalMembershipMemberInfo);
 		return "admin/membershipMember/total_modify_membership_member_info";
 	}
 	

@@ -72,12 +72,7 @@ public class LicenseInfo {
 	public void setLiRegDatetime(String liRegDatetime) {
 		this.liRegDatetime = liRegDatetime;
 	}	
-	public String getLmcCode() {
-		return lmcCode;
-	}
-	public void setLmcCode(String lmcCode) {
-		this.lmcCode = lmcCode;
-	}
+
 
 	@Override
 	public String toString() {

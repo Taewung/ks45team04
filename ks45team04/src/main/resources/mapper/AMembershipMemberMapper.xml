@@ -18,11 +18,12 @@
 	 		/*특정 멤버십 회원 정보 수정*/	
 		UPDATE 
 			membership_member
-		SET 
+		SET
+			mm_membership_code = #{mmMembershipCode},
 			mm_period = #{mmPeriod},
 			mm_start_datetime = #{mmStartDatetime},
 			mm_end_datetime = #{mmEndDatetime},
-			mm_state = #{mmState}
+			mm_state = #{mmState}	
 		WHERE 
 			mm_code= #{mmCode};			
 	</update>
@@ -31,6 +32,7 @@
 			/*멤버십 회원 조회*/
 			SELECT
 			mm_id,
+			mm_membership_code,
 			mm_period,
 			mm_start_datetime,
 			mm_end_datetime,
