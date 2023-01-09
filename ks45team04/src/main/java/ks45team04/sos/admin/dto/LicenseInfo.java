@@ -73,6 +73,7 @@ public class LicenseInfo {
 		this.liRegDatetime = liRegDatetime;
 	}	
 
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
