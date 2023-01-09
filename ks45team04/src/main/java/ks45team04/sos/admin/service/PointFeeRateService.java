@@ -18,6 +18,7 @@ public class PointFeeRateService {
 }
 	//포인트 수수료율 수정
 	public int modifyPointFeeRate(PointFeeRate pointFeeRate) {
+		
 		return pointFeeRateMapper.modifyPointFeeRate(pointFeeRate);
 	}
 

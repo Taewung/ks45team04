@@ -16,6 +16,13 @@ public class MPayService {
 		this.mPayMapper = mPayMapper;
 	}
 	
+	
+	//회원 결제 내역 상세보기
+	public MPay getMPayByCode(String payCompleteCode) {
+		
+		return mPayMapper.getMPayByCode(payCompleteCode);
+	}
+	
 	//회원 결제 내역 조회
 	public List<MPay> MPayList(){
 		

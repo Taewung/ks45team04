@@ -40,8 +40,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:if="${not #lists.isEmpty(mPayList)}"
-									th:each="l : ${mPayList}">
+                                <tr th:if="${not #lists.isEmpty(mPayInfo)}"
+									th:each="l : ${mPayInfo}">
                                     <td>
                                         <a><div class="pxp-company-dashboard-job-title" th:text="${l.payCompleteCode}"></div></a>
                                     </td>
@@ -52,7 +52,7 @@
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${#numbers.formatInteger(l.finalPayPrice, 3, 'COMMA')}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${l.payCompleteDatetime}"></div></td>
                                 </tr>
-                                <tr th:unless="${not #lists.isEmpty(mPayList)}">
+                                <tr th:unless="${not #lists.isEmpty(mPayInfo)}">
 									<td colspan="9">조회된 결제 정보 내역이 없습니다.</td>
 								</tr> 
                             </tbody>

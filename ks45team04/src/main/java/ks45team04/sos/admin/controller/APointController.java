@@ -246,6 +246,7 @@ public class APointController {
 	@GetMapping("/modifyPointRefundApproval")
 	public String modifyPointRefundApproval(@RequestParam(value="pointRefundCode")String pointRefundCode,
 										    Model model) {
+		
 		PointRefundApproval pointRefundApproval = pointRefundApprovalService.getPointRefundApprovalInfoByCode(pointRefundCode);
 
 		model.addAttribute("title", "포인트 환급 승인 내역 수정");

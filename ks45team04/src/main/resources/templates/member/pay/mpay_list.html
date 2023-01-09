@@ -61,10 +61,10 @@
                                     <td>
                                         <div class="pxp-dashboard-table-options">
                                             <ul class="list-unstyled">
-                                            <a href="/refundRequest">
+                                            <a th:href="@{/refundRequest(payCompleteCode=${l.payCompleteCode})}">
                                                 <li><button title="Detail"><span class="fa fa-check"></span></button></li>
                                              </a>
-                                            <a href="/payDetailList">
+                                            <a th:href="@{/payDetailList(payCompleteCode=${l.payCompleteCode})}">
                                                 <li><button title="Detail"><span class="fa fa-check"></span></button></li>
                                              </a>
                                             </ul>

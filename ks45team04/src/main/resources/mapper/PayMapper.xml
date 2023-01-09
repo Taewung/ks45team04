@@ -4,7 +4,7 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ks45team04.sos.member.mapper.MPayMapper">
 	
-	<resultMap type="Pay" id="mPayResultMap">
+	<resultMap type="MPay" id="mPayResultMap">
 		<id property="payId" 					column="pay_id"/>
 		<result property="payCompleteCode" 		column="pay_complete_code"/>
 		<result property="goodsName" 			column="goods_name"/>
@@ -13,6 +13,22 @@
 		<result property="finalPayPrice" 		column="final_pay_price"/>
 		<result property="payCompleteDatetime" 	column="pay_complete_datetime"/>
 	</resultMap>
+	
+		<select id="getMPayByCode" parameterType="String" resultMap="mPayResultMap">
+		/* 결제내역 상세보기 */
+		SELECT
+			 pay_complete_code
+			,pay_id
+			,goods_name
+			,total_pay_price
+			,pay_use_point
+			,final_pay_price
+			,pay_complete_datetime
+		FROM
+			pay_complete
+		WHERE
+			pay_complete_code = #{payCompleteCode};
+	</select>
 	
 	<select id="mPayList" resultMap="mPayResultMap">
 		/* 결제 내역 조회*/
