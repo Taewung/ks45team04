@@ -18,24 +18,24 @@
                     <div class="row justify-content-between align-content-center">
                         <div class="col-auto order-2 order-sm-1">
                             <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
-                                <div class="pxp-company-dashboard-jobs-search mb-3">
-                                <select class="form-select">
-                                    <option>등록자</option>
-                                    <option>자격증명</option>
-                                </select>
-                                	<div class="col-auto order-1 order-sm-2">
-                                		<div class="pxp-company-dashboard-jobs-search-search-form">
-                                    		<div class="input-group">
-                                        		<span class="input-group-text"><span class="fa fa-search"></span></span>
-                                        		<input type="text" class="form-control" placeholder="Search ID">
-                                        		<button class="btn ms-2">Search</button>
-                                    		</div>
-                                		</div>
-                            		</div>
-                        		</div>
-                        		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                        		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                      			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+								<form th:action="@{/licensePassScoreList}" method="get">
+	                                <div class="pxp-company-dashboard-jobs-search mb-6">							
+	                                <select class="form-select" name="searchKey">
+	                                    <option value="liPScoreCode">합격기준코드</option>
+	                                    <option value="liName">자격증명</option>
+	                                    <option value="liPScoreRegId">등록자</option>
+	                                </select>
+	                                	<div class="col-auto order-1 order-sm-2">
+	                                		<div class="pxp-company-dashboard-jobs-search-search-form">
+	                                    		<div class="input-group">
+	                                        		<span class="input-group-text"><span class="fa fa-search"></span></span>
+	                                        		<input type="text" name="searchValue" class="form-control" placeholder="Search">
+	                                        		<button type="submit" class="btn ms-2">Search</button>
+	                                    		</div>
+	                                		</div>
+	                            		</div>
+	                        		</div>
+								</form>
 								<div class="pxp-dashboard-table-options">
 			                        <ul class="list-unstyled">
 			                        <!-- 등록버튼 start -->
@@ -52,8 +52,6 @@
                         </div>
                     </div>
 
-                    
-                     
                     <!-- 목록 start -->                   
                     <div class="table-responsive" style="overflow-x: hidden">
                         <table class="table table-hover align-middle">                      	
@@ -73,7 +71,7 @@
                                 <tr th:if="${not #lists.isEmpty(licensePassScoreList)}" th:each="l : ${licensePassScoreList}">
                                     <td><input type="checkbox" class="form-check-input"></td>
                                     <td>
-                                        <a href="/checkLicensePassScore">
+                                        <a th:href="@{/checkLicensePassScore(liPScoreCode=${l.liPScoreCode})}">
                                             <div class="pxp-company-dashboard-job-title" th:text="${l.liPScoreCode}"></div>                                           
                                         </a>
                                     </td>
@@ -86,7 +84,7 @@
                                         <div class="pxp-dashboard-table-options">
                                             <ul class="list-unstyled">
                                             <!-- 수정버튼 start -->
-                                                <a href="/modifyLicensePassScore">
+                                                <a th:href="@{/modifyLicensePassScore(liPScoreCode=${l.liPScoreCode})}">
                                                 	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
                                                 </a>
                                             <!-- 수정버튼 end -->                                             

@@ -2,6 +2,8 @@ package ks45team04.sos.admin.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import ks45team04.sos.admin.dto.LicenseInfo;
@@ -15,9 +17,28 @@ import ks45team04.sos.admin.mapper.LicensePassScoreMapper;
 @Service
 public class LicensePassScoreService {
 
-private final LicensePassScoreMapper licensePassScoreMapper;
+	private static final Logger log = LoggerFactory.getLogger(LicensePassScoreService.class);
+	private final LicensePassScoreMapper licensePassScoreMapper;
 	public LicensePassScoreService(LicensePassScoreMapper licensePassScoreMapper) {
 		this.licensePassScoreMapper = licensePassScoreMapper;
+	}
+	/**
+	 * 특정 자격증합격기준점수 수정
+	 * @param licensePassScore
+	 * @return  int (update 쿼리 실행 결과)
+	 */
+	public int modifyLicensePassScore(LicensePassScore licensePassScore) {	
+		int modifyResult = licensePassScoreMapper.modifyLicensePassScore(licensePassScore);
+		return modifyResult;
+	}
+	/**
+	 * 특정 자격증합격기준점수 조회
+	 * @param liPScoreCode
+	 * @return LicensePassScore
+	 */
+	public LicensePassScore getLicensePassScoreByCode(String liPScoreCode) {
+		LicensePassScore licensePassScoreByCode = licensePassScoreMapper.getLicensePassScoreByCode(liPScoreCode);
+		return licensePassScoreByCode;
 	}
 	
 	/**
@@ -69,8 +90,22 @@ private final LicensePassScoreMapper licensePassScoreMapper;
 	 * 자격증별 합격기준점수 조회
 	 * @return List<LicensePassScore>
 	 */
-	public List<LicensePassScore> getLicensePassScoreList(){	
-		List<LicensePassScore> licensePassScoreList = licensePassScoreMapper.getLicensePassScoreList();	
+	public List<LicensePassScore> getLicensePassScoreList(String searchKey, String searchValue){
+		
+		if(searchKey != null) {
+			switch (searchKey) {
+			case "liPScoreCode":
+				searchKey = "li_p_score_code";
+				break;
+			case "liName":
+				searchKey = "li_name";
+				break;
+			case "liPScoreRegId":
+				searchKey = "li_p_score_reg_id";
+				break;
+			}
+		}	
+		List<LicensePassScore> licensePassScoreList = licensePassScoreMapper.getLicensePassScoreList(searchKey, searchValue);
 		return licensePassScoreList;
 	}
 
