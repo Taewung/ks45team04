@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import ks45team04.sos.member.dto.DDay;
 import ks45team04.sos.member.dto.ToDoList;
 import ks45team04.sos.member.mapper.PlannerMapper;
 
@@ -17,12 +18,25 @@ public class PlannerService {
 	}
 	
 	/**
-	 * 
+	 * 일정 상세 리스트
+	 * @return List<DDay>
+	 */
+	
+	public List<DDay> dDayDetailList(){
+		List<DDay> dDayDetailList = plannerMapper.dDayDetailList();
+		
+		return dDayDetailList;
+	
+	}
+	
+	/**
+	 * 특정 일정 삭제
 	 * @param toDoListCode
 	 * @return toDoList
 	 */
 	public void deleteToDoList(String toDoListCode) {
 		
+	
 		plannerMapper.deleteToDoListByCode(toDoListCode);
 		
 		

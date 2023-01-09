@@ -4,6 +4,40 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ks45team04.sos.member.mapper.PlannerMapper">
 	
+	<resultMap type="ks45team04.sos.member.dto.DDay" 		id="dDayDetailListResultMap">
+		<id property="dDayCode" 											column="d_day_code"/>
+		<result property="memId" 											column="mem_id"/>
+		<result property="liCode" 											column="li_code"/>
+		<result property="liName" 											column="li_name"/>
+		<result property="dDayContent" 									column="d_day_content"/>
+		<result property="dDayDate" 										column="d_day_date"/>
+		<result property="dDayWriteDate" 								column="d_day_write_date"/>
+	</resultMap>
+
+
+	<resultMap type="ks45team04.sos.member.dto.ToDoList" 				id="toDoListDetailListResultMap">
+		<id property="toDoListCode" 													column="to_do_list_code"/>
+		<result property="memId" 														column="mem_id"/>
+		<result property="liCode" 														column="li_code"/>
+		<result property="liName" 														column="li_name"/>
+		<result property="toDoListTitle" 												column="to_do_list_title"/>
+		<result property="toDoListDay" 												column="to_do_list_day"/>
+		<result property="toDoListRegTime" 											column="to_do_list_reg_time"/>
+		<result property="totalDayStudyTime" 										column="total_day_study_time"/>
+	</resultMap>
+	
+		<select id="dDayDetailList" resultMap="dDayDetailListResultMap">
+			/* 디데이 상세 조회 */
+			
+		SELECT
+			*
+		FROM
+			d_day AS dd;
+
+			
+		</select>
+		
+	
 		<delete id="deleteToDoListByCode" parameterType="String">
 		/* 일정코드로 일정삭제 */
 		DELETE
@@ -12,17 +46,6 @@
 		WHERE 
 			to_do_list_code = #{toDoListCode};
 	</delete>
-	
-	<resultMap type="ks45team04.sos.member.dto.ToDoList" 						id="toDoListDetailListResultMap">
-		<id property="toDoListCode" 					column="to_do_list_code"/>
-		<result property="memId" 						column="mem_id"/>
-		<result property="liCode" 						column="li_code"/>
-		<result property="liName" 						column="li_name"/>
-		<result property="toDoListTitle" 				column="to_do_list_title"/>
-		<result property="toDoListDay" 				column="to_do_list_day"/>
-		<result property="toDoListRegTime" 			column="to_do_list_reg_time"/>
-		<result property="totalDayStudyTime" 			column="total_day_study_time"/>
-	</resultMap>
 	
 	<update id="modifyToDoList" parameterType="String">
 		/* 특정 일정 정보 수정*/
@@ -70,7 +93,7 @@
 	</insert>
 	
 	<select id="toDoListDetailList" resultMap="toDoListDetailListResultMap">
-			
+			/* 일정 상세 조회 */
 			
 		SELECT
 			*
