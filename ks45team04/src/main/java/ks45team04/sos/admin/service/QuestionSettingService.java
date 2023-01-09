@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.admin.dto.LicenseMain;
 import ks45team04.sos.admin.dto.LicenseSub;
+import ks45team04.sos.admin.dto.LicenseSubject;
 import ks45team04.sos.admin.dto.Question;
 import ks45team04.sos.admin.mapper.QuestionSettingMapper;
 
@@ -17,6 +18,16 @@ public class QuestionSettingService {
 	
 	public QuestionSettingService(QuestionSettingMapper questionSettingMapper) {
 		this.questionSettingMapper = questionSettingMapper;
+	}
+	
+	
+	/**
+	 * 자격증별 과목목록 조회
+	 * @return 
+	 */
+	public List<LicenseSubject> getSubjectListForQSet(String liCode){
+		List<LicenseSubject> subjectListForQSet = questionSettingMapper.getSubjectListForQSet(liCode);
+		return subjectListForQSet;
 	}
 	/**
 	 * 자격증 중분류별 자격증목록 조회
