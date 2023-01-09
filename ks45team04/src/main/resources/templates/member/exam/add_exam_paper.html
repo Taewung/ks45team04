@@ -20,39 +20,26 @@
                 <br>
                 <div class="pxp-hero-form pxp-hero-form-round pxp-large mt-3 mt-lg-4">
                     <form class="row gx-3 align-items-center">
-                        <div class="col-12 col-lg">
+                        <div class="col-md-6 col-xxl-3">
                             <div class="input-group mb-3 mb-lg-0">
                                 <span class="input-group-text"><span class="fa fa-check"></span></span>
-                                <select class="form-select">
-                                    <option selected>대분류</option>
-                                    <option>대분류</option>
-                                </select>
+                                <select  id="licenseMainCategory" class="form-select" name="mainCate">
+                                	<option th:if="${not #lists.isEmpty(licenseMainList)}" th:each="l : ${licenseMainList}" th:value="${l.lmcCode}" th:text="${l.lmcName}"></option>
+                             	</select>
                             </div>
                         </div>
-                        <div class="col-12 col-lg pxp-has-left-border">
-                            <div class="input-group mb-3 mb-lg-0">
-                                <span class="input-group-text"><span class="fa fa-check"></span></span>
-                                <select class="form-select">
-                                    <option selected>중분류</option>
-                                    <option>중분류</option>
-                                </select>
+                        <div class="col-md-6 col-xxl-3 pxp-has-left-border">
+                            <div class="mb-3 licenseSubCategoryDiv">
+	                        	<label for="licenseSubCategory" class="form-label">중분류</label>
+	                        	<select id="licenseSubCategory" class="form-select" name="subCate" disabled="disabled"></select>
                             </div>
                         </div>
-                        <div class="col-12 col-lg pxp-has-left-border">
+                        <div class="col-md-6 col-xxl-3 pxp-has-left-border">
                             <div class="input-group mb-3 mb-lg-0">
                                 <span class="input-group-text"><span class="fa fa-check"></span></span>
                                 <select class="form-select">
                                     <option selected>자격증명</option>
                                     <option>자격증명</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg pxp-has-left-border">
-                            <div class="input-group mb-3 mb-lg-0">
-                                <span class="input-group-text"><span class="fa fa-check"></span></span>
-                                <select class="form-select">
-                                    <option selected>문제유형</option>
-                                    <option>문제유형</option>
                                 </select>
                             </div>
                         </div>

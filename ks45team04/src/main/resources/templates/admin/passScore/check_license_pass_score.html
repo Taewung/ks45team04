@@ -5,8 +5,13 @@
 
 	<!-- script start -->
 	<th:block layout:fragment="customScript">
-	<script>
-	</script>
+		<script>
+			$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+				$('#resetBtn').click(function(){
+					location.href = '/licensePassScoreList';
+				});
+			});
+		</script>
 	</th:block> 
 	<!-- script end -->
 	
@@ -14,75 +19,53 @@
 	<th:block layout:fragment="customContents">
 	<h1>합격기준점수</h1>
            		<p class="pxp-text-light">License Pass Score</p>
-                <div class="pxp-dashboard-table-options">                             
-                	<ul class="list-unstyled">
+                <div class="pxp-dashboard-table-options" >                             
+                	<ul class="list-unstyled" th:object="${licensePassScoreByCode}">
                       <!-- 수정버튼 start -->
-                     <a href="/modifyLicensePassScore">
-                     	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
-                     </a>
+                      <a th:href="@{/modifyLicensePassScore(liPScoreCode=*{liPScoreCode})}">
+                    	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
+                      </a>
                  	<!-- 수정버튼 end -->
                  	<!-- 삭제버튼 start -->
                      	<li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
                  	<!-- 삭제버튼 end -->                                              
                     </ul>
-                </div>		
-                <form>
+                </div>		      
+        	<form id="modifyLicensePassScoreForm" th:action="@{/modifyLicensePassScore}" method="post">
+                <th:block th:object="${licensePassScoreByCode}">
+                	<div class="row mt-4 mt-lg-5">                  
+                		<h2><strong><span class="fa fa-check"></span>자격증</strong></h2>
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3">
+	         					<label for="liName" class="form-label">자격증코드</label>
+	                            <input type="text" id="liName" name="liName" class="form-control" th:value="*{liCode}" readonly="readonly"/>
+                            </div>
+                        </div>                
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3">
+	         					<label for="liName" class="form-label">자격증명</label>
+	                            <input type="text" id="liName" name="liName" class="form-control" th:value="*{liName}" readonly="readonly"/>
+                            </div>
+                        </div>                
+                	</div>
                     <div class="row mt-4 mt-lg-5">                  
-                	<h2><strong><span class="fa fa-check"></span>자격증</strong></h2>
+                	<h2><strong><span class="fa fa-check"></span>자격증합격기준점수</strong></h2>
                         <div class="col-md-6 col-xxl-3">
-                            <label for="pxp-company-job-experience" class="form-label">대분류</label>
-                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
+                            <label for="liPScoreCode" class="form-label">자격증합격기준점수코드</label>
+                            <input type="text" id="liPScoreCode" name="liPScoreCode" class="form-control" th:value="*{liPScoreCode}" readonly="readonly"/>
                         </div>
                         <div class="col-md-6 col-xxl-3">
                             <div class="mb-3">
-	         					<label for="pxp-company-job-experience" class="form-label">중분류</label>
-	                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xxl-3">
-                            <div class="mb-3">
-	         					<label for="pxp-company-job-experience" class="form-label">자격증명</label>
-	                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xxl-3">
-                            <div class="mb-3">
-	         					<label for="pxp-company-job-experience" class="form-label">자격증합격점수</label>
-	                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
+	         					<label for="liPStandardScore" class="form-label">자격증합격기준점수</label>
+                            	<input type="text" id="liPStandardScore" name="liPStandardScore" class="form-control" th:value="*{liPStandardScore}"  readonly="readonly"/>
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-4 mt-lg-5">
-                    <h2><strong><span class="fa fa-check"></span>과목</strong></h2>
-                        <div class="col-md-6 col-xxl-3">
-                         	<div class="mb-3">
-	         					<label for="pxp-company-job-experience" class="form-label">과목</label>
-	                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xxl-3">
-                            <div class="mb-3">
-	         					<label for="pxp-company-job-experience" class="form-label">과목명</label>
-	                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xxl-3">
-                            <div class="mb-3">
-	         					<label for="pxp-company-job-experience" class="form-label">문항수</label>
-	                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xxl-3">
-                            <div class="mb-3">
-	         					<label for="pxp-company-job-experience" class="form-label">과목합격점수</label>
-	                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
-                            </div>
-                        </div>
-	                    <div class="mt-4 mt-lg-5">	                 
-	                        <a th:href="@{/licensePassScoreList}" class="btn rounded-pill pxp-section-cta">목록으로</a>
-                    	</div>                                       
-                    	</div>
-                </form>
+                    <div class="mt-4 mt-lg-5">	                 
+						<button type="button" id="resetBtn" class="btn rounded-pill pxp-section-cta">목록으로</button>
+                    </div> 
+            	</th:block>                                                        
+        	</form>
 	</th:block>
 	<!-- customContents end -->
 	

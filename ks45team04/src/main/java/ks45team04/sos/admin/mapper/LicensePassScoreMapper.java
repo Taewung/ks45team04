@@ -11,9 +11,13 @@ import ks45team04.sos.admin.dto.LicenseSub;
 
 
 @Mapper
-public interface LicensePassScoreMapper {
-
-
+public interface LicensePassScoreMapper {	
+	// 특정합격기준점수 수정
+	public int modifyLicensePassScore(LicensePassScore licensePassScore);
+	
+	// 특정합격기준점수 정보 조회
+	public LicensePassScore getLicensePassScoreByCode(String liPScoreCode);
+	
 	// 자격증별 합격기준점수 등록
 	public int addLicensePassScore(LicensePassScore licensePassScore);
 	
@@ -30,6 +34,6 @@ public interface LicensePassScoreMapper {
 	public List<LicenseMain> getLicenseMainList();
 		
 	// 자격증별 합격기준점수목록 조회
-	public List<LicensePassScore> getLicensePassScoreList();
+	public List<LicensePassScore> getLicensePassScoreList(String searchKey, String searchValue);
 	
 }
