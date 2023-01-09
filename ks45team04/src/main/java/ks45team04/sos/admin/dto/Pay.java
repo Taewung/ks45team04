@@ -8,6 +8,7 @@ public class Pay {
 	private int payUsePoint;
 	private int finalPayPrice;
 	private String payCompleteDatetime;
+	
 	public String getPayId() {
 		return payId;
 	}

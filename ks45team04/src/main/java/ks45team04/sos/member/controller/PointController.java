@@ -1,15 +1,28 @@
 package ks45team04.sos.member.controller;
 
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import ks45team04.sos.member.dto.MPointSaveUse;
+import ks45team04.sos.member.service.MPointSaveUseService;
 
 
 
 @Controller
 public class PointController {
 
+	private final MPointSaveUseService mPointSaveUseService;
+	
+	public PointController(MPointSaveUseService mPointSaveUseService) {
+		
+		this.mPointSaveUseService = mPointSaveUseService;
+	}
+	
 
 	
 	//포인트 적립 기준 조회
@@ -31,7 +44,11 @@ public class PointController {
 	//포인트 적립/사용 내역 조회
 	@GetMapping("/saveUsePointList")
 	public String saveUsePointList(Model model) {
+		
+		List<MPointSaveUse> mPointSaveUseList = mPointSaveUseService.MPointSaveUseList();
+		
 		model.addAttribute("title", "포인트 적립/사용 내역 조회");
+		model.addAttribute("mPointSaveUseList", mPointSaveUseList);
 		
 		return "member/point/point_save_use_list";
 	}
@@ -43,11 +60,10 @@ public class PointController {
 		
 		return "member/point/point_refund_request";
 	}
-	//포인트 환급 조회
+	
+	//포인트 환급 신청 내역 조회
 	@GetMapping("/pointRefundList")
 	public String pointRefundList(Model model) {
-		
-		
 		
 		model.addAttribute("title", "포인트 환급 조회");
 		

@@ -28,13 +28,13 @@ public class APayController {
 		return "admin/pay/pay_delete";
 	}
 	
-	//결제 내역
+	//결제 내역 조회
 	@GetMapping("/payList")
 	public String payList(Model model) {
 		
 		List<Pay> payList = payService.PayList();
 		
-		model.addAttribute("title", "결제 내역");
+		model.addAttribute("title", "결제 내역 조횐");
 		model.addAttribute("payList",payList);
 		
 		return "admin/pay/pay_list";

@@ -27,6 +27,7 @@ public class ARefundController {
 	//환불 승인 수정 처리
 	@PostMapping("/modifyRefundApproval")
 	public String modifyRefundApproval(Refund refund) {
+		
 		System.out.println(refund + "<- refund modifyRefundApproval");
 
 		refundService.modifyRefundApproval(refund);
@@ -41,6 +42,7 @@ public class ARefundController {
 		
 		
 		System.out.println(refundCode + "<- refundCode modifyRefundApproval");
+		
 		Refund refund = refundService.getRefundInfoByCode(refundCode);
 		
 		model.addAttribute("title", "환불 승인 수정");

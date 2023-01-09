@@ -56,8 +56,7 @@
                         <tbody>
                          <tr th:if="${not #lists.isEmpty(refundList)}"
 									th:each="l : ${refundList}">
-                            
-                                <td><div class="pxp-company-dashboard-job-title" th:text="${l.refundCode}"></div>
+                                	<td><div class="pxp-company-dashboard-job-title" th:text="${l.refundCode}"></div>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.payCompleteCode}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${l.payId}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${l.refundReason}"></div></td>

@@ -20,6 +20,17 @@ public class PointRefundApprovalService {
 		this.pointRefundApprovalMapper = pointRefundApprovalMapper;
 	}
 
+	//특정 포인트 환급 승인 내역 수정
+	public int modifyPointRefundApproval(PointRefundApproval pointRefundApproval) {
+		
+		return pointRefundApprovalMapper.modifyPointRefundApproval(pointRefundApproval);
+	}
+	
+	//특정 포인트 환급 승인 내역 조회
+	public PointRefundApproval getPointRefundApprovalInfoByCode(String pointRefundCode) {
+		
+		return pointRefundApprovalMapper.getPointRefundApprovalByCode(pointRefundCode);
+	}
 	//포인트 환급 승인 내역 조회
 	public List<PointRefundApproval> PointRefundApprovalList(){
 		

@@ -14,6 +14,7 @@ import ks45team04.sos.admin.dto.PointRefundApproval;
 import ks45team04.sos.admin.dto.PointSaveStandard;
 import ks45team04.sos.admin.dto.PointSaveUse;
 import ks45team04.sos.admin.mapper.PointFeeRateMapper;
+import ks45team04.sos.admin.mapper.PointRefundApprovalMapper;
 import ks45team04.sos.admin.mapper.PointSaveStandardMapper;
 import ks45team04.sos.admin.mapper.PointSaveUseMapper;
 import ks45team04.sos.admin.service.PointFeeRateService;
@@ -30,6 +31,7 @@ public class APointController {
 	private final PointFeeRateService pointFeeRateService;
 	private final PointFeeRateMapper pointFeeRateMapper;
 	private final PointRefundApprovalService pointRefundApprovalService;
+	private final PointRefundApprovalMapper pointRefundApprovalMapper;
 	
 	public APointController(PointSaveUseService pointSaveUseService, 
 							PointSaveUseMapper pointSaveUseMapper , 
@@ -37,7 +39,8 @@ public class APointController {
 							PointSaveStandardMapper pointSaveStandardMapper,
 							PointFeeRateService pointFeeRateService,
 							PointFeeRateMapper pointFeeRateMapper,
-							PointRefundApprovalService pointRefundApprovalService) {
+							PointRefundApprovalService pointRefundApprovalService,
+							PointRefundApprovalMapper pointRefundApprovalMapper) {
 		
 		this.pointSaveUseService = pointSaveUseService;
 		this.pointSaveStandardService = pointSaveStandardService;
@@ -45,6 +48,7 @@ public class APointController {
 		this.pointFeeRateService = pointFeeRateService;
 		this.pointFeeRateMapper = pointFeeRateMapper;
 		this.pointRefundApprovalService = pointRefundApprovalService;
+		this.pointRefundApprovalMapper = pointRefundApprovalMapper;
 		
 	}
 	
@@ -119,7 +123,7 @@ public class APointController {
 	}
 
 	// 포인트 적립 기준 등록 처리
-	@PostMapping("/addpointSaveStandard")
+	@PostMapping("/addPointSaveStandard")
 	public String addPointSaveStandard(PointSaveStandard PointSaveStandard) {
 		System.out.println(PointSaveStandard);
 		pointSaveStandardService.addPointSaveStandard(PointSaveStandard);
@@ -215,23 +219,38 @@ public class APointController {
 		return "admin/point/point_save_use_add";
 	}
 
-	// 포인트 적립/사용 내역 조회
+	// 포인트 적립/사용 내역 조회(검색)
 	@GetMapping("/pointSaveUseList")
-	public String pointSaveUseList(Model model) {
+	public String pointSaveUseList(Model model
+								  ,@RequestParam(value="searchKey", required = false) String searchKey
+								  ,@RequestParam(value="searchValue", required = false, defaultValue = "") String searchValue){
 
-		List<PointSaveUse> pointSaveUseList = pointSaveUseService.PointSaveUseList();
+		List<PointSaveUse> pointSaveUseList = pointSaveUseService.PointSaveUseList(searchKey, searchValue);
 
-		model.addAttribute("title", "포인트 적립/사용 내역 조회");
+		model.addAttribute("title", "포인트 적립/사용 내역");
 		model.addAttribute("pointSaveUseList", pointSaveUseList);
 
 		return "admin/point/point_save_use_list";
 	}
-	
-	// 포인트 환급 승인 내역 수정
-	@GetMapping("/modifyPointRefundApproval")
-	public String modifyPointRefundApproval(Model model) {
-		model.addAttribute("title", "포인트 환급 승인 내역 수정");
 
+	
+	// 포인트 환급 승인 내역 수정 처리
+	@PostMapping("/modifyPointRefundApproval")
+	public String modifyPointRefundApproval(PointRefundApproval pointRefundApproval) {
+		
+		pointRefundApprovalService.modifyPointRefundApproval(pointRefundApproval);
+		
+		return "redirect:/pointRefundApprovalList";
+	}
+	// 포인트 환급 승인 내역 수정 화면
+	@GetMapping("/modifyPointRefundApproval")
+	public String modifyPointRefundApproval(@RequestParam(value="pointRefundCode")String pointRefundCode,
+										    Model model) {
+		PointRefundApproval pointRefundApproval = pointRefundApprovalService.getPointRefundApprovalInfoByCode(pointRefundCode);
+
+		model.addAttribute("title", "포인트 환급 승인 내역 수정");
+		model.addAttribute("pointRefundApprovalInfo", pointRefundApproval);
+		
 		return "admin/point/point_refund_approval_modify";
 	}
 	
