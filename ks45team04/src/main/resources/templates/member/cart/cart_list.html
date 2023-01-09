@@ -8,6 +8,52 @@
 	<!-- script start -->
 	<th:block layout:fragment="customScript">
 	<script>
+	/* 종합 정보 섹션 정보 삽입 */
+	let totalPrice = 0;				// 총 가격
+	let totalCount = 0;				// 총 갯수
+	let totalKind = 0;				// 총 종류
+	let totalPoint = 0;				// 총 마일리지
+	let deliveryPrice = 0;			// 배송비
+	let finalTotalPrice = 0; 		// 최종 가격(총 가격 + 배송비)	
+	
+	$(".cart_info_td").each(function(index, element){
+		
+		// 총 가격
+		totalPrice += parseInt($(element).find(".individual_totalPrice_input").val());
+		// 총 갯수
+		totalCount += parseInt($(element).find(".individual_bookCount_input").val());
+		// 총 종류
+		totalKind += 1;
+		// 총 마일리지
+		totalPoint += parseInt($(element).find(".individual_totalPoint_input").val());
+
+	});	
+	
+	/* 배송비 결정 */
+	if(totalPrice >= 30000){
+		deliveryPrice = 0;
+	} else if(totalPrice == 0){
+		deliveryPrice = 0;
+	} else {
+		deliveryPrice = 3000;	
+	}	
+	
+	/* 최종 가격 */
+	finalTotalPrice = totalPrice + deliveryPrice;
+	
+	/* 값 삽입 */
+	// 총 가격
+	$(".totalPrice_span").text(totalPrice.toLocaleString());
+	// 총 갯수
+	$(".totalCount_span").text(totalCount);
+	// 총 종류
+	$(".totalKind_span").text(totalKind);
+	// 총 마일리지
+	$(".totalPoint_span").text(totalPoint.toLocaleString());
+	// 배송비
+	$(".delivery_price").text(deliveryPrice);	
+	// 최종 가격(총 가격 + 배송비)
+	$(".finalTotalPrice_span").text(finalTotalPrice.toLocaleString());
 	</script>
 	</th:block> 
 	<!-- script end -->
