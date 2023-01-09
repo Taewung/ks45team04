@@ -30,21 +30,27 @@
                         <table class="table table-hover align-middle">
                             <thead>
                                 <tr>
-                                    <th colspan="1" style="width: 20%;">결제완료코드</th>
+                                    <th colspan="1" style="width: 14%;">환불코드</th>
+                                    <th style="width: 14%;">결제완료코드</th>
                                     <th style="width: 10%;">아이디</th>
-                                    <th style="width: 15%;">환불사유</th>
-                                    <th style="width: 15%;">결제금액</th>
-                                    <th style="width: 20%;">결제일시</th>
+                                    <th style="width: 10%;">환불사유</th>
+                                    <th style="width: 8%;">결제금액</th>
+                                    <th style="width: 8%;">환불금액</th>
+                                	<th style="width: 8%;">환불포인트</th>
+                                    <th style="width: 18%;">환불신청일시</th>
                                     <th style="width: 20%;">환불신청상태(대기/승인)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                  <tr th:if="${not #lists.isEmpty(mRefundList)}"
 									th:each="l : ${mRefundList}">
-                                    <td><div class="pxp-company-dashboard-job-title" th:text="${l.payCompleteCode}"></div></td>
+									<td><div class="pxp-company-dashboard-job-title" th:text="${l.refundCode}"></div>
+                                    <td><div class="pxp-company-dashboard-job-status" th:text="${l.payCompleteCode}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${l.payId}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${l.refundReason}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${#numbers.formatInteger(l.finalPayPrice, 3, 'COMMA')}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-status" th:text="${#numbers.formatInteger(l.refundPrice, 3, 'COMMA')}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-status" th:text="${l.refundPoint}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${l.refundDatetime}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${l.refundState}"></div></td>
                                 </tr>

@@ -42,12 +42,10 @@
                             <thead>
                                 <tr>
                                     <th colspan="1" style="width: 20%;">결제완료코드</th>
-                                    <th style="width: 12%;">아이디</th>
-                                    <th style="width: 12%;">결제상품</th>
-                                    <th style="width: 10%;">상품금액</th>
-                                    <th style="width: 10%;">사용포인트</th>
-                                    <th style="width: 10%;">결제금액</th>
-                                    <th style="width: 20%;">결제일시</th>
+                                    <th style="width: 15%;">아이디</th>
+                                    <th style="width: 19%;">결제상품</th>
+                                    <th style="width: 15%;">총결제금액</th>
+                                    <th style="width: 25%;">결제일시</th>
                                     <th style="width: 20%;">환불신청/상세보기</th>
                                 </tr>
                             </thead>
@@ -57,8 +55,7 @@
                                     <td><div class="pxp-company-dashboard-job-title" th:text="${l.payCompleteCode}"></div>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.payId}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${l.goodsName}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-status" th:text="${#numbers.formatInteger(l.totalPayPrice, 3, 'COMMA')}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-status" th:text="${l.payUsePoint}"></div></td>
+                                    
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${#numbers.formatInteger(l.finalPayPrice, 3, 'COMMA')}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${l.payCompleteDatetime}"></div></td>
                                     <td>

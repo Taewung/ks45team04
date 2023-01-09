@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ks45team04.sos.admin.mapper.PointSaveUseMapper">
+<mapper namespace="ks45team04.sos.member.mapper.MPointSaveUseMapper">
 	
-	<resultMap type="PointSaveUse" id="pointSaveUseResultMap">
+	<resultMap type="pointSaveUse" id="mPointSaveUseResultMap">
 		<id property="pointSaveUseCode" 		column="point_save_use_code"/>
 		<result property="pointSaveUseId" 		column="point_save_use_id"/>
 		<result property="pointSaveUseReason" 	column="point_save_use_reason"/>
@@ -13,8 +13,8 @@
 		<result property="saveUse" 				column="save_use"/>
 		<result property="saveUseDatetime" 		column="save_use_datetime"/>
 	</resultMap>
-
-	<select id="pointSaveUseList" resultType="PointSaveUse" resultMap="pointSaveUseResultMap">
+	
+	<select id="mPointSaveUseList" resultMap="mPointSaveUseResultMap">
 		/* 포인트 적립/사용 내역 조회*/
 		SELECT 
 			point_save_use_code,
@@ -25,12 +25,7 @@
 			save_use,
 			save_use_datetime	
 		FROM
-			point_save_use
-		<where>
-			<if test="searchKey != null and searchKey != ''">
-				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
-			</if>
-		</where>		
+			point_save_use ;			
 	</select>
 	
 	
