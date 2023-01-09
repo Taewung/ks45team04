@@ -16,7 +16,9 @@ import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.admin.dto.LicenseMain;
 import ks45team04.sos.admin.dto.LicensePassScore;
 import ks45team04.sos.admin.dto.LicenseSub;
+import ks45team04.sos.admin.dto.SubjectPassScore;
 import ks45team04.sos.admin.service.LicensePassScoreService;
+import ks45team04.sos.admin.service.SubjectPassScoreService;
 
 @Controller
 public class PassScoreController {
@@ -24,9 +26,20 @@ public class PassScoreController {
 	private static final Logger log = LoggerFactory.getLogger(PassScoreController.class);
 	
 	private final LicensePassScoreService licensePassScoreService;
+	private final SubjectPassScoreService subjectPassScoreService;
 	
-	public PassScoreController(LicensePassScoreService licensePassScoreService) {
+	public PassScoreController(LicensePassScoreService licensePassScoreService
+							  ,SubjectPassScoreService subjectPassScoreService) {
 		this.licensePassScoreService = licensePassScoreService;
+		this.subjectPassScoreService = subjectPassScoreService;
+	}
+	// 과목별 합격기준점수 목록조회
+	@GetMapping("/subjectPassScoreList")
+	public String getsubjectPassScoreList(Model model) {
+	List<SubjectPassScore> subjectPassScoreList = subjectPassScoreService.getsubjectPassScoreList(); 		
+	model.addAttribute("subjectPassScoreList", subjectPassScoreList);
+	model.addAttribute("title", "과목별 합격기준점수 목록");	
+	return "admin/passScore/subject_pass_score_list";
 	}
 	
 	// 자격증별 합격기준점수 상세정보 조회

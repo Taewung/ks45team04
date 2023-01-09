@@ -16,6 +16,17 @@
 	</resultMap>
 	
 	<select id="getsubjectPassScoreList" resultMap="subjectPassScoreResultMap">
-	
+		/* 과목별  합격기준 점수 조회 */
+		SELECT
+			 sp.ls_p_score_code
+			,sp.li_code
+			,sp.ls_code
+			,sp.ls_name
+			,sp.ls_total_question_num
+			,sp.ls_p_standard_score
+			,sp.ls_p_score_reg_id
+			,sp.ls_p_score_reg_datetime
+		FROM
+			subject_pass_score AS sp;	
 	</select>
 </mapper>
