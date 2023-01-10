@@ -27,4 +27,7 @@ public interface PlannerMapper {
 		
 	//디데이 조회
 		public List<DDay> dDayDetailList();
+		
+	//디데이 등록
+		public int addDDay(DDay dDay);
 }
