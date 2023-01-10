@@ -16,12 +16,13 @@
 	    <p class="pxp-text-light">Answer List</p>
 		    <div class="pxp-dashboard-table-options">
 	            <ul class="list-unstyled">
-	                <a href="/addAnswer">
+	                <a th:href="@{/addAnswer(questionCode=*{questionCode})}">
 	                	<li><button title="Add"><span class="fa fa-plus"></span></button></li>
 	                </a>                                              
 	            </ul>
-	        </div>               
+	        </div>          
                 <div class="table-responsive"  style="overflow-x: hidden">
+                <form id="answerListForm" th:action="@{/answerList}" method="post">
 					<table class="table table-hover align-middle">                      	
                     	<thead>                    
 	                        <tr>
@@ -34,19 +35,19 @@
 								<th>&nbsp;</th>
 	                        </tr>
                     	</thead>    
-                            <tbody>
-                                <tr th:if="${not #lists.isEmpty(answerList)}" th:each="l : ${answerList}">
-                                    <td><div class="pxp-company-dashboard-job-title" th:text="${l.answerCode}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.questionCode}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.answer}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.answerState}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.answerRegId}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${l.answerRegDateTime}"></div></td>        
+                            <tbody >
+                                <tr>
+                                    <td><div class="answerCode" 		name="answerCode"></div></td>
+                                    <td><div class="questionCode" 		name="questionCode"></div></td>
+                                    <td><div class="answer"	 			name="answer"></div></td>
+                                    <td><div class="answerState" 		name="answerState"></div></td>
+                                    <td><div class="answerRegId" 		name="answerRegId"></div></td>
+                                    <td><div class="answerRegDateTime" 	name="answerRegDateTime"></div></td>        
                                     <td>
                                         <div class="pxp-dashboard-table-options">
                                         	<ul>
                                         	<li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>                                                                                    
-                                            <a href="/modifyAnswer">
+                                            <a th:href="@{/modifyAnswer(answerCode=*{answerCode})}">
                                             	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
                                             </a>                                                                                        
                                         	</ul>
@@ -58,6 +59,9 @@
 								</tr>                      
                             </tbody>
                         </table>
+                </form>
+                </th:block>
+ 
                     </div>
                 <!-- 목록 end -->    
                 

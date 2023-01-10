@@ -80,7 +80,7 @@
                                     <td>
                                         <div class="pxp-dashboard-table-options">
                                             <ul class="list-unstyled">
-                                                <a href="/answerList">
+                                                <a th:href="@{/answerList(questionCode=${l.questionCode})}">
                                                 	<li><button title="답안"><strong>A</strong></button></li>
                                                 </a>
                                                 <a href="/explanationList">
