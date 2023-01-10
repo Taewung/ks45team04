@@ -15,13 +15,39 @@ public class MNoteService {
 		this.mNoteMapper = mNoteMapper;
 	}
 	
+	
+	
+	/**
+	 * 노트 등록
+	 * @param Note
+	 */
+	public int addNote(Note note) {
+		
+		return mNoteMapper.addNote(note);
+	}
+	
+	
+	/**
+	 * 노트코드 자동완성
+	 * 
+	 */
+	public String getNoteCode(String note_code, String noteCode) {
+		
+		String getNoteCode = mNoteMapper.getNoteCode(note_code, noteCode);
+	
+		return getNoteCode;
+		
+	}
+	
+	
+	
 	/**
 	 * 공부노트 리뷰목록
-	 * return List<Note>
+	 * @return List<Note>
 	 */
-	public List<Note> noteReviewList(){
+	public List<Note> noteReviewList(String noteWriterId){
 		
-		List<Note> noteReviewList = mNoteMapper.noteReviewList();
+		List<Note> noteReviewList = mNoteMapper.noteReviewList(noteWriterId);
 		
 		return noteReviewList;
 	}

@@ -57,7 +57,11 @@ public class NoteController {
 	@PostMapping("/addNote")
 	public String addNote(Note Note) {
 		
-		return "";
+		//판매노트 자동완성
+		String getNoteCode = mNoteService.getNoteCode("note_code", "noteCode");
+		
+		
+		return "redirect:/noteList";
 	}
 
 	// 판매노트 등록 화면
@@ -71,10 +75,11 @@ public class NoteController {
 	// 판매노트 상세보기 화면
 		@GetMapping("/noteDetial")
 		public String noteDetial(@RequestParam(value="noteWriterId") String noteWriterId
+								
 								 ,Model model) {
 			
 			Note note = mNoteService.getNoteById(noteWriterId);
-			List<Note> noteReviewList = mNoteService.noteReviewList();
+			List<Note> noteReviewList = mNoteService.noteReviewList(noteWriterId);
 			
 			model.addAttribute("title", "판매노트 상세보기 화면");
 			model.addAttribute("noteInfo", note);

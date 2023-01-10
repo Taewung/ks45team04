@@ -33,6 +33,41 @@
 		</association>
 	</resultMap>
 	
+	
+	
+	
+	<insert id="addNote" parameterType="Note">
+			/* 공부노트 등록 */
+			INSERT INTO note
+			   (note_code, 
+				note_writer_id, 
+				li_code, 
+				li_name, 
+				note_name,
+				note_info, 
+				note_prev_file,
+				note_file,
+				note_price,
+				note_reg_date
+				)
+			VALUES
+				(#{noteCode}, #{noteWriterId}, #{liCode}, #{liName}, #{noteName},
+				#{noteInfo}, #{notePrevFile}, #{noteFile}, #{notePrice}, CURDATE());
+	</insert>
+	
+	
+	<select id="getNoteCode" parameterType="String" resultType="String">
+	   /* 자격증 합격기준점수코드 자동생성 */
+	   SELECT
+	      CASE
+	      WHEN COUNT(1) = 0 THEN CONCAT(#{note_code}, '_1')
+	      ELSE
+	         CONCAT('note_', MAX(CAST(SUBSTRING_INDEX(${noteCode}, 'note_', -1)AS UNSIGNED))+1)
+	         END AS newCode
+	     FROM
+	         ${note};
+	</select>
+	
 	<select id="noteReviewList" parameterType="Note" resultMap="noteResultMap">
 		/* 노트 리뷰 목록 조회 */
 		SELECT
@@ -45,8 +80,8 @@
 			note_purchase_review AS npr
 			on
 			n.note_code = npr.note_code
-			where
-			n.note_code=#{noteCode};
+		where
+			n.note_writer_id = #{noteWriterId};
 			
 	</select>
 	
@@ -74,6 +109,5 @@
 				*
 			FROM
 				note;
-			
 	</select>
 </mapper>
