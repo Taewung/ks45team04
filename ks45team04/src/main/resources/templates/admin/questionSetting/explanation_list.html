@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{admin/layout/adminDefault}">
+
+	<!-- script start -->
+    <th:block layout:fragment="customScript">
+		<script>
+		</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+		<h1>해설</h1>
+	    <p class="pxp-text-light">Explanation List</p>
+	    <div class="pxp-dashboard-table-options">
+            <ul class="list-unstyled">
+                <a href="/addExplanation">
+                	<li><button title="Add"><span class="fa fa-plus"></span></button></li>
+                </a>
+                <a href="/modifyExplanation">
+               		<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
+                </a>
+                <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>                                              
+            </ul>
+        </div>
+	    <form> 
+			<div class="mt-4 mt-lg-5">
+	            <div class="row mt-4 mt-lg-5">
+		            <div class="mb-3">
+		             <textarea class="form-control" id="pxp-company-job-description" name="explanation" placeholder="등록된 해설이 존재하지 않습니다." readonly></textarea>
+		         	</div>
+	            </div>                 
+			</div>
+			<div class="mt-4 mt-lg-5">
+				<a th:href="@{/qSettingList}" class="btn rounded-pill pxp-section-cta">목록으로</a>
+           	</div>                                                              
+    	</form>
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	</th:block>
+	<!-- customJs end -->
+</html>

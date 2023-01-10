@@ -12,8 +12,8 @@
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
- 				<h1>문제/답안/해설</h1>
- 				<p class="pxp-text-light">Question Setting List</p>
+ 				<h1>문제목록</h1>
+ 				<p class="pxp-text-light">&emsp;Question List</p>
                 <div class="mt-4 mt-lg-5">
 	  				<div class="row justify-content-between align-content-center">
 	                        <div class="col-auto order-2 order-sm-1">
@@ -39,7 +39,7 @@
 									<div class="pxp-dashboard-table-options">
 				                        <ul class="list-unstyled">
 				                        <!-- 등록버튼 start -->
-				                            <a href="/addQSetting">
+				                            <a href="/addQuestion">
 				                            	<li><button title="Add"><span class="fa fa-plus"></span></button></li>
 				                            </a>
 				                        <!-- 등록버튼 end -->
@@ -64,17 +64,13 @@
                                     <th style="width: 15%;">과목명</th>
                                     <th style="width: 15%;">등록자</th>
                                     <th style="width: 30%;">등록일시</th>
-                                    <th>&nbsp;</th>
+                                    <th>답안/해설/수정</th>
                                 </tr>
                             </thead>    
                             <tbody>
                                 <tr th:if="${not #lists.isEmpty(questionList)}" th:each="l : ${questionList}">
                                     <td><input type="checkbox" class="form-check-input"></td>
-                                    <td>
-                                        <a href="/checkQSetting">
-                                            <div class="pxp-company-dashboard-job-title" th:text="${l.questionCode}"></div>                                           
-                                        </a>
-                                    </td>
+                                    <td><div class="pxp-company-dashboard-job-title" th:text="${l.questionCode}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.liName}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.lsNum}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.lsName}"></div></td>
@@ -84,11 +80,15 @@
                                     <td>
                                         <div class="pxp-dashboard-table-options">
                                             <ul class="list-unstyled">
-                                            <!-- 수정버튼 start -->
-                                                <a href="/modifyQSetting">
-                                                	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
+                                                <a href="/answerList">
+                                                	<li><button title="답안"><strong>A</strong></button></li>
                                                 </a>
-                                            <!-- 수정버튼 end -->                                                                                        
+                                                <a href="/explanationList">
+                                                	<li><button title="해설"><strong>E</strong></button></li>
+                                                </a>
+                                                <a href="/modifyQuestion">
+                                                	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
+                                                </a>                                                                                        
                                             </ul>
                                         </div>
                                     </td>

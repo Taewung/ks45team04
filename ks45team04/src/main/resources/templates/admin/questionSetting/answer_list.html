@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{admin/layout/adminDefault}">
+
+	<!-- script start -->
+    <th:block layout:fragment="customScript">
+		<script>
+		</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+		<h1>답안목록</h1>
+	    <p class="pxp-text-light">Answer List</p>
+		    <div class="pxp-dashboard-table-options">
+	            <ul class="list-unstyled">
+	                <a href="/addAnswer">
+	                	<li><button title="Add"><span class="fa fa-plus"></span></button></li>
+	                </a>                                              
+	            </ul>
+	        </div>               
+                <div class="table-responsive"  style="overflow-x: hidden">
+					<table class="table table-hover align-middle">                      	
+                    	<thead>                    
+	                        <tr>
+	                            <th style="width: 10%;">답안코드</th>
+                                <th style="width: 10%;">문제코드</th>
+                                <th style="width: 40%;">답안</th>
+	                            <th style="width: 10%;">정답여부</th>   
+								<th style="width: 10%;">등록자</th>
+								<th style="width: 20%;">등록일시</th>
+								<th>&nbsp;</th>
+	                        </tr>
+                    	</thead>    
+                            <tbody>
+                                <tr th:if="${not #lists.isEmpty(answerList)}" th:each="l : ${answerList}">
+                                    <td><div class="pxp-company-dashboard-job-title" th:text="${l.answerCode}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.questionCode}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.answer}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.answerState}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.answerRegId}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${l.answerRegDateTime}"></div></td>        
+                                    <td>
+                                        <div class="pxp-dashboard-table-options">
+                                        	<ul>
+                                        	<li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>                                                                                    
+                                            <a href="/modifyAnswer">
+                                            	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
+                                            </a>                                                                                        
+                                        	</ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                 <tr th:unless="${not #lists.isEmpty(answerList)}">
+									<td colspan="9">등록된 답안이 없습니다.</td>
+								</tr>                      
+                            </tbody>
+                        </table>
+                    </div>
+                <!-- 목록 end -->    
+                
+            <div class="mt-4 mt-lg-5">
+				<a th:href="@{/qSettingList}" class="btn rounded-pill pxp-section-cta">목록으로</a>
+           	</div>  	
+                </div> 
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	</th:block>
+	<!-- customJs end -->
+</html>

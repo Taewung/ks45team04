@@ -33,6 +33,16 @@ public class PassScoreController {
 		this.licensePassScoreService = licensePassScoreService;
 		this.subjectPassScoreService = subjectPassScoreService;
 	}
+
+	@GetMapping("/addSubjectPassScore")
+	public String addSubjectPassScore(Model model) {
+		return "admin/passScore/add_subject_pass_score";
+	}
+	@GetMapping("/modifySubjectPassScore")
+	public String modifySubjectPassScore(Model model) {
+		return "admin/passScore/modify_subject_pass_score";
+	}
+	
 	// 과목별 합격기준점수 목록조회
 	@GetMapping("/subjectPassScoreList")
 	public String getsubjectPassScoreList(Model model) {

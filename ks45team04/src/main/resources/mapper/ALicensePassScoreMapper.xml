@@ -37,7 +37,17 @@
 		<result property="lscRegId" 		column="lsc_reg_id"/>
 		<result property="lscRegDatetime" 	column="lsc_reg_datetime"/>
 	</resultMap>
-
+	<resultMap type="SubjectPassScore" id="subjectPassScoreResultMap">
+		<id 	property="lsPScoreCode" 			column="ls_p_score_code"/>
+		<result property="liCode" 					column="li_code"/>
+		<result property="lsCode" 					column="ls_code"/>
+		<result property="lsName" 					column="ls_name"/>
+		<result property="lsTotalQuestionNum" 		column="ls_total_question_num"/>
+		<result property="lsPStandardScore" 		column="ls_p_standard_score"/>
+		<result property="lsPScoreRegId" 			column="ls_p_score_reg_id"/>
+		<result property="lsPScoreRegDateTime" 		column="ls_p_score_reg_datetime"/>
+	</resultMap>
+	
 	<update id="modifyLicensePassScore" parameterType="LicensePassScore">
 		/* 특정 자격증합격기준점수 수정 */
 		UPDATE license_pass_score
