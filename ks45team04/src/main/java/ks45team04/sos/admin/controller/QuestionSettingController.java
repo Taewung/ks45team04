@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ks45team04.sos.admin.dto.LicenseInfo;
-import ks45team04.sos.admin.dto.LicenseMain;
-import ks45team04.sos.admin.dto.LicenseSub;
-import ks45team04.sos.admin.dto.LicenseSubject;
+import ks45team04.sos.admin.dto.Answer;
 import ks45team04.sos.admin.dto.Question;
 import ks45team04.sos.admin.service.QuestionSettingService;
 
@@ -26,88 +23,75 @@ public class QuestionSettingController {
 	public QuestionSettingController(QuestionSettingService questionSettingService) {
 		this.questionSettingService = questionSettingService;
 	}
-
+	
+	/* ------------------문제/답안/해설------------------ */
+	// 문제코드별 문제/답안/해설 상세정보 조회
 	@GetMapping("/checkQSetting")
 	public String checkQSetting(Model model) {
 		model.addAttribute("title", "문제요소상세정보");
 		return "admin/questionSetting/check_q_setting";
 	}
-	@GetMapping("/modifyQSetting")
-	public String modifyQSetting(Model model) {
-		model.addAttribute("title", "문제요소수정");
-		return "admin/questionSetting/modify_q_setting";
+
+	/* ------------------문제------------------ */
+	// 문제수정
+	@GetMapping("/modifyQuestion")
+	public String modifyQuestion(Model model) {
+		return "admin/questionSetting/modify_question";
 	}
-	/////// 문제 해설 목록?
-		@GetMapping("/modifyExplanation")
-		public String modifyExplanation(Model model) {
-			return "admin/questionSetting/modify_explanation";
-		}
-		@GetMapping("/modifyAnswer")
-		public String modifyAnswer(Model model) {
-			return "admin/questionSetting/modify_Answer";
-		}
-		@GetMapping("/addExplanation")
-		public String addExplanation(Model model) {
-			return "admin/questionSetting/add_explanation";
-		}
-		@GetMapping("/modifyQuestion")
-		public String modifyQuestion(Model model) {
-			return "admin/questionSetting/modify_question";
-		}
-		@GetMapping("/addAnswer")
-		public String addAnswer(Model model) {
-			return "admin/questionSetting/add_Answer";
-		}
-		@GetMapping("/answerList")
-		public String answerList(Model model) {
-			return "admin/questionSetting/answer_list";
-		}
-		@GetMapping("/explanationList")
-		public String explanationList(Model model) {
-			return "admin/questionSetting/explanation_list";
-		}
-		@GetMapping("/addQuestion")
-		public String addQuestion(Model model) {
-			return "admin/questionSetting/add_question";
-		}
-	
-	
-	// 문제요소등록
-	@GetMapping("/addQSetting")
-	public String addQSetting(Model model) {
-		model.addAttribute("title", "문제요소등록");
-		List<LicenseMain> licenseMainListForQSet = questionSettingService.getLicenseMainListForQSet();
-		model.addAttribute("licenseMainListForQSet", licenseMainListForQSet);
-		return "admin/questionSetting/add_q_setting";
+	// 문제등록
+	@GetMapping("/addQuestion")
+	public String addQuestion(Model model) {
+		return "admin/questionSetting/add_question";
 	}
-	// 자격증별 과목목록 조회
-	@GetMapping("/getSubjectCategoryForQSet")
-	@ResponseBody
-	public List<LicenseSubject> getSubjectListForQSet (@RequestParam(value="liCode") String liCode){
-		List<LicenseSubject> subjectListForQSet = questionSettingService.getSubjectListForQSet(liCode);
-		log.info("자격증별 과목목록 : {}", subjectListForQSet);
-		return subjectListForQSet;
-	}	
-	// 중분류별 자격증목록 조회
-	@GetMapping("/getLicenseCategoryForQSet")
-	@ResponseBody
-	public List<LicenseInfo> getLicenseCategoryForQSet (@RequestParam(value="lscCode") String lscCode){
-		List<LicenseInfo> licenseListForQSet = questionSettingService.getLicenseListForQSet(lscCode);
-		return licenseListForQSet;
-	}	
-	// 대분류별 중분류 조회
-	@GetMapping("/getLicenseSubCategoryForQSet")
-	@ResponseBody
-	public List<LicenseSub> getLicenseSubCategoryForQSet (@RequestParam(value="lmcCode") String lmcCode){
-		List<LicenseSub> licenseSubListForQSet = questionSettingService.getLicenseSubListForQSet(lmcCode);
-		return licenseSubListForQSet;
-	}	
-	// 문제 목록조회
+	// 문제목록조회
 	@GetMapping("/qSettingList")
 	public String qSettingList(Model model) {
 		List<Question> questionList = questionSettingService.getQuestionList();
 		model.addAttribute("questionList", questionList);
 		model.addAttribute("title", "문제목록");
 		return "admin/questionSetting/q_setting_list";
+	}
+	
+	/* ------------------답안------------------ */
+	// 문제코드별 답안수정
+	@GetMapping("/modifyAnswer")
+	public String modifyAnswer(Model model) {
+		return "admin/questionSetting/modify_Answer";
+	}
+	// 문제코드별 답안등록
+	@GetMapping("/addAnswer")
+	public String addAnswer(Model model) {
+		return "admin/questionSetting/add_Answer";
+	}
+	// 문제코드별 답안목록조회
+	@GetMapping("/answerList")
+	public String answerList(Model model) {
+		model.addAttribute("title", "답안목록");
+		return "admin/questionSetting/answer_list";
+	}
+	// 문제코드별 답안목록
+	@GetMapping("/getAnswerList")
+	@ResponseBody
+	public List<Answer> getAnswerList(@RequestParam(value="questionCode", required=false) String questionCode){
+		List<Answer> answerList = questionSettingService.getAnswerList(questionCode);
+		log.info("문제코드별 답안목록 : {}", answerList);
+		return answerList;
+	}
+	
+	/* ------------------해설------------------ */
+	// 문제코드별 해설수정
+	@GetMapping("/modifyExplanation")
+	public String modifyExplanation(Model model) {
+		return "admin/questionSetting/modify_explanation";
+	}
+	// 문제코드별 해설등록
+	@GetMapping("/addExplanation")
+	public String addExplanation(Model model) {
+		return "admin/questionSetting/add_explanation";
+	}
+	// 문제코드별 해설목록
+	@GetMapping("/explanationList")
+	public String explanationList(Model model) {
+		return "admin/questionSetting/explanation_list";
 	}
 }
