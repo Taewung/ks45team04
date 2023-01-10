@@ -69,18 +69,16 @@
 	                                   <td>
 	                                        <div class="pxp-dashboard-table-options" style="margin-right: 80px;">
 	                                            <ul class="list-unstyled">
-	                                          
 	                                                      <!-- 수정버튼 start -->
-	                                                   <!-- 수정버튼 start -->
-	                                               <a th:href="@{/modifyToDoList(toDoListCode=${l.toDoListCode})}">
+	                                               <a th:href="@{/modifyDDay(dDayCode=${l.dDayCode})}">
 	                                                	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
 	                                                </a>
 	                                            <!-- 수정버튼 end -->
 	                                            <!-- 삭제버튼 start -->
-	                                            <a th:href="@{/deleteToDoList(toDoListCode=${l.toDoListCode})}">
+	                                            <a th:href="@{/deleteDDay(dDayCode=${l.dDayCode})}">
 	                                              	  <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
 	                                           	</a>
-	                                            <!-- 삭제버튼 end -->                     
+	                                            <!-- 삭제버튼 end -->                           
 	                                            </ul>
 	                                        </div>
 	                                    </td>  

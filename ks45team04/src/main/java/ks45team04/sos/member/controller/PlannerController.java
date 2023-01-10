@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import ks45team04.sos.member.dto.DDay;
 import ks45team04.sos.member.dto.ToDoList;
 import ks45team04.sos.member.mapper.PlannerMapper;
 import ks45team04.sos.member.service.PlannerService;
@@ -172,7 +173,9 @@ public class PlannerController {
 	// 디데이 상세
 	@GetMapping("/detailDDay")
 	public String detailDDay(Model model) {
+		List<DDay> dDayDetailList = plannerService.dDayDetailList();
 		model.addAttribute("title", "디데이 상세");
+		model.addAttribute("dDayDetailList", dDayDetailList);
 		return "member/planner/d_day_detail";
 	}
 }

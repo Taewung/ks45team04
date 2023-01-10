@@ -18,7 +18,7 @@ public class PlannerService {
 	}
 	
 	/**
-	 * 일정 상세 리스트
+	 * 디데이 상세 리스트
 	 * @return List<DDay>
 	 */
 	
