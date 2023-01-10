@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{admin/layout/adminDefault}">
+
+	<!-- script start -->
+    <th:block layout:fragment="customScript">
+		<script>
+		</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+                <h1>문제수정</h1>
+                <p class="pxp-text-light">Modify Question</p>
+                <form>
+                    <div class="row mt-4 mt-lg-5">  
+                    <!-- 자격증선택 start -->                
+                	<h2><strong><span class="fa fa-check"></span>자격증</strong></h2>
+                        <div class="col-md-6 col-xxl-3">
+                        	<label for="licenseMainCategory" class="form-label">대분류</label>
+                             <select  id="licenseMainCategory" class="form-select" name="mainCate">
+                                <option th:if="${not #lists.isEmpty(licenseMainListForQSet)}" th:each="l : ${licenseMainListForQSet}" th:value="${l.lmcCode}" th:text="${l.lmcName}"></option>
+                             </select>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 licenseSubCategoryDiv">
+	                               <label for="licenseSubCategory" class="form-label">중분류</label>
+	                               <select id="licenseSubCategory" class="form-select" name="subCate" disabled="disabled"></select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 licenseCategoryDiv">
+	                               <label for="licenseCategory" class="form-label">자격증명</label>
+	                               <select id="licenseCategory" class="form-select" name="liName" disabled="disabled"></select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 liCodeCategoryDiv">
+	                               <label for="liCodeCategory" class="form-label">자격증코드</label>
+	                               <select id="liCodeCategory" class="form-select" name="liCode" disabled="disabled"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 자격증선택 end -->                      
+                    <!-- 과목선택 start --> 
+                    <div class="row mt-4 mt-lg-5">
+                    <h2><strong><span class="fa fa-check"></span>과목 선택</strong></h2>
+                   		<div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 subjectCategoryDiv">
+	                               <label for="subjectCategory" class="form-label">과목</label>
+	                               <select id="subjectCategory" class="form-select" name="lsSubject" disabled="disabled"></select>
+                            </div>
+                        </div>
+                   		<div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 subjectNameCategoryDiv">
+	                               <label for="subjectNameCategory" class="form-label">과목명</label>
+	                               <select id="subjectNameCategory" class="form-select" name="lsName" disabled="disabled"></select>
+                            </div>
+                        </div>
+                   		<div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 subjectCodeCategoryDiv">
+	                               <label for="subjectCodeCategory" class="form-label">과목코드</label>
+	                               <select id="subjectCodeCategory" class="form-select" name="lsCode" disabled="disabled"></select>
+                            </div>
+                        </div>
+                      <!-- 과목선택 end -->                                     
+		            </div>
+		            <div class="row mt-4 mt-lg-5">
+                        <h2><strong><span class="fa fa-check"></span>문제입력</strong></h2>	                    
+	                        <div class="mb-3">
+		                        <textarea class="form-control" id="pxp-company-job-description" placeholder="문제를 입력해주세요."></textarea>
+	                    	</div>	                        
+                    </div>
+                    <div class="mt-4 mt-lg-5">
+	                  <button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta">수정</button>
+					  <a th:href="@{/qSettingList}" class="btn rounded-pill pxp-section-cta-o ms-3">취소</a>                                                
+	             	</div>                                                                   
+                </form>
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	</th:block>
+	<!-- customJs end -->
+</html>

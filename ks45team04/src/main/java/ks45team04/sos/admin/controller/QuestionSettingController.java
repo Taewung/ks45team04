@@ -2,10 +2,11 @@ package ks45team04.sos.admin.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -18,7 +19,8 @@ import ks45team04.sos.admin.service.QuestionSettingService;
 
 @Controller
 public class QuestionSettingController {
-	
+	private static final Logger log = LoggerFactory.getLogger(PassScoreController.class);
+
 	private final QuestionSettingService questionSettingService;
 	
 	public QuestionSettingController(QuestionSettingService questionSettingService) {
@@ -35,6 +37,40 @@ public class QuestionSettingController {
 		model.addAttribute("title", "문제요소수정");
 		return "admin/questionSetting/modify_q_setting";
 	}
+	/////// 문제 해설 목록?
+		@GetMapping("/modifyExplanation")
+		public String modifyExplanation(Model model) {
+			return "admin/questionSetting/modify_explanation";
+		}
+		@GetMapping("/modifyAnswer")
+		public String modifyAnswer(Model model) {
+			return "admin/questionSetting/modify_Answer";
+		}
+		@GetMapping("/addExplanation")
+		public String addExplanation(Model model) {
+			return "admin/questionSetting/add_explanation";
+		}
+		@GetMapping("/modifyQuestion")
+		public String modifyQuestion(Model model) {
+			return "admin/questionSetting/modify_question";
+		}
+		@GetMapping("/addAnswer")
+		public String addAnswer(Model model) {
+			return "admin/questionSetting/add_Answer";
+		}
+		@GetMapping("/answerList")
+		public String answerList(Model model) {
+			return "admin/questionSetting/answer_list";
+		}
+		@GetMapping("/explanationList")
+		public String explanationList(Model model) {
+			return "admin/questionSetting/explanation_list";
+		}
+		@GetMapping("/addQuestion")
+		public String addQuestion(Model model) {
+			return "admin/questionSetting/add_question";
+		}
+	
 	
 	// 문제요소등록
 	@GetMapping("/addQSetting")
@@ -49,7 +85,7 @@ public class QuestionSettingController {
 	@ResponseBody
 	public List<LicenseSubject> getSubjectListForQSet (@RequestParam(value="liCode") String liCode){
 		List<LicenseSubject> subjectListForQSet = questionSettingService.getSubjectListForQSet(liCode);
-		System.out.println(subjectListForQSet+"<------------------------------------subjectListForQSet");
+		log.info("자격증별 과목목록 : {}", subjectListForQSet);
 		return subjectListForQSet;
 	}	
 	// 중분류별 자격증목록 조회
