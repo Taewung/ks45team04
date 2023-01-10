@@ -135,11 +135,24 @@ public class PlannerController {
 		return toDoListMap;
 	}
 
-	// 스톱워치 기록
+	//스톱워치 기록
 	@GetMapping("/recordStopwatch")
-	public String recordStopwatch(Model model) {
+	public String recordStopwatch(@RequestParam(name="toDoListCode", required = false) String toDoListCode, Model model) {
 		model.addAttribute("title", "스톱워치 기록");
+		model.addAttribute("toDoListCode", toDoListCode);
+		//model.addAttribute("stopwatchTime", "00:00:04");
 		return "member/planner/stopwatch_record";
+	}
+	//스톱워치 기록
+	@PostMapping("/recordStopwatch")
+	public String recordStopwatch( @RequestParam(value="toDoListCode", required = false) String toDoListCode
+												,@RequestParam(value="stopwatchTime", required = false) String stopwatchTime) {
+		System.out.println("toDoListCode : " + toDoListCode);
+		System.out.println("stopwatchTime : " + stopwatchTime);
+		
+		//update 처리
+		
+		return "redirect:/detailToDoList";
 	}
 
 	// 공부시간 기록

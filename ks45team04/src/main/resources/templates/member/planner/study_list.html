@@ -14,7 +14,7 @@
 	<th:block layout:fragment="customContents">
 		<section>
 			<div class="pxp-container">
-				<h1>일정목록</h1>
+				<h1>스톱워치</h1>
                 <p class="pxp-text-light"></p>
 
                 <div class="mt-4 mt-lg-5">
@@ -70,7 +70,7 @@
 	                                   <td>
 	                                        <div class="pxp-dashboard-table-options" style="margin-right: 110px;">
 	                                            <ul class="list-unstyled">
-	                                            <a href="/recordStopwatch">
+	                                            <a th:href="@{/recordStopwatch(toDoListCode=${l.toDoListCode})}">
 	                                                	<li><button title="stopwatch"><i class="fa fa-clock-o" aria-hidden="true"></i></button></li>
 	                                                </a>
 	                                                          
