@@ -16,6 +16,14 @@ public class PlannerService {
 	public PlannerService(PlannerMapper plannerMapper) {
 		this.plannerMapper = plannerMapper;
 	}
+
+	
+	
+	public int addDDay(DDay dDay) {
+		
+		return plannerMapper.addDDay(dDay);
+	}
+	
 	
 	/**
 	 * 디데이 상세 리스트

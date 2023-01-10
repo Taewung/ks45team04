@@ -145,7 +145,10 @@ public class PlannerController {
 	// 공부시간 기록
 	@GetMapping("/listStudyTime")
 	public String listStudyTime(Model model) {
-		model.addAttribute("title", "공부시간 기록");
+		List<ToDoList> toDoListDetailList = plannerService.toDoListDetailList();
+
+		model.addAttribute("title", "일정 상세");
+		model.addAttribute("toDoListDetailList", toDoListDetailList);
 		return "member/planner/study_list";
 	}
 
