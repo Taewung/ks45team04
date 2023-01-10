@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ks45team04.sos.member.dto.MPointSaveStandard;
 import ks45team04.sos.member.dto.MPointSaveUse;
+import ks45team04.sos.member.service.MPointSaveStandardService;
 import ks45team04.sos.member.service.MPointSaveUseService;
 
 
@@ -17,10 +19,13 @@ import ks45team04.sos.member.service.MPointSaveUseService;
 public class PointController {
 
 	private final MPointSaveUseService mPointSaveUseService;
+	private final MPointSaveStandardService mPointSaveStandardService;
 	
-	public PointController(MPointSaveUseService mPointSaveUseService) {
+	public PointController(MPointSaveUseService mPointSaveUseService,
+							MPointSaveStandardService mpointSaveStandardService) {
 		
 		this.mPointSaveUseService = mPointSaveUseService;
+		this.mPointSaveStandardService = mpointSaveStandardService;
 	}
 	
 
@@ -28,7 +33,11 @@ public class PointController {
 	//포인트 적립 기준 조회
 	@GetMapping("/mpointSaveStandardList")
 	public String mpointSaveStandardList(Model model) {
+		
+		List<MPointSaveStandard> mPointSaveStandardList = mPointSaveStandardService.MPointSaveStandardList();
+		
 		model.addAttribute("title", "포인트 적립 기준 조회");
+		model.addAttribute("mPointSaveStandardList", mPointSaveStandardList);
 		
 		return "member/point/mpoint_save_standard_list";
 	}
