@@ -19,7 +19,7 @@
 				}
 			
 				$('#memId').on('input', function(){
-					$('#addMemberForm label').not('#memId').prop('disabled', true);
+					$('#addMemberForm input').not('#memId').prop('disabled', true);
 				  	$('#addMemberForm select').prop('disabled', true);
 				  	$('#addMemberForm button').not('#checkBtn').prop('disabled', true);
 				});
@@ -43,17 +43,20 @@
 					//성공 
 					request.done(function( isChecked ) {
 						console.log(isChecked, '데이터타입 확인');
-					  	  
-						if(isChecked){
+						var result = isChecked.result
+						console.log(result)
+					   
+						if(result == "성공"){
 					  	  	alert('중복된 아이디가 존재합니다.');
 					  	  	$('#memId').val('');
-						  	$('#addMemberForm label').not('#memId').prop('disabled', true);
+						  	$('#addMemberForm input').not('#memId').prop('disabled', true);
 						  	$('#addMemberForm select').prop('disabled', true);
 						  	$('#addMemberForm button').not('#checkBtn').prop('disabled', true);
 							$('#memId').focus();
 							return false;		
 						}else{
-						  	$('#addMemberForm label').not('#memId').prop('disabled', false);
+					  	  	alert('회원가입할 수 있는 아이디입니다.');							
+						  	$('#addMemberForm input').not('#memId').prop('disabled', false);
 						  	$('#addMemberForm select').prop('disabled', false);
 						  	$('#addMemberForm button').not('#checkBtn').prop('disabled', false);
 						}
@@ -92,7 +95,7 @@
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-	<form >
+	<form id="addMemberForm" action="/addMember" method="post">
         <section class="pxp-hero vh-100" style="background-color: var(--pxpMainColorLight);">
             <div class="row align-items-center pxp-sign-hero-container">
                 <div class="col-xl-6 pxp-column">
@@ -107,10 +110,9 @@
                             <div class="col-lg-6 col-xl-7 col-xxl-5">
                                 <div class="pxp-sign-hero-form-content">
                                     <h5 class="text-center">회원 가입</h5> 
-                                    <form class="mt-4" id="addMemberForm" action="/addMember">
                                        <tr>
                                         <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" id="memId" placeholder="Id">
+                                            <input type="text" class="form-control" id="memId" name="memId" placeholder="Id">
                                             <label for="pxp-signup-page-email">ID</label>
                                             <span class="fa fa-id-card-o"></span>
                                         </div> 	
@@ -123,35 +125,36 @@
                                         </div>
                                                                                                       
                                         <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" id="memPw" placeholder="password">
+                                            <input type="text" class="form-control" id="memPw" placeholder="password" name="memPw" disabled="disabled">
                                             <label for="pxp-signup-page-password">Password</label>
                                             <span class="fa fa-lock"></span>
                                         </div>
                                         <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" id="memName" placeholder="Name">
+                                            <input type="text" class="form-control" id="memName" placeholder="Name" name="memName" disabled="disabled">
                                             <label for="pxp-signup-page-email">Name</label>
                                             <span class="fa fa-user"></span>
                                         </div>       
                                         <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" id="memEmail" placeholder="Email address">
+                                            <input type="text" class="form-control" id="memEmail" placeholder="Email address" name="memEmail" disabled="disabled">
                                             <label for="pxp-signup-page-email">Email</label>
                                             <span class="fa fa-envelope-o"></span>
                                         </div>
                                         <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" id="memBirth" placeholder="Birth" >
+                                            <input type="date" class="form-control" id="memBirth" placeholder="Birth" name="memBirth" disabled="disabled">
                                             <label for="pxp-signup-page-email">Birth</label>
                                             <span class="fa fa-birthday-cake"></span>
                                         </div> 
                                         <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" id="memPhone" placeholder="Phone" >
+                                            <input type="tel" class="form-control" id="memPhone" placeholder="Phone" name="memPhone" disabled="disabled">
                                             <label for="pxp-signup-page-email">Phone</label>
                                             <span class="fa fa-mobile"></span>
                                         </div>   
                                                                                                                                                                                              
                                         
                                         <div class="mt-4 text-center pxp-sign-hero-form-small">
+                                        <button type="button" id="submitBtn" class="btn rounded-pill pxp-sign-hero-form-cta" onClick="alert('회원가입이 완료되었습니다.')">회원가입</button>
                                             이미 가입 된 계정이 있다면 <a href="/login">로그인하기</a>
-										<button type="button" id="submitBtn" class="btn rounded-pill pxp-sign-hero-form-cta">회원가입</button>
+										
                                         </div>
                                     </form>
                                 </div>

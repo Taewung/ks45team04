@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import ks45team04.sos.member.dto.LoginHistory;
@@ -12,6 +14,9 @@ import ks45team04.sos.member.mapper.MemberMapper;
 
 @Service
 public class MMemberService {
+	
+	
+	private static final Logger log = LoggerFactory.getLogger(MMemberService.class);
 
 	public final MemberMapper memberMapper;
 	
@@ -126,17 +131,17 @@ public MMember modifyMemberInfo(String memId) {
  * 
  */
 	//회원가입 처리
-	public int addMember(MMember mmember){
-	    int result=memberMapper.addMember(mmember);
-	    System.out.println(result);
-	    System.out.println(mmember);
-	    return result;
+	public void addMember(MMember mmember){
+		log.info("addMember : {}", mmember);
+	    memberMapper.addMember(mmember);
 	
 	}
 	
     // 중복 회원 아이디 체크
 	public int checkId(String memId){
+		log.info("memId1111111111 :{}", memId);
 	    int result = memberMapper.checkId(memId);
+	    log.info("result :{}", result);
 	    return result;
 	}
 
