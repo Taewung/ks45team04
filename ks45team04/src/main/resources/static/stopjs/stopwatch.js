@@ -7,17 +7,9 @@ $(document).ready(function(){
 function init(){
     //document.getElementById("time").innerHTML = "00:00:00";
     let initTimeArr = document.getElementById("time").textContent.split(':');
-	
-	
-	for(let idx in initTimeArr){
-		if(idx == 0){    				
-			time += Number(initTimeArr[idx]) * 60;
-		}else if(idx == 1){
-			time += Number(initTimeArr[idx]) * 60;
-		}else{
-			time += Number(initTimeArr[idx]);
-		}
-	}
+	time += Number(initTimeArr[0]) * 60 * 60;
+	time += Number(initTimeArr[1]) * 60;
+	time += Number(initTimeArr[2]);
 }
 
 function buttonEvt(){

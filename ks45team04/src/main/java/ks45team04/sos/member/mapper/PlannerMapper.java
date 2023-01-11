@@ -30,4 +30,7 @@ public interface PlannerMapper {
 		
 	//디데이 등록
 		public int addDDay(DDay dDay);
+		
+	//투두리스트 스탑워치 시간 수정
+		public int modifyToDoListStopWatch(String stopwatchTime,String toDoListCode);
 }

@@ -8,8 +8,7 @@ public class ToDoList {
 	 private String toDoListTitle;
 	 private String toDoListDay;
 	 private String toDoListRegTime;
-	 private String toDayStudyTime;
-	 
+	 private String totalDayStudyTime;
 	public String getToDoListCode() {
 		return toDoListCode;
 	}
@@ -52,13 +51,12 @@ public class ToDoList {
 	public void setToDoListRegTime(String toDoListRegTime) {
 		this.toDoListRegTime = toDoListRegTime;
 	}
-	public String getToDayStudyTime() {
-		return toDayStudyTime;
+	public String getTotalDayStudyTime() {
+		return totalDayStudyTime;
 	}
-	public void setToDayStudyTime(String toDayStudyTime) {
-		this.toDayStudyTime = toDayStudyTime;
+	public void setTotalDayStudyTime(String totalDayStudyTime) {
+		this.totalDayStudyTime = totalDayStudyTime;
 	}
-	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -76,13 +74,11 @@ public class ToDoList {
 		builder.append(toDoListDay);
 		builder.append(", toDoListRegTime=");
 		builder.append(toDoListRegTime);
-		builder.append(", toDayStudyTime=");
-		builder.append(toDayStudyTime);
+		builder.append(", totalDayStudyTime=");
+		builder.append(totalDayStudyTime);
 		builder.append("]");
 		return builder.toString();
 	}
 	 
-	
-	
 	 
 }
