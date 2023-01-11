@@ -78,7 +78,7 @@
                                     <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${l.liPScoreRegId}"></div></td>                                   
                                     <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${l.liPScoreRegDateTime}"></div></td>
                                     <td>
-                                    	<a th:href="@{/subjectPassScoreList}">
+                                    	<a th:href="@{/subjectPassScoreList(liCode=${l.liCode})}">
                                        		<button type="button" class="btn rounded-pill pxp-section-cta">확인하기</button>
                                         </a>
                                     </td>                                                                                                        

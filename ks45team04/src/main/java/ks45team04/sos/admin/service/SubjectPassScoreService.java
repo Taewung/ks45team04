@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import ks45team04.sos.admin.dto.SubjectPassScore;
 import ks45team04.sos.admin.mapper.SubjectPassScoreMapper;
 
-
-
 @Service
 public class SubjectPassScoreService {
 
@@ -21,12 +19,29 @@ public class SubjectPassScoreService {
 	}
 	
 	/**
-	 * 과목별 합격기준점수 조회
+	 * 특정 과목합격기준점수 수정
+	 * @param subjectPassScore
+	 * @return modifyResult
+	 */
+	public int modifySubjectPassScore(SubjectPassScore subjectPassScore) {	
+		int modifyResult = subjectPassScoreMapper.modifySubjectPassScore(subjectPassScore);
+		return modifyResult;
+	}
+	/**
+	 * 특정 과목합격기준점수 조회
+	 * @param lsPScoreCode
+	 * @return subjectPassScoreByCode
+	 */
+	public SubjectPassScore getSubjectPassScoreByCode(String lsPScoreCode) {
+		SubjectPassScore subjectPassScoreByCode = subjectPassScoreMapper.getSubjectPassScoreByCode(lsPScoreCode);
+		return subjectPassScoreByCode;
+	}	
+	/**
+	 * 자격증별 과목합격기준점수목록 조회
 	 * @return List<SubjectPassScore>
 	 */
-	public List<SubjectPassScore> getsubjectPassScoreList(){	
-		List<SubjectPassScore> subjectPassScoreList = subjectPassScoreMapper.getsubjectPassScoreList();
+	public List<SubjectPassScore> getsubjectPassScoreList(String licode){	
+		List<SubjectPassScore> subjectPassScoreList = subjectPassScoreMapper.getsubjectPassScoreList(licode);
 		return subjectPassScoreList;
 	}
-
 }
