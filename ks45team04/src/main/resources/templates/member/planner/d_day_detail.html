@@ -38,13 +38,15 @@
                             <thead>                    
                                 <tr>
                                    
-                                    <th style="width: 10%;">디데이 등록번호</th>
-                                    <th style="width: 13%;">디데이등록아이디</th>
-                                    <th style="width: 10%;">자격증 코드</th>
-                                    <th style="width: 10%;">자격증 이름</th>
-                                    <th style="width: 13%;">디데이제목/내용</th>
-                                    <th style="width: 13%;">목표날짜</th>
-                                    <th style="width: 11%;">작성일시</th>
+                                    <th class="text-center" style="width: 10%;">디데이 등록번호</th>
+                                    <th class="text-center" style="width: 13%;">디데이등록아이디</th>
+                                    <th class="text-center" style="width: 10%;">자격증 코드</th>
+                                    <th class="text-center" style="width: 10%;">자격증 이름</th>
+                                    <th class="text-center" style="width: 13%;">디데이제목/내용</th>
+                                    <th class="text-center" style="width: 13%;">목표날짜</th>
+                                    <th class="text-center" style="width: 11%;">작성일시</th>
+                                    <th class="text-center" style="width: 11%;">수정/삭제</th>
+                                    <th class="text-center" style="width: 11%;">등록</th>
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>    
@@ -58,38 +60,43 @@
 									th:each="l : ${dDayDetailList}">
                                     	<td>
 	                                     	<input type="hidden"  th:value="${l.dDayCode}" name="dDayCode" readonly="readonly" />
-                                    		<div class="pxp-company-dashboard-job-title" th:text="${l.dDayCode}">
+                                    		<div class="pxp-company-dashboard-job-title  text-center" th:text="${l.dDayCode}">
                                     	</div>
-                                    	<td><div class="pxp-company-dashboard-job-category" th:text="${l.memId}"></div></td>
-                                    	<td><div class="pxp-company-dashboard-job-category" th:text="${l.liCode}"></div></td>
-                                    	<td><div class="pxp-company-dashboard-job-category" th:text="${l.liName}"></div></td>
-                                    	<td><div class="pxp-company-dashboard-job-category" th:text="${l.dDayContent}"></div></td>
-                                    	<td><div class="pxp-company-dashboard-job-category" th:text="${l.dDayDate}"></div></td>                      
-                                    	<td><div class="pxp-company-dashboard-job-category" th:text="${l.dDayWriteDate}"></div></td>   
-	                                   <td>
-	                                        <div class="pxp-dashboard-table-options" style="margin-right: 80px;">
-	                                            <ul class="list-unstyled">
-	                                                      <!-- 수정버튼 start -->
-	                                               <a th:href="@{/modifyDDay(dDayCode=${l.dDayCode})}">
-	                                                	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
-	                                                </a>
-	                                            <!-- 수정버튼 end -->
-	                                            <!-- 삭제버튼 start -->
-	                                            <a th:href="@{/deleteDDay(dDayCode=${l.dDayCode})}">
-	                                              	  <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
-	                                           	</a>
-	                                            <!-- 삭제버튼 end -->                           
-	                                            </ul>
-	                                        </div>
-	                                    </td>  
+                                    	<td><div class="pxp-company-dashboard-job-category text-center" th:text="${l.memId}"></div></td>
+                                    	<td><div class="pxp-company-dashboard-job-category text-center" th:text="${l.liCode}"></div></td>
+                                    	<td><div class="pxp-company-dashboard-job-category text-center" th:text="${l.liName}"></div></td>
+                                    	<td><div class="pxp-company-dashboard-job-category text-center" th:text="${l.dDayContent}"></div></td>
+                                    	<td><div class="pxp-company-dashboard-job-category text-center" th:text="${l.dDayDate}"></div></td>                      
+                                    	<td><div class="pxp-company-dashboard-job-category text-center" th:text="${l.dDayWriteDate}"></div></td>   
+                                    	<td><div class="pxp-company-dashboard-job-category text-center">
+                                    				<div class="pxp-dashboard-table-options d-flex justify-content-center">
+			                                            <ul class="list-unstyled">
+			                                               <!-- 수정버튼 start -->
+			                                               <a th:href="@{/modifyDDay(dDayCode=${l.dDayCode})}">
+			                                                	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
+			                                                </a>
+			                                         		<!-- 수정버튼 end -->
+			                                            	<!-- 삭제버튼 start -->
+			                                            	<a th:href="@{/deleteDDay(dDayCode=${l.dDayCode})}">
+			                                              	  <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
+	                                           				</a>
+	                                           			</div>
+	                                           	</div>
+	                                   </td>   
+                                    	<td><div class="pxp-company-dashboard-job-category text-center"> 
+                                    				<div class="pxp-dashboard-table-options d-flex justify-content-center">
+			                                            <ul class="list-unstyled">
+			                                              <!-- 등록버튼 start -->
+                                    						<a href="/addDDay">
+						                            	<li><button title="Add"><span class="fa fa-plus"></span></button></li>
+						                           			 </a>
+						                           		  <!-- 등록버튼 end -->
+						                         	</div>
+						                        </div>
+						                </td>   
+	                                 
                                     
-	                                    <td>
-	                                        <div class="pxp-dashboard-table-options">
-	                                            <ul class="list-unstyled">
-	                                                                       
-	                                            </ul>
-	                                        </div>
-	                                    </td>
+	                                  
                                 </tr>
                                 <tr th:unless="${not #lists.isEmpty(dDayDetailList)}">
 									<td colspan="9">등록된 정보가 없습니다.</td>

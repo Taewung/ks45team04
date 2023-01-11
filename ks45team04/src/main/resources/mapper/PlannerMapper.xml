@@ -26,6 +26,17 @@
 		<result property="totalDayStudyTime" 										column="total_day_study_time"/>
 	</resultMap>
 	
+		<update id="modifyToDoListStopWatch" parameterType="String">
+		/* 특정 일정 총공부시간 수정*/
+		UPDATE 
+			to_do_list
+		SET 
+			 total_day_study_time = #{stopwatchTime}
+			
+		WHERE 
+			to_do_list_code= #{toDoListCode};
+		</update>
+	
 		<select id="dDayDetailList" resultMap="dDayDetailListResultMap">
 			/* 디데이 상세 조회 */
 			

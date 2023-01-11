@@ -79,16 +79,16 @@ const startCountdown = (date) => {
 
 const updateDom = ({ seconds, minutes, hours, days }) => {
   // Update the dom with the right values
-  dayDOM.innerHTML = `${days} <span>days</span>`;
-  secondDOM.innerHTML = `${seconds} <span>seconds</span>`;
-  minuteDOM.innerHTML = `${minutes} <span>minutes</span>`;
-  hourDOM.innerHTML = `${hours} <span>hours</span>`;
+  dayDOM.innerHTML = `${days} <span>일</span>`;
+  secondDOM.innerHTML = `${seconds} <span>초</span>`;
+  minuteDOM.innerHTML = `${minutes} <span>분</span>`;
+  hourDOM.innerHTML = `${hours} <span>시간</span>`;
 };
 
 const controlError = () => {
   // we send different values to be updated in the DOM
-  updateDom({ seconds: "S", minutes: "m", hours: "h", days: "d" });
-  head.innerHTML = `<span>날짜</span>를 선택해야 합니다.`;
+  updateDom({ seconds: "초", minutes: "분", hours: "시간", days: "일" });
+  head.innerHTML = `You really should try a <span>future</span> date`;
   head.classList.add("error");
 };
 

@@ -107,7 +107,7 @@ public class PlannerController {
 
 		model.addAttribute("title", "일정 상세");
 		model.addAttribute("toDoListDetailList", toDoListDetailList);
-
+		System.out.println("toDoListDetailList>>>>>"+ toDoListDetailList);
 		return "member/planner/to_do_list_detail";
 	}
 	
@@ -145,12 +145,13 @@ public class PlannerController {
 	}
 	//스톱워치 기록
 	@PostMapping("/recordStopwatch")
-	public String recordStopwatch( @RequestParam(value="toDoListCode", required = false) String toDoListCode
+	public String recordStopwatch( @RequestParam(value="toDoListCode", required = false) String toDoListCode,Model model
 												,@RequestParam(value="stopwatchTime", required = false) String stopwatchTime) {
 		System.out.println("toDoListCode : " + toDoListCode);
 		System.out.println("stopwatchTime : " + stopwatchTime);
 		
 		//update 처리
+		plannerMapper.modifyToDoListStopWatch(stopwatchTime, toDoListCode);
 		
 		return "redirect:/detailToDoList";
 	}
