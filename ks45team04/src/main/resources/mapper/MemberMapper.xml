@@ -14,7 +14,7 @@
 		<result property="memRegDatetime" 		column="mem_reg_datetime"/>
 	</resultMap>
 	
-	<resultMap type="loginHistory" id="LoginResultMap">
+	<resultMap type="loginHistory" id="loginResultMap">
 		<id property="loginLogoutCode" 					column="login_logout_code"/>
 		<result property="loginLogoutId" 				column="login_logout_id"/>
 		<result property="loginDatetime" 				column="login_datetime"/>
@@ -55,7 +55,7 @@
 			login_logout;
 	</select>
 	
-		<select id="checkId" resultMap="MemberResultMap">	
+		<select id="checkMem	Id" resultMap="MemberResultMap">	
 		/*아이디 중복체크*/
 		SELECT
 			IF(COUNT(*)=1, 1, 0)
