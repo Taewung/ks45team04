@@ -46,7 +46,12 @@
 		SELECT
 			*
 		FROM
-			point_refund;
+			point_refund
+		<where>
+			<if test="searchKey != null and searchKey != ''">
+				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
+			</if>
+		</where>
 			
 	</select>
 	

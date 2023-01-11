@@ -25,7 +25,12 @@
 			final_pay_price,
 			pay_complete_datetime	
 		FROM
-			pay_complete;
+			pay_complete
+		<where>
+			<if test="searchKey != null and searchKey != ''">
+				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
+			</if>
+		</where>
 	
 	</select>
 	

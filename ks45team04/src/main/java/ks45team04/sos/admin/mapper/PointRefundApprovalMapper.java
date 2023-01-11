@@ -16,8 +16,8 @@ public interface PointRefundApprovalMapper {
 	//특정 포인트 환급 신청 내역 조회
 	public PointRefundApproval getPointRefundApprovalByCode(String pointRefundCode);
 	
-	//포인트 환급 신청 내역 조회
-	public List<PointRefundApproval> pointRefundApprovalList();
+	//포인트 환급 신청 내역 조회(검색)
+	public List<PointRefundApproval> pointRefundApprovalList(String searchKey, String searchValue);
 	
 	
 }

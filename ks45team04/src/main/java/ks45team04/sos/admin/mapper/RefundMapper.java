@@ -15,6 +15,6 @@ public interface RefundMapper {
 	//특정 환불 내역 조회
 	public Refund getRefundByCode(String refundCode);
 	
-	//환불 내역 조회
-	public List<Refund> refundList();
+	//환불 내역 조회(검색)
+	public List<Refund> refundList(String searchKey, String searchValue);
 }

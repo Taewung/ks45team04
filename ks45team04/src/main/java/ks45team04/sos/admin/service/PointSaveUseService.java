@@ -16,10 +16,15 @@ public class PointSaveUseService {
 		this.pointSaveUseMapper = pointSaveUseMapper;
 	}
 	
+	//포인트 적립/사용 등록
+	public int pointSaveUseadd(PointSaveUse pointSaveUse) {
+		
+		return pointSaveUseMapper.pointSaveUseAdd(pointSaveUse);
+	}
+	
+	
 	//포인트 적립/사용 내역 조회
 	public List<PointSaveUse> PointSaveUseList(String searchKey, String searchValue){
-		
-		
 		
 		if(searchKey != null) {
 			switch (searchKey) {
@@ -28,6 +33,7 @@ public class PointSaveUseService {
 				break;
 			}
 		}
+		
 		List<PointSaveUse> pointSaveUseList = pointSaveUseMapper.pointSaveUseList(searchKey, searchValue);
 		
 		return pointSaveUseList;
