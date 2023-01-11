@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ks45team04.sos.member.mapper.MemberMapper">
+<mapper namespace="ks45team04.sos.member.mapper.MMemberMapper">
 	
 	<resultMap type="Member" id="MemberResultMap">
 		<id property="memId" 					column="mem_id"/>
@@ -14,26 +14,66 @@
 		<result property="memRegDatetime" 		column="mem_reg_datetime"/>
 	</resultMap>
 	
+	<resultMap type="loginHistory" id="LoginResultMap">
+		<id property="loginLogoutCode" 					column="login_logout_code"/>
+		<result property="loginLogoutId" 				column="login_logout_id"/>
+		<result property="loginDatetime" 				column="login_datetime"/>
+		<result property="logoutDatetime" 				column="logout_datetime"/>
+		<association property="member" javaType="Member">
+			<id property="memId" column="mem_id"/>
+			<result property="memPw" 				column="mem_pw"/>
+			<result property="memName" 				column="mem_name"/>
+			<result property="memEmail" 			column="mem_email"/>
+			<result property="memBirth" 			column="mem_birth"/>
+			<result property="memPhone" 			column="mem_phone"/>
+			<result property="memRegDatetime" 		column="mem_reg_datetime"/>		
+		</association>
+	</resultMap>	
 	
-		<select id="checkMemberId" resultMap="MemberResultMap">	
+	
+	<select id="getLoginHistory" parameterType="map" resultMap="loginResultMap">
+	/*로그인 이력 조회*/
+	SELECT
+		login_logout_code,
+		login_logout_id,
+		login_datetime,
+		logout_datetime;
+	FROM
+		login_logout
+		INNER JOIN
+		member
+		ON
+		mem_id = login_logout_id;
+	
+	</select>
+	
+	<select id="getLoginHistoryCnt" resultType="int">
+		/*로그인 이력 테이블의 전체 행의 갯수*/
+		SELECT
+			COUNT(1)
+		FROM
+			login_logout;
+	</select>
+	
+		<select id="checkId" resultMap="MemberResultMap">	
 		/*아이디 중복체크*/
 		SELECT
-				IF(COUNT(*)=1, 1, 0)
-			FROM
-				member as m
-			WHERE
-				m.mem_id = #{memId};
+			IF(COUNT(*)=1, 1, 0)
+		FROM
+			member as m
+		WHERE
+			m.mem_id = #{memId};
 		</select>	
 	
 	
 	
-		<select id="AddMember" resultMap="MemberResultMap">
+		<insert id="addMember" parameterType="Member">
 			/* 회원 가입 */
 			INSERT INTO member
 			(mem_id, mem_pw, mem_name, mem_email, mem_birth, mem_phone, mem_level_name)
 			VALUES
 			(#{memId}, #{memPw}, #{memName}, #{memEmail}, #{memBirth}, #{memPhone}, 회원, curdate());
-	</select>
+	</insert>
 	
 	
 	
