@@ -4,12 +4,19 @@ public class LicenseSubject {
 	
 	private String lsCode;
 	private String liCode;
+	private String liName;
 	private String lsSubject;
 	private String lsName;
 	private String lsRegId;
 	private String lsRegDatetime;
 	
 	
+	public String getLiName() {
+		return liName;
+	}
+	public void setLiName(String liName) {
+		this.liName = liName;
+	}
 	public String getLsCode() {
 		return lsCode;
 	}
@@ -46,11 +53,26 @@ public class LicenseSubject {
 	public void setLsRegDatetime(String lsRegDatetime) {
 		this.lsRegDatetime = lsRegDatetime;
 	}
-	
 	@Override
 	public String toString() {
-		return "LicenseSubject [lsCode=" + lsCode + ", liCode=" + liCode + ", lsSubject=" + lsSubject + ", lsName="
-				+ lsName + ", lsRegId=" + lsRegId + ", lsRegDatetime=" + lsRegDatetime + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("LicenseSubject [lsCode=");
+		builder.append(lsCode);
+		builder.append(", liCode=");
+		builder.append(liCode);
+		builder.append(", liName=");
+		builder.append(liName);
+		builder.append(", lsSubject=");
+		builder.append(lsSubject);
+		builder.append(", lsName=");
+		builder.append(lsName);
+		builder.append(", lsRegId=");
+		builder.append(lsRegId);
+		builder.append(", lsRegDatetime=");
+		builder.append(lsRegDatetime);
+		builder.append("]");
+		return builder.toString();
 	}
+	
 	
 }

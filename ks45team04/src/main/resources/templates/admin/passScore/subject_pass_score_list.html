@@ -28,7 +28,7 @@
 	                            <th style="width: 10%;">과목합격점수코드</th>
                                 <th style="width: 10%;">자격증코드</th>
                                 <th style="width: 10%;">과목코드</th>
-                                <th style="width: 10%;">과목명</th>
+                                <th style="width: 20%;">과목명</th>
                                 <th style="width: 10%;">문항수</th>
                                 <th style="width: 10%;">과목합격점수</th>
                                 <th style="width: 10%;">등록자</th>
@@ -49,7 +49,7 @@
 	                                <td>
 	                                    <div class="pxp-dashboard-table-options">
 	                                        <ul class="list-unstyled">
-	                                            <a href="/modifySubjectPassScore">
+	                                            <a th:href="@{/modifySubjectPassScore(lsPScoreCode=${l.lsPScoreCode})}">
 	                                            	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
 	                                            </a>                                                                                        
 	                                            	<li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>

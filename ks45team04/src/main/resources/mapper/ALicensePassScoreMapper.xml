@@ -48,6 +48,7 @@
 		<result property="lsPScoreRegDateTime" 		column="ls_p_score_reg_datetime"/>
 	</resultMap>
 	
+	
 	<update id="modifyLicensePassScore" parameterType="LicensePassScore">
 		/* 특정 자격증합격기준점수 수정 */
 		UPDATE license_pass_score
