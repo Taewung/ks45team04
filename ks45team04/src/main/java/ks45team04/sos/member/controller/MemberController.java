@@ -1,5 +1,6 @@
 package ks45team04.sos.member.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -128,29 +129,43 @@ public String getLoginHistory(Model model
 	//아이디 중복체크 처리
 	@RequestMapping(value="/checkId", method= {RequestMethod.GET})
 	@ResponseBody
-	public int checkId(@RequestParam Map<String, Object> param) {
-		int result;
-		String Code = (String) param.get("memId");
-		log.info("Code :{}", Code);
-		//result=memberMapper.checkMemberId(memId);
+	public HashMap<String, String> checkId(@RequestParam Map<String, Object> param) {
 		
-		return 1;
+		HashMap<String, String> data = new HashMap<String, String>();
+		
+		String memId = (String) param.get("memId");
+		log.info("memId :{}", memId);
+		int result=memberService.checkId(memId);
+		
+		if(result == 1) {
+			data.put("result", "성공");
+		}else {
+			data.put("result", "실패");
+		}
+		
+		return data;
 	}
 	
-	//회원가입 화면
-	@GetMapping("/addMember")
-    public String addMember(Model model) {
-        model.addAttribute("pageTitle","회원가입");
-        return "member/member/add_member";
-    }
+
 	
     // 회원가입 처리
     @PostMapping("/addMember")
     public String addMember(MMember mmember){
+    	
         log.info("회원가입 :{}", mmember);
+        
         memberService.addMember(mmember);
 
         return "redirect:/main";
+    }
+    
+	//회원가입 화면
+	@GetMapping("/addMember")
+    public String addMember(Model model) {
+		
+        model.addAttribute("title","회원가입");
+        
+        return "member/member/add_member";
     }
 
     

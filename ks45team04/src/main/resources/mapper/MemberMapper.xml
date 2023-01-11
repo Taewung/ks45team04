@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ks45team04.sos.member.mapper.MMemberMapper">
+<mapper namespace="ks45team04.sos.member.mapper.MemberMapper">
 	
 	<resultMap type="Member" id="MemberResultMap">
 		<id property="memId" 					column="mem_id"/>
@@ -11,6 +11,7 @@
 		<result property="memEmail" 			column="mem_email"/>
 		<result property="memBirth" 			column="mem_birth"/>
 		<result property="memPhone" 			column="mem_phone"/>
+		<result property="memLevelName" 		column="mem_level_name"/>
 		<result property="memRegDatetime" 		column="mem_reg_datetime"/>
 	</resultMap>
 	
@@ -55,7 +56,7 @@
 			login_logout;
 	</select>
 	
-		<select id="checkMem	Id" resultMap="MemberResultMap">	
+		<select id="checkId" parameterType="String" resultType="int">	
 		/*아이디 중복체크*/
 		SELECT
 			IF(COUNT(*)=1, 1, 0)
@@ -70,9 +71,9 @@
 		<insert id="addMember" parameterType="Member">
 			/* 회원 가입 */
 			INSERT INTO member
-			(mem_id, mem_pw, mem_name, mem_email, mem_birth, mem_phone, mem_level_name)
+			(mem_id, mem_pw, mem_name, mem_email, mem_birth, mem_phone, mem_level_name, mem_reg_datetime)
 			VALUES
-			(#{memId}, #{memPw}, #{memName}, #{memEmail}, #{memBirth}, #{memPhone}, 회원, curdate());
+			(#{memId}, #{memPw}, #{memName}, #{memEmail}, #{memBirth}, #{memPhone}, '회원', curdate());
 	</insert>
 	
 	
