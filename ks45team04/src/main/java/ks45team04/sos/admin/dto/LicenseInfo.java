@@ -11,6 +11,7 @@ public class LicenseInfo {
 	private String liQualification;
 	private String liRegId;
 	private String liRegDatetime;
+	private String liImage;
 	
 	private LicenseDate licenseDate;
 	
@@ -88,14 +89,19 @@ public class LicenseInfo {
 	public void setLicenseSubject(LicenseSubject licenseSubject) {
 		this.licenseSubject = licenseSubject;
 	}
+	public String getLiImage() {
+		return liImage;
+	}
+	public void setLiImage(String liImage) {
+		this.liImage = liImage;
+	}
 	@Override
 	public String toString() {
 		return "LicenseInfo [liCode=" + liCode + ", lmcCode=" + lmcCode + ", lmcName=" + lmcName + ", lscCode="
 				+ lscCode + ", lscName=" + lscName + ", liName=" + liName + ", liOverview=" + liOverview
 				+ ", liQualification=" + liQualification + ", liRegId=" + liRegId + ", liRegDatetime=" + liRegDatetime
-				+ ", licenseDate=" + licenseDate + ", licenseSubject=" + licenseSubject + "]";
+				+ ", liImage=" + liImage + ", licenseDate=" + licenseDate + ", licenseSubject=" + licenseSubject + "]";
 	}
-	
 
 	
 	

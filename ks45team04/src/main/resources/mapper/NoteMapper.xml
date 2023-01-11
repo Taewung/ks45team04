@@ -31,10 +31,28 @@
 			<result property="noteReviewWriter" 		column="note_review_writer" />
 				
 		</association>
+		
+		<association property="licenseInfo" javaType="LicenseInfo">
+			<id property="liCode" 					column="li_code" />
+			<result property="lmcCode" 				column="lmc_code" />
+			<result property="lmcName" 				column="lmc_name" />
+			<result property="lscCode" 				column="lsc_code" />
+			<result property="liName" 				column="li_name" />
+			<result property="lscName" 				column="lsc_name" />
+			<result property="liOverview" 			column="li_overview" />
+			<result property="liQualification" 		column="li_qualification" />
+			<result property="liRegId" 				column="li_reg_id" />
+			<result property="liRegDatetime" 		column="li_reg_date" />
+		</association>
 	</resultMap>
 	
-	
-	
+	<select id="licenseInfoList" resultMap="noteResultMap">
+			/* 공부노트등록을 위한 자격증 목록 조회 */
+			SELECT
+			*
+			from
+			license_info;
+	</select>
 	
 	<insert id="addNote" parameterType="Note">
 			/* 공부노트 등록 */
@@ -51,22 +69,10 @@
 				note_reg_date
 				)
 			VALUES
-				(#{noteCode}, #{noteWriterId}, #{liCode}, #{liName}, #{noteName},
+				(sf_new_note_code(), #{noteWriterId}, #{liCode}, #{liName}, #{noteName},
 				#{noteInfo}, #{notePrevFile}, #{noteFile}, #{notePrice}, CURDATE());
 	</insert>
 	
-	
-	<select id="getNoteCode" parameterType="String" resultType="String">
-	   /* 자격증 합격기준점수코드 자동생성 */
-	   SELECT
-	      CASE
-	      WHEN COUNT(1) = 0 THEN CONCAT(#{note_code}, '_1')
-	      ELSE
-	         CONCAT('note_', MAX(CAST(SUBSTRING_INDEX(${noteCode}, 'note_', -1)AS UNSIGNED))+1)
-	         END AS newCode
-	     FROM
-	         ${note};
-	</select>
 	
 	<select id="noteReviewList" parameterType="Note" resultMap="noteResultMap">
 		/* 노트 리뷰 목록 조회 */

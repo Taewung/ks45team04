@@ -4,28 +4,27 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.member.dto.Note;
 
 @Mapper
 public interface MNoteMapper {
 	
-
-	// 구매노트 리뷰 목록 조회
-	public List<Note> noteReviewList(String noteWriterId);
 	
-	// 구매노트 수정
-	public int modifyNote(Note note);
 	
-	// 구매노트 상세보기
-	public Note getNoteById(String noteWriterId);
-	
-	// 구매노트 등록
+	// 공부노트 등록
 	public int addNote(Note note);
 	
-	// 노트코드 자동완성
-	public String getNoteCode(String note_code, String noteCode);
+	// 공부노트 등록을 위한 자격증 정보 조회
+	public List<LicenseInfo> licenseInfoList();
 	
-	// 구매노트 목록 조회
+	// 공부노트 리뷰 목록 조회
+	public List<Note> noteReviewList(String noteWriterId);
+	
+	// 공부노트 상세보기
+	public Note getNoteById(String noteWriterId);
+	
+	// 공부노트 목록 조회
 	public List<Note> noteList();
 	
 }

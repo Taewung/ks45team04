@@ -65,7 +65,6 @@
 		 ,ls_reg_datetime) 
 		VALUES 
 		(#{lsCode}, #{liCode}, #{lsSubject}, #{lsName}, #{lsRegId}, CURDATE());
-
 	</insert>
 	
 	
