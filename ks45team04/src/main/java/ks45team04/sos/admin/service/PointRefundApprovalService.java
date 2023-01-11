@@ -31,10 +31,18 @@ public class PointRefundApprovalService {
 		
 		return pointRefundApprovalMapper.getPointRefundApprovalByCode(pointRefundCode);
 	}
-	//포인트 환급 승인 내역 조회
-	public List<PointRefundApproval> PointRefundApprovalList(){
+	//포인트 환급 승인 내역 조회(검색)
+	public List<PointRefundApproval> PointRefundApprovalList(String searchKey, String searchValue){
 		
-		List<PointRefundApproval> pointRefundApprovalList = pointRefundApprovalMapper.pointRefundApprovalList();
+		if(searchKey != null) {
+			switch (searchKey) {
+			case "pointRefundId":
+				searchKey = "point_refund_id";
+				break;
+			}
+		}
+		
+		List<PointRefundApproval> pointRefundApprovalList = pointRefundApprovalMapper.pointRefundApprovalList(searchKey, searchValue);
 		
 		return pointRefundApprovalList;
 	}

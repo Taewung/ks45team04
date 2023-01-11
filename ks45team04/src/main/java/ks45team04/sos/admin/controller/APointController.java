@@ -26,6 +26,7 @@ import ks45team04.sos.admin.service.PointSaveUseService;
 public class APointController {
 
 	private final PointSaveUseService pointSaveUseService;
+	private final PointSaveUseMapper pointSaveUseMapper;
 	private final PointSaveStandardService pointSaveStandardService;
 	private final PointSaveStandardMapper pointSaveStandardMapper;
 	private final PointFeeRateService pointFeeRateService;
@@ -43,6 +44,7 @@ public class APointController {
 							PointRefundApprovalMapper pointRefundApprovalMapper) {
 		
 		this.pointSaveUseService = pointSaveUseService;
+		this.pointSaveUseMapper = pointSaveUseMapper;
 		this.pointSaveStandardService = pointSaveStandardService;
 		this.pointSaveStandardMapper = pointSaveStandardMapper;
 		this.pointFeeRateService = pointFeeRateService;
@@ -81,43 +83,12 @@ public class APointController {
 
 		return "admin/point/point_save_standard_modify";
 	}
-	// 포인트 수수료율 수정 처리 화면
-	@PostMapping("/modifyPointFeeRate")
-	public String modifyPointFeeRate(PointFeeRate pointFeeRate) {
-		
-		pointFeeRateService.modifyPointFeeRate(pointFeeRate);
-		
-		return "redirect:/pointFeeRateList";
-	}
-	// 포인트 수수료율 수정 화면
-	@GetMapping("/modifyPointfeeRate")
-	public String modifyPointfeeRate(@RequestParam(value="pointFeeRateCode") String pointFeeRateCode,
-									 Model model) {
-		
-		PointFeeRate pointFeeRate = pointFeeRateService.getPointFeeRateInfoByCode(pointFeeRateCode);
-		
-		model.addAttribute("title", "포인트 수수료율 수정");
-		model.addAttribute("pointFeeRateInfo",pointFeeRate);
-
-		return "admin/point/point_fee_rate_modify";
-	}
-	
 	//포인트 적립 기준 등록 관리자 인증
 	@GetMapping("/pointSaveStandardIdCheck")
 	@ResponseBody
 	public boolean pointSaveStandardIdCheck(@RequestParam(value="inputId") String inputId){
 		
 		boolean isChecked = pointSaveStandardMapper.getPointSaveStandardIdCheck(inputId);
-		
-		return isChecked;
-	}
-	
-	//포인트 수수율 등록 관리자 인증
-	@GetMapping("/pointFeeRateIdCheck")
-	@ResponseBody
-	public boolean pointFeeRateIdCheck(@RequestParam(value="inputId") String inputId){
-	
-		boolean isChecked = pointFeeRateMapper.getPointFeeRateIdCheck(inputId);
 		
 		return isChecked;
 	}
@@ -143,27 +114,7 @@ public class APointController {
 		
 		return "admin/point/point_save_standard_insert";
 	}
-	
-	// 포인트 수수료율 등록 처리
-	@PostMapping("/addPointFeeRate")
-	public String addPointFeeRate(PointFeeRate PointFeeRate) {
-		System.out.println(PointFeeRate);
-		pointFeeRateService.addPointFeeRate(PointFeeRate);
-		
-		return "redirect:/pointFeeRateList";
-			}
-	
-	// 포인트 수수료율 등록 화면
-	@GetMapping("/addPointFeeRate")
-	public String addPointFeeRate(Model model) {
-		
-		List<PointFeeRate> pointFeeRateList = pointFeeRateMapper.pointFeeRateList();
-		
-		model.addAttribute("title", "포인트 수수료율 등록");
-		model.addAttribute("pointFeeRateList",pointFeeRateList);
 
-		return "admin/point/point_fee_rate_insert";
-	}
 	
 	// 포인트 적립 기준 조회
 	@GetMapping("/pointSaveStandardList")
@@ -177,17 +128,48 @@ public class APointController {
 		return "admin/point/point_save_standard_list";
 	}
 	
-	// 포인트 환급 승인 내역 조회
-	@GetMapping("/pointRefundApprovalList")
-	public String pointRefundApprovalList(Model model) {
-		
-		List<PointRefundApproval> pointRefundApprovalList = pointRefundApprovalService.PointRefundApprovalList();
-		
-		model.addAttribute("title", "포인트 환급 승인 내역 조회");
-		model.addAttribute("pointRefundApprovalList", pointRefundApprovalList);
 
-		return "admin/point/point_refund_approval_list";
+	// 포인트 수수료율 삭제
+	@GetMapping("/deletePointfeeRate")
+	public String deletePointfeeRate(Model model) {
+		model.addAttribute("title", "포인트 수수료율 삭제");
+
+		return "admin/point/point_fee_rate_delete";
 	}
+	
+	// 포인트 수수료율 수정 처리 화면
+	@PostMapping("/modifyPointFeeRate")
+	public String modifyPointFeeRate(PointFeeRate pointFeeRate) {
+		
+		pointFeeRateService.modifyPointFeeRate(pointFeeRate);
+		
+		return "redirect:/pointFeeRateList";
+	}
+	
+	// 포인트 수수료율 수정 화면
+	@GetMapping("/modifyPointfeeRate")
+	public String modifyPointfeeRate(@RequestParam(value="pointFeeRateCode") String pointFeeRateCode,
+									 Model model) {
+		
+		PointFeeRate pointFeeRate = pointFeeRateService.getPointFeeRateInfoByCode(pointFeeRateCode);
+		
+		model.addAttribute("title", "포인트 수수료율 수정");
+		model.addAttribute("pointFeeRateInfo",pointFeeRate);
+
+		return "admin/point/point_fee_rate_modify";
+	}
+	
+	//포인트 수수율 등록 관리자 인증
+	@GetMapping("/pointFeeRateIdCheck")
+	@ResponseBody
+	public boolean pointFeeRateIdCheck(@RequestParam(value="inputId") String inputId){
+	
+		boolean isChecked = pointFeeRateMapper.getPointFeeRateIdCheck(inputId);
+		
+		return isChecked;
+	}
+	
+
 	
 	// 포인트 수수료율 조회
 	@GetMapping("/pointFeeRateList")
@@ -200,21 +182,63 @@ public class APointController {
 
 		return "admin/point/point_fee_rate_list";
 	}
-
-
-	// 포인트 수수료율 삭제
-	@GetMapping("/deletePointfeeRate")
-	public String deletePointfeeRate(Model model) {
-		model.addAttribute("title", "포인트 수수료율 삭제");
-
-		return "admin/point/point_fee_rate_delete";
-	}
+	
 
 	
-	// 포인트 적립 등록
-	@GetMapping("/pointSaveUsePointAdd")
+	
+	// 포인트 환급 승인 내역 조회(검색)
+	@GetMapping("/pointRefundApprovalList")
+	public String pointRefundApprovalList(Model model
+			 							,@RequestParam(value="searchKey", required = false) String searchKey
+			 							,@RequestParam(value="searchValue", required = false, defaultValue = "") String searchValue){
+		
+		List<PointRefundApproval> pointRefundApprovalList = pointRefundApprovalService.PointRefundApprovalList(searchKey, searchValue);
+		
+		model.addAttribute("title", "포인트 환급 승인 내역 조회");
+		model.addAttribute("pointRefundApprovalList", pointRefundApprovalList);
+
+		return "admin/point/point_refund_approval_list";
+	}
+	
+
+	// 포인트 수수료율 등록 처리
+	@PostMapping("/addPointFeeRate")
+	public String addPointFeeRate(PointFeeRate PointFeeRate) {
+		System.out.println(PointFeeRate);
+		pointFeeRateService.addPointFeeRate(PointFeeRate);
+		
+		return "redirect:/pointFeeRateList";
+	}
+	
+	// 포인트 수수료율 등록 화면
+	@GetMapping("/addPointFeeRate")
+	public String addPointFeeRate(Model model) {
+		
+		List<PointFeeRate> pointFeeRateList = pointFeeRateMapper.pointFeeRateList();
+		
+		model.addAttribute("title", "포인트 수수료율 등록");
+		model.addAttribute("pointFeeRateList",pointFeeRateList);
+
+		return "admin/point/point_fee_rate_insert";
+	}
+	
+	// 포인트 적립 등록 처리
+	@PostMapping("/pointSaveUseAdd")
+	public String pointSaveUseAdd(PointSaveUse pointSaveUse) {
+		
+		pointSaveUseService.pointSaveUseadd(pointSaveUse);
+		
+		return "redirect:/pointSaveUseList";
+	}
+	
+	// 포인트 적립 등록 화면
+	@GetMapping("/pointSaveUseAdd")
 	public String pointSaveUsePointAdd(Model model) {
+		
+		List<PointSaveStandard> pointSaveStandardList = pointSaveUseMapper.pointSaveStandardList();
+		
 		model.addAttribute("title", "포인트 적립 등록");
+		model.addAttribute("pointSaveStandardList", pointSaveStandardList);
 
 		return "admin/point/point_save_use_add";
 	}
@@ -234,6 +258,8 @@ public class APointController {
 	}
 
 	
+	
+	
 	// 포인트 환급 승인 내역 수정 처리
 	@PostMapping("/modifyPointRefundApproval")
 	public String modifyPointRefundApproval(PointRefundApproval pointRefundApproval) {
@@ -242,6 +268,7 @@ public class APointController {
 		
 		return "redirect:/pointRefundApprovalList";
 	}
+	
 	// 포인트 환급 승인 내역 수정 화면
 	@GetMapping("/modifyPointRefundApproval")
 	public String modifyPointRefundApproval(@RequestParam(value="pointRefundCode")String pointRefundCode,
