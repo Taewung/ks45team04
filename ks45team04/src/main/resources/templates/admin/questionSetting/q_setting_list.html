@@ -83,10 +83,10 @@
                                                 <a th:href="@{/answerList(questionCode=${l.questionCode})}">
                                                 	<li><button title="답안"><strong>A</strong></button></li>
                                                 </a>
-                                                <a href="/explanationList">
+                                                <a th:href="@{/explanationList(questionCode=${l.questionCode})}">
                                                 	<li><button title="해설"><strong>E</strong></button></li>
                                                 </a>
-                                                <a href="/modifyQuestion">
+                                                <a th:href="@{/modifyQuestion(questionCode=${l.questionCode})}">
                                                 	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
                                                 </a>                                                                                        
                                             </ul>

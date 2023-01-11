@@ -11,12 +11,12 @@
 	<!-- script end -->
 	
 	<!-- customContents start -->
-	<th:block layout:fragment="customContents">
+	<th:block layout:fragment="customContents" th:if="${not #lists.isEmpty(explanationList)}" th:each="l : ${explanationList}">
 		<h1>해설</h1>
 	    <p class="pxp-text-light">Explanation List</p>
 	    <div class="pxp-dashboard-table-options">
             <ul class="list-unstyled">
-                <a href="/addExplanation">
+             	<a href="/addExplanation">
                 	<li><button title="Add"><span class="fa fa-plus"></span></button></li>
                 </a>
                 <a href="/modifyExplanation">
@@ -25,11 +25,11 @@
                 <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>                                              
             </ul>
         </div>
-	    <form> 
+	    <form th:if="${not #lists.isEmpty(explanationList)}" th:each="l : ${explanationList}"> 
 			<div class="mt-4 mt-lg-5">
 	            <div class="row mt-4 mt-lg-5">
 		            <div class="mb-3">
-		             <textarea class="form-control" id="pxp-company-job-description" name="explanation" placeholder="등록된 해설이 존재하지 않습니다." readonly></textarea>
+		             <textarea class="form-control" id="explanation" th:text="${l.explanation}" name="explanation" placeholder="등록된 해설이 존재하지 않습니다." readonly></textarea>
 		         	</div>
 	            </div>                 
 			</div>
