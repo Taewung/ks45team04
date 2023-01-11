@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ks45team04.sos.admin.dto.Answer;
+import ks45team04.sos.admin.dto.Explanation;
 import ks45team04.sos.admin.dto.Question;
 import ks45team04.sos.admin.service.QuestionSettingService;
 
@@ -65,17 +66,12 @@ public class QuestionSettingController {
 	}
 	// 문제코드별 답안목록조회
 	@GetMapping("/answerList")
-	public String answerList(Model model) {
-		model.addAttribute("title", "답안목록");
-		return "admin/questionSetting/answer_list";
-	}
-	// 문제코드별 답안목록
-	@GetMapping("/getAnswerList")
-	@ResponseBody
-	public List<Answer> getAnswerList(@RequestParam(value="questionCode", required=false) String questionCode){
+	public String answerList(@RequestParam(value="questionCode", required=false) String questionCode, Model model) {
 		List<Answer> answerList = questionSettingService.getAnswerList(questionCode);
-		log.info("문제코드별 답안목록 : {}", answerList);
-		return answerList;
+		model.addAttribute("answerList", answerList);
+		model.addAttribute("title", "답안목록");
+		log.info("문제코드별 답안목록조회 : {}", answerList);
+		return "admin/questionSetting/answer_list";
 	}
 	
 	/* ------------------해설------------------ */
@@ -91,7 +87,11 @@ public class QuestionSettingController {
 	}
 	// 문제코드별 해설목록
 	@GetMapping("/explanationList")
-	public String explanationList(Model model) {
+	public String explanationList(@RequestParam(value="questionCode", required=false) String questionCode, Model model) {
+		List<Explanation> explanationList = questionSettingService.getExplanationList(questionCode);
+		model.addAttribute("explanationList", explanationList);
+		model.addAttribute("title", "해설목록");
+		log.info("문제코드별 해설조회 : {}", questionCode);
 		return "admin/questionSetting/explanation_list";
 	}
 }
