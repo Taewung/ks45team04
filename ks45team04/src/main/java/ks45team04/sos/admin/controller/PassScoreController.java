@@ -53,7 +53,7 @@ public class PassScoreController {
 		subjectPassScore.setLsPScoreRegId("id002");
 		subjectPassScoreService.modifySubjectPassScore(subjectPassScore);
 		log.info("특정 과목합격기준점수 수정 : {}", subjectPassScore);	
-		return "redirect:/subjectPassScoreList";
+		return "redirect:/subjectPassScoreList?liCode=${liCode}";
 	}
 	
 	// 자격증별 과목합격기준점수목록 조회
