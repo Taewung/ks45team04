@@ -6,11 +6,6 @@
 	<!-- script start -->
 	<th:block layout:fragment="customScript">
 		<script>
-		$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
-			$('#resetBtn').click(function(){
-				location.href = '/subjectPassScoreList';
-			});
-		});
 		</script>
 	</th:block> 
 	<!-- script end -->
@@ -81,8 +76,8 @@
                         </div>
 					</div>
          		 <div class="mt-4 mt-lg-5">
-         	  	<button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta">수정</button>
-				<a th:href="@{/subjectPassScoreList}" class="btn rounded-pill pxp-section-cta-o ms-3">취소</a>  
+         	  	<button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">수정</button>  
+                <a th:href="@{/subjectPassScoreList(liCode=*{liCode})}" class="btn rounded-pill pxp-section-cta-o ms-3">취소</a>
             	</div>  
             	</th:block>                                                        
         	</form>
