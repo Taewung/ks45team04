@@ -231,17 +231,23 @@ public class APointController {
 		return "redirect:/pointSaveUseList";
 	}
 	
+	
+	
+	
 	// 포인트 적립 등록 화면
 	@GetMapping("/pointSaveUseAdd")
 	public String pointSaveUsePointAdd(Model model) {
 		
-		List<PointSaveStandard> pointSaveStandardList = pointSaveUseMapper.pointSaveStandardList();
+		List<PointSaveStandard> pointSaveStandardList = pointSaveStandardService.PointSaveStandardList();
+		System.out.println(pointSaveStandardList);
 		
 		model.addAttribute("title", "포인트 적립 등록");
 		model.addAttribute("pointSaveStandardList", pointSaveStandardList);
 
 		return "admin/point/point_save_use_add";
 	}
+	
+	
 
 	// 포인트 적립/사용 내역 조회(검색)
 	@GetMapping("/pointSaveUseList")

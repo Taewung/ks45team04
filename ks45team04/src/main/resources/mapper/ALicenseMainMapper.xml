@@ -57,7 +57,7 @@
 		 ,lmc_name
 		 ,lmc_reg_datetime) 
 		VALUES 
-		(#{lmcCode}, #{lmcRegId}, #{lmcName}, CURDATE());
+		(sf_new_license_main_code(), #{lmcRegId}, #{lmcName}, CURDATE());
 
 	</insert>
 	

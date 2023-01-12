@@ -64,30 +64,21 @@
 					  	  console.log('Request failed: ' + textStatus );
 					});
 				});
-				
-				
-		
-				/* 유효성검사를 구현하시오. (#submitBtn 를 클릭 시) */
-				$('#submitBtn').click(function(){
-					let isSubmit = true;
-					
-					$('#addLicenseSubForm input').each(function(idx, item){
-						let checkValue = $(item).val();
-						let labelValue = $(item).parent('.mb-3').find('label').text();
-						if(validateValue(checkValue)){
-							
-							alert(`${labelValue}를 입력해주세요`);
-							$(item).focus();
-							isSubmit = false;
-							return false;
-						}
+
+				/* 자격증대분류 이름 클릭시 코드와 이름 자동 등록*/
+					$(function(){
+						$('#lmcName').val($('#lmcCode option:selected').text());
+						$(document).on('change', '#lmcCode', function(){
+							//console.log($('#liCode option:selected').text());
+							let selectedLiName = $('#lmcCode option:selected').text();
+							$('#lmcName').val(selectedLiName);
+						});
 						
-					});   
-					
-
-
-					if(isSubmit) $('#addLicenseSubForm').submit();
-				});
+						$(document).on('click', '.addNote', function(){
+							$('#addLicenseSubForm').submit();
+						});
+					})
+			
 			});
 			
 
@@ -115,24 +106,23 @@
                       <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3">
-                                  <label for="lscCode" class="form-label"><h6>자격증 중분류코드</h6></label><h12>&nbsp;&nbsp;예시)lsc000</h12>
-                                  <input type="text" id="lscCode" class="form-control" name="lscCode" placeholder="자격증 중분류코드" disabled="disabled">
+                                  <label for="lmcCode" class="form-label"><h6>자격증 대분류 이름</h6></label><h12>&nbsp;&nbsp;</h12>
+                                  <select class="form-select" id="lmcCode" name="lmcCode" disabled="disabled">
+                             		 <th:block th:if="${not #lists.isEmpty(licenseMainList)}" 
+										  th:each="l : ${licenseMainList}">								
+									<option th:value="${l.licenseMain.lmcCode}">[[${l.licenseMain.lmcName}]]</option>
+									</th:block>
+									<th:block th:unless="${not #lists.isEmpty(licenseInfoList)}">								
+									<option>등록된 정보가 없습니다.</option>
+                               		</select>
                               </div>
                           </div>
                       </div>
                       <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3">
-                                  <label for="lmcCode" class="form-label"><h6>자격증 대분류코드</h6></label><h12>&nbsp;&nbsp;예시)lmc000</h12>
-                                  <input type="text" id="lmcCode" class="form-control" name="lmcCode" placeholder="자격증 대분류코드" disabled="disabled">
-                              </div>
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="mb-3">
-                                  <label for="lmcName" class="form-label"><h6>자격증 대분류명</h6></label>
-                                  <input type="text" id="lmcName" class="form-control" name="lmcName" placeholder="자격증 대분류명" disabled="disabled">
+                                  <label for="lmcName" class="form-label"></label>
+                                   <input type="hidden" id="lmcName" class="form-control" name="lmcName">
                               </div>
                           </div>
                       </div>                      
@@ -148,7 +138,7 @@
                   </div>
               </div>
               <div class="mt-4 mt-lg-5">
-                  <button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>&nbsp;&nbsp;
+                  <button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta addNote">등록</button>&nbsp;&nbsp;
                   <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
                   
               </div>
