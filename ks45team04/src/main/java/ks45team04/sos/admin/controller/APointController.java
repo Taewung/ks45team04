@@ -240,10 +240,10 @@ public class APointController {
 		
 		List<PointSaveStandard> pointSaveStandardList = pointSaveStandardService.PointSaveStandardList();
 		System.out.println(pointSaveStandardList);
-		
+
 		model.addAttribute("title", "포인트 적립 등록");
 		model.addAttribute("pointSaveStandardList", pointSaveStandardList);
-
+		
 		return "admin/point/point_save_use_add";
 	}
 	

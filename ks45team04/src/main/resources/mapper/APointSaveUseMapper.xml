@@ -35,12 +35,13 @@
 		INSERT INTO 
 			point_save_use
 		(
-			point_save_use_code, 
-			point_save_standard_content, 
-			save_point, 
+			point_save_use_code,
+			point_save_use_id,
+			point_save_use_reason, 
+			point_save_use_point, 
 			save_use_datetime
 		)VALUES(
-			sf_point_save_use_code(), #{pointSaveStandardContent}, #{savePoint}, NOW()
+			sf_point_save_use_code(), #{pointSaveUseId}, #{pointSaveUseReason}, #{point_save_use_point}, NOW()
 		);
 	</insert>
 

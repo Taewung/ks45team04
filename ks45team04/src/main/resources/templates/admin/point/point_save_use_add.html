@@ -5,41 +5,43 @@
 
 	<!-- script start -->
 	<th:block layout:fragment="customScript">
-	<script>
-	$(function(){
-        $('#liName').val($('#liCode option:selected').text());
-        $(document).on('change', '#liCode', function(){
-            //console.log($('#liCode option:selected').text());
-            let selectedLiName = $('#liCode option:selected').text();
-            $('#liName').val(selectedLiName);
-        });
-
-        $(document).on('click', '.addNote', function(){
-            $('#addNoteForm').submit();
-        });
-    })
-
-        $('#submitBtn').click(function(){
-        let isSubmit = true;
-
-        $('#addNoteForm input').each(function(idx, item){
-            let checkValue = $(item).val();
-            let labelValue = $(item).parent('.mainDiv').find('label').text();
-            if(validateValue(checkValue)){
-
-                alert(${labelValue}를 입력해주세요);
-                $(item).focus();
-                isSubmit = false;
-                return false;
-            }
-
-        });
-
-
-
-        if(isSubmit) $('#addNoteForm').submit();
-    });
+<script>
+		$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+			function validateValue(checkValue) {
+				if(    typeof checkValue == 'undefined' 
+						|| checkValue == null 
+						|| checkValue == ''					){
+					return true;
+				}
+				return false;
+				
+			}
+			
+		
+			/* 유효성검사를 구현하시오. (#submitBtn 를 클릭 시) */
+			$(document).on('click','#submitBtn', function(){
+				let isSubmit = true;
+				
+				$('#pointSaveUseAddForm input').each(function(idx, item){
+					let checkValue = $(item).val();
+					let labelValue = $(item).parent('.mb-3').find('label').text();
+					if(validateValue(checkValue)){
+						
+						alert(`${labelValue}를 입력해주세요`);
+						$(item).focus();
+						isSubmit = false;
+						
+						return false;
+					}
+					
+				});                                                                                                                                                         
+			
+				if(isSubmit) $('#addPointSaveStandardForm').submit();
+			});
+		});
+	
 	</script>
+	
 	</th:block> 
 	<!-- script end -->
 	
@@ -47,7 +49,7 @@
 	<th:block layout:fragment="customContents">
 		<h1>포인트 적립 등록</h1>
 			<p class="pxp-text-light">Point save use.</p>
-			<form ㅋth:action="@{/pointSaveUseAdd}" method="post" data-parsley-validate class="form-horizontal form-label-left" novalidate>
+			<form id="pointSaveUseAddForm" th:action="@{/pointSaveUseAdd}" method="post" data-parsley-validate class="form-horizontal form-label-left" novalidate>
 				<div class="row mt-4 mt-lg-5">
             	<div class="row justify-content-between align-content-center">
                     <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
@@ -67,35 +69,32 @@
 		                         <label for="pointSaveUseReason" class="form-label">포인트 지급 사유</label>
 		                         <div class="col-md-6 col-sm-6 ">
 									<select id="pointSaveReason" name="pointSaveReason"class="form-select">
-										<option value="미선택">선택해주세요.</option>
-										<option value="회원가입">회원가입</option>
-										<option value="챌린지 성공">챌린지 성공</option>
-										<option value="노트 구매 리뷰">노트 구매 리뷰</option>
-										<option value="합격자 리뷰 작성">합격자 리뷰 작성</option>
+										
+										<th:block th:if="${not #lists.isEmpty(pointSaveStandardList)}" 
+										  	th:each="l : ${pointSaveStandardList}">								
+											<option th:text="${l.pointSaveStandardContent}"></option>
+										</th:block>
 									</select>
+									
 								</div>	
 		              		</div>
 						</div>
+						<div class="row">
 						<div class="mb-3">
 							<label for="pointSaveUsePoint" class="col-form-label col-md-3 col-sm-3 label-align">포인트 지급 금액</label>
 							<div class="col-md-6 col-sm-6 ">
-								<input type="number" id="pointSaveUsePoint" name="pointSaveUsePoint"
-								   readonly="readonly" placeholder="포인트 지급 금액" class="form-control"/>
+								<input type="text" id="pointSaveUsePoint" name="pointSaveUsePoint"
+								    placeholder="포인트 지급 금액" class="form-control">
 							</div>
 						</div>
-						<div class="item form-group">
-							<label for="saveUseDatetime" class="col-form-label col-md-3 col-sm-3 label-align">포인트 지급 날짜</label>
-							<div class="col-md-6 col-sm-6 ">
-								<input type="date" id="saveUseDatetime" name="saveUseDatetime"
-								   	class="form-control"/>
-							</div>
-						</div>
+						
 					</div>
 				</div>
 				</div>
 				<div class="mt-4 mt-lg-5">
 	                  <button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta">Save</button>
-	                  <button type="button" id="cancelBtn" class="btn rounded-pill pxp-section-cta">Cancel</button>
+	                  <button type="reset" id="resetBtn" class="btn rounded-pill pxp-section-cta">Cancel</button>
+				</div>
 				</div>
 				</div>
 			</form>
@@ -104,9 +103,7 @@
 	
 	<!-- customJs start -->
 	<th:block layout:fragment="customJs">
-	<script type="text/javascript" th:inline="javascript">
-			
-		</script>
+
 
 	</th:block>
 	<!-- customJs end -->
