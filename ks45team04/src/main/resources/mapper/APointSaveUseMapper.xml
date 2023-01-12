@@ -12,12 +12,19 @@
 		<result property="totalPoint" 			column="total_point"/>
 		<result property="saveUse" 				column="save_use"/>
 		<result property="saveUseDatetime" 		column="save_use_datetime"/>
-	</resultMap>
+		
+		<association property="pointSaveStandard" javaType="PointSaveStandard">
+			<id property="pointSaveStandardCode" 					column="point_save_standard_code" />
+			<result property="pointSaveStandardContent" 			column="point_save_standard_content" />
+			<result property="savePoint" 							column="save_point" />
+			<result property="pointSaveStandardId" 					column="point_save_standard_id" />
+			</association>
+		</resultMap>
 
 	<select id="pointSaveStandardList" resultType="PointSaveStandard">
 		/* 포인트 적립기준 조회*/
 		SELECT 
-			save_point
+			*
 		FROM
 			point_save_standard;
 	</select>
@@ -25,14 +32,16 @@
 
 	<insert id="pointSaveUseAdd" parameterType="PointSaveUse">
 		/* 포인트 적립/사용 등록 */
-		INSERT INTO point_save_use
+		INSERT INTO 
+			point_save_use
 		(
-			point_save_use_code, 
-			point_save_standard_content, 
-			save_point, 
+			point_save_use_code,
+			point_save_use_id,
+			point_save_use_reason, 
+			point_save_use_point, 
 			save_use_datetime
 		)VALUES(
-			sf_point_save_use_code(), #{pointSaveStandardContent}, #{savePoint}, NOW()
+			sf_point_save_use_code(), #{pointSaveUseId}, #{pointSaveUseReason}, #{point_save_use_point}, NOW()
 		);
 	</insert>
 
