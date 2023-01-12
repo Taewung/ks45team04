@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import ks45team04.sos.admin.dto.LicenseMain;
 import ks45team04.sos.admin.dto.LicenseSub;
 import ks45team04.sos.admin.mapper.LicenseSubMapper;
 
@@ -46,6 +47,17 @@ private final LicenseSubMapper licenseSubMapper;
 	public int addLicenseSub(LicenseSub licenseSub) {
 		
 		return licenseSubMapper.addLicenseSub(licenseSub);
+	}
+	
+	/**
+	 * 자격증 중분류 선택을 위한 대분류 목록 조회
+	 * @return List<LicenseMain>
+	 */
+	public List<LicenseMain> licenseMainList(){
+		
+		List<LicenseMain> licenseMainList = licenseSubMapper.licenseMainList();
+		
+		return licenseMainList;
 	}
 	
 	

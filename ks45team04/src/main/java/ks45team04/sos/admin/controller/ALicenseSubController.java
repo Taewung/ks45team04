@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ks45team04.sos.admin.dto.LicenseMain;
 import ks45team04.sos.admin.dto.LicenseSub;
 import ks45team04.sos.admin.mapper.LicenseSubMapper;
 import ks45team04.sos.admin.service.LicenseSubService;
@@ -97,9 +98,12 @@ private final LicenseSubMapper licenseSubMapper;
 		public String addlicenseSub(Model model) {
 			
 			List<LicenseSub> licenseSubList = licenseSubMapper.LicenseSubList();
+			List<LicenseMain> licenseMainList = licenseSubService.licenseMainList();
+			System.out.println(licenseMainList);
 			
 			model.addAttribute("title", "자격증 중분류 등록");
 			model.addAttribute("licenseSubList", licenseSubList);
+			model.addAttribute("licenseMainList", licenseMainList);
 			
 			return "admin/licenseSub/license_sub_insert";
 			

@@ -4,7 +4,7 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ks45team04.sos.member.mapper.MPointSaveUseMapper">
 	
-	<resultMap type="pointSaveUse" id="mPointSaveUseResultMap">
+	<resultMap type="PointSaveUse" id="mPointSaveUseResultMap">
 		<id property="pointSaveUseCode" 		column="point_save_use_code"/>
 		<result property="pointSaveUseId" 		column="point_save_use_id"/>
 		<result property="pointSaveUseReason" 	column="point_save_use_reason"/>

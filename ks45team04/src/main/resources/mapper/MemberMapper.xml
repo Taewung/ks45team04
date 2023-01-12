@@ -4,7 +4,7 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ks45team04.sos.member.mapper.MemberMapper">
 	
-	<resultMap type="Member" id="MemberResultMap">
+	<resultMap type="MMember" id="MemberResultMap">
 		<id property="memId" 					column="mem_id"/>
 		<result property="memPw" 				column="mem_pw"/>
 		<result property="memName" 				column="mem_name"/>
@@ -13,26 +13,28 @@
 		<result property="memPhone" 			column="mem_phone"/>
 		<result property="memLevelName" 		column="mem_level_name"/>
 		<result property="memRegDatetime" 		column="mem_reg_datetime"/>
+			<collection property="loginHistory" ofType="LoginHistory" foreignColumn="mem_id">
+			<id property="loginLogoutCode" 					column="login_logout_code"/>
+			<result property="loginDatetime" 				column="login_datetime"/>
+			<result property="logoutDatetime" 				column="logout_datetime"/>
+			<result property="loginLevelName" 				column="login_level_name"/>
+		</collection>
 	</resultMap>
 	
-	<resultMap type="loginHistory" id="loginResultMap">
-		<id property="loginLogoutCode" 					column="login_logout_code"/>
-		<result property="loginLogoutId" 				column="login_logout_id"/>
-		<result property="loginDatetime" 				column="login_datetime"/>
-		<result property="logoutDatetime" 				column="logout_datetime"/>
-		<association property="member" javaType="Member">
-			<id property="memId" column="mem_id"/>
-			<result property="memPw" 				column="mem_pw"/>
-			<result property="memName" 				column="mem_name"/>
-			<result property="memEmail" 			column="mem_email"/>
-			<result property="memBirth" 			column="mem_birth"/>
-			<result property="memPhone" 			column="mem_phone"/>
-			<result property="memRegDatetime" 		column="mem_reg_datetime"/>		
-		</association>
-	</resultMap>	
 	
 	
-	<select id="getLoginHistory" parameterType="map" resultMap="loginResultMap">
+	<select id="getMemInfoById" parameterType="String" resultMap="MemberResultMap">
+		/*특정 회원정보 조회*/
+		SELECT
+			m.mem_id,
+			m.mem_pw	
+		FROM
+			member AS m
+		WHERE
+			m.mem_id = #{memId};
+	</select>
+	
+	<select id="getLoginHistory" parameterType="map" resultMap="MemberResultMap">
 	/*로그인 이력 조회*/
 	SELECT
 		login_logout_code,
@@ -87,6 +89,7 @@
 				m.mem_email,
 				m.mem_birth,
 				m.mem_phone,
+				m.mem_level_name,
 				m.mem_reg_datetime
 			FROM
 				member AS m
