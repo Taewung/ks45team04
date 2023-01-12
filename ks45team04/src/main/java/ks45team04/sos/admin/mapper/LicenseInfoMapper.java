@@ -9,7 +9,7 @@ import ks45team04.sos.admin.dto.LicenseInfo;
 @Mapper
 public interface LicenseInfoMapper {
 	
-	// 틁정 자격증 정보 수정
+	// 특정 자격증 정보 수정
 	public int modifyLicenseInfo(LicenseInfo licenseInfo);
 	
 	// 특정 자격증 정보 조회

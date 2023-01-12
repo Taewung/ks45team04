@@ -7,17 +7,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ks45team04.sos.admin.dto.Answer;
 import ks45team04.sos.admin.dto.Explanation;
+import ks45team04.sos.admin.dto.LicenseInfo;
+import ks45team04.sos.admin.dto.LicenseMain;
+import ks45team04.sos.admin.dto.LicenseSub;
+import ks45team04.sos.admin.dto.LicenseSubject;
 import ks45team04.sos.admin.dto.Question;
 import ks45team04.sos.admin.service.QuestionSettingService;
 
 @Controller
 public class QuestionSettingController {
-	private static final Logger log = LoggerFactory.getLogger(PassScoreController.class);
+	private static final Logger log = LoggerFactory.getLogger(QuestionSettingController.class);
 
 	private final QuestionSettingService questionSettingService;
 	
@@ -25,7 +30,7 @@ public class QuestionSettingController {
 		this.questionSettingService = questionSettingService;
 	}
 	
-	/* ------------------문제/답안/해설------------------ */
+	/* --------------문제/답안/해설--------------- */
 	// 문제코드별 문제/답안/해설 상세정보 조회
 	@GetMapping("/checkQSetting")
 	public String checkQSetting(Model model) {
@@ -40,9 +45,58 @@ public class QuestionSettingController {
 		return "admin/questionSetting/modify_question";
 	}
 	// 문제등록
+	@PostMapping("/addQuestion")
+	public String addQuestion(Question question) {
+		// questionCode 자동생성
+		String newQuestionCode = questionSettingService.getNewQuestionCode("question", "question_code");
+		question.setQuestionRegId("id003");
+		question.setQuestionCode(newQuestionCode);
+		questionSettingService.addQuestion(question);
+		log.info("문제등록 쿼리파라미터: {}", question);
+		return "redirect:/qSettingList";
+	}	
+	// 문제등록화면
 	@GetMapping("/addQuestion")
 	public String addQuestion(Model model) {
+		// 대분류 목록조회
+		List<LicenseMain> mainListForQuestion = questionSettingService.getMainLisForQuestion();
+		model.addAttribute("mainListForQuestion", mainListForQuestion);
+		log.info("대분류목록 : {}", mainListForQuestion);
+		model.addAttribute("title", "문제등록");
 		return "admin/questionSetting/add_question";
+	}	
+	// 특정 과목정보 조회
+	@GetMapping("/getSubjectInfoForQuestion")
+	@ResponseBody
+	public LicenseSubject getSubjectInfoForQuestion (@RequestParam(value="lsCode") String lsCode){
+		LicenseSubject subjectInfoForQuestion = questionSettingService.getSubjectInfoForQuestion(lsCode);
+		log.info("특정 과목정보 조회 : {}", subjectInfoForQuestion);
+		return subjectInfoForQuestion;
+	}	
+	// 자격증별 과목목록 조회
+	@GetMapping("/getSubjectListForQuestion")
+	@ResponseBody
+	public List<LicenseSubject> getSubjectListForQuestion (@RequestParam(value="liCode") String liCode){
+		List<LicenseSubject> subjectListForQuestion = questionSettingService.getSubjectListForQuestion(liCode);
+		log.info("자격증별 과목목록 조회 : {}", subjectListForQuestion);
+		return subjectListForQuestion;
+	}	
+	// 중분류별 자격증목록 조회
+	@GetMapping("/getLicenseListForQuestion")
+	@ResponseBody
+	public List<LicenseInfo> getLicenseListForQuestion (@RequestParam(value="lscCode") String lscCode){
+
+		List<LicenseInfo> liListForQuestion = questionSettingService.getLiListForQuestion(lscCode);
+		log.info("중분류별 자격증목록 조회 : {}", liListForQuestion);
+		return liListForQuestion;
+	}	
+	// 대분류별 중분류 조회
+	@GetMapping("/getSubListForQuestion")
+	@ResponseBody
+	public List<LicenseSub> getSubListForQuestion (@RequestParam(value="lmcCode") String lmcCode){
+		List<LicenseSub> subListForQuestion = questionSettingService.getSubListForQuestion(lmcCode);
+		log.info("대분류별 중분류목록 조회 : {}", subListForQuestion);
+		return subListForQuestion;
 	}
 	// 문제목록조회
 	@GetMapping("/qSettingList")
