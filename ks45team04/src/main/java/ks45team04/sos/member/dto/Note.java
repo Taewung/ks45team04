@@ -16,6 +16,8 @@ public class Note {
 	private String noteRegDate;
 	
 	private NotePurchaseReview notePurchaseReview;
+	
+	private LicenseInfo licenseInfo;
 
 	public String getNoteCode() {
 		return noteCode;
@@ -112,14 +114,24 @@ public class Note {
 	public void setNotePurchaseReview(NotePurchaseReview notePurchaseReview) {
 		this.notePurchaseReview = notePurchaseReview;
 	}
+	
+	public LicenseInfo getLicenseInfo() {
+		return licenseInfo;
+	}
+
+	public void setLicenseInfo(LicenseInfo licenseInfo) {
+		this.licenseInfo = licenseInfo;
+	}
 
 	@Override
 	public String toString() {
 		return "Note [noteCode=" + noteCode + ", noteWriterId=" + noteWriterId + ", liName=" + liName + ", liCode="
 				+ liCode + ", lsCode=" + lsCode + ", noteName=" + noteName + ", noteInfo=" + noteInfo
 				+ ", notePrevFile=" + notePrevFile + ", noteFile=" + noteFile + ", notePrice=" + notePrice
-				+ ", noteRegDate=" + noteRegDate + ", notePurchaseReview=" + notePurchaseReview + "]";
+				+ ", noteRegDate=" + noteRegDate + ", notePurchaseReview=" + notePurchaseReview + ", licenseInfo="
+				+ licenseInfo + "]";
 	}
+
 
 	
 	

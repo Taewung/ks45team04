@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.member.dto.Note;
 import ks45team04.sos.member.mapper.MNoteMapper;
 
@@ -15,13 +16,39 @@ public class MNoteService {
 		this.mNoteMapper = mNoteMapper;
 	}
 	
+	
+	
+	/**
+	 * 노트 등록을 위한 자격증 정보 조회
+	 * @param Note
+	 */
+	public List<LicenseInfo> licenseInfoList(){
+		
+		List<LicenseInfo> licenseInfoList = mNoteMapper.licenseInfoList();
+		
+		return licenseInfoList;
+	}
+	
+	
+	
+	/**
+	 * 노트 등록
+	 * @param Note
+	 */
+	public int addNote(Note note) {
+		
+		return mNoteMapper.addNote(note);
+	}
+
+	
+	
 	/**
 	 * 공부노트 리뷰목록
-	 * return List<Note>
+	 * @return List<Note>
 	 */
-	public List<Note> noteReviewList(){
+	public List<Note> noteReviewList(String noteWriterId){
 		
-		List<Note> noteReviewList = mNoteMapper.noteReviewList();
+		List<Note> noteReviewList = mNoteMapper.noteReviewList(noteWriterId);
 		
 		return noteReviewList;
 	}

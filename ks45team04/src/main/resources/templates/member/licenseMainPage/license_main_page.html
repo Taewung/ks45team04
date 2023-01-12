@@ -2,21 +2,244 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{member/layout/contentDefault}">
-
+	<head>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+	</head>
 	<!-- script start -->
-	<th:block layout:fragment="customScript">
-	<script>
-	</script>
+    <th:block layout:fragment="customScript">
+		<script>
+			$(function(){
+				function validationCheck(data){
+					if(typeof data == 'undefined' || data == '' || data == null || data == '대분류'){	
+						return false;
+					}
+					return true;
+				}
+				// 자격증 대분류값 선택
+				$(document).on('change','#licenseMainCategory', function(){
+					$('#licenseSubCategory').prop('disabled', false);
+					let lmcCode = $(this).val();
+					
+					if(validationCheck(lmcCode)){						
+						var request = $.ajax({
+						  url: '/MLicenseSubCategory',
+						  method: 'GET',
+						  data: { 'lmcCode' : lmcCode },
+						  dataType: 'json'
+						});	
+						// 대분류값 선택 성공시 중분류명 조회
+						request.done(function( data ) {
+						  console.log(data);
+						  $('#licenseSubCategory').children().remove();
+						  for(let subCategory of data){
+							  $('#licenseSubCategory').append(`<option value="${subCategory.lscCode}">${subCategory.lscName}</option>`);							 
+						  }
+						});
+						// 대분류값 선택 실패시
+						request.fail(function( jqXHR, textStatus ) {
+						  alert( "Request failed: " + textStatus );
+						});
+					}
+					
+				});
+				//대분류값 선택없이 중분류값 선택시
+				$(document).on('click','.licenseSubCategoryDiv', function(){
+					let isDisabled = $('#licenseSubCategory').prop('disabled');
+					if(isDisabled) {
+						alert('대분류를 선택해주세요');
+						return false;
+					}
+				});
+				// 자격증 중분류값 선택시 자격증코드,자격증명 조회
+				$(document).on('change','#licenseSubCategory', function(){
+					$('#licenseCategory').prop('disabled', false);
+					let lscCode = $(this).val();
+					
+					if(validationCheck(lscCode)){						
+						var request = $.ajax({
+						  url: '/MLicenseCategory',
+						  method: 'GET',
+						  data: { 'lscCode' : lscCode },
+						  dataType: 'json'
+						});
+					// 중분류값 선택 성공시 
+					request.done(function( data ) {
+						  console.log(data);
+						  $('#licenseCategory').children().remove();
+						  for(let licenseCategory of data){
+							  $('#licenseCategory').append(`<option value="${licenseCategory.liCode}">${licenseCategory.liName}</option>`);								  
+						  }
+						  $('#liCodeCategory').children().remove();
+						  $('#liCodeCategory').prop('disabled', false);
+						  for(let licenseCategory of data){
+							  $('#liCodeCategory').append(`<option value="${licenseCategory.liCode}">${licenseCategory.liCode}</option>`);							  
+						  }
+
+						});
+					// 중분류 선택 실패시
+					request.fail(function( jqXHR, textStatus ) {
+						  alert( "Request failed: " + textStatus );
+						});
+					}
+				});
+				// 중분류값 선택없이 자격증명값 선택시
+				$(document).on('click','.licenseCategoryDiv', function(){
+					let isDisabled = $('#licenseCategory').prop('disabled');
+					if(isDisabled) {
+						alert('중분류를 선택해주세요');
+						return false;
+					}
+				});
+				
+				$(document).on('click', '.searchBtn', function(){
+					$()
+					$('#licenseInfoDetail').submit();
+				});
+			});
+		</script>
 	</th:block> 
 	<!-- script end -->
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-		<section>
-	    	<div class="pxp-container">
-				license_main_page.html
-			</div>
-		</section>
+	<section class="pxp-page-header-simple" style="background-color: var(--pxpMainColorLight);">
+            <div class="pxp-container">
+                <h1>100% 합격보장!</h1><br>
+                <h3><div class="pxp-hero-subtitle pxp-text-ligh" style="text-align:center;">합격을 위한 한걸음!</div></h3><br><br>
+            </div>
+            <h1><i class="bi bi-caret-down-fill"></i>&nbsp;&nbsp;자격증정보&nbsp;&nbsp;<i class="bi bi-caret-down-fill"></i></h1> 
+        </section>			
+	 <form id="licenseInfoDetail" th:action="@{/licenseInfoDetail}" method="Get">
+	<div class="row mt-4 mt-lg-5" style="margin:40px">            
+                	<h2><strong><span class="fa fa-check"></span>&nbsp;자격증 선택</strong></h2><br><br><br>
+                        <div class="col-md-6 col-xxl-3">
+                        	<label for="licenseSubCategory" class="form-label">대분류</label>
+                             <select  id="licenseMainCategory" class="form-select" name="mainCate">
+                                <option th:if="${not #lists.isEmpty(licenseMainList)}" th:each="l : ${licenseMainList}" th:value="${l.lmcCode}" th:text="${l.lmcName}"></option>
+                             </select>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 licenseSubCategoryDiv">
+	                               <label for="licenseSubCategory" class="form-label">중분류</label>
+	                               <select id="licenseSubCategory" class="form-select" name="subCate" disabled="disabled"></select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 licenseCategoryDiv">
+	                               <label for="licenseCategory" class="form-label">자격증명</label>
+	                               <select id="licenseCategory" class="form-select" name="liCode" disabled="disabled"></select>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-xxl-3">
+	                   <div class="mt-4 mt-lg-5">
+	                  		<button type="button" class="btn rounded-pill pxp-nav-btn searchBtn">조회<span class="fa fa-angle-right"></span></button>
+                    	</div>                                      
+                    </div>
+                    </div>  
+                    </form>  <br><br><br>                             
+	<section class="pxp-hero vh-100" style="background-color: var(--pxpMainColorLight);" th:fragment="mainFragment">
+            <div class="pxp-hero-caption">
+                <div class="pxp-container">
+                    <div class="row pxp-pl-80 align-items-center justify-content-between">
+                        <div class="col-12 col-xl-6 col-xxl-5">
+                            <h1>100% 합격보장<br><span style="color: var(--pxpMainColor);">자격증</span> 취득 플랫폼</h1>
+                            <div class="pxp-hero-subtitle mt-3 mt-lg-4">Search your career opportunity through <strong>12,800</strong> jobs</div>
+
+                            <div class="pxp-hero-form pxp-hero-form-round mt-3 mt-lg-4">
+                                <form class="row gx-3 align-items-center" action="jobs-list-1.html">
+                                    <div class="col-12 col-sm">
+                                        <div class="mb-3 mb-sm-0">
+                                            <input type="text" class="form-control" placeholder="Job Title or Keyword">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm pxp-has-left-border">
+                                        <div class="mb-3 mb-sm-0">
+                                            <input type="text" class="form-control" placeholder="Location">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-auto">
+                                        <button><span class="fa fa-search"></span></button>
+                                    </div>
+                                </form>
+                            </div>
+							>
+                            <div class="pxp-hero-searches-container">
+                                <div class="pxp-hero-searches-label">Popular Searches</div>
+                                <div class="pxp-hero-searches">
+                                    <div class="pxp-hero-searches-items">
+                                        <a href="jobs-list-1.html">Work from home</a>
+                                        <a href="jobs-list-1.html">Part-time</a>
+                                        <a href="jobs-list-1.html">Administration</a>
+                                        <a href="jobs-list-1.html">Finance</a>
+                                        <a href="jobs-list-1.html">Retail</a>
+                                        <a href="jobs-list-1.html">IT</a>
+                                        <a href="jobs-list-1.html">Engineering</a>
+                                        <a href="jobs-list-1.html">Sales</a>
+                                        <a href="jobs-list-1.html">Manufacturing</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-none d-xl-block col-xl-5 position-relative">
+                            <div class="pxp-hero-cards-container pxp-animate-cards pxp-mouse-move" data-speed="160">
+                                <div class="pxp-hero-card pxp-cover pxp-cover-top" style="background-image: url(images/ph-big.jpg);"></div>
+                                <div class="pxp-hero-card-dark"></div>
+                                <div class="pxp-hero-card-light"></div>
+                            </div>
+
+                            <div class="pxp-hero-card-info-container pxp-mouse-move" data-speed="60">
+                                <div class="pxp-hero-card-info pxp-animate-bounce">
+                                    <div class="pxp-hero-card-info-item">
+                                        <div class="pxp-hero-card-info-item-number">286<span>job offers</span></div>
+                                        <div class="pxp-hero-card-info-item-description">in Business Development</div>
+                                    </div>
+                                    <div class="pxp-hero-card-info-item">
+                                        <div class="pxp-hero-card-info-item-number">154<span>job offers</span></div>
+                                        <div class="pxp-hero-card-info-item-description">in Marketing & Communication</div>
+                                    </div>
+                                    <div class="pxp-hero-card-info-item">
+                                        <div class="pxp-hero-card-info-item-number">319<span>job offers</span></div>
+                                        <div class="pxp-hero-card-info-item-description">in Human Resources</div>
+                                    </div>
+                                    <div class="pxp-hero-card-info-item">
+                                        <div class="pxp-hero-card-info-item-number">120<span>job offers</span></div>
+                                        <div class="pxp-hero-card-info-item-description">in Project Management</div>
+                                    </div>
+                                    <div class="pxp-hero-card-info-item">
+                                        <div class="pxp-hero-card-info-item-number">176<span>job offers</span></div>
+                                        <div class="pxp-hero-card-info-item-description">in Customer Service</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pxp-hero-logos-carousel-container">
+                <div class="pxp-container">
+                    <div class="row pxp-pl-80">
+                        <div class="col-12 col-xl-6">
+                            <div class="pxp-hero-logos-carousel owl-carousel">
+                                <img src="images/hero-logo-1.svg" alt="Logo 1">
+                                <img src="images/hero-logo-2.svg" alt="Logo 2">
+                                <img src="images/hero-logo-3.svg" alt="Logo 3">
+                                <img src="images/hero-logo-4.svg" alt="Logo 4">
+                                <img src="images/hero-logo-5.svg" alt="Logo 5">
+                                <img src="images/hero-logo-6.svg" alt="Logo 6">
+                                <img src="images/hero-logo-7.svg" alt="Logo 7">
+                                <img src="images/hero-logo-1.svg" alt="Logo 8">
+                                <img src="images/hero-logo-2.svg" alt="Logo 9">
+                                <img src="images/hero-logo-3.svg" alt="Logo 10">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pxp-hero-right-bg-card pxp-has-animation"></div>
+        </section>
+	                                
 	</th:block>
 	<!-- customContents end -->
 	

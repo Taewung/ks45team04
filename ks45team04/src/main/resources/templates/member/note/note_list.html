@@ -2,7 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{member/layout/contentDefault}">
-
+	<head>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+	</head>
 	<!-- script start -->
 	<th:block layout:fragment="customScript">
 	<script>
@@ -12,39 +14,18 @@
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-	<section class="pxp-page-header-simple">
+	<section class="pxp-page-header-simple" style="background-color: var(--pxpMainColorLight);">
             <div class="pxp-container">
-                <h1>100% 합격보장 공부노트</h1><br>
-                <h3><div class="pxp-hero-subtitle pxp-text-ligh">합격을 위한 한걸음!</div></h3>
-                <div class="pxp-hero-form pxp-hero-form-round pxp-large mt-3 mt-lg-4 pxp-has-border">
-                    <form class="row gx-3 align-items-center">
-                        <div class="col-12 col-lg pxp-has-left-border">
-                            <div class="input-group mb-3 mb-lg-0">
-                                <span class="input-group-text"><span class="fa fa-folder-o"></span></span>
-                                <select class="form-select">
-                                    <option selected>자격증 종류</option>
-                                    <option>Business Development</option>
-                                    <option>Construction</option>
-                                    <option>Customer Service</option>
-                      
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-auto">
-                            <button>검색</button>
-                        </div>
-                    </form>
-                </div>
+                <h1>100% 합격보장!</h1><br>
+                <h3><div class="pxp-hero-subtitle pxp-text-ligh" style="text-align:center;">합격을 위한 한걸음!</div></h3><br><br>
             </div>
+            <h1><i class="bi bi-caret-down-fill"></i>&nbsp;&nbsp;공부노트&nbsp;&nbsp;<i class="bi bi-caret-down-fill"></i></h1> 
         </section>
-        <section class="mt-4 mt-lg-5 pt-100 pb-100" style='background-color: var(--pxpSecondaryColorLight);'>
-
+        <section class="mt-4 mt-lg-5 pt-100 pb-100">
             <div class="pxp-container">
-                
                 <div class="pxp-candidates-list-top">
                     <div>
                         <div class="col-auto">
-                            <h1>공부 노트</h1>
                             <div style='text-align:right'>
                             <a th:href="@{/addNote}" class="btn rounded-pill pxp-section-cta">공부노트 등록</a>
                             </div>
@@ -52,12 +33,11 @@
                         </div>
                     </div>
                 </div><br>
-
                 <div class="row">
                     <div class="col-md-6 col-xl-4 col-xxl-3 pxp-candiadates-card-1-container"
                     	 th:if="${not #lists.isEmpty(noteList)}"
 									th:each="l : ${noteList}">
-                        <div class="pxp-candiadates-card-1 pxp-has-shadow text-center">
+                        <div class="pxp-candiadates-card-1 pxp-has-shadow text-center" style="background-color: var(--pxpMainColorLight);">
                             <div class="pxp-candiadates-card-1-top">
                                 <div class="pxp-candiadates-card-1-avatar pxp-cover" style="background-image: url(images/ph-small.jpg);"></div>
                                 <div class="pxp-candiadates-card-1-name"  th:text="${l.noteName}"></div>

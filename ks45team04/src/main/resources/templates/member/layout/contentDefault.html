@@ -36,18 +36,13 @@
 		<div th:replace="~{member/fragments/contentsFooter :: footerFragment}"></div>
 		<!-- end footer -->
 			
-	<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
-    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/js/owl.carousel.min.js}"></script>
-    <script th:src="@{/js/nav.js}"></script>
-    <script th:src="@{/js/main.js}"></script>
-	<script type="text/javascript" src='questions.json'></script>
-	<script type='text/javascript' src='jsquiz.js'></script>
-	<script type='text/javascript' src='/js/examAnswer.js'></script>
-	
-	<th:block layout:fragment="customJs"></th:block>
-	
-	<th:block layout:fragment="customScript"></th:block>
-	
+	 <script src="js/jquery-3.4.1.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/nav.js"></script>
+        <script src="js/Chart.min.js"></script>
+        <script src="js/main.js"></script>
+        <th:block layout:fragment="customJs"></th:block> 
+        <th:block layout:fragment="customScript"></th:block> 
 </body>
 </html>
