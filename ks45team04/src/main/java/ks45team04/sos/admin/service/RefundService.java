@@ -29,9 +29,17 @@ public class RefundService {
 	}
 	
 	//환불 승인 내역 조회
-	public List<Refund> RefundList(){
+	public List<Refund> RefundList(String searchKey, String searchValue){
 		
-		List<Refund> refundList = refundMapper.refundList();
+		if(searchKey != null) {
+			switch (searchKey) {
+			case "payId":
+				searchKey = "pay_id";
+				break;
+			}
+		}
+		
+		List<Refund> refundList = refundMapper.refundList(searchKey, searchValue);
 		
 		return refundList;
 	}

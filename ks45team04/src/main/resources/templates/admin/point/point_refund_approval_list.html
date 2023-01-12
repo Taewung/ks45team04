@@ -19,20 +19,22 @@
                 <div class="row justify-content-between align-content-center">
                     <div class="col-auto order-2 order-sm-1">
                         <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
+                            <form th:action="@{/pointRefundApprovalList}" method="get">
                             <div class="pxp-company-dashboard-jobs-search mb-3">
-                            <select class="form-select">
-                                <option>회원 아이디</option>
+                            <select name="searchKey" class="form-select">
+                                <option value="pointRefundId" >회원 아이디</option>
                             </select>
                             	<div class="col-auto order-1 order-sm-2">
                             		<div class="pxp-company-dashboard-jobs-search-search-form">
                                 		<div class="input-group">
                                     		<span class="input-group-text"><span class="fa fa-search"></span></span>
-                                    		<input type="text" class="form-control" placeholder="Search ID">
-                                    		<button class="btn ms-2">Search</button>
+                                    		<input type="text"  name="searchValue" class="form-control" placeholder="Search ID">
+                                    		<button type="submit" class="btn ms-2">Search</button>
                                 		</div>
                             		</div>
                         		</div>
                     		</div> 
+                    		</form>
                         </div>
                     </div>
                     
@@ -41,19 +43,16 @@
                     <table class="table table-hover align-middle">
                         <thead>
                             <tr>
-                                <th colspan="1" style="width: 15%;">포인트환급코드</th>
-                                <th style="width: 10%;">신청자아이디</th>
-                                <th style="width: 15%;">환급신청포인트</th>
-                                <th style="width: 15%;">환급수수료율코드</th>
-                                <th style="width: 10%;">포인트환급수수료</th>
-                                <th style="width: 10%;">포인트환급액</th>
+                                <th colspan="1" style="width: 17%;">포인트환급코드</th>
+                                <th style="width: 8%;">아이디</th>
+                                <th style="width: 10%;">신청포인트</th>
+                                <th style="width: 7%;">수수료</th>
+                                <th style="width: 7%;">환급액</th>
                                 <th style="width: 10%;">은행명</th>
                                 <th style="width: 15%;">계좌번호</th>
-                                <th style="width: 10%;">예금주</th>
-                                <th style="width: 20%;">환급신청일시</th>
-                                <th style="width: 10%;">상태</th>
-                                <th style="width: 10%;">환급신청승인자</th>
-                                <th style="width: 20%;">승인일시</th>
+                                <th style="width: 7%;">예금주</th>
+                                <th style="width: 10%;">신청일시</th>
+                                <th style="width: 8%;">상태</th>
                                 <th>승인/삭제</th>
                             </tr>
                         </thead>
@@ -63,20 +62,17 @@
                                 <td><div class="pxp-company-dashboard-job-title" 	th:text="${l.pointRefundCode}"></div>
                                 <td><div class="pxp-company-dashboard-job-category" th:text="${l.pointRefundId}"></div></td>
                                 <td><div class="pxp-company-dashboard-job-status" 	th:text="${l.refundRequestPoint}"></div></td>
-                                <td><div class="pxp-company-dashboard-job-status" 	th:text="${l.pointRefundFeeRateCode}"></div></td>
                                 <td><div class="pxp-company-dashboard-job-category"	th:text="${l.pointRefundFee}"></div>
-                                <td><div class="pxp-company-dashboard-job-category" th:text="${l.refundPoint}"></div></td>
+                                <td><div class="pxp-company-dashboard-job-category" th:text="${#numbers.formatInteger(l.refundPoint, 3, 'COMMA')}"></div></td>
                                 <td><div class="pxp-company-dashboard-job-status" 	th:text="${l.refundBank}"></div></td>
                                 <td><div class="pxp-company-dashboard-job-status" 	th:text="${l.refundAccountNumber}"></div></td>
                                 <td><div class="pxp-company-dashboard-job-status" 	th:text="${l.refundName}"></div></td>
                                 <td><div class="pxp-company-dashboard-job-category"	th:text="${l.refundReuquestDatetime}"></div>
                                 <td><div class="pxp-company-dashboard-job-category" th:text="${l.refundState}"></div></td>
-                                <td><div class="pxp-company-dashboard-job-status" 	th:text="${l.pointRefundApprovalId}"></div></td>
-                                <td><div class="pxp-company-dashboard-job-status" 	th:text="${l.refundApprovalDatetime}"></div></td>
                                 <td>
                                     <div class="pxp-dashboard-table-options">
                                         <ul class="list-unstyled">
-                                        <a href="/modifyPointRefundApproval">
+                                        <a th:href="@{/modifyPointRefundApproval(pointRefundCode=${l.pointRefundCode})}">
                                             <li><button title="Approval"><span class="fa fa-check"></span></button></li>
                                          </a>
                                          <a href="/deletePointRefundApproval">

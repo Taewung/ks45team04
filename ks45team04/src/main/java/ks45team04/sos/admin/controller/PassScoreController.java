@@ -16,7 +16,9 @@ import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.admin.dto.LicenseMain;
 import ks45team04.sos.admin.dto.LicensePassScore;
 import ks45team04.sos.admin.dto.LicenseSub;
+import ks45team04.sos.admin.dto.SubjectPassScore;
 import ks45team04.sos.admin.service.LicensePassScoreService;
+import ks45team04.sos.admin.service.SubjectPassScoreService;
 
 @Controller
 public class PassScoreController {
@@ -24,9 +26,44 @@ public class PassScoreController {
 	private static final Logger log = LoggerFactory.getLogger(PassScoreController.class);
 	
 	private final LicensePassScoreService licensePassScoreService;
+	private final SubjectPassScoreService subjectPassScoreService;
 	
-	public PassScoreController(LicensePassScoreService licensePassScoreService) {
+	public PassScoreController(LicensePassScoreService licensePassScoreService
+							  ,SubjectPassScoreService subjectPassScoreService) {
 		this.licensePassScoreService = licensePassScoreService;
+		this.subjectPassScoreService = subjectPassScoreService;
+	}
+
+	@GetMapping("/addSubjectPassScore")
+	public String addSubjectPassScore(Model model) {
+		return "admin/passScore/add_subject_pass_score";
+	}
+	// 특정 과목합격기준점수 수정화면
+	@GetMapping("/modifySubjectPassScore")
+	public String modifySubjectPassScore(Model model, @RequestParam(value="lsPScoreCode", required=false) String lsPScoreCode) {
+		SubjectPassScore subjectPassScoreByCode = subjectPassScoreService.getSubjectPassScoreByCode(lsPScoreCode);
+		model.addAttribute("subjectPassScoreByCode", subjectPassScoreByCode);
+		model.addAttribute("title", "과목합격기준점수 수정");
+		log.info("특정 과목합격기준점수 조회 : {}", subjectPassScoreByCode);
+		return "admin/passScore/modify_subject_pass_score";
+	}
+	// 특정 과목합격기준점수 수정
+	@PostMapping("/modifySubjectPassScore")
+	public String modifySubjectPassScore(SubjectPassScore subjectPassScore) {	
+		subjectPassScore.setLsPScoreRegId("id002");
+		subjectPassScoreService.modifySubjectPassScore(subjectPassScore);
+		log.info("특정 과목합격기준점수 수정 : {}", subjectPassScore);	
+		return "redirect:/subjectPassScoreList?liCode=${liCode}";
+	}
+	
+	// 자격증별 과목합격기준점수목록 조회
+	@GetMapping("/subjectPassScoreList")
+	public String getsubjectPassScoreList(Model model, @RequestParam(value="liCode", required=false) String liCode) {
+	List<SubjectPassScore> subjectPassScoreList = subjectPassScoreService.getsubjectPassScoreList(liCode); 		
+	model.addAttribute("subjectPassScoreList", subjectPassScoreList);
+	model.addAttribute("title", "과목별 합격기준점수 목록");	
+	log.info("과목합격기준점수목록 : {}", liCode);
+	return "admin/passScore/subject_pass_score_list";
 	}
 	
 	// 자격증별 합격기준점수 상세정보 조회
@@ -70,8 +107,7 @@ public class PassScoreController {
 	   log.info("자격증별 합격기준 등록 쿼리파라미터: {}", licensePassScore);
 	   licensePassScoreService.addLicensePassScore(licensePassScore);
 	   return "redirect:/licensePassScoreList";		
-	}
-	
+	}	
 	// 자격증별 합격기준점수 등록
 	@GetMapping("/addLicensePassScore")
 	public String addLicensePassScore(Model model) {

@@ -21,26 +21,6 @@
 			});
 		})
 
-			$('#submitBtn').click(function(){
-			let isSubmit = true;
-			
-			$('#addNoteForm input').each(function(idx, item){
-				let checkValue = $(item).val();
-				let labelValue = $(item).parent('.mainDiv').find('label').text();
-				if(validateValue(checkValue)){
-					
-					alert(`${labelValue}를 입력해주세요`);
-					$(item).focus();
-					isSubmit = false;
-					return false;
-				}
-				
-			});   
-			
-
-
-			if(isSubmit) $('#addNoteForm').submit();
-		});
 	    	    
 
 	</script>
@@ -57,7 +37,7 @@
             <h1><i class="bi bi-caret-down-fill"></i>&nbsp;&nbsp;노트등록&nbsp;&nbsp;<i class="bi bi-caret-down-fill"></i></h1> 
         </section>	
                 
-		<div class="mainDiv" >
+		<div class="pxp-dashboard-content-details" >
                 <form id="addNoteForm" th:action="@{/addNote}" name="addForm" method="post">
                     <div class="row mt-4 mt-lg-5">
                         <div class="col-xxl-8">
@@ -128,7 +108,7 @@
                     </div>
 
                     <div class="mt-4 mt-lg-5" style='text-align:center'>
-                        <button type="button"  id="submtiBtn" class="btn rounded-pill pxp-section-cta addNote">등록</button>
+                        <button type="button" class="btn rounded-pill pxp-section-cta addNote">등록</button>
                     </div>
                 </form>
             </div>

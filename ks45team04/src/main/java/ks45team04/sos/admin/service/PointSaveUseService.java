@@ -16,10 +16,25 @@ public class PointSaveUseService {
 		this.pointSaveUseMapper = pointSaveUseMapper;
 	}
 	
-	//포인트 적립/사용 내역 조회
-	public List<PointSaveUse> PointSaveUseList(){
+	//포인트 적립/사용 등록
+	public int pointSaveUseadd(PointSaveUse pointSaveUse) {
 		
-		List<PointSaveUse> pointSaveUseList = pointSaveUseMapper.pointSaveUseList();
+		return pointSaveUseMapper.pointSaveUseAdd(pointSaveUse);
+	}
+	
+	
+	//포인트 적립/사용 내역 조회
+	public List<PointSaveUse> PointSaveUseList(String searchKey, String searchValue){
+		
+		if(searchKey != null) {
+			switch (searchKey) {
+			case "pointSaveUseId":
+				searchKey = "point_save_use_id";
+				break;
+			}
+		}
+		
+		List<PointSaveUse> pointSaveUseList = pointSaveUseMapper.pointSaveUseList(searchKey, searchValue);
 		
 		return pointSaveUseList;
 	}

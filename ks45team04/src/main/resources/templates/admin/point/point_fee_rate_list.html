@@ -55,7 +55,7 @@
                             <tbody>
                                 <tr th:if="${not #lists.isEmpty(pointFeeRateList)}"
 									th:each="l : ${pointFeeRateList}">
-                                    <td><div class="pxp-company-dashboard-job-title" th:text="${l.pointFeeRateCode}"></div>
+                                    <td><div class="pxp-company-dashboard-job-title" th:text="${l.pointFeeRateCode}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.pointFeeRate}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.pointFeeRateContents}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${l.pointFeeRateDatetime}"></div></td>

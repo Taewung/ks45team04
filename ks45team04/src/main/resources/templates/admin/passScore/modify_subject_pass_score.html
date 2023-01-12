@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{admin/layout/adminDefault}">
+
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+		<script>
+		</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+		<h1>과목합격기준점수수정</h1>
+    	<p class="pxp-text-light">Modify Subject Pass Score</p>	      
+        	<form id="modifySubjectPassScoreForm" th:action="@{/modifySubjectPassScore}" method="post">
+                <th:block th:object="${subjectPassScoreByCode}">
+                	<div class="row mt-4 mt-lg-5">                  
+                		<h2><strong><span class="fa fa-check"></span>자격증</strong></h2>
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3">
+	         					<label for="liName" class="form-label">자격증코드</label>
+	                            <input type="text" id="liName" name="liName" class="form-control" th:value="*{liCode}" readonly="readonly"/>
+                            </div>
+                        </div>                              
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3">
+	         					<label for="liName" class="form-label">자격증명</label>
+	                            <input type="text" id="liName" name="liName" class="form-control" th:value="*{licenseSubject.liName}" readonly="readonly"/>
+                            </div>
+                        </div>                
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3">
+	         					<label for="liName" class="form-label">자격증합격기준점수</label>
+	                            <input type="text" id="liName" name="liName" class="form-control" th:value="*{lsPStandardScore}" readonly="readonly"/>
+                            </div>
+                        </div>                
+                	</div>
+                	
+                	<div class="row mt-4 mt-lg-5">                  
+                		<h2><strong><span class="fa fa-check"></span>과목</strong></h2>
+						<div class="col-md-6 col-xxl-3">
+                            <div class="mb-3">
+	         					<label for="liSubject" class="form-label">과목</label>
+	                            <input type="text" id="liSubject" name="liSubject" class="form-control" th:value="*{licenseSubject.lsSubject}" readonly="readonly"/>
+                            </div>
+                        </div>
+						<div class="col-md-6 col-xxl-3">
+                            <div class="mb-3">
+	         					<label for="lsName" class="form-label">과목명</label>
+	                            <input type="text" id="lsName" name="lsName" class="form-control" th:value="*{licenseSubject.lsName}" readonly="readonly"/>
+                            </div>
+                        </div>
+						<div class="col-md-6 col-xxl-3">
+                            <div class="mb-3">
+	         					<label for="lsCode" class="form-label">과목코드</label>
+	                            <input type="text" id="lsCode" name="lsCode" class="form-control" th:value="*{licenseSubject.lsCode}" readonly="readonly"/>
+                            </div>
+                        </div>
+					</div>
+					
+					<div class="row mt-4 mt-lg-5">                  
+                		<h2><strong><span class="fa fa-check"></span>과목정보</strong></h2>
+						<div class="col-md-6 col-xxl-3">
+                            <div class="mb-3">
+	         					<label for="lsTotalQuestionNum" class="form-label">문항수</label>
+	                            <input type="text" id="lsTotalQuestionNum" class="form-control" name="lsTotalQuestionNum" th:value="*{lsTotalQuestionNum}" placeholder="문항수를 입력해주세요.">  
+                            </div>
+                        </div>
+						<div class="col-md-6 col-xxl-3">
+                            <div class="mb-3">
+	         					<label for="lsPStandardScore" class="form-label">과목합격점수</label>
+	                            <input type="text" id="lsPStandardScore" class="form-control" name="lsPStandardScore" th:value="*{lsPStandardScore}" placeholder="과목합격점수를 입력해주세요.">  
+                            </div>
+                        </div>
+					</div>
+         		 <div class="mt-4 mt-lg-5">
+         	  	<button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">수정</button>  
+                <a th:href="@{/subjectPassScoreList(liCode=*{liCode})}" class="btn rounded-pill pxp-section-cta-o ms-3">취소</a>
+            	</div>  
+            	</th:block>                                                        
+        	</form>
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
+</html>

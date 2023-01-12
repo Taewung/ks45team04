@@ -9,7 +9,7 @@ import ks45team04.sos.admin.dto.Pay;
 @Mapper
 public interface PayMapper {
 	
-	//결제 내역 조회
-	public List<Pay> payList();
+	//결제 내역 조회(검색)
+	public List<Pay> payList(String searchKey, String searchValue);
 
 }

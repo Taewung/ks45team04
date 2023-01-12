@@ -20,10 +20,13 @@
 	<select id="mRefundList" resultMap="mRefundResultMap">
 		/* 환불 내역 조회*/
 		SELECT
+			refund_code,
 			pay_complete_code,
 			pay_id,
 			refund_reason,
 			final_pay_price,
+			refund_price,
+			refund_point,
 			refund_datetime,
 			refund_state
 		FROM

@@ -59,7 +59,11 @@
 			refund_state,
 			refund_datetime
 		FROM
-			refund_info;
-	
+			refund_info
+		<where>
+			<if test="searchKey != null and searchKey != ''">
+				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
+			</if>
+		</where>
 	</select>
 </mapper>

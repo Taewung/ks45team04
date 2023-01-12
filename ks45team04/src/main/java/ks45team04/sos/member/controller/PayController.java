@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import ks45team04.sos.member.dto.MPay;
 import ks45team04.sos.member.mapper.MPayMapper;
 import ks45team04.sos.member.service.MPayService;
@@ -28,6 +30,20 @@ public class PayController {
 		return "member/pay/pay_insert";
 	}
 	
+
+	//결제 내역 상세 조회
+	@GetMapping("/payDetailList")
+	public String payDetailList(@RequestParam(value="payCompleteCode")String payCompleteCode
+								,Model model) {
+		
+		MPay mPay = mPayService.getMPayByCode(payCompleteCode);
+		
+		model.addAttribute("title", "결제 내역 상세 조회");
+		model.addAttribute("mPayInfo",mPay);
+		
+		return "member/pay/pay_detail";
+	}
+	
 	//결제 내역 조회
 	@GetMapping("/mPayList")
 	public String mPayList(Model model) {
@@ -38,18 +54,6 @@ public class PayController {
 		model.addAttribute("mPayList",mPayList);
 		
 		return "member/pay/mpay_list";
-	}
-	
-	//결제 내역 상세 조회
-	@GetMapping("/payDetailList")
-	public String payDetailList(Model model) {
-		
-		List<MPay> mPayList = mPayService.MPayList();
-		
-		model.addAttribute("title", "결제 내역 상세 조회");
-		model.addAttribute("mPayList",mPayList);
-		
-		return "member/pay/pay_detail";
 	}
 
 }

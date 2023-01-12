@@ -13,8 +13,30 @@
 		<result property="saveUse" 				column="save_use"/>
 		<result property="saveUseDatetime" 		column="save_use_datetime"/>
 	</resultMap>
-	
-	<select id="pointSaveUseList" resultMap="pointSaveUseResultMap">
+
+	<select id="pointSaveStandardList" resultType="PointSaveStandard">
+		/* 포인트 적립기준 조회*/
+		SELECT 
+			save_point
+		FROM
+			point_save_standard;
+	</select>
+
+
+	<insert id="pointSaveUseAdd" parameterType="PointSaveUse">
+		/* 포인트 적립/사용 등록 */
+		INSERT INTO point_save_use
+		(
+			point_save_use_code, 
+			point_save_standard_content, 
+			save_point, 
+			save_use_datetime
+		)VALUES(
+			sf_point_save_use_code(), #{pointSaveStandardContent}, #{savePoint}, NOW()
+		);
+	</insert>
+
+	<select id="pointSaveUseList" resultType="PointSaveUse" resultMap="pointSaveUseResultMap">
 		/* 포인트 적립/사용 내역 조회*/
 		SELECT 
 			point_save_use_code,
@@ -25,7 +47,12 @@
 			save_use,
 			save_use_datetime	
 		FROM
-			point_save_use ;			
+			point_save_use
+		<where>
+			<if test="searchKey != null and searchKey != ''">
+				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
+			</if>
+		</where>		
 	</select>
 	
 	

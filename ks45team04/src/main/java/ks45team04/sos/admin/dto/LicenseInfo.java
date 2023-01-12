@@ -95,6 +95,7 @@ public class LicenseInfo {
 	public void setLiImage(String liImage) {
 		this.liImage = liImage;
 	}
+
 	@Override
 	public String toString() {
 		return "LicenseInfo [liCode=" + liCode + ", lmcCode=" + lmcCode + ", lmcName=" + lmcName + ", lscCode="

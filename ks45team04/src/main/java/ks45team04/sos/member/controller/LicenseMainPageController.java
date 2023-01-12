@@ -43,6 +43,7 @@ public class LicenseMainPageController {
 		String licenseInfoListLdDate = licenseInfoList.get(0).getLicenseDate().getLdDate();
 		String licenseInfoListLdAcceptanceDate = licenseInfoList.get(0).getLicenseDate().getLdAcceptanceDate();
 		String licenseInfoListLdCost = licenseInfoList.get(0).getLicenseDate().getLdCost();
+		String licenseInfoListImage = licenseInfoList.get(0).getLiImage();
 		
 		
 		model.addAttribute("title", "자격증 상세보기 화면 조회");
@@ -58,6 +59,7 @@ public class LicenseMainPageController {
 		model.addAttribute("licenseInfoListLdDate", licenseInfoListLdDate);
 		model.addAttribute("licenseInfoListLdAcceptanceDate", licenseInfoListLdAcceptanceDate);
 		model.addAttribute("licenseInfoListLdCost", licenseInfoListLdCost);
+		model.addAttribute("licenseInfoListImage", licenseInfoListImage);
 		
 		
 		

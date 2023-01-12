@@ -27,6 +27,7 @@ public class ARefundController {
 	//환불 승인 수정 처리
 	@PostMapping("/modifyRefundApproval")
 	public String modifyRefundApproval(Refund refund) {
+		
 		System.out.println(refund + "<- refund modifyRefundApproval");
 
 		refundService.modifyRefundApproval(refund);
@@ -41,6 +42,7 @@ public class ARefundController {
 		
 		
 		System.out.println(refundCode + "<- refundCode modifyRefundApproval");
+		
 		Refund refund = refundService.getRefundInfoByCode(refundCode);
 		
 		model.addAttribute("title", "환불 승인 수정");
@@ -49,11 +51,13 @@ public class ARefundController {
 		return "admin/refund/refund_approval_modify";
 	}
 	
-	//환불 신청 내역 조회
+	//환불 신청 내역 조회(검색)
 	@GetMapping("/refundApproval")
-	public String refundApproval(Model model) {
+	public String refundApproval(Model model
+								,@RequestParam(value="searchKey", required = false) String searchKey
+								,@RequestParam(value="searchValue", required = false, defaultValue = "") String searchValue){
 		
-		List<Refund> refundList = refundService.RefundList();
+		List<Refund> refundList = refundService.RefundList(searchKey, searchValue);
 		
 		model.addAttribute("title", "환불 신청 내역 조회");
 		model.addAttribute("refundList", refundList);

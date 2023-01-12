@@ -16,7 +16,7 @@ public class MRefundService {
 		this.mRefundMapper = mRefundMapper;
 	}
 
-	
+	//회원 환불 승인 내역 조회
 	public List<MRefund> MRefundList(){
 	
 		List<MRefund> mRefundList = mRefundMapper.mRefundList();

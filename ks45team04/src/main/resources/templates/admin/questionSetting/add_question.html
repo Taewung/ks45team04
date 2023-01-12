@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{admin/layout/adminDefault}">
+
+	<!-- script start -->
+    <th:block layout:fragment="customScript">
+		<script>
+			$(function(){
+				function validationCheck(data){
+					if(typeof data == 'undefined' || data == '' || data == null || data == '대분류'){	
+						return false;
+					}
+					return true;
+				}
+				// 자격증 대분류값 선택
+				$(document).on('change','#licenseMainCategory', function(){
+					$('#licenseSubCategory').prop('disabled', false);
+					let lmcCode = $(this).val();
+					
+					if(validationCheck(lmcCode)){						
+						var request = $.ajax({
+						  url: '/getLicenseSubCategoryForQSet',
+						  method: 'GET',
+						  data: { 'lmcCode' : lmcCode },
+						  dataType: 'json'
+						});	
+						// 대분류값 선택 성공시 중분류명 조회
+						request.done(function( data ) {
+						  console.log(data);
+						  $('#licenseSubCategory').children().remove();
+						  for(let subCategory of data){
+							  $('#licenseSubCategory').append(`<option value="${subCategory.lscCode}">${subCategory.lscName}</option>`);							 
+						  }
+						});
+						// 대분류값 선택 실패시
+						request.fail(function( jqXHR, textStatus ) {
+						  alert( "Request failed: " + textStatus );
+						});
+					}
+					
+				});
+				//대분류값 선택없이 중분류값 선택시
+				$(document).on('click','.licenseSubCategoryDiv', function(){
+					let isDisabled = $('#licenseSubCategory').prop('disabled');
+					if(isDisabled) {
+						alert('대분류를 선택해주세요');
+						return false;
+					}
+				});
+				// 자격증 중분류값 선택시 자격증코드,자격증명 조회
+				$(document).on('change','#licenseSubCategory', function(){
+					$('#licenseCategory').prop('disabled', false);
+					let lscCode = $(this).val();
+					
+					if(validationCheck(lscCode)){						
+						var request = $.ajax({
+						  url: '/getLicenseCategoryForQSet',
+						  method: 'GET',
+						  data: { 'lscCode' : lscCode },
+						  dataType: 'json'
+						});
+					// 중분류값 선택 성공시 
+					request.done(function( data ) {
+						  console.log(data);
+						  $('#licenseCategory').children().remove();
+						  for(let licenseCategory of data){
+							  $('#licenseCategory').append(`<option value="${licenseCategory.liName}">${licenseCategory.liName}</option>`);								  
+						  }
+						  $('#liCodeCategory').children().remove();
+						  $('#liCodeCategory').prop('disabled', false);
+						  for(let licenseCategory of data){
+							  $('#liCodeCategory').append(`<option value="${licenseCategory.liCode}">${licenseCategory.liCode}</option>`);							  
+						  }
+
+						});
+					// 중분류 선택 실패시
+					request.fail(function( jqXHR, textStatus ) {
+						  alert( "Request failed: " + textStatus );
+						});
+					}
+				});
+				// 중분류값 선택없이 자격증명값 선택시
+				$(document).on('click','.licenseCategoryDiv', function(){
+					let isDisabled = $('#licenseCategory').prop('disabled');
+					if(isDisabled) {
+						alert('중분류를 선택해주세요');
+						return false;
+					}
+				});
+				// 자격증값 선택시 과목조회
+				$(document).on('change','#licenseCategory', function(){
+					$('#subjectCategory').prop('disabled', false);
+					let liCode = $(this).val();
+					
+					if(validationCheck(liCode)){						
+						var request = $.ajax({
+						  url: '/getSubjectCategoryForQSet',
+						  method: 'GET',
+						  data: { 'liCode' : liCode },
+						  dataType: 'json'
+						});
+					// 자격증값 선택 성공시 
+					request.done(function( data ) {
+						  console.log(data);
+						  $('#subjectCategory').children().remove();
+						  for(let subjectCategory of data){
+							  $('#subjectCategory').append(`<option value="${subjectCategory.lsSubject}">${subjectCategory.lsSubject}</option>`);								  
+						  }
+						  $('#subjectNameCategory').children().remove();
+						  $('#subjectNameCategory').prop('disabled', false);
+						  for(let subjectCategory of data){
+							  $('#subjectNameCategory').append(`<option value="${subjectCategory.lsName}">${subjectCategory.lsName}</option>`);							  
+						  }
+						  $('#subjectCodeCategory').children().remove();
+						  $('#subjectCodeCategory').prop('disabled', false);
+						  for(let subjectCategory of data){
+							  $('#subjectCodeCategory').append(`<option value="${subjectCategory.lsCode}">${subjectCategory.lsCode}</option>`);							  
+						  }
+
+						});
+					// 자격증값 선택 실패시
+					request.fail(function( jqXHR, textStatus ) {
+						  alert( "Request failed: " + textStatus );
+						});
+					}
+				});
+				// 자격증값 선택없이 과목값 선택시
+				$(document).on('click','.subjectCategoryDiv', function(){
+					let isDisabled = $('#subjectCategory').prop('disabled');
+					if(isDisabled) {
+						alert('자격증을 선택해주세요');
+						return false;
+					}
+				});
+			});
+			
+
+			$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+				function validateValue(checkValue) {
+					if(    typeof checkValue == 'undefined' 
+							|| checkValue == null 
+							|| checkValue == ''					){
+						return true;
+					}
+					return false;
+					
+				}			
+
+				$(document).on('click', '#submitBtn', function(){
+					let isSubmit = true;
+					
+					$('#addLicensePassScore input').each(function(idx, item){
+						let checkValue = $(item).val();
+						let labelValue = $(item).parents('.mb-3').find('label').text();
+						if(validateValue(checkValue)){
+							
+							alert(`${labelValue}를 입력해주세요`);
+							$(item).focus();
+							isSubmit = false;
+							
+							return false;
+						}
+						
+					});
+				
+					if(isSubmit) $('#addLicensePassScore').submit();
+				});
+			});
+	
+			
+			
+		// 답안등록폼
+		// 답안 행 추가
+		$('#addRows').click(function(){
+			let trLength = $('#trCount').val();
+			if(Number(trLength) < 1 ){
+				alert('1 이상의 값을 입력해주세요');
+				return false;
+			}
+			for(let i=0; i < trLength; i++){
+				const $targetEle = $('#addAnswerBody').children().last();
+				const $cloneEle = $targetEle.clone(true);
+				$targetEle.find('.addButton')
+									.toggleClass('addButton')
+									.addClass('delButton')
+									.text('삭제');
+				$('#addAnswerBody').append($cloneEle);
+			}
+		});
+		
+		</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+                <h1>문제등록</h1>
+                <p class="pxp-text-light">Add Question</p>
+                <form>
+                    <div class="row mt-4 mt-lg-5">  
+                    <!-- 자격증선택 start -->                
+                	<h2><strong><span class="fa fa-check"></span>자격증 선택</strong></h2>
+                        <div class="col-md-6 col-xxl-3">
+                        	<label for="licenseMainCategory" class="form-label">대분류</label>
+                             <select  id="licenseMainCategory" class="form-select" name="mainCate">
+                                <option th:if="${not #lists.isEmpty(licenseMainListForQSet)}" th:each="l : ${licenseMainListForQSet}" th:value="${l.lmcCode}" th:text="${l.lmcName}"></option>
+                             </select>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 licenseSubCategoryDiv">
+	                               <label for="licenseSubCategory" class="form-label">중분류</label>
+	                               <select id="licenseSubCategory" class="form-select" name="subCate" disabled="disabled"></select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 licenseCategoryDiv">
+	                               <label for="licenseCategory" class="form-label">자격증명</label>
+	                               <select id="licenseCategory" class="form-select" name="liName" disabled="disabled"></select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 liCodeCategoryDiv">
+	                               <label for="liCodeCategory" class="form-label">자격증코드</label>
+	                               <select id="liCodeCategory" class="form-select" name="liCode" disabled="disabled"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 자격증선택 end -->                      
+                    <!-- 과목선택 start --> 
+                    <div class="row mt-4 mt-lg-5">
+                    <h2><strong><span class="fa fa-check"></span>과목 선택</strong></h2>
+                   		<div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 subjectCategoryDiv">
+	                               <label for="subjectCategory" class="form-label">과목</label>
+	                               <select id="subjectCategory" class="form-select" name="lsSubject" disabled="disabled"></select>
+                            </div>
+                        </div>
+                   		<div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 subjectNameCategoryDiv">
+	                               <label for="subjectNameCategory" class="form-label">과목명</label>
+	                               <select id="subjectNameCategory" class="form-select" name="lsName" disabled="disabled"></select>
+                            </div>
+                        </div>
+                   		<div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 subjectCodeCategoryDiv">
+	                               <label for="subjectCodeCategory" class="form-label">과목코드</label>
+	                               <select id="subjectCodeCategory" class="form-select" name="lsCode" disabled="disabled"></select>
+                            </div>
+                        </div>
+                      <!-- 과목선택 end -->                                     
+		            </div>
+		            <div class="row mt-4 mt-lg-5">
+                        <h2><strong><span class="fa fa-check"></span>문제입력</strong></h2>	                    
+	                        <div class="mb-3">
+		                        <textarea class="form-control" id="pxp-company-job-description" placeholder="문제를 입력해주세요."></textarea>
+	                    	</div>	                        
+                    </div>
+                    <div class="mt-4 mt-lg-5">
+	                  <button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>
+					  <a th:href="@{/qSettingList}" class="btn rounded-pill pxp-section-cta-o ms-3">취소</a>                                                
+	             	</div>                                                                   
+                </form>
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	</th:block>
+	<!-- customJs end -->
+</html>

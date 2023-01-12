@@ -1,5 +1,5 @@
 package ks45team04.sos.admin.dto;
 
-public class LoginHistory {
+public class TotalLoginHistory {
 
 }

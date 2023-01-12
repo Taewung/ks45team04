@@ -20,13 +20,38 @@
 		<result property="refundApprovalDatetime" 	column="refund_approval_datetime"/>
 	</resultMap>
 	
+	<update id="modifyPointRefundApproval" parameterType="PointRefundApproval">
+		/* 특정 환불 승인 내역 수정*/
+		UPDATE 
+				point_refund
+		SET 
+				refund_state = #{refundState}
+		WHERE 
+				point_refund_code= #{pointRefundCode};
+	
+	</update>
+	
+	<select id="getPointRefundApprovalByCode" parameterType="String" resultMap="pointRefundApprovalResultMap">
+		/* 특정 환불 승인 내역 조회 */
+		SELECT
+			*
+		FROM
+			point_refund
+		WHERE
+			point_refund_code = #{pointRefundCode};
+	</select>
 	
 	<select id="pointRefundApprovalList" resultMap="pointRefundApprovalResultMap">
 		/* 포인트 환급 신청 내역 조회*/
 		SELECT
 			*
 		FROM
-			point_refund;
+			point_refund
+		<where>
+			<if test="searchKey != null and searchKey != ''">
+				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
+			</if>
+		</where>
 			
 	</select>
 	

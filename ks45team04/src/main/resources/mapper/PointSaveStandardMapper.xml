@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team04.sos.member.mapper.MPointSaveStandardMapper">
+	
+	<resultMap type="PointSaveStandard" id="mPointSaveStandardResultMap">
+		<id property="pointSaveStandardCode" 			column="point_save_standard_code"/>
+		<result property="pointSaveStandardContent" 	column="point_save_standard_content"/>
+		<result property="savePoint" 					column="save_point"/>
+		<result property="pointSaveStandardId" 			column="point_save_standard_id"/>
+	</resultMap>
+	
+	
+	<select id="mPointSaveStandardList" resultMap="mPointSaveStandardResultMap">
+		/* 포인트 적립 기준 내역 조회*/
+		SELECT
+			*
+		FROM
+			point_save_standard;
+			
+	</select>
+</mapper>

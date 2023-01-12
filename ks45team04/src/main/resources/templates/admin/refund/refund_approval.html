@@ -18,22 +18,26 @@
             <div class="mt-4 mt-lg-5">
                 <div class="row justify-content-between align-content-center">
                     <div class="col-auto order-2 order-sm-1">
+                        <form th:action="@{/refundApproval}" method="get">
                         <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
-                            <div class="pxp-company-dashboard-jobs-search mb-3">
-                            <select class="form-select">
-                                <option>회원 아이디</option>
+                            <div class="pxp-company-dashboard-jobs-search mb-3">                            
+                            <select name="searchKey" class="form-select">
+                                <option value="payId">회원 아이디</option>
                             </select>
                             	<div class="col-auto order-1 order-sm-2">
                             		<div class="pxp-company-dashboard-jobs-search-search-form">
                                 		<div class="input-group">
                                     		<span class="input-group-text"><span class="fa fa-search"></span></span>
-                                    		<input type="text" class="form-control" placeholder="Search ID">
-                                    		<button class="btn ms-2">Search</button>
+                                    		<input type="text" name="searchValue" class="form-control" placeholder="Search ID">
+                                    		<button type="submit" class="btn ms-2">Search</button>
                                 		</div>
                             		</div>
                         		</div>
-                    		</div> 
+                        		
+                    		</div>
+                    		
                         </div>
+                        </form> 
                     </div>
                     
                 </div>
@@ -56,8 +60,7 @@
                         <tbody>
                          <tr th:if="${not #lists.isEmpty(refundList)}"
 									th:each="l : ${refundList}">
-                            
-                                <td><div class="pxp-company-dashboard-job-title" th:text="${l.refundCode}"></div>
+                                	<td><div class="pxp-company-dashboard-job-title" th:text="${l.refundCode}"></div>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.payCompleteCode}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${l.payId}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${l.refundReason}"></div></td>

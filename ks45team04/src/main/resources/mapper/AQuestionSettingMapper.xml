@@ -32,6 +32,8 @@
 		<result property="questionRegDateTime" 			column="question_reg_datetime"/>				
 	</resultMap>
 	
+	
+<!-- 문제 -->
 	<select id="getQuestionList" resultMap="questionResultMap">
 		/* 전체 문제목록 조회 */
 		SELECT
@@ -47,5 +49,36 @@
 			,q.question_reg_datetime
 		FROM
 			question AS q;
+	</select>
+	
+<!-- 답안 -->
+	<select id="getAnswerList" resultMap="answerResultMap" parameterType="String">
+		/* 문제코드별 답안목록 조회 */
+		SELECT
+			 a.answer_code
+			,a.question_code
+			,a.answer
+			,a.answer_state
+			,a.answer_reg_id
+			,a.answer_reg_datetime
+		FROM
+			answer AS a
+		WHERE
+			a.question_code = #{questionCode};
+	</select>
+	
+<!-- 헤설 -->	
+	<select id="getExplanationList" resultMap="explanationResultMap" parameterType="String">
+		/* 문제코드별 해설목록 조회 */
+		SELECT
+			 e.explain_code
+			,e.question_code
+			,e.explanation
+			,e.explanation_reg_id
+			,e.explanation_reg_datetime
+		FROM
+			explanation AS e
+		WHERE
+			e.question_code = #{questionCode};
 	</select>
 </mapper>
