@@ -135,7 +135,7 @@
                     <div class="row mt-4 mt-lg-5">                  
                 	<h2><strong><span class="fa fa-check"></span>자격증 선택</strong></h2>
                         <div class="col-md-6 col-xxl-3">
-                        	<label for="licenseSubCategory" class="form-label">대분류</label>
+                        	<label for="licenseMainCategory" class="form-label">대분류</label>
                              <select  id="licenseMainCategory" class="form-select" name="mainCate">
                                 <option th:if="${not #lists.isEmpty(licenseMainList)}" th:each="l : ${licenseMainList}" th:value="${l.lmcCode}" th:text="${l.lmcName}"></option>
                              </select>

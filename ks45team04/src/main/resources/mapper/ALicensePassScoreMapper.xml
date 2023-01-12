@@ -128,14 +128,14 @@
 			ls.lmc_code = #{lmcCode};
 	</select>
 	<select id="getLicenseMainList" resultMap="licenseMainResultMap">
-			/* 자격증 대분류 목록 조회 */
-			SELECT 
-				 lm.lmc_code
-				,lm.lmc_reg_id
-				,lm.lmc_name
-				,lm.lmc_reg_datetime
-			FROM
-				license_main_category AS lm;	
+		/* 자격증 대분류 목록 조회 */
+		SELECT 
+			 lm.lmc_code
+			,lm.lmc_reg_id
+			,lm.lmc_name
+			,lm.lmc_reg_datetime
+		FROM
+			license_main_category AS lm;	
 	</select>	
 	<select id="getLicensePassScoreList" resultType="LicensePassScore" parameterType="String" resultMap="licensePassScoreResultMap">
 		/* 자격증별  합격기준 점수 조회 */

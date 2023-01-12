@@ -101,7 +101,6 @@ public class PassScoreController {
 			
 	   //테이블명과 pk 자동 완성 할 컬럼명 입력 후 pk조회 후 DTO 셋팅 후 -> 입력처리 하면 된다
 	   String newLiPScoreCode = licensePassScoreService.getNewLiPassScoreCode("license_pass_score", "li_p_score_code");
-	   System.out.println(licensePassScore.getLiCode() + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`");
 	   licensePassScore.setLiPScoreRegId("id003");
 	   licensePassScore.setLiPScoreCode(newLiPScoreCode);
 	   log.info("자격증별 합격기준 등록 쿼리파라미터: {}", licensePassScore);
@@ -115,7 +114,6 @@ public class PassScoreController {
 		model.addAttribute("licenseMainList", licenseMainList);
 		return "admin/passScore/add_license_pass_score";
 	}
-
 	// 중분류별 자격증목록 조회
 	@GetMapping("/getLicenseCategory")
 	@ResponseBody
