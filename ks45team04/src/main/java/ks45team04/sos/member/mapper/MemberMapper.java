@@ -16,7 +16,7 @@ public interface MemberMapper {
 	public int modifyMemberInfo(MMember mmember);
 	
 	//특정 회원정보 조회
-	public MMember getMemInfoById(String memId);
+	public MMember MemberList(String memId);
 	
 	//로그인이력 테이블의 전체 행의 갯수
 	public int getLoginHistoryCnt();
@@ -30,6 +30,4 @@ public interface MemberMapper {
 	//회원 가입
 	public int addMember(MMember mmember);
 	
-	//회원 목록
-	public List<MMember> MemberList();	
 }
