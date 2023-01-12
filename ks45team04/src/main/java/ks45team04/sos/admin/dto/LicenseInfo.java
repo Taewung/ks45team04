@@ -13,6 +13,7 @@ public class LicenseInfo {
 	private String liQualification;
 	private String liRegId;
 	private String liRegDatetime;
+	private String liImage;
 	
 	private List<LicenseSubject> licenseSubjectList;
 	private LicenseDate licenseDate;
@@ -77,6 +78,12 @@ public class LicenseInfo {
 	public void setLiRegDatetime(String liRegDatetime) {
 		this.liRegDatetime = liRegDatetime;
 	}
+	public String getLiImage() {
+		return liImage;
+	}
+	public void setLiImage(String liImage) {
+		this.liImage = liImage;
+	}
 	public List<LicenseSubject> getLicenseSubjectList() {
 		return licenseSubjectList;
 	}
@@ -118,6 +125,8 @@ public class LicenseInfo {
 		builder.append(liRegId);
 		builder.append(", liRegDatetime=");
 		builder.append(liRegDatetime);
+		builder.append(", liImage=");
+		builder.append(liImage);
 		builder.append(", licenseSubjectList=");
 		builder.append(licenseSubjectList);
 		builder.append(", licenseDate=");
@@ -127,5 +136,6 @@ public class LicenseInfo {
 		builder.append("]");
 		return builder.toString();
 	}
-
+	
+	
 }
