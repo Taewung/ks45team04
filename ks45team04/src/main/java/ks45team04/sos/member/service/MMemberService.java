@@ -25,11 +25,11 @@ public class MMemberService {
 	}
 	
 	
-public List<MMember> MemberList() {
-	List<MMember> memberList = memberMapper.MemberList();
-	
-	return memberList;
-}
+//public List<MMember> MemberList() {
+//	List<MMember> memberList = memberMapper.MemberList();
+//	
+//	return memberList;
+//}
 
 public Map<String, Object> getLoginHistory(int currentPage){
 	// 보여질 행의 갯수
@@ -83,22 +83,23 @@ public Map<String, Object> getLoginHistory(int currentPage){
  * @param memberId, memberPw
  * @return
  */
-public Map<String, Object> checkPwByMemberId(String memId, String memPw) {
+public Map<String, Object> checkPwByMemId(String memId, String memPw) {
 	
 	Map<String, Object> resultMap = new HashMap<String, Object>();
 	
 	boolean result = false;
 	
-	MMember member = memberMapper.getMemInfoById(memId);
-	if(member != null) {
-		String checkPw = member.getMemPw();
+	MMember mmember = memberMapper.MemberList(memId);
+	if(mmember != null) {
+		String checkPw = mmember.getMemPw();
+		log.info("mmember = {}", mmember);
 		if(memPw.equals(checkPw)) {
 			result = true;
 		}
 	}
 	
 	resultMap.put("result", result);
-	resultMap.put("memberInfo", member);
+	resultMap.put("memInfo", mmember);
 	
 	return resultMap;
 }
@@ -120,7 +121,7 @@ public int modifyMemberInfo(MMember mmember) {
  */
 public MMember modifyMemberInfo(String memId) {
 	
-	return  memberMapper.getMemInfoById(memId);
+	return  memberMapper.MemberList(memId);
 }
 
 

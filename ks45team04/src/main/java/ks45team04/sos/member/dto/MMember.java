@@ -1,5 +1,7 @@
 package ks45team04.sos.member.dto;
 
+import java.util.List;
+
 public class MMember {
 
 	private String memId;
@@ -9,8 +11,7 @@ public class MMember {
 	private String memBirth;
 	private String memPhone;
 	private String memLevelName;
-	private String memRegDate;
-	
+	private String memRegDatetime;
 	public String getMemId() {
 		return memId;
 	}
@@ -53,17 +54,18 @@ public class MMember {
 	public void setMemLevelName(String memLevelName) {
 		this.memLevelName = memLevelName;
 	}
-	public String getMemRegDate() {
-		return memRegDate;
+	public String getMemRegDatetime() {
+		return memRegDatetime;
 	}
-	public void setMemRegDate(String memRegDate) {
-		this.memRegDate = memRegDate;
+	public void setMemRegDatetime(String memRegDatetime) {
+		this.memRegDatetime = memRegDatetime;
 	}
 	@Override
 	public String toString() {
-		return "Member [memId=" + memId + ", memPw=" + memPw + ", memName=" + memName + ", memEmail=" + memEmail
+		return "MMember [memId=" + memId + ", memPw=" + memPw + ", memName=" + memName + ", memEmail=" + memEmail
 				+ ", memBirth=" + memBirth + ", memPhone=" + memPhone + ", memLevelName=" + memLevelName
-				+ ", memRegDate=" + memRegDate + "]";
+				+ ", memRegDatetime=" + memRegDatetime + "]";
 	}
 	
+	private List<LoginHistory> loginHistory;
 }
