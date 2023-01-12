@@ -1,5 +1,7 @@
 package ks45team04.sos.admin.dto;
 
+import java.util.List;
+
 public class LicenseInfo {
 	private String liCode;
 	private String lmcCode;
@@ -12,67 +14,95 @@ public class LicenseInfo {
 	private String liRegId;
 	private String liRegDatetime;
 	
-  public String getLiCode() {
+	private List<LicenseSubject> licenseSubjectList;
+
+	public String getLiCode() {
 		return liCode;
 	}
+
 	public void setLiCode(String liCode) {
 		this.liCode = liCode;
 	}
+
 	public String getLmcCode() {
 		return lmcCode;
 	}
+
 	public void setLmcCode(String lmcCode) {
 		this.lmcCode = lmcCode;
 	}
+
 	public String getLmcName() {
 		return lmcName;
 	}
+
 	public void setLmcName(String lmcName) {
 		this.lmcName = lmcName;
 	}
+
 	public String getLscCode() {
 		return lscCode;
 	}
+
 	public void setLscCode(String lscCode) {
 		this.lscCode = lscCode;
 	}
+
 	public String getLscName() {
 		return lscName;
 	}
+
 	public void setLscName(String lscName) {
 		this.lscName = lscName;
 	}
+
 	public String getLiName() {
 		return liName;
 	}
+
 	public void setLiName(String liName) {
 		this.liName = liName;
 	}
+
 	public String getLiOverview() {
 		return liOverview;
 	}
+
 	public void setLiOverview(String liOverview) {
 		this.liOverview = liOverview;
 	}
+
 	public String getLiQualification() {
 		return liQualification;
 	}
+
 	public void setLiQualification(String liQualification) {
 		this.liQualification = liQualification;
 	}
+
 	public String getLiRegId() {
 		return liRegId;
 	}
+
 	public void setLiRegId(String liRegId) {
 		this.liRegId = liRegId;
 	}
+
 	public String getLiRegDatetime() {
 		return liRegDatetime;
 	}
+
 	public void setLiRegDatetime(String liRegDatetime) {
 		this.liRegDatetime = liRegDatetime;
-	}	
+	}
 
+	public List<LicenseSubject> getLicenseSubjectList() {
+		return licenseSubjectList;
+	}
+
+	public void setLicenseSubjectList(List<LicenseSubject> licenseSubjectList) {
+		this.licenseSubjectList = licenseSubjectList;
+	}
 
 	@Override
 	public String toString() {
@@ -97,7 +127,11 @@ public class LicenseInfo {
 		builder.append(liRegId);
 		builder.append(", liRegDatetime=");
 		builder.append(liRegDatetime);
+		builder.append(", licenseSubjectList=");
+		builder.append(licenseSubjectList);
 		builder.append("]");
 		return builder.toString();
 	}
+	
+	
 }
