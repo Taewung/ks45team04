@@ -53,26 +53,12 @@ public class LicenseSubject {
 	public void setLsRegDatetime(String lsRegDatetime) {
 		this.lsRegDatetime = lsRegDatetime;
 	}
+	
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("LicenseSubject [lsCode=");
-		builder.append(lsCode);
-		builder.append(", liCode=");
-		builder.append(liCode);
-		builder.append(", liName=");
-		builder.append(liName);
-		builder.append(", lsSubject=");
-		builder.append(lsSubject);
-		builder.append(", lsName=");
-		builder.append(lsName);
-		builder.append(", lsRegId=");
-		builder.append(lsRegId);
-		builder.append(", lsRegDatetime=");
-		builder.append(lsRegDatetime);
-		builder.append("]");
-		return builder.toString();
+		return "LicenseSubject [lsCode=" + lsCode + ", liCode=" + liCode + ", liName=" + liName + ", lsSubject="
+				+ lsSubject + ", lsName=" + lsName + ", lsRegId=" + lsRegId + ", lsRegDatetime=" + lsRegDatetime + "]";
 	}
-	
-	
+
+
 }

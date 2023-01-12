@@ -11,8 +11,13 @@ public class LicenseInfo {
 	private String liQualification;
 	private String liRegId;
 	private String liRegDatetime;
+	private String liImage;
 	
-  public String getLiCode() {
+	private LicenseDate licenseDate;
+	
+	private LicenseSubject licenseSubject;
+	
+	public String getLiCode() {
 		return liCode;
 	}
 	public void setLiCode(String liCode) {
@@ -71,33 +76,34 @@ public class LicenseInfo {
 	}
 	public void setLiRegDatetime(String liRegDatetime) {
 		this.liRegDatetime = liRegDatetime;
-	}	
-
+	}
+	public LicenseDate getLicenseDate() {
+		return licenseDate;
+	}
+	public void setLicenseDate(LicenseDate licenseDate) {
+		this.licenseDate = licenseDate;
+	}
+	public LicenseSubject getLicenseSubject() {
+		return licenseSubject;
+	}
+	public void setLicenseSubject(LicenseSubject licenseSubject) {
+		this.licenseSubject = licenseSubject;
+	}
+	public String getLiImage() {
+		return liImage;
+	}
+	public void setLiImage(String liImage) {
+		this.liImage = liImage;
+	}
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("LicenseInfo [liCode=");
-		builder.append(liCode);
-		builder.append(", lmcCode=");
-		builder.append(lmcCode);
-		builder.append(", lmcName=");
-		builder.append(lmcName);
-		builder.append(", lscCode=");
-		builder.append(lscCode);
-		builder.append(", lscName=");
-		builder.append(lscName);
-		builder.append(", liName=");
-		builder.append(liName);
-		builder.append(", liOverview=");
-		builder.append(liOverview);
-		builder.append(", liQualification=");
-		builder.append(liQualification);
-		builder.append(", liRegId=");
-		builder.append(liRegId);
-		builder.append(", liRegDatetime=");
-		builder.append(liRegDatetime);
-		builder.append("]");
-		return builder.toString();
+		return "LicenseInfo [liCode=" + liCode + ", lmcCode=" + lmcCode + ", lmcName=" + lmcName + ", lscCode="
+				+ lscCode + ", lscName=" + lscName + ", liName=" + liName + ", liOverview=" + liOverview
+				+ ", liQualification=" + liQualification + ", liRegId=" + liRegId + ", liRegDatetime=" + liRegDatetime
+				+ ", liImage=" + liImage + ", licenseDate=" + licenseDate + ", licenseSubject=" + licenseSubject + "]";
 	}
+
+	
+	
 }
