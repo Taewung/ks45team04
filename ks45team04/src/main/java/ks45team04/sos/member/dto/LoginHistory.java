@@ -5,6 +5,9 @@ public class LoginHistory {
 	private String loginLogoutId;
 	private String loginDatetime;
 	private String logoutDatetime;
+	private String loginLevelName;
+	
+	
 	public String getLoginLogoutCode() {
 		return loginLogoutCode;
 	}
@@ -29,10 +32,17 @@ public class LoginHistory {
 	public void setLogoutDatetime(String logoutDatetime) {
 		this.logoutDatetime = logoutDatetime;
 	}
+	public String getLoginLevelName() {
+		return loginLevelName;
+	}
+	public void setLoginLevelName(String loginLevelName) {
+		this.loginLevelName = loginLevelName;
+	}
 	@Override
 	public String toString() {
-		return "MLogin [loginLogoutCode=" + loginLogoutCode + ", loginLogoutId=" + loginLogoutId + ", loginDatetime="
-				+ loginDatetime + ", logoutDatetime=" + logoutDatetime + "]";
+		return "LoginHistory [loginLogoutCode=" + loginLogoutCode + ", loginLogoutId=" + loginLogoutId
+				+ ", loginDatetime=" + loginDatetime + ", logoutDatetime=" + logoutDatetime + ", loginLevelName="
+				+ loginLevelName + "]";
 	}
 	
 	

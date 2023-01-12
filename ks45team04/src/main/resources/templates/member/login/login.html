@@ -5,14 +5,47 @@
 
 	<!-- script start -->
 	<th:block layout:fragment="customScript">
-		<script>
-			$('footer').removeClass('mt-100');
+		<script type="text/javascript" th:inline="javascript">
+			$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+				const msg = [[${msg}]];
+				
+				if(msg != null) alert(msg);
+				
+				function validationCheck (data){
+					if(typeof data == 'undefined' || data == null || data == ''){
+						return true;				
+					}
+					return false;
+				}				
+				
+				$('#submitBtn').click(function(){
+					const $inputEle = $('#loginForm input');
+					
+					let isSubmit = true;
+					
+					$.each($inputEle, function(){
+						let inputData = $(this).val();
+						if(validationCheck(inputData)){
+						
+							let alertMsg = $(this).attr('placeholder');							
+							alert(alertMsg);
+							$(this).focus();
+							isSubmit = false;
+							return false;
+
+						}
+					});
+	
+					if(isSubmit) $('#loginForm').submit();				
+				});	
+			});
 		</script>
-	</th:block> 
+	</th:block>
 	<!-- script end -->
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
+	<form id="loginForm" action="/login" method="post">
         <section class="pxp-hero vh-100 mb-auto" style="background-color: var(--pxpMainColorLight);">
             <div class="row align-items-center pxp-sign-hero-container">
                 <div class="col-xl-6 pxp-column" >
@@ -29,20 +62,20 @@
                                     <h5 class="text-center">로그인</h5>
                                     <form class="mt-4">
                                         <div class="form-floating mb-3">
-                                            <input type="email" class="form-control" id="pxp-signin-page-email" placeholder="Email address">
+                                            <input type="text" class="form-control" id="memId" name="memId" placeholder="ID">
                                             <label for="pxp-signin-page-email">ID</label>
                                             <span class="fa fa-envelope-o"></span>
                                         </div>
                                         <div class="form-floating mb-3">
-                                            <input type="password" class="form-control" id="pxp-signin-page-password" placeholder="Password">
+                                            <input type="password" class="form-control" id="memPw" name="memPw" placeholder="Password">
                                             <label for="pxp-signin-page-password">Password</label>
                                             <span class="fa fa-lock"></span>
                                         </div>
-                                        <a href="#" class="btn rounded-pill pxp-sign-hero-form-cta">로그인</a>
+                                        <button type="button" id="submitBtn" class="btn rounded-pill pxp-sign-hero-form-cta">로그인</button>
                                         <div class="mt-4 text-center pxp-sign-hero-form-small">
                                             <a href="findId" class="pxp-modal-link">ID 찾기</a>&emsp;&emsp;                                        
                                             <a href="findPw" class="pxp-modal-link">Password 찾기</a>
-                                        </div>
+                                        </div>	
                                         <div class="mt-4 text-center pxp-sign-hero-form-small">
                                             회원가입 하시겠습니까? <a href="/addMember">회원가입</a>
                                         </div>
@@ -54,6 +87,7 @@
                 </div>
 			</div>
 		</section>
+		</form>
 	</th:block>
 	<!-- customContents end -->
 	

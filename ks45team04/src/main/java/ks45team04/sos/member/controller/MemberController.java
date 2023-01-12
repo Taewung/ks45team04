@@ -44,85 +44,88 @@ private static final Logger log = LoggerFactory.getLogger(MemberController.class
 
 
 
-@GetMapping("/logout")
-public String logout(HttpSession session) {
-	
-	session.invalidate();
-	
-	return "redirect:/member/login";
-}
-
-@PostMapping("/login")
-public String login(	@RequestParam(name="memId") String memId
-						   ,@RequestParam(name="memPw") String memPw
-						   ,RedirectAttributes reAttr
-						   ,HttpSession session
-						   ,HttpServletRequest request
-						   ,HttpServletResponse response) {
-	
-	log.info("memberId : {}, memberPw : {}", memId, memPw);
-	
-	Map<String,Object> checkResult = memberService.checkPwByMemberId(memId, memPw);
-	
-	boolean isChecked = (boolean) checkResult.get("result");
-	
-	String redirectURI = "redirect:/";
-	
-	// 1. 비밀번호가 일치하지 않을 시에는 로그인 폼으로 리다이렉트
-	// /member/removeMember?memberId=id001
-	if(!isChecked) {			
-		redirectURI = "redirect:/member/login";
-		reAttr.addAttribute("msg", "입력하신 회원의 정보가 일치하지 않습니다.");
-	}else {
-		// 2. 비밀번호 일치 시 세션 저장 
-		MMember mmember = (MMember) checkResult.get("memberInfo");
-//		session.setAttribute("SID", 		memId);
-//		session.setAttribute("SLEVEL", member.getMemberLevel());
-//		session.setAttribute("SNAME", member.getMemberName());
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
 		
-		LoginInfo loginInfo = new LoginInfo(memId, 
-											mmember.getMemName(),
-											mmember.getMemBirth());
-		session.setAttribute("S_MEM_INFO", loginInfo);
+		session.invalidate();
 		
-		Cookie cookie = new Cookie("loginKeepId", memId);
-		cookie.setPath("/");
-		cookie.setMaxAge(60 * 60 * 24);
-		response.addCookie(cookie);
+		return "redirect:/main";
 	}
-	return redirectURI;
-}
-
-@GetMapping("/login")
-public String login(Model model
-						  ,@RequestParam(value="msg", required = false) String msg) {
 	
-	model.addAttribute("title","로그인");
-	if(msg != null) model.addAttribute("msg", msg);
+	@PostMapping("/login")
+	public String login(	@RequestParam(name="memId", required=false) String memId
+							   ,@RequestParam(name="memPw", required=false) String memPw
+							   ,RedirectAttributes reAttr
+							   ,HttpSession session
+							   ,HttpServletRequest request
+							   ,HttpServletResponse response) {
+		
+		log.info("memId : {}, memPw : {}", memId, memPw);
+		
+		Map<String,Object> checkResult = memberService.checkPwByMemId(memId, memPw);
+		log.info("checkResult:{}",checkResult);
+		
+		boolean isChecked = (boolean) checkResult.get("result");
+		
+		String redirectURI = "redirect:/main";
+		
+		// 1. 비밀번호가 일치하지 않을 시에는 로그인 폼으로 리다이렉트
+		// /member/removeMember?memberId=id001
+		if(!isChecked) {			
+			redirectURI = "redirect:/login";
+			reAttr.addAttribute("msg", "입력하신 회원의 정보가 일치하지 않습니다.");
+		}else {
+			// 2. 비밀번호 일치 시 세션 저장 
+			MMember mmember = (MMember) checkResult.get("memInfo");
+	//		session.setAttribute("SID", 		memId);
+	//		session.setAttribute("SLEVEL", member.getMemberLevel());
+	//		session.setAttribute("SNAME", member.getMemberName());
+			
+			LoginInfo loginInfo = new LoginInfo(memId);
+			
+			session.setAttribute("S_MEM_INFO", loginInfo);
+			
+			LoginInfo linfo = (LoginInfo) session.getAttribute("S_MEM_INFO");
+			
+			log.info("memberCont login info : {} ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", linfo);
+			Cookie cookie = new Cookie("loginKeepId", memId);
+			cookie.setPath("/");
+			cookie.setMaxAge(60 * 60 * 24);
+			response.addCookie(cookie);
+		}
+		return redirectURI;
+	}
 	
-	return "login/login";
-}
-
-@GetMapping("/loginHistory")
-@SuppressWarnings("unchecked")
-public String getLoginHistory(Model model
-										 ,@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage) {
+	@GetMapping("/login")
+	public String login(Model model
+							  ,@RequestParam(value="msg", required = false) String msg) {
+		
+		model.addAttribute("title","로그인");
+		if(msg != null) model.addAttribute("msg", msg);
+		
+		return "member/login/login";
+	}
 	
-	Map<String, Object> paramMap = memberService.getLoginHistory(currentPage);
-	int lastPage = (int) paramMap.get("lastPage");
-	List<LoginHistory> loginHistory = (List<LoginHistory>) paramMap.get("loginHistory");
-	int startPageNum = (int) paramMap.get("startPageNum");
-	int endPageNum = (int) paramMap.get("endPageNum");
-	
-	model.addAttribute("title", "로그인이력");
-	model.addAttribute("currentPage", currentPage);
-	model.addAttribute("loginHistory", loginHistory);
-	model.addAttribute("lastPage", lastPage);
-	model.addAttribute("startPageNum", startPageNum);
-	model.addAttribute("endPageNum", endPageNum);
-	
-	return "login/loginHistory";
-}
+	@GetMapping("/loginHistory")
+	@SuppressWarnings("unchecked")
+	public String getLoginHistory(Model model
+											 ,@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage) {
+		
+		Map<String, Object> paramMap = memberService.getLoginHistory(currentPage);
+		int lastPage = (int) paramMap.get("lastPage");
+		List<LoginHistory> loginHistory = (List<LoginHistory>) paramMap.get("loginHistory");
+		int startPageNum = (int) paramMap.get("startPageNum");
+		int endPageNum = (int) paramMap.get("endPageNum");
+		
+		model.addAttribute("title", "로그인이력");
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("loginHistory", loginHistory);
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+		
+		return "login/loginHistory";
+	}
 
 
 
@@ -197,14 +200,14 @@ public String getLoginHistory(Model model
 	}		
 
 	//회원 개인 목록 조회
-	@GetMapping("/memberList")
-	public String memberList(Model model) {
+//	@GetMapping("/memberList")
+//	public String memberList(Model model) {
 		
-		List<MMember> memberList = memberService.MemberList();
-		model.addAttribute("title", "회원 개인 정보 조회");
-		model.addAttribute("memberList", memberList);
-		return  "member/member/member_list";		
-	}
+//		List<MMember> memberList = memberService.MemberList();
+//		model.addAttribute("title", "회원 개인 정보 조회");
+//		model.addAttribute("memberList", memberList);
+//		return  "member/member/member_list";		
+//	}
 	
 	@GetMapping("/findId")
 	public String findId(Model model) {
