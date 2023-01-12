@@ -29,7 +29,7 @@
 		<result property="lmcName" 			column="lmc_name"/>
 		<result property="lmcRegDatetime" 	column="lmc_reg_datetime"/>
 	</resultMap>
-		<resultMap type="LicenseSub" id="licenseSubResultMap">
+	<resultMap type="LicenseSub" id="licenseSubResultMap">
 		<id property="lscCode" 				column="lsc_code"/>
 		<result property="lmcCode" 			column="lmc_code"/>
 		<result property="lmcName" 			column="lmc_name"/>
