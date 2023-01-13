@@ -58,11 +58,12 @@
                             <thead>                    
                                 <tr>
                                     <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
-                                    <th style="width: 15%;">문제코드</th>
+                                    <th style="width: 10%;">문제코드</th>
                                     <th style="width: 15%;">자격증명</th>
                                     <th style="width: 10%;">과목</th>
                                     <th style="width: 15%;">과목명</th>
-                                    <th style="width: 15%;">등록자</th>
+                                    <th style="width: 30%;">문제</th>
+                                    <th style="width: 10%;">등록자</th>
                                     <th style="width: 30%;">등록일시</th>
                                     <th>답안/해설/수정</th>
                                 </tr>
@@ -72,8 +73,9 @@
                                     <td><input type="checkbox" class="form-check-input"></td>
                                     <td><div class="pxp-company-dashboard-job-title" th:text="${l.questionCode}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.liName}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.lsNum}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.liSubject}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.lsName}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.question}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.questionRegId}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${l.questionRegDateTime}"></div></td>
                                     

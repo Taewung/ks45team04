@@ -24,7 +24,7 @@
 		<result property="liCode" 					column="li_code"/>			
 		<result property="lsCode" 					column="ls_code"/>			
 		<result property="liName" 					column="li_name"/>			
-		<result property="lsNum" 					column="ls_num"/>			
+		<result property="liSubject" 				column="li_subject"/>			
 		<result property="lsName" 					column="ls_name"/>			
 		<result property="question" 				column="question"/>			
 		<result property="questionScore" 			column="question_score"/>			
@@ -89,7 +89,7 @@
 		 ,#{liCode}
 		 ,#{lsCode}
 		 ,#{liName}
-		 ,#{lsNum}
+		 ,#{liSubject}
 		 ,#{lsName}
 		 ,#{question}
 		 ,#{questionScore}
@@ -180,7 +180,7 @@
 			,q.li_code
 			,q.ls_code
 			,q.li_name
-			,q.ls_num
+			,q.li_subject
 			,q.ls_name
 			,q.question
 			,q.question_score
