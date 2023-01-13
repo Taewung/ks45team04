@@ -40,8 +40,20 @@ public class QuestionSettingController {
 
 	/* ------------------문제------------------ */
 	// 문제수정
+	@PostMapping("/modifyQuestion")
+	public String modifyQuestion(Question question) {
+		question.setQuestionRegId("id002");
+		questionSettingService.modifyQuestion(question);
+		log.info("특정 문제수정 : {}", question);
+		return "redirect:qSettingList";
+	}
+	// 문제수정 화면
 	@GetMapping("/modifyQuestion")
-	public String modifyQuestion(Model model) {
+	public String modifyQuestion(Model model, @RequestParam(value="questionCode", required=false) String questionCode) {
+		Question questionByCode = questionSettingService.getQuestionbyCode(questionCode);
+		model.addAttribute("questionByCode", questionByCode);		
+		model.addAttribute("title", "문제수정");
+		log.info("특정 문제조회 : {}", questionByCode);
 		return "admin/questionSetting/modify_question";
 	}
 	// 문제등록
@@ -100,8 +112,10 @@ public class QuestionSettingController {
 	}
 	// 문제목록조회
 	@GetMapping("/qSettingList")
-	public String qSettingList(Model model) {
-		List<Question> questionList = questionSettingService.getQuestionList();
+	public String qSettingList(Model model
+							  ,@RequestParam(value="searchKey", required = false) String searchKey
+							  ,@RequestParam(value="searchValue", required = false, defaultValue = "") String searchValue) {
+		List<Question> questionList = questionSettingService.getQuestionList(searchKey, searchValue);
 		model.addAttribute("questionList", questionList);
 		model.addAttribute("title", "문제목록");
 		return "admin/questionSetting/q_setting_list";

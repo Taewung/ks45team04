@@ -47,6 +47,24 @@ public class QuestionSettingService {
 	
 	/* 문제 */
 	/**
+	 * 특정 문제정보 수정
+	 * @param question
+	 * @return int (update 쿼리 실행 결과)
+	 */
+	public int modifyQuestion(Question question) {
+		int modifyResult = questionSettingMapper.modifyQuestion(question);
+		return modifyResult;
+	}
+	/**
+	 * 특정 문제정보 조회
+	 * @param questionCode
+	 * @return questionByCode
+	 */
+	public Question getQuestionbyCode(String questionCode) {
+		Question questionByCode = questionSettingMapper.getQuestionbyCode(questionCode);
+		return questionByCode;
+	}
+	/**
 	 * 문제 등록
 	 * @param question
 	 */
@@ -111,8 +129,24 @@ public class QuestionSettingService {
 	 * 문제 정보 목록조회
 	 * @return List<Question>
 	 */
-	public List<Question> getQuestionList(){
-		List<Question> questionList = questionSettingMapper.getQuestionList();
+	public List<Question> getQuestionList(String searchKey, String searchValue){
+		if(searchKey != null) {
+			switch (searchKey) {
+			case "questionCode":
+				searchKey = "question_code";
+				break;
+			case "liName":
+				searchKey = "li_name";
+				break;
+			case "lsName":
+				searchKey = "ls_name";
+				break;
+			case "questionRegId":
+				searchKey = "question_reg_id";
+				break;
+			}
+		}		
+		List<Question> questionList = questionSettingMapper.getQuestionList(searchKey, searchValue);
 		return questionList;
 	}
 }

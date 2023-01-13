@@ -14,12 +14,10 @@
 	<th:block layout:fragment="customContents">
 		<h1>답안목록</h1>
 		<p class="pxp-text-light">Answer List</p>
-		<div class="pxp-dashboard-table-options">
+		<div class="pxp-dashboard-table-options" th:if="${not #lists.isEmpty(answerList)}" th:each="l : ${answerList}">
 			<ul class="list-unstyled">
-				<a th:href="@{/addAnswer}">
-					<li><button title="Add">
-							<span class="fa fa-plus"></span>
-						</button></li>
+				<a th:href="@{/addAnswer(questionCode=${l.questionCode})}">
+					<li><button title="Add"><span class="fa fa-plus"></span></button></li>
 				</a>
 			</ul>
 		</div>
@@ -50,14 +48,10 @@
 										th:text="${l.answerRegDateTime}"></div></td>
 								<td>
 									<div class="pxp-dashboard-table-options">
-										<ul>
-											<li><button title="Delete">
-													<span class="fa fa-trash-o"></span>
-												</button></li>
+										<ul class="list-unstyled">
+											<li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
 											<a th:href="@{/modifyAnswer}">
-												<li><button title="Edit">
-														<span class="fa fa-pencil"></span>
-													</button></li>
+												<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
 											</a>
 										</ul>
 									</div>
