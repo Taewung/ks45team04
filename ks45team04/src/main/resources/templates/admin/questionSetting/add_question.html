@@ -117,7 +117,7 @@
 						  $('#subjectCategory').children().remove();
 						  $('#subjectCategory').append(`<option selected>과목</option>`);
 						  for(let subjectCategory of data){
-							  $('#subjectCategory').append(`<option value="${subjectCategory.lsCode}" name="lsCode">${subjectCategory.lsSubject}</option>`);								  
+							  $('#subjectCategory').append(`<option value="${subjectCategory.lsCode}" name="liSubject">${subjectCategory.lsSubject}</option>`);								  
 						  }
 						});
 					// 자격증값 선택 실패시
@@ -256,19 +256,19 @@
 					<div class="col-md-6 col-xxl-3">
 						<div class="mb-3 subjectCategoryDiv">
 							<label for="subjectCategory" class="form-label">과목</label>
-							<select id="subjectCategory" class="form-select" name="lsSubject" disabled="disabled"></select>
+							<select id="subjectCategory" class="form-select" name="liSubject" disabled="disabled"></select>
 						</div>
 					</div>				
-					<div class="col-md-6 col-xxl-3">
-						<div class="mb-3 subjectNameCategoryDiv">
-							<label for="subjectNameCategory" class="form-label">과목명</label>					   						   								
-							<select id="subjectNameCategory" class="form-select" name="lsName" disabled="disabled"></select>							
-						</div>
-					</div>
 					<div class="col-md-6 col-xxl-3">
 						<div class="mb-3 subjectCodeCategoryDiv">
 							<label for="subjectCodeCategory" class="form-label">과목코드</label>
 							<select id="subjectCodeCategory" class="form-select" name="lsCode" disabled="disabled"></select>
+						</div>
+					</div>
+					<div class="col-md-6 col-xxl-3">
+						<div class="mb-3 subjectNameCategoryDiv">
+							<label for="subjectNameCategory" class="form-label">과목명</label>					   						   								
+							<select id="subjectNameCategory" class="form-select" name="lsName" disabled="disabled"></select>							
 						</div>
 					</div>
 				</div>
@@ -277,7 +277,7 @@
 				<div class="row mt-4 mt-lg-5">
 					<h2><strong><span class="fa fa-check"></span>문제입력</strong></h2>	                    
 					<div class="mb-3">
-						<textarea class="form-control" id="pxp-company-job-description" placeholder="문제를 입력해주세요."></textarea>
+						<textarea class="form-control" id="pxp-company-job-description" name="question" placeholder="문제를 입력해주세요."></textarea>
 					</div>	                        
 				</div>
 				<!-- 문제입력 end -->
