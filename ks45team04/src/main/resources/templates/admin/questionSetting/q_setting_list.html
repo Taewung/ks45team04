@@ -15,42 +15,43 @@
  				<h1>문제목록</h1>
  				<p class="pxp-text-light">&emsp;Question List</p>
                 <div class="mt-4 mt-lg-5">
-	  				<div class="row justify-content-between align-content-center">
-	                        <div class="col-auto order-2 order-sm-1">
-	                            <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
-	                                <div class="pxp-company-dashboard-jobs-search mb-3">
-	                                <select class="form-select">
-	                                    <option>자격증명</option>
-	                                    <option>등록자</option>
+	                  <div class="row justify-content-between align-content-center">
+                        <div class="col-auto order-2 order-sm-1">
+                            <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
+								<form th:action="@{/qSettingList}" method="get">
+	                                <div class="pxp-company-dashboard-jobs-search mb-6">							
+	                                <select class="form-select" name="searchKey">
+	                                    <option value="questionCode">문제코드</option>
+	                                    <option value="liName">자격증명</option>
+	                                    <option value="lsName">과목명</option>
+	                                    <option value="questionRegId">등록자</option>
 	                                </select>
 	                                	<div class="col-auto order-1 order-sm-2">
 	                                		<div class="pxp-company-dashboard-jobs-search-search-form">
 	                                    		<div class="input-group">
 	                                        		<span class="input-group-text"><span class="fa fa-search"></span></span>
-	                                        		<input type="text" class="form-control" placeholder="Search ID">
-	                                        		<button class="btn ms-2">Search</button>
+	                                        		<input type="text" name="searchValue" class="form-control" placeholder="Search">
+	                                        		<button type="submit" class="btn ms-2">Search</button>
 	                                    		</div>
 	                                		</div>
 	                            		</div>
 	                        		</div>
-	                        		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-	                        		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-	                        		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-									<div class="pxp-dashboard-table-options">
-				                        <ul class="list-unstyled">
-				                        <!-- 등록버튼 start -->
-				                            <a href="/addQuestion">
-				                            	<li><button title="Add"><span class="fa fa-plus"></span></button></li>
-				                            </a>
-				                        <!-- 등록버튼 end -->
-										<!-- 삭제버튼 start -->
-                                                <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
-                                        <!-- 삭제버튼 end -->                                               
-				                        </ul>
-				                    </div>
-	                            </div>
-	                        </div>
-	                    </div>
+								</form>
+								<div class="pxp-dashboard-table-options">
+			                        <ul class="list-unstyled">
+			                        <!-- 등록버튼 start -->
+			                            <a href="/addQuestion">
+			                            	<li><button title="Add"><span class="fa fa-plus"></span></button></li>
+			                            </a>
+			                        <!-- 등록버튼 end --> 
+			                        <!-- 삭제버튼 start -->
+                                         <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
+                                     <!-- 삭제버튼 end -->                                               
+			                        </ul>
+			                    </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- 검색 end -->   
                     <!-- 목록 start -->                   
                     <div class="table-responsive"  style="overflow-x: hidden">
@@ -58,13 +59,14 @@
                             <thead>                    
                                 <tr>
                                     <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
-                                    <th style="width: 10%;">문제코드</th>
-                                    <th style="width: 15%;">자격증명</th>
-                                    <th style="width: 10%;">과목</th>
-                                    <th style="width: 15%;">과목명</th>
+                                    <th style="width: 8%;">문제코드</th>
+                                    <th style="width: 10%;">자격증명</th>
+                                    <th style="width: 6%;">과목</th>
+                                    <th style="width: 12%;">과목명</th>
                                     <th style="width: 30%;">문제</th>
+                                    <th style="width: 10%;">배점</th>
                                     <th style="width: 10%;">등록자</th>
-                                    <th style="width: 30%;">등록일시</th>
+                                    <th style="width: 40%;">등록일시</th>
                                     <th>답안/해설/수정</th>
                                 </tr>
                             </thead>    
@@ -73,9 +75,10 @@
                                     <td><input type="checkbox" class="form-check-input"></td>
                                     <td><div class="pxp-company-dashboard-job-title" th:text="${l.questionCode}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.liName}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.liSubject}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.lsSubject}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.lsName}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.question}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.questionScore}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.questionRegId}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${l.questionRegDateTime}"></div></td>
                                     

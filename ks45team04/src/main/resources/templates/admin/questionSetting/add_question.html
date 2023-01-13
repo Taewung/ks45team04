@@ -31,7 +31,7 @@
 						  $('#licenseSubCategory').children().remove();
 						  $('#licenseSubCategory').append(`<option selected>중분류</option>`);
 						  for(let subCategory of data){							  
-							  $('#licenseSubCategory').append(`<option value="${subCategory.lscCode}" name="lscName">${subCategory.lscName}</option>`);							 
+							  $('#licenseSubCategory').append(`<option value="${subCategory.lscCode}">${subCategory.lscName}</option>`);							 
 						  }
 						});
 						// 대분류값 선택 실패시
@@ -75,7 +75,7 @@
 						  for(let liCodeCategory of data){
 							  $('#liCodeCategory').append(`<option value="${liCodeCategory.liCode}" name="liCode">${liCodeCategory.liCode}</option>`);							  
 						  }
-
+					
 						});
 					// 중분류 선택 실패시
 					request.fail(function( jqXHR, textStatus ) {
@@ -111,13 +111,13 @@
 						  data: { 'liCode' : liCode },
 						  dataType: 'json'
 						});
-					// 자격증값 선택 성공시 
+					// 자격증값 선택 성공시  realSubjectCategoryDiv
 					request.done(function( data ) {
 						  console.log(data);
 						  $('#subjectCategory').children().remove();
 						  $('#subjectCategory').append(`<option selected>과목</option>`);
 						  for(let subjectCategory of data){
-							  $('#subjectCategory').append(`<option value="${subjectCategory.lsCode}" name="liSubject">${subjectCategory.lsSubject}</option>`);								  
+							  $('#subjectCategory').append(`<option value="${subjectCategory.lsCode}" name="lsSubject">${subjectCategory.lsSubject}</option>`);								  
 						  }
 						});
 					// 자격증값 선택 실패시
@@ -148,15 +148,16 @@
 						});
 					//  과목 선택 성공시 
 					request.done(function( data ) {
-						  console.log(data);
+						  console.log(data);						  
 						  $('#subjectNameCategory').children().remove();
 						  const lsNameOption = '<option selected name="lsName">' + data.lsName + '</option>';
-						  $('#subjectNameCategory').append(lsNameOption);
+						  $('#subjectNameCategory').append(lsNameOption);   	
 						  
 						  $('#subjectCodeCategory').children().remove();
 						  $('#subjectCodeCategory').prop('disabled', false);
 						  const lsCodeOption = '<option selected name="lsCode">' + data.lsCode + '</option>';
-						  $('#subjectCodeCategory').append(lsCodeOption);												 		  
+						  $('#subjectCodeCategory').append(lsCodeOption);   	
+						  
 						});
 					// 과목 선택 실패시
 					request.fail(function( jqXHR, textStatus ) {
@@ -256,9 +257,9 @@
 					<div class="col-md-6 col-xxl-3">
 						<div class="mb-3 subjectCategoryDiv">
 							<label for="subjectCategory" class="form-label">과목</label>
-							<select id="subjectCategory" class="form-select" name="liSubject" disabled="disabled"></select>
+							<select id="subjectCategory" class="form-select"  name="lsSubject" disabled="disabled"></select>
 						</div>
-					</div>				
+					</div>														
 					<div class="col-md-6 col-xxl-3">
 						<div class="mb-3 subjectCodeCategoryDiv">
 							<label for="subjectCodeCategory" class="form-label">과목코드</label>

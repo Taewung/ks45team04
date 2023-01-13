@@ -18,7 +18,7 @@ public interface QuestionSettingMapper {
 
 	/* ------------------문제------------------ */
 	// 전체 문제목록 조회
-	public List<Question> getQuestionList();	
+	public List<Question> getQuestionList(String searchKey, String searchValue);	
 	// 자격증 대분류 목록조회
 	public List<LicenseMain> getMainLisForQuestion();	
 	// 자격증 대분류별 중분류목록조회
@@ -33,6 +33,10 @@ public interface QuestionSettingMapper {
 	public String getNewQuestionCode(String question, String questionCode);
 	// 문제등록
 	public int addQuestion(Question question);
+	// 특정 문제정보 조회
+	public Question getQuestionbyCode(String questionCode);
+	// 특정 문제정보 수정
+	public int modifyQuestion(Question question);
 	
 	/* ------------------답안------------------ */
 	// 문제코드별 답안목록조회
