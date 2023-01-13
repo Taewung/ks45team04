@@ -8,7 +8,6 @@ import ks45team04.sos.admin.dto.Answer;
 import ks45team04.sos.admin.dto.Explanation;
 import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.admin.dto.LicenseMain;
-import ks45team04.sos.admin.dto.LicensePassScore;
 import ks45team04.sos.admin.dto.LicenseSub;
 import ks45team04.sos.admin.dto.LicenseSubject;
 import ks45team04.sos.admin.dto.Question;
@@ -22,7 +21,16 @@ public class QuestionSettingService {
 	public QuestionSettingService(QuestionSettingMapper questionSettingMapper) {
 		this.questionSettingMapper = questionSettingMapper;
 	}
-
+	/* 전체 */
+	/**
+	 * 특정 문제코드 조회
+	 * @param questionCode
+	 * @return questionCode
+	 */
+	public Question getQuestionCodeForQSet(String questionCode) {
+		Question questionCodeForQSet = questionSettingMapper.getQuestionCodeForQSet(questionCode);		
+		return questionCodeForQSet;
+	}
 	/* 답안 */	
 	/**
 	 * 문제코드별 답안목록조회
@@ -32,8 +40,42 @@ public class QuestionSettingService {
 	public List<Answer> getAnswerList(String questionCode){
 		List<Answer> answerList = questionSettingMapper.getAnswerList(questionCode);
 		return answerList;
-	}	
-	
+	}
+	/**
+	 * 답안 등록
+	 * @param answer
+	 */
+	public void addAnswer(Answer answer) {
+		questionSettingMapper.addAnswer(answer);
+	}
+	/**
+	 * 답안코드 자동생성
+	 * @param answer
+	 * @param answerCode
+	 * @return newAnswerCode
+	 */
+	public String getNewAnswerCode(String answer, String answerCode) {
+		String newAnswerCode = questionSettingMapper.getNewAnswerCode(answer, answerCode);
+		return newAnswerCode;
+	}
+	/**
+	 * 특정 답안정보 수정
+	 * @param answer
+	 * @return int (update 쿼리 실행 결과)
+	 */
+	public int modifyAnswer(Answer answer) {
+		int modifyResult = questionSettingMapper.modifyAnswer(answer);
+		return modifyResult;
+	}
+	/**
+	 * 특정 답안정보 조회
+	 * @param answerCode
+	 * @return answerByCode
+	 */
+	public Answer getAnswerByCode(String answerCode) {
+		Answer answerByCode = questionSettingMapper.getAnswerByCode(answerCode);
+		return answerByCode;
+	}
 	/* 해설 */
 	/**
 	 * 문제코드별 해설목록조회
@@ -61,7 +103,7 @@ public class QuestionSettingService {
 	 * @return questionByCode
 	 */
 	public Question getQuestionbyCode(String questionCode) {
-		Question questionByCode = questionSettingMapper.getQuestionbyCode(questionCode);
+		Question questionByCode = questionSettingMapper.getQuestionByCode(questionCode);
 		return questionByCode;
 	}
 	/**

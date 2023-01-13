@@ -16,6 +16,10 @@ import ks45team04.sos.admin.dto.Question;
 @Mapper
 public interface QuestionSettingMapper {
 
+	/* ------------------전체------------------ */
+	// 특정 문제코드 조회
+	public Question getQuestionCodeForQSet(String questionCode);
+	
 	/* ------------------문제------------------ */
 	// 전체 문제목록 조회
 	public List<Question> getQuestionList(String searchKey, String searchValue);	
@@ -34,13 +38,21 @@ public interface QuestionSettingMapper {
 	// 문제등록
 	public int addQuestion(Question question);
 	// 특정 문제정보 조회
-	public Question getQuestionbyCode(String questionCode);
+	public Question getQuestionByCode(String questionCode);
 	// 특정 문제정보 수정
 	public int modifyQuestion(Question question);
 	
 	/* ------------------답안------------------ */
 	// 문제코드별 답안목록조회
 	public List<Answer> getAnswerList(String questionCode);
+	// 답안코드 자동생성
+	public String getNewAnswerCode(String answer, String answerCode);
+	// 답안등록
+	public int addAnswer(Answer answer);
+	// 특정 답안 조회
+	public Answer getAnswerByCode(String answerCode);
+	// 특정 답안 수정
+	public int modifyAnswer(Answer answer);
 	
 	/* ------------------해설------------------ */
 	// 문제코드별 해설목록조회

@@ -39,7 +39,7 @@ public class QuestionSettingController {
 	}
 
 	/* ------------------문제------------------ */
-	// 문제수정
+	// 문제수정 처리
 	@PostMapping("/modifyQuestion")
 	public String modifyQuestion(Question question) {
 		question.setQuestionRegId("id002");
@@ -56,7 +56,7 @@ public class QuestionSettingController {
 		log.info("특정 문제조회 : {}", questionByCode);
 		return "admin/questionSetting/modify_question";
 	}
-	// 문제등록
+	// 문제등록 처리
 	@PostMapping("/addQuestion")
 	public String addQuestion(Question question) {
 		// questionCode 자동생성
@@ -67,7 +67,7 @@ public class QuestionSettingController {
 		log.info("문제등록 쿼리파라미터: {}", question);
 		return "redirect:/qSettingList";
 	}	
-	// 문제등록화면
+	// 문제등록 화면
 	@GetMapping("/addQuestion")
 	public String addQuestion(Model model) {
 		// 대분류 목록조회
@@ -122,22 +122,54 @@ public class QuestionSettingController {
 	}
 	
 	/* ------------------답안------------------ */
-	// 문제코드별 답안수정
+	// 답안수정 처리
+	@PostMapping("/modifyAnswer")
+	public String modifyAnswer(Answer answer) {
+		answer.setAnswerRegId("id002"); 
+		questionSettingService.modifyAnswer(answer);
+		log.info("특정 문제수정 : {}", answer);
+		String qCode = answer.getQuestionCode();
+		return "redirect:/answerList?questionCode="+qCode;
+	}
+	// 답안수정 화면
 	@GetMapping("/modifyAnswer")
-	public String modifyAnswer(Model model) {
+	public String modifyAnswer(Model model, @RequestParam(value="answerCode", required=false) String answerCode) {
+		Answer answerByCode = questionSettingService.getAnswerByCode(answerCode);
+		model.addAttribute("answerByCode", answerByCode);		
+		model.addAttribute("title", "답안수정");
+		log.info("특정 답안조회 : {}", answerByCode);
 		return "admin/questionSetting/modify_Answer";
 	}
 	// 문제코드별 답안등록
+	@PostMapping("/addAnswer")
+	public String addAnswer(Answer answer) {
+		// answerCode 자동생성
+		String newAnswerCode = questionSettingService.getNewAnswerCode("answer", "answer_code");
+		answer.setAnswerRegId("id003");
+		answer.setAnswerCode(newAnswerCode);
+		questionSettingService.addAnswer(answer);
+		log.info("답안등록 쿼리파라미터: {}", answer);
+		String qCode = answer.getQuestionCode(); 
+		return "redirect:/answerList?questionCode="+qCode;
+	}	
+	// 문제코드별 답안등록
 	@GetMapping("/addAnswer")
-	public String addAnswer(Model model) {
+	public String addAnswer(Model model, @RequestParam(value="questionCode", required=false) String questionCode) {
+		Question questionCodeForQSet = questionSettingService.getQuestionCodeForQSet(questionCode);
+		model.addAttribute("questionCodeForQSet", questionCodeForQSet);
+		model.addAttribute("title", "답안등록");
+		log.info("특정 문제코드 조회 : {}", questionCodeForQSet);
 		return "admin/questionSetting/add_Answer";
 	}
 	// 문제코드별 답안목록조회
 	@GetMapping("/answerList")
-	public String answerList(@RequestParam(value="questionCode", required=false) String questionCode, Model model) {
-		List<Answer> answerList = questionSettingService.getAnswerList(questionCode);
+	public String answerList(Model model
+							,@RequestParam(value="questionCode", required=false) String questionCode) {
+		List<Answer> answerList = questionSettingService.getAnswerList(questionCode);;
+		String qCode = answerList.get(0).getQuestionCode();						
 		model.addAttribute("answerList", answerList);
 		model.addAttribute("title", "답안목록");
+		model.addAttribute("qCode", qCode);
 		log.info("문제코드별 답안목록조회 : {}", answerList);
 		return "admin/questionSetting/answer_list";
 	}
