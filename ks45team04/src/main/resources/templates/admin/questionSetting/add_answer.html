@@ -14,12 +14,12 @@
 	<th:block layout:fragment="customContents">
 	    <h1>답안등록</h1>
 	    <p class="pxp-text-light">Add Answer</p>	    
-	        <form id="addAnswerForm" th:action="@{/addAnswer}" method="post">
+	        <form id="addAnswerForm" th:action="@{/addAnswer}" method="post" th:object="${questionCodeForQSet}">
 	             <div class="row mt-4 mt-lg-5">                 
                         <div class="col-md-6 col-xxl-3">
                              <div class="mb-3 questionCode">
 	                            <label for="questionCode" class="form-label">문제코드</label>
-	                            <input type="text" id="questionCode" class="form-control" name="questionCode" readonly/>
+	                            <input type="text" id="questionCode" class="form-control" th:value="*{questionCode}" name="questionCode" readonly = "readonly"/>
                             </div>
                         </div>
                         <div class="col-md-6 col-xxl-3">
@@ -39,10 +39,16 @@
                         </div>
                     </div>
 	             <div class="row mt-4 mt-lg-5">
-	             <div class="mt-4 mt-lg-5">
+	             <!-- <div class="mt-4 mt-lg-5">
 	                  <button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>
-					  <a th:href="@{/answerList}" class="btn rounded-pill pxp-section-cta-o ms-3">취소</a>                                                
-	             	</div>                                      
+					  <a th:href="@{/answerList(questionCode=${l.questionCode})}" class="btn rounded-pill pxp-section-cta-o ms-3">취소</a>                                                
+	             </div> -->
+	             <!-- 등록/취소버튼 start -->			 
+				<div class="mt-4 mt-lg-5">
+					<button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>
+					<a th:href="@{/answerList(questionCode=*{questionCode})}" class="btn rounded-pill pxp-section-cta-o ms-3">취소</a>                                                
+				</div>  
+				<!-- 등록/취소버튼 end -->                                     
 	             </div>                                   
 	         </form>
 	</th:block>

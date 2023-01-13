@@ -67,6 +67,16 @@
 		<result property="lsRegDatetime" 	column="ls_reg_datetime"/>
 	</resultMap>
 	
+<!-- 전체 -->
+	<select id="getQuestionCodeForQSet" resultMap="questionResultMap" parameterType="String">
+		/* 특정 문제코드 조회 */
+		SELECT
+			question_code
+		FROM
+			question
+		WHERE 	
+			question_code = #{questionCode};
+	</select>	
 <!-- 문제 -->
 	<update id="modifyQuestion" parameterType="Question">
 		/* 특정 문제정보 수정 */
@@ -80,7 +90,7 @@
 			question_code = #{questionCode};
 	</update>
 
-	<select id="getQuestionbyCode" parameterType="String" resultMap="questionResultMap">
+	<select id="getQuestionByCode" parameterType="String" resultMap="questionResultMap">
 		/* 특정 문제정보 조회 */
 		SELECT
 			 q.question_code
@@ -101,31 +111,9 @@
 	<insert id="addQuestion" parameterType="Question">
 		/* 문제 등록 */
 		INSERT INTO question
-		(
-		  question_code
-		 ,li_code
-		 ,ls_code
-		 ,li_name
-		 ,ls_subject
-		 ,ls_name
-		 ,question
-		 ,question_score
-		 ,question_reg_id
-		 ,question_reg_datetime
-		 )
+		(question_code, li_code, ls_code, li_name, ls_subject, ls_name, question, question_score, question_reg_id, question_reg_datetime)
 		VALUES
-		(
-		  #{questionCode}
-		 ,#{liCode}
-		 ,#{lsCode}
-		 ,#{liName}
-		 ,#{lsSubject}
-		 ,#{lsName}
-		 ,#{question}
-		 ,#{questionScore}
-		 ,#{questionRegId}
-		 ,NOW()
-		);
+		(#{questionCode},#{liCode},#{lsCode},#{liName},#{lsSubject},#{lsName},#{question},#{questionScore},#{questionRegId},NOW());
 	</insert>
 	<select id="getNewQuestionCode" parameterType="String" resultType="String">
 		/* 문제코드 자동생성 */
@@ -239,6 +227,49 @@
 			answer AS a
 		WHERE
 			a.question_code = #{questionCode};
+	</select>
+	<insert id="addAnswer" parameterType="Answer">
+		/* 답안 등록 */
+		INSERT INTO answer 
+		(answer_code, question_code, answer, answer_state, answer_reg_id, answer_reg_datetime)
+		VALUES
+		(#{answerCode}, #{questionCode}, #{answer}, #{answerState}, #{answerRegId}, NOW());
+	</insert>
+	<select id="getNewAnswerCode" parameterType="String" resultType="String">
+		/* 답안코드 자동생성 */
+		SELECT
+			CASE
+			WHEN COUNT(1) = 0 THEN CONCAT(#{answer}, '_1')
+		ELSE
+			CONCAT('answer_', MAX(CAST(SUBSTRING_INDEX(${answerCode}, 'answer_', -1)AS UNSIGNED))+1)
+			END AS newCode
+		FROM
+			${answer};
+	</select>
+	<update id="modifyAnswer" parameterType="Answer">
+		/* 특정 답안정보 수정 */
+		UPDATE answer AS a 
+		SET 
+			 answer = #{answer}
+			,answer_state = #{answerState}
+			,answer_reg_id = #{answerRegId}
+			,answer_reg_datetime = NOW()
+		WHERE 
+			answer_code = #{answerCode};
+	</update>
+	<select id="getAnswerByCode" parameterType="String" resultMap="answerResultMap">
+		/* 특정 답안정보 조회 */
+		SELECT
+			 answer_code
+			,question_code
+			,answer
+			,answer_state
+			,answer_reg_id
+			,answer_reg_datetime
+		FROM
+			answer 
+		WHERE
+			answer_code = #{answerCode};
 	</select>
 	
 <!-- 헤설 -->	
