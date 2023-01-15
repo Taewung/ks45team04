@@ -17,7 +17,7 @@
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-	<h1>자격증 대분류 수정</h1>
+	<h1><a th:href="@{/licenseDateList}">자격증 일정 수정</a></h1>
 		<form id="modifyLicenseDateForm" th:action="@{/modifylicenseDate}" name="myform" method="post">
               <div class="row mt-4 mt-lg-5">
                   <div class="col-xxl-8">
@@ -25,12 +25,12 @@
                       <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3">
-                                  <label for="ldRegId" class="form-label"><h4>관리자 아이디</h4></label>
-                                  <input type="text" id="ldRegId" class="form-control" name="ldRegId" placeholder="관리자 아이디"
-                                  		 th:value="${licenseDateInfo.ldRegId}" readonly="readonly">
+                                  <label for="liCode" class="form-label"><h6>자격증 이름</h6></label>
+                                  <input type="text" id="liName" class="form-control" name="liName" placeholder="자격증 이름"
+                                         th:value="${licenseDateInfo.liName}" readonly="readonly">
                               </div>
                           </div>
-                      </div><br><br>
+                      </div>
                       <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3">
@@ -40,15 +40,6 @@
                               </div>
                           </div>
                       </div>                     
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="mb-3">
-                                  <label for="liCode" class="form-label"><h6>자격증 코드</h6></label>
-                                  <input type="text" id="liCode" class="form-control" name="liCode" placeholder="자격증 코드"
-                                         th:value="${licenseDateInfo.liCode}" readonly="readonly">
-                              </div>
-                          </div>
-                      </div>
                       <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3">

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.admin.dto.LicenseSubject;
 import ks45team04.sos.admin.mapper.LicenseSubjectMapper;
 import ks45team04.sos.admin.service.LicenseSubService;
@@ -92,19 +93,24 @@ public class ALicenseSubjectController {
 	@GetMapping("/addlicenseSubject")
 	public String addlicenseSubject(Model model) {
 		
-		List<LicenseSubject> licenseSubject = licenseSubjectMapper.LicenseSubjectList();
+		List<LicenseSubject> getLicenseSubjectList = licenseSubjectMapper.getLicenseSubjectList();
+		List<LicenseInfo> licenseInfoList = licenseSubjectService.licenseInfoList();
+		System.out.println(licenseInfoList);
 		
 		model.addAttribute("title", "자격증 과목 등록");
-		model.addAttribute("licenseSubject", licenseSubject);
+		model.addAttribute("getLicenseSubjectList", getLicenseSubjectList);
+		model.addAttribute("licenseInfoList", licenseInfoList);
 		
 		return "admin/licenseSubject/license_subject_insert";
 	}
 
 	// 자격증 과목 조회
 	@GetMapping("/licenseSubjectList")
-	public String licenseSubjectList(Model model) {
+	public String licenseSubjectList(Model model
+									,@RequestParam(value="searchKey", required = false) String searchKey
+								    ,@RequestParam(value="searchValue", required = false) String searchValue) {
 		
-		List<LicenseSubject> licenseSubjectList = licenseSubjectService.LicenseSubjectList();
+		List<LicenseSubject> licenseSubjectList = licenseSubjectService.LicenseSubjectList(searchKey, searchValue);
 		
 		model.addAttribute("title", "자격증 과목 조회");
 		model.addAttribute("licenseSubjectList", licenseSubjectList);

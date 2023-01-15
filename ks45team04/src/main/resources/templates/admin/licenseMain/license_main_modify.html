@@ -18,19 +18,12 @@
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-		<h1>자격증 대분류 수정</h1>
+		<h1><a th:href="@{/licenseMainList}">자격증 대분류 수정</a></h1>
 		<form id="modifyLicenseMainForm" th:action="@{/modifylicenseMain}" name="myform" method="post">
-              <div class="row mt-4 mt-lg-5">
+              <div>
                   <div class="col-xxl-8">
                       <div class="row">
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="mb-3">
-                                  <label for="lmcRegId" class="form-label"><h4>관리자 아이디</h4></label>
-                                  <input type="text" id="lmcRegId" class="form-control" name="lmcRegId" placeholder="관리자 아이디"
-                                  		 th:value="${licenseMainInfo.lmcRegId}" readonly="readonly">
-                              </div>
-                          </div>
+                      <div class="row">    
                       </div><br><br>
                       <div class="row">
                           <div class="col-sm-6">

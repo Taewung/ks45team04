@@ -12,25 +12,41 @@
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
- 	<h1>자격증 정보</h1>
+ 	<h1><a th:href="@{/licenseInofoList}">자격증 정보</a></h1>
                 <p class="pxp-text-light"></p>
                 <div class="mt-4 mt-lg-5">
-                    <!-- 검색 start -->
-                    <div class="row justify-content-between align-content-center">
-                        <div class="col-auto order-1 order-sm-2">
-                            <div class="pxp-company-dashboard-jobs-search mb-3">
-                                <div class="pxp-company-dashboard-jobs-search-search-form">
-                                    <div class="input-group">
-                                        <span class="input-group-text"><span class="fa fa-search"></span></span>
-                                        <input type="text" class="form-control" placeholder="검색">
-                                    </div>
-                                </div>
-                                <button  class="btn rounded-pill pxp-section-cta-o ms-3">
-                                <a th:href="@{/addlicenseInfo}">자격증 정보 등록</a>	
-                                </button>
+            <button  class="btn rounded-pill pxp-section-cta-o ms-3">
+		        <a th:href="@{/addlicenseInfo}">자격증 정보 등록</a><br><br>
+	        </button>
+ <!-- 검색 start -->
+ <div>
+  <form th:action="@{/licenseInofoList}" method="GET">
+    <div class="row justify-content-between align-content-center">
+        <div class="col-auto order-2 order-sm-1">
+            <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
+                <div class="pxp-company-dashboard-jobs-search mb-3">
+                <select class="form-select" style="width:200px;" name="searchKey">
+                    <option value="liCode">자격증코드</option>
+                    <option value="liName">자격증명</option>
+                    <option value="lmcName">대분류명</option>
+                    <option value="lscName">중분류명</option>
+                    <option value="liRegDatetime">등록날짜</option>
+               </select>&nbsp;&nbsp;
+                    <div class="col-auto order-1 order-sm-2">
+                        <div class="pxp-company-dashboard-jobs-search-search-form">
+                            <div class="input-group">
+                                <span class="input-group-text"><span class="fa fa-search"></span></span>
+                                <input type="text" class="form-control" placeholder="검색어를 입력해주세요." name="searchValue">
+                                <button class="btn ms-2" type="submit">검색</button>
                             </div>
                         </div>
                     </div>
+                </div>              
+            </div>
+        </div>
+   	</div>
+ </form>
+ </div>
                     <!-- 검색 end -->   
                     <!-- 목록 start -->                   
                     <div class="table-responsive">
@@ -38,8 +54,8 @@
                             <thead>                    
                                 <tr>
                                     <th style="width: 10%;">자격증코드</th>
-                                    <th style="width: 10%;">대분류코드</th>                                
-                                    <th style="width: 10%;">중분류코드</th>
+                                    <th style="width: 10%;">대분류명</th>                                
+                                    <th style="width: 10%;">중분류명</th>
                                     <th style="width: 10%;">자격증명</th>
                                     <th style="width: 35%;">개요</th>
                                     <th style="width: 15%;">응시자격</th>
@@ -52,8 +68,8 @@
                                 <tr th:if="${not #lists.isEmpty(licenseInfoList)}"
 									th:each="l : ${licenseInfoList}">
                                     <td><div class="pxp-company-dashboard-job-title" th:text="${l.liCode}"></div>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.lmcCode}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.lscCode}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.licenseMain.lmcName}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.licenseSub.lscName}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.liName}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.liOverview}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.liQualification}"></div></td>

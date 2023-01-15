@@ -25,7 +25,10 @@ public interface LicenseSubMapper {
 	// 자격증 중분류 중분류 등록을 위한 대분류 목록 조회
 	public List<LicenseMain> licenseMainList();
 	
+	// 자격증 중분류 등록을 위한 목록 조회
+	public List<LicenseSub> getLicenseSubList();
+	
 	// 자격증 중분류 목록 조회
-	public List<LicenseSub> LicenseSubList();
+	public List<LicenseSub> LicenseSubList(String searchKey, String searchValue);
 	
 }
