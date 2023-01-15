@@ -17,6 +17,14 @@
 					
 				}
 			
+				// 취소 버튼 클릭시 리다이렉트
+				$(function(){
+					$('#resetBtn').click(function(){
+						location.href = '/licenseMainList';
+					});
+				});
+				
+			
 			// 관리자 인증
 				$('#lmcRegId').on('input', function(){
 					$('#addLicenseMainForm input').not('#lmcRegId').prop('disabled', true);
@@ -99,7 +107,7 @@
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-	<h1>자격증대분류 등록</h1>
+	<h1><a th:href="@{/licenseMainList}">자격증 대분류 등록</a></h1>
 		<form id="addLicenseMainForm" th:action="@{/addlicenseMain}" name="myform" method="post">
               <div class="row mt-4 mt-lg-5">
                   <div class="col-xxl-8">

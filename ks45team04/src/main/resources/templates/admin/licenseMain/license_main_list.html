@@ -12,43 +12,56 @@
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-		<h1>자격증 대분류</h1><br>
+		<h1><a th:href="@{/licenseMainList}">자격증 대분류</a></h1>
                 <p class="pxp-text-light"></p>
                 <div class="mt-4 mt-lg-5">
-                    <!-- 검색 start -->
-                    <div class="row justify-content-between align-content-center">
-                        <div class="col-auto order-1 order-sm-2">
-                            <div class="pxp-company-dashboard-jobs-search mb-3">
-                                <div class="pxp-company-dashboard-jobs-search-search-form">
-                                    <div class="input-group">
-                                        <span class="input-group-text"><span class="fa fa-search"></span></span>
-                                        <input type="text" class="form-control" placeholder="검색">&nbsp;&nbsp;
-                                    </div>
-                                </div>
-                                <button  class="btn rounded-pill pxp-section-cta-o ms-3">
-                                <a th:href="@{/addlicenseMain}">자격증 대분류 등록</a>	
-                                </button>
-                            	</div>
+            <button  class="btn rounded-pill pxp-section-cta-o ms-3">
+		        <a th:href="@{/addlicenseMain}">자격증 대분류 등록</a><br><br>
+	        </button>
+<!-- 검색 start -->
+  <div>
+  <form th:action="@{/licenseMainList}" method="GET">
+    <div class="row justify-content-between align-content-center">
+        <div class="col-auto order-2 order-sm-1">
+            <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
+                <div class="pxp-company-dashboard-jobs-search mb-3">
+                <select class="form-select" style="width:200px;" name="searchKey">
+                    <option value="lmcCode">대분류코드</option>
+                    <option value="lmcName">대분류명</option>
+                    <option value="lmcRegDatetime">등록날짜</option>
+               </select>&nbsp;&nbsp;
+                    <div class="col-auto order-1 order-sm-2">
+                        <div class="pxp-company-dashboard-jobs-search-search-form">
+                            <div class="input-group">
+                                <span class="input-group-text"><span class="fa fa-search"></span></span>
+                                <input type="text" class="form-control" placeholder="검색어를 입력해주세요." name="searchValue">
+                                <button class="btn ms-2" type="submit">검색</button>
+                            </div>
                         </div>
                     </div>
+                </div>              
+            </div>
+        </div>
+   	</div>
+ </form>
+ </div>
+    <div></div>
                     <!-- 검색 end -->   
                     <!-- 목록 start -->                   
                     <div class="table-responsive">
                         <table class="table table-hover align-middle">                      	
                             <thead>                    
                                 <tr>
-                                	<th></th>
-                                    <th style="width: 15%;">자격증대분류코드</th>
-                                    <th style="width: 15%;">자격증대분류등록자</th>
-                                    <th style="width: 15%;">자격증대분류명</th>
-                                    <th style="width: 15%;">등록날짜</th>
+                                    <th style="width: 20%;">자격증대분류코드</th>
+                                    <th style="width: 20%;">자격증대분류등록자</th>
+                                    <th style="width: 20%;">자격증대분류명</th>
+                                    <th style="width: 20%;">등록날짜</th>
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>    
                             <tbody>
                                 <tr th:if="${not #lists.isEmpty(licenseMainList)}"
 									th:each="l : ${licenseMainList}">
-                                    <td><input type="checkbox" class="form-check-input"></td>
                                     <td><div class="pxp-company-dashboard-job-title" 	th:text="${l.lmcCode}"></div>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.lmcRegId}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.lmcName}"></div></td>

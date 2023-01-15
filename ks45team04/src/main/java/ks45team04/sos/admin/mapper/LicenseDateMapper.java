@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import ks45team04.sos.admin.dto.LicenseDate;
+import ks45team04.sos.admin.dto.LicenseInfo;
 
 @Mapper
 public interface LicenseDateMapper {
@@ -21,9 +22,14 @@ public interface LicenseDateMapper {
 	// 자격증 일정 등록
 	public int addLicenseDate(LicenseDate licenseDate);
 	
+	// 자격증 일정 등록을 위한 자격증 정보 조회
+	public List<LicenseInfo> licenseInfoList();
+	
+	// 자격증 일정 등록을 위한 목록 조회
+	public List<LicenseDate> getLicenseDateList();
 	
 	// 자격증 일정 목록 조회
-	public List<LicenseDate> LicenseDateList();
+	public List<LicenseDate> LicenseDateList(String searchKey, String searchValue);
 	
 
 }

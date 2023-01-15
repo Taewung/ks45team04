@@ -82,6 +82,18 @@
 			license_sub_category AS lsc
 			ON
 			lmc.lmc_code = lsc.lmc_code
+	</select>	
+	
+	<select id="getLicenseSubList" resultMap="licenseSubResultMap">
+			/* 자격증 중분류 등록을 위한 목록 조회*/	
+			SELECT
+				*
+			FROM
+				license_sub_category AS lsc
+				INNER join
+				license_main_category AS lmc
+				ON
+				lsc.lmc_code = lmc.lmc_code
 	</select>
 
 	<select id="LicenseSubList" resultMap="licenseSubResultMap">
@@ -94,6 +106,11 @@
 			license_main_category AS lmc
 			ON
 			lsc.lmc_code = lmc.lmc_code
+		<where>
+			<if test="searchKey != null and searchValue != ''">
+			${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
+			</if>
+		</where>
 			
 	</select>
 </mapper>

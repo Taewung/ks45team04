@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import ks45team04.sos.admin.dto.LicenseDate;
+import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.admin.mapper.LicenseDateMapper;
 
 @Service
@@ -48,15 +49,57 @@ public class LicenseDateService {
 		return licenseDateMapper.addLicenseDate(licenseDate);
 	}
 	
+	/**
+	 * 자격증 일정 등록을 위한 자격증 정보 조회
+	 * @return List<LicenseInfo>
+	 */
+	public List<LicenseInfo> licenseInfoList(){
+		
+		List<LicenseInfo> licenseInfoList = licenseDateMapper.licenseInfoList();
+		
+		return licenseInfoList;
+		
+	}
+	
+	/**
+	 * 자격증 일정 등록을 목록 조회
+	 * @return List<LicenseDate>
+	 */
+	public List<LicenseDate> getLicenseDateList(){
+		
+		List<LicenseDate> getLicenseDateList = licenseDateMapper.getLicenseDateList();
+		
+		return getLicenseDateList;
+	}
+	
 	
 	/**
 	 * 자격증 일정 목록 조회
 	 * @return List<LicenseDate>
 	 */
-	public List<LicenseDate> licenseDateList(){
+	public List<LicenseDate> licenseDateList(String searchKey, String searchValue){
 		
-		List<LicenseDate> licenseDateList = licenseDateMapper.LicenseDateList();
+		if(searchKey != null) {
+			switch (searchKey) {
+			case "ldCode":
+				searchKey = "ld_code";
+				break;
+			case "liName":
+				searchKey = "li_name";
+				break;
+			case "ldRegDatetime":
+				searchKey = "ld_reg_datetime";
+				break;
+			}
+		}
+		
+		List<LicenseDate> licenseDateList = licenseDateMapper.LicenseDateList(searchKey, searchValue);
 		
 		return licenseDateList;
 	}
 }
+
+
+
+
+

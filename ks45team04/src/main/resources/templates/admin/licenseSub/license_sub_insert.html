@@ -16,6 +16,15 @@
 					
 				}
 			
+
+				// 취소 버튼 클릭시 리다이렉트
+				$(function(){
+					$('#resetBtn').click(function(){
+						location.href = '/licenseSubList';
+					});
+				});
+				
+			
 			// 관리자 인증
 				$('#lscRegId').on('input', function(){
 					$('#addLicenseSubForm input').not('#lscRegId').prop('disabled', true);
@@ -74,10 +83,28 @@
 							$('#lmcName').val(selectedLiName);
 						});
 						
-						$(document).on('click', '.addNote', function(){
-							$('#addLicenseSubForm').submit();
-						});
+
 					})
+					
+					/* 유효성검사를 구현하시오. (#submitBtn 를 클릭 시) */
+					$('#submitBtn').click(function(){
+						let isSubmit = true;
+						
+						$('#addLicenseSubForm input').each(function(idx, item){
+							let checkValue = $(item).val();
+							let labelValue = $(item).parent('.mb-3').find('label').text();
+							if(validateValue(checkValue)){
+								
+								alert(`${labelValue}를 입력해주세요`);
+								$(item).focus();
+								isSubmit = false;
+								return false;
+							}
+							
+						});   
+
+						if(isSubmit) $('#addLicenseSubForm').submit();
+					});
 			
 			});
 			
@@ -86,7 +113,7 @@
 		</script>
 	</th:block> 
 	<th:block layout:fragment="customContents">
-		<h1>자격증 중분류 등록</h1>
+		<h1><a th:href="@{/licenseSubList}">자격증 중분류 등록</a></h1>
 		<form id="addLicenseSubForm" th:action="@{/addlicenseSub}" name="myform" method="post">
               <div class="row mt-4 mt-lg-5">
                   <div class="col-xxl-8">
@@ -112,20 +139,18 @@
 										  th:each="l : ${licenseMainList}">								
 									<option th:value="${l.licenseMain.lmcCode}">[[${l.licenseMain.lmcName}]]</option>
 									</th:block>
-									<th:block th:unless="${not #lists.isEmpty(licenseInfoList)}">								
+									<th:block th:unless="${not #lists.isEmpty(licenseMainList)}">								
 									<option>등록된 정보가 없습니다.</option>
                                		</select>
                               </div>
                           </div>
-                      </div>
-                      <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3">
                                   <label for="lmcName" class="form-label"></label>
                                    <input type="hidden" id="lmcName" class="form-control" name="lmcName">
                               </div>
                           </div>
-                      </div>                      
+                      </div>                     
                       <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3">

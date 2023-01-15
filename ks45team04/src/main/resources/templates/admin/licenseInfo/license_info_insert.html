@@ -17,6 +17,15 @@
 			
 		}
 	
+
+		// 취소 버튼 클릭시 리다이렉트
+		$(function(){
+			$('#resetBtn').click(function(){
+				location.href = '/licenseInofoList';
+			});
+		});
+		
+	
 	// 관리자 인증
 		$('#liRegId').on('input', function(){
 			$('#addLicenseInfoForm input').not('#liRegId').prop('disabled', true);
@@ -65,6 +74,74 @@
 			  	  console.log('Request failed: ' + textStatus );
 			});
 		});
+		
+		
+		$(function(){
+			function validationCheck(data){
+				if(typeof data == 'undefined' || data == '' || data == null || data == '대분류'){	
+					return false;
+				}
+				return true;
+			}
+			// 자격증 대분류값 선택
+			$(document).on('change','#licenseMainCategory', function(){
+				$('#licenseSubCategory').prop('disabled', false);
+				let lmcCode = $(this).val();
+				
+				if(validationCheck(lmcCode)){						
+					var request = $.ajax({
+					  url: '/ALicenseSubCategory',
+					  method: 'GET',
+					  data: { 'lmcCode' : lmcCode },
+					  dataType: 'json'
+					});	
+					// 대분류값 선택 성공시 중분류명 조회
+					request.done(function( data ) {
+					  console.log(data);
+					  $('#licenseSubCategory').children().remove();
+					  for(let subCategory of data){
+						  $('#licenseSubCategory').append(`<option value="${subCategory.licenseSub.lscCode}">${subCategory.licenseSub.lscName}</option>`);							 
+					  }
+					});
+					// 대분류값 선택 실패시
+					request.fail(function( jqXHR, textStatus ) {
+					  alert( "Request failed: " + textStatus );
+					});
+				}
+				
+			});
+			//대분류값 선택없이 중분류값 선택시
+			$(document).on('click','.licenseSubCategoryDiv', function(){
+				let isDisabled = $('#licenseSubCategory').prop('disabled');
+				if(isDisabled) {
+					alert('대분류를 선택해주세요');
+					return false;
+				}
+			});
+		});
+		
+		/* 자격증대분류 이름 클릭시 코드와 이름 자동 등록*/
+		$(function(){
+			$('#lmcName').val($('#licenseMainCategory option:selected').text());
+			$(document).on('change', '#licenseMainCategory', function(){
+				//console.log($('#liCode option:selected').text());
+				let selectedLiName = $('#licenseMainCategory option:selected').text();
+				$('#lmcName').val(selectedLiName);
+			});
+
+		});
+		
+		/* 자격증중분류 이름 클릭시 코드와 이름 자동 등록*/
+		$(function(){
+			$('#lscName').val($('#licenseSubCategory option:selected').text());
+			$(document).on('change', '#licenseSubCategory', function(){
+				//console.log($('#liCode option:selected').text());
+				let selectedLiName = $('#licenseSubCategory option:selected').text();
+				$('#lscName').val(selectedLiName);
+			});
+
+		});
+
 
 		/* 유효성검사를 구현하시오. (#submitBtn 를 클릭 시) */
 		$('#submitBtn').click(function(){
@@ -82,11 +159,11 @@
 				}
 				
 			});   
-			
-
 
 			if(isSubmit) $('#addLicenseInfoForm').submit();
 		});
+		
+		
 	});
 
 	</script>
@@ -95,7 +172,7 @@
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-	<h1>자격증 정보 등록</h1>
+	<h1><a th:href="@{/licenseInofoList}">자격증 정보 등록</a></h1>
 		<form id="addLicenseInfoForm" th:action="@{/addlicenseInfo}" name="myform" method="post">
               <div class="row mt-4 mt-lg-5">
                   <div class="col-xxl-8">
@@ -112,29 +189,39 @@
                               </div>
                           </div>
                       </div><br><br>
+
                       <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3">
-                                  <label for="liCode" class="form-label"><h6>자격증 정보 코드</h6></label><h12>&nbsp;&nbsp;예시) li000</h12>
-                                  <input type="text" id="liCode" class="form-control" name="liCode" placeholder="자격증 정보 코드" disabled="disabled">
+                                  <label for="licenseMainCategory" class="form-label">자격증 대분류</label>
+                                  <select  id="licenseMainCategory" class="form-select" name="lmcCode" disabled="disabled">
+                                  <option th:if="${not #lists.isEmpty(licenseMainList)}" 
+                                		th:each="l : ${licenseMainList}" th:value="${l.licenseMain.lmcCode}" th:text="${l.licenseMain.lmcName}"></option>
+                             </select>
                               </div>
                           </div>
+                          <div class="col-sm-6">
+                          <div class="mb-3">
+                                  <label for="lmcName" class="form-label"></label>
+                                  <input type="hidden" id="lmcName" class="form-control" name="lmcName">
+                              </div>
+                              </div>
                       </div>
                       <div class="row">
                           <div class="col-sm-6">
-                              <div class="mb-3">
-                                  <label for="lmcCode" class="form-label"><h6>자격증 대분류 코드</h6></label><h12>&nbsp;&nbsp;예시) lmc000</h12>
-                                  <input type="text" id="lmcCode" class="form-control" name="lmcCode" placeholder="자격증 대분류 코드" disabled="disabled">
+                              <div class="mb-3 licenseSubCategoryDiv">
+                                 <div class="mb-3 licenseSubCategoryDiv">
+	                               <label for="licenseSubCategory" class="form-label">자격증 중분류</label>
+	                               <select id="licenseSubCategory" class="form-select" name="lscCode" disabled="disabled"></select>
+                            	</div>
                               </div>
                           </div>
-                      </div>
-                      <div class="row">
                           <div class="col-sm-6">
-                              <div class="mb-3">
-                                  <label for="lscCode" class="form-label"><h6>자격증 중분류 코드</h6></label><h12>&nbsp;&nbsp;예시) lsc000</h12>
-                                  <input type="text" id="lscCode" class="form-control" name="lscCode" placeholder="자격증 중분류 코드" disabled="disabled">
+                          <div class="mb-3">
+                                  <label for="lscName" class="form-label"></label>
+                                  <input type="hidden" id="lscName" class="form-control" name="lscName">
                               </div>
-                          </div>
+                              </div>
                       </div> 
                       <div class="row">
                           <div class="col-sm-6">
