@@ -156,7 +156,12 @@
 						  $('#subjectCodeCategory').children().remove();
 						  $('#subjectCodeCategory').prop('disabled', false);
 						  const lsCodeOption = '<option selected name="lsCode">' + data.lsCode + '</option>';
-						  $('#subjectCodeCategory').append(lsCodeOption);   	
+						  $('#subjectCodeCategory').append(lsCodeOption);  
+						  
+						  $('#lsSubjectCategory').children().remove();
+						  $('#lsSubjectCategory').prop('disabled', false);
+						  const lsSubjectOption = '<option selected name="lsSubject">' + data.lsSubject + '</option>';
+						  $('#lsSubjectCategory').append(lsSubjectOption);   	
 						  
 						});
 					// 과목 선택 실패시
@@ -257,7 +262,7 @@
 					<div class="col-md-6 col-xxl-3">
 						<div class="mb-3 subjectCategoryDiv">
 							<label for="subjectCategory" class="form-label">과목</label>
-							<select id="subjectCategory" class="form-select"  name="lsSubject" disabled="disabled"></select>
+							<select id="subjectCategory" class="form-select" disabled="disabled"></select>
 						</div>
 					</div>														
 					<div class="col-md-6 col-xxl-3">
@@ -270,6 +275,12 @@
 						<div class="mb-3 subjectNameCategoryDiv">
 							<label for="subjectNameCategory" class="form-label">과목명</label>					   						   								
 							<select id="subjectNameCategory" class="form-select" name="lsName" disabled="disabled"></select>							
+						</div>
+					</div>
+					<div class="col-md-6 col-xxl-3" hidden>
+						<div class="mb-3 lsSubjectCategoryDiv">
+							<label for="lsSubjectCategory" class="form-label">과목</label>					   						   								
+							<select id="lsSubjectCategory" class="form-select" name="lsSubject" disabled="disabled"></select>							
 						</div>
 					</div>
 				</div>
