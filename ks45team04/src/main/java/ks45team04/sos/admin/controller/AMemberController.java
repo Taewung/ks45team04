@@ -66,9 +66,12 @@ public AMemberController(@Qualifier("adminMemberService") MemberService memberSe
 
 	//회원 목록 조회
 	@GetMapping("/totalMemberList")
-	public String totalMemberList(Model model) {
+	public String totalMemberList(Model model
+									,@RequestParam(value="searchKey", required = false)String searchKey
+									,@RequestParam(value="searchValue", required = false, defaultValue="") String
+									searchValue) {
 
-		List<Member> totalMemberList = memberService.TotalMemberList();		
+		List<Member> totalMemberList = memberService.TotalMemberList(searchKey, searchValue);		
 		model.addAttribute("title", "회원 전체 정보 조회");
 		model.addAttribute("totalMemberList", totalMemberList);
 		

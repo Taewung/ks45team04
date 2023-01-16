@@ -70,9 +70,13 @@ private static final Logger log = LoggerFactory.getLogger(APassMemberController.
 
 	//합격 회원 목록 조회
 	@GetMapping("/totalPassMemberList")
-	public String passMemberList(Model model) {
+	public String passMemberList(Model model
+			,@RequestParam(value="searchKey", required = false)String searchKey
+			,@RequestParam(value="searchValue", required = false, defaultValue="") String
+			searchValue) {
+
 		
-		List<PassMember> passMemberList = passMemberService.PassMemberList();
+		List<PassMember> passMemberList = passMemberService.PassMemberList(searchKey, searchValue);
 		model.addAttribute("title", "합격 인증 멤버 조회");
 		model.addAttribute("passMemberList", passMemberList);
 		log.info("passMemberList :{}", passMemberList);

@@ -42,8 +42,24 @@ public Membership getTotalMembershipInfo(String membershipCode) {
  * @return List<Membership>
  */
 
-public List<Membership> MembershipList() {
-	List<Membership> membershipList = adminMembershipMapper.MembershipList();
+public List<Membership> MembershipList(String searchKey, String searchValue) {
+	
+	if(searchKey != null) {
+		switch(searchKey) {
+		case "membershipCode":
+			searchKey = "membership_code";
+			break;
+		}
+		switch(searchKey) {
+		case "membershipPeriod":
+			searchKey = "membership_period";
+			break;
+		}
+	}	
+		
+	
+	
+	List<Membership> membershipList = adminMembershipMapper.MembershipList(searchKey, searchValue);
 
 			return membershipList;
 }

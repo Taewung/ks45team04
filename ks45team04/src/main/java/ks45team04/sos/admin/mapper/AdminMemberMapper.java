@@ -17,7 +17,7 @@ public interface AdminMemberMapper {
 	public Member getTotalMemberInfo(String memId);
 	
 	//전체 회원 정보 조회
-	public List<Member> TotalMemberList();
+	public List<Member> TotalMemberList(String searchKey, String searchValue);
 
 	
 }

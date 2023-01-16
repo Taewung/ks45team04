@@ -45,9 +45,32 @@ public PassMember getTotalPassMemberInfo(String pmId) {
  * 합격 회원 조회
  * @return List<PassMember>
  */
-public List<PassMember> PassMemberList() {
+public List<PassMember> PassMemberList(String searchKey, String searchValue) {
 	
-	List<PassMember> passMemberList = adminPassMemberMapper.PassMemberList();
+	if(searchKey != null) {
+		switch(searchKey) {
+		case "pmId":
+			searchKey = "pm_id";
+			break;
+		}
+		switch(searchKey) {
+		case "pmState":
+			searchKey = "pm_state";
+			break;
+		}
+		switch(searchKey) {
+		case "pmReportManager":
+			searchKey = "pm_report_manager";
+			break;
+		}
+		switch(searchKey) {
+		case "pmLiCode":
+			searchKey = "pm_li_code";
+			break;
+		}		
+	}	
+	
+	List<PassMember> passMemberList = adminPassMemberMapper.PassMemberList(searchKey, searchValue);
 	
 	return passMemberList;
 }

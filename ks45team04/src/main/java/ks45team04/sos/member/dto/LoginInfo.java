@@ -8,8 +8,9 @@ public class LoginInfo {
 	private String loginLevelName;
 	
 	
-	public LoginInfo(String memId) {
+	public LoginInfo(String memId, String memberLevelName) {
 		this.loginLogoutId = memId;
+		this.loginLevelName = memberLevelName;
 	}
 	public String getLoginLogoutCode() {
 		return loginLogoutCode;

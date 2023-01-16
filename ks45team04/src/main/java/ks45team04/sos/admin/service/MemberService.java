@@ -52,9 +52,26 @@ public Member getTotalMemberInfo(String memId){
  * 전체 회원 목록 조회
  * @return List<Member>
  */
-public List<Member> TotalMemberList() {
+public List<Member> TotalMemberList(String searchKey, String searchValue) {
 	
-	List<Member> totalMemberList = adminMemberMapper.TotalMemberList();
+	if(searchKey != null) {
+		switch(searchKey) {
+		case "memId":
+			searchKey = "mem_id";
+			break;
+		}
+		switch(searchKey) {
+		case "memName":
+			searchKey = "mem_name";
+			break;
+		}
+		switch(searchKey) {
+		case "memEmail":
+			searchKey = "mem_email";
+			break;
+		}
+	}	
+	List<Member> totalMemberList = adminMemberMapper.TotalMemberList(searchKey, searchValue);
 	
 	return totalMemberList;
 	

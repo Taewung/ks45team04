@@ -41,9 +41,28 @@ public MembershipMember getTotalMembershipInfo(String mmId) {
  * 멤버십 회원 조회
  * @return List<MembershipMember>
  */
-public List<MembershipMember> TotalMembershipMemberList() {
+public List<MembershipMember> TotalMembershipMemberList(String searchKey, String searchValue) {
 	
-	List<MembershipMember> totalMemberhipMemberList = adminMembershipMemberMapper.TotalMembershipMemberList();
+	if(searchKey != null) {
+		switch(searchKey) {
+		case "mmCode":
+			searchKey = "mm_code";
+			break;
+		}
+		switch(searchKey) {
+		case "mmPeriod":
+			searchKey = "mm_period";
+			break;
+		}
+		switch(searchKey) {
+		case "mmState":
+			searchKey = "mm_state";
+			break;
+		}		
+		
+	}	
+	
+	List<MembershipMember> totalMemberhipMemberList = adminMembershipMemberMapper.TotalMembershipMemberList(searchKey, searchValue);
 	
 	return totalMemberhipMemberList;
 }

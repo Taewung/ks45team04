@@ -69,7 +69,12 @@
 				mem_phone,
 				mem_reg_datetime
 			FROM
-				member;
+				member
+		<where>
+			<if  test="searchKey != null and searchKey != ''">
+				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
+			</if>
+		</where>	
 	</select>
 
 </mapper>

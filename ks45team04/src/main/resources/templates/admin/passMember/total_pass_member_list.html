@@ -20,25 +20,29 @@
                         <div class="col-auto order-2 order-sm-1">
                             <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
                                 <div class="pxp-company-dashboard-jobs-search mb-3">
-                                <select class="form-select">
-                                    <option>회원 아이디</option>
-                                    <option>이름</option>
-                                    <option>이메일</option>
-                                </select>
-                                	<div class="col-auto order-1 order-sm-2">
-                                		<div class="pxp-company-dashboard-jobs-search-search-form">
-                                    		<div class="input-group">
-                                        		<span class="input-group-text"><span class="fa fa-search"></span></span>
-                                        		<input type="text" class="form-control" placeholder="Search ID">
-                                        		<button class="btn ms-2">Search</button>
-                                    		</div>
-                                		</div>
-                            		</div>
-                        		</div> 
-                            </div>
-                        </div>
-                        
-                    </div>
+ 							<form th:action="@{/totalPassMemberList}" method="get">
+	                                <div class="pxp-company-dashboard-jobs-search mb-6">							
+	                                <select class="form-select" name="searchKey">
+	                                    <option value="pmId">합격자 아이디</option>
+	                                    <option value="pmState">승인상태</option>
+	                                    <option value="pmReportManager">승인자</option>
+	                                    <option value="pmLiCode">자격증코드</option>
+	                                </select>
+	                                	<div class="col-auto order-1 order-sm-2">
+	                                		<div class="pxp-company-dashboard-jobs-search-search-form">
+	                                    		<div class="input-group">
+	                                        		<span class="input-group-text"><span class="fa fa-search"></span></span>
+	                                        		<input type="text" name="searchValue" class="form-control" placeholder="Search">
+	                                        		<button type="submit" class="btn ms-2">Search</button>
+	                                    		</div>
+	                                		</div>
+	                            		</div>
+	                        		</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
                     <!-- 검색 end -->   
                     <!-- 목록 start -->                   
                     <div class="table-responsive">
@@ -49,6 +53,7 @@
                                     <th style="width: 15%;">자격증코드</th>                                   
                                     <th style="width: 15%;">합격인증자료</th>
                                     <th style="width: 15%;">신청일시</th>
+                                    <th style="width: 15%;">승인상태</th>                                    
                                     <th style="width: 15%;">승인 / 반려일시</th>
                                     <th style="width: 15%;">반려사유</th>
                                     <th style="width: 15%;">승인자</th>
@@ -66,6 +71,7 @@
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${pm.pmLiCode}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${pm.pmCertificationData}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${pm.pmDatetime}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${pm.pmState}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${pm.pmRegDatetime}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${pm.pmRefuseReason}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${pm.pmReportManager}"></div></td>

@@ -64,9 +64,12 @@ public class AMembershipMemberController {
 	
 	// 조회
 	@GetMapping("/totalMembershipMemberList")
-	public String TotalMembershipMemberList(Model model) {
+	public String TotalMembershipMemberList(Model model
+			,@RequestParam(value="searchKey", required = false)String searchKey
+			,@RequestParam(value="searchValue", required = false, defaultValue="") String
+			searchValue) {		
 		
-		List<MembershipMember> totalMembershipMemberList = membershipMemberService.TotalMembershipMemberList();
+		List<MembershipMember> totalMembershipMemberList = membershipMemberService.TotalMembershipMemberList(searchKey, searchValue);
 		
 		model.addAttribute("title", "멤버십 회원 조회");
 		model.addAttribute("totalMembershipMemberList", totalMembershipMemberList);

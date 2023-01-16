@@ -46,8 +46,11 @@ public class AWithdrawalMemberController {
 		
 	//탈퇴 회원 정보 조회		
 	@GetMapping("/withdrawalMemberList")
-	public String withdrawalMemberList(Model model) {
-		List<WithdrawalMember> withdrawalMemberList = withdrawalMemberService.WithdrawalMemberList();
+	public String withdrawalMemberList(Model model
+			,@RequestParam(value="searchKey", required = false)String searchKey
+			,@RequestParam(value="searchValue", required = false, defaultValue="") String
+			searchValue) {
+		List<WithdrawalMember> withdrawalMemberList = withdrawalMemberService.WithdrawalMemberList(searchKey, searchValue);
 		model.addAttribute("title", "전체 회원 목록");
 		model.addAttribute("withdrawalMemberList", withdrawalMemberList);
 		log.info("withdrawalmemberList : {}", withdrawalMemberList);
