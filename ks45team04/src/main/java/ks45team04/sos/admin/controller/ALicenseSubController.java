@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ks45team04.sos.admin.dto.LicenseMain;
 import ks45team04.sos.admin.dto.LicenseSub;
 import ks45team04.sos.admin.mapper.LicenseSubMapper;
 import ks45team04.sos.admin.service.LicenseSubService;
@@ -96,10 +97,13 @@ private final LicenseSubMapper licenseSubMapper;
 		@GetMapping("/addlicenseSub")
 		public String addlicenseSub(Model model) {
 			
-			List<LicenseSub> licenseSubList = licenseSubMapper.LicenseSubList();
+			List<LicenseSub> getLicenseSubList = licenseSubMapper.getLicenseSubList();
+			List<LicenseMain> licenseMainList = licenseSubService.licenseMainList();
+			System.out.println(licenseMainList);
 			
 			model.addAttribute("title", "자격증 중분류 등록");
-			model.addAttribute("licenseSubList", licenseSubList);
+			model.addAttribute("getLicenseSubList", getLicenseSubList);
+			model.addAttribute("licenseMainList", licenseMainList);
 			
 			return "admin/licenseSub/license_sub_insert";
 			
@@ -108,9 +112,11 @@ private final LicenseSubMapper licenseSubMapper;
 	
 		// 자격증 중분류 목록 조회
 		@GetMapping("/licenseSubList")
-		public String licenseSubList(Model model) {
+		public String licenseSubList(Model model
+									,@RequestParam(value="searchKey", required = false) String searchKey
+								    ,@RequestParam(value="searchValue", required = false) String searchValue) {
 			
-			List<LicenseSub> licenseSubList = licenseSubService.LicenseSubList();
+			List<LicenseSub> licenseSubList = licenseSubService.LicenseSubList(searchKey, searchValue);
 			
 			model.addAttribute("title", "자격증 중분류 조회");
 			model.addAttribute("licenseSubList", licenseSubList);

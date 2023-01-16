@@ -17,6 +17,13 @@
 			
 		}
 	
+		// 취소 버튼 클릭시 리다이렉트
+		$(function(){
+			$('#resetBtn').click(function(){
+				location.href = '/licenseDateList';
+			});
+		});
+	
 	// 관리자 인증
 		$('#ldRegId').on('input', function(){
 			$('#addLicenseDateForm input').not('#ldRegId').prop('disabled', true);
@@ -66,6 +73,18 @@
 			});
 		});
 		
+		/* 자격증 이름 클릭시 코드 자동 등록*/
+		$(function(){
+			$('#liName').val($('#liCode option:selected').text());
+			$(document).on('change', '#liCode', function(){
+				//console.log($('#liCode option:selected').text());
+				let selectedLiName = $('#liCode option:selected').text();
+				$('#liName').val(selectedLiName);
+			});
+			
+
+		})
+		
 		
 
 		/* 유효성검사를 구현하시오. (#submitBtn 를 클릭 시) */
@@ -99,7 +118,7 @@
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-		<h1>자격증대분류 등록</h1>
+		<h1><a th:href="@{/licenseDateList}">자격증 일정 등록</a></h1>
 		<form id="addLicenseDateForm" th:action="@{/addlicenseDate}" name="myform" method="post">
               <div class="row mt-4 mt-lg-5">
                   <div class="col-xxl-8">
@@ -116,19 +135,25 @@
                               </div>
                           </div>
                       </div><br><br>
+                         
                       <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3">
-                                  <label for="ldCode" class="form-label"><h6>자격증 일정 코드</h6></label><h12>&nbsp;&nbsp;예시)ld000</h12>
-                                  <input type="text" id="ldCode" class="form-control" name="ldCode" placeholder="자격증 일정 코드" disabled="disabled">
+                                  <label for="liCode" class="form-label"><h6>자격증 이름</h6></label><h12>&nbsp;&nbsp;</h12>
+                                  <select class="form-select" id="liCode" name="liCode" disabled="disabled">
+                             		 <th:block th:if="${not #lists.isEmpty(getLicenseDateList)}" 
+										  th:each="l : ${getLicenseDateList}">								
+									<option th:value="${l.licenseInfo.liCode}">[[${l.licenseInfo.liName}]]</option>
+									</th:block>
+									<th:block th:unless="${not #lists.isEmpty(getLicenseDateList)}">								
+									<option>등록된 정보가 없습니다.</option>
+                               		</select>
                               </div>
                           </div>
-                      </div>     
-                      <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3">
-                                  <label for="liCode" class="form-label"><h6>자격증 코드</h6></label><h12>&nbsp;&nbsp;예시)li000</h12>
-                                  <input type="text" id="liCode" class="form-control" name="liCode" placeholder="자격증 코드" disabled="disabled">
+                                  <label for="liName" class="form-label"></label>
+                                   <input type="hidden" id="liName" class="form-control" name="liName">
                               </div>
                           </div>
                       </div>                     
@@ -144,7 +169,7 @@
                           <div class="col-sm-6">
                               <div class="mb-3">
                                   <label for="ldDate" class="form-label"><h6>시험일</h6></label>
-                                  <input type="text" id="ldDate" class="form-control" name="ldDate" placeholder="시험일">
+                                  <input type="text" id="ldDate" class="form-control" name="ldDate" placeholder="시험일" disabled="disabled">
                               </div>
                           </div>
                       </div>
@@ -152,7 +177,7 @@
                           <div class="col-sm-6">
                               <div class="mb-3">
                                   <label for="ldAcceptanceDate" class="form-label"><h6>합격자 발표일</h6></label>
-                                  <input type="text" id="ldAcceptanceDate" class="form-control" name="ldAcceptanceDate" placeholder="합격자 발표일">
+                                  <input type="text" id="ldAcceptanceDate" class="form-control" name="ldAcceptanceDate" placeholder="합격자 발표일" disabled="disabled">
                               </div>
                           </div>
                       </div>
@@ -160,7 +185,7 @@
                           <div class="col-sm-6">
                               <div class="mb-3">
                                   <label for="ldCost" class="form-label"><h6>시험비용</h6></label>
-                                  <input type="text" id="ldCost" class="form-control" name="ldCost" placeholder="시험비용">
+                                  <input type="text" id="ldCost" class="form-control" name="ldCost" placeholder="시험비용" disabled="disabled">
                               </div>
                           </div>
                       </div>

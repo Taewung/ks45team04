@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ks45team04.sos.admin.dto.LicenseDate;
+import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.admin.mapper.LicenseDateMapper;
 import ks45team04.sos.admin.service.LicenseDateService;
 
@@ -88,10 +89,12 @@ private final LicenseDateMapper licenseDateMapper;
 			@GetMapping("/addlicenseDate")
 			public String addlicenseDate(Model model) {
 				
-				List<LicenseDate> licenseDateList = licenseDateMapper.LicenseDateList();
+				List<LicenseDate> getLicenseDateList = licenseDateMapper.getLicenseDateList();
+				List<LicenseInfo> licenseInfoList = licenseDateService.licenseInfoList();
+				System.out.println(getLicenseDateList);
 				
 				model.addAttribute("title", "자격증 일정 등록");
-				model.addAttribute("licenseDateList", licenseDateList);
+				model.addAttribute("getLicenseDateList", getLicenseDateList);
 				
 				return "admin/licenseDate/license_date_insert";
 			}
@@ -99,8 +102,12 @@ private final LicenseDateMapper licenseDateMapper;
 	
 			// 자격증 일정 조회
 			@GetMapping("/licenseDateList")
-			public String licenseDateList(Model model) {		
-				List<LicenseDate> licenseDateList = licenseDateService.licenseDateList();
+			public String licenseDateList(Model model
+										 ,@RequestParam(value="searchKey", required = false) String searchKey
+									     ,@RequestParam(value="searchValue", required = false) String searchValue) {		
+				
+				
+				List<LicenseDate> licenseDateList = licenseDateService.licenseDateList(searchKey, searchValue);
 				
 				model.addAttribute("title", "자격증 일정 조회");
 				model.addAttribute("licenseDateList", licenseDateList);

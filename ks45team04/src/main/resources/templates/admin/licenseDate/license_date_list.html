@@ -12,38 +12,51 @@
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-			 <h1>자격증 일정</h1>
+			 <h1><a th:href="@{/licenseDateList}">자격증 일정</a></h1>
                 <p class="pxp-text-light"></p>
                 <div class="mt-4 mt-lg-5">
+            <button  class="btn rounded-pill pxp-section-cta-o ms-3">
+		        <a th:href="@{/addlicenseDate}">자격증 일정 등록</a><br><br>
+	        </button>
                     <!-- 검색 start -->
-                    <div class="row justify-content-between align-content-center">
-                        <div class="col-auto order-1 order-sm-2">
-                            <div class="pxp-company-dashboard-jobs-search mb-3">
-                                <div class="pxp-company-dashboard-jobs-search-search-form">
-                                    <div class="input-group">
-                                        <span class="input-group-text"><span class="fa fa-search"></span></span>
-                                        <input type="text" class="form-control" placeholder="검색">
-                                    </div>
-                                </div>
-                                <button  class="btn rounded-pill pxp-section-cta-o ms-3">
-                                <a th:href="@{/addlicenseDate}">자격증 일정 등록</a>	
-                                </button>
+                    <div>
+  <form th:action="@{/licenseDateList}" method="GET">
+    <div class="row justify-content-between align-content-center">
+        <div class="col-auto order-2 order-sm-1">
+            <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
+                <div class="pxp-company-dashboard-jobs-search mb-3">
+                <select class="form-select" style="width:200px;" name="searchKey">
+                    <option value="ldCode">일정코드</option>
+                    <option value="liName">자격증명</option>
+                    <option value="ldRegDatetime">등록날짜</option>
+               </select>&nbsp;&nbsp;
+                    <div class="col-auto order-1 order-sm-2">
+                        <div class="pxp-company-dashboard-jobs-search-search-form">
+                            <div class="input-group">
+                                <span class="input-group-text"><span class="fa fa-search"></span></span>
+                                <input type="text" class="form-control" placeholder="검색어를 입력해주세요." name="searchValue">
+                                <button class="btn ms-2" type="submit">검색</button>
                             </div>
                         </div>
                     </div>
+                </div>              
+            </div>
+        </div>
+   	</div>
+ </form>
+ </div>
                     <!-- 검색 end -->   
                     <!-- 목록 start -->                   
                     <div class="table-responsive">
                         <table class="table table-hover align-middle">                      	
                             <thead>                    
                                 <tr>
-                                	<th></th>
                                     <th style="width: 10%;">일정코드</th>
-                                    <th style="width: 10%;">자격증코드</th>
-                                    <th style="width: 15%;">접수기간</th>
+                                    <th style="width: 15%;">자격증이름</th>
+                                    <th style="width: 13%;">접수기간</th>
                                     <th style="width: 15%;">시험날짜</th>
                                     <th style="width: 15%;">합격자발표일</th>
-                                    <th style="width: 15%;">응시비용</th>
+                                    <th style="width: 10%;">응시비용</th>
                                     <th style="width: 10%;">등록자</th>
                                     <th style="width: 25%;">등록날짜</th>
                                     <th>&nbsp;</th>
@@ -52,9 +65,8 @@
                             <tbody>
                                 <tr th:if="${not #lists.isEmpty(licenseDateList)}"
 									th:each="l : ${licenseDateList}">
-                                    <td><input type="checkbox" class="form-check-input"></td>
                                     <td><div class="pxp-company-dashboard-job-title" 	th:text="${l.ldCode}"></div>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.liCode}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.liName}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.ldPeriod}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.ldDate}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.ldAcceptanceDate}"></div></td>

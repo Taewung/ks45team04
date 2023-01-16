@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import ks45team04.sos.admin.dto.LicenseMain;
 import ks45team04.sos.admin.dto.LicenseSub;
 import ks45team04.sos.admin.mapper.LicenseSubMapper;
 
@@ -48,17 +49,62 @@ private final LicenseSubMapper licenseSubMapper;
 		return licenseSubMapper.addLicenseSub(licenseSub);
 	}
 	
+	/**
+	 * 자격증 중분류 선택을 위한 대분류 목록 조회
+	 * @return List<LicenseMain>
+	 */
+	public List<LicenseMain> licenseMainList(){
+		
+		List<LicenseMain> licenseMainList = licenseSubMapper.licenseMainList();
+		
+		return licenseMainList;
+	}
+	
+	/**
+	 * 자격증 중분류 등록을 위한 목록 조회
+	 * @return List<LicenseSub>
+	 */
+	public List<LicenseSub> getLicenseSubList(){
+		
+		List<LicenseSub> getLicenseSubList = licenseSubMapper.getLicenseSubList();
+		
+		return getLicenseSubList;
+	}
 	
 	
 	/**
 	 * 자격증 중분류 목록 조회
 	 * @return List<LicenseSub>
 	 */
-	public List<LicenseSub> LicenseSubList(){
+	public List<LicenseSub> LicenseSubList(String searchKey, String searchValue){
 		
-		List<LicenseSub> licenseSubList = licenseSubMapper.LicenseSubList();
+		if(searchKey != null) {
+			switch (searchKey) {
+			case "lscCode":
+				searchKey = "lsc.lsc_code";
+				break;
+			case "lmcName":
+				searchKey = "lsc.lmc_name";
+				break;
+			case "lscName":
+				searchKey = "lsc.lsc_name";
+				break;
+			case "lscRegDatetime":
+				searchKey = "lsc.lmc_reg_datetime";
+				break;
+			}
+		}
+		
+		List<LicenseSub> licenseSubList = licenseSubMapper.LicenseSubList(searchKey, searchValue);
 		
 		return licenseSubList;
 		
 	}
+	
+	
+	
+	
+	
+	
+	
 }

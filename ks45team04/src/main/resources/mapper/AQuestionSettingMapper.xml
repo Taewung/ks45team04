@@ -24,12 +24,12 @@
 		<result property="liCode" 					column="li_code"/>			
 		<result property="lsCode" 					column="ls_code"/>			
 		<result property="liName" 					column="li_name"/>			
-		<result property="lsNum" 					column="ls_num"/>			
+		<result property="lsSubject" 				column="ls_subject"/>			
 		<result property="lsName" 					column="ls_name"/>			
 		<result property="question" 				column="question"/>			
 		<result property="questionScore" 			column="question_score"/>			
 		<result property="questionRegId" 			column="question_reg_id"/>				
-		<result property="questionRegDateTime" 			column="question_reg_datetime"/>				
+		<result property="questionRegDateTime" 		column="question_reg_datetime"/>				
 	</resultMap>
 	<resultMap type="LicenseInfo" id="licenseInfoResultMap">
 		<id property="liCode" 				column="li_code"/>
@@ -42,29 +42,12 @@
 		<result property="liQualification" 	column="li_qualification"/>
 		<result property="liRegId" 			column="li_reg_id"/>
 		<result property="liRegDatetime" 	column="li_reg_datetime"/>
-		<collection property="licenseSubjectList" javaType="list" ofType="LicenseSubject">
-			<id property="lsCode" 				column="ls_code"/>
-			<result property="liCode" 			column="li_code"/>
-			<result property="liName" 			column="li_name"/>
-			<result property="lsSubject" 		column="ls_subject"/>
-			<result property="lsName" 			column="ls_name"/>
-			<result property="lsRegId" 			column="ls_reg_id"/>
-			<result property="lsRegDatetime" 	column="ls_reg_datetime"/>
-		</collection>
 	</resultMap>
 	<resultMap type="LicenseMain" id="licenseMainResultMap">
 		<id property="lmcCode" 				column="lmc_code"/>
 		<result property="lmcRegId" 		column="lmc_reg_id"/>
 		<result property="lmcName" 			column="lmc_name"/>
 		<result property="lmcRegDatetime" 	column="lmc_reg_datetime"/>
-		<collection property="licenseSubList" javaType="list" ofType="LicenseSub">
-			<id property="lscCode" 				column="lsc_code"/>
-			<result property="lmcCode" 			column="lmc_code"/>
-			<result property="lmcName" 			column="lmc_name"/>
-			<result property="lscName" 			column="lsc_name"/>
-			<result property="lscRegId" 		column="lsc_reg_id"/>
-			<result property="lscRegDatetime" 	column="lsc_reg_datetime"/>
-		</collection>
 	</resultMap>
 	<resultMap type="LicenseSub" id="licenseSubResultMap">
 		<id property="lscCode" 				column="lsc_code"/>
@@ -73,18 +56,6 @@
 		<result property="lscName" 			column="lsc_name"/>
 		<result property="lscRegId" 		column="lsc_reg_id"/>
 		<result property="lscRegDatetime" 	column="lsc_reg_datetime"/>
-		<collection property="licenseInfoList" javaType="list" ofType="LicenseInfo">
-			<id property="liCode" 				column="li_code"/>
-			<result property="lmcCode" 			column="lmc_code"/>
-			<result property="lmcName" 			column="lmc_name"/>
-			<result property="lscCode" 			column="lsc_code"/>
-			<result property="lscName" 			column="lsc_name"/>
-			<result property="liName" 			column="li_name"/>
-			<result property="liOverview" 		column="li_overview"/>
-			<result property="liQualification" 	column="li_qualification"/>
-			<result property="liRegId" 			column="li_reg_id"/>
-			<result property="liRegDatetime" 	column="li_reg_datetime"/>
-		</collection>
 	</resultMap>
 	<resultMap type="LicenseSubject" id="licenseSubjectResultMap">
 		<id property="lsCode" 				column="ls_code"/>
@@ -96,63 +67,119 @@
 		<result property="lsRegDatetime" 	column="ls_reg_datetime"/>
 	</resultMap>
 	
+<!-- 전체 -->
+	<select id="getQuestionCodeForQSet" resultMap="questionResultMap" parameterType="String">
+		/* 특정 문제코드 조회 */
+		SELECT
+			question_code
+		FROM
+			question
+		WHERE 	
+			question_code = #{questionCode};
+	</select>	
 <!-- 문제 -->
-	<select id="getSubjectInfoForQuestion" resultMap="licenseSubjectResultMap">
+	<update id="modifyQuestion" parameterType="Question">
+		/* 특정 문제정보 수정 */
+		UPDATE question 
+		SET 
+			 question = #{question}
+			,question_score = #{questionScore}
+			,question_reg_id = #{questionRegId}
+			,question_reg_datetime = NOW()
+		WHERE 
+			question_code = #{questionCode};
+	</update>
+
+	<select id="getQuestionByCode" parameterType="String" resultMap="questionResultMap">
+		/* 특정 문제정보 조회 */
+		SELECT
+			 q.question_code
+			,q.li_code
+			,q.ls_code
+			,q.li_name
+			,q.ls_subject
+			,q.ls_name
+			,q.question
+			,q.question_score
+			,q.question_reg_id
+			,q.question_reg_datetime
+		FROM
+			question AS q
+		WHERE 
+			question_code = #{questionCode};
+	</select>
+	<insert id="addQuestion" parameterType="Question">
+		/* 문제 등록 */
+		INSERT INTO question
+		(question_code, li_code, ls_code, li_name, ls_subject, ls_name, question, question_score, question_reg_id, question_reg_datetime)
+		VALUES
+		(#{questionCode},#{liCode},#{lsCode},#{liName},#{lsSubject},#{lsName},#{question},#{questionScore},#{questionRegId},NOW());
+	</insert>
+	<select id="getNewQuestionCode" parameterType="String" resultType="String">
+		/* 문제코드 자동생성 */
+		SELECT
+			CASE
+			WHEN COUNT(1) = 0 THEN CONCAT(#{question}, '_1')
+		ELSE
+			CONCAT('question_', MAX(CAST(SUBSTRING_INDEX(${questionCode}, 'question_', -1)AS UNSIGNED))+1)
+			END AS newCode
+		FROM
+			${question};
+	</select>
+	<select id="getSubjectInfoForQuestion" resultMap="licenseSubjectResultMap" parameterType="String">
 		/* 과목별 과목정보조회 */
 		SELECT
 			 ls.ls_code
+			,ls.li_name
+			,ls.li_code
 			,ls.ls_subject
 			,ls.ls_name
+			,ls.ls_reg_id
+			,ls.ls_reg_datetime
 		FROM
 			license_subject AS ls
 		WHERE
 			ls.ls_code = #{lsCode};	
 	</select>
-	<select id="getSubjectListForQuestion" resultMap="licenseInfoResultMap">	
+	<select id="getSubjectListForQuestion" resultMap="licenseSubjectResultMap" parameterType="String">	
 		/* 자격증별 과목 목록조회 */
 		SELECT
-			 li.li_code
-			,li.li_name
-			,ls.ls_code
-			,ls.ls_subject
-		FROM
-			license_info AS li
-			INNER JOIN 
-			license_subject AS ls
-			on
-			li.li_code = ls.li_code
-		WHERE 
-			ls.li_code = #{liCode};
+			ls.ls_code
+		   ,ls.ls_subject
+		FROM 
+		    license_subject AS ls
+		WHERE
+		    ls.li_code = #{liCode};
 	</select>
-	<select id="getLicenseListForQuestion" resultMap="licenseSubResultMap">	
+	<select id="getLiListForQuestion" resultMap="licenseInfoResultMap" parameterType="String">	
 		/* 중분류별 자격증 목록조회 */
-		SELECT
-			 ls.lsc_code
-			,ls.lsc_name
-			,li.li_code
+		SELECT 
+			 li.li_code
+			,li.lmc_code
+			,li.lmc_name
+			,li.lsc_code
+			,li.lsc_name
 			,li.li_name
+			,li.li_overview
+			,li.li_qualification
+			,li.li_reg_id
+			,li.li_reg_date
 		FROM
-			license_sub_category AS ls
-			INNER JOIN
 			license_info AS li
-			ON 
-			ls.lsc_code = li.lsc_code
 		WHERE 
-			li.lsc_code = #{lscCode};
+			li.lsc_code = #{lscCode};	
 	</select>
-	<select id="getSubListForQuestion" resultMap="licenseMainResultMap">	
+	<select id="getSubListForQuestion" resultMap="licenseSubResultMap" parameterType="String">	
 		/* 대분류별 중분류 목록조회 */
-		SELECT
-			 lm.lmc_code
-			,lm.lmc_name
-			,ls.lsc_code
+		SELECT 
+			 ls.lsc_code
+			,ls.lmc_code
+			,ls.lmc_name
 			,ls.lsc_name
+			,ls.lsc_reg_id
+			,ls.lsc_reg_datetime 
 		FROM
-			license_main_category AS lm
-			INNER JOIN 
 			license_sub_category AS ls
-			ON 
-			lm.lmc_code = ls.lmc_code
 		WHERE 
 			ls.lmc_code = #{lmcCode};
 	</select>
@@ -164,21 +191,26 @@
 		FROM
 			license_main_category AS lm;	
 	</select>
-	<select id="getQuestionList" resultMap="questionResultMap">
+	<select id="getQuestionList" resultType="Question" parameterType="String" resultMap="questionResultMap">
 		/* 전체 문제목록 조회 */
 		SELECT
-			 q.question_code
-			,q.li_code
-			,q.ls_code
-			,q.li_name
-			,q.ls_num
-			,q.ls_name
-			,q.question
-			,q.question_score
-			,q.question_reg_id
-			,q.question_reg_datetime
+			 question_code
+			,li_code
+			,ls_code
+			,li_name
+			,ls_subject
+			,ls_name
+			,question
+			,question_score
+			,question_reg_id
+			,question_reg_datetime
 		FROM
-			question AS q;
+			question
+		<where>
+			<if  test="searchKey != null and searchKey != ''">
+				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
+			</if>
+		</where>
 	</select>
 	
 <!-- 답안 -->
@@ -195,6 +227,49 @@
 			answer AS a
 		WHERE
 			a.question_code = #{questionCode};
+	</select>
+	<insert id="addAnswer" parameterType="Answer">
+		/* 답안 등록 */
+		INSERT INTO answer 
+		(answer_code, question_code, answer, answer_state, answer_reg_id, answer_reg_datetime)
+		VALUES
+		(#{answerCode}, #{questionCode}, #{answer}, #{answerState}, #{answerRegId}, NOW());
+	</insert>
+	<select id="getNewAnswerCode" parameterType="String" resultType="String">
+		/* 답안코드 자동생성 */
+		SELECT
+			CASE
+			WHEN COUNT(1) = 0 THEN CONCAT(#{answer}, '_1')
+		ELSE
+			CONCAT('answer_', MAX(CAST(SUBSTRING_INDEX(${answerCode}, 'answer_', -1)AS UNSIGNED))+1)
+			END AS newCode
+		FROM
+			${answer};
+	</select>
+	<update id="modifyAnswer" parameterType="Answer">
+		/* 특정 답안정보 수정 */
+		UPDATE answer AS a 
+		SET 
+			 answer = #{answer}
+			,answer_state = #{answerState}
+			,answer_reg_id = #{answerRegId}
+			,answer_reg_datetime = NOW()
+		WHERE 
+			answer_code = #{answerCode};
+	</update>
+	<select id="getAnswerByCode" parameterType="String" resultMap="answerResultMap">
+		/* 특정 답안정보 조회 */
+		SELECT
+			 answer_code
+			,question_code
+			,answer
+			,answer_state
+			,answer_reg_id
+			,answer_reg_datetime
+		FROM
+			answer 
+		WHERE
+			answer_code = #{answerCode};
 	</select>
 	
 <!-- 헤설 -->	

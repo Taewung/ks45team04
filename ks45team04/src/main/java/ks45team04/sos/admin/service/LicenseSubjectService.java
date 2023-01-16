@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.admin.dto.LicenseSubject;
 import ks45team04.sos.admin.mapper.LicenseSubjectMapper;
 
@@ -52,13 +53,55 @@ private final LicenseSubjectMapper licenSubjectMapper;
 	}
 	
 	
+
+	/**
+	 * 자격증 과목 등록을 위한 자격증 정보 목록 조회
+	 * @return List<LicenseInfo>
+	 */
+	public List<LicenseInfo> licenseInfoList(){
+		
+		List<LicenseInfo> licenseInfoList = licenSubjectMapper.licenseInfoList();
+		
+		return licenseInfoList;
+	}
+	
+	/**
+	 * 자격증 과목 등록을 위한 목록 조회
+	 * @return List<LicenseSubject>
+	 */
+	public List<LicenseSubject> getLicenseSubjectList(){
+		
+		List<LicenseSubject> getLicenseSubjectList = licenSubjectMapper.getLicenseSubjectList();
+		
+		return getLicenseSubjectList;
+	}
+	
+	
+	
 	/**
 	 * 자격증 과목 목록 조회
 	 * @return List<LicenseSubject>
 	 */
-	public List<LicenseSubject> LicenseSubjectList(){
+	public List<LicenseSubject> LicenseSubjectList(String searchKey, String searchValue){
 		
-		List<LicenseSubject> licenseSubjectList = licenSubjectMapper.LicenseSubjectList();
+		if(searchKey != null) {
+			switch (searchKey) {
+			case "lsCode":
+				searchKey = "ls_code";
+				break;
+			case "liName":
+				searchKey = "li_name";
+				break;
+			case "lsName":
+				searchKey = "ls_name";
+				break;
+			case "lsRegDatetime":
+				searchKey = "ls_reg_datetime";
+				break;
+			}
+		}
+		
+		List<LicenseSubject> licenseSubjectList = licenSubjectMapper.LicenseSubjectList(searchKey, searchValue);
 		
 		return licenseSubjectList;
 

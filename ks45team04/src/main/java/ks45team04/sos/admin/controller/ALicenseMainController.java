@@ -97,10 +97,10 @@ private final LicenseMainMapper licenseMainMapper;
 	@GetMapping("/addlicenseMain")
 	public String addlicenseMain(Model model) {
 		
-		List<LicenseMain> licenseMainList = licenseMainMapper.LicenseMainList();
+		List<LicenseMain> getLicenseMainList = licenseMainMapper.getlicenseMainList();
 		
 		model.addAttribute("title", "자격증 대분류 정보 등록");
-		model.addAttribute("licenseMainList", licenseMainList);
+		model.addAttribute("getLicenseMainList", getLicenseMainList);
 		
 		return "admin/licenseMain/license_main_insert";
 	}
@@ -108,12 +108,15 @@ private final LicenseMainMapper licenseMainMapper;
 	
 	// 자격증 대분류 정보 조회
 	@GetMapping("/licenseMainList")
-	public String licenseMainList(Model model) {
+	public String licenseMainList(Model model
+				 ,@RequestParam(value="searchKey", required = false) String searchKey
+			     ,@RequestParam(value="searchValue", required = false) String searchValue) {
 		
-		List<LicenseMain> licenseMainList = licenseMainService.LicenseMainList();
+		List<LicenseMain> licenseMainList = licenseMainService.LicenseMainList(searchKey, searchValue);
 		
 		model.addAttribute("title", "자격증 대분류 조회");
 		model.addAttribute("licenseMainList", licenseMainList);
+		
 		
 		
 		

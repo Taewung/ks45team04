@@ -50,14 +50,40 @@ private final LicenseMainMapper licenseMainMapper;
 		return licenseMainMapper.addLicenseMain(licenseMain);
 	}
 	
+	/**
+	 * 자격증 대분류 등록을 위한 목록조회
+	 * 
+	 */
+	public List<LicenseMain> getLicenseMainList(){
+		
+		List<LicenseMain> getLicenseMainList = licenseMainMapper.getlicenseMainList();
+		
+		return getLicenseMainList;
+		
+	}
+	
 	
 	/**
 	 * 자격증 대분류 목록 조회
 	 * @return List<LicenseMain>
 	 */
-	public List<LicenseMain> LicenseMainList(){
+	public List<LicenseMain> LicenseMainList(String searchKey, String searchValue){
 		
-		List<LicenseMain> licenseMainList = licenseMainMapper.LicenseMainList();
+		if(searchKey != null) {
+			switch (searchKey) {
+			case "lmcCode":
+				searchKey = "lmc_code";
+				break;
+			case "lmcName":
+				searchKey = "lmc_name";
+				break;
+			case "lmcRegDatetime":
+				searchKey = "lmc_reg_datetime";
+				break;
+			}
+		}
+		
+		List<LicenseMain> licenseMainList = licenseMainMapper.LicenseMainList(searchKey, searchValue);
 		
 		return licenseMainList;
 	}

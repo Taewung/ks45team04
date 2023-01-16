@@ -17,44 +17,35 @@
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-<h1>자격증 대분류 수정</h1>
+<h1><a th:href="@{/licenseInofoList}">자격증 정보 수정</a></h1>
 		<form id="modifyLicenseInfoForm" th:action="@{/modifylicenseInfo}" name="myform" method="post">
               <div class="row mt-4 mt-lg-5">
                   <div class="col-xxl-8">
-                      <div class="row">
+                      <div class="row">      
                       <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3">
-                                  <label for="liRegId" class="form-label"><h4>관리자 아이디</h4></label>
-                                  <input type="text" id="liRegId" class="form-control" name="liRegId" placeholder="관리자 아이디"
-                                  		 th:value="${licenseInfo.liRegId}" readonly="readonly">
+                                  <label for="lmcName" class="form-label"><h6>자격증 대분류명</h6></label><h12></h12>
+                                  <input type="text" id="lmcName" class="form-control" name="lmcName" placeholder="자격증 대분류명"
+                                  		 th:value="${licenseInfo.licenseMain.lmcName}" readonly="readonly">
                               </div>
                           </div>
-                      </div><br><br>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lscName" class="form-label"><h6>자격증 중분류명</h6></label><h12></h12>
+                                  <input type="text" id="lscName" class="form-control" name="lscName" placeholder="자격증 대분류명"
+                                  		 th:value="${licenseInfo.licenseSub.lscName}" readonly="readonly">
+                              </div>
+                          </div>
+                      </div>
                       <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3">
                                   <label for="liCode" class="form-label"><h6>자격증 코드</h6></label><h12></h12>
                                   <input type="text" id="liCode" class="form-control" name="liCode" placeholder="자격증 코드"
                                   		 th:value="${licenseInfo.liCode}" readonly="readonly">
-                              </div>
-                          </div>
-                      </div> 
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="mb-3">
-                                  <label for="lmcCode" class="form-label"><h6>자격증 대분류 코드</h6></label><h12></h12>
-                                  <input type="text" id="lmcCode" class="form-control" name="lmcCode" placeholder="자격증 대분류 코드"
-                                  		 th:value="${licenseInfo.lmcCode}" readonly="readonly">
-                              </div>
-                          </div>
-                      </div>                     
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="mb-3">
-                                  <label for="lscCode" class="form-label"><h6>자격증 중분류 코드</h6></label>
-                                  <input type="text" id="lscCode" class="form-control" name="lscCode" placeholder="자격증 중분류 코드"
-                                         th:value="${licenseInfo.lscCode}" readonly="readonly">
                               </div>
                           </div>
                       </div>

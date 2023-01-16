@@ -13,7 +13,7 @@
 		</script>
 	</th:block> 
 	<th:block layout:fragment="customContents">
-		<h1>자격증 중분류 수정</h1>
+		<h1><a th:href="@{/licenseSubList}">자격증 중분류 수정</a></h1>
 		<form id="modifyLicenseSubForm" th:action="@{/modifylicenseSub}" name="myform" method="post">
               <div class="row mt-4 mt-lg-5">
                   <div class="col-xxl-8">
@@ -22,14 +22,15 @@
                       <div class="row">
                       </div><br>
                       <div class="row">
+                      <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3">
-                                  <label for="lscRegId" class="form-label"><h4>관리자 아이디</h4></label>
-                                  <input type="text" id="lscRegId" class="form-control" name="lscRegId" placeholder="관리자 아이디" readonly="readonly"
-                                  		 th:value="${licenseSubInfo.lscRegId}">
+                                  <label for="lmcName" class="form-label"><h6>자격증 대분류명</h6></label>
+                                  <input type="text" id="lmcName" class="form-control" name="lmcName" placeholder="자격증 대분류명" readonly="readonly" 
+                                  		 th:value="${licenseSubInfo.lmcName}">
                               </div>
                           </div>
-                      </div><br><br>
+                      </div>  
                       <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3">
@@ -38,25 +39,7 @@
                                   		 th:value="${licenseSubInfo.lscCode}">
                               </div>
                           </div>
-                      </div>
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="mb-3">
-                                  <label for="lmcCode" class="form-label"><h6>자격증 대분류코드</h6></label>
-                                  <input type="text" id="lmcCode" class="form-control" name="lmcCode" placeholder="자격증 대분류코드" readonly="readonly"
-                                  		 th:value="${licenseSubInfo.lmcCode}">
-                              </div>
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="mb-3">
-                                  <label for="lmcName" class="form-label"><h6>자격증 대분류명</h6></label>
-                                  <input type="text" id="lmcName" class="form-control" name="lmcName" placeholder="자격증 대분류명" 
-                                  		 th:value="${licenseSubInfo.lmcName}">
-                              </div>
-                          </div>
-                      </div>                      
+                      </div>              
                       <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3">

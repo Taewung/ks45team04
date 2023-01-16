@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ks45team04.sos.admin.dto.LicenseInfo;
+import ks45team04.sos.admin.dto.LicenseMain;
+import ks45team04.sos.admin.dto.LicenseSub;
 import ks45team04.sos.admin.mapper.LicenseInfoMapper;
 import ks45team04.sos.admin.service.LicenseInfoService;
 
@@ -58,6 +60,7 @@ private final LicenseInfoMapper licenseInfoMapper;
 		public String modifylicenseInfo(@RequestParam(value="liCode") String liCode
 										,Model model) {
 			LicenseInfo licenseInfo = licenseInfoService.getLicenseInfoByCode(liCode);
+			System.out.println(licenseInfo);
 			
 			
 			model.addAttribute("title", "자격증 정보 수정");
@@ -86,23 +89,43 @@ private final LicenseInfoMapper licenseInfoMapper;
 			return "redirect:/licenseInofoList";
 		}
 		
+		
+		// 자격증 대분류별 중분류 조회
+		@GetMapping("/ALicenseSubCategory")
+		@ResponseBody
+		public List<LicenseSub> licenseSubList (@RequestParam(value="lmcCode") String lmcCode){
+			
+			List<LicenseSub> licenseSubList = licenseInfoService.licenseSubList(lmcCode);
+			System.out.println(licenseSubList);
+			
+			
+			return licenseSubList;
+		}	
+		
 		// 자격증 정보 등록 화면
 		@GetMapping("/addlicenseInfo")
 		public String addlicenseInfo(Model model) {
 			
-			List<LicenseInfo> licenseInfoList = licenseInfoMapper.LicenseInfoList();
+			List<LicenseInfo> getLicenseInfoList = licenseInfoMapper.getLicenseInfoList();
+			List<LicenseMain> licenseMainList = licenseInfoService.licenseMainList();
+			System.out.println(licenseMainList);
 			
 			model.addAttribute("title", "자격증 정보 등록");
-			model.addAttribute("licenseInfoList", licenseInfoList);
+			model.addAttribute("getLicenseInfoList", getLicenseInfoList);
+			model.addAttribute("licenseMainList", licenseMainList);
+			
 			
 			return "admin/licenseInfo/license_info_insert";
 		}
 		
 		// 자격증 정보 조회
 		@GetMapping("/licenseInofoList")
-		public String licenseInofoList(Model model) {
+		public String licenseInofoList(Model model
+									  ,@RequestParam(value="searchKey", required = false) String searchKey
+								      ,@RequestParam(value="searchValue", required = false) String searchValue) {
 			
-			List<LicenseInfo> licenseInfoList = licenseInfoService.LicenseInfoList();
+			List<LicenseInfo> licenseInfoList = licenseInfoService.LicenseInfoList(searchKey, searchValue);
+			System.out.println(licenseInfoList);
 			
 			model.addAttribute("title", "자격증 정보 조회");
 			model.addAttribute("licenseInfoList", licenseInfoList);

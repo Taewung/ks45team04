@@ -6,7 +6,7 @@ public class Question {
 	private String liCode;
 	private String lsCode;
 	private String liName;
-	private String lsNum;
+	private String lsSubject;
 	private String lsName;
 	private String question;
 	private int questionScore;
@@ -36,11 +36,11 @@ public class Question {
 	public void setLiName(String liName) {
 		this.liName = liName;
 	}
-	public String getLsNum() {
-		return lsNum;
+	public String getLsSubject() {
+		return lsSubject;
 	}
-	public void setLsNum(String lsNum) {
-		this.lsNum = lsNum;
+	public void setLsSubject(String lsSubject) {
+		this.lsSubject = lsSubject;
 	}
 	public String getLsName() {
 		return lsName;
@@ -83,8 +83,8 @@ public class Question {
 		builder.append(lsCode);
 		builder.append(", liName=");
 		builder.append(liName);
-		builder.append(", lsNum=");
-		builder.append(lsNum);
+		builder.append(", lsSubject=");
+		builder.append(lsSubject);
 		builder.append(", lsName=");
 		builder.append(lsName);
 		builder.append(", question=");
@@ -98,6 +98,8 @@ public class Question {
 		builder.append("]");
 		return builder.toString();
 	}
+
+
 	
 	
 }
