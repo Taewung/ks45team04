@@ -140,7 +140,7 @@ public class QuestionSettingController {
 		log.info("특정 답안조회 : {}", answerByCode);
 		return "admin/questionSetting/modify_Answer";
 	}
-	// 문제코드별 답안등록
+	// 문제코드별 답안등록 처리
 	@PostMapping("/addAnswer")
 	public String addAnswer(Answer answer) {
 		// answerCode 자동생성
@@ -152,7 +152,7 @@ public class QuestionSettingController {
 		String qCode = answer.getQuestionCode(); 
 		return "redirect:/answerList?questionCode="+qCode;
 	}	
-	// 문제코드별 답안등록
+	// 문제코드별 답안등록 화면
 	@GetMapping("/addAnswer")
 	public String addAnswer(Model model, @RequestParam(value="questionCode", required=false) String questionCode) {
 		Question questionCodeForQSet = questionSettingService.getQuestionCodeForQSet(questionCode);
@@ -164,31 +164,62 @@ public class QuestionSettingController {
 	// 문제코드별 답안목록조회
 	@GetMapping("/answerList")
 	public String answerList(Model model
-							,@RequestParam(value="questionCode", required=false) String questionCode) {
-		List<Answer> answerList = questionSettingService.getAnswerList(questionCode);;
-		String qCode = answerList.get(0).getQuestionCode();						
+							,@RequestParam(value="questionCode", required=false) String questionCode) {		
+		Question questionCodeForQSet = questionSettingService.getQuestionCodeForQSet(questionCode);		
+		List<Answer> answerList = questionSettingService.getAnswerList(questionCode);				
 		model.addAttribute("answerList", answerList);
 		model.addAttribute("title", "답안목록");
-		model.addAttribute("qCode", qCode);
+		model.addAttribute("questionCodeForQSet", questionCodeForQSet);
 		log.info("문제코드별 답안목록조회 : {}", answerList);
 		return "admin/questionSetting/answer_list";
 	}
 	
 	/* ------------------해설------------------ */
-	// 문제코드별 해설수정
-	@GetMapping("/modifyExplanation")
-	public String modifyExplanation(Model model) {
-		return "admin/questionSetting/modify_explanation";
+	// 문제코드별 해설수정 처리
+	@PostMapping("/modifyExplanation")
+	public String modifyExplanation(Explanation explanation) {
+		explanation.setExplanationRegId("id002");
+		questionSettingService.modifyExpalantion(explanation);
+		log.info("특정 해설수정 : {}", explanation);
+		String qCode = explanation.getQuestionCode();
+		return "redirect:/explanationList?questionCode="+qCode;
 	}
-	// 문제코드별 해설등록
+	// 문제코드별 해설수정 화면
+	@GetMapping("/modifyExplanation")
+	public String modifyExplanation(Model model, @RequestParam(value="explainCode", required=false) String explainCode) {
+		Explanation explanationByCode = questionSettingService.getExplanationByCode(explainCode);
+		model.addAttribute("explanationByCode", explanationByCode);
+		model.addAttribute("title","해설수정");
+		log.info("특정 해설조회 : {}", explanationByCode);
+		return "admin/questionSetting/modify_explanation"; 
+	}
+	// 문제코드별 해설등록 처리
+	@PostMapping("/addExplanation")
+	public String addExplanation(Explanation explanation) {
+		// explainCode 자동생성
+		String newExplainCode = questionSettingService.getNewExplainCode("explanation", "explain_code");
+		explanation.setExplanationRegId("id002");
+		explanation.setExplainCode(newExplainCode);
+		questionSettingService.addExplanation(explanation);
+		log.info("해설등록 쿼리파라미터: {}", explanation);
+		String qCode = explanation.getQuestionCode();
+		return "redirect:/explanationList?questionCode="+qCode;
+	}	
+	// 문제코드별 해설등록 화면
 	@GetMapping("/addExplanation")
-	public String addExplanation(Model model) {
+	public String addExplanation(Model model, @RequestParam(value="questionCode", required=false) String questionCode) {
+		Question questionCodeForQSet = questionSettingService.getQuestionCodeForQSet(questionCode);
+		model.addAttribute("questionCodeForQSet", questionCodeForQSet);
+		model.addAttribute("title", "해설등록");
+		log.info("특정 문제코드 조회 : {}", questionCodeForQSet);
 		return "admin/questionSetting/add_explanation";
 	}
 	// 문제코드별 해설목록
 	@GetMapping("/explanationList")
 	public String explanationList(@RequestParam(value="questionCode", required=false) String questionCode, Model model) {
+		Question questionCodeForQSet = questionSettingService.getQuestionCodeForQSet(questionCode);
 		List<Explanation> explanationList = questionSettingService.getExplanationList(questionCode);
+		model.addAttribute("questionCodeForQSet", questionCodeForQSet);
 		model.addAttribute("explanationList", explanationList);
 		model.addAttribute("title", "해설목록");
 		log.info("문제코드별 해설조회 : {}", questionCode);

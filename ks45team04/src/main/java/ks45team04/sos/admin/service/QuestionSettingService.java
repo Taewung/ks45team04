@@ -21,7 +21,7 @@ public class QuestionSettingService {
 	public QuestionSettingService(QuestionSettingMapper questionSettingMapper) {
 		this.questionSettingMapper = questionSettingMapper;
 	}
-	/* 전체 */
+	/* ******************전체****************** */	
 	/**
 	 * 특정 문제코드 조회
 	 * @param questionCode
@@ -31,7 +31,7 @@ public class QuestionSettingService {
 		Question questionCodeForQSet = questionSettingMapper.getQuestionCodeForQSet(questionCode);		
 		return questionCodeForQSet;
 	}
-	/* 답안 */	
+	/* ******************답안****************** */	
 	/**
 	 * 문제코드별 답안목록조회
 	 * @param questionCode
@@ -76,7 +76,7 @@ public class QuestionSettingService {
 		Answer answerByCode = questionSettingMapper.getAnswerByCode(answerCode);
 		return answerByCode;
 	}
-	/* 해설 */
+	/* ******************해설****************** */	
 	/**
 	 * 문제코드별 해설목록조회
 	 * @param questionCode
@@ -86,8 +86,43 @@ public class QuestionSettingService {
 		List<Explanation> explanationList = questionSettingMapper.getExplanationList(questionCode);
 		return explanationList;
 	}
+	/**
+	 * 해설 등록
+	 * @param explanation
+	 */
+	public void addExplanation(Explanation explanation) {
+		questionSettingMapper.addExplanation(explanation);
+	}
+	/**
+	 * explanation코드 자동생성
+	 * @param explanation
+	 * @param explainCode
+	 * @return newExplainCode
+	 */
+	public String getNewExplainCode(String explanation, String explainCode) {
+		String newExplainCode = questionSettingMapper.getNewExplainCode(explanation, explainCode);
+		return newExplainCode;
+	}
+	/**
+	 * 특정 해설정보 수정
+	 * @param explanation
+	 * @return int (update 쿼리 실행 결과)
+	 */
+	public int modifyExpalantion(Explanation explanation) {
+		int modifyResult = questionSettingMapper.modifyExpalantion(explanation);				
+		return modifyResult;
+	}
+	/**
+	 * 특정 해설정보 조회
+	 * @param explainCode
+	 * @return explanationrByCode
+	 */
+	public Explanation getExplanationByCode(String explainCode) {
+		Explanation explanationByCode = questionSettingMapper.getExplanationByCode(explainCode);
+		return explanationByCode;
+	}
 	
-	/* 문제 */
+	/* ******************문제****************** */	
 	/**
 	 * 특정 문제정보 수정
 	 * @param question

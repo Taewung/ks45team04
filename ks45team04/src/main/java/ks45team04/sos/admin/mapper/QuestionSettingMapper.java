@@ -57,5 +57,12 @@ public interface QuestionSettingMapper {
 	/* ------------------해설------------------ */
 	// 문제코드별 해설목록조회
 	public List<Explanation> getExplanationList(String questionCode);
-
+	// 해설코드 자동생성
+	public String getNewExplainCode(String explanation, String explainCode);
+	// 해설등록
+	public int addExplanation(Explanation explanation);
+	// 특정 해설정보 조회
+	public Explanation getExplanationByCode(String explainCode);
+	// 특정 해설정보 수정
+	public int modifyExpalantion(Explanation explanation);
 }

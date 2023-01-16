@@ -14,13 +14,16 @@
 	<th:block layout:fragment="customContents">
 		<h1>답안목록</h1>
 		<p class="pxp-text-light">Answer List</p>
-		<div class="pxp-dashboard-table-options" >
-			<ul class="list-unstyled">
-				<a th:href="@{/addAnswer(questionCode=${qCode})}">
-					<li><button title="Add"><span class="fa fa-plus"></span></button></li>
-				</a>
-			</ul>
-		</div>
+		<th:block th:object="${questionCodeForQSet}">
+		
+			<div class="pxp-dashboard-table-options" >
+				<ul class="list-unstyled">
+					<a th:href="@{/addAnswer(questionCode=*{questionCode})}">
+						<li><button title="Add"><span class="fa fa-plus"></span></button></li>
+					</a>
+				</ul>
+			</div>
+		</th:block>
 		<div class="table-responsive" style="overflow-x: hidden">
 			<form>
 				<th:block>
