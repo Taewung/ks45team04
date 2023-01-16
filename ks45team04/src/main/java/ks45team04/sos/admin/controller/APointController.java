@@ -96,21 +96,22 @@ public class APointController {
 	// 포인트 적립 기준 등록 처리
 	@PostMapping("/addPointSaveStandard")
 	public String addPointSaveStandard(PointSaveStandard PointSaveStandard) {
+		
 		System.out.println(PointSaveStandard);
+		
 		pointSaveStandardService.addPointSaveStandard(PointSaveStandard);
 		
 		return "redirect:/pointSaveStandardList";
 	}
 	
-	
 	// 포인트 적립 기준 등록 화면
 	@GetMapping("/addPointSaveStandard")
 	public String addPointSaveStandard(Model model) {
 		
-		List<PointSaveStandard> pointSaveStandardList = pointSaveStandardMapper.pointSaveStandardList();
+		//List<PointSaveStandard> pointSaveStandardList = pointSaveStandardMapper.pointSaveStandardList();
 		
 		model.addAttribute("title", "포인트 적립 기준 등록");
-		model.addAttribute("pointSaveStandardList", pointSaveStandardList);
+		//model.addAttribute("pointSaveStandardList", pointSaveStandardList);
 		
 		return "admin/point/point_save_standard_insert";
 	}
@@ -230,9 +231,6 @@ public class APointController {
 		
 		return "redirect:/pointSaveUseList";
 	}
-	
-	
-	
 	
 	// 포인트 적립 등록 화면
 	@GetMapping("/pointSaveUseAdd")

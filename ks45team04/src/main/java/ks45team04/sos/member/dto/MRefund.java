@@ -12,6 +12,14 @@ public class MRefund {
 	private String refundDatetime;
 	private String refundApprovalId;
 	
+	private MPay mpay;
+	
+	public MPay getMpay() {
+		return mpay;
+	}
+	public void setMpay(MPay mpay) {
+		this.mpay = mpay;
+	}
 	public String getRefundCode() {
 		return refundCode;
 	}
@@ -77,7 +85,9 @@ public class MRefund {
 		return "MRefund [refundCode=" + refundCode + ", payCompleteCode=" + payCompleteCode + ", payId=" + payId
 				+ ", refundReason=" + refundReason + ", finalPayPrice=" + finalPayPrice + ", refundPrice=" + refundPrice
 				+ ", refundPoint=" + refundPoint + ", refundState=" + refundState + ", refundDatetime=" + refundDatetime
-				+ ", refundApprovalId=" + refundApprovalId + "]";
+				+ ", refundApprovalId=" + refundApprovalId + ", mpay=" + mpay + "]";
 	}
+	
+	
 	
 }

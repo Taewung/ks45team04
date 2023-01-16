@@ -21,10 +21,10 @@
 			</association>
 		</resultMap>
 
-	<select id="pointSaveStandardList" resultType="PointSaveStandard">
-		/* 포인트 적립기준 조회*/
+	<select id="PointSaveStandardList" resultType="PointSaveStandard">
+		/* 포인트 적립기준 내용 내역 조회*/
 		SELECT 
-			*
+			point_save_standard_content
 		FROM
 			point_save_standard;
 	</select>
@@ -37,11 +37,12 @@
 		(
 			point_save_use_code,
 			point_save_use_id,
+			save_use,
 			point_save_use_reason, 
 			point_save_use_point, 
 			save_use_datetime
 		)VALUES(
-			sf_point_save_use_code(), #{pointSaveUseId}, #{pointSaveUseReason}, #{point_save_use_point}, NOW()
+			sf_point_save_use_code(),#{pointSaveUseId}, #{saveUse}, #{pointSaveUseReason}, #{pointSaveUsePoint}, NOW()
 		);
 	</insert>
 

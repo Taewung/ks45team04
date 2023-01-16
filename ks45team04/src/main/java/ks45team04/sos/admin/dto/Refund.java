@@ -12,7 +12,7 @@ public class Refund {
 	private String refundDatetime;
 	private String refundApprovalId;
 		
-	
+
 	public String getRefundCode() {
 		return refundCode;
 	}
@@ -80,6 +80,8 @@ public class Refund {
 				+ ", refundPoint=" + refundPoint + ", refundState=" + refundState + ", refundDatetime=" + refundDatetime
 				+ ", refundApprovalId=" + refundApprovalId + "]";
 	}
+	
+	
 	
 
 }

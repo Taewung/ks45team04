@@ -15,7 +15,19 @@
 		<result property="refundState" 			column="refund_state"/>
 		<result property="refundDatetime" 		column="refund_datetime"/>
 		<result property="refundApprovalId" 	column="refund_approval_id"/>
+		
+
 	</resultMap>
+		
+	<insert id="refundRequest" parameterType="MPay">
+		/* 환불 신청 사유 등록 */
+		INSERT INTO refund_info
+		(
+			refund_code, pay_complete_code, pay_id, final_pay_price, refund_price, refund_point, refund_datetime, refund_reason
+		)VALUES(
+			sf_refund_code(), #{payCompleteCode}, #{payId}, #{finalPayPrice}, #{refundPrice}, #{refundPoint}, NOW(), #{refundReason}
+		);
+	</insert>
 	
 	<select id="mRefundList" resultMap="mRefundResultMap">
 		/* 환불 내역 조회*/
