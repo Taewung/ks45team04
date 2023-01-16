@@ -28,12 +28,13 @@
 	    	<div class="pxp-container" id="licenseInfoList">
 				<section>
             <div class="pxp-container">
-                <div class="pxp-single-candidate-hero pxp-cover pxp-boxed" style="background-image: url(images/ph-big.jpg);">
+                <div class="pxp-single-candidate-hero pxp-cover pxp-boxed">
+                <img th:src="@{|/licenseImage/${licenseInfoListImage}|}">
                     <div class="pxp-hero-opacity"></div>
                     <div class="pxp-single-candidate-hero-caption">
                         <div class="pxp-container">
                             <div class="pxp-single-candidate-hero-content">
-                                <div class="pxp-single-candidate-hero-avatar" style="background-image: url(images/ph-small.jpg);"></div>
+                               
                                 <div class="pxp-single-candidate-hero-name">
                                     <h1 th:text="${licenseInfoListLimcName}"></h1>
                                     <div class="pxp-single-candidate-hero-title" th:text="${licenseInfoListLiscName}"></div>

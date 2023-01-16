@@ -34,6 +34,8 @@ public class LicenseMainPageController {
 		
 		List<LicenseInfo> licenseInfoList = mLicenseInfoService.getLicenseInfo(liCode);
 		
+		
+		
 		String licenseInfoListLiName = licenseInfoList.get(0).getLiName();
 		String licenseInfoListLimcName = licenseInfoList.get(0).getLmcName();
 		String licenseInfoListLiscName = licenseInfoList.get(0).getLscName();
@@ -44,6 +46,7 @@ public class LicenseMainPageController {
 		String licenseInfoListLdAcceptanceDate = licenseInfoList.get(0).getLicenseDate().getLdAcceptanceDate();
 		String licenseInfoListLdCost = licenseInfoList.get(0).getLicenseDate().getLdCost();
 		String licenseInfoListImage = licenseInfoList.get(0).getLiImage();
+		System.out.println(licenseInfoListImage);
 		
 		
 		model.addAttribute("title", "자격증 상세보기 화면 조회");

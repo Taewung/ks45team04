@@ -8,6 +8,28 @@
 	<!-- script start -->
 	<th:block layout:fragment="customScript">
 	<script>
+	$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+		function validateValue(checkValue) {
+			if(    typeof checkValue == 'undefined' 
+					|| checkValue == null 
+					|| checkValue == ''					){
+				return true;
+			}
+			return false;
+			
+		}
+	
+
+		// 취소 버튼 클릭시 리다이렉트
+		$(function(){
+			$('#resetBtn').click(function(){
+				location.href = '/noteList';
+			});
+		});
+		
+
+		
+		// 노트이름 클릭시 노트코드 자동 등록
 		$(function(){
 			$('#liName').val($('#liCode option:selected').text());
 			$(document).on('change', '#liCode', function(){
@@ -15,13 +37,32 @@
 				let selectedLiName = $('#liCode option:selected').text();
 				$('#liName').val(selectedLiName);
 			});
-			
-			$(document).on('click', '.addNote', function(){
-				$('#addNoteForm').submit();
-			});
-		})
+		});
+		
+	
 
-	    	    
+		/* 유효성검사를 구현하시오. (#submitBtn 를 클릭 시) */
+		$('#submitBtn').click(function(){
+			let isSubmit = true;
+			
+			$('#addNoteForm input').each(function(idx, item){
+				let checkValue = $(item).val();
+				let labelValue = $(item).parent('.mb-3').find('label').text();
+				if(validateValue(checkValue)){
+					
+					alert(`${labelValue}를 입력해주세요`);
+					$(item).focus();
+					isSubmit = false;
+					return false;
+				}
+				
+			});   
+
+			if(isSubmit) $('#addNoteForm').submit();
+		});
+		
+		
+	});
 
 	</script>
 	</th:block> 
@@ -95,10 +136,6 @@
                                 <input type="file" id="pxp-candidate-cover-choose-file" accept="image/*">
                                 <label for="pxp-candidate-cover-choose-file" class="pxp-cover"><span>사진 첨부</span></label>
                             </div>
-                            <div class="pxp-candidate-cover mb-3">
-                                <input type="file" id="pxp-candidate-cover-choose-file" accept="image/*">
-                                <label for="pxp-candidate-cover-choose-file" class="pxp-cover"><span>사진 첨부</span></label>
-                            </div>
                         </div>
                     </div>
 
@@ -108,7 +145,8 @@
                     </div>
 
                     <div class="mt-4 mt-lg-5" style='text-align:center'>
-                        <button type="button" class="btn rounded-pill pxp-section-cta addNote">등록</button>
+                        <button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta addNote">등록</button>&nbsp;&nbsp;
+                        <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
                     </div>
                 </form>
             </div>

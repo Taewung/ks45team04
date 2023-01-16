@@ -63,14 +63,13 @@
 				li_name, 
 				note_name,
 				note_info, 
-				note_prev_file,
 				note_file,
 				note_price,
 				note_reg_date
 				)
 			VALUES
 				(sf_new_note_code(), #{noteWriterId}, #{liCode}, #{liName}, #{noteName},
-				#{noteInfo}, #{notePrevFile}, #{noteFile}, #{notePrice}, CURDATE());
+				#{noteInfo}, #{noteFile}, #{notePrice}, CURDATE());
 	</insert>
 	
 	
@@ -100,7 +99,6 @@
 			,note_info
 			,li_name
 			,note_price
-			,note_prev_file
 			,note_file
 		FROM
 			note
