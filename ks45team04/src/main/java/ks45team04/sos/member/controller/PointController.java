@@ -8,8 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ks45team04.sos.member.dto.MPointRefund;
 import ks45team04.sos.member.dto.MPointSaveStandard;
 import ks45team04.sos.member.dto.MPointSaveUse;
+import ks45team04.sos.member.service.MPointRefundService;
 import ks45team04.sos.member.service.MPointSaveStandardService;
 import ks45team04.sos.member.service.MPointSaveUseService;
 
@@ -20,12 +22,15 @@ public class PointController {
 
 	private final MPointSaveUseService mPointSaveUseService;
 	private final MPointSaveStandardService mPointSaveStandardService;
+	private final MPointRefundService mPointRefundService;
 	
 	public PointController(MPointSaveUseService mPointSaveUseService,
-							MPointSaveStandardService mpointSaveStandardService) {
+							MPointSaveStandardService mpointSaveStandardService,
+							MPointRefundService mPointRefundService) {
 		
 		this.mPointSaveUseService = mPointSaveUseService;
 		this.mPointSaveStandardService = mpointSaveStandardService;
+		this.mPointRefundService = mPointRefundService;
 	}
 	
 
@@ -74,7 +79,10 @@ public class PointController {
 	@GetMapping("/pointRefundList")
 	public String pointRefundList(Model model) {
 		
+		List<MPointRefund> mPointRefundList = mPointRefundService.MPointRefundList();
+				
 		model.addAttribute("title", "포인트 환급 조회");
+		model.addAttribute("mPointRefundList", mPointRefundList);
 		
 		
 		return "member/point/point_refund_list";
