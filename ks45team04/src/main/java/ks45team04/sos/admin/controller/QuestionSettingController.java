@@ -154,7 +154,7 @@ public class QuestionSettingController {
 	}	
 	// 문제코드별 답안등록 화면
 	@GetMapping("/addAnswer")
-	public String addAnswer(Model model, @RequestParam(value="questionCode", required=false) String questionCode) {
+	public String addAnswer(Model model,@RequestParam(value="questionCode", required=false) String questionCode) {
 		Question questionCodeForQSet = questionSettingService.getQuestionCodeForQSet(questionCode);
 		model.addAttribute("questionCodeForQSet", questionCodeForQSet);
 		model.addAttribute("title", "답안등록");

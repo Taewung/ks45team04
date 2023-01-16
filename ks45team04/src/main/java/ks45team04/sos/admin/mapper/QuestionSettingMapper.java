@@ -8,7 +8,6 @@ import ks45team04.sos.admin.dto.Answer;
 import ks45team04.sos.admin.dto.Explanation;
 import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.admin.dto.LicenseMain;
-import ks45team04.sos.admin.dto.LicensePassScore;
 import ks45team04.sos.admin.dto.LicenseSub;
 import ks45team04.sos.admin.dto.LicenseSubject;
 import ks45team04.sos.admin.dto.Question;
