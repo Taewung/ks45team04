@@ -13,8 +13,8 @@
 	<th:block layout:fragment="customContents">
 		<h1>과목합격기준점수등록</h1>
     	<p class="pxp-text-light">Add Subject Pass Score</p>	      
-        	<form >
-                <th:block>
+        	<form id="addSubjectPassScoreForm" th:action="@{/addSubjectPassScore}" method="post">
+                <th:block th:object="${liInfoForLsPScore}">
                 	<div class="row mt-4 mt-lg-5">                  
                 		<h2><strong><span class="fa fa-check"></span>자격증</strong></h2>
                         <div class="col-md-6 col-xxl-3">
@@ -31,32 +31,38 @@
                         </div>                
                         <div class="col-md-6 col-xxl-3">
                             <div class="mb-3">
-	         					<label for="liName" class="form-label">자격증합격기준점수</label>
-	                            <input type="text" id="liName" name="liName" class="form-control" th:value="*{liPScoreCode}" readonly="readonly"/>
+	         					<label for="liPStandardScore" class="form-label">자격증합격기준점수</label>
+	                            <input type="text" id="liPStandardScore" name="liPStandardScore" class="form-control" th:value="*{liPStandardScore}" readonly="readonly"/>
                             </div>
                         </div>                
                 	</div>
                 	
                 	<div class="row mt-4 mt-lg-5">                  
-                		<h2><strong><span class="fa fa-check"></span>과목</strong></h2>
-						<div class="col-md-6 col-xxl-3">
-                            <div class="mb-3 liSubject">
-	                               <label for="liSubject" class="form-label">과목</label>
-	                               <select id="liSubject" class="form-select" name="liSubject" disabled="disabled"></select>
-                            </div>
-                        </div>
-						<div class="col-md-6 col-xxl-3">
-                            <div class="mb-3">
-	         					<label for="lsName" class="form-label">과목명</label>
-	                            <input type="text" id="lsName" name="lsName" class="form-control" readonly="readonly"/>
-                            </div>
-                        </div>
-						<div class="col-md-6 col-xxl-3">
-                            <div class="mb-3">
-	         					<label for="lsCode" class="form-label">과목코드</label>
-	                            <input type="text" id="lsCode" name="lsCode" class="form-control" readonly="readonly"/>
-                            </div>
-                        </div>
+                	<h2><strong><span class="fa fa-check"></span>과목</strong></h2>
+					<div class="col-md-6 col-xxl-3">
+						<div class="mb-3 subjectCategoryDiv">
+							<label for="subjectCategory" class="form-label">과목</label>
+							<select id="subjectCategory" class="form-select" disabled="disabled"></select>
+						</div>
+					</div>														
+					<div class="col-md-6 col-xxl-3">
+						<div class="mb-3 subjectCodeCategoryDiv">
+							<label for="subjectCodeCategory" class="form-label">과목코드</label>
+							<select id="subjectCodeCategory" class="form-select" name="lsCode" disabled="disabled"></select>
+						</div>
+					</div>
+					<div class="col-md-6 col-xxl-3">
+						<div class="mb-3 subjectNameCategoryDiv">
+							<label for="subjectNameCategory" class="form-label">과목명</label>					   						   								
+							<select id="subjectNameCategory" class="form-select" name="lsName" disabled="disabled"></select>							
+						</div>
+					</div>
+					<div class="col-md-6 col-xxl-3" hidden>
+						<div class="mb-3 lsSubjectCategoryDiv">
+							<label for="lsSubjectCategory" class="form-label">과목</label>					   						   								
+							<select id="lsSubjectCategory" class="form-select" name="lsSubject" disabled="disabled"></select>							
+						</div>
+					</div>
 					</div>
 					
 					<div class="row mt-4 mt-lg-5">                  
