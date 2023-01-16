@@ -38,7 +38,12 @@
 			mm_end_datetime,
 			mm_state
 			FROM
-			membership_member;
+			membership_member
+					<where>
+			<if  test="searchKey != null and searchKey != ''">
+				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
+			</if>
+		</where>	
 	</select>
 	
 	
@@ -55,6 +60,8 @@
 			membership_member AS mm
 			WHERE
 			mm.mm_id = #{mmId};
+		
+			
 	</select>		
 	
 	

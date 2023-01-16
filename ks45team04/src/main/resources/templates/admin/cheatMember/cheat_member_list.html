@@ -20,25 +20,29 @@
                         <div class="col-auto order-2 order-sm-1">
                             <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
                                 <div class="pxp-company-dashboard-jobs-search mb-3">
-                                <select class="form-select">
-                                    <option>신고자ID</option>
-                                    <option>부정회원ID</option>
-                                    <option>승인자</option>
-                                </select>
-                                	<div class="col-auto order-1 order-sm-2">
-                                		<div class="pxp-company-dashboard-jobs-search-search-form">
-                                    		<div class="input-group">
-                                        		<span class="input-group-text"><span class="fa fa-search"></span></span>
-                                        		<input type="text" class="form-control" placeholder="Search ID">
-                                        		<button class="btn ms-2">Search</button>
-                                    		</div>
-                                		</div>
-                            		</div>
-                        		</div> 
-                            </div>
-                        </div>
-                        
-                    </div>
+ 							<form th:action="@{/cheatMemberList}" method="get">
+	                                <div class="pxp-company-dashboard-jobs-search mb-6">							
+	                                <select class="form-select" name="searchKey">
+	                                    <option value="cmId">신고자 아이디</option>
+	                                    <option value="cmReportId">부정회원아이디</option>
+	                                    <option value="cmReportManager">승인자</option>
+	                                    <option value="cmReportState">승인상태</option>
+	                                </select>
+	                                	<div class="col-auto order-1 order-sm-2">
+	                                		<div class="pxp-company-dashboard-jobs-search-search-form">
+	                                    		<div class="input-group">
+	                                        		<span class="input-group-text"><span class="fa fa-search"></span></span>
+	                                        		<input type="text" name="searchValue" class="form-control" placeholder="Search">
+	                                        		<button type="submit" class="btn ms-2">Search</button>
+	                                    		</div>
+	                                		</div>
+	                            		</div>
+	                        		</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
                     <!-- 검색 end -->   
                     <!-- 목록 start -->                   
                     <div class="table-responsive">
@@ -50,6 +54,7 @@
                                     <th style="width: 10%;">신고사유</th>
                                     <th style="width: 10%;">신고내용</th>
                                     <th style="width: 10%;">신고일시</th>
+                                    <th style="width: 10%;">승인상태</th>                                    
                                     <th style="width: 7%;">승인자</th>
                                     <th style="width: 13%;">심사완료일시</th>
                                     <th style="width: 9%;">정지기간</th>
@@ -70,6 +75,7 @@
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportReason}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportContent}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportDatetime}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportState}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportManager}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmReportJudgeDatetime}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${cm.cmStopDate}"></div></td>

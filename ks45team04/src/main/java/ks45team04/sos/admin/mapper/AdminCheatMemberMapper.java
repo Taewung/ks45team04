@@ -8,7 +8,7 @@ import ks45team04.sos.admin.dto.CheatMember;
 
 @Mapper
 public interface AdminCheatMemberMapper {
-
+	
 	
 	//부정 회원 정보 수정 처리
 	public int modifyCheatMemberInfo(CheatMember cheatMember);
@@ -23,5 +23,5 @@ public interface AdminCheatMemberMapper {
 	public CheatMember getCheatMemberJudge(String cmReportCode);
 	
 	//부정 회원 목록 조회
-	public List<CheatMember> CheatMemberList();
+	public List<CheatMember> CheatMemberList(String searchKey, String searchValue);
 }

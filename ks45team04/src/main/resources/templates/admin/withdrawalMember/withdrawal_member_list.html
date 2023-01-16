@@ -19,25 +19,28 @@
                         <div class="col-auto order-2 order-sm-1">
                             <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
                                 <div class="pxp-company-dashboard-jobs-search mb-3">
-                                <select class="form-select">
-                                    <option>회원 아이디</option>
-                                    <option>이름</option>
-                                    <option>이메일</option>
-                                </select>
-                                	<div class="col-auto order-1 order-sm-2">
-                                		<div class="pxp-company-dashboard-jobs-search-search-form">
-                                    		<div class="input-group">
-                                        		<span class="input-group-text"><span class="fa fa-search"></span></span>
-                                        		<input type="text" class="form-control" placeholder="Search ID">
-                                        		<button class="btn ms-2">Search</button>
-                                    		</div>
-                                		</div>
-                            		</div>
-                        		</div> 
-                            </div>
-                        </div>
-                        
-                    </div>
+								<form th:action="@{/withdrawalMemberList}" method="get">
+	                                <div class="pxp-company-dashboard-jobs-search mb-6">							
+	                                <select class="form-select" name="searchKey">
+	                                    <option value="wdmId">회원 아이디</option>
+	                                    <option value="wdmName">이름</option>
+	                                    <option value="wdmEmail">이메일</option>
+	                                </select>
+	                                	<div class="col-auto order-1 order-sm-2">
+	                                		<div class="pxp-company-dashboard-jobs-search-search-form">
+	                                    		<div class="input-group">
+	                                        		<span class="input-group-text"><span class="fa fa-search"></span></span>
+	                                        		<input type="text" name="searchValue" class="form-control" placeholder="Search">
+	                                        		<button type="submit" class="btn ms-2">Search</button>
+	                                    		</div>
+	                                		</div>
+	                            		</div>
+	                        		</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
                     <!-- 검색 end -->   
                     <!-- 목록 start -->                   
                     <div class="table-responsive">

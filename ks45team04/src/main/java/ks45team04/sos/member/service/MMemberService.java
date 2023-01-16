@@ -110,6 +110,7 @@ public Map<String, Object> checkPwByMemId(String memId, String memPw) {
  * @return
  */
 public int modifyMemberInfo(MMember mmember) {
+	
 	return memberMapper.modifyMemberInfo(mmember);
 }
 
@@ -119,7 +120,7 @@ public int modifyMemberInfo(MMember mmember) {
  * @param memId
  * @return
  */
-public MMember modifyMemberInfo(String memId) {
+public MMember MemberList(String memId) {
 	
 	return  memberMapper.MemberList(memId);
 }

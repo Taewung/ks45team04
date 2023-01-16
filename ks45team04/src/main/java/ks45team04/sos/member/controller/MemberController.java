@@ -172,25 +172,26 @@ private static final Logger log = LoggerFactory.getLogger(MemberController.class
     }
 
     
-    //회원 정보 수정 처리
+    //회원 개인 정보 수정 처리
     @PostMapping("/modifyMemberInfo")
     public String modifyMemberInfo(MMember mmember) {
     	
     	memberService.modifyMemberInfo(mmember);
     	
-    	return "redirect:/memberList";
+    	return "redirect:/memberInfo";
     }
     
-    //회원 정보 수정 화면
-	@GetMapping("/modifyMemberInfo")
-	public String modifyMemberInfo(@RequestParam(value="memId") String memId
-									,Model model) {
-		MMember mmember = memberService.modifyMemberInfo(memId);
-		
-		model.addAttribute("title", "회원 정보 수정");
-		model.addAttribute("modifyMemberInfo", mmember);
-		return  "member/member/modify_member";	
-	}	
+	/*
+	 * //회원 개인 정보 수정 화면
+	 * 
+	 * @GetMapping("/modifyMemberInfo") public String
+	 * modifyMemberInfo(@RequestParam(value="memId") String memId ,Model model) {
+	 * MMember mmember = memberService.modifyMemberInfo(memId);
+	 * 
+	 * model.addAttribute("title", "회원 정보 수정");
+	 * model.addAttribute("modifyMemberInfo", mmember); return
+	 * "member/member/modify_member_info"; }
+	 */
 	
 	
 	@GetMapping("/removeMember")

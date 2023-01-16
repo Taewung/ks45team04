@@ -80,8 +80,12 @@ private static final Logger log = LoggerFactory.getLogger(AMembershipController.
 	
 	//멤버십 목록 조회
 	@GetMapping("/membershipList")
-	public String membershipList(Model model) {
-		List<Membership> membershipList = membershipService.MembershipList();
+	public String membershipList(Model model
+			,@RequestParam(value="searchKey", required = false)String searchKey
+			,@RequestParam(value="searchValue", required = false, defaultValue="") String
+			searchValue) {			
+			
+		List<Membership> membershipList = membershipService.MembershipList(searchKey, searchValue);
 		model.addAttribute("title", "멤버십 조회");
 		model.addAttribute("membershipList", membershipList);
 		log.info("membershipList : {}", membershipList);

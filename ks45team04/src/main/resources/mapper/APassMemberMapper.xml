@@ -58,6 +58,11 @@
 				pm_report_manager,
 				pm_refuse_reason
 			FROM
-				pass_member;
+				pass_member
+		<where>
+			<if  test="searchKey != null and searchKey != ''">
+				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
+			</if>
+		</where>				
 	</select>
 </mapper>

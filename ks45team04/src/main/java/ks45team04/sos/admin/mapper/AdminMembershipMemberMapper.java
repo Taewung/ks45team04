@@ -16,5 +16,5 @@ public interface AdminMembershipMemberMapper {
 	public MembershipMember getTotalMembershipMemberInfo(String mmId);
 	
 	//멤버십 회원 조회
-	public List<MembershipMember> TotalMembershipMemberList();
+	public List<MembershipMember> TotalMembershipMemberList(String searchKey, String searchValue);
 }

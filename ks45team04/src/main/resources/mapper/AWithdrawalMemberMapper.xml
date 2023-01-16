@@ -52,6 +52,11 @@
 			wm.wdm_reg_datetime,
 			wm.wdm_datetime
 			FROM
-			withdrawal_member AS wm;
+			withdrawal_member AS wm
+		<where>
+			<if  test="searchKey != null and searchKey != ''">
+				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
+			</if>
+		</where>	
 	</select>
 </mapper>

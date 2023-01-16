@@ -16,5 +16,5 @@ public interface AdminPassMemberMapper {
 	public PassMember getTotalPassMemberInfo(String pmId);
 	
 	//합격 회원 정보 조회
-	public List<PassMember> PassMemberList();
+	public List<PassMember> PassMemberList(String searchKey, String searchValue);
 }

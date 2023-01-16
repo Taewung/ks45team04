@@ -50,7 +50,12 @@
 			ms.membership_reg_manager,
 			ms.membership_reg_datetime
 			FROM
-			membership AS ms;	
+			membership AS ms
+		<where>
+			<if  test="searchKey != null and searchKey != ''">
+				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
+			</if>
+		</where>			
 	</select>	
 	
 </mapper>

@@ -67,9 +67,12 @@ private static final Logger log = LoggerFactory.getLogger(ACheatMemberController
 	
  	// 부정회원 목록 조회 화면
 	@GetMapping("/cheatMemberList")
-	public String cheatMemberList(Model model) {
+	public String cheatMemberList(Model model
+			,@RequestParam(value="searchKey", required = false)String searchKey
+			,@RequestParam(value="searchValue", required = false, defaultValue="") String
+			searchValue) {
 		
-		List<CheatMember> cheatMemberList = cheatMemberService.CheatMemberList();
+		List<CheatMember> cheatMemberList = cheatMemberService.CheatMemberList(searchKey, searchValue);
 		model.addAttribute("title", "부정 회원 조회");
 		model.addAttribute("cheatMemberList", cheatMemberList);
 		log.info("cheatMemberList :{}", cheatMemberList);

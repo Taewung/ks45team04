@@ -81,12 +81,12 @@
 				<!-- 상단메뉴 끝 -->
 				<!-- 로그인/회원가입버튼 시작 -->
 				<nav class="pxp-user-nav d-none d-sm-flex">
-					<a th:if="${session.S_MEM_INFO == null}" href="/login" class="btn rounded-pill pxp-nav-btn">로그인</a>&emsp;
-					<a th:unless="${session.S_MEM_INFO == null}" href="/logout" class="btn rounded-pill pxp-nav-btn">로그아웃</a>&emsp;
-					<a th:if="${session.S_MEM_INFO == null}" href="/addMember" class="btn rounded-pill pxp-nav-btn">회원가입</a>&emsp;
-					<a th:if="${session.S_MEM_INFO != null and session.S_MEM_INFO.loginLevelName == '관리자'}" href="/admin" class="btn rounded-pill pxp-nav-btn">관리자페이지</a>&emsp;
-					<a th:if="${session.S_MEM_INFO != null and session.S_MEM_INFO.loginLevelName == '회원'}" href="/myPage" class="btn rounded-pill pxp-nav-btn">마이페이지</a>&emsp;
-					<a href="/cartList" class="btn rounded-pill pxp-nav-btn">#장바구니</a>&emsp;
+					<a th:if="${session.S_MEM_INFO == null}" href="/login" class="btn rounded-pill pxp-nav-btn">로그인</a>
+					<a th:unless="${session.S_MEM_INFO == null}" href="/logout" class="btn rounded-pill pxp-nav-btn">로그아웃</a>
+					<a th:if="${session.S_MEM_INFO == null}" href="/addMember" class="btn rounded-pill pxp-nav-btn">회원가입</a>
+				 	<a th:if="${session.S_MEM_INFO != null} and ${session.S_MEM_INFO.loginLevelName != '관리자'}" href="/myPage" class="btn rounded-pill pxp-nav-btn">마이페이지</a>
+				 	<a th:unless="${session.S_MEM_INFO == null} or ${session.S_MEM_INFO.loginLevelName == '회원'}" href="/admin" class="btn rounded-pill pxp-nav-btn">관리자페이지</a>
+					<a href="/cartList" class="btn rounded-pill pxp-nav-btn">#장바구니</a>
 					<div th:unless ="${session.S_MEMBER_INFO == null}">
 						<label th:text="${session.S_MEM_INFO.loginLogoutId}님이 로그인하셨습니다."></label>
 					</div>

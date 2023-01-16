@@ -30,8 +30,28 @@ public class WithdrawalMemberService {
 	 * 탈퇴 회원 정보 조회
 	 * @return List<WithdrawalMember>
 	 */
-	public List<WithdrawalMember> WithdrawalMemberList() {
-			List<WithdrawalMember> withdrawalMemberList = withdrawalMemberMapper.WithdrawalMemberList();
+	public List<WithdrawalMember> WithdrawalMemberList(String searchKey, String searchValue) {
+		
+		if(searchKey != null) {
+			switch(searchKey) {
+			case "wdmId":
+				searchKey = "wdm_id";
+				break;
+			}
+			switch(searchKey) {
+			case "wdmName":
+				searchKey = "wdm_name";
+				break;
+			}
+			switch(searchKey) {
+			case "wdmEmail":
+				searchKey = "wdm_email";
+				break;
+			}
+		}	
+		
+		
+			List<WithdrawalMember> withdrawalMemberList = withdrawalMemberMapper.WithdrawalMemberList(searchKey, searchValue);
 			
 			return withdrawalMemberList;
 	}
