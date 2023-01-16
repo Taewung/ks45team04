@@ -286,4 +286,45 @@
 		WHERE
 			e.question_code = #{questionCode};
 	</select>
+	<insert id="addExplanation" parameterType="Explanation">
+		/* 해설 등록 */
+		INSERT INTO explanation 
+		(explain_code, question_code, explanation, explanation_reg_id, explanation_reg_datetime)
+		VALUES
+		(#{explainCode}, #{questionCode}, #{explanation}, #{explanationRegId}, NOW());
+	</insert>
+	<select id="getNewExplainCode" parameterType="String" resultType="String">
+		/* 해설코드 자동생성 */
+		SELECT
+			CASE
+			WHEN COUNT(1) = 0 THEN CONCAT('explain', '_1')
+		ELSE
+			CONCAT('explain_', MAX(CAST(SUBSTRING_INDEX(${explainCode}, 'explain_', -1)AS UNSIGNED))+1)
+			END AS newCode
+		FROM
+			${explanation};
+	</select>
+	<update id="modifyExpalantion" parameterType="Explanation">
+		/* 특정 해설정보 수정 */
+		UPDATE explanation
+		SET 
+			 explanation = #{explanation}
+			,explanation_reg_id = #{explanationRegId}
+			,explanation_reg_datetime = NOW()
+		WHERE 
+			explain_code = #{explainCode};
+	</update>
+	<select id="getExplanationByCode" parameterType="String" resultMap="explanationResultMap">
+		/* 특정 해설정보 조회 */
+		SELECT
+			 e.explain_code
+			,e.question_code
+			,e.explanation
+			,e.explanation_reg_id
+			,e.explanation_reg_datetime
+		FROM
+			explanation AS e
+		WHERE
+			e.explain_code = #{explainCode};
+	</select>
 </mapper>
