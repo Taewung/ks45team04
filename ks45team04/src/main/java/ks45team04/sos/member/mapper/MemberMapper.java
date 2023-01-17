@@ -10,7 +10,9 @@ import ks45team04.sos.member.dto.MMember;
 
 @Mapper
 public interface MemberMapper {
-
+	
+	//자동완성 코드
+	public String getloginLogoutCode(String login_logout, String loginLogoutCode);
 	
 	//회원 정보 수정 처리
 	public int modifyMemberInfo(MMember mmember);

@@ -38,8 +38,8 @@ public class LoginInterceptor implements HandlerInterceptor{
 		
 		if(cookie != null && loginInfo == null) {
 			String loginKeepId = cookie.getValue();
-			MMember member = memberMapper.MemberList(loginKeepId);
-			if(member != null) {
+			MMember mmember = memberMapper.MemberList(loginKeepId);
+			if(mmember != null) {
 				loginInfo = new LoginInfo(loginKeepId
 													, member.getMemName()
 													, member.getMemBirth());

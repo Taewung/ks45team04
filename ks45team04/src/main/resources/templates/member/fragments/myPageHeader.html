@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
-<header>      
+	<header>      
             <div class="pxp-dashboard-content-header" th:fragment="headerFragment">              
                 <nav class="pxp-user-nav pxp-on-light">
                  
                     <div class="dropdown pxp-user-nav-dropdown">
                         <a role="button" class="dropdown-toggle" data-bs-toggle="dropdown">
                             <div class="pxp-user-nav-avatar pxp-cover" style="background-image: url(images/company-logo-1.png);"></div>
-                            <div class="pxp-user-nav-name d-none d-md-block">멤버이름</div>
+                            <div th:if="${session.S_MEM_INFO.loginLogoutId}" class="pxp-user-nav-name d-none d-md-block">멤버이름</div>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="#">#메뉴1</a></li>
@@ -19,5 +18,5 @@
                     </div>
                 </nav>
             </div>
-</header>	
+	</header>	
 </html>

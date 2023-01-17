@@ -6,6 +6,7 @@ public class LoginInfo {
 	private String loginDatetime;
 	private String logoutDatetime;
 	private String loginLevelName;
+	private MMember mmember;
 	
 	
 	public LoginInfo(String memId, String memberLevelName) {
@@ -42,12 +43,18 @@ public class LoginInfo {
 	public void setLoginLevelName(String loginLevelName) {
 		this.loginLevelName = loginLevelName;
 	}
+	public MMember getMmember() {
+		return mmember;
+	}
+	public void setMmember(MMember mmember) {
+		this.mmember = mmember;
+	}
 	@Override
 	public String toString() {
 		return "LoginInfo [loginLogoutCode=" + loginLogoutCode + ", loginLogoutId=" + loginLogoutId + ", loginDatetime="
-				+ loginDatetime + ", logoutDatetime=" + logoutDatetime + ", loginLevelName=" + loginLevelName + "]";
+				+ loginDatetime + ", logoutDatetime=" + logoutDatetime + ", loginLevelName=" + loginLevelName
+				+ ", mmember=" + mmember + "]";
 	}
-	
 
 	
 	
