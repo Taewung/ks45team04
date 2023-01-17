@@ -44,6 +44,20 @@ private static final Logger log = LoggerFactory.getLogger(MemberController.class
 
 
 
+/*
+ * // 로그인 내역 등록
+ * 
+ * @PostMapping("/getloginLogoutCode") public String
+ * getloginLogoutCode(LoginLogoutCode loginLogoutCode) { String
+ * newLoginLogoutCode = MMemberService.getloginLogoutCode("login_logout",
+ * "login_logout_code"); System.out.println (newLoginLogoutCode +
+ * "<-- newPKCode Controller.java");
+ * MMemberService.getloginLogoutCode(newLoginLogoutCode);
+ * 
+ * return "redirect:/"; }
+ */
+
+
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		
@@ -77,9 +91,9 @@ private static final Logger log = LoggerFactory.getLogger(MemberController.class
 		}else {
 			// 2. 비밀번호 일치 시 세션 저장 
 			MMember mmember = (MMember) checkResult.get("memInfo");
-	//		session.setAttribute("SID", 		memId);
-	//		session.setAttribute("SLEVEL", member.getMemberLevel());
-	//		session.setAttribute("SNAME", member.getMemberName());
+			session.setAttribute("SID", 	memId);
+			session.setAttribute("SLEVEL", mmember.getMemLevelName());
+			session.setAttribute("SNAME", mmember.getMemName());
 			
 			LoginInfo loginInfo = new LoginInfo(memId, mmember.getMemLevelName());
 			

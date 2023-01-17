@@ -146,5 +146,12 @@ public MMember MemberList(String memId) {
 	    log.info("result :{}", result);
 	    return result;
 	}
-
+	
+	
+	/* 로그인코드 자동생성 */
+	public String getloginLogoutCode(String login_logout, String loginLogoutCode) {
+	     String newLoginLogoutCode = memberMapper.getloginLogoutCode(login_logout, loginLogoutCode);
+	     return newLoginLogoutCode;	
+	}
+	
 }
