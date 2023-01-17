@@ -20,8 +20,8 @@
                 		<h2><strong><span class="fa fa-check"></span>자격증</strong></h2>
                         <div class="col-md-6 col-xxl-3">
                             <div class="mb-3">
-	         					<label for="liName" class="form-label">자격증코드</label>
-	                            <input type="text" id="liName" name="liName" class="form-control" th:value="*{liCode}" readonly="readonly"/>
+	         					<label for="liCode" class="form-label">자격증코드</label>
+	                            <input type="text" id="liCode" name="liCode" class="form-control" th:value="*{liCode}" readonly="readonly"/>
                             </div>
                         </div>                              
                         <div class="col-md-6 col-xxl-3">
@@ -29,13 +29,7 @@
 	         					<label for="liName" class="form-label">자격증명</label>
 	                            <input type="text" id="liName" name="liName" class="form-control" th:value="*{licenseSubject.liName}" readonly="readonly"/>
                             </div>
-                        </div>                
-                        <div class="col-md-6 col-xxl-3">
-                            <div class="mb-3">
-	         					<label for="liName" class="form-label">자격증합격기준점수</label>
-	                            <input type="text" id="liName" name="liName" class="form-control" th:value="*{lsPStandardScore}" readonly="readonly"/>
-                            </div>
-                        </div>                
+                        </div>                               
                 	</div>
                 	
                 	<div class="row mt-4 mt-lg-5">                  
@@ -64,19 +58,26 @@
                 		<h2><strong><span class="fa fa-check"></span>과목정보</strong></h2>
 						<div class="col-md-6 col-xxl-3">
                             <div class="mb-3">
+	         					<label for="lsPScoreCode" class="form-label">과목합격기준점수코드</label>
+	                            <input type="text" id="lsPScoreCode" class="form-control" name="lsPScoreCode" th:value="*{lsPScoreCode}" readonly="readonly">  
+                            </div>
+                        </div>
+						<div class="col-md-6 col-xxl-3">
+                            <div class="mb-3">
 	         					<label for="lsTotalQuestionNum" class="form-label">문항수</label>
 	                            <input type="text" id="lsTotalQuestionNum" class="form-control" name="lsTotalQuestionNum" th:value="*{lsTotalQuestionNum}" placeholder="문항수를 입력해주세요.">  
                             </div>
                         </div>
 						<div class="col-md-6 col-xxl-3">
-                            <div class="mb-3">
+                            <div class="mb-3" >
 	         					<label for="lsPStandardScore" class="form-label">과목합격점수</label>
-	                            <input type="text" id="lsPStandardScore" class="form-control" name="lsPStandardScore" th:value="*{lsPStandardScore}" placeholder="과목합격점수를 입력해주세요.">  
+	                            <!-- <input type="text" id="lsPStandardScore" class="form-control" name="lsPStandardScore" th:value="*{lsPStandardScore}" placeholder="점수를 입력해주세요.">  --> 
+	                            <input type="text" class="form-control" name="lsPStandardScore" th:value="*{lsPStandardScore}">
                             </div>
                         </div>
 					</div>
          		 <div class="mt-4 mt-lg-5">
-         	  	<button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">수정</button>  
+         	  	<button type="submit" class="btn rounded-pill pxp-section-cta">수정</button>  
                 <a th:href="@{/subjectPassScoreList(liCode=*{liCode})}" class="btn rounded-pill pxp-section-cta-o ms-3">취소</a>
             	</div>  
             	</th:block>                                                        

@@ -37,6 +37,18 @@ public class PassScoreController {
 	}
 	
 	/* ***************************과목합격기준점수******************************** */
+	// 특정 과목합격기준점수 수정처리
+	@PostMapping("/modifySubjectPassScore")
+	public String modifySubjectPassScore(SubjectPassScore subjectPassScore) {	
+		subjectPassScore.setLsPScoreRegId("id002");
+		
+		System.out.println(subjectPassScore + "modifyVal ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		
+		subjectPassScoreService.modifySubjectPassScore(subjectPassScore);
+		log.info("특정 과목합격기준점수 수정 : {}", subjectPassScore);	
+		String liCode = subjectPassScore.getLiCode();
+		return "redirect:/subjectPassScoreList?liCode="+liCode;
+	}
 	// 특정 과목합격기준점수 수정화면
 	@GetMapping("/modifySubjectPassScore")
 	public String modifySubjectPassScore(Model model, @RequestParam(value="lsPScoreCode", required=false) String lsPScoreCode) {
@@ -45,14 +57,6 @@ public class PassScoreController {
 		model.addAttribute("title", "과목합격기준점수 수정");
 		log.info("특정 과목합격기준점수 조회 : {}", subjectPassScoreByCode);
 		return "admin/passScore/modify_subject_pass_score";
-	}
-	// 특정 과목합격기준점수 수정
-	@PostMapping("/modifySubjectPassScore")
-	public String modifySubjectPassScore(SubjectPassScore subjectPassScore) {	
-		subjectPassScore.setLsPScoreRegId("id002");
-		subjectPassScoreService.modifySubjectPassScore(subjectPassScore);
-		log.info("특정 과목합격기준점수 수정 : {}", subjectPassScore);	
-		return "redirect:/subjectPassScoreList?liCode=${liCode}";
 	}
 	// 과목합격기준점수 등록처리
 	@PostMapping("/addSubjectPassScore")
