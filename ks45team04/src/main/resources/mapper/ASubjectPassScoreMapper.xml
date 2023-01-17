@@ -42,14 +42,14 @@
 	</resultMap>
 	
 	
-	<update id="modifyLicensePassScore" parameterType="SubjectPassScore">
+	<update id="modifySubjectPassScore" parameterType="SubjectPassScore">
 		/* 특정 과목합격기준점수 수정 */
 		UPDATE subject_pass_score AS sp
 		SET 
 			 sp.ls_total_question_num = #{lsTotalQuestionNum}
 			,sp.ls_p_standard_score = #{lsPStandardScore}
 			,sp.ls_p_score_reg_id = #{lsPScoreRegId}
-			,sp.ls_p_score_reg_datetime = CURDATE()
+			,sp.ls_p_score_reg_datetime = NOW()
 		WHERE 
 			sp.ls_p_score_code = #{lsPScoreCode};
 	</update>
