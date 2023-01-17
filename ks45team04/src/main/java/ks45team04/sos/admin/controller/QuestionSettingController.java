@@ -1,6 +1,7 @@
 package ks45team04.sos.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -110,14 +111,29 @@ public class QuestionSettingController {
 		log.info("대분류별 중분류목록 조회 : {}", subListForQuestion);
 		return subListForQuestion;
 	}
+
 	// 문제목록조회
 	@GetMapping("/qSettingList")
+	@SuppressWarnings("unchecked")
 	public String qSettingList(Model model
+							  ,@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage
 							  ,@RequestParam(value="searchKey", required = false) String searchKey
 							  ,@RequestParam(value="searchValue", required = false, defaultValue = "") String searchValue) {
-		List<Question> questionList = questionSettingService.getQuestionList(searchKey, searchValue);
-		model.addAttribute("questionList", questionList);
+		Map<String, Object> paramMap = questionSettingService.getQuestionList(currentPage, searchKey, searchValue);
+		int lastPage = (int) paramMap.get("lastPage");
+		List<Question> questionList = (List<Question>) paramMap.get("questionList");
+		int startPageNum = (int) paramMap.get("startPageNum");
+		int endPageNum = (int) paramMap.get("endPageNum");
+		
 		model.addAttribute("title", "문제목록");
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("questionList", questionList);
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+		
+		log.info("문제 목록조회 : {}", questionList);
+
 		return "admin/questionSetting/q_setting_list";
 	}
 	

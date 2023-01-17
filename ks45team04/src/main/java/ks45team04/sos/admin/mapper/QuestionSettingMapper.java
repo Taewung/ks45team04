@@ -1,6 +1,7 @@
 package ks45team04.sos.admin.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -21,7 +22,9 @@ public interface QuestionSettingMapper {
 	
 	/* ------------------문제------------------ */
 	// 전체 문제목록 조회
-	public List<Question> getQuestionList(String searchKey, String searchValue);	
+	public List<Question> getQuestionList(Map<String,Object> paramMap);
+	// 문제테이블 전체 행의 갯수
+	public int getQuestionCnt();
 	// 자격증 대분류 목록조회
 	public List<LicenseMain> getMainLisForQuestion();	
 	// 자격증 대분류별 중분류목록조회
