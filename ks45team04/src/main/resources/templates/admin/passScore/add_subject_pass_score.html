@@ -5,7 +5,73 @@
 
 	<!-- script start -->
 	<th:block layout:fragment="customScript">
-		<script></script>
+		<script>
+		$(function(){
+			function validationCheck(data){
+				if(typeof data == 'undefined' || data == '' || data == null || data == '대분류'){	
+					return false;
+				}
+				return true;
+			}
+			// 과목 선택시 과목정보 조회
+			$(document).on('change','#subjectCategory', function(){
+				let lsCode = $(this).val();
+				
+				if(validationCheck(lsCode)){						
+					var request = $.ajax({
+					  url: '/getSubjectInfoForQuestion',
+					  method: 'GET',
+					  data: { 'lsCode' : lsCode },
+					  dataType: 'json'
+					});
+				//  과목 선택 성공시 
+				request.done(function( data ) {
+					  console.log(data);						  
+					  $('#subjectCodeCategory').children().remove();
+					  const lsCodeOption = '<option selected name="lsCode">' + data.lsCode + '</option>';
+					  $('#subjectCodeCategory').append(lsCodeOption);  
+					  
+					  $('#subjectNameCategory').children().remove();
+					  const lsNameOption = '<option selected name="lsName">' + data.lsName + '</option>';
+					  $('#subjectNameCategory').append(lsNameOption);   		
+					  
+					});
+				// 과목 선택 실패시
+				request.fail(function( jqXHR, textStatus ) {
+					  alert( "Request failed: " + textStatus );
+					});
+				}
+			});
+		});	
+		
+		$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+			function validateValue(checkValue) {
+				if(    typeof checkValue == 'undefined' 
+						|| checkValue == null 
+						|| checkValue == ''					){
+					return true;
+				}
+				return false;
+				
+			}			
+
+			$(document).on('click', '#submitBtn', function(){
+				let isSubmit = true;
+				
+				$('#addSubjectPassScoreForm input').each(function(idx, item){
+					let checkValue = $(item).val();
+					let labelValue = $(item).parents('.mb-3').find('label').text();
+					if(validateValue(checkValue)){							
+						alert(`${labelValue}를 입력해주세요`);
+						$(item).focus();
+						isSubmit = false;							
+						return false;
+					}						
+				});				
+				if(isSubmit) $('#addSubjectPassScoreForm').submit();
+			});
+		});
+		</script>
 	</th:block> 
 	<!-- script end -->
 	
@@ -20,7 +86,7 @@
                         <div class="col-md-6 col-xxl-3">
                             <div class="mb-3">
 	         					<label for="liName" class="form-label">자격증코드</label>
-	                            <input type="text" id="liName" name="liName" class="form-control" th:value="*{liCode}" readonly="readonly"/>
+	                            <input type="text" id="liCode" name="liCode" class="form-control" th:value="*{liCode}" readonly="readonly"/>
                             </div>
                         </div>                              
                         <div class="col-md-6 col-xxl-3">
@@ -38,31 +104,28 @@
                 	</div>
                 	
                 	<div class="row mt-4 mt-lg-5">                  
-                	<h2><strong><span class="fa fa-check"></span>과목</strong></h2>
-					<div class="col-md-6 col-xxl-3">
-						<div class="mb-3 subjectCategoryDiv">
-							<label for="subjectCategory" class="form-label">과목</label>
-							<select id="subjectCategory" class="form-select" disabled="disabled"></select>
+	                	<h2><strong><span class="fa fa-check"></span>과목</strong></h2>
+						<div class="col-md-6 col-xxl-3">
+							<div class="mb-3 subjectCategoryDiv">
+								<label for="subjectCategory" class="form-label">과목</label>
+								<select id="subjectCategory" class="form-select">
+									<option selected>과목</option>
+									<option th:if="${not #lists.isEmpty(liSubListForLsPScore)}" th:each="l : ${liSubListForLsPScore}" th:value="${l.lsCode}" th:text="${l.lsSubject}"></option>
+								</select>
+							</div>
+						</div>														
+						<div class="col-md-6 col-xxl-3">
+							<div class="mb-3 subjectCodeCategoryDiv">
+								<label for="subjectCodeCategory" class="form-label">과목코드</label>
+								<select id="subjectCodeCategory" class="form-select" name="lsCode" ></select>
+							</div>
 						</div>
-					</div>														
-					<div class="col-md-6 col-xxl-3">
-						<div class="mb-3 subjectCodeCategoryDiv">
-							<label for="subjectCodeCategory" class="form-label">과목코드</label>
-							<select id="subjectCodeCategory" class="form-select" name="lsCode" disabled="disabled"></select>
+						<div class="col-md-6 col-xxl-3">
+							<div class="mb-3 subjectNameCategoryDiv">
+								<label for="subjectNameCategory" class="form-label">과목명</label>					   						   								
+								<select id="subjectNameCategory" class="form-select" name="lsName" ></select>							
+							</div>
 						</div>
-					</div>
-					<div class="col-md-6 col-xxl-3">
-						<div class="mb-3 subjectNameCategoryDiv">
-							<label for="subjectNameCategory" class="form-label">과목명</label>					   						   								
-							<select id="subjectNameCategory" class="form-select" name="lsName" disabled="disabled"></select>							
-						</div>
-					</div>
-					<div class="col-md-6 col-xxl-3" hidden>
-						<div class="mb-3 lsSubjectCategoryDiv">
-							<label for="lsSubjectCategory" class="form-label">과목</label>					   						   								
-							<select id="lsSubjectCategory" class="form-select" name="lsSubject" disabled="disabled"></select>							
-						</div>
-					</div>
 					</div>
 					
 					<div class="row mt-4 mt-lg-5">                  
@@ -81,8 +144,8 @@
                         </div>
 					</div>
          		 <div class="mt-4 mt-lg-5">
-         	  	<button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>
-				<a th:href="@{/subjectPassScoreList}" class="btn rounded-pill pxp-section-cta-o ms-3">취소</a>  
+         	  	<button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>
+				<a th:href="@{/subjectPassScoreList(liCode=*{liCode})}" class="btn rounded-pill pxp-section-cta-o ms-3">취소</a>                  
             	</div>  
             	</th:block>                                                        
         	</form>

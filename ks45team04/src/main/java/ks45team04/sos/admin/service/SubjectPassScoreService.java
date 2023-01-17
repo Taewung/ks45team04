@@ -46,13 +46,12 @@ public class SubjectPassScoreService {
 		List<SubjectPassScore> subjectPassScoreList = subjectPassScoreMapper.getsubjectPassScoreList(licode);
 		return subjectPassScoreList;
 	}
-
 	/**
 	 * 과목합격기준점수 등록
 	 * @param licensePassScore
 	 */
-	public void addLsPScore(LicensePassScore licensePassScore) {										
-		subjectPassScoreMapper.addLsPScore(licensePassScore);
+	public void addSubjectPassScore(SubjectPassScore subjectPassScore) {										
+		subjectPassScoreMapper.addSubjectPassScore(subjectPassScore);
 	}
 	/**
 	 * 과목합격기준점수코드 자동생성
@@ -63,7 +62,25 @@ public class SubjectPassScoreService {
 	public String getNewLsPScoreCode(String subjectPassScore, String lsPScoreCode) {
 		String newLsPScoreCode = subjectPassScoreMapper.getNewLsPScoreCode(subjectPassScore, lsPScoreCode);
 		return newLsPScoreCode; 
-	}		
+	}
+	/**
+	 * 특정 과목정보조회
+	 * @param lsCode
+	 * @return LicenseSubject
+	 */
+	public LicenseSubject getLsInfoForLsPScore(String lsCode){
+		LicenseSubject lsInfoForLsPScore = subjectPassScoreMapper.getLsInfoForLsPScore(lsCode);
+		return lsInfoForLsPScore;
+	}
+	/**
+	 * 특정 자격증 과목목록조회
+	 * @param liCode
+	 * @return List<LicenseSubject>
+	 */
+	public List<LicenseSubject> getLiSubListForLsPScore(String liCode){	
+		List<LicenseSubject> liSubListForLsPScore = subjectPassScoreMapper.getLiSubListForLsPScore(liCode);
+		return liSubListForLsPScore;
+	}
 	/**
 	 * 특정 자격증정보 조회
 	 * @param liCode
@@ -81,23 +98,5 @@ public class SubjectPassScoreService {
 	public SubjectPassScore getLiCodeForLsPScore(String liCode) {
 		SubjectPassScore liCodeForLsPScore = subjectPassScoreMapper.getLiCodeForLsPScore(liCode);		
 		return liCodeForLsPScore;
-	}
-	/**
-	 * 자격증별 과목목록 조회
-	 * @param liCode
-	 * @return List<LicenseSubject>
-	 */
-	public List<LicenseSubject> getSubListForLsPScore(String liCode){
-		List<LicenseSubject> subjectListForQuestion = subjectPassScoreMapper.getSubListForLsPScore(liCode);
-		return subjectListForQuestion;
-	}
-	/**
-	 * 특정 과목정보 조회
-	 * @param lsCode
-	 * @return LicenseSubject
-	 */
-	public LicenseSubject getSubInfoForLsPScore(String lsCode){
-		LicenseSubject subInfoForLsPScore = subjectPassScoreMapper.getSubInfoForLsPScore(lsCode);
-		return subInfoForLsPScore;
 	}
 }
