@@ -25,8 +25,14 @@ public class PlannerService {
 	}
 	
 	
+	
+	public DDay getDDayByCode(String dDayCode) {
+		
+		return plannerMapper.getDDayByCode(dDayCode);
+	}
+	
 	/**
-	 * 디데이 상세 리스트
+	 * 디데이 목록 조회
 	 * @return List<DDay>
 	 */
 	
