@@ -10,6 +10,9 @@ import ks45team04.sos.admin.dto.PointSaveStandard;
 @Mapper
 public interface PointSaveStandardMapper {
 	
+	
+	
+		
 	//포인트 적립 기준 수정
 	public int modifyPointSaveStandard(PointSaveStandard pointSaveStandard);
 	
@@ -22,8 +25,11 @@ public interface PointSaveStandardMapper {
 	//포인트 적립 기준 등록
 	public int addPointSaveStandard(PointSaveStandard pointSaveStandard);
 		
-	//포인트 적립 기준 내역 조회
-	public List<PointSaveStandard> pointSaveStandardList();
+	//포인트 적립 기준 내역 조회(검색)
+	public List<PointSaveStandard> pointSaveStandardList(String searchKey, String searchValue);
+	
+	//포인트 적립 기준 내용 조회
+	public List<PointSaveStandard> getPointSaveStandardContent();
 	
 	
 }

@@ -10,6 +10,12 @@ import ks45team04.sos.admin.dto.PointSaveUse;
 @Mapper
 public interface PointSaveUseMapper {
 	
+	// 문제코드 자동생성
+	public String getPointSaveUseCode(String pointSaveUse, String pointSaveUseCode);
+	
+	//포인트 적립 기준 내용 조회
+	public List<PointSaveStandard> getPointSaveContent();
+	
 	//포인트 적립/사용 등록
 	public int pointSaveUseAdd(PointSaveUse pointSaveUse);
 	
