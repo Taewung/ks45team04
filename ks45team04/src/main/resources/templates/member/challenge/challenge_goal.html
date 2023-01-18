@@ -239,7 +239,8 @@
               <!-- 챌린지 목표 제목 입력 end --> 
 
                     <!-- 자격증선택 start -->                
- 			<!-- 자격증선택 start -->                
+ 			<!-- 자격증선택 start -->
+            <div class="pxp-container"> 			                
 				<div class="row mt-4 mt-lg-5" >  
 					<h2><strong><span class="fa fa-check"></span>자격증 선택</strong></h2>
 					<div class="col-md-6 col-xxl-3">
@@ -267,10 +268,12 @@
 							<select id="liCodeCategory" class="form-select" name="liCode" disabled="disabled"></select>
 						</div>
 					</div>
+				</div>
 				</div>	
 				<!-- 자격증선택 end -->             
                     <!-- 자격증선택 end -->
                     <!-- 과목선택 start -->
+            <div class="pxp-container">                    
  				<div class="row mt-4 mt-lg-5">
 					<h2><strong><span class="fa fa-check"></span>과목 선택</strong></h2>
 					<div class="col-md-6 col-xxl-3">
@@ -292,6 +295,7 @@
 						</div>
 					</div>
 				</div>
+			</div>	
                       <!-- 과목선택 end -->   
 
                        	<!-- 목표 시간 설정start -->
@@ -372,10 +376,12 @@
 		            </div> 
         </section>		                                      
                     <!-- 답안입력란 end -->
+            <div class="pxp-container">                    
 				<div class="mt-4 mt-lg-5">
 					<button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>
 					<a th:href="@{/main}" class="btn rounded-pill pxp-section-cta-o ms-3">취소</a>                                                
-				</div>                                      
+				</div>
+			</div>	                                      
             <!-- end contents -->
 		</form>
 	</th:block>
