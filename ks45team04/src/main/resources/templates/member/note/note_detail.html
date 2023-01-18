@@ -82,6 +82,11 @@
                                     <h5><div class="pxp-single-candidate-side-info-label pxp-text-light"
                                     	 th:text="${noteInfo.notePrice}"></div></h5>
                                 </div>
+                                 <div class="row mt-4 mt-lg-5">
+			                   		<div class="mt-4 mt-lg-5">
+			                        	<a th:href="@{/payInsert(noteWriterId=${noteInfo.noteWriterId})}" id="submitBtn" class="btn rounded-pill pxp-section-cta">결제하기</a>
+		                    		</div>                                      
+                          	  </div>
                             </div>
                         </div>
                     </div>

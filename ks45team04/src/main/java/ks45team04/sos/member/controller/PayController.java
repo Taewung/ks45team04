@@ -8,27 +8,43 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ks45team04.sos.member.dto.MPay;
+import ks45team04.sos.member.dto.Note;
+import ks45team04.sos.member.mapper.MNoteMapper;
 import ks45team04.sos.member.mapper.MPayMapper;
+import ks45team04.sos.member.service.MNoteService;
 import ks45team04.sos.member.service.MPayService;
 
 @Controller
 public class PayController {
 	
 	private final MPayService mPayService;
+	private final MPayMapper mpayMapper;
 	
-	public PayController(MPayService mPayService,
-						MPayMapper mPayMapper) {
+	private final MNoteService mNoteService;
+	private final MNoteMapper mNoteMapper;
+	
+	
+	public PayController(MPayService mPayService, MPayMapper mpayMapper,
+						MNoteService mNoteService, MNoteMapper mNoteMapper) {
 		
+		this.mNoteMapper = mNoteMapper;
+		this.mNoteService = mNoteService;
+		this.mpayMapper = mpayMapper;
 		this.mPayService = mPayService;
+		
 	}
 	
-	//결제창(등록)
-	@GetMapping("/payInsert")
-	public String payInsert(Model model) {
-		model.addAttribute("title", "결제(등록)");
-		
-		return "member/pay/pay_insert";
-	}
+	//결제창 처리
+		@GetMapping("/payInsert")
+		public String payInsert(@RequestParam(value="noteWriterId") String noteWriterId
+				 				,Model model) {
+			Note note = mNoteService.getNoteById(noteWriterId);
+			
+			model.addAttribute("noteInfo", note);
+			
+			return "member/pay/pay_insert";
+			
+		}
 	
 
 	//결제 내역 상세 조회
