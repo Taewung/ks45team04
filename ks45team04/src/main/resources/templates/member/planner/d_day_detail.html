@@ -25,12 +25,25 @@
                                 <div class="pxp-company-dashboard-jobs-search-search-form">
                                     <div class="input-group">
                                         <span class="input-group-text"><span class="fa fa-search"></span></span>
-                                        <input type="text" class="form-control" placeholder="Search jobs...">
+                                      
+                                        <input type="text" class="form-control" placeholder="Search D-day">
+                                           &nbsp&nbsp<div class="pxp-dashboard-table-options d-flex justify-content-center" >
+			                                            <ul class="list-unstyled">
+                                   
+                                   <a href="addDDay" <li><button title="Add"><span class="fa fa-plus"></span></button></li></a>
+                                  
+                                    </ul>
+                                    	</div>
+                                        
                                     </div>
+                                    	
+						                        
                                 </div>
                             </div>
                         </div>
                     </div>
+                 
+                                    	
                     <!-- 검색 end -->   
                     <!-- 목록 start -->                   
                     <div class="table-responsive">
@@ -46,7 +59,7 @@
                                     <th class="text-center" style="width: 13%;">목표날짜</th>
                                     <th class="text-center" style="width: 11%;">작성일시</th>
                                     <th class="text-center" style="width: 11%;">수정/삭제</th>
-                                    <th class="text-center" style="width: 11%;">등록</th>
+                                    <th class="text-center" style="width: 11%;">디데이보기</th>
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>    
@@ -80,6 +93,7 @@
 			                                            	<a th:href="@{/deleteDDay(dDayCode=${l.dDayCode})}">
 			                                              	  <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
 	                                           				</a>
+	                                           				</ul>
 	                                           			</div>
 	                                           	</div>
 	                                   </td>   
@@ -88,9 +102,11 @@
 			                                            <ul class="list-unstyled">
 			                                              <!-- 등록버튼 start -->
                                     						<a href="/addDDay">
-						                            	<li><button title="Add"><span class="fa fa-plus"></span></button></li>
+                                    					
+						                            	<button title="Add"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i></button>
 						                           			 </a>
 						                           		  <!-- 등록버튼 end -->
+						                           		  </ul>
 						                         	</div>
 						                        </div>
 						                </td>   

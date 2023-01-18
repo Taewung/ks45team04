@@ -195,4 +195,11 @@ public class PlannerController {
 		model.addAttribute("dDayDetailList", dDayDetailList);
 		return "member/planner/d_day_detail";
 	}
+	
+	// 디데이 보기
+	@GetMapping("/DDayDDay")
+	public String DDayDDay(Model model) {
+		model.addAttribute("title", "디데이 보기");
+		return "member/planner/d_day_d_day";
+	}
 }
