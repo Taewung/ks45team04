@@ -1,6 +1,7 @@
 package ks45team04.sos.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import ks45team04.sos.admin.dto.LicenseMain;
 import ks45team04.sos.admin.dto.LicensePassScore;
 import ks45team04.sos.admin.dto.LicenseSub;
 import ks45team04.sos.admin.dto.LicenseSubject;
+import ks45team04.sos.admin.dto.Question;
 import ks45team04.sos.admin.dto.SubjectPassScore;
 import ks45team04.sos.admin.service.LicensePassScoreService;
 import ks45team04.sos.admin.service.LicenseSubjectService;
@@ -40,10 +42,7 @@ public class PassScoreController {
 	// 특정 과목합격기준점수 수정처리
 	@PostMapping("/modifySubjectPassScore")
 	public String modifySubjectPassScore(SubjectPassScore subjectPassScore) {	
-		subjectPassScore.setLsPScoreRegId("id002");
-		
-		System.out.println(subjectPassScore + "modifyVal ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		
+		subjectPassScore.setLsPScoreRegId("id002");		
 		subjectPassScoreService.modifySubjectPassScore(subjectPassScore);
 		log.info("특정 과목합격기준점수 수정 : {}", subjectPassScore);	
 		String liCode = subjectPassScore.getLiCode();
@@ -169,12 +168,26 @@ public class PassScoreController {
 	}	
 	// 자격증 합격기준점수목록 조회
 	@GetMapping("/licensePassScoreList")
+	@SuppressWarnings("unchecked")
 	public String licensePassScoreList(Model model
+									   ,@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage
 									  ,@RequestParam(value="searchKey", required = false) String searchKey
 									  ,@RequestParam(value="searchValue", required = false, defaultValue = "") String searchValue) {
-		List<LicensePassScore> licensePassScoreList = licensePassScoreService.getLicensePassScoreList(searchKey, searchValue);		
+		Map<String, Object> paramMap = licensePassScoreService.getLicensePassScoreList(currentPage, searchKey, searchValue);
+		int lastPage = (int) paramMap.get("lastPage");
+		List<LicensePassScore> licensePassScoreList = (List<LicensePassScore>) paramMap.get("licensePassScoreList");
+		int startPageNum = (int) paramMap.get("startPageNum");
+		int endPageNum = (int) paramMap.get("endPageNum");
+		
+		model.addAttribute("title", "자격증별 합격기준점수 목록");
+		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("licensePassScoreList", licensePassScoreList);
-		model.addAttribute("title", "자격증별 합격기준점수 목록");	
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+		
+		log.info("자격증별 합격기준점수 목록조회 : {}", licensePassScoreList);
+		
 		return "admin/passScore/license_pass_score_list";
 	}
 }

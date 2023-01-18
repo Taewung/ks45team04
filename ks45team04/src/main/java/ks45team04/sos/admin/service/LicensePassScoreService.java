@@ -1,6 +1,8 @@
 package ks45team04.sos.admin.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +12,7 @@ import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.admin.dto.LicenseMain;
 import ks45team04.sos.admin.dto.LicensePassScore;
 import ks45team04.sos.admin.dto.LicenseSub;
+import ks45team04.sos.admin.dto.Question;
 import ks45team04.sos.admin.mapper.LicensePassScoreMapper;
 
 
@@ -87,10 +90,29 @@ public class LicensePassScoreService {
 	}
 	
 	/**
-	 * 자격증별 합격기준점수 조회
-	 * @return List<LicensePassScore>
+	 * 자격증별 합격기준점수 목록조회 및 검색/페이징 처리
+	 * @param currentPage
+	 * @param searchKey
+	 * @param searchValue
+	 * @return paramMap
 	 */
-	public List<LicensePassScore> getLicensePassScoreList(String searchKey, String searchValue){
+	public Map<String, Object> getLicensePassScoreList(int currentPage, String searchKey, String searchValue){		
+		// 보여질 행의 갯수
+		int rowPerPage = 10;
+		
+		//  보여질 행의 시작점
+		int startRowNum = (currentPage - 1) * rowPerPage;
+		
+		// 마지막페이지 
+		// 1. 테이블의 전체 행의 갯수
+		double rowCnt = licensePassScoreMapper.getLiPScoreCnt();
+		// 2. 마지막페이지
+		int lastPage = (int) Math.ceil(rowCnt/rowPerPage);
+		
+		// 보여질 페이지 번호 구현
+		// 보여질 페이지 번호 초기화
+		int startPageNum = 1;
+		int endPageNum = (int) Math.ceil(rowCnt/rowPerPage);
 		
 		if(searchKey != null) {
 			switch (searchKey) {
@@ -105,8 +127,24 @@ public class LicensePassScoreService {
 				break;
 			}
 		}	
-		List<LicensePassScore> licensePassScoreList = licensePassScoreMapper.getLicensePassScoreList(searchKey, searchValue);
-		return licensePassScoreList;
+		// 조회 시 Limit 인수 파라미터 셋팅
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("startRowNum", startRowNum);
+		paramMap.put("rowPerPage", rowPerPage);
+		paramMap.put("searchKey", searchKey);
+		paramMap.put("searchValue", searchValue);
+		
+		// data => 전체 문제 목록 조회 get
+		List<LicensePassScore> licensePassScoreList = licensePassScoreMapper.getLicensePassScoreList(paramMap);
+		
+		// controller에 전달하기 위한 파라미터 셋팅
+		paramMap.clear();
+		paramMap.put("licensePassScoreList", licensePassScoreList);
+		paramMap.put("lastPage", lastPage);
+		paramMap.put("startPageNum", startPageNum);
+		paramMap.put("endPageNum", endPageNum);
+				
+		return paramMap;
 	}
 
 }

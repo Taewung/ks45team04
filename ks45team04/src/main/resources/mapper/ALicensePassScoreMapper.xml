@@ -137,7 +137,7 @@
 		FROM
 			license_main_category AS lm;	
 	</select>	
-	<select id="getLicensePassScoreList" resultType="LicensePassScore" parameterType="String" resultMap="licensePassScoreResultMap">
+	<select id="getLicensePassScoreList" resultType="LicensePassScore" parameterType="Map" resultMap="licensePassScoreResultMap">
 		/* 자격증별  합격기준 점수 조회 */
 		SELECT
 			 li_p_score_code
@@ -150,8 +150,18 @@
 			license_pass_score	
 		<where>
 			<if  test="searchKey != null and searchKey != ''">
-				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
+				${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
 			</if>
-		</where>		
+		</where>
+		<if test="startRowNum != null and startRowNum > -1">		
+			LIMIT #{startRowNum}, #{rowPerPage};
+		</if>		
+	</select>
+	<select id="getLiPScoreCnt" resultType ="int">
+		/* 자격증합격기준점수 테이블의 전체 행의 갯수 */
+		SELECT
+			COUNT(1)
+		FROM
+			license_pass_score;
 	</select>
 </mapper>

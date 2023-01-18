@@ -204,20 +204,14 @@ public class QuestionSettingService {
 		List<LicenseMain> mainListForQuestion = questionSettingMapper.getMainLisForQuestion();
 		return mainListForQuestion;
 	}
+
 	/**
-	 * 문제 정보 목록조회
-	 * @return List<Question>
+	 * 전체 문제 목록조회 및 검색/페이징 처리
+	 * @param currentPage
+	 * @param searchKey
+	 * @param searchValue
+	 * @return
 	 */
-	/*
-	 * public List<Question> getQuestionList(String searchKey, String searchValue){
-	 * if(searchKey != null) { switch (searchKey) { case "questionCode": searchKey =
-	 * "question_code"; break; case "liName": searchKey = "li_name"; break; case
-	 * "lsName": searchKey = "ls_name"; break; case "questionRegId": searchKey =
-	 * "question_reg_id"; break; } } List<Question> questionList =
-	 * questionSettingMapper.getQuestionList(searchKey, searchValue); return
-	 * questionList; }
-	 */
-	
 	public Map<String, Object> getQuestionList(int currentPage, String searchKey, String searchValue){ 
 		// 보여질 행의 갯수
 		int rowPerPage = 10;
@@ -273,3 +267,6 @@ public class QuestionSettingService {
 		return paramMap;
 	}
 }
+
+
+

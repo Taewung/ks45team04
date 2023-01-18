@@ -1,6 +1,7 @@
 package ks45team04.sos.admin.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -34,6 +35,8 @@ public interface LicensePassScoreMapper {
 	public List<LicenseMain> getLicenseMainList();
 		
 	// 자격증별 합격기준점수목록 조회
-	public List<LicensePassScore> getLicensePassScoreList(String searchKey, String searchValue);
+	public List<LicensePassScore> getLicensePassScoreList(Map<String,Object> paramMap);
 	
+	// 자격증합격기준점수 테이블 전체 행의 갯수
+	public int getLiPScoreCnt();
 }
