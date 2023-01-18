@@ -27,18 +27,20 @@ public class RefundController {
 		this.mPayService = mPayService;
 	}
 	
-	//환불 신청 등록 화면 처리
+	//환불 신청 등록 처리
 	@PostMapping("/refundRequest")
 	public String refundRequest(MRefund mRefund) {
 		
-		System.out.println(mRefund);
+		//환불 신청 등록 코드 자동생성
+		String newRefundCode = mRefundService.getMRefundCode("refundInfo", "refundCode");
 		
+		mRefund.setRefundCode(newRefundCode);
 		mRefundService.refundRequest(mRefund);
 		
 		return "redirect:/refundList";
 	}
 	
-	//환불 신청(등록) 화면
+	//환불 신청 등록 화면
 	@GetMapping("/refundRequest")
 	public String refundRequest(@RequestParam(value="payCompleteCode") String payCompleteCode,
 								Model model) {

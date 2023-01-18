@@ -21,6 +21,17 @@ public class MRefundService {
 		this.mRefundMapper = mRefundMapper;
 		this.mPayMapper = mPayMapper;
 	}
+	/**
+	 * refundCode 자동 생성
+	 * 
+	 * @param refundInfo
+	 * @param refundCode
+	 * @return newRefundCode
+	 */
+	public String getMRefundCode(String refundInfo, String refundCode) {
+		String newRefundCode = mRefundMapper.getMRefundCode(refundInfo, refundCode);
+		return newRefundCode;
+	}
 	
 	//회원 환불 신청 등록(수정)
 	public int refundRequest(MRefund mRefund) {
