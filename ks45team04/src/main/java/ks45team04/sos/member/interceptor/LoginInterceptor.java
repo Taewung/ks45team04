@@ -40,9 +40,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 			String loginKeepId = cookie.getValue();
 			MMember mmember = memberMapper.MemberList(loginKeepId);
 			if(mmember != null) {
-				loginInfo = new LoginInfo(loginKeepId
-													, member.getMemName()
-													, member.getMemBirth());
+				//loginInfo = new LoginInfo(loginKeepId, member.getMemName(), member.getMemBirth());
 				session.setAttribute("S_MEM_INFO", loginInfo);
 			}
 		}

@@ -142,7 +142,7 @@ private static final Logger log = LoggerFactory.getLogger(MemberController.class
 		model.addAttribute("startPageNum", startPageNum);
 		model.addAttribute("endPageNum", endPageNum);
 		
-		return "/member/login/loginHistory";
+		return "member/login/loginHistory";
 	}
 
 

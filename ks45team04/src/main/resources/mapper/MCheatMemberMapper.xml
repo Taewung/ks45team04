@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team04.sos.member.mapper.MCheatMemberMapper">
+	
+	
+	<insert id="addFileUpload" parameterType="list">
+		/* 파일 정보 삽입 */
+		INSERT INTO file
+		(
+			 file_idx
+			,file_new_name
+			,file_original_name
+			,file_path
+			,file_size
+		)VALUES
+		<foreach collection="list" item="data" separator=",">
+		( 
+			 #{data.fileIdx}
+			,#{data.fileNewName}
+			,#{data.fileOriginalName}
+			,#{data.filePath}
+			,#{data.fileSize}
+		)
+		</foreach>
+	</insert>
+	
+	<insert id="addFileControl" parameterType="FileControl">
+		/* 파일 관계 테이블 삽입 */
+		<selectKey keyProperty="fileGroupIdx" resultType="string" order="BEFORE">
+			SELECT
+				CASE
+				WHEN COUNT(1) = 0 THEN CONCAT('file_control', '_1')
+			ELSE
+				CONCAT('file_control_', MAX(CAST(SUBSTRING_INDEX(f.file_group_idx, 'file_control_', -1)AS UNSIGNED))+1)
+				END
+			FROM
+				file_control as f
+		</selectKey>
+		INSERT INTO file_control
+		(
+			  file_group_idx
+			 ,file_idx
+			 ,file_reg_date
+		)VALUES
+		<foreach collection="fileDtoList" item="data" separator=",">
+		( 
+			 #{fileGroupIdx}
+			,#{data.fileIdx}
+			,NOW()
+		)
+		</foreach>
+	</insert>
+	
+	<insert id="cheatRequest" parameterType="MCheatMember">
+		/* 파일 관계 테이블 삽입 */
+		<selectKey keyProperty="cmReportCode" resultType="string" order="BEFORE">
+			SELECT
+				CASE
+				WHEN COUNT(1) = 0 THEN CONCAT('cm', '1')
+			ELSE
+				CONCAT('cm', MAX(CAST(SUBSTRING_INDEX(c.cm_report_code, 'cm', -1)AS UNSIGNED))+1)
+				END
+			FROM
+				cheat_member as c
+		</selectKey>
+		INSERT INTO cheat_member
+		(      cm_report_code
+			 , cm_id
+			 , cm_report_id
+			 , cm_report_reason
+			 , cm_report_content
+			 , cm_report_file
+			 , cm_report_datetime
+			 , cm_report_state
+		)VALUES (
+			   #{cmReportCode}
+			 , 'id006'
+			 , #{cmReportId}
+			 , #{cmReportReason}
+			 , #{cmReportContent}
+			 , #{cmReportFile}
+			 , NOW()
+			 , '대기'
+		);
+	</insert>
+	
+	
+	
+	
+	
+	
+</mapper>
