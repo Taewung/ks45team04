@@ -9,12 +9,13 @@
                     <div class="dropdown pxp-user-nav-dropdown">
                         <a role="button" class="dropdown-toggle" data-bs-toggle="dropdown">
                             <div class="pxp-user-nav-avatar pxp-cover" style="background-image: url(images/company-logo-1.png);"></div>
-                            <div class="pxp-user-nav-name d-none d-md-block">관리자명</div>
+                            <div th:unless="${session.S_MEM_INFO == null}" class="pxp-user-nav-name d-none d-md-block">
+          					<label th:text="|${session.S_MEM_INFO.loginLogoutId}|"></label>                            
+                            </div>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#">#메뉴1</a></li>
-                            <li><a class="dropdown-item" href="#">#메뉴2</a></li>
-                            <li><a class="dropdown-item" href="/main">Logout</a></li>
+                            <li><a class="dropdown-item" href="/main">Main</a></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         </ul>
                     </div>
                 </nav>

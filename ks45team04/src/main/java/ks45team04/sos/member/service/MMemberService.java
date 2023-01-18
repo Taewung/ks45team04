@@ -105,6 +105,16 @@ public Map<String, Object> checkPwByMemId(String memId, String memPw) {
 }
 
 /**
+ * 회원 상세 조회
+ * @param memId
+ * @return
+ */
+public MMember getMemberInfo(String memId) {
+	
+	return memberMapper.getMemberInfo(memId);
+}
+
+/**
  * 개인 회원 정보 수정
  * @param mmember
  * @return

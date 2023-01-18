@@ -22,24 +22,42 @@
 		</collection>
 	</resultMap>
 	
-	<select id="getMemInfoById" parameterType="String" resultMap="MemberResultMap">
-		/*특정 회원정보 조회*/
-		SELECT
-			m.mem_id,
-			m.mem_pw	
-		FROM
-			member AS m
-		WHERE
-			m.mem_id = #{memId};
-	</select>
+	<update id ="modifyMemberInfo" parameterType="Member">
+	/*특정 회원 정보 수정*/
+	UPDATE
+		member
+	SET
+		mem_pw = #{memPw},
+		mem_name = #{memName},		
+		mem_email = #{memEmail},
+		mem_phone = #{memPhone}
+	WHERE
+		mem_id =#{memId};
+	</update>
 	
+	<select id="getMemberInfo" parameterType="String" resultMap="MemberResultMap">
+		/*특정 회원정보 조회*/
+			SELECT
+				m.mem_id,
+				m.mem_pw,
+				m.mem_name,
+				m.mem_email,
+				m.mem_birth,
+				m.mem_phone,
+				m.mem_level_name,
+				m.mem_reg_datetime
+			FROM
+				member AS m
+			where
+			m.mem_id = #{memId}; 
+	</select> 
 	<select id="getLoginHistory" parameterType="map" resultMap="MemberResultMap">
 	/*로그인 이력 조회*/
 	SELECT
 		login_logout_code,
 		login_logout_id,
 		login_datetime,
-		logout_datetime;
+		logout_datetime
 	FROM
 		login_logout
 		INNER JOIN

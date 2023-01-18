@@ -69,12 +69,15 @@ public class ChallengeController {
 	  
 	  
 	  //챌린지 목표 등록 처리
-	  @PostMapping("/challengeGoal") public String challengeGoal(ChallengeGoal challengeGoal) {
+	  @PostMapping("/challengeGoal")
+	  public String challengeGoal(ChallengeGoal challengeGoal) {
 		 //cgCode 자동생성
-	  String newCgCode = challengeService.getNewCgCode("cg", "cg_code"); challengeGoal.setCgId("id005");
-	  challengeGoal.setCgCode(newCgCode); challengeService.challengeGoal(challengeGoal);
+	  String newCgCode = challengeService.getNewCgCode("cg", "cg_code");
+	  challengeGoal.setCgId("id005");
+	  challengeGoal.setCgCode(newCgCode);
+	  challengeService.challengeGoal(challengeGoal);
 	  log.info("챌린지 목표 등록 쿼리파라미터 : {}", challengeGoal);
-	  return "redirect:/challenge_goal";
+	  return "redirect:/challengeState";
 	  }
 	 
 
