@@ -38,7 +38,7 @@
                         <table class="table table-hover align-middle">                      	
                             <thead>                    
                                 <tr>
-                                    <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
+                                    <th class="pxp-is-checkbox" style="width: 1%;"></th>
                                     <th style="width: 15%;">년_월별상품매출</th>
                                     <th style="width: 10%;">년도</th>
                                     <th style="width: 15%;">1월</th>
@@ -60,7 +60,7 @@
                             <tbody>
                                  <tr th:if="${not #lists.isEmpty(annualSalesList)}"
 									th:each="l : ${annualSalesList}">
-                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td></td>
                                     <td><div class="pxp-company-dashboard-job-title" th:text="${l.annualSalesCode}"></div>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualSalesYear}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualSalesJan}"></div></td>
@@ -134,7 +134,7 @@
                         <table class="table table-hover align-middle">                      	
                             <thead>                    
                                 <tr>
-                                    <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
+                                    <th class="pxp-is-checkbox" style="width: 1%;"></th>
                                     <th style="width: 15%;">년_월별상품환불</th>
                                     <th style="width: 10%;">년도</th>
                                     <th style="width: 15%;">1월</th>
@@ -156,7 +156,7 @@
                             <tbody>
                                  <tr th:if="${not #lists.isEmpty(annualRefundList)}"
 									th:each="l : ${annualRefundList}">
-                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td></td>
                                     <td><div class="pxp-company-dashboard-job-title" th:text="${l.annualRefundCode}"></div>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualRefundYear}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualRefundJan}"></div></td>
@@ -230,7 +230,7 @@
                         <table class="table table-hover align-middle">                      	
                             <thead>                    
                                 <tr>
-                                    <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
+                                    <th class="pxp-is-checkbox" style="width: 1%;"></th>
                                     <th style="width: 15%;">년_월별상품손익</th>
                                     <th style="width: 10%;">년도</th>
                                     <th style="width: 15%;">1월</th>
@@ -252,7 +252,7 @@
                             <tbody>
                                  <tr th:if="${not #lists.isEmpty(annualTotalList)}"
 									th:each="l : ${annualTotalList}">
-                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td></td>
                                     <td><div class="pxp-company-dashboard-job-title" th:text="${l.annualTotalCode}"></div>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualTotalYear}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.annualTotalJan}"></div></td>

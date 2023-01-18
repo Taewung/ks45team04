@@ -18,12 +18,24 @@
     <link rel="stylesheet" th:href="@{/css/animate.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     
- 
+    <link href="/pay/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/pay/assets/plugins/jquery-ui/jquery-ui.css" rel="stylesheet">
+    <link href="/pay/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/pay/assets/plugins/selectbox/select_option1.css" rel="stylesheet">
+    <link href="/pay/assets/plugins/fancybox/jquery.fancybox.min.css" rel="stylesheet">
+    <link href="/pay/assets/plugins/rateyo/jquery.rateyo.min.css" rel="stylesheet">
+    <link href="/pay/assets/plugins/iziToast/css/iziToast.css" rel="stylesheet">
+    <link href="/pay/assets/plugins/prismjs/prism.css" rel="stylesheet">
+    <link href="/pay/assets/plugins/revolution/css/settings.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/pay/assets/plugins/slick/slick.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/pay/assets/plugins/slick/slick-theme.css" media="screen">
     
-  
+    <link href="/pay/assets/plugins/animate/animate.css" rel="stylesheet">
+    
+     <link href="/pay/assets/css/style.css" rel="stylesheet">
     
     <link rel="stylesheet" th:href="@{/css/examAnswer.css}">
-   
+     <link rel="shortcut icon" href="/pay/assets/img/favicon.png">
 </head>
 
 <body>
@@ -37,13 +49,13 @@
         <th:block layout:fragment="customContents">
 		
 		
-		  <div class="container" style=" margin-left: 570px;">
+		  <div class="container">
 		    <div class="row">
 		      <div class="col-md-7">
 		        <div class="page-title">
 		         <br> <br> 
-		          <h2><b>
-		          노트 결제</b></h2>
+		          <h2>&nbsp&nbsp
+		          노트 결제</h2>
 		          <br> <br> <br>
 		        </div>
 		      </div>
@@ -54,54 +66,60 @@
 		  </div>
 		</section>
 	  
-	   
+	     <div class="container">
+	       <div class="row">
+	         <div class="col-md-8">
+	           <div class="innerWrapper clearfix stepsPage">
+	             <div class="row progress-wizard" style="border-bottom:0;">
+	                 <div class="container">
+	       <div class="row">
+	         <div class="col-md-8">
+	           <div class="innerWrapper clearfix stepsPage">
+	             <div class="row progress-wizard" style="border-bottom:0;">
+	
 	           
-		<div class="row" style=" margin-left: 550px;">
-	             <form id="paymentForm" action="/payInsert" class="row" method="GET" role="form" >
+	
+	             <form id="paymentForm" action="/payInsert" class="row" method="GET" role="form">
 	               <div class="col-12">
 	                 <div class="page-header">
-	                   <h4>Payment Infomation</h4>
+	                   <h4>Rental Infomation</h4>
 	                 </div>
 	               </div>
 	               <div class="form-group col-md-7 col-12">
-	                 <label for=""> 상품명</label>
+	                 <label for="">상품명</label>
 	                 <input type="hidden" readonly="readonly" class="goodsCode" name="noteWriterId" th:value="${noteInfo.noteWriterId}">
 	                 <input type="text" class="form-control" th:value="${noteInfo.noteName}" readonly="readonly">
 	               </div>
-	             
 	               <div class="form-group col-md-7 col-12">
-	                 <br><br>
 	                 <label for="">관련자격증</label>
 	                 <input id="goodsPrice" type="text" class="form-control" th:value="${noteInfo.liName}" readonly="readonly">
 	               </div>
-	             
 	               <div class="form-group col-md-7 col-12">
-	                 <br><br>
 	                 <label for="">상품가격</label>
 	                 <input id="goodsPrice" type="text" class="form-control" th:value="${noteInfo.notePrice}" readonly="readonly">
 	               </div>
+	             
 	              
-	         	    <div class="form-group col-md-7 col-12">
-	         	     <br><br>
+	              
+	               <div class="form-group col-md-7 col-12">
 	                 <label for="">포인트 사용</label>
 	                 <input id="pointUse" type="number" th:value="0" class="form-control" name="#">
 	               </div>
-	            
-	             </form>
+	               <div class="form-group col-md-2 col-12">
+	               </div>
+	             
                	  
 	            
 	             
-	               
-	               <div class="col-12" >
+	               <div class="col-12">
 	                 <div class="page-header">
-	                 <br><br><br><br>
-	                   <h4> Billing Information</h4>
+	                   <h4>Billing Information</h4>
 	                 </div>
 	               </div>
 	               <div class=" checkboxArea card-check">
 	               	<div class="col-sm-12 mb-2">
-                     <input  id="checkbox1" type="radio" name="payment.paymentType" value="카드" checked="checked">
-                      <label for="checkbox1"><span></span> 카드</label>
+                      <input id="checkbox1" type="radio" name="payment.paymentType" value="카드" checked="checked">
+                      <label for="checkbox1"><span></span>카드</label>
                       <div class="form-group row my-3 ml-3" id="card">
                         <div class="col-md-7">
                           <label for="" class="col-form-label">결제 회사</label>
@@ -115,19 +133,18 @@
                       		<option value="롯데" >롯데</option>
 	                     </select>
 	                     <br>
-	                   
+	                     <br>
+	                     <br>
+	                     <br>
 	                     <div class="col-12">
-	             	 	<div class="mt-4 mt-lg-5">
-	                 <a th:href="@{/noteDetial(noteWriterId=${noteInfo.noteWriterId})}"><button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta save">이전</button>
-	                 </a>
-	                  <button type="button" id="resetBtn" class="btn rounded-pill pxp-section-cta">결제</button>
-				</div>
+	             	    <div class="well well-lg clearfix">
+	                   <ul class="pager">
+	                     <li class="next"><button type="submit" style=" margin-left: 10px; font-weight: 700;" id="submitBtn" class="btn btn-primary btn-default float-right">결제 <i class="fa fa-angle-right"></i></button></li>
+	                     <li class="prev"><button type="button" style=" margin-left: 10px; font-weight: 700;" class="btn btn-primary btn-default float-right" ><i class="fa fa-angle-left"></i> 이전</button></li>
+	                   </ul>
+	                 </div>
 	               </div>
-	                </div>
-	                 </div>
-	                 </div>
-	                 </div>
-	</div>
+	
 	</th:block>
          
          
@@ -146,7 +163,21 @@
         <script src="js/main.js"></script>
         <th:block layout:fragment="customJs"></th:block> 
         <th:block layout:fragment="customScript"></th:block> 
-      
+        <script src="/pay/assets/plugins/jquery/jquery.min.js"></script>
+		<script src="/pay/assets/plugins/jquery/jquery-migrate-3.0.0.min.js"></script>
+		<script src="/pay/assets/plugins/jquery-ui/jquery-ui.js"></script>
+		<script src="/pay/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<script src="/pay/assets/plugins/revolution/js/jquery.themepunch.tools.min.js"></script>
+		<script src="/pay/assets/plugins/revolution/js/jquery.themepunch.revolution.min.js"></script>
+		<script src="/pay/assets/plugins/slick/slick.js"></script>
+		<script src="/pay/assets/plugins/fancybox/jquery.fancybox.min.js"></script>
+		<script src="/pay/assets/plugins/iziToast/js/iziToast.js"></script>
+		<script src="/pay/assets/plugins/prismjs/prism.js"></script>
+		<script src="/pay/assets/plugins/selectbox/jquery.selectbox-0.1.3.min.js"></script>
+		<script src="/pay/assets/plugins/countdown/jquery.syotimer.js"></script>
+		<script src="/pay/assets/plugins/velocity/velocity.min.js"></script>
+		<script src="/pay/assets/plugins/rateyo/jquery.rateyo.min.js"></script>
+		<script src="/pay/assets/js/custom.js"></script>
         
 </body>
 </html>
