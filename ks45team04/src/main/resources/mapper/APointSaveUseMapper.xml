@@ -18,33 +18,39 @@
 			<result property="pointSaveStandardContent" 			column="point_save_standard_content" />
 			<result property="savePoint" 							column="save_point" />
 			<result property="pointSaveStandardId" 					column="point_save_standard_id" />
-			</association>
-		</resultMap>
+		</association>
+	</resultMap>
 
-	<select id="PointSaveStandardList" resultType="PointSaveStandard">
-		/* 포인트 적립기준 내용 내역 조회*/
-		SELECT 
-			point_save_standard_content
-		FROM
-			point_save_standard;
+	<select id="getPointSaveUseCode" parameterType="String" resultType="String">
+		/* 포인트 적립 코드 자동생성 */
+		SELECT
+    		CASE
+    		WHEN COUNT(1) = 0 THEN CONCAT('point_save_use', '_001')
+		ELSE
+    		CONCAT('point-save-use-', LPAD(MAX(CAST(SUBSTRING_INDEX(point_save_use_code, 'point-save-use-', -1)AS UNSIGNED))+1, 3, 0))
+    	END AS newCode
+	FROM
+    	point_save_use;
 	</select>
-
-
+	
 	<insert id="pointSaveUseAdd" parameterType="PointSaveUse">
 		/* 포인트 적립/사용 등록 */
 		INSERT INTO 
 			point_save_use
 		(
-			point_save_use_code,
-			point_save_use_id,
+			point_save_use_code, 
+			point_save_use_id, 
 			save_use,
 			point_save_use_reason, 
 			point_save_use_point, 
+			total_point, 
 			save_use_datetime
 		)VALUES(
-			sf_point_save_use_code(),#{pointSaveUseId}, #{saveUse}, #{pointSaveUseReason}, #{pointSaveUsePoint}, NOW()
+			#{pointSaveUseCode},#{pointSaveUseId}, #{saveUse}, #{pointSaveUseReason}, #{pointSaveUsePoint}, #{totalPoint}, NOW()
 		);
 	</insert>
+
+
 
 	<select id="pointSaveUseList" resultType="PointSaveUse" resultMap="pointSaveUseResultMap">
 		/* 포인트 적립/사용 내역 조회*/

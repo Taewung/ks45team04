@@ -19,23 +19,28 @@
                     <div class="row justify-content-between align-content-between">
                         <div class="col-auto order-2 order-sm-1">
                             <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
+                                <form th:action="@{/pointFeeRateList}" method="get">
                                 <div class="pxp-company-dashboard-jobs-search mb-3">
-                                <select class="form-select">
-                                    <option>내용</option>
-                                </select>
+                                <select name="searchKey" style="width:100px;" class="form-select">
+                                    <option value="pointFeeRateCode">코드</option>
+                                    <option value="pointFeeRateContents">내용</option>
+                                </select>&nbsp;&nbsp;
                                 	<div class="col-auto order-1 order-sm-2">
                                 		<div class="pxp-company-dashboard-jobs-search-search-form">
                                     		<div class="input-group">
                                         		<span class="input-group-text"><span class="fa fa-search"></span></span>
-                                        		<input type="text" class="form-control" placeholder="Search ID">
+                                        		<input type="text"  name="searchValue" class="form-control" placeholder="Search ID">
                                         		<button class="btn ms-2">Search</button>
-                                        		<a href="/addPointFeeRate">
-                                        		<button class="btn ms-2">포인트 수수료율 등록</button>
-                                        		</a>
                                     		</div>
                                 		</div>
                             		</div>
                         		</div> 
+                        		</form>
+                        		<div class="pxp-company-dashboard-jobs-search mb-3">
+                        		<a href="/addPointFeeRate">
+                                <button class="btn ms-2">포인트 수수료율 등록</button>
+                                </a>
+                                </div>
                             </div>
                         </div>
                         

@@ -11,16 +11,24 @@
 		<result property="pointSaveStandardId" 			column="point_save_standard_id"/>
 	</resultMap>
 	
-	<update id="modifyPointSaveStandard" parameterType="PointSaveStandard">
-	/* 특정 포인트 적립 기준 수정*/
-	UPDATE 
-			point_save_standard
-	SET 
-			point_save_standard_content = #{pointSaveStandardContent},
-			save_point = #{savePoint}
-	WHERE 
-			point_save_standard_code= #{pointSaveStandardCode};
+	 <select id="getPointSaveStandardContent" resultType="String" >
+		/* 포인트 적립 기준 내용 조회*/
+		SELECT 
+			point_save_standard_content
+		FROM 
+			point_save_standard;
+	</select> 
 	
+	<update id="modifyPointSaveStandard" parameterType="PointSaveStandard">
+		/* 특정 포인트 적립 기준 수정*/
+		UPDATE 
+				point_save_standard
+		SET 
+				point_save_standard_content = #{pointSaveStandardContent},
+				save_point = #{savePoint}
+		WHERE 
+				point_save_standard_code= #{pointSaveStandardCode};
+		
 	</update>
 	
 	<select id="getPointSaveStandardByCode" parameterType="String" resultMap="pointSaveStandardResultMap">
@@ -59,7 +67,21 @@
 		SELECT
 			*
 		FROM
-			point_save_standard;
+			point_save_standard
+		<where>
+			<if test="searchKey != null and searchKey != ''">
+				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
+			</if>
+		</where>
 			
 	</select>
+	
+	<!-- <select id="pointSaveStandardContentList" resultMap="pointSaveStandardContentResultMap">
+		/* 포인트 적립기준 내용 내역 조회*/
+		SELECT 
+			point_save_standard_content
+		FROM
+			point_save_standard;
+	
+	</select> -->
 </mapper>

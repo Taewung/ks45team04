@@ -34,9 +34,21 @@ public class PointFeeRateService {
 	}
 	
 	//포인트 수수료율 내역 조회
-	public List<PointFeeRate> PointFeeRateList(){
+	public List<PointFeeRate> PointFeeRateList(String searchKey, String searchValue){
 		
-		List<PointFeeRate> pointFeeRateList = pointFeeRateMapper.pointFeeRateList();
+		if(searchKey != null) {
+			switch (searchKey) {
+			case "pointFeeRateCode":
+				searchKey = "point_fee_rate_code";
+				break;
+			case "pointFeeRateContents":
+				searchKey = "point_fee_rate_contents";
+				break;
+			}
+		}
+		
+		
+		List<PointFeeRate> pointFeeRateList = pointFeeRateMapper.pointFeeRateList(searchKey, searchValue);
 		
 		return pointFeeRateList;
 	}

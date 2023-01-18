@@ -19,23 +19,29 @@
                 <div class="row justify-content-between align-content-center">
                     <div class="col-auto order-2 order-sm-1">
                         <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
+                            <form th:action="@{/pointSaveStandardList}" method="get">
                             <div class="pxp-company-dashboard-jobs-search mb-3">
-                            <select name="searchKey" class="form-select">
-                                <option value="pointSaveUseId">내용</option>
-                            </select>
+                            <select name="searchKey" style="width:100px;" class="form-select">
+                                <option value="pointSaveStandardCode">코드</option>
+                                <option value="pointSaveStandardContent">내용</option>
+                            </select>&nbsp;&nbsp;
                             	<div class="col-auto order-1 order-sm-2">
                             		<div class="pxp-company-dashboard-jobs-search-search-form">
                                 		<div class="input-group">
                                     		<span class="input-group-text"><span class="fa fa-search"></span></span>
-                                    		<input type="text" class="form-control" placeholder="Search Content">
-                                    		<button class="btn ms-2">Search</button>            
-                                    		<a href="/addPointSaveStandard">
-                                    		<button class="btn ms-2">포인트 적립 기준 등록</button>
-                                    		</a>                        		
+                                    		<input type="text" name="searchValue" style="width:250px;" class="form-control" placeholder="Search Content">
+                                    		<button type="submit" class="btn ms-2">Search</button>            
+                                    		                       		
                                 		</div>
                             		</div>
                         		</div>
                     		</div> 
+                    		</form>
+                    		<div class="pxp-company-dashboard-jobs-search mb-3">
+                    			<a href="/addPointSaveStandard">
+                            	<button class="btn ms-2">포인트 적립 기준 등록</button>
+                            	</a>
+                            </div> 
                         </div>
                     </div>
                     

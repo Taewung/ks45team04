@@ -2,6 +2,8 @@ package ks45team04.sos.admin.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +27,8 @@ import ks45team04.sos.admin.service.PointSaveUseService;
 @Controller
 public class APointController {
 
+	private static final Logger log = LoggerFactory.getLogger(APointController.class);
+	
 	private final PointSaveUseService pointSaveUseService;
 	private final PointSaveUseMapper pointSaveUseMapper;
 	private final PointSaveStandardService pointSaveStandardService;
@@ -119,9 +123,11 @@ public class APointController {
 	
 	// 포인트 적립 기준 조회
 	@GetMapping("/pointSaveStandardList")
-	public String pointSaveStandardList(Model model) {
+	public String pointSaveStandardList(Model model,
+										@RequestParam(value="searchKey", required = false) String searchKey,
+										@RequestParam(value="searchValue", required = false, defaultValue="")String searchValue) {
 		
-		List<PointSaveStandard> pointSaveStandardList = pointSaveStandardService.PointSaveStandardList();
+		List<PointSaveStandard> pointSaveStandardList = pointSaveStandardService.PointSaveStandardList(searchKey, searchValue);
 
 		model.addAttribute("title", "포인트 적립 기준 조회");
 		model.addAttribute("pointSaveStandardList", pointSaveStandardList);
@@ -129,7 +135,6 @@ public class APointController {
 		return "admin/point/point_save_standard_list";
 	}
 	
-
 	// 포인트 수수료율 삭제
 	@GetMapping("/deletePointfeeRate")
 	public String deletePointfeeRate(Model model) {
@@ -169,36 +174,20 @@ public class APointController {
 		
 		return isChecked;
 	}
-	
 
 	
 	// 포인트 수수료율 조회
 	@GetMapping("/pointFeeRateList")
-	public String pointFeeRateList(Model model) {
+	public String pointFeeRateList(Model model,
+								   @RequestParam(value="searchKey", required = false) String searchKey,
+								   @RequestParam(value="searchValue", required = false, defaultValue="")String searchValue) {
 			
-		List<PointFeeRate> pointFeeRateList = pointFeeRateService.PointFeeRateList();
+		List<PointFeeRate> pointFeeRateList = pointFeeRateService.PointFeeRateList(searchKey, searchValue);
 			
 		model.addAttribute("title", "포인트 수수료율 조회");
 		model.addAttribute("pointFeeRateList", pointFeeRateList);
 
 		return "admin/point/point_fee_rate_list";
-	}
-	
-
-	
-	
-	// 포인트 환급 승인 내역 조회(검색)
-	@GetMapping("/pointRefundApprovalList")
-	public String pointRefundApprovalList(Model model
-			 							,@RequestParam(value="searchKey", required = false) String searchKey
-			 							,@RequestParam(value="searchValue", required = false, defaultValue = "") String searchValue){
-		
-		List<PointRefundApproval> pointRefundApprovalList = pointRefundApprovalService.PointRefundApprovalList(searchKey, searchValue);
-		
-		model.addAttribute("title", "포인트 환급 승인 내역 조회");
-		model.addAttribute("pointRefundApprovalList", pointRefundApprovalList);
-
-		return "admin/point/point_refund_approval_list";
 	}
 	
 
@@ -215,7 +204,7 @@ public class APointController {
 	@GetMapping("/addPointFeeRate")
 	public String addPointFeeRate(Model model) {
 		
-		List<PointFeeRate> pointFeeRateList = pointFeeRateMapper.pointFeeRateList();
+		List<PointFeeRate> pointFeeRateList = pointFeeRateMapper.pointFeeRateList(null, null);
 		
 		model.addAttribute("title", "포인트 수수료율 등록");
 		model.addAttribute("pointFeeRateList",pointFeeRateList);
@@ -227,7 +216,10 @@ public class APointController {
 	@PostMapping("/pointSaveUseAdd")
 	public String pointSaveUseAdd(PointSaveUse pointSaveUse) {
 		
+		String newPointSaveUseCode = pointSaveUseService.getPointSaveUseCode("pointSaveUse", "pointSaveUseCode");
+		pointSaveUse.setPointSaveUseCode(newPointSaveUseCode);
 		pointSaveUseService.pointSaveUseadd(pointSaveUse);
+		
 		
 		return "redirect:/pointSaveUseList";
 	}
@@ -236,16 +228,19 @@ public class APointController {
 	@GetMapping("/pointSaveUseAdd")
 	public String pointSaveUsePointAdd(Model model) {
 		
-		List<PointSaveStandard> pointSaveStandardList = pointSaveStandardService.PointSaveStandardList();
-		System.out.println(pointSaveStandardList);
-
+		List<PointSaveStandard> pointSaveStandardContentList = pointSaveStandardService.getPointSaveStandardContent();
+		log.info("pointSaveStandardContentList--> " +pointSaveStandardContentList);
+		
+		List<PointSaveStandard> pointSaveStandardList = pointSaveStandardService.PointSaveStandardList(null, null);
+		log.info("pointSaveStandardList-->" + pointSaveStandardList);
+		
 		model.addAttribute("title", "포인트 적립 등록");
 		model.addAttribute("pointSaveStandardList", pointSaveStandardList);
 		
 		return "admin/point/point_save_use_add";
 	}
 	
-	
+
 
 	// 포인트 적립/사용 내역 조회(검색)
 	@GetMapping("/pointSaveUseList")
@@ -261,9 +256,6 @@ public class APointController {
 		return "admin/point/point_save_use_list";
 	}
 
-	
-	
-	
 	// 포인트 환급 승인 내역 수정 처리
 	@PostMapping("/modifyPointRefundApproval")
 	public String modifyPointRefundApproval(PointRefundApproval pointRefundApproval) {
@@ -284,6 +276,20 @@ public class APointController {
 		model.addAttribute("pointRefundApprovalInfo", pointRefundApproval);
 		
 		return "admin/point/point_refund_approval_modify";
+	}
+	
+	// 포인트 환급 승인 내역 조회(검색)
+	@GetMapping("/pointRefundApprovalList")
+	public String pointRefundApprovalList(Model model
+			 							,@RequestParam(value="searchKey", required = false) String searchKey
+			 							,@RequestParam(value="searchValue", required = false, defaultValue = "") String searchValue){
+		
+		List<PointRefundApproval> pointRefundApprovalList = pointRefundApprovalService.PointRefundApprovalList(searchKey, searchValue);
+		
+		model.addAttribute("title", "포인트 환급 승인 내역 조회");
+		model.addAttribute("pointRefundApprovalList", pointRefundApprovalList);
+
+		return "admin/point/point_refund_approval_list";
 	}
 	
 	// 포인트 환급 승인 내역 삭제

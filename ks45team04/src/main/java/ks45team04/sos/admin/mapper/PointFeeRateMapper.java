@@ -20,7 +20,7 @@ public interface PointFeeRateMapper {
 	//포인트 수수료율 등록
 	public int addPointFeeRate(PointFeeRate pointFeeRate);
 	
-	//포인트 수수료율 내역 조회
-	public List<PointFeeRate> pointFeeRateList();
+	//포인트 수수료율 내역 조회(검색)
+	public List<PointFeeRate> pointFeeRateList(String searchKey, String searchValue);
 	
 }

@@ -68,6 +68,11 @@
 			point_fee_rate_id,
 			point_fee_rate_datetime
 		FROM
-			point_fee_rate;
+			point_fee_rate
+		<where>
+			<if test="searchKey != null and searchKey != ''">
+				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
+			</if>
+		</where>
 	</select>
 </mapper>
