@@ -38,7 +38,7 @@
                         <table class="table table-hover align-middle">                      	
                             <thead>                    
                                 <tr>
-                                    <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
+                                    <th class="pxp-is-checkbox" style="width: 1%;"></th>
                                     <th style="width: 15%;">일별상품매출</th>
                                     <th style="width: 10%;">일_매출마감그룹</th>
                                     <th style="width: 15%;">최종결제합계</th>
@@ -52,7 +52,7 @@
                             <tbody>
                                  <tr th:if="${not #lists.isEmpty(dailySalesList)}"
 									th:each="l : ${dailySalesList}">
-                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td></td>
                                     <td><div class="pxp-company-dashboard-job-title" th:text="${l.dsCode}"></div>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.dsEndGroup}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.dsTotalPayment}"></div></td>
@@ -106,7 +106,7 @@
                         <table class="table table-hover align-middle">                      	
                             <thead>                    
                                 <tr>
-                                    <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
+                                    <th class="pxp-is-checkbox" style="width: 1%;"></th>
                                     <th style="width: 15%;">일별상품환불</th>
                                     <th style="width: 10%;">일_환불마감그룹</th>
                                     <th style="width: 15%;">최종환불합계</th>
@@ -120,7 +120,7 @@
                             <tbody>
                                  <tr th:if="${not #lists.isEmpty(dailyRefundList)}"
 									th:each="l : ${dailyRefundList}">
-                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td></td>
                                     <td><div class="pxp-company-dashboard-job-title" th:text="${l.drCode}"></div>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.drEndGroup}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.drTotalPayment}"></div></td>
@@ -174,7 +174,7 @@
                         <table class="table table-hover align-middle">                      	
                             <thead>                    
                                 <tr>
-                                    <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
+                                    <th class="pxp-is-checkbox" style="width: 1%;"></th>
                                     <th style="width: 13%;">일별상품매출및환불</th>
                                     <th style="width: 13%;">일_매출 및 환불 마감그룹</th>
                                     <th style="width: 8%;">최종합계</th>
@@ -191,7 +191,7 @@
                             <tbody>
                                  <tr th:if="${not #lists.isEmpty(dailySalesAndRefundList)}"
 									th:each="l : ${dailySalesAndRefundList}">
-                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td></td>
                                     <td><div class="pxp-company-dashboard-job-title" th:text="${l.dsarCode}"></div>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.dsarEndGroup}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.dsarTotalPayment}"></div></td>

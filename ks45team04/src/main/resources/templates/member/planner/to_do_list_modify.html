@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{admin/layout/adminDefault}">
+	 layout:decorate="~{member/layout/contentDefault}">
 <!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
 	<th:block layout:fragment="customScript">
 		<script>
@@ -16,7 +16,7 @@
 		<h1>투두리스트 수정</h1>
 		<form id="modifyToDoListForm" th:action="@{/modifyToDoList}" name="myform" method="post">
               <div class="row mt-4 mt-lg-5">
-                  <div class="col-xxl-8">
+                  <div class="col-xxl-8" style=" margin-left: 550px;">
                       <div class="row">
                       </div>
                       <div class="row">
@@ -70,7 +70,7 @@
                       
                   </div>
               </div>
-              <div class="mt-4 mt-lg-5">
+              <div class="mt-4 mt-lg-5" style=" margin-left: 730px;">
                   <button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>&nbsp;&nbsp;
                   <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
                   

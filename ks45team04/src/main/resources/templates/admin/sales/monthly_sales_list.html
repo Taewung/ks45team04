@@ -38,7 +38,7 @@
                         <table class="table table-hover align-middle">                      	
                             <thead>                    
                                 <tr>
-                                    <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
+                                    <th class="pxp-is-checkbox" style="width: 1%;"></th>
                                     <th style="width: 15%;">월별상품매출</th>
                                     <th style="width: 10%;">월_매출및환불마감그룹</th>
                                     <th style="width: 15%;">최종결제합계</th>
@@ -52,7 +52,7 @@
                             <tbody>
                                  <tr th:if="${not #lists.isEmpty(monthlySalesAndRefundList)}"
 									th:each="l : ${monthlySalesAndRefundList}">
-                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td></td>
                                     <td><div class="pxp-company-dashboard-job-title" th:text="${l.msarCode}"></div>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.msarEndGroup}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.msarTotalPayment}"></div></td>
@@ -106,7 +106,7 @@
                         <table class="table table-hover align-middle">                      	
                             <thead>                    
                                 <tr>
-                                    <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
+                                    <th class="pxp-is-checkbox" style="width: 1%;"></th>
                                     <th style="width: 10%;">월별손익합계</th>
                                     <th style="width: 15%;">월_매출및환불마감그룹</th>
                                     <th style="width: 8%;">매출합계</th>
@@ -123,7 +123,7 @@
                             <tbody>
                                  <tr th:if="${not #lists.isEmpty(monthlyTotalList)}"
 									th:each="l : ${monthlyTotalList}">
-                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td></td>
                                     <td><div class="pxp-company-dashboard-job-title" th:text="${l.mtCode}"></div>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.msarEndGroup}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.mtSalesPayment}"></div></td>
