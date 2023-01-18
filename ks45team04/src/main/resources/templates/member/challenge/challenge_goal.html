@@ -198,7 +198,7 @@
 				$(document).on('click', '#submitBtn', function(){
 					let isSubmit = true;
 					
-					$('#addQuestionForm input').each(function(idx, item){
+					$('#challengeGoalForm input').each(function(idx, item){
 						let checkValue = $(item).val();
 						let labelValue = $(item).parents('.mb-3').find('label').text();
 						if(validateValue(checkValue)){							
@@ -225,7 +225,7 @@
                 <div class="pxp-hero-subtitle pxp-text-ligh">Challenge Goal</div>
             </div>
         </section>
-
+	<form id="challengeGoalForm" th:action="@{/challengeState}" method="get">
         <section class="mt-100">
             <div class="pxp-container">
              <!-- 챌린지 목표 제목 입력 start -->
@@ -372,14 +372,12 @@
 		            </div> 
         </section>		                                      
                     <!-- 답안입력란 end -->
-             <div class="pxp-container">                       
-                   <div class="mt-2 mt-lg-4">
-                            <a href="/challengeState" class="btn rounded-pill pxp-section-cta"  onclick="alert('등록이 완료되었습니다.')">등록하기</a>  &emsp;&emsp;
-                            <a href="/main" >취소(메인화면으로)</a>
-                    </div>   
-                    </div>	                                     
+				<div class="mt-4 mt-lg-5">
+					<button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>
+					<a th:href="@{/main}" class="btn rounded-pill pxp-section-cta-o ms-3">취소</a>                                                
+				</div>                                      
             <!-- end contents -->
-
+		</form>
 	</th:block>
 	<!-- customContents end -->
 	

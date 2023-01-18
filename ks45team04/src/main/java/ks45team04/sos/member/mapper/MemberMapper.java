@@ -32,4 +32,8 @@ public interface MemberMapper {
 	//회원 가입
 	public int addMember(MMember mmember);
 	
+	//회원 상세 정보 조회
+	public MMember getMemberInfo(String memId);
+	
+	
 }

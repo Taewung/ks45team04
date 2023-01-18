@@ -91,7 +91,7 @@ private static final Logger log = LoggerFactory.getLogger(MemberController.class
 		}else {
 			// 2. 비밀번호 일치 시 세션 저장 
 			MMember mmember = (MMember) checkResult.get("memInfo");
-			session.setAttribute("SID", 	memId);
+			session.setAttribute("SID", memId);
 			session.setAttribute("SLEVEL", mmember.getMemLevelName());
 			session.setAttribute("SNAME", mmember.getMemName());
 			
@@ -112,11 +112,15 @@ private static final Logger log = LoggerFactory.getLogger(MemberController.class
 	
 	@GetMapping("/login")
 	public String login(Model model
-							  ,@RequestParam(value="msg", required = false) String msg) {
-		
+							  ,@RequestParam(value="msg", required = false) String msg,
+							  	HttpSession httpSession) {
 		model.addAttribute("title","로그인");
 		if(msg != null) model.addAttribute("msg", msg);
-		
+		String redirectURI="user/user/userLogin";
+		LoginInfo loginInfo= (LoginInfo) httpSession.getAttribute("S_MEM_INFO");
+		if(loginInfo!=null){
+			redirectURI="redirect:/myPage";
+		}
 		return "member/login/login";
 	}
 	
@@ -138,7 +142,7 @@ private static final Logger log = LoggerFactory.getLogger(MemberController.class
 		model.addAttribute("startPageNum", startPageNum);
 		model.addAttribute("endPageNum", endPageNum);
 		
-		return "login/loginHistory";
+		return "/member/login/loginHistory";
 	}
 
 
@@ -186,33 +190,45 @@ private static final Logger log = LoggerFactory.getLogger(MemberController.class
     }
 
     
-    //회원 개인 정보 수정 처리
+    //특정 회원 개인 정보 수정 처리
     @PostMapping("/modifyMemberInfo")
     public String modifyMemberInfo(MMember mmember) {
-    	
     	memberService.modifyMemberInfo(mmember);
     	
-    	return "redirect:/memberInfo";
+    	return "redirect:/myPage";
     }
     
-	/*
-	 * //회원 개인 정보 수정 화면
-	 * 
-	 * @GetMapping("/modifyMemberInfo") public String
-	 * modifyMemberInfo(@RequestParam(value="memId") String memId ,Model model) {
-	 * MMember mmember = memberService.modifyMemberInfo(memId);
-	 * 
-	 * model.addAttribute("title", "회원 정보 수정");
-	 * model.addAttribute("modifyMemberInfo", mmember); return
-	 * "member/member/modify_member_info"; }
-	 */
-	
-	
-	@GetMapping("/removeMember")
-	public String removeMember(Model model) {
-		model.addAttribute("title", "회원 탈퇴");
-		return  "member/member/remove_member";		
-	}		
+    
+    //특정 회원 개인 정보 수정 화면
+    @GetMapping("/modifyMemberInfo")
+    public String modifyMemberInfo(HttpSession session
+    								,Model model){
+    	
+    	LoginInfo loginInfo = (LoginInfo) session.getAttribute("S_MEM_INFO");
+    	String memId = (String) session.getAttribute("SID");
+    	log.info("Id : {}", memId);
+    	MMember mmember = memberService.getMemberInfo(loginInfo.getLoginLogoutId());
+    	memberService.MemberList(memId);
+    	
+    	model.addAttribute("title", "특정 회원 정보 수정");
+    	model.addAttribute("modifyMemberInfo", mmember);
+    	
+    	return "member/member/modify_member_info";
+    }
+    
+ /**   //특정 회원 상세 조회 화면
+    @GetMapping("/memberInfo")
+    public String memberInfo(@RequestParam(value="memId") String memId
+    		,Model model) {
+    	
+    	MMember memberInfo = memberService.getMemberInfo(memId);
+    	
+    	model.addAttribute("title", "상세 회원 조회");
+    	model.addAttribute("memberInfo", memberInfo);
+    	
+    	return "member/member/memberInfo";
+    }
+*/
 
 	//회원 개인 목록 조회
 //	@GetMapping("/memberList")
@@ -223,6 +239,25 @@ private static final Logger log = LoggerFactory.getLogger(MemberController.class
 //		model.addAttribute("memberList", memberList);
 //		return  "member/member/member_list";		
 //	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    
+    
+    
+	
+	@GetMapping("/removeMember")
+	public String removeMember(Model model) {
+		model.addAttribute("title", "회원 탈퇴");
+		return  "member/member/remove_member";		
+	}			
+	
 	
 	@GetMapping("/findId")
 	public String findId(Model model) {
