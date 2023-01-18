@@ -1,28 +1,195 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{member/layout/contentDefault}">
+	  class="pxp-root" >
+<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<!-- script start -->
-	<th:block layout:fragment="customScript">
-	<script>
-	</script>
-	</th:block> 
-	<!-- script end -->
+    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
+    <link rel="stylesheet" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    
+    <link href="/pay/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/pay/assets/plugins/jquery-ui/jquery-ui.css" rel="stylesheet">
+    <link href="/pay/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/pay/assets/plugins/selectbox/select_option1.css" rel="stylesheet">
+    <link href="/pay/assets/plugins/fancybox/jquery.fancybox.min.css" rel="stylesheet">
+    <link href="/pay/assets/plugins/rateyo/jquery.rateyo.min.css" rel="stylesheet">
+    <link href="/pay/assets/plugins/iziToast/css/iziToast.css" rel="stylesheet">
+    <link href="/pay/assets/plugins/prismjs/prism.css" rel="stylesheet">
+    <link href="/pay/assets/plugins/revolution/css/settings.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/pay/assets/plugins/slick/slick.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/pay/assets/plugins/slick/slick-theme.css" media="screen">
+    
+    <link href="/pay/assets/plugins/animate/animate.css" rel="stylesheet">
+    
+     <link href="/pay/assets/css/style.css" rel="stylesheet">
+    
+    <link rel="stylesheet" th:href="@{/css/examAnswer.css}">
+     <link rel="shortcut icon" href="/pay/assets/img/favicon.png">
+</head>
+
+<body>
+	<div class="pxp-preloader"><span>Loading...</span></div>
 	
-	<!-- customContents start -->
-	<th:block layout:fragment="customContents">
-		<section>
-			<div class="pxp-container">
-				pay_insert.html
-			</div>
+		<!-- begin header -->
+		<div th:replace="~{member/fragments/contentsHeader :: headerFragment}"></div>
+		<!-- end header -->			
+		
+		<!-- begin contents --> 
+        <th:block layout:fragment="customContents">
+		
+		
+		  <div class="container">
+		    <div class="row">
+		      <div class="col-md-7">
+		        <div class="page-title">
+		         <br> <br> 
+		          <h2>&nbsp&nbsp
+		          노트 결제</h2>
+		          <br> <br> <br>
+		        </div>
+		      </div>
+		      <div class="col-md-7">
+		       
+		      </div>
+		    </div>
+		  </div>
 		</section>
-	</th:block>
-	<!-- customContents end -->
+	  
+	     <div class="container">
+	       <div class="row">
+	         <div class="col-md-8">
+	           <div class="innerWrapper clearfix stepsPage">
+	             <div class="row progress-wizard" style="border-bottom:0;">
+	                 <div class="container">
+	       <div class="row">
+	         <div class="col-md-8">
+	           <div class="innerWrapper clearfix stepsPage">
+	             <div class="row progress-wizard" style="border-bottom:0;">
 	
-	<!-- customJs start -->
-	<th:block layout:fragment="customJs">
+	               <div class="col-6 progress-wizard-step active">
+	                 <div class="text-center progress-wizard-stepnum">Payment</div>
+	                 <div class="progress"><div class="progress-bar"></div></div>
+	                 <span class="progress-wizard-dot"></span>
+	               </div>
+	
+	               <div class="col-6 progress-wizard-step disabled">
+	                 <div class="text-center progress-wizard-stepnum">Result</div>
+	                 <div class="progress"><div class="progress-bar"></div></div>
+	                 <span class="progress-wizard-dot"></span>
+	               </div>
+	             </div>
+	
+	
+	             <form id="paymentForm" action="/payInsert" class="row" method="GET" role="form">
+	               <div class="col-12">
+	                 <div class="page-header">
+	                   <h4>Rental Infomation</h4>
+	                 </div>
+	               </div>
+	               <div class="form-group col-md-7 col-12">
+	                 <label for="">상품명</label>
+	                 <input type="hidden" readonly="readonly" class="goodsCode" name="noteWriterId" th:value="${noteInfo.noteWriterId}">
+	                 <input type="text" class="form-control" th:value="${noteInfo.noteName}" readonly="readonly">
+	               </div>
+	               <div class="form-group col-md-7 col-12">
+	                 <label for="">관련자격증</label>
+	                 <input id="goodsPrice" type="text" class="form-control" th:value="${noteInfo.liName}" readonly="readonly">
+	               </div>
+	               <div class="form-group col-md-7 col-12">
+	                 <label for="">상품가격</label>
+	                 <input id="goodsPrice" type="text" class="form-control" th:value="${noteInfo.notePrice}" readonly="readonly">
+	               </div>
+	             
+	              
+	              
+	               <div class="form-group col-md-7 col-12">
+	                 <label for="">포인트 사용</label>
+	                 <input id="pointUse" type="number" th:value="0" class="form-control" name="#">
+	               </div>
+	               <div class="form-group col-md-2 col-12">
+	               </div>
+	             
+               	  
+	            
+	             
+	               <div class="col-12">
+	                 <div class="page-header">
+	                   <h4>Billing Information</h4>
+	                 </div>
+	               </div>
+	               <div class=" checkboxArea card-check">
+	               	<div class="col-sm-12 mb-2">
+                      <input id="checkbox1" type="radio" name="payment.paymentType" value="카드" checked="checked">
+                      <label for="checkbox1"><span></span>카드</label>
+                      <div class="form-group row my-3 ml-3" id="card">
+                        <div class="col-md-7">
+                          <label for="" class="col-form-label">결제 회사</label>
+                          <select id="cardAgency" name="payment.paymentAgency" class="form-control select-drop" >
+                      		<option value="삼성" selected>삼성</option>
+                      		<option value="우리" >우리</option>
+                      		<option value="신한" >신한</option>
+                      		<option value="KB국민" >KB국민</option>
+                      		<option value="하나" >하나</option>
+                      		<option value="현대" >현대</option>
+                      		<option value="롯데" >롯데</option>
+	                     </select>
+	                     <br>
+	                     <br>
+	                     <br>
+	                     <br>
+	                     <div class="col-12">
+	             	    <div class="well well-lg clearfix">
+	                   <ul class="pager">
+	                     <li class="next"><button type="submit" style=" margin-left: 10px; font-weight: 700;" id="submitBtn" class="btn btn-primary btn-default float-right">결제 <i class="fa fa-angle-right"></i></button></li>
+	                     <li class="prev"><button type="button" style=" margin-left: 10px; font-weight: 700;" class="btn btn-primary btn-default float-right" ><i class="fa fa-angle-left"></i> 이전</button></li>
+	                   </ul>
+	                 </div>
+	               </div>
 	
 	</th:block>
-	<!-- customJs end -->
+         
+         
+            
+        <!-- end contents --> 
+
+		<!-- begin footer -->
+		<div th:replace="~{member/fragments/contentsFooter :: footerFragment}"></div>
+		<!-- end footer -->
+			
+	 <script src="js/jquery-3.4.1.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/nav.js"></script>
+        <script src="js/Chart.min.js"></script>
+        <script src="js/main.js"></script>
+        <th:block layout:fragment="customJs"></th:block> 
+        <th:block layout:fragment="customScript"></th:block> 
+        <script src="/pay/assets/plugins/jquery/jquery.min.js"></script>
+		<script src="/pay/assets/plugins/jquery/jquery-migrate-3.0.0.min.js"></script>
+		<script src="/pay/assets/plugins/jquery-ui/jquery-ui.js"></script>
+		<script src="/pay/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<script src="/pay/assets/plugins/revolution/js/jquery.themepunch.tools.min.js"></script>
+		<script src="/pay/assets/plugins/revolution/js/jquery.themepunch.revolution.min.js"></script>
+		<script src="/pay/assets/plugins/slick/slick.js"></script>
+		<script src="/pay/assets/plugins/fancybox/jquery.fancybox.min.js"></script>
+		<script src="/pay/assets/plugins/iziToast/js/iziToast.js"></script>
+		<script src="/pay/assets/plugins/prismjs/prism.js"></script>
+		<script src="/pay/assets/plugins/selectbox/jquery.selectbox-0.1.3.min.js"></script>
+		<script src="/pay/assets/plugins/countdown/jquery.syotimer.js"></script>
+		<script src="/pay/assets/plugins/velocity/velocity.min.js"></script>
+		<script src="/pay/assets/plugins/rateyo/jquery.rateyo.min.js"></script>
+		<script src="/pay/assets/js/custom.js"></script>
+        
+</body>
 </html>
