@@ -1,6 +1,7 @@
 package ks45team04.sos.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -216,7 +217,9 @@ public class APointController {
 	@PostMapping("/pointSaveUseAdd")
 	public String pointSaveUseAdd(PointSaveUse pointSaveUse) {
 		
+		//포인트 적립 등록 코드 자동생성
 		String newPointSaveUseCode = pointSaveUseService.getPointSaveUseCode("pointSaveUse", "pointSaveUseCode");
+		
 		pointSaveUse.setPointSaveUseCode(newPointSaveUseCode);
 		pointSaveUseService.pointSaveUseadd(pointSaveUse);
 		
@@ -244,15 +247,27 @@ public class APointController {
 
 	// 포인트 적립/사용 내역 조회(검색)
 	@GetMapping("/pointSaveUseList")
+	@SuppressWarnings("unchecked")
 	public String pointSaveUseList(Model model
+								  ,@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage
 								  ,@RequestParam(value="searchKey", required = false) String searchKey
 								  ,@RequestParam(value="searchValue", required = false, defaultValue = "") String searchValue){
 
-		List<PointSaveUse> pointSaveUseList = pointSaveUseService.PointSaveUseList(searchKey, searchValue);
-
+		Map<String, Object> paramMap = pointSaveUseService.PointSaveUseList(currentPage, searchKey, searchValue);
+		int lastPage = (int) paramMap.get("lastPage");
+		List<PointSaveUse> pointSaveUseList = (List<PointSaveUse>) paramMap.get("pointSaveUseList");
+		int startPageNum = (int) paramMap.get("startPageNum");
+		int endPageNum = (int) paramMap.get("endPageNum");
+		
 		model.addAttribute("title", "포인트 적립/사용 내역");
+		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("pointSaveUseList", pointSaveUseList);
-
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+		
+		log.info("포인트 적립/사용 내역 조회 : {}", pointSaveUseList);
+		
 		return "admin/point/point_save_use_list";
 	}
 

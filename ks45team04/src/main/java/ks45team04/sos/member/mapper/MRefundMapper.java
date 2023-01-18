@@ -10,6 +10,9 @@ import ks45team04.sos.member.dto.MRefund;
 @Mapper
 public interface MRefundMapper {
 	
+	//환불 신청 내역 코드 자동생성
+	public String getMRefundCode(String pointRefund, String pointRefundCode);
+	
 	//환불 신청 등록
 	public int refundRequest(MRefund mRefund);
 	
