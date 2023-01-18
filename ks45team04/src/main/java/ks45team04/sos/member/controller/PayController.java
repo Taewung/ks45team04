@@ -35,16 +35,16 @@ public class PayController {
 	}
 	
 	//결제창 처리
-		@GetMapping("/payInsert")
-		public String payInsert(@RequestParam(value="noteWriterId") String noteWriterId
-				 				,Model model) {
-			Note note = mNoteService.getNoteById(noteWriterId);
+	@GetMapping("/payInsert")
+	public String payInsert(@RequestParam(value="noteWriterId") String noteWriterId
+							,Model model) {
+		Note note = mNoteService.getNoteById(noteWriterId);
+		
+		model.addAttribute("noteInfo", note);
+		
+		return "member/pay/pay_insert";
 			
-			model.addAttribute("noteInfo", note);
-			
-			return "member/pay/pay_insert";
-			
-		}
+	}
 	
 
 	//결제 내역 상세 조회
