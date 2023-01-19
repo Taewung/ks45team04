@@ -6,13 +6,141 @@
 	<!-- script start -->
 	<th:block layout:fragment="customScript">
 	<script>
+	$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+		function validateValue(checkValue) {
+			if(    typeof checkValue == 'undefined' 
+					|| checkValue == null 
+					|| checkValue == ''					){
+				return true;
+			}
+			return false;
+			
+		}
+	
+		// 취소 버튼 클릭시 리다이렉트
+		$(function(){
+			$('#resetBtn').click(function(){
+				location.href = '/QnaQuestionList';
+			});
+		});
+	
+		$('#submitBtn').click(function(){
+			let isSubmit = true;
+			
+			const $addQnaQuestionFormInputs = $('#modifyQnaQuestionForm input');
+			const $addQnaQuestionFormTextarea = $('#modifyQnaQuestionForm textarea');
+			for(let addQnaQuestionFormInput of $addQnaQuestionFormInputs){
+				
+				let checkValue = $(addQnaQuestionFormInput).val();
+				let labelValue = $(addQnaQuestionFormInput).parent('.mb-3').find('label').text();
+				if(validateValue(checkValue)){
+					
+					alert(`${labelValue}를 입력해주세요`);
+					$(addQnaQuestionFormInput).focus();
+					isSubmit = false;
+					return false;
+				}
+			}
+			for(let addQnaQuestionFormTextarea of $addQnaQuestionFormTextarea){
+				
+				let checkValue = $(addQnaQuestionFormTextarea).val();
+				let labelValue = $(addQnaQuestionFormTextarea).parent('.mb-3').find('label').text();
+				if(validateValue(checkValue)){
+					
+					alert(`${labelValue}를 입력해주세요`);
+					$(addQnaQuestionFormTextarea).focus();
+					isSubmit = false;
+					return false;
+				}
+			}
+			/* $('#addQnaQuestionForm input').each(function(idx, item){
+				let checkValue = $(item).val();
+				let labelValue = $(item).parent('.mb-3').find('label').text();
+				if(validateValue(checkValue)){
+					
+					alert(`${labelValue}를 입력해주세요`);
+					$(item).focus();
+					isSubmit = false;
+					return false;
+				}
+				
+			});   
+			$('#addQnaQuestionForm textarea').each(function(idx, item){
+				let checkValue = $(item).val();
+				let labelValue = $(item).parent('.mb-3').find('label').text();
+				if(validateValue(checkValue)){
+					
+					alert(`${labelValue}를 입력해주세요`);
+					$(item).focus();
+					isSubmit = false;
+					return false;
+				}
+				
+			});    */
+
+			if(isSubmit) $('#modifyQnaQuestionForm').submit();
+		});
+		
+		
+	});
+	
 	</script>
 	</th:block> 
 	<!-- script end -->
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-qna_answer_insert.html
+        <section><br>
+			<div class="pxp-container">
+				<div class="pxp-dashboard-content-details">
+	<h1>1:1 문의 답변</h1><br><br>
+
+	<form  id="modifyQnaQuestionForm" th:action="@{/addQnaAnswer}" name="myform" method="post">
+		<div class="row mt-4 mt-lg-5">
+			<div class="col-xxl-6">
+				<div class="mb-3">
+					<label for="questionTitle" class="form-label">문의 제목</label>
+					<input type="text" id="questionTitle" class="form-control questionTitle" name="questionTitle" 
+						    th:value="${qnaInfo.questionTitle}" readonly="readonly">
+				</div>
+			</div>
+			<div class="col-md-6 col-xxl-3">
+			<div class="mb-3">
+				<label for="pxp-company-job-location" class="form-label">작성자 아이디</label>
+				<input type="text" id="questionId" class="form-control questionId" name="questionId" 
+					   th:value="${qnaInfo.questionId}" readonly="readonly">
+				</div>
+			</div>
+			<div class="col-md-6 col-xxl-3">
+				<div class="mb-3">
+					<label for="pxp-company-job-category" class="form-label qnaType">문의 유형</label>
+					<input type="text" id="qnaType" class="form-control qnaType" name="qnaType" 
+					   th:value="${qnaInfo.qnaType}" readonly="readonly">    
+				</div>
+			</div>
+		</div>
+
+		<div class="mb-3">
+			<label for="pxp-company-job-description" class="form-label questionContent">문의 내용</label>
+			<textarea class="form-control questionContent" id="questionContent" name="questionContent"
+				 	  th:value="${qnaInfo.questionContent}" th:text="${qnaInfo.questionContent}" readonly="readonly"></textarea>
+		</div><br>
+		<div class="mb-3">
+			<label for="pxp-company-job-description" class="form-label answerContent">답변 내용</label>
+			<textarea class="form-control answerContent" id="answerContent" name="answerContent"
+					  th:value="${qnaInfo.answerContent}" th:text="${qnaInfo.answerContent}"></textarea>
+		</div>
+
+		<div class="mt-4 mt-lg-5">
+			<button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>&nbsp;&nbsp;
+            <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
+		</div>
+	</form>
+	
+</div>
+			</div>
+		</section><br><br>
+	
 	</th:block>
 	<!-- customContents end -->
 	
