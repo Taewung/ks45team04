@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{admin/layout/adminDefault}">
+	  layout:decorate="~{member/layout/contentDefault}">
 
 	<!-- script start -->
 	<th:block layout:fragment="customScript">
@@ -12,7 +12,11 @@
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-   qna_answer_delete.html 
+		<section>
+			<div class="pxp-container">
+				qna_question_delete.html
+			</div>
+		</section>
 	</th:block>
 	<!-- customContents end -->
 	

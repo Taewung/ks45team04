@@ -1,21 +1,21 @@
-package ks45team04.sos.member.dto;
+package ks45team04.sos.admin.dto;
 
-public class Qnaquestion {
-	
-	private String qanCode;
+public class Qna {
+
+	private String qnaCode;
 	private String questionId;
 	private String questionTitle;
 	private String questionContent;
 	private String questionDatetime;
-	private String answerId;
 	private String answerContent;
 	private String answerDatetime;
+	private String qnaType;
 	
-	public String getQanCode() {
-		return qanCode;
+	public String getQnaCode() {
+		return qnaCode;
 	}
-	public void setQanCode(String qanCode) {
-		this.qanCode = qanCode;
+	public void setQnaCode(String qnaCode) {
+		this.qnaCode = qnaCode;
 	}
 	public String getQuestionId() {
 		return questionId;
@@ -41,12 +41,6 @@ public class Qnaquestion {
 	public void setQuestionDatetime(String questionDatetime) {
 		this.questionDatetime = questionDatetime;
 	}
-	public String getAnswerId() {
-		return answerId;
-	}
-	public void setAnswerId(String answerId) {
-		this.answerId = answerId;
-	}
 	public String getAnswerContent() {
 		return answerContent;
 	}
@@ -59,13 +53,21 @@ public class Qnaquestion {
 	public void setAnswerDatetime(String answerDatetime) {
 		this.answerDatetime = answerDatetime;
 	}
-	
+	public String getQnaType() {
+		return qnaType;
+	}
+	public void setQnaType(String qnaType) {
+		this.qnaType = qnaType;
+	}
 	@Override
 	public String toString() {
-		return "Qnaquestion [qanCode=" + qanCode + ", questionId=" + questionId + ", questionTitle=" + questionTitle
-				+ ", questionContent=" + questionContent + ", questionDatetime=" + questionDatetime + ", answerId="
-				+ answerId + ", answerContent=" + answerContent + ", answerDatetime=" + answerDatetime + "]";
+		return "Qna [qnaCode=" + qnaCode + ", questionId=" + questionId + ", questionTitle=" + questionTitle
+				+ ", questionContent=" + questionContent + ", questionDatetime=" + questionDatetime + ", answerContent="
+				+ answerContent + ", answerDatetime=" + answerDatetime + ", qnaType=" + qnaType + "]";
 	}
+	
+	
+	
 	
 	
 	
