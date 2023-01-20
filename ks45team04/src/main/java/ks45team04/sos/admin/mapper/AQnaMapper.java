@@ -19,6 +19,9 @@ public interface AQnaMapper {
 	//1:1 문의 등록
 	public int addQnaQuestion(Qna qna);
 	
+	//1:1문의 등록을 위한 목록 조회
+	public List<Qna> getQnaList();
+	
 	//1:1 문의 질문 및 답변 목록 조회
-	public List<Qna> QnaList();
+	public List<Qna> QnaList(String searchKey, String searchValue);
 }
