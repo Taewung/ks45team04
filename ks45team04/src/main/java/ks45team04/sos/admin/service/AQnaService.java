@@ -52,16 +52,46 @@ public class AQnaService {
 		return aqnaMapper.addQnaQuestion(qna);
 	}
 	
+	/**
+	 * 1:1 문의 등록을 위한 조회
+	 * @return List<Qna>
+	 */
+	 public List<Qna> getQnaList(){
+		 
+		 List<Qna> getQnaList = aqnaMapper.getQnaList();
+		 
+		 return getQnaList;
+	 }
 	
 
 	/**
 	 * 1:1 문의 조회
 	 * @return List<Qna>
 	 */
-	public List<Qna> QnaList(){
+	public List<Qna> QnaList(String searchKey, String searchValue){
 		
-		List<Qna> QnaList = aqnaMapper.QnaList();
+		if(searchKey != null) {
+			switch (searchKey) {
+			case "questionId":
+				searchKey = "question_id";
+				break;
+			case "qnaType":
+				searchKey = "qna_type";
+				break;
+			case "questionTitle":
+				searchKey = "question_title";
+				break;
+			}
+		}
+		
+
+		List<Qna> QnaList = aqnaMapper.QnaList(searchKey, searchValue);
 		
 		return QnaList;
 	}
 }
+
+
+
+
+

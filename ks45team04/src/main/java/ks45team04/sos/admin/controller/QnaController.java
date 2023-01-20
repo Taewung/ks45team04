@@ -139,10 +139,10 @@ public class QnaController {
 		@GetMapping("/addQnaQuestion")
 		public String addQnaQuestion(Model model) {
 			
-			List<Qna> QnaList = aqnaMapper.QnaList();
+			List<Qna> getQnaList = aqnaService.getQnaList();
 			
 			model.addAttribute("title", "qna 질문 등록");
-			model.addAttribute("QnaList", QnaList);
+			model.addAttribute("getQnaList", getQnaList);
 			
 			return "admin/QnA/qna_question_insert";
 		}
@@ -159,9 +159,11 @@ public class QnaController {
 
 		// qna 질문 및 답변 목록 조회
 				@GetMapping("/QnaQuestionList")
-				public String QnaList(Model model) {
+				public String QnaList(Model model
+									,@RequestParam(value="searchKey", required = false) String searchKey
+								    ,@RequestParam(value="searchValue", required = false) String searchValue) {
 					
-				List<Qna> QnaList = aqnaService.QnaList();
+				List<Qna> QnaList = aqnaService.QnaList(searchKey, searchValue);
 				
 				
 					model.addAttribute("title", "qna 질문 조회");
