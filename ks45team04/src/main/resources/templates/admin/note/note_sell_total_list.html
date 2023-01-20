@@ -12,7 +12,7 @@
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
-	<h1>자격증과목</h1>
+	<h1>노트 판매 내역</h1>
                 <p class="pxp-text-light"></p>
                 <div class="mt-4 mt-lg-5">
                     <!-- 검색 start -->
@@ -34,7 +34,6 @@
                         <table class="table table-hover align-middle">                      	
                             <thead>                    
                                 <tr>
-                                	<th></th>
                                     <th style="width: 12%;">판매내역코드</th>
                                     <th style="width: 10%;">노트코드</th>
                                     <th style="width: 11%;">작성자아이디</th>
@@ -49,7 +48,6 @@
                             <tbody>
                                 <tr th:if="${not #lists.isEmpty(noteSellTotalList)}"
 									th:each="l : ${noteSellTotalList}">
-                                    <td><input type="checkbox" class="form-check-input"></td>
                                     <td><div class="pxp-company-dashboard-job-title" th:text="${l.nstlCode}"></div>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.noteCode}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.nstlId}"></div></td>
