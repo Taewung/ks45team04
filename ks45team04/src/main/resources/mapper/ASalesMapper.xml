@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team04.sos.admin.mapper.SalesMapper">
+	
+	<resultMap type="DailySales" 				id="dailySalesResultMap">
+		<id property="dsCode" 					column="ds_code"/>
+		<result property="dsEndGroup" 			column="ds_end_group"/>
+		<result property="dsTotalPayment" 		column="ds_total_payment"/>
+		<result property="dsRegDate" 			column="ds_reg_date"/>
+		<result property="memId" 				column="mem_id"/>
+		<result property="msEndGroup" 			column="ms_end_group"/>
+		<result property="dsYearAndMonth" 		column="ds_year_and_month"/>
+	</resultMap>
+	
+	<select id="DailySalesList" resultMap="dailySalesResultMap">
+			
+			
+		SELECT
+			*
+		FROM
+			daily_sales AS ds;
+
+			
+	</select>
+	
+	<resultMap type="DailyRefund" 			id="dailyRefundResultMap">
+		<id property="drCode" 				column="dr_code"/>
+		<result property="drEndGroup" 		column="dr_end_group"/>
+		<result property="drTotalPayment" 	column="dr_total_payment"/>
+		<result property="drRegDate" 		column="dr_reg_date"/>
+		<result property="memId" 			column="mem_id"/>
+		<result property="mrEndGroup" 		column="mr_end_group"/>
+		<result property="drYearAndmonth" 	column="dr_year_and_month"/>
+	</resultMap>
+	
+	<select id="DailyRefundList" resultMap="dailyRefundResultMap">
+			
+			
+		SELECT
+			*
+		FROM
+			daily_refund AS dr;
+
+			
+	</select>
+	<resultMap type="DailySalesAndRefund" 		id="dailySalesAndRefundResultMap">
+		<id property="dsarCode" 				column="dsar_code"/>
+		<result property="dsarEndGroup" 		column="dsar_end_group"/>
+		<result property="dsarTotalPayment" 	column="dsar_total_payment"/>
+		<result property="salesOrRefund" 		column="sales_or_refund"/>
+		<result property="relatedTable" 		column="related_table"/>
+		<result property="relatedWork" 			column="related_work"/>
+		<result property="dsarRegDate" 			column="dsar_reg_date"/>
+		<result property="memId" 				column="mem_id"/>
+		<result property="msarEndGroup" 		column="msar_end_group"/>
+		<result property="dsarYearAndMonth" 	column="dsar_year_and_month"/>
+	</resultMap>
+	
+	<select id="DailySalesAndRefundList" resultMap="dailySalesAndRefundResultMap">
+			
+			
+		SELECT
+			*
+		FROM
+			daily_sales_and_refund AS dsar;
+
+			
+	</select>
+	
+		<resultMap type="MonthlySalesAndRefund" 	id="monthlySalesAndRefundListResultMap">
+		<id property="msarCode" 					column="msar_code"/>
+		<result property="msarEndGroup" 			column="msar_end_group"/>
+		<result property="msarTotalPayment" 		column="msar_total_payment"/>
+		<result property="salesOrRefund" 			column="sales_or_refund"/>
+		<result property="msarYearAndMonth" 		column="msar_year_and_month"/>
+		<result property="msarRegDate" 				column="msar_reg_date"/>
+		<result property="memrId" 					column="mem_id"/>
+	</resultMap>
+	
+	<select id="MonthlySalesAndRefundList" resultMap="monthlySalesAndRefundListResultMap">
+			
+			
+		SELECT
+			*
+		FROM
+			monthly_sales_and_refund AS msar;
+
+			
+	</select>
+	
+		<resultMap type="MonthlyTotal" 					id="monthlyTotalListResultMap">
+		<id property="mtCode" 							column="mt_code"/>
+		<result property="msarEndGroup" 				column="msar_end_group"/>
+		<result property="mtSalesPayment" 				column="mt_sales_payment"/>
+		<result property="mtRefundPayment" 				column="mt_refund_payment"/>
+		<result property="monthlyIncome" 				column="montly_income"/>
+		<result property="incomeCalculationStartDate" 	column="income_calculation_start_date"/>
+		<result property="incomeCalculationEndDate" 	column="income_calculation_end_date"/>
+		<result property="mtRegDate" 					column="mt_reg_date"/>
+		<result property="memId" 						column="mem_id"/>
+		<result property="mtYearAndMonth" 				column="mt_year_and_month"/>
+	</resultMap>
+	
+	<select id="MonthlyTotalList" resultMap="monthlyTotalListResultMap">
+			
+			
+		SELECT
+			*
+		FROM
+			monthly_total AS mt;
+
+			
+	</select>
+	
+		<resultMap type="AnnualSales" 					id="annualSalesListResultMap">
+		<id property="annualSalesCode" 					column="annual_sales_code"/>
+		<result property="annualSalesYear" 				column="annual_sales_year"/>
+		<result property="annualSalesJan" 				column="annual_sales_jan"/>
+		<result property="annualSalesFeb" 				column="annual_sales_feb"/>
+		<result property="annualSalesMar" 				column="annual_sales_mar"/>
+		<result property="annualSalesApr" 				column="annual_sales_apr"/>
+		<result property="annualSalesMay" 				column="annual_sales_may"/>
+		<result property="annualSalesJun" 				column="annual_sales_jun"/>
+		<result property="annualSalesJul" 				column="annual_sales_jul"/>
+		<result property="annualSalesAug" 				column="annual_sales_aug"/>
+		<result property="annualSalesSept" 				column="annual_sales_sept"/>
+		<result property="annualSalesOct" 				column="annual_sales_oct"/>
+		<result property="annualSalesNov" 				column="annual_sales_nov"/>
+		<result property="annualSalesDec" 				column="annual_sales_dec"/>
+	</resultMap>
+	
+	<select id="AnnualSalesList" resultMap="annualSalesListResultMap">
+			
+			
+		SELECT
+			*
+		FROM
+			annual_sales AS ans;
+
+			
+	</select>
+	
+	
+		<resultMap type="AnnualRefund" 					id="annualRefundListResultMap">
+		<id property="annualRefundCode" 				column="annual_refund_code"/>
+		<result property="annualRefundYear" 			column="annual_refund_year"/>
+		<result property="annualRefundJan" 				column="annual_refund_jan"/>
+		<result property="annualRefundFeb" 				column="annual_refund_feb"/>
+		<result property="annualRefundMar" 				column="annual_refund_mar"/>
+		<result property="annualRefundApr" 				column="annual_refund_apr"/>
+		<result property="annualRefundMay" 				column="annual_refund_may"/>
+		<result property="annualRefundJun" 				column="annual_refund_jun"/>
+		<result property="annualRefundJul" 				column="annual_refund_jul"/>
+		<result property="annualRefundAug" 				column="annual_refund_aug"/>
+		<result property="annualRefundSept" 			column="annual_refund_sept"/>
+		<result property="annualRefundOct" 				column="annual_refund_oct"/>
+		<result property="annualRefundNov" 				column="annual_refund_nov"/>
+		<result property="annualRefundDec" 				column="annual_refund_dec"/>
+	</resultMap>
+	
+	<select id="AnnualRefundList" resultMap="annualRefundListResultMap">
+			
+			
+		SELECT
+			*
+		FROM
+			annual_refund AS ar;
+
+			
+	</select>
+	
+		<resultMap type="AnnualTotal" 					id="annualTotalListResultMap">
+		<id property="annualTotalCode" 					column="annual_total_code"/>
+		<result property="annualTotalYear" 				column="annual_total_year"/>
+		<result property="annualTotalJan" 				column="annual_total_jan"/>
+		<result property="annualTotalFeb" 				column="annual_total_feb"/>
+		<result property="annualTotalMar" 				column="annual_total_mar"/>
+		<result property="annualTotalApr" 				column="annual_total_apr"/>
+		<result property="annualTotalMay" 				column="annual_total_may"/>
+		<result property="annualTotalJun" 				column="annual_total_jun"/>
+		<result property="annualTotalJul" 				column="annual_total_jul"/>
+		<result property="annualTotalAug" 				column="annual_total_aug"/>
+		<result property="annualTotalSept" 				column="annual_total_sept"/>
+		<result property="annualTotalOct" 				column="annual_total_oct"/>
+		<result property="annualTotalNov" 				column="annual_total_nov"/>
+		<result property="annualTotalDec" 				column="annual_total_dec"/>
+	</resultMap>
+	
+	<select id="AnnualTotalList" resultMap="annualTotalListResultMap">
+			
+			
+		SELECT
+			*
+		FROM
+			annual_total AS at;
+
+			
+	</select>
+</mapper>
+
+

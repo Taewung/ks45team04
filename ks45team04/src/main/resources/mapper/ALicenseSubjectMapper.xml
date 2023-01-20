@@ -7,16 +7,112 @@
 	<resultMap type="LicenseSubject" id="licenseSubjectResultMap">
 		<id property="lsCode" 				column="ls_code"/>
 		<result property="liCode" 			column="li_code"/>
+		<result property="liName" 			column="li_name"/>
 		<result property="lsSubject" 		column="ls_subject"/>
 		<result property="lsName" 			column="ls_name"/>
 		<result property="lsRegId" 			column="ls_reg_id"/>
 		<result property="lsRegDatetime" 	column="ls_reg_datetime"/>
+		
+		<association property="licenseInfo" javaType="LicenseInfo">
+			<id property="liCode" 				column="li_code" />
+			<result property="lmcCode" 			column="lmc_code" />
+			<result property="lmcName" 			column="lmc_name" />
+			<result property="lscCode" 			column="lsc_code" />
+			<result property="lscName" 			column="lsc_name" />
+			<result property="liName" 			column="li_name" />
+			<result property="liOverview" 		column="li_overview" />
+			<result property="liQualification" 	column="li_qualification" />
+			<result property="liRegId" 			column="li_reg_id" />
+			<result property="liRegDatetime" 	column="li_reg_date" />
+
+		</association>
 	</resultMap>
 	
-	<select id="LicenseSubjectList" resultMap="licenseSubjectResultMap">
+	<update id="modifyLicenseSubject" parameterType="LicenseSubject">
+			/* 특정 자격증 과목 수정*/
+		UPDATE 
+			license_subject
+		SET 
+			 ls_subject = #{lsSubject}
+			,ls_name = #{lsName}
+		WHERE 
+			ls_code= #{lsCode};
+	</update>
+	
+	<select id="getLicenseSubjectByCode" parameterType="String" resultMap="licenseSubjectResultMap">
+		/* 특정 자격증 과목 정보 조회 */
+		SELECT
+			 ls.ls_code
+			,ls.li_code
+			,ls.li_name
+			,ls.ls_subject
+			,ls.ls_name
+			,ls.ls_reg_id
+			,ls.ls_reg_datetime
+		FROM
+			license_subject AS ls
+		WHERE
+			ls.ls_code = #{lsCode};
+		
+	
+	</select>
+	
+	
+	<select id="getIdCheck" parameterType="String" resultType="boolean">
+		/* 관리자 아이디 인증 */
+		SELECT
+			if(COUNT(lmc.lmc_reg_id) > 0, 1, 0)
+		FROM
+			license_subject AS ls
+		WHERE
+			ls.ls_reg_id = #{lsRegId};
+	</select>
+	
+	
+	
+	<insert id="addLicenseSubject" parameterType="LicenseSubject">
+		/* 자격증과목 등록 */
+		INSERT INTO license_subject
+		( ls_code
+		 ,li_code
+		 ,li_name
+		 ,ls_subject
+		 ,ls_name
+		 ,ls_reg_id
+		 ,ls_reg_datetime) 
+		VALUES 
+		(sf_new_license_subject_code(), #{liCode}, #{liName}, #{lsSubject}, #{lsName}, #{lsRegId}, CURDATE());
+	</insert>
+	
+	<select id="licenseInfoList" resultMap="licenseSubjectResultMap">
+		/* 자격증과목 등록을 위한 자격증 정보 목록 조회 */
+		SELECT
+			*
+		FROM
+			license_info
+
+
+	</select>
+	
+	<select id="getLicenseSubjectList" resultMap="licenseSubjectResultMap">
+		/* 자격증과목 등록을 위한 목록 조회 */
 		SELECT
 			*
 		FROM
 			license_subject AS ls;
+	</select>
+	
+	
+	<select id="LicenseSubjectList" resultMap="licenseSubjectResultMap">
+		/* 자격증과목 목록 조회 */
+		SELECT
+			*
+		FROM
+			license_subject AS ls
+		<where>
+			<if test="searchKey != null and searchValue != ''">
+			${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
+			</if>
+		</where>
 	</select>
 </mapper>

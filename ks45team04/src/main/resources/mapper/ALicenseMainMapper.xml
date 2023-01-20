@@ -9,8 +9,46 @@
 		<result property="lmcRegId" 		column="lmc_reg_id"/>
 		<result property="lmcName" 			column="lmc_name"/>
 		<result property="lmcRegDatetime" 	column="lmc_reg_datetime"/>
-	</resultMap>
 	
+	
+	</resultMap>
+		<update id="modifyLicenseMain" parameterType="LicenseMain">
+		/* 특정 자격증 대분류 수정*/
+		UPDATE 
+			license_main_category
+		SET 
+			lmc_name = #{lmcName}
+		WHERE 
+			lmc_code= #{lmcCode};
+		</update>
+		
+		
+	<select id="getLicenseMainByCode" parameterType="String" resultMap="licenseMainResultMap">
+		/* 특정 자격증 대분류 정보 조회 */
+		SELECT
+			 lmc.lmc_code
+			,lmc.lmc_reg_id
+			,lmc.lmc_name
+			,lmc.lmc_reg_datetime
+		FROM
+			license_main_category AS lmc
+		WHERE
+			lmc.lmc_code = #{lmcCode};
+	</select>
+
+
+	<select id="getIdCheck" parameterType="String" resultType="boolean">
+		/* 관리자 아이디 인증 */
+		SELECT
+			if(COUNT(lmc.lmc_reg_id) > 0, 1, 0)
+		FROM
+			license_main_category AS lmc
+		WHERE
+			lmc.lmc_reg_id = #{lmcRegId};
+	</select>
+	
+	
+
 	<insert id="addLicenseMain" parameterType="LicenseMain">
 		/* 자격증 대분류 등록 */
 		INSERT INTO license_main_category
@@ -19,20 +57,43 @@
 		 ,lmc_name
 		 ,lmc_reg_datetime) 
 		VALUES 
-		(#{lmcCode}, #{lmcRegId}, #{lmcName}, CURDATE());
+		(sf_new_license_main_code(), #{lmcRegId}, #{lmcName}, CURDATE());
 
 	</insert>
 	
-	
-	<select id="LicenseMainList" resultMap="licenseMainResultMap">
-			/* 자격증 대분류 목록 조회 */
+	<select id="getlicenseMainList" resultMap="licenseMainResultMap">
+			/* 자격증 대분류 등록을 위한 목록 조회 */
 			SELECT
 				lmc.lmc_code,
 				lmc.lmc_reg_id,
 				lmc.lmc_name,
 				lmc.lmc_reg_datetime
 			FROM
-				license_main_category AS lmc;
-			
+				license_main_category AS lmc
+	</select>
+	
+	
+	<select id="LicenseMainList" resultMap="licenseMainResultMap">
+			/* 자격증 검색을 위한 대분류 목록 조회 */
+			SELECT
+				lmc.lmc_code,
+				lmc.lmc_reg_id,
+				lmc.lmc_name,
+				lmc.lmc_reg_datetime
+			FROM
+				license_main_category AS lmc
+		<where>
+			<if test="searchKey != null and searchValue != ''">
+			${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
+			</if>
+		</where>
 	</select>
 </mapper>
+
+
+
+
+
+
+
+

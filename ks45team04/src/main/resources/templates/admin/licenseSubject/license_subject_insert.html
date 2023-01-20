@@ -1,52 +1,183 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  class="pxp-root" >
+	  layout:decorate="~{admin/layout/adminDefault}">
 <!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
-    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-    <body style="background-color: var(--pxpMainColorLight);">
-        <div class="pxp-dashboard-content">
-        
-        <!-- begin aside -->
-		<div th:replace="~{admin/fragments/adminAside :: asideFragment}"></div>
-		<!-- end aside -->
+	<th:block layout:fragment="customScript">
+		<script>
+		$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+			function validateValue(checkValue) {
+				if(    typeof checkValue == 'undefined' 
+						|| checkValue == null 
+						|| checkValue == ''					){
+					return true;
+				}
+				return false;
+				
+			}
 		
-        <!-- begin header -->
-		<div th:replace="~{admin/fragments/adminHeader :: headerFragment}"></div>
-		<!-- end header -->
+			// 취소 버튼 클릭시 리다이렉트
+			$(function(){
+				$('#resetBtn').click(function(){
+					location.href = '/licenseSubjectList';
+				});
+			});
 		
-		<!-- begin contents --> 
-            <div class="pxp-dashboard-content-details">
+		// 관리자 인증
+			$('#lsRegId').on('input', function(){
+				$('#addLicenseSubForm input').not('#lsRegId').prop('disabled', true);
+			  	$('#addLicenseSubForm select').prop('disabled', true);
+			  	$('#addLicenseSubForm button').not('#checkBtn').prop('disabled', true);
+			});
+		
+			$('#checkBtn').click(function(){
+				let lmcRegId = $('#lsRegId').val();
+				
+				if(validateValue(lmcRegId)){
+					alert('관리자 인증을 해주세요');
+					$('#lsRegId').focus();
+					return false;					
+				}					
 
-                    
-          license_subject_insert.html        
+				let request = $.ajax({
+					  url: '/lscIdCheck',
+					  method: 'GET',
+					  data: { 'inputId' : lmcRegId },
+					  dataType: 'json'
+				});
+				
+				//성공 
+				request.done(function( isChecked ) {
+					console.log(isChecked, '데이터타입 확인');
+				  	  
+					if(isChecked){
+						alert('인증 완료')
+					  	$('#addLicenseSubjectForm input').not('#lsRegId').prop('disabled', false);
+					  	$('#addLicenseSubjectForm select').prop('disabled', false);
+					  	$('#addLicenseSubjectForm button').not('#checkBtn').prop('disabled', false);
+							
+					}else{
+				  	  	alert('관리자 아이디가 일치하지 않습니다.');
+				  	  	$('#lsRegId').val('');
+					  	$('#addLicenseSubjectForm input').not('#lsRegId').prop('disabled', true);
+					  	$('#addLicenseSubjectForm select').prop('disabled', true);
+					  	$('#addLicenseSubjectForm button').not('#checkBtn').prop('disabled', true);
+						$('#lscRegId').focus();
+					}
+				});
+				
+				//실패 
+				request.fail(function( jqXHR, textStatus ) {
+				  	  console.log('Request failed: ' + textStatus );
+				});
+			});
+			
+			/* 자격증이름 클릭시 코드 자격증코드 자동 등록*/
+			$(function(){
+				$('#liName').val($('#liCode option:selected').text());
+				$(document).on('change', '#liCode', function(){
+					//console.log($('#liCode option:selected').text());
+					let selectedLiName = $('#liCode option:selected').text();
+					$('#liName').val(selectedLiName);
+				});
+				
 
-            </div>
-        <!-- end contents -->     
-            
-        <!-- begin footer -->
-			<div th:replace="~{admin/fragments/adminFooter :: footerFragment}"></div>
-		<!-- end footer -->
-        </div>
-        <script src="js/jquery-3.4.1.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/nav.js"></script>
-        <script src="js/Chart.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+			})
+			
+			
+	
+			/* 유효성검사를 구현하시오. (#submitBtn 를 클릭 시) */
+			$('#submitBtn').click(function(){
+				let isSubmit = true;
+				
+				$('#addLicenseSubjectForm input').each(function(idx, item){
+					let checkValue = $(item).val();
+					let labelValue = $(item).parent('.mb-3').find('label').text();
+					if(validateValue(checkValue)){
+						
+						alert(`${labelValue}를 입력해주세요`);
+						$(item).focus();
+						isSubmit = false;
+						return false;
+					}
+					
+				});   
+				
+
+
+				if(isSubmit) $('#addLicenseSubjectForm').submit();
+			});
+		});
+		
+			
+
+			
+		</script>
+	</th:block> 
+	<th:block layout:fragment="customContents">
+		<h1><a th:href="@{/licenseSubjectList}">자격증 과목 등록</a></h1>
+		<form id="addLicenseSubjectForm" th:action="@{/addlicenseSubject}" name="myform" method="post">
+              <div class="row mt-4 mt-lg-5">
+                  <div class="col-xxl-8">
+                      <div class="row">
+                      </div>
+                      <div class="row">
+                      </div><br>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lsRegId" class="form-label"><h4>관리자 아이디</h4></label>
+                                  <button type="button" id="checkBtn" class="btn rounded-pill pxp-section-cta-o ms-3">관리자 인증</button>
+                                  <input type="text" id="lsRegId" class="form-control" name="lsRegId" placeholder="관리자 아이디">
+                              </div>
+                          </div>
+                      </div><br><br>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="liCode" class="form-label"><h6>자격증 이름</h6></label><h12>&nbsp;&nbsp;</h12>
+                                  <select class="form-select" id="liCode" name="liCode" disabled="disabled">
+                             		 <th:block th:if="${not #lists.isEmpty(licenseInfoList)}" 
+										  th:each="l : ${licenseInfoList}">								
+									<option th:value="${l.licenseInfo.liCode}">[[${l.licenseInfo.liName}]]</option>
+									</th:block>
+									<th:block th:unless="${not #lists.isEmpty(licenseInfoList)}">								
+									<option>등록된 정보가 없습니다.</option>
+                               		</select>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="liName" class="form-label"></label>
+                                   <input type="hidden" id="liName" class="form-control" name="liName">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lsSubject" class="form-label"><h6>자격증 과목</h6></label><h12>&nbsp;&nbsp;</h12>
+                                  <input type="text" id="lsSubject" class="form-control" name="lsSubject" placeholder="자격증 과목" disabled="disabled">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lsName" class="form-label"><h6>자격증 과목명</h6></label>
+                                  <input type="text" id="lsName" class="form-control" name="lsName" placeholder="자격증 과목명" disabled="disabled">
+                              </div>
+                          </div>
+                      </div>                      
+                  </div>
+              </div>
+              <div class="mt-4 mt-lg-5">
+                  <button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>&nbsp;&nbsp;
+                  <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
+                  
+              </div>
+          </form>
+	
+	</th:block>
+	
 </html>

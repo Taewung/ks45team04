@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{admin/layout/adminDefault}">
+
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	<script>
+	</script>  
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+		<h1>멤버십 회원 정보 조회 / 수정</h1>
+                <p class="pxp-text-light">MembershipInfo</p>
+                <div class="mt-4 mt-lg-5">
+                    <div class="row justify-content-between align-content-center">
+                        <div class="col-auto order-2 order-sm-1">
+                            <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
+                                <div class="pxp-company-dashboard-jobs-search mb-3">
+								<form th:action="@{/totalMembershipMemberList}" method="get">
+	                                <div class="pxp-company-dashboard-jobs-search mb-6">							
+	                                <select class="form-select" name="searchKey">
+	                                    <option value="mmCode">멤버십 코드</option>
+	                                    <option value="mmPeriod">기간</option>
+	                                    <option value="mmState">상태</option>
+	                                </select>
+	                                	<div class="col-auto order-1 order-sm-2">
+	                                		<div class="pxp-company-dashboard-jobs-search-search-form">
+	                                    		<div class="input-group">
+	                                        		<span class="input-group-text"><span class="fa fa-search"></span></span>
+	                                        		<input type="text" name="searchValue" class="form-control" placeholder="Search">
+	                                        		<button type="submit" class="btn ms-2">Search</button>
+	                                    		</div>
+	                                		</div>
+	                            		</div>
+	                        		</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+					<div class="pxp-dashboard-table-options">
+    
+                    </div>
+                    </div>
+                    <!-- 검색 end -->   
+                    <!-- 목록 start -->                   
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">                      	
+                            <thead>                    
+                                <tr>
+                                    <th style="width: 15%;">멤버십아이디</th>
+                                    <th style="width: 15%;">멤버십코드</th>
+                                    <th style="width: 10%;">멤버십기간</th>
+                                    <th style="width: 20%;">멤버십시작일시</th>
+                                    <th style="width: 20%;">멤버십만료일시</th>
+                                    <th style="width: 15%;">멤버십상태</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead> 
+                            <tbody>
+        				<th:block th:if="${not #lists.isEmpty(totalMembershipMemberList)}" th:each="mm : ${totalMembershipMemberList}">
+                                <tr>
+                                    <td>
+                                        <a  th:href="@{/totalModifyMembershipMemberInfo(mmId=${mm.mmId})}"  class="pxp-company-dashboard-job-title" 
+                                        	th:text="${mm.mmId}">
+                                        </a>
+                                    </td>
+                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${mm.mmMembershipCode}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${mm.mmPeriod}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${mm.mmStartDatetime}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${mm.mmEndDatetime}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${mm.mmState}"></div></td>
+                                    <td>
+                                    </td>
+                                 </tr>
+                                </th:block>    
+                            </tbody>
+                        </table>                                                                 
+ 
+						<!-- page 넘김 start -->
+                        <div class="row mt-4 mt-lg-5 justify-content-center align-items-center">
+                            <div class="col-auto">
+                                <nav class="mt-3 mt-sm-0" aria-label="Jobs list pagination">
+                                    <ul class="pagination pxp-pagination">
+                                        <li class="page-item active" aria-current="page">
+                                            <span class="page-link">1</span>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <!-- page 넘김 end -->
+                    </div>
+                <!-- 목록 end -->    
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
+</html>
+             

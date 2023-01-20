@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{admin/layout/adminDefault}">
+
+	<!-- script start -->
+    <th:block layout:fragment="customScript">
+		<script>
+		</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+                <h1>문제수정</h1>
+                <p class="pxp-text-light">Modify Question</p>
+                <form id="modifyQuestion" th:action="@{/modifyQuestion}" method="post">
+                 <th:block th:object="${questionByCode}">
+                    <!-- 자격증선택 start -->                
+				<div class="row mt-4 mt-lg-5" >  
+					<h2><strong><span class="fa fa-check"></span>자격증 정보</strong></h2>
+					<div class="col-md-6 col-xxl-3">
+						<label for="mainCate" class="form-label">자격증명</label>
+	                    <input type="text" id="liName" class="form-control" th:value="*{liName}" readonly="readonly"/>
+					</div>
+					<div class="col-md-6 col-xxl-3">
+						<label for="mainCate" class="form-label">자격증코드</label>
+	                    <input type="text" id="liCode" class="form-control" th:value="*{liCode}" readonly="readonly"/>
+					</div>
+				</div>	
+				<!-- 자격증선택 end -->                      
+				<!-- 과목선택 start --> 
+				<div class="row mt-4 mt-lg-5">
+					<h2><strong><span class="fa fa-check"></span>과목 정보</strong></h2>
+					<div class="col-md-6 col-xxl-3">
+						<label for="lsSubject" class="form-label">과목</label>
+	                    <input type="text" id="lsSubject" class="form-control" th:value="*{lsSubject}" readonly="readonly"/>
+					</div>
+					<div class="col-md-6 col-xxl-3">
+						<label for="lsName" class="form-label">과목명</label>
+	                    <input type="text" id="lsName" class="form-control" th:value="*{lsName}" readonly="readonly"/>
+					</div>
+					<div class="col-md-6 col-xxl-3">
+						<label for="lsCode" class="form-label">과목코드</label>
+	                    <input type="text" id="lsCode" class="form-control" th:value="*{lsCode}" readonly="readonly"/>
+					</div>
+				</div>
+				<!-- 과목선택 end -->                                     
+				<!-- 문제입력 start -->                                     
+				<div class="row mt-4 mt-lg-5">
+					<h2><strong><span class="fa fa-check"></span>문제입력</strong></h2>	                    
+					<div class="mb-3">
+						<textarea class="form-control" id="question" name="question" th:text="*{question}" placeholder="문제를 입력해주세요."></textarea>
+					</div>	                        
+				</div>
+				<!-- 문제입력 end -->
+				<!-- 배점입력 start -->                                     
+				<div class="col-md-6 col-xxl-3">
+                	<div class="mb-3">
+                        <h2><strong><span class="fa fa-check"></span>배점입력</strong></h2>
+	                    <input type="text" id="questionScore" class="form-control" name="questionScore" th:value="*{questionScore}" placeholder="배점을 입력해주세요."/>   
+	                    <input type="text" id="questionCode" class="form-control" name="questionCode" th:value="*{questionCode}" readonly="readonly" hidden/>   
+                    </div>
+                </div>
+				<!-- 배점입력 end -->
+				<!-- 등록/취소버튼 start -->			   
+                    <div class="mt-4 mt-lg-5">
+	                  <button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">수정</button>
+					  <a th:href="@{/qSettingList}" class="btn rounded-pill pxp-section-cta-o ms-3">취소</a>                                                
+	             	</div>  
+	            <!-- 수정/취소버튼 start -->			                                                                    
+                 </th:block>
+                </form>
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	</th:block>
+	<!-- customJs end -->
+</html>

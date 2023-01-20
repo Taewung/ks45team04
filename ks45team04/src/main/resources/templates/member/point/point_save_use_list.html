@@ -1,22 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  class="pxp-root" >
-<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
+	  layout:decorate="~{member/layout/myPageDefault}">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
-    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
     <style>
     th,td{
     text-align:center;
@@ -26,77 +12,72 @@
 	}
     </style>
 </head>
-    <body style="background-color: var(--pxpSecondaryColorLight);">
-        <div class="pxp-dashboard-content">
-        
-        <!-- begin aside -->
-		<div th:replace="~{member/fragments/myPageAside :: asideFragment}"></div>
-		<!-- end aside -->
-		
-        <!-- begin header -->
-		<div th:replace="~{member/fragments/myPageHeader :: headerFragment}"></div>
-		<!-- end header -->
-		
-		<!-- begin contents --> 
-            <div class="pxp-dashboard-content-details">
+
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	<script>
+	</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
              <h1>포인트 적립/사용 내역</h1>
                 <p class="pxp-text-light">Point save use list</p>
 				<div class="mt-4 mt-lg-5">
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle">
-                            <tbody>
-                            	<tr>
-                                    <td style="width: 30%;"><a><div class="pxp-company-dashboard-job-title">총 적립금</div></a></td>
-                                    <td style="width: 30%;">300</td>
-                                </tr>
-                            
-                            	<tr>
-                                    <td><a><div class="pxp-company-dashboard-job-title">사용된 적립금</div></a></td>
-                                    <td><div class="pxp-company-dashboard-job-category">1000</div></td>
-                                </tr>
-                                <tr>
-                                    <td><a><div class="pxp-company-dashboard-job-title">사용가능 적립금</div></a></td>
-                                    <td><div class="pxp-company-dashboard-job-category">300</div></td>
-                                </tr>
-                            </tbody>
-                            </table>
-                <div class="mt-4 mt-lg-5">
-                    <div class="table-responsive">
+                    <div class="table-responsive" style="overflow-x: hidden">
                         <table class="table table-hover align-middle">
                             <thead>
                                 <tr>
-                                    <th colspan="1" style="width: 10%;">번호</th>
+                                    <th colspan="1" style="width: 10%;">총 적립금</th>
+                                    <th style="width: 10%;">사용된 적립금</th>
+                                    <th style="width: 15%;">사용가능 적립금</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:if="${not #lists.isEmpty(mPointSaveUseList)}"
+									th:each="l : ${mPointSaveUseList}">
+                                    <td><div class="pxp-company-dashboard-job-title" th:text="${#numbers.formatInteger(l.totalPoint, 3, 'COMMA')}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-title" th:text="${#numbers.formatInteger(l.pointSaveUsePoint, 3, 'COMMA')}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-title" th:text="${#numbers.formatInteger(l.totalPoint, 3, 'COMMA')}"></div></td>
+                                </tr>
+                                <tr th:unless="${not #lists.isEmpty(mPointSaveUseList)}">
+									<td colspan="9">조회된 포인트 적립/사용 내역이 없습니다.</td>
+								</tr> 
+                            </tbody>
+                        </table>
+                <div class="mt-4 mt-lg-5">
+                    <div class="table-responsive" style="overflow-x: hidden">
+                        <table class="table table-hover align-middle">
+                            <thead>
+                                <tr>
+                                    <th colspan="1" style="width: 20%;">코드</th>
                                     <th style="width: 10%;">아이디</th>
                                     <th style="width: 15%;">내역</th>
-                                    <th style="width: 15%;">적립/사용</th>
-                                    <th style="width: 15%;">포인트</th>
+                                    <th style="width: 10%;">적립/사용</th>
+                                    <th style="width: 10%;">포인트</th>
                                     <th style="width: 10%;">총 보유 포인트</th>
                                     <th>일시</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><a><div class="pxp-company-dashboard-job-title">1</div></a></td>
-                                    <td><div class="pxp-company-dashboard-job-category">id008</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">합격자 리뷰</div></td>
-                                    <td><div class="pxp-company-dashboard-job-status"><span class="badge rounded-pill bg-success">적립</span></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">1000</div></td>
-                                    <td><div class="pxp-company-dashboard-job-title">1300</div></td>
-                                    <td><div class="pxp-company-dashboard-job-date">2022/12/31 at 11:56 am</div></td>
+                                <tr th:if="${not #lists.isEmpty(mPointSaveUseList)}"
+									th:each="l : ${mPointSaveUseList}">
+                                    <td><div class="pxp-company-dashboard-job-title" th:text="${l.pointSaveUseCode}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.pointSaveUseId}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.pointSaveUseReason}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" ><span class="badge rounded-pill bg-success" th:text="${l.saveUse}"></span></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${#numbers.formatInteger(l.pointSaveUsePoint, 3, 'COMMA')}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${#numbers.formatInteger(l.totalPoint, 3, 'COMMA')}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.saveUseDatetime}"></div></td>
                                 </tr>
-                                <tr>
-                                    <td><a><div class="pxp-company-dashboard-job-title">2</div></a></td>
-                                    <td><div class="pxp-company-dashboard-job-category">id008</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">노트 구매</div></td>
-                                    <td><div class="pxp-company-dashboard-job-status"><span class="badge rounded-pill bg-danger">사용</span></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">1000</div></td>
-                                    <td><div class="pxp-company-dashboard-job-title">300</div></td>
-                                    <td><div class="pxp-company-dashboard-job-date">2022/12/31 at 11:56 am</div></td>
-                                </tr>
+                                <tr th:unless="${not #lists.isEmpty(mPointSaveUseList)}">
+									<td colspan="9">조회된 포인트 적립/사용 내역이 없습니다.</td>
+								</tr> 
                             </tbody>
                         </table>
 
-                        <div class="row mt-4 mt-lg-5 justify-content-between align-items-center">
+                        <div class="row mt-4 mt-lg-5 justify-content-center align-items-center">
                             <div class="col-auto">
                                 <nav class="mt-3 mt-sm-0" aria-label="Candidates pagination">
                                     <ul class="pagination pxp-pagination">
@@ -113,19 +94,15 @@
 				</div>
 			</div>
 		</div>
-	</div>
-
-        <!-- end contents -->          
-            
-        <!-- begin footer -->
-			<div th:replace="~{member/fragments/myPageFooter :: footerFragment}"></div>
-		<!-- end footer -->
-        </div>
-        <script src="js/jquery-3.4.1.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/nav.js"></script>
-        <script src="js/Chart.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
 </html>
+
+
+

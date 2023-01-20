@@ -6,7 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import ks45team04.sos.admin.dto.DownloadCountStandard;
+import ks45team04.sos.admin.mapper.DownloadCountStandardMapper;
 import ks45team04.sos.admin.service.DownloadCountStandardService;
 
 
@@ -17,9 +21,13 @@ import ks45team04.sos.admin.service.DownloadCountStandardService;
 public class ADownloadCountStandardController {
 	
 private final DownloadCountStandardService downloadCountStandardService;
+private final DownloadCountStandardMapper downloadCountStandardMapper;
 	
-	public ADownloadCountStandardController(DownloadCountStandardService downloadCountStandardService) {
+	public ADownloadCountStandardController(DownloadCountStandardService downloadCountStandardService
+										   ,DownloadCountStandardMapper downloadCountStandardMapper) {
+		
 		this.downloadCountStandardService = downloadCountStandardService;
+		this.downloadCountStandardMapper = downloadCountStandardMapper;
 	}
 	
 		
@@ -42,29 +50,53 @@ private final DownloadCountStandardService downloadCountStandardService;
 		// 다운로드 횟수 기준 수정 처리
 		@PostMapping("/modifydownloadCountStandard")
 		public String modifydownloadCountStandard(DownloadCountStandard DownloadCountStandard) {
+			
+			downloadCountStandardService.modifyDownloadCountStandard(DownloadCountStandard);
 					
-			return "";
+			return "redirect:/downloadCountStandardList";
 		}
 				
 		// 다운로드 횟수 기준 수정 화면
 		@GetMapping("/modifydownloadCountStandard")
-		public String modifydownloadCountStandard(Model model) {
+		public String modifydownloadCountStandard(@RequestParam(value="dscCode") String dscCode
+												  ,Model model) {
+			
+			DownloadCountStandard downloadCountStandard = downloadCountStandardMapper.getDownloadCountStandardInfoByCode(dscCode);
+			
 			model.addAttribute("title", "다운로드 횟수 기준 정보 수정");
+			model.addAttribute("downloadCountStandardInfo", downloadCountStandard);
 				
 			return "admin/noteDownloadCountStandard/dwonload_count_standard_modify";
 		}
-	
+		
+		// 관리자 인증
+		@GetMapping("/dcsIdCheck")
+		@ResponseBody
+		public boolean idCheck(@RequestParam(value="inputId") String inputId) {
+			
+			boolean isChecked = downloadCountStandardMapper.getIdCheck(inputId);
+			
+			return isChecked;
+		}
+		
+		
 		// 다운로드 횟수 기준 등록 처리
 		@PostMapping("/adddownloadCountStandard")
 		public String adddownloadCountStandard(DownloadCountStandard downloadCountStandard) {
 			
-			return "";
+			downloadCountStandardService.addDownloadCountStandard(downloadCountStandard);
+			
+			return "redirect:/downloadCountStandardList";
 		}
 		
 		// 다운로드 횟수 기준 등록 화면
 		@GetMapping("/adddownloadCountStandard")
 		public String adddownloadCountStandard(Model model) {
+			
+			List<DownloadCountStandard> downloadCountStandardList = downloadCountStandardMapper.DownloadCountStandardList();
+			
 			model.addAttribute("title", "다운로드 횟수 기준 등록");
+			model.addAttribute("downloadCountStandardList", downloadCountStandardList);
 			
 			return "admin/noteDownloadCountStandard/dwonload_count_standard_insert";
 		}

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team04.sos.admin.mapper.AdminCheatMemberMapper">
+	
+	<resultMap type="CheatMember" id="CheatMemberResultMap">
+		<id property="cmReportCode" 							column="cm_report_code"/>
+		<result property="cmId" 								column="cm_id"/>
+		<result property="cmReportId" 							column="cm_report_id"/>
+		<result property="cmReportReason" 						column="cm_report_reason"/>
+		<result property="cmReportContent" 						column="cm_report_content"/>
+		<result property="cmReportFile" 						column="cm_report_file"/>
+		<result property="cmReportDatetime" 					column="cm_report_datetime"/>
+		<result property="cmReportState" 						column="cm_report_state"/>
+		<result property="cmReportManager" 						column="cm_report_manager"/>
+		<result property="cmReportJudgeDatetime" 				column="cm_report_judge_datetime"/>
+		<result property="cmStopDate" 							column="cm_stop_date"/>
+		<result property="cmStartDatetime" 						column="cm_start_datetime"/>
+		<result property="cmEndDatetime" 						column="cm_end_datetime"/>
+	</resultMap>
+
+
+	<update id="modifyCheatMemberInfo" parameterType="CheatMember">
+			/* 특정 부정 회원 정보 수정 */
+		UPDATE 
+			cheat_member
+		SET 
+			cm_stop_date = #{cmStopDate},
+			cm_start_datetime = #{cmStartDatetime},
+			cm_end_datetime = #{cmEndDatetime}
+		WHERE 
+			cm_id= #{cmId};
+	</update>
+
+
+
+	<select id="getTotalCheatMemberInfo" parameterType="String" resultMap="CheatMemberResultMap">
+			/* 특정 부정 회원 목록 조회 */
+			SELECT
+			cm.cm_id,
+			cm.cm_report_id,
+			cm.cm_report_reason,
+			cm.cm_stop_date,
+			cm.cm_start_datetime,
+			cm.cm_end_datetime
+			FROM
+				cheat_member as cm
+			WHERE
+				cm.cm_id = #{cmId};
+				
+	</select>
+
+	
+	<select id="CheatMemberList" resultMap="CheatMemberResultMap">
+			/*전체 회원 목록 조회*/
+			SELECT
+				cm_id,
+				cm_report_id,
+				cm_report_reason,
+				cm_report_content,
+				cm_report_datetime,
+				cm_report_state,
+				cm_report_manager,
+				cm_report_judge_datetime,
+				cm_stop_date,
+				cm_start_datetime,
+				cm_end_datetime
+			FROM
+				cheat_member
+		<where>
+			<if  test="searchKey != null and searchKey != ''">
+				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
+			</if>
+		</where>	
+	</select>
+	</mapper>
+	

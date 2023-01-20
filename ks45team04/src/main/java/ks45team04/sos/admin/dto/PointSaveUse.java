@@ -10,6 +10,8 @@ public class PointSaveUse {
 	private String saveUse;
 	private String saveUseDatetime;
 	
+	private PointSaveStandard pointSaveStandard;
+	
 	
 	public String getPointSaveUseCode() {
 		return pointSaveUseCode;
@@ -53,13 +55,20 @@ public class PointSaveUse {
 	public void setSaveUseDatetime(String saveUseDatetime) {
 		this.saveUseDatetime = saveUseDatetime;
 	}
-	
+	public PointSaveStandard getPointSaveStandard() {
+		return pointSaveStandard;
+	}
+	public void setPointSaveStandard(PointSaveStandard pointSaveStandard) {
+		this.pointSaveStandard = pointSaveStandard;
+	}
 	
 	@Override
 	public String toString() {
-		return "Point [pointSaveUseCode=" + pointSaveUseCode + ", pointSaveUseId=" + pointSaveUseId
+		return "PointSaveUse [pointSaveUseCode=" + pointSaveUseCode + ", pointSaveUseId=" + pointSaveUseId
 				+ ", pointSaveUseReason=" + pointSaveUseReason + ", pointSaveUsePoint=" + pointSaveUsePoint
-				+ ", totalPoint=" + totalPoint + ", saveUse=" + saveUse + ", saveUseDatetime=" + saveUseDatetime + "]";
+				+ ", totalPoint=" + totalPoint + ", saveUse=" + saveUse + ", saveUseDatetime=" + saveUseDatetime
+				+ ", pointSaveStandard=" + pointSaveStandard + "]";
 	}
+	
 
 }

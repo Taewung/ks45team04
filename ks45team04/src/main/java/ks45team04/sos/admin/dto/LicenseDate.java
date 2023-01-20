@@ -4,12 +4,15 @@ public class LicenseDate {
 
 	private String ldCode;
 	private String liCode;
+	private String liName;
 	private String ldPeriod;
 	private String ldDate;
 	private String ldAcceptanceDate;
 	private String ldCost;
 	private String ldRegId;
 	private String ldRegDatetime;
+	
+	private LicenseInfo licenseInfo;
 	
 	public String getLdCode() {
 		return ldCode;
@@ -59,13 +62,27 @@ public class LicenseDate {
 	public void setLdRegDatetime(String ldRegDatetime) {
 		this.ldRegDatetime = ldRegDatetime;
 	}
+	public String getLiName() {
+		return liName;
+	}
+	public void setLiName(String liName) {
+		this.liName = liName;
+	}
+	public LicenseInfo getLicenseInfo() {
+		return licenseInfo;
+	}
+	public void setLicenseInfo(LicenseInfo licenseInfo) {
+		this.licenseInfo = licenseInfo;
+	}
 	
 	@Override
 	public String toString() {
-		return "LicenseDate [ldCode=" + ldCode + ", liCode=" + liCode + ", ldPeriod=" + ldPeriod + ", ldDate=" + ldDate
-				+ ", ldAcceptanceDate=" + ldAcceptanceDate + ", ldCost=" + ldCost + ", ldRegId=" + ldRegId
-				+ ", ldRegDatetime=" + ldRegDatetime + "]";
+		return "LicenseDate [ldCode=" + ldCode + ", liCode=" + liCode + ", liName=" + liName + ", ldPeriod=" + ldPeriod
+				+ ", ldDate=" + ldDate + ", ldAcceptanceDate=" + ldAcceptanceDate + ", ldCost=" + ldCost + ", ldRegId="
+				+ ldRegId + ", ldRegDatetime=" + ldRegDatetime + ", licenseInfo=" + licenseInfo + "]";
 	}
+	
+	
 	
 	
 	

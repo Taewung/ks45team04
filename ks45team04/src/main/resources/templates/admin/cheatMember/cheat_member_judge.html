@@ -1,37 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  class="pxp-root" >
-<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  layout:decorate="~{admin/layout/adminDefault}">
 
-    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
-    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-    <body style="background-color: var(--pxpMainColorLight);">
-        <div class="pxp-dashboard-content">
-        
-        <!-- begin aside -->
-		<div th:replace="~{admin/fragments/adminAside :: asideFragment}"></div>
-		<!-- end aside -->
-		
-        <!-- begin header -->
-		<div th:replace="~{admin/fragments/adminHeader :: headerFragment}"></div>
-		<!-- end header -->
-		
-		<!-- begin contents --> 
-             <div class="pxp-dashboard-content-details">
-             <h1>부정 회원 신고 목록</h1>
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	<script>
+	</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+	             <h1>부정 회원 신고 목록</h1>
                 <p class="pxp-text-light">Cheat Member Judge list</p>
 
                 <div class="mt-4 mt-lg-5">
@@ -64,7 +45,6 @@
                         <table class="table table-hover align-middle">                      	
                             <thead>                    
                                 <tr>
-                                    <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
                                     <th style="width: 10%;">신고자ID</th>
                                     <th style="width: 10%;">부정ID</th>
                                     <th style="width: 15%;">신고사유</th>
@@ -77,12 +57,7 @@
                             </thead>    
                             <tbody>
                                 <tr>
-                                    <td><input type="checkbox" class="form-check-input"></td>
-                                    <td>
-                                        <a href="#">
-                                            <div class="pxp-company-dashboard-job-title">id004</div>                                           
-                                        </a>
-                                    </td>
+                                    <td><div class="pxp-company-dashboard-job-category">id004</div></td>
                                     <td><div class="pxp-company-dashboard-job-category">id003</div></td>
                                     <td><div class="pxp-company-dashboard-job-category">욕설/인신공격</div></td>
                                     <td><div class="pxp-company-dashboard-job-category">욕했어요</div></td>
@@ -125,20 +100,12 @@
                     </div>
                 <!-- 목록 end -->    
                 </div>
-                  
-
-            </div>
-        <!-- end contents -->     
-            
-        <!-- begin footer -->
-			<div th:replace="~{admin/fragments/adminFooter :: footerFragment}"></div>
-		<!-- end footer -->
-        </div>
-        <script src="js/jquery-3.4.1.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/nav.js"></script>
-        <script src="js/Chart.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
 </html>

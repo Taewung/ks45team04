@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{admin/layout/adminDefault}">
+
+	<!-- script start -->
+    <th:block layout:fragment="customScript">
+		<script>
+		</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents" th:object="${explanationByCode}">
+		<h1>해설수정</h1>
+	    <p class="pxp-text-light">Modify Explanation</p>
+	    <form id="modifyExplanationForm" th:action="@{/modifyExplanation}" method="post">
+	    	<div class="row mt-4 mt-lg-5 " >
+				<div class="mb-3 explainCode">
+					<label for="explainCode" class="form-label">해설코드</label>
+					<input type="text" id="explainCode" class="form-control" th:value="*{explainCode}" name="explainCode" readonly="readonly"/>
+				</div>
+			</div> 
+			<div class="row mt-4 mt-lg-5 " hidden>
+					<div class="mb-3 questionCode">
+						<input type="text" id="questionCode" class="form-control" th:value="*{questionCode}" name="questionCode" hidden/>
+					</div>
+				</div>
+			<div class="mt-4 mt-lg-5">
+	            <div class="row mt-4 mt-lg-5">
+		            <div class="mb-3 explanation">
+		             <textarea class="form-control" id="explanation" th:value="*{explanation}" th:text="*{explanation}" name="explanation" placeholder="해설를 입력해주세요."></textarea>
+		         	</div>
+	            </div>                 
+			</div>
+			<div class="mt-4 mt-lg-5">
+                <button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">수정</button>
+				<a th:href="@{/explanationList(questionCode=*{questionCode})}" class="btn rounded-pill pxp-section-cta-o ms-3">취소</a>
+           	</div>                                                              
+    	</form>
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	</th:block>
+	<!-- customJs end -->
+</html>

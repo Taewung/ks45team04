@@ -3,7 +3,7 @@
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	  	  
 	<aside>
-		<div class="pxp-dashboard-side-panel d-none d-lg-block" th:fragment="asideFragment">
+		<div class="pxp-dashboard-side-panel d-none d-lg-block" th:fragment="asideFragment" style="overflow-y: hidden">
              <div class="pxp-logo">
                 <a href="/main" class="pxp-animate"><span style="color: var(--pxpMainColor)">S</span>aveY<span style="color: var(--pxpMainColor)">O</span>urLicen<span style="color: var(--pxpMainColor)">S</span>e</a>
              </div>
@@ -14,7 +14,7 @@
 		                <li class="dropdown">
 							<a class="dropdown-toggle" data-bs-toggle="dropdown"><span class="fa fa-pencil"></span>#회원 관리</a>
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="/modifyMember">#회원 정보 수정</a></li>
+									<li><a class="dropdown-item" href="/modifyMemberInfo">#회원 정보 수정</a></li>
 									<li><a class="dropdown-item" href="/removeMember">#회원 탈퇴</a></li>
 								</ul>
 		                </li>		              
@@ -41,21 +41,21 @@
 		                <li class="dropdown">
 							<a class="dropdown-toggle" data-bs-toggle="dropdown"><span class="fa fa-pencil"></span>#멤버십 관리</a>
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="/membershipRequest">#멤버십 신청</a></li>
-									<li><a class="dropdown-item" href="/membershipPeriod">#멤버십 남은 기간 확인</a></li>
+									<li><a class="dropdown-item" href="/membershipRequest">멤버십 신청</a></li>
+									<li><a class="dropdown-item" href="/membershipMemberList">#멤버십 남은 기간 확인</a></li>
 								</ul>
 		                </li>		              
 		                <li class="dropdown">
-							<a class="dropdown-toggle" data-bs-toggle="dropdown"><span class="fa fa-pencil"></span>#기출문제</a>
+							<a class="dropdown-toggle" data-bs-toggle="dropdown"><span class="fa fa-pencil"></span>기출문제</a>
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="/examResultList">#기출문제응시결과목록</a></li>
+									<li><a class="dropdown-item" href="/examResultList">!기출문제응시결과목록</a></li>
 								</ul>
 						</li>	              	              
 		                <li class="dropdown">
-							<a class="dropdown-toggle" data-bs-toggle="dropdown"><span class="fa fa-pencil"></span>#오답</a>
+							<a class="dropdown-toggle" data-bs-toggle="dropdown"><span class="fa fa-pencil"></span>오답</a>
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="/wrongAnswerList">#오답목록</a></li>
-									<li><a class="dropdown-item" href="/wrongAnswerNoteList">#오답노트목록</a></li>
+									<li><a class="dropdown-item" href="/wrongAnswerList">!오답목록</a></li>
+									<li><a class="dropdown-item" href="/wrongAnswerNoteList">!오답노트목록</a></li>
 								</ul>
 						</li>	              	              
 		                <li class="dropdown">
@@ -75,14 +75,14 @@
 		                <li class="dropdown">
 							<a class="dropdown-toggle" data-bs-toggle="dropdown"><span class="fa fa-sharp fa-solid fa-credit-card"></span>결제</a>
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="/mpayList">#결제내역</a></li>
+									<li><a class="dropdown-item" href="/mPayList">#결제내역</a></li>
 									<li><a class="dropdown-item" href="/refundList">#환불신청내역</a></li>
 								</ul>
-		                </li>			                
+		                </li>
 		                <li class="dropdown">
-							<a class="dropdown-toggle" data-bs-toggle="dropdown"><span class="fa fa-pencil"></span>장바구니</a>
+							<a class="dropdown-toggle" data-bs-toggle="dropdown"><span class="fa fa-pencil"></span>1:1문의 조회</a>
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="/cartList">#장바구니 조회</a></li>
+									<li><a class="dropdown-item" href="/qnaQuestionDetail">1:1문의 조회</a></li>
 								</ul>
 		                </li>			                
                		</ul>

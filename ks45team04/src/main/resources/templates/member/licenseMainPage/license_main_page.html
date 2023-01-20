@@ -1,48 +1,156 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  class="pxp-root" >
-<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  layout:decorate="~{member/layout/contentDefault}">
+	<head>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+	</head>
+	<!-- script start -->
+    <th:block layout:fragment="customScript">
+		<script>
+			$(function(){
+				function validationCheck(data){
+					if(typeof data == 'undefined' || data == '' || data == null || data == '대분류'){	
+						return false;
+					}
+					return true;
+				}
+				// 자격증 대분류값 선택
+				$(document).on('change','#licenseMainCategory', function(){
+					$('#licenseSubCategory').prop('disabled', false);
+					let lmcCode = $(this).val();
+					
+					if(validationCheck(lmcCode)){						
+						var request = $.ajax({
+						  url: '/MLicenseSubCategory',
+						  method: 'GET',
+						  data: { 'lmcCode' : lmcCode },
+						  dataType: 'json'
+						});	
+						// 대분류값 선택 성공시 중분류명 조회
+						request.done(function( data ) {
+						  console.log(data);
+						  $('#licenseSubCategory').children().remove();
+						  for(let subCategory of data){
+							  $('#licenseSubCategory').append(`<option value="${subCategory.lscCode}">${subCategory.lscName}</option>`);							 
+						  }
+						});
+						// 대분류값 선택 실패시
+						request.fail(function( jqXHR, textStatus ) {
+						  alert( "Request failed: " + textStatus );
+						});
+					}
+					
+				});
+				//대분류값 선택없이 중분류값 선택시
+				$(document).on('click','.licenseSubCategoryDiv', function(){
+					let isDisabled = $('#licenseSubCategory').prop('disabled');
+					if(isDisabled) {
+						alert('대분류를 선택해주세요');
+						return false;
+					}
+				});
+				// 자격증 중분류값 선택시 자격증코드,자격증명 조회
+				$(document).on('change','#licenseSubCategory', function(){
+					$('#licenseCategory').prop('disabled', false);
+					let lscCode = $(this).val();
+					
+					if(validationCheck(lscCode)){						
+						var request = $.ajax({
+						  url: '/MLicenseCategory',
+						  method: 'GET',
+						  data: { 'lscCode' : lscCode },
+						  dataType: 'json'
+						});
+					// 중분류값 선택 성공시 
+					request.done(function( data ) {
+						  console.log(data);
+						  $('#licenseCategory').children().remove();
+						  for(let licenseCategory of data){
+							  $('#licenseCategory').append(`<option value="${licenseCategory.liCode}">${licenseCategory.liName}</option>`);								  
+						  }
+						  $('#liCodeCategory').children().remove();
+						  $('#liCodeCategory').prop('disabled', false);
+						  for(let licenseCategory of data){
+							  $('#liCodeCategory').append(`<option value="${licenseCategory.liCode}">${licenseCategory.liCode}</option>`);							  
+						  }
 
-    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
-    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-
-<body>
-	<div class="pxp-preloader"><span>Loading...</span></div>
+						});
+					// 중분류 선택 실패시
+					request.fail(function( jqXHR, textStatus ) {
+						  alert( "Request failed: " + textStatus );
+						});
+					}
+				});
+				// 중분류값 선택없이 자격증명값 선택시
+				$(document).on('click','.licenseCategoryDiv', function(){
+					let isDisabled = $('#licenseCategory').prop('disabled');
+					if(isDisabled) {
+						alert('중분류를 선택해주세요');
+						return false;
+					}
+				});
+				
+				
+				$(document).on('click', '.searchBtn', function(){
+					 
+					if($("#licenseMainCategory").val() == ""){
+					    alert("정보를 선택해주세요.");
+					    $("#licenseMainCategory").focus();
+					    return false;
+					}
+					
+					$('#licenseInfoDetail').submit();
+				});
+			});
+		</script>
+	</th:block> 
+	<!-- script end -->
 	
-		<!-- begin header -->
-		<div th:replace="~{member/fragments/contentsHeader :: headerFragment}"></div>
-		<!-- end header -->			
-		
-		<!--  begin contents -->
-		<section>
-			<div class="pxp-container">
-				license_main_page.html
-			</div>
-		</section>
-		<!--  end contents -->
-
-			
-		<!-- begin footer -->
-		<div th:replace="~{member/fragments/contentsFooter :: footerFragment}"></div>
-		<!-- end footer -->
-			
-	<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
-    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/js/owl.carousel.min.js}"></script>
-    <script th:src="@{/js/nav.js}"></script>
-    <script th:src="@{/js/main.js}"></script>
-</body>
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+	<section class="pxp-page-header-simple" style="background-color: var(--pxpMainColorLight);">
+            <div class="pxp-container">
+                <h1>100% 합격보장!</h1><br>
+                <h3><div class="pxp-hero-subtitle pxp-text-ligh" style="text-align:center;">합격을 위한 한걸음!</div></h3><br><br>
+            </div>
+            <h1><i class="bi bi-caret-down-fill"></i>&nbsp;&nbsp;자격증정보&nbsp;&nbsp;<i class="bi bi-caret-down-fill"></i></h1> 
+        </section>			
+	 <form id="licenseInfoDetail" th:action="@{/licenseInfoDetail}" method="Get">
+	<div class="row mt-4 mt-lg-5" style="margin:40px">            
+                	<h2><strong><span class="fa fa-check"></span>&nbsp;자격증 선택</strong></h2><br><br><br>
+                        <div class="col-md-6 col-xxl-3">
+                        	<label for="licenseSubCategory" class="form-label">대분류</label>
+                             <select  id="licenseMainCategory" class="form-select" name="mainCate">
+                                <option th:if="${not #lists.isEmpty(licenseMainList)}" th:each="l : ${licenseMainList}" th:value="${l.lmcCode}" th:text="${l.lmcName}"></option>
+                             </select>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 licenseSubCategoryDiv">
+	                               <label for="licenseSubCategory" class="form-label">중분류</label>
+	                               <select id="licenseSubCategory" class="form-select" name="subCate" disabled="disabled"></select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 licenseCategoryDiv">
+	                               <label for="licenseCategory" class="form-label">자격증명</label>
+	                               <select id="licenseCategory" class="form-select" name="liCode" disabled="disabled"></select>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-xxl-3">
+	                   <div class="mt-4 mt-lg-5">
+	                  		<button type="button" class="btn rounded-pill pxp-nav-btn searchBtn">조회<span class="fa fa-angle-right"></span></button>
+                    	</div>                                      
+                    </div>
+                    </div>  
+                    </form>  <br><br><br>                              
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
 </html>

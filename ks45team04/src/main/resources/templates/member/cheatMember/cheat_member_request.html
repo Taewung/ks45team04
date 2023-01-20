@@ -1,87 +1,73 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  class="pxp-root" >
-<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  layout:decorate="~{member/layout/contentDefault}">
 
-    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
-    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-
-<body>
-	<div class="pxp-preloader"><span>Loading...</span></div>
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+		<script>
+			
+		</script>
+	</th:block> 
+	<!-- script end -->
 	
-		<!-- begin header -->
-		<div th:replace="~{member/fragments/contentsHeader :: headerFragment}"></div>
-		<!-- end header -->			
-		
-		<!-- begin contents -->
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
         <section class="pxp-page-header-simple" style="background-color: var(--pxpMainColorLight);">
             <div class="pxp-container">
                 <h1>부정 회원 신고</h1>
                 <div class="pxp-hero-subtitle pxp-text-ligh">Challenge Goal</div>
             </div>
         </section>
-
-        <section class="mt-100">
-            <div class="pxp-container">
-                    <!-- 자격증선택 start -->                
-                	<h2><strong><span class="fa fa-check"></span>&nbsp;신고 사유</strong></h2>
-                        <div class="col-md-6 col-xxl-3">
-                            <label for="pxp-company-job-category" class="form-label">신고 사유</label>
-                                <select id="pxp-company-job-category" class="form-select">
-                                    <option>욕설 / 인신공격</option>
-                                    <option>홍보성 게시물</option>
-                                    <option>도배글(같은정보반복게시)</option>
-                                </select>
-                        </div>
-                    <!-- 자격증선택 end -->  
-                    
-             <!-- 신고 내용 입력 start -->
-               <div class="row mt-4 mt-lg-5">
-                	<h2><strong><span class="fa fa-check"></span>&nbsp;신고 내용</strong></h2>                    
-	               <div class="mb-3">
-		             <textarea class="form-control" id="pxp-company-job-description" placeholder="신고 내용을 입력해주세요."></textarea>
-	               </div>	                        
-               </div>
-              <!-- 신고 내용 입력 end -->                     
-                                        
-                      	<!-- 첨부파일 start -->
-                        <div class="row mt-4 mt-lg-5">
-                        <h2><strong><span class="fa fa-check"></span>&nbsp;부정 증빙 자료</strong></h2>	                    
-	                        <div class="mb-3">
-		   <input type="file" id="cheatFile" name="cheatFile" accept="image/png, image/jpeg">
-	                    	</div>	                        
-                        </div>
-                     	<!-- 첨부파일 end --> 
-	                   <div class="mt-4 mt-lg-5">
-	                        <button type="button" onclick="location.href='/customerCenter'" class="btn rounded-pill pxp-section-cta")>신고</button>
-	                        <button type="button" onclick="location.href='/cheatMemberRequest'" class="btn rounded-pill pxp-section-cta-o ms-3">취소</button>
-                    	</div>
-                    	</div>
-         </section>     
+		<form id="cheetRequestForm" action="/customerCenter" method="post" enctype="multipart/form-data">
+	        <section class="mt-100">
+	            <div class="pxp-container">
+	            		<input type="hidden" name="cmReportId" th:value="${session.SID}"/>
+	                    <!-- 자격증선택 start -->                
+	                	<h2><strong><span class="fa fa-check"></span>&nbsp;신고 사유</strong></h2>
+	                        <div class="col-md-6 col-xxl-3">
+	                            <label for="pxp-company-job-category" class="form-label">신고 사유</label>
+	                                <select id="pxp-company-job-category" name="cmReportReason" class="form-select">
+	                                    <option>욕설 / 인신공격</option>
+	                                    <option>홍보성 게시물</option>
+	                                    <option>도배글(같은정보반복게시)</option>
+	                                </select>
+	                        </div>
+	                    <!-- 자격증선택 end -->  
+	                    
+	             <!-- 신고 내용 입력 start -->
+	               <div class="row mt-4 mt-lg-5">
+	                	<h2><strong><span class="fa fa-check"></span>&nbsp;신고 내용</strong></h2>                    
+		               <div class="mb-3">
+			             <textarea class="form-control" id="pxp-company-job-description" name="cmReportContent" placeholder="신고 내용을 입력해주세요."></textarea>
+		               </div>	                        
+	               </div>
+	              <!-- 신고 내용 입력 end -->                     
+	                                        
+	                      	<!-- 첨부파일 start -->
+	                        <div class="row mt-4 mt-lg-5">
+	                        <h2><strong><span class="fa fa-check"></span>&nbsp;부정 증빙 자료</strong></h2>	                    
+		                        <div class="mb-3">
+			   						<input type="file" id="cheatFile" name="cheatFiles" accept="image/png, image/jpeg"  multiple="multiple">
+		                    	</div>	                        
+	                        </div>
+	                     	<!-- 첨부파일 end --> 
+		                   <div class="mt-4 mt-lg-5">
+		                        <button type="submit" class="btn rounded-pill pxp-section-cta")>신고</button>
+		                        <button type="button" onclick="location.href='/cheatMemberRequest'" class="btn rounded-pill pxp-section-cta-o ms-3">취소</button>
+	                    	</div>
+	                    	</div>
+	         </section>
+         </form>     
             <!-- end contents -->
 		<br><br>
-			
-		<!-- begin footer -->
-		<div th:replace="~{member/fragments/contentsFooter :: footerFragment}"></div>
-		<!-- end footer -->
-			
-	<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
-    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/js/owl.carousel.min.js}"></script>
-    <script th:src="@{/js/nav.js}"></script>
-    <script th:src="@{/js/main.js}"></script>
-</body>
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
 </html>
+

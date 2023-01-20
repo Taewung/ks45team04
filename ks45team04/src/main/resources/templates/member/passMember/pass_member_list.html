@@ -1,36 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  class="pxp-root" >
-<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  layout:decorate="~{member/layout/myPageDefault}">
 
-    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
-    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-    <body style="background-color: var(--pxpSecondaryColorLight);">
-        <div class="pxp-dashboard-content">
-        
-        <!-- begin aside -->
-		<div th:replace="~{member/fragments/myPageAside :: asideFragment}"></div>
-		<!-- end aside -->
-		
-        <!-- begin header -->
-		<div th:replace="~{member/fragments/myPageHeader :: headerFragment}"></div>
-		<!-- end header -->
-		
-		<!-- begin contents --> 
-           <div class="pxp-dashboard-content-details">
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	<script>
+	</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
              <h1>합격 인증 여부 조회</h1>
                 <p class="pxp-text-light">Pass Request Judge</p>
                 <div class="mt-4 mt-lg-5">
@@ -91,7 +72,7 @@
                             </tbody>
                         </table>
 						<!-- page 넘김 start -->
-                        <div class="row mt-4 mt-lg-5 justify-content-between align-items-center">
+                        <div class="row mt-4 mt-lg-5 justify-content-center align-items-center">
                             <div class="col-auto">
                                 <nav class="mt-3 mt-sm-0" aria-label="Jobs list pagination">
                                     <ul class="pagination pxp-pagination">
@@ -108,20 +89,13 @@
                     </div>
                 <!-- 목록 end -->    
                 </div>
-             
-
-            </div>
-        <!-- end contents -->     
-            
-        <!-- begin footer -->
-			<div th:replace="~{member/fragments/myPageFooter :: footerFragment}"></div>
-		<!-- end footer -->
-        </div>
-        <script src="js/jquery-3.4.1.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/nav.js"></script>
-        <script src="js/Chart.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
 </html>
+

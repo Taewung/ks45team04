@@ -8,7 +8,20 @@ import ks45team04.sos.admin.dto.DownloadCountStandard;
 
 @Mapper
 public interface DownloadCountStandardMapper {
+	
+	// 특정 노트 다운로드 횟수 기준 수정
+	public int modifyDownloadCountStandard(DownloadCountStandard downloadCountStandard);
+	
+	// 특정 노트 다운로드 횟수 기준 등록
+	public DownloadCountStandard getDownloadCountStandardInfoByCode(String dscCode);
 
+	// 관리자 인증
+	public boolean getIdCheck(String inputId);
+	
+	// 노트 다운로드 횟수 기준 등록
+	public int addDownloadCountStandard(DownloadCountStandard downloadCountStandard);
+	
+	// 노트 다운로드 횟수 기준 목록 조회
 	public List<DownloadCountStandard> DownloadCountStandardList();
 	
 }

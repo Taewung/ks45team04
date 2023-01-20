@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="ks45team04.sos.admin.mapper.TotalLoginHistoryMapper">
+	
+	<resultMap type="TotalLoginHistory" id="TotalLoginHistoryResultMap">
+		<id property="loginLogoutCode" 					column="login_logout_code"/>
+		<result property="loginLogoutId" 				column="login_logout_id"/>
+		<result property="loginDatetime" 				column="login_datetime"/>
+		<result property="logoutDatetime" 				column="logout_datetime"/>
+		<result property="loginLevelName" 				column="login_level_name"/>
+	</resultMap>
+	
+	
+	<select id="TotalLoginHistory" resultMap="TotalLoginHistoryResultMap">
+			/*전체 회원 로그인 내역 조회*/
+		SELECT
+			lh.login_logout_code,
+			lh.login_logout_id,
+			lh.login_datetime,
+			lh.logout_datetime,
+			lh.login_level_name
+		FROM
+			login_logout AS lh
+		<where>
+			<if  test="searchKey != null and searchKey != ''">
+				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
+			</if>
+		</where>			
+	</select>	
+	
+</mapper>

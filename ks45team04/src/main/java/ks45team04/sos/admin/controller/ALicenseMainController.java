@@ -8,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.annotation.RequestScope;
 
 import ks45team04.sos.admin.dto.LicenseMain;
 import ks45team04.sos.admin.mapper.LicenseMainMapper;
@@ -27,7 +29,6 @@ private final LicenseMainMapper licenseMainMapper;
 		this.licenseMainMapper = licenseMainMapper;
 		
 	}
-	
 	
 	// 자격증 대분류 삭제 처리
 		@PostMapping("/deletelicenseMain")
@@ -49,23 +50,42 @@ private final LicenseMainMapper licenseMainMapper;
 	@PostMapping("/modifylicenseMain")
 	public String modifylicenseMain(LicenseMain LicenseMain) {
 		
-		return "";
+		licenseMainService.modifyLicenseMain(LicenseMain);
+		
+		return "redirect:/licenseMainList";
 	}
 
 
 	// 자격증 대분류 수정 화면
 	@GetMapping("/modifylicenseMain")
-	public String modifylicenseMain(Model model) {
+	public String modifylicenseMain(@RequestParam(value="lmcCode") String lmcCode
+									,Model model) {
+		
+		LicenseMain licenseMain = licenseMainService.getLicenseMainInfoByCode(lmcCode);
+		
 		model.addAttribute("title", "자격증 대분류 정보 수정");
+		model.addAttribute("licenseMainInfo", licenseMain);
 		
 		return "admin/licenseMain/license_main_modify";
 	}
 	
-
+	
+	// 관리자 아이디 인증
+	@GetMapping("/idCheck")
+	@ResponseBody
+	public boolean idCheck(@RequestParam(value="inputId") String inputId) {
+		
+		boolean isChecked = licenseMainMapper.getIdCheck(inputId);
+		
+		return isChecked;
+	}
+	
+	
 	//자격증 대분류 등록 처리
 	@PostMapping("/addlicenseMain")
 	public String addlicenseMain(LicenseMain LicenseMain) {
 		System.out.println(LicenseMain);
+		
 		licenseMainService.addLicenseMain(LicenseMain);
 		
 		
@@ -77,22 +97,26 @@ private final LicenseMainMapper licenseMainMapper;
 	@GetMapping("/addlicenseMain")
 	public String addlicenseMain(Model model) {
 		
-		List<LicenseMain> licenseMainList = licenseMainMapper.LicenseMainList();
+		List<LicenseMain> getLicenseMainList = licenseMainMapper.getlicenseMainList();
 		
 		model.addAttribute("title", "자격증 대분류 정보 등록");
-		model.addAttribute("licenseMainList", licenseMainList);
+		model.addAttribute("getLicenseMainList", getLicenseMainList);
+		
 		return "admin/licenseMain/license_main_insert";
 	}
 	
 	
 	// 자격증 대분류 정보 조회
 	@GetMapping("/licenseMainList")
-	public String licenseMainList(Model model) {
+	public String licenseMainList(Model model
+				 ,@RequestParam(value="searchKey", required = false) String searchKey
+			     ,@RequestParam(value="searchValue", required = false) String searchValue) {
 		
-		List<LicenseMain> licenseMainList = licenseMainService.LicenseMainList();
+		List<LicenseMain> licenseMainList = licenseMainService.LicenseMainList(searchKey, searchValue);
 		
 		model.addAttribute("title", "자격증 대분류 조회");
 		model.addAttribute("licenseMainList", licenseMainList);
+		
 		
 		
 		

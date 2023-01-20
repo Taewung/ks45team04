@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{admin/layout/adminDefault}">
+
+	<!-- script start -->
+    <th:block layout:fragment="customScript">
+		<script>
+		</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+		<h1>과목별합격기준점수</h1>
+	    <p class="pxp-text-light">Subject Pass Score list</p>
+	    <th:block th:object="${liCodeForLsPScore}">	    
+		    <div class="pxp-dashboard-table-options">
+	            <ul class="list-unstyled">
+	                <a th:href="@{/addSubjectPassScore(liCode=*{liCode})}">
+	                	<li><button title="Add"><span class="fa fa-plus"></span></button></li>
+	                </a>                                              
+	            </ul>
+	        </div>               
+	    </th:block>
+                <div class="table-responsive"  style="overflow-x: hidden">
+					<table class="table table-hover align-middle">                      	
+                    	<thead>                    
+	                        <tr>
+	                            <th style="width: 10%;">과목합격점수코드</th>
+                                <th style="width: 10%;">자격증코드</th>
+                                <th style="width: 10%;">과목코드</th>
+                                <th style="width: 20%;">과목명</th>
+                                <th style="width: 10%;">문항수</th>
+                                <th style="width: 10%;">과목합격점수</th>
+                                <th style="width: 10%;">등록자</th>
+                                <th style="width: 30%;">등록일시</th>
+                                <th>수정/삭제</th>
+	                        </tr>
+                    	</thead>    
+	                        <tbody>
+	                            <tr th:if="${not #lists.isEmpty(subjectPassScoreList)}" 	th:each="l : ${subjectPassScoreList}">
+	                            	<td><div class="pxp-company-dashboard-job-title" 		th:text="${l.lsPScoreCode}"></div></td>
+	                                <td><div class="pxp-company-dashboard-job-category" 	th:text="${l.liCode}"></div></td>
+	                                <td><div class="pxp-company-dashboard-job-category" 	th:text="${l.lsCode}"></div></td>
+	                                <td><div class="pxp-company-dashboard-job-category" 	th:text="${l.lsName}"></div></td>
+	                                <td><div class="pxp-company-dashboard-job-category" 	th:text="${l.lsTotalQuestionNum}"></div></td>
+	                                <td><div class="pxp-company-dashboard-job-date mt-1" 	th:text="${l.lsPStandardScore}"></div></td>                                   
+	                                <td><div class="pxp-company-dashboard-job-date mt-1" 	th:text="${l.lsPScoreRegId}"></div></td>                                                                                                        
+	                                <td><div class="pxp-company-dashboard-job-date mt-1" 	th:text="${l.lsPScoreRegDateTime}"></div></td>        
+	                                <td>
+	                                    <div class="pxp-dashboard-table-options">
+	                                        <ul class="list-unstyled">
+	                                            <a th:href="@{/modifySubjectPassScore(lsPScoreCode=${l.lsPScoreCode})}">
+	                                            	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
+	                                            </a>                                                                                        
+	                                            	<li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
+	                                        </ul>
+	                                    </div>
+	                                </td>
+	                            </tr>
+	                            <tr th:unless="${not #lists.isEmpty(subjectPassScoreList)}">
+									<td colspan="9">등록된 합격기준점수가 없습니다.</td>
+								</tr>                     
+	                        </tbody>
+                        </table>
+                    </div>
+                <!-- 목록 end -->    
+                
+            <div class="mt-4 mt-lg-5">
+				<a th:href="@{/licensePassScoreList}" class="btn rounded-pill pxp-section-cta">목록으로</a>
+           	</div>  	
+                </div> 
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	</th:block>
+	<!-- customJs end -->
+</html>

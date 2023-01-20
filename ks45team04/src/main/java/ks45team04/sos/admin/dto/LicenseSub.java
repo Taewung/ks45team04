@@ -8,6 +8,8 @@ public class LicenseSub {
 	private String lscRegId;
 	private String lscRegDatetime;
 	
+	private LicenseMain licenseMain;
+	
 	public String getLscCode() {
 		return lscCode;
 	}
@@ -44,10 +46,18 @@ public class LicenseSub {
 	public void setLscRegDatetime(String lscRegDatetime) {
 		this.lscRegDatetime = lscRegDatetime;
 	}
+	public LicenseMain getLicenseMain() {
+		return licenseMain;
+	}
+	public void setLicenseMain(LicenseMain licenseMain) {
+		this.licenseMain = licenseMain;
+	}
+	
 	@Override
 	public String toString() {
 		return "LicenseSub [lscCode=" + lscCode + ", lmcCode=" + lmcCode + ", lmcName=" + lmcName + ", lscName="
-				+ lscName + ", lscRegId=" + lscRegId + ", lscRegDatetime=" + lscRegDatetime + "]";
+				+ lscName + ", lscRegId=" + lscRegId + ", lscRegDatetime=" + lscRegDatetime + ", licenseMain="
+				+ licenseMain + "]";
 	}
 	
 	

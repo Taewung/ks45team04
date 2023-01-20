@@ -1,70 +1,62 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  class="pxp-root" >
-<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  layout:decorate="~{admin/layout/adminDefault}">
 
-    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
-    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-    <!-- 부트스트랩  -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>자격증 일정 목록 조회</title>
-    
-</head>
-    <body style="background-color: var(--pxpMainColorLight);">
-        <div class="pxp-dashboard-content">
-        
-        <!-- begin aside -->
-		<div th:replace="~{admin/fragments/adminAside :: asideFragment}"></div>
-		<!-- end aside -->
-		
-        <!-- begin header -->
-		<div th:replace="~{admin/fragments/adminHeader :: headerFragment}"></div>
-		<!-- end header -->
-		
-		<!-- begin contents --> 
-            <div class="pxp-dashboard-content-details">
-			 <h1>자격증일정</h1>
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	<script>
+	</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+			 <h1><a th:href="@{/licenseDateList}">자격증 일정</a></h1>
                 <p class="pxp-text-light"></p>
                 <div class="mt-4 mt-lg-5">
+            <button  class="btn rounded-pill pxp-section-cta-o ms-3">
+		        <a th:href="@{/addlicenseDate}">자격증 일정 등록</a><br><br>
+	        </button>
                     <!-- 검색 start -->
-                    <div class="row justify-content-between align-content-center">
-                        <div class="col-auto order-1 order-sm-2">
-                            <div class="pxp-company-dashboard-jobs-search mb-3">
-                                <div class="pxp-company-dashboard-jobs-search-search-form">
-                                    <div class="input-group">
-                                        <span class="input-group-text"><span class="fa fa-search"></span></span>
-                                        <input type="text" class="form-control" placeholder="검색">
-                                    </div>
-                                </div>
+                    <div>
+  <form th:action="@{/licenseDateList}" method="GET">
+    <div class="row justify-content-between align-content-center">
+        <div class="col-auto order-2 order-sm-1">
+            <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
+                <div class="pxp-company-dashboard-jobs-search mb-3">
+                <select class="form-select" style="width:200px;" name="searchKey">
+                    <option value="ldCode">일정코드</option>
+                    <option value="liName">자격증명</option>
+                    <option value="ldRegDatetime">등록날짜</option>
+               </select>&nbsp;&nbsp;
+                    <div class="col-auto order-1 order-sm-2">
+                        <div class="pxp-company-dashboard-jobs-search-search-form">
+                            <div class="input-group">
+                                <span class="input-group-text"><span class="fa fa-search"></span></span>
+                                <input type="text" class="form-control" placeholder="검색어를 입력해주세요." name="searchValue">
+                                <button class="btn ms-2" type="submit">검색</button>
                             </div>
                         </div>
                     </div>
+                </div>              
+            </div>
+        </div>
+   	</div>
+ </form>
+ </div>
                     <!-- 검색 end -->   
                     <!-- 목록 start -->                   
                     <div class="table-responsive">
                         <table class="table table-hover align-middle">                      	
                             <thead>                    
                                 <tr>
-                                	<th></th>
                                     <th style="width: 10%;">일정코드</th>
-                                    <th style="width: 10%;">자격증코드</th>
-                                    <th style="width: 15%;">접수기간</th>
+                                    <th style="width: 15%;">자격증이름</th>
+                                    <th style="width: 13%;">접수기간</th>
                                     <th style="width: 15%;">시험날짜</th>
                                     <th style="width: 15%;">합격자발표일</th>
-                                    <th style="width: 15%;">응시비용</th>
+                                    <th style="width: 10%;">응시비용</th>
                                     <th style="width: 10%;">등록자</th>
                                     <th style="width: 25%;">등록날짜</th>
                                     <th>&nbsp;</th>
@@ -73,9 +65,8 @@
                             <tbody>
                                 <tr th:if="${not #lists.isEmpty(licenseDateList)}"
 									th:each="l : ${licenseDateList}">
-                                    <td><input type="checkbox" class="form-check-input"></td>
-                                    <td><div class="pxp-company-dashboard-job-title" th:text="${l.ldCode}"></div>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.liCode}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-title" 	th:text="${l.ldCode}"></div>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.liName}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.ldPeriod}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.ldDate}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.ldAcceptanceDate}"></div></td>
@@ -86,7 +77,7 @@
                                         <div class="pxp-dashboard-table-options">
                                             <ul class="list-unstyled">
                                             <!-- 수정버튼 start -->
-                                                <a href="#">
+                                                <a th:href="@{/modifylicenseDate(ldCode=${l.ldCode})}">
                                                 	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
                                                 </a>
                                             <!-- 수정버튼 end -->
@@ -120,21 +111,12 @@
                     </div>
                 <!-- 목록 end -->    
                 </div>
-                    
-               
-
-            </div>
-        <!-- end contents -->     
-            
-        <!-- begin footer -->
-			<div th:replace="~{admin/fragments/adminFooter :: footerFragment}"></div>
-		<!-- end footer -->
-        </div>
-        <script src="js/jquery-3.4.1.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/nav.js"></script>
-        <script src="js/Chart.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+	
+	</th:block>
+	<!-- customContents end -->
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
 </html>

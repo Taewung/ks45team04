@@ -1,39 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  class="pxp-root" >
-<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  layout:decorate="~{admin/layout/adminDefault}">
 
-    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
-    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-    <body style="background-color: var(--pxpMainColorLight);">
-        <div class="pxp-dashboard-content">
-        
-        <!-- begin aside -->
-		<div th:replace="~{admin/fragments/adminAside :: asideFragment}"></div>
-		<!-- end aside -->
-		
-        <!-- begin header -->
-		<div th:replace="~{admin/fragments/adminHeader :: headerFragment}"></div>
-		<!-- end header -->
-		
-		<!-- begin contents --> 
-           
-              	<!-- begin contents --> 	
-            <div class="pxp-dashboard-content-details">
- 				<h1>제목</h1>
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	<script>
+	</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+		 <div class="pxp-dashboard-content-details">
+ 				<h1>월별상품매출</h1>
                 <div class="mt-4 mt-lg-5">
                     <div class="row justify-content-between align-content-center">
                         <div class="col-auto order-1 order-sm-2">
@@ -48,11 +28,7 @@
                         </div>
 					<div class="pxp-dashboard-table-options">
                         <ul class="list-unstyled">
-                        <!-- 등록버튼 start -->
-                            <a href="#">
-                            	<li><button title="Add"><span class="fa fa-plus"></span></button></li>
-                            </a>
-                        <!-- 등록버튼 end -->                                              
+                                                
                         </ul>
                     </div>
                     </div>
@@ -62,75 +38,130 @@
                         <table class="table table-hover align-middle">                      	
                             <thead>                    
                                 <tr>
-                                    <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
-                                    <th style="width: 15%;">컬럼명</th>
-                                    <th style="width: 10%;">컬럼명</th>
-                                    <th style="width: 15%;">컬럼명</th>
-                                    <th style="width: 15%;">컬럼명</th>
-                                    <th style="width: 15%;">컬럼명</th>
-                                    <th style="width: 10%;">컬럼명</th>
-                                    <th style="width: 30%;">등록일시</th>
+                                    <th class="pxp-is-checkbox" style="width: 1%;"></th>
+                                    <th style="width: 15%;">월별상품매출</th>
+                                    <th style="width: 10%;">월_매출및환불마감그룹</th>
+                                    <th style="width: 15%;">최종결제합계</th>
+                                    <th style="width: 15%;">매출/환불구분</th>
+                                    <th style="width: 15%;">년월</th>
+                                    <th style="width: 10%;">등록일자</th>
+                                    <th style="width: 30%;">등록자아이디</th>
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>    
                             <tbody>
-                                <tr>
-                                    <td><input type="checkbox" class="form-check-input"></td>
-                                    <td>
-                                        <a href="#">
-                                            <div class="pxp-company-dashboard-job-title">데이터</div>                                           
-                                        </a>
-                                    </td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-date mt-1">2022/08/24 at 11:56 am</div></td>
+                                 <tr th:if="${not #lists.isEmpty(monthlySalesAndRefundList)}"
+									th:each="l : ${monthlySalesAndRefundList}">
+                                    <td></td>
+                                    <td><div class="pxp-company-dashboard-job-title" th:text="${l.msarCode}"></div>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.msarEndGroup}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.msarTotalPayment}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.salesOrRefund}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.msarYearAndMonth}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.msarRegDate}"></div></td>                      
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.memrId}"></div></td>   
                                     
                                     <td>
                                         <div class="pxp-dashboard-table-options">
                                             <ul class="list-unstyled">
-                                                                 
+                                                                       
                                             </ul>
                                         </div>
                                     </td>
-                                </tr>                      
+                                </tr>
+                                <tr th:unless="${not #lists.isEmpty(monthlySalesAndRefundList)}">
+									<td colspan="9">등록된 정보가 없습니다.</td>
+								</tr>                    
+                                    
                             </tbody>
                         </table>
-						<!-- page 넘김 start -->
-                        <div class="row mt-4 mt-lg-5 justify-content-between align-items-center">
-                            <div class="col-auto">
-                                <nav class="mt-3 mt-sm-0" aria-label="Jobs list pagination">
-                                    <ul class="pagination pxp-pagination">
-                                        <li class="page-item active" aria-current="page">
-                                            <span class="page-link">1</span>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                        <!-- page 넘김 end -->
+						
                     </div>
                 <!-- 목록 end -->    
                 </div>
-            </div>     
-        <!-- end contents --> 
-
-            
-        <!-- end contents -->     
-            
-        <!-- begin footer -->
-			<div th:replace="~{admin/fragments/adminFooter :: footerFragment}"></div>
-		<!-- end footer -->
-        </div>
-        <script src="js/jquery-3.4.1.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/nav.js"></script>
-        <script src="js/Chart.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+            </div>
+             <div class="pxp-dashboard-content-details">
+ 				<h1>월별손익합계</h1>
+                <div class="mt-4 mt-lg-5">
+                    <div class="row justify-content-between align-content-center">
+                        <div class="col-auto order-1 order-sm-2">
+                            <div class="pxp-company-dashboard-jobs-search mb-3">
+                                <div class="pxp-company-dashboard-jobs-search-search-form">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><span class="fa fa-search"></span></span>
+                                        <input type="text" class="form-control" placeholder="Search">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+					<div class="pxp-dashboard-table-options">
+                        <ul class="list-unstyled">
+                                                
+                        </ul>
+                    </div>
+                    </div>
+                    <!-- 검색 end -->   
+                    <!-- 목록 start -->                   
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">                      	
+                            <thead>                    
+                                <tr>
+                                    <th class="pxp-is-checkbox" style="width: 1%;"></th>
+                                    <th style="width: 10%;">월별손익합계</th>
+                                    <th style="width: 15%;">월_매출및환불마감그룹</th>
+                                    <th style="width: 8%;">매출합계</th>
+                                    <th style="width: 8%;">환불합계</th>
+                                    <th style="width: 5%;">손익</th>
+                                    <th style="width: 13%;">손익계산시작일</th>
+                                    <th style="width: 13%;">손익계산종료일</th>
+                                    <th style="width: 10%;">등록일자</th>
+                                    <th style="width: 10%;">등록자아이디</th>
+                                    <th style="width: 20%;">년월</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>    
+                            <tbody>
+                                 <tr th:if="${not #lists.isEmpty(monthlyTotalList)}"
+									th:each="l : ${monthlyTotalList}">
+                                    <td></td>
+                                    <td><div class="pxp-company-dashboard-job-title" th:text="${l.mtCode}"></div>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.msarEndGroup}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.mtSalesPayment}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.mtRefundPayment}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.monthlyIncome}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.incomeCalculationStartDate}"></div></td>                      
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.incomeCalculationEndDate}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.mtRegDate}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.memId}"></div></td>   
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.mtYearAndMonth}"></div></td>   
+                                    
+                                    <td>
+                                        <div class="pxp-dashboard-table-options">
+                                            <ul class="list-unstyled">
+                                                                       
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr th:unless="${not #lists.isEmpty(monthlyTotalList)}">
+									<td colspan="9">등록된 정보가 없습니다.</td>
+								</tr>                    
+                                    
+                            </tbody>
+                        </table>
+						
+                    </div>
+                <!-- 목록 end -->    
+                </div>
+            </div>          
+          
+   
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
 </html>

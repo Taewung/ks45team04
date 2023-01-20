@@ -1,52 +1,152 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  class="pxp-root" >
-<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  layout:decorate="~{admin/layout/adminDefault}">
 
-    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
-    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-    <body style="background-color: var(--pxpMainColorLight);">
-        <div class="pxp-dashboard-content">
-        
-        <!-- begin aside -->
-		<div th:replace="~{admin/fragments/adminAside :: asideFragment}"></div>
-		<!-- end aside -->
-		
-        <!-- begin header -->
-		<div th:replace="~{admin/fragments/adminHeader :: headerFragment}"></div>
-		<!-- end header -->
-		
-		<!-- begin contents --> 
-            <div class="pxp-dashboard-content-details">
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	<script>
+			$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+				function validateValue(checkValue) {
+					if(    typeof checkValue == 'undefined' 
+							|| checkValue == null 
+							|| checkValue == ''					){
+						return true;
+					}
+					return false;
+					
+				}
+			
+			// 관리자 인증
+				$('#downloadCountWriter').on('input', function(){
+					$('#addDownloadCountStandardForm input').not('#downloadCountWriter').prop('disabled', true);
+				  	$('#addDownloadCountStandardForm select').prop('disabled', true);
+				  	$('#addDownloadCountStandardForm button').not('#checkBtn').prop('disabled', true);
+				});
+			
+				$('#checkBtn').click(function(){
+					let lmcRegId = $('#downloadCountWriter').val();
+					
+					if(validateValue(lmcRegId)){
+						alert('관리자 인증을 해주세요');
+						$('#downloadCountWriter').focus();
+						return false;					
+					}					
 
-            dwonload_count_standard_insert.html        
+					let request = $.ajax({
+						  url: '/dcsIdCheck',
+						  method: 'GET',
+						  data: { 'inputId' : lmcRegId },
+						  dataType: 'json'
+					});
+					
+					//성공 
+					request.done(function( isChecked ) {
+						console.log(isChecked, '데이터타입 확인');
+					  	  
+						if(isChecked){
+							alert('인증 완료')
+						  	$('#addDownloadCountStandardForm input').not('#downloadCountWriter').prop('disabled', false);
+						  	$('#addDownloadCountStandardForm select').prop('disabled', false);
+						  	$('#addDownloadCountStandardForm button').not('#checkBtn').prop('disabled', false);
+								
+						}else{
+					  	  	alert('관리자 아이디가 일치하지 않습니다.');
+					  	  	$('#downloadCountWriter').val('');
+						  	$('#addDownloadCountStandardForm input').not('#downloadCountWriter').prop('disabled', true);
+						  	$('#addDownloadCountStandardForm select').prop('disabled', true);
+						  	$('#addDownloadCountStandardForm button').not('#checkBtn').prop('disabled', true);
+							$('#downloadCountWriter').focus();
+						}
+					});
+					
+					//실패 
+					request.fail(function( jqXHR, textStatus ) {
+					  	  console.log('Request failed: ' + textStatus );
+					});
+				});
+				
+				
+		
+				/* 유효성검사를 구현하시오. (#submitBtn 를 클릭 시) */
+				$('#submitBtn').click(function(){
+					let isSubmit = true;
+					
+					$('#addDownloadCountStandardForm input').each(function(idx, item){
+						let checkValue = $(item).val();
+						let labelValue = $(item).parent('.mb-3').find('label').text();
+						if(validateValue(checkValue)){
+							
+							alert(`${labelValue}를 입력해주세요`);
+							$(item).focus();
+							isSubmit = false;
+							return false;
+						}
+						
+					});   
+					
+
+
+					if(isSubmit) $('#addDownloadCountStandardForm').submit();
+				});
+			});
+			
+
+			
+		</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+	<h1>다운로드 횟수 기준 등록</h1>
+		<form id="addDownloadCountStandardForm" th:action="@{/adddownloadCountStandard}" name="myform" method="post">
+              <div class="row mt-4 mt-lg-5">
+                  <div class="col-xxl-8">
+                      <div class="row">
+                      </div>
+                      <div class="row">
+                      </div><br>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="downloadCountWriter" class="form-label"><h4>관리자 아이디</h4></label>
+                                  <button type="button" id="checkBtn" class="btn rounded-pill pxp-section-cta-o ms-3">관리자 인증</button>
+                                  <input type="text" id="downloadCountWriter" class="form-control" name="downloadCountWriter" placeholder="관리자 아이디">
+                              </div>
+                          </div>
+                      </div><br><br>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="dscCode" class="form-label"><h6>다운로드 횟수 기준 코드</h6></label><h12>&nbsp;&nbsp;예시) down000</h12>
+                                  <input type="text" id="dscCode" class="form-control" name="dscCode" placeholder="다운로드 횟수 기준 코드" disabled="disabled">
+                              </div>
+                          </div>
+                      </div>                     
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="downloadCount" class="form-label"><h6>다운로드 가능횟수</h6></label>
+                                  <input type="text" id="downloadCount" class="form-control" name="downloadCount" placeholder="다운로드 가능횟수" disabled="disabled">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
+              <div class="mt-4 mt-lg-5">
+                  <button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>&nbsp;&nbsp;
+                  <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
                   
-
-            </div>
-        <!-- end contents -->     
-            
-        <!-- begin footer -->
-			<div th:replace="~{admin/fragments/adminFooter :: footerFragment}"></div>
-		<!-- end footer -->
-        </div>
-        <script src="js/jquery-3.4.1.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/nav.js"></script>
-        <script src="js/Chart.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+              </div>
+          </form>
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
 </html>

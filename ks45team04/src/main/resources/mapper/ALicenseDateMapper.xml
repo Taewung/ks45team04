@@ -7,22 +7,117 @@
 	<resultMap type="LicenseDate" id="licenseDateResultMap">
 		<id property="ldCode" 					column="ld_code"/>
 		<result property="liCode" 				column="li_code"/>
+		<result property="liName" 				column="li_name"/>
 		<result property="ldPeriod" 			column="ld_period"/>
 		<result property="ldDate" 				column="ld_date"/>
 		<result property="ldAcceptanceDate" 	column="ld_acceptance_date"/>
 		<result property="ldCost" 				column="ld_cost"/>
 		<result property="ldRegId" 				column="ld_reg_id"/>
 		<result property="ldRegDatetime" 		column="ld_reg_datetime"/>
+		
+		<association property="licenseInfo" javaType="LicenseInfo">
+			<id property="liCode" 				column="li_code" />
+			<result property="lmcCode" 			column="lmc_code" />
+			<result property="lmcName" 			column="lmc_name" />
+			<result property="lscCode" 			column="lsc_code" />
+			<result property="lscName" 			column="lsc_name" />
+			<result property="liName" 			column="li_name" />
+			<result property="liOverview" 		column="li_overview" />
+			<result property="liQualification" 	column="li_qualification" />
+			<result property="liRegId" 			column="li_reg_id" />
+			<result property="liRegDatetime" 	column="li_reg_date" />
+
+		</association>
 	</resultMap>
+
+		<update id="modifyLicenseDate" parameterType="LicenseDate">
+		/* 특정 자격증 일정 수정*/
+		UPDATE 
+			license_date
+		SET 
+			 ld_period = #{ldPeriod}
+			,ld_date = #{ldDate}
+			,ld_acceptance_date = #{ldAcceptanceDate}
+			,ld_cost = #{ldCost}
+		WHERE 
+			ld_code= #{ldCode};
+		</update>
 	
-	<select id="LicenseDateList" resultMap="licenseDateResultMap">
-			
+	<select id="getLicenseDateInfoByCode" parameterType="String" resultMap="licenseDateResultMap">
+			/* 특정 자격증 일정 조회 */
+			SELECT
+				 ld.ld_code
+				,ld.li_code
+				,ld.li_name
+				,ld.ld_period
+				,ld.ld_date
+				,ld.ld_acceptance_date
+				,ld.ld_cost
+				,ld.ld_reg_id
+				,ld.ld_reg_datetime
+			FROM
+				license_date AS ld
+			WHERE
+				ld.ld_code = #{ldCode};
+	</select>
+	
+	
+	<select id="getIdCheck" parameterType="String" resultType="boolean">
+		/* 관리자 아이디 인증 */
+		SELECT
+			if(COUNT(ld.ld_reg_id) > 0, 1, 0)
+		FROM
+			license_date AS ld
+		WHERE
+			ld.ld_reg_id = #{ldRegId};
+	</select>
+	
+
+	<insert id="addLicenseDate" parameterType="LicenseDate">
+		/* 자격증 일정 등록 */
+			INSERT INTO license_date
+			( ld_code
+			 ,li_code
+			 ,li_name
+			 ,ld_period
+			 ,ld_date
+			 ,ld_acceptance_date
+			 ,ld_cost
+			 ,ld_reg_id
+			 ,ld_reg_datetime) 
+			VALUES 
+			(sf_new_license_date_code(), #{liCode}, #{liName}, #{ldPeriod}, #{ldDate}, #{ldAcceptanceDate}, #{ldCost}, #{ldRegId}, CURDATE());
+	</insert>	
+
+	<select id="licenseInfoList" resultMap="licenseDateResultMap">
+		/* 자격증 일정 등록을 위한 자격증 정보 조회*/
 		SELECT
 				*
 		FROM
-			license_date AS ld;
-				
+			license_info;
+	</select>
 
-			
+	<select id="getLicenseDateList" resultMap="licenseDateResultMap">
+		/* 자격증 일정 등록을 목록 조회*/
+		SELECT
+				*
+		FROM
+			license_date
+	</select>
+	
+	<select id="LicenseDateList" resultMap="licenseDateResultMap">
+		/* 자격증 일정 목록 조회*/
+		SELECT
+				*
+		FROM
+			license_date
+		<where>
+			<if test="searchKey != null and searchValue != ''">
+			${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
+			</if>
+		</where>
 	</select>
 </mapper>
+
+
+

@@ -1,52 +1,97 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  class="pxp-root" >
-<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  layout:decorate="~{admin/layout/adminDefault}">
 
-    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
-    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-    <body style="background-color: var(--pxpMainColorLight);">
-        <div class="pxp-dashboard-content">
-        
-        <!-- begin aside -->
-		<div th:replace="~{admin/fragments/adminAside :: asideFragment}"></div>
-		<!-- end aside -->
-		
-        <!-- begin header -->
-		<div th:replace="~{admin/fragments/adminHeader :: headerFragment}"></div>
-		<!-- end header -->
-		
-		<!-- begin contents --> 
-            <div class="pxp-dashboard-content-details">
-
-                    license_date_modify.html
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	<script>
+	$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+		$('#resetBtn').click(function(){
+			location.href = '/licenseSubjectList';
+		});
+	});
+	</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+	<h1><a th:href="@{/licenseDateList}">자격증 일정 수정</a></h1>
+		<form id="modifyLicenseDateForm" th:action="@{/modifylicenseDate}" name="myform" method="post">
+              <div class="row mt-4 mt-lg-5">
+                  <div class="col-xxl-8">
+                      <div class="row">
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="liCode" class="form-label"><h6>자격증 이름</h6></label>
+                                  <input type="text" id="liName" class="form-control" name="liName" placeholder="자격증 이름"
+                                         th:value="${licenseDateInfo.liName}" readonly="readonly">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="ldCode" class="form-label"><h6>자격증 일정 코드</h6></label><h12></h12>
+                                  <input type="text" id="ldCode" class="form-control" name="ldCode" placeholder="자격증 일정 코드"
+                                  		 th:value="${licenseDateInfo.ldCode}" readonly="readonly">
+                              </div>
+                          </div>
+                      </div>                     
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="ldPeriod" class="form-label"><h6>접수기간</h6></label>
+                                  <input type="text" id="ldPeriod" class="form-control" name="ldPeriod" placeholder="접수기간"
+                                         th:value="${licenseDateInfo.ldPeriod}">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="ldDate" class="form-label"><h6>시험일</h6></label>
+                                  <input type="text" id="ldDate" class="form-control" name="ldDate" placeholder="시험일"
+                                         th:value="${licenseDateInfo.ldDate}">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="ldAcceptanceDate" class="form-label"><h6>합격자 발표일</h6></label>
+                                  <input type="text" id="ldAcceptanceDate" class="form-control" name="ldAcceptanceDate" placeholder="합격자 발표일"
+                                         th:value="${licenseDateInfo.ldAcceptanceDate}">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="ldCost" class="form-label"><h6>시험비용</h6></label>
+                                  <input type="text" id="ldCost" class="form-control" name="ldCost" placeholder="시험비용"
+                                         th:value="${licenseDateInfo.ldCost}">
+                              </div>
+                          </div>
+                      </div>
+                      
+                  </div>
+              </div>
+              
+              <div class="mt-4 mt-lg-5">
+                  <button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>&nbsp;&nbsp;
+                  <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
                   
-
-            </div>
-        <!-- end contents -->     
-            
-        <!-- begin footer -->
-			<div th:replace="~{admin/fragments/adminFooter :: footerFragment}"></div>
-		<!-- end footer -->
-        </div>
-        <script src="js/jquery-3.4.1.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/nav.js"></script>
-        <script src="js/Chart.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+              </div>
+          </form>
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
 </html>

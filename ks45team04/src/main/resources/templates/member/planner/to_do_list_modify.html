@@ -1,48 +1,82 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  class="pxp-root" >
+	 layout:decorate="~{member/layout/contentDefault}">
 <!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
-    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-
-<body>
-	<div class="pxp-preloader"><span>Loading...</span></div>
+	<th:block layout:fragment="customScript">
+		<script>
+		$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+			$('#resetBtn').click(function(){
+				location.href = '/detailToDoList';
+			});
+		});
+		</script>
+	</th:block> 
+	<th:block layout:fragment="customContents">
+		<h1>투두리스트 수정</h1>
+		<form id="modifyToDoListForm" th:action="@{/modifyToDoList}" name="myform" method="post">
+              <div class="row mt-4 mt-lg-5">
+                  <div class="col-xxl-8" style=" margin-left: 650px;">
+                      <div class="row">
+                      </div>
+                      <div class="row">
+                      </div><br>
+                      <div class="row">
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="toDoListCode" class="form-label"><h6>일정 코드</h6></label>
+                                  <input type="text" id="toDoListCode" class="form-control" name="toDoListCode" placeholder="일정코드" readonly="readonly"
+                                  		 th:value="${toDoList.toDoListCode}">
+                              </div>
+                          </div>
+                      </div>
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="memId" class="form-label"><h4>회원 아이디</h4></label>
+                                  <input type="text" id="memId" class="form-control" name="memId" placeholder="회원 아이디" readonly="readonly"
+                                  		 th:value="${toDoList.memId}">
+                              </div>
+                          </div>
+                      </div><br><br>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="liCode" class="form-label"><h6>자격증 코드</h6></label>
+                                  <input type="text" id="liCode" class="form-control" name="liCode" placeholder="자격증 코드" readonly="readonly"
+                                  		 th:value="${toDoList.liCode}">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="liName" class="form-label"><h6>자격증 이름</h6></label>
+                                  <input type="text" id="liName" class="form-control" name="liName" placeholder="자격증 이름" 
+                                  		 th:value="${toDoList.liName}">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="toDoListTitle" class="form-label"><h6>제목</h6></label>
+                                  <input type="text" id="toDoListTitle" class="form-control" name="toDoListTitle" placeholder="자격증 내용" 
+                                  		 th:value="${toDoList.toDoListTitle}">
+                              </div>
+                          </div>
+                      </div>                      
+                   
+                      
+                  </div>
+              </div>
+              <div class="mt-4 mt-lg-5" style=" margin-left: 850px;">
+                  <button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>&nbsp;&nbsp;
+                  <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
+                  
+              </div>
+          </form>
+	<br>
+	</th:block>
 	
-		<!-- begin header -->
-		<div th:replace="~{member/fragments/contentsHeader :: headerFragment}"></div>
-		<!-- end header -->			
-		
-		<!--  begin contents -->
-		<section>
-			<div class="pxp-container">
-				to_do_list_modify.html
-			</div>
-		</section>
-		<!--  end contents -->
-
-			
-		<!-- begin footer -->
-		<div th:replace="~{member/fragments/contentsFooter :: footerFragment}"></div>
-		<!-- end footer -->
-			
-	<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
-    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/js/owl.carousel.min.js}"></script>
-    <script th:src="@{/js/nav.js}"></script>
-    <script th:src="@{/js/main.js}"></script>
-</body>
 </html>

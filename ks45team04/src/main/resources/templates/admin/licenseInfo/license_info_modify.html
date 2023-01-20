@@ -1,52 +1,96 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  class="pxp-root" >
-<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  layout:decorate="~{admin/layout/adminDefault}">
 
-    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
-    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-    <body style="background-color: var(--pxpMainColorLight);">
-        <div class="pxp-dashboard-content">
-        
-        <!-- begin aside -->
-		<div th:replace="~{admin/fragments/adminAside :: asideFragment}"></div>
-		<!-- end aside -->
-		
-        <!-- begin header -->
-		<div th:replace="~{admin/fragments/adminHeader :: headerFragment}"></div>
-		<!-- end header -->
-		
-		<!-- begin contents --> 
-            <div class="pxp-dashboard-content-details">
-
-                    
-              license_info_modify.html    
-
-            </div>
-        <!-- end contents -->     
-            
-        <!-- begin footer -->
-			<div th:replace="~{admin/fragments/adminFooter :: footerFragment}"></div>
-		<!-- end footer -->
-        </div>
-        <script src="js/jquery-3.4.1.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/nav.js"></script>
-        <script src="js/Chart.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	<script>
+	$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+		$('#resetBtn').click(function(){
+			location.href = '/licenseInofoList';
+		});
+	});
+	</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+<h1><a th:href="@{/licenseInofoList}">자격증 정보 수정</a></h1>
+		<form id="modifyLicenseInfoForm" th:action="@{/modifylicenseInfo}" name="myform" method="post">
+              <div class="row mt-4 mt-lg-5">
+                  <div class="col-xxl-8">
+                      <div class="row">      
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lmcName" class="form-label"><h6>자격증 대분류명</h6></label><h12></h12>
+                                  <input type="text" id="lmcName" class="form-control" name="lmcName" placeholder="자격증 대분류명"
+                                  		 th:value="${licenseInfo.licenseMain.lmcName}" readonly="readonly">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="lscName" class="form-label"><h6>자격증 중분류명</h6></label><h12></h12>
+                                  <input type="text" id="lscName" class="form-control" name="lscName" placeholder="자격증 대분류명"
+                                  		 th:value="${licenseInfo.licenseSub.lscName}" readonly="readonly">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="liCode" class="form-label"><h6>자격증 코드</h6></label><h12></h12>
+                                  <input type="text" id="liCode" class="form-control" name="liCode" placeholder="자격증 코드"
+                                  		 th:value="${licenseInfo.liCode}" readonly="readonly">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="liName" class="form-label"><h6>자격증 이름</h6></label>
+                                  <input type="text" id="liName" class="form-control" name="liName" placeholder="자격증 이름"
+                                         th:value="${licenseInfo.liName}">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="liOverview" class="form-label"><h6>자격증 개요</h6></label>
+                                  <input type="text" id="liOverview" class="form-control" name="liOverview" placeholder="자격증 개요"
+                                         th:value="${licenseInfo.liOverview}">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="liQualification" class="form-label"><h6>자격증 응시자격</h6></label>
+                                  <input type="text" id="liQualification" class="form-control" name="liQualification" placeholder="자격증 응시자격"
+                                         th:value="${licenseInfo.liQualification}">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
+              <div class="mt-4 mt-lg-5">
+                  <button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>&nbsp;&nbsp;
+                  <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
+                  
+              </div>
+          </form>
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
 </html>

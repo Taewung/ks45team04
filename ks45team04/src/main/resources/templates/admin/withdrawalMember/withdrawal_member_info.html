@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{admin/layout/adminDefault}">
+
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	<script>
+	</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents"> 
+                <h1>탈퇴 회원 정보</h1>
+                <p class="pxp-text-light">Withdrawal Member List</p>
+                <form id="withdrawalMemberInfoForm" th:action="@{/withdrawalMemberInfo}" name="withdrawalMemberform" method="post">
+                    <div class="row mt-2 mt-lg-3">
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Password" class="form-label">ID</label>
+                                <input type="text" id="wdmId" class="form-control" name="wdmId" th:value="${withdrawalMemberInfo.wdmId}" readonly>
+                            </div>
+                         </div>                            
+                     </div>                 
+                    <div class="row mt-1 mt-lg-3">
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Password" class="form-label">PW</label>
+                                <input type="text" id="wdmPw" class="form-control" name="wdmPw" th:value="${withdrawalMemberInfo.wdmPw}" readonly>
+                            </div>
+                         </div>                            
+                     </div>
+                    <div class="row mt-1 mt-lg-3">
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Password" class="form-label">이름</label>
+                                <input type="text" id="wdmName" class="form-control" name="wdmName" th:value="${withdrawalMemberInfo.wdmName}" readonly>
+                            </div>
+                         </div>                            
+                     </div>                                               
+                    <div class="row mt-1 mt-lg-3">                          
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Email" class="form-label">이메일</label>
+                                <input type="text" id="wdmEmail" class="form-control" name="wdmEmail" th:value="${withdrawalMemberInfo.wdmEmail}" readonly>
+                            </div>                            
+                            </div>
+                         </div>
+                    <div class="row mt-1 mt-lg-3">                          
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Email" class="form-label">생년월일</label>
+                                <input type="text" id="wdmBirth" class="form-control" name="wdmBirth" th:value="${withdrawalMemberInfo.wdmBirth}" readonly>
+                            </div>                            
+                            </div>
+                         </div>                                                                                         
+                    <div class="row mt-1 mt-lg-3">                           
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Phone" class="form-label">전화번호</label>
+                                <input type="text" id="wdmPhone" class="form-control" name="wdmPhone" th:value="${withdrawalMemberInfo.wdmPhone}" readonly>
+                            </div>                            
+                            </div>
+                         </div> 
+                    <div class="row mt-1 mt-lg-3">                           
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Phone" class="form-label">가입일시</label>
+                                <input type="text" id="wdmRegDatetime" class="form-control" name="wdmRegDatetime" th:value="${withdrawalMemberInfo.wdmRegDatetime}" readonly>
+                            </div>                            
+                            </div>
+                         </div>
+                    <div class="row mt-1 mt-lg-3">                           
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Phone" class="form-label">탈퇴일시</label>
+                                <input type="text" id="wdmDatetime" class="form-control" name="wdmDatetime" th:value="${withdrawalMemberInfo.wdmDatetime}" readonly>
+                            </div>                            
+                            </div>
+                         </div> 
+                      <div class="mt-2 mt-lg-4">
+                            <a href="/withdrawalMemberList" class="btn rounded-pill pxp-section-cta" >목록으로</a></button>
+                    </div> 
+                  
+                                                                             
+	</th:block>
+	<!-- customContents end -->	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
+</html>

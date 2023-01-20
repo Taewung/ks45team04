@@ -1,73 +1,50 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  class="pxp-root" >
-<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  layout:decorate="~{admin/layout/adminDefault}">
 
-    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
-    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-    <style>
-    th,td{
-    text-align:center;
-    }
-    </style>
-</head>
-    <body style="background-color: var(--pxpMainColorLight);">
-        <div class="pxp-dashboard-content">
-        
-        <!-- begin aside -->
-		<div th:replace="~{admin/fragments/adminAside :: asideFragment}"></div>
-		<!-- end aside -->
-		
-        <!-- begin header -->
-		<div th:replace="~{admin/fragments/adminHeader :: headerFragment}"></div>
-		<!-- end header -->
-		
-		<!-- begin contents --> 
-            <div class="pxp-dashboard-content-details">
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	<script>
+	</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
              <h1>회원 목록</h1>
                 <p class="pxp-text-light">Member list</p>
-
                 <div class="mt-4 mt-lg-5">
                     <div class="row justify-content-between align-content-center">
                         <div class="col-auto order-2 order-sm-1">
                             <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
                                 <div class="pxp-company-dashboard-jobs-search mb-3">
-                                <select class="form-select">
-                                    <option>회원 아이디</option>
-                                    <option>이름</option>
-                                    <option>이메일</option>
-                                </select>
-                                	<div class="col-auto order-1 order-sm-2">
-                                		<div class="pxp-company-dashboard-jobs-search-search-form">
-                                    		<div class="input-group">
-                                        		<span class="input-group-text"><span class="fa fa-search"></span></span>
-                                        		<input type="text" class="form-control" placeholder="Search ID">
-                                        		<button class="btn ms-2">Search</button>
-                                    		</div>
-                                		</div>
-                            		</div>
-                        		</div> 
-                            </div>
-                        </div>
-                        
-                    </div>
+								<form th:action="@{/totalMemberList}" method="get">
+	                                <div class="pxp-company-dashboard-jobs-search mb-6">							
+	                                <select class="form-select" name="searchKey">
+	                                    <option value="memId">회원 아이디</option>
+	                                    <option value="memName">이름</option>
+	                                    <option value="memEmail">이메일</option>
+	                                </select>
+	                                	<div class="col-auto order-1 order-sm-2">
+	                                		<div class="pxp-company-dashboard-jobs-search-search-form">
+	                                    		<div class="input-group">
+	                                        		<span class="input-group-text"><span class="fa fa-search"></span></span>
+	                                        		<input type="text" name="searchValue" class="form-control" placeholder="Search">
+	                                        		<button type="submit" class="btn ms-2">Search</button>
+	                                    		</div>
+	                                		</div>
+	                            		</div>
+	                        		</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
                     <div class="table-responsive">
                         <table class="table table-hover align-middle">
                             <thead>
                                 <tr>
-                                    <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
                                     <th style="width: 15%;">ID</th>
                                     <th style="width: 10%;">PW</th>
                                     <th style="width: 15%;">이름</th>
@@ -76,44 +53,27 @@
                                     <th style="width: 10%;">전화번호</th>
                                     <th style="width: 30%;">가입일시</th>
                                     <th>&nbsp;</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                                   </tr>
+                            </thead>    
+			<th:block th:if="${not #lists.isEmpty(totalMemberList)}" th:each="m : ${totalMemberList}">
                                 <tr>
-                                    <td><input type="checkbox" class="form-check-input"></td>
                                     <td>
-                                        <a href="#">
-                                            <div class="pxp-company-dashboard-job-title">데이터</div>                                           
+                                        <a  th:href="@{/totalModifyMemberInfo(memId=${m.memId})}"  class="pxp-company-dashboard-job-title" 
+                                        	th:text="${m.memId}">
                                         </a>
                                     </td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">데이터</div></td>
-                                    <td><div class="pxp-company-dashboard-job-date mt-1">2022/08/24 at 11:56 am</div></td>
-                                    <td>
-                                        <div class="pxp-dashboard-table-options">
-                                            <ul class="list-unstyled">
-                                            <!-- 수정버튼 start -->
-                                                <a href="#">
-                                                	<li><button title="Edit"><span class="fa fa-pencil"></span></button></li>
-                                                </a>
-                                            <!-- 수정버튼 end -->
-                                            <!-- 삭제버튼 start -->
-                                                <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
-                                            <!-- 삭제버튼 end --> 
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-
-
-
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${m.memPw}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${m.memName}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${m.memEmail}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${m.memBirth}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${m.memPhone}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${m.memRegDatetime}"></div></td>
+                                         </tr>
+                                </th:block>    
                             </tbody>
-                        </table>
-
-                        <div class="row mt-4 mt-lg-5 justify-content-between align-items-center">
+                        </table>                                                                 
+ 
+                        <div class="row mt-4 mt-lg-5 justify-content-center align-items-center">
                             <div class="col-auto">
                                 <nav class="mt-3 mt-sm-0" aria-label="Candidates pagination">
                                     <ul class="pagination pxp-pagination">
@@ -129,19 +89,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        <!-- end contents --> 
-
-            
-        <!-- begin footer -->
-			<div th:replace="~{admin/fragments/adminFooter :: footerFragment}"></div>
-		<!-- end footer -->
-        </div>
-        <script src="js/jquery-3.4.1.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/nav.js"></script>
-        <script src="js/Chart.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
 </html>

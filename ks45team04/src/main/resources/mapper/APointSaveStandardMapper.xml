@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team04.sos.admin.mapper.PointSaveStandardMapper">
+	
+	<resultMap type="PointSaveStandard" id="pointSaveStandardResultMap">
+		<id property="pointSaveStandardCode" 			column="point_save_standard_code"/>
+		<result property="pointSaveStandardContent" 	column="point_save_standard_content"/>
+		<result property="savePoint" 					column="save_point"/>
+		<result property="pointSaveStandardId" 			column="point_save_standard_id"/>
+	</resultMap>
+	
+	 <select id="getPointSaveStandardContent" resultType="String" >
+		/* 포인트 적립 기준 내용 조회*/
+		SELECT 
+			point_save_standard_content
+		FROM 
+			point_save_standard;
+	</select> 
+	
+	<update id="modifyPointSaveStandard" parameterType="PointSaveStandard">
+		/* 특정 포인트 적립 기준 수정*/
+		UPDATE 
+				point_save_standard
+		SET 
+				point_save_standard_content = #{pointSaveStandardContent},
+				save_point = #{savePoint}
+		WHERE 
+				point_save_standard_code= #{pointSaveStandardCode};
+		
+	</update>
+	
+	<select id="getPointSaveStandardByCode" parameterType="String" resultMap="pointSaveStandardResultMap">
+		/* 특정 포인트 적립 기준 정보 조회 */
+		SELECT
+			 *
+		FROM
+			point_save_standard
+		WHERE
+			point_save_standard_code = #{pointSaveStandardCode};
+	</select>
+	
+	<select id="getPointSaveStandardIdCheck" parameterType="String" resultType="boolean">
+		/* 관리자 아이디 인증 */
+		SELECT
+			if(COUNT(point_save_standard_id) > 0, 1, 0)
+		FROM
+			point_save_standard
+		WHERE
+			point_save_standard_id = #{pointSaveStandardId};
+	</select>
+	
+	
+	<insert id="addPointSaveStandard" parameterType="PointSaveStandard">
+		/* 포인트 적립 기준 등록 */
+		INSERT INTO point_save_standard
+		(
+			point_save_standard_code, point_save_standard_content, save_point, point_save_standard_id
+		)VALUES(
+			sf_point_save_standard_code(), #{pointSaveStandardContent}, #{savePoint}, #{pointSaveStandardId}
+		);
+	</insert>
+	
+	<select id="pointSaveStandardList" resultMap="pointSaveStandardResultMap">
+		/* 포인트 적립 기준 내역 조회*/
+		SELECT
+			*
+		FROM
+			point_save_standard
+		<where>
+			<if test="searchKey != null and searchKey != ''">
+				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
+			</if>
+		</where>
+			
+	</select>
+	
+	<!-- <select id="pointSaveStandardContentList" resultMap="pointSaveStandardContentResultMap">
+		/* 포인트 적립기준 내용 내역 조회*/
+		SELECT 
+			point_save_standard_content
+		FROM
+			point_save_standard;
+	
+	</select> -->
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team04.sos.member.mapper.MPointRefundMapper">
+	
+	<resultMap type="MPointRefund" 	id="mPointRefundResultMap">
+		<id property="pointRefundCode" 				column="point_refund_code"/>
+		<result property="pointRefundId" 			column="point_refund_id"/>
+		<result property="refundRequestPoint" 		column="refund_request_point"/>
+		<result property="pointRefundFeeRateCode" 	column="point_refund_fee_rate_code"/>
+		<result property="pointRefundFee" 			column="point_refund_fee"/>
+		<result property="refundPoint" 				column="refund_point"/>
+		<result property="refundBank" 				column="refund_bank"/>
+		<result property="refundAccountNumber" 		column="refund_account_number"/>
+		<result property="refundName" 				column="refund_name"/>
+		<result property="refundRequestDatetime"	column="refund_request_datetime"/>
+		<result property="refundState" 				column="refund_state"/>
+	</resultMap>
+	
+	<select id="mPointRefundList" resultMap="mPointRefundResultMap">
+		/* 포인트 환급 신청 내역 조회*/
+		SELECT
+			*
+		FROM
+			point_refund;
+			
+	</select>
+</mapper>

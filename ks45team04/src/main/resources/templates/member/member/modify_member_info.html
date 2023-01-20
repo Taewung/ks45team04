@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{member/layout/myPageDefault}">
+
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	<script>
+	$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+		$('#resetBtn').click(function(){
+			location.href = '/licenseMainList';
+		});
+	});s
+	</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+                <h1>개인 정보 수정</h1>
+                <p class="pxp-text-light">Modify Member</p>
+                <form id="modifyMemberInfoForm" th:action="@{/modifyMemberInfo}" name="memberInfoform" method="post">
+                    <div class="row mt-2 mt-lg-3">
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="memId" class="form-label">ID</label>
+                                <input type="text" id="memId" class="form-control" name="memId" th:value="${modifyMemberInfo.memId}" readonly>
+                            </div>
+                         </div>                            
+                     </div>                 
+                    <div class="row mt-1 mt-lg-3">
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Password" class="form-label">PW</label>
+                                <input type="text" id="memPw" class="form-control" placeholder="변경할 비밀번호를 입력하세요"  name="memPw" th:value="${modifyMemberInfo.memPw}">
+                            </div>
+                         </div>                            
+                     </div>
+                    <div class="row mt-1 mt-lg-3">
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Password" class="form-label">Name</label>
+                                <input type="text" id="memName" class="form-control" placeholder="Name" name="memName" th:value="${modifyMemberInfo.memName}" readonly>
+                            </div>
+                         </div>                            
+                     </div>                                               
+                    <div class="row mt-1 mt-lg-3">                          
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Email" class="form-label">E-mail</label>
+                                <input type="text" id="pxp-candidate-Email" class="form-control" placeholder="변경할 이메일을 입력하세요" name="memEmail" th:value="${modifyMemberInfo.memEmail}">
+                            </div>                            
+                            </div>
+                         </div>                                                             
+                    <div class="row mt-1 mt-lg-3">                           
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pxp-candidate-Phone" class="form-label">Phone</label>
+                                <input type="text" id="pxp-candidate-Phone" class="form-control" placeholder="변경할 전화번호를 입력하세요" name="memPhone" th:value="${modifyMemberInfo.memPhone}">
+                            </div>                            
+                            </div>
+                            
+                         </div>  
+              <div class="mt-4 mt-lg-5">
+                  <button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">수정</button>&nbsp;&nbsp;
+                  <button type="submit"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
+              </div> 
+        </form>  
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
+</html>
+           

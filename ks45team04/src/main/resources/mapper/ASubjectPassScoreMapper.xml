@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team04.sos.admin.mapper.SubjectPassScoreMapper">
+	
+	<resultMap type="SubjectPassScore" id="subjectPassScoreResultMap">
+		<id 	property="lsPScoreCode" 			column="ls_p_score_code"/>
+		<result property="liCode" 					column="li_code"/>
+		<result property="lsCode" 					column="ls_code"/>
+		<result property="lsName" 					column="ls_name"/>
+		<result property="lsTotalQuestionNum" 		column="ls_total_question_num"/>
+		<result property="lsPStandardScore" 		column="ls_p_standard_score"/>
+		<result property="lsPScoreRegId" 			column="ls_p_score_reg_id"/>
+		<result property="lsPScoreRegDateTime" 		column="ls_p_score_reg_datetime"/>
+		<association property="licenseSubject" javaType="LicenseSubject" >
+			<id property="lsCode" 				column="ls_code"/>
+			<result property="liCode" 			column="li_code"/>
+			<result property="liName" 			column="li_name"/>
+			<result property="lsSubject" 		column="ls_subject"/>
+			<result property="lsName" 			column="ls_name"/>
+			<result property="lsRegId" 			column="ls_reg_id"/>
+			<result property="lsRegDatetime" 	column="ls_reg_datetime"/>
+		</association>
+	</resultMap>
+	<resultMap type="LicenseSubject" id="licenseSubjectResultMap">
+		<id property="lsCode" 				column="ls_code"/>
+		<result property="liCode" 			column="li_code"/>
+		<result property="liName" 			column="li_name"/>
+		<result property="lsSubject" 		column="ls_subject"/>
+		<result property="lsName" 			column="ls_name"/>
+		<result property="lsRegId" 			column="ls_reg_id"/>
+		<result property="lsRegDatetime" 	column="ls_reg_datetime"/>
+	</resultMap>
+	<resultMap type="LicensePassScore" id="licensePassScoreResultMap">
+		<id 	property="liPScoreCode" 			column="li_p_score_code"/>
+		<result property="liCode" 					column="li_code"/>		
+		<result property="liName" 					column="li_name"/>		
+		<result property="liPStandardScore" 		column="li_p_standard_score"/>		
+		<result property="liPScoreRegId" 			column="li_p_score_reg_id"/>		
+		<result property="liPScoreRegDateTime" 		column="li_p_score_reg_datetime"/>	
+	</resultMap>
+	
+	
+	<update id="modifySubjectPassScore" parameterType="SubjectPassScore">
+		/* 특정 과목합격기준점수 수정 */
+		UPDATE subject_pass_score AS sp
+		SET 
+			 sp.ls_total_question_num = #{lsTotalQuestionNum}
+			,sp.ls_p_standard_score = #{lsPStandardScore}
+			,sp.ls_p_score_reg_id = #{lsPScoreRegId}
+			,sp.ls_p_score_reg_datetime = NOW()
+		WHERE 
+			sp.ls_p_score_code = #{lsPScoreCode};
+	</update>
+	<select id="getSubjectPassScoreByCode" parameterType="String" resultMap="subjectPassScoreResultMap">
+		/* 특정 과목합격기준점수 조회 */
+		SELECT
+			 sp.ls_p_score_code
+			,sp.li_code
+			,ls.li_name
+			,ls.ls_subject
+			,sp.ls_code
+			,sp.ls_name
+			,sp.ls_total_question_num
+			,sp.ls_p_standard_score
+			,sp.ls_p_score_reg_id
+			,sp.ls_p_score_reg_datetime
+		FROM
+			subject_pass_score AS sp
+			INNER JOIN 
+			license_subject AS ls
+			on
+			sp.ls_code = ls.ls_code
+		WHERE
+			sp.ls_p_score_code = #{lsPScoreCode};
+	</select>
+	
+	<select id="getLiInfoForLsPScore" resultMap="licensePassScoreResultMap">
+		/* 특정 자격증정보 조회 */
+		SELECT
+			 li_p_score_code
+			,li_code
+			,li_name
+			,li_p_standard_score
+			,li_p_score_reg_id
+			,li_p_score_reg_datetime
+		FROM
+			license_pass_score 
+		WHERE
+			li_code = #{liCode};
+	</select>	
+	<select id="getLiCodeForLsPScore" resultMap="subjectPassScoreResultMap" parameterType="String">
+		/* 특정 문제코드 조회 */
+		SELECT
+			li_code
+		FROM
+			license_info
+		WHERE 	
+			li_code = #{liCode};
+	</select>
+	<select id="getLiSubListForLsPScore" resultMap="licenseSubjectResultMap" parameterType="String">
+		/* 특정 자격증 과목목록 조회 */
+		SELECT
+		    ls.ls_code
+			,ls.li_name
+			,ls.li_code
+			,ls.ls_subject
+			,ls.ls_name
+			,ls.ls_reg_id
+			,ls.ls_reg_datetime
+		FROM
+			license_subject AS ls
+		WHERE
+		   ls.li_code = #{liCode};
+	</select>
+	<select id="getLsInfoForLsPScore" resultMap="licenseSubjectResultMap" parameterType="String">
+		/* 특정 자격증 과목정보 조회 */
+		SELECT
+		     ls.ls_code
+			,ls.li_name
+			,ls.ls_subject
+			,ls.ls_name
+		FROM
+			license_subject AS ls
+		WHERE
+		   ls.ls_code = #{lsCode};
+	</select>
+	<select id="getsubjectPassScoreList" resultMap="subjectPassScoreResultMap" parameterType="String">
+		/* 자격증별 과목합격기준점수목록 조회 */
+		SELECT
+			 sp.ls_p_score_code
+			,sp.li_code
+			,sp.ls_code
+			,sp.ls_name
+			,sp.ls_total_question_num
+			,sp.ls_p_standard_score
+			,sp.ls_p_score_reg_id
+			,sp.ls_p_score_reg_datetime
+		FROM
+			subject_pass_score AS sp
+		WHERE
+			sp.li_code = #{liCode};	
+	</select>	
+	<select id="getNewLsPScoreCode" parameterType="String" resultType="String">
+		/* 과목합격기준점수코드 자동생성 */
+		SELECT
+			CASE
+			WHEN COUNT(1) = 0 THEN CONCAT(#{subjectPassScore}, '_1')
+		ELSE
+			CONCAT('sub_pass_score_', MAX(CAST(SUBSTRING_INDEX(${lsPScoreCode}, 'sub_pass_score_', -1)AS UNSIGNED))+1)
+			END AS newCode
+		FROM
+			${subjectPassScore};
+	</select>
+		<insert id="addSubjectPassScore" parameterType="SubjectPassScore">
+		/* 과목합격기준점수 등록 */
+		INSERT INTO subject_pass_score
+		(ls_p_score_code, li_code, ls_code, ls_name, ls_total_question_num, ls_p_standard_score, ls_p_score_reg_id, ls_p_score_reg_datetime)
+		VALUES
+		(#{lsPScoreCode}, #{liCode}, #{lsCode}, #{lsName}, #{lsTotalQuestionNum}, #{lsPStandardScore}, #{lsPScoreRegId}, NOW());
+	</insert>
+</mapper>

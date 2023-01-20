@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{admin/layout/adminDefault}">
+
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	<script>
+		$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+			$('#resetBtn').click(function(){
+				location.href = '/totalPassMemberList';
+			});
+		});
+	</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents"> 
+                <h1>합격 회원 정보 조회 / 수정</h1>
+                <p class="pxp-text-light">PassMemberInfo Modify</p>
+                 <form id="totalModifyPassMemberInfoForm" th:action="@{/totalModifyPassMemberInfo}" name="totalPassMemberInfoform" method="post">
+                    <div class="row mt-2 mt-lg-3">
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pmId" class="form-label">ID</label>
+                                <input type="text" id="pmId" class="form-control" name="pmId" th:value="${totalModifyPassMemberInfo.pmId}" readonly>
+                            </div>
+                         </div>                            
+                     </div>                 
+                    <div class="row mt-1 mt-lg-3">
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pmLiCode" class="form-label">자격증코드</label>
+                                <input type="text" id="pmLiCode" class="form-control" name="pmLiCode" th:value="${totalModifyPassMemberInfo.pmLiCode}">
+                            </div>
+                         </div>                            
+                     </div>
+                    <div class="row mt-1 mt-lg-3">
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pmDatetime" class="form-label">신청 일시</label>
+                                <input type="text" id="pmDatetime" class="form-control" name="pmDatetime" th:value="${totalModifyPassMemberInfo.pmDatetime}" readonly>
+                            </div>
+                         </div>                            
+                     </div> 
+                     <div class="row mt-1 mt-lg-3">                          
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pmState" class="form-label">승인상태</label>
+                                <input type="text" id="pmState" class="form-control" name="pmState" th:value="${totalModifyPassMemberInfo.pmState}">
+                            </div>                            
+                            </div>
+                         </div>                    
+                    <div class="row mt-1 mt-lg-3">                          
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pmRegDatetime" class="form-label">승인/반려일시</label>
+                                <input type="text" id="pmRegDatetime" class="form-control" name="pmRegDatetime" th:value="${totalModifyPassMemberInfo.pmRegDatetime}">
+                            </div>                            
+                            </div>
+                         </div>
+                    <div class="row mt-1 mt-lg-3">                           
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pmRefuseReason" class="form-label">반려사유</label>
+                                <input type="text" id="pmRefuseReason" class="form-control" name="pmRefuseReason" th:value="${totalModifyPassMemberInfo.pmRefuseReason}">
+                            </div>                            
+                            </div>
+                         </div>                                                                                                                
+                    <div class="row mt-1 mt-lg-3">                           
+                        <div class="col-xxl-8">
+                            <div class="mb-1">
+                                <label for="pmState" class="form-label">상태</label>
+                                <input type="text" id="pmState" class="form-control" name="pmState" th:value="${totalModifyPassMemberInfo.pmState}">
+                            </div>                            
+                            </div>
+                         </div> 
+              <div class="mt-4 mt-lg-5">
+			      <button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">수정</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
+              </div> 
+             </form> 
+	</th:block>
+	<!-- customContents end -->	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
+</html>

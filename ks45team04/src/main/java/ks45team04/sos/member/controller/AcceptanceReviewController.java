@@ -1,14 +1,28 @@
 package ks45team04.sos.member.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import ks45team04.sos.member.dto.AcceptanceReview;
 import ks45team04.sos.member.dto.NotePurchaseReview;
+import ks45team04.sos.member.service.AcceptanceReviewService;
 
 @Controller
 public class AcceptanceReviewController {
+	
+	private final AcceptanceReviewService acceptanceReviewService;
+	
+	public AcceptanceReviewController(AcceptanceReviewService acceptanceReviewService) {
+		
+		this.acceptanceReviewService = acceptanceReviewService;
+	}
+	
+	
 	
 			// 합격자 리뷰 삭제 처리
 			@PostMapping("/deleteAcceptance")
@@ -72,8 +86,14 @@ public class AcceptanceReviewController {
 				
 			// 합격자 리뷰 목록
 			@GetMapping("/AcceptanceList")
-			public String AcceptanceList(Model model) {
+			public String AcceptanceList(Model model
+										,@RequestParam(value="searchKey", required = false) String searchKey
+									    ,@RequestParam(value="searchValue", required = false) String searchValue) {
+				
+				List<AcceptanceReview> acceptanceReviewList = acceptanceReviewService.acceptanceReviewList(searchKey, searchValue);
+				
 				model.addAttribute("title", "판매노트 목록 조회");
+				model.addAttribute("acceptanceReviewList", acceptanceReviewList);
 				
 				return "member/acceptacne/acceptance_review_list";
 

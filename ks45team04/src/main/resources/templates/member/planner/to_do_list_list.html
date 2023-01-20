@@ -11,12 +11,20 @@
     <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
     <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
     <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
     <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
     <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
     <link rel="stylesheet" th:href="@{/css/animate.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    
+    <link rel="stylesheet"  th:href="@{/fullcal/vendor/css/fullcalendar.min.css}" />
+    <link rel="stylesheet"  th:href="@{/fullcal/vendor/css/select2.min.css}" />
+    <link rel="stylesheet"  th:href="@{/fullcal/vendor/css/bootstrap-datetimepicker.min.css}" />
+
+    <link rel="stylesheet" th:href="@{/fullcal/css/main.css}">
 </head>
 
 <body>
@@ -25,298 +33,201 @@
 		<!-- begin header -->
 		<div th:replace="~{member/fragments/contentsHeader :: headerFragment}"></div>
 		<!-- end header -->			
-		
-		<!--  begin contents -->
-<html>
-<head>
-<title>FullCalendar by Creative Tim </title>
-<meta charset="utf-8" />
-<meta https-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-<link rel="canonical" href="https://www.creative-tim.com/product/full-calendar" />
-<meta name="keywords" content="creative tim, calendar, calendar plugin, twitter bootstrap, bootstrap, jquery plugin, bootstrap plugin, beautiful calendar, minimal calendar, ios7 calendar, slick calendar">
-<meta name="description" content="FullCalendar is a jQuery plugin with a beautiful interface made by Creative Tim. ">
-
-<meta itemprop="name" content="FullCalendar by Creative Tim">
-<meta itemprop="description" content="FullCalendar is a jQuery plugin with a beautiful interface made by Creative Tim.">
-<meta itemprop="image" content="https://s3.amazonaws.com/creativetim_bucket/products/11/opt_full_calendar_thumbnail3.jpg">
-
-<meta name="twitter:card" content="summary">
-<meta name="twitter:site" content="@creativetim">
-<meta name="twitter:title" content="FullCalendar by Creative Tim">
-<meta name="twitter:description" content="FullCalendar is a jQuery plugin with a beautiful interface made by Creative Tim.">
-<meta name="twitter:creator" content="@creativetim">
-<meta name="twitter:image" content="https://s3.amazonaws.com/creativetim_bucket/products/11/opt_full_calendar_thumbnail3.jpg">
-
-<meta property="og:title" content="FullCalendar by Creative Tim" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://demos.creative-tim.com/fullcalendar" />
-<meta property="og:image" content="https://s3.amazonaws.com/creativetim_bucket/products/11/opt_full_calendar_thumbnail3.jpg" />
-<meta property="og:description" content="FullCalendar is a jQuery plugin with a beautiful interface made by Creative Tim." />
-<meta property="og:site_name" content="Creative Tim" />
-<link href='assets/css/fullcalendar.css' rel='stylesheet' />
-<link href='assets/css/fullcalendar.print.css' rel='stylesheet' media='print' />
-<script src='assets/js/jquery-1.10.2.js' type="text/javascript"></script>
-<script src='assets/js/jquery-ui.custom.min.js' type="text/javascript"></script>
-<script src='assets/js/fullcalendar.js' type="text/javascript"></script>
-<script>
-
-	$(document).ready(function() {
-	    var date = new Date();
-		var d = date.getDate();
-		var m = date.getMonth();
-		var y = date.getFullYear();
-
-		/*  className colors
-
-		className: default(transparent), important(red), chill(pink), success(green), info(blue)
-
-		*/
-
-
-		/* initialize the external events
-		-----------------------------------------------------------------*/
-
-		$('#external-events div.external-event').each(function() {
-
-			// create an Event Object (https://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-			// it doesn't need to have a start or end
-			var eventObject = {
-				title: $.trim($(this).text()) // use the element's text as the event title
-			};
-
-			// store the Event Object in the DOM element so we can get to it later
-			$(this).data('eventObject', eventObject);
-
-			// make the event draggable using jQuery UI
-			$(this).draggable({
-				zIndex: 999,
-				revert: true,      // will cause the event to go back to its
-				revertDuration: 0  //  original position after the drag
-			});
-
-		});
-
-
-		/* initialize the calendar
-		-----------------------------------------------------------------*/
-
-		var calendar =  $('#calendar').fullCalendar({
-			header: {
-				left: 'title',
-				center: 'agendaDay,agendaWeek,month',
-				right: 'prev,next today'
-			},
-			editable: true,
-			firstDay: 1, //  1(Monday) this can be changed to 0(Sunday) for the USA system
-			selectable: true,
-			defaultView: 'month',
-
-			axisFormat: 'h:mm',
-			columnFormat: {
-                month: 'ddd',    // Mon
-                week: 'ddd d', // Mon 7
-                day: 'dddd M/d',  // Monday 9/7
-                agendaDay: 'dddd d'
-            },
-            titleFormat: {
-                month: 'MMMM yyyy', // September 2009
-                week: "MMMM yyyy", // September 2009
-                day: 'MMMM yyyy'                  // Tuesday, Sep 8, 2009
-            },
-			allDaySlot: false,
-			selectHelper: true,
-			select: function(start, end, allDay) {
-				var title = prompt('Event Title:');
-				if (title) {
-					calendar.fullCalendar('renderEvent',
-						{
-							title: title,
-							start: start,
-							end: end,
-							allDay: allDay
-						},
-						true // make the event "stick"
-					);
-				}
-				calendar.fullCalendar('unselect');
-			},
-			droppable: true, // this allows things to be dropped onto the calendar !!!
-			drop: function(date, allDay) { // this function is called when something is dropped
-
-				// retrieve the dropped element's stored Event Object
-				var originalEventObject = $(this).data('eventObject');
-
-				// we need to copy it, so that multiple events don't have a reference to the same object
-				var copiedEventObject = $.extend({}, originalEventObject);
-
-				// assign it the date that was reported
-				copiedEventObject.start = date;
-				copiedEventObject.allDay = allDay;
-
-				// render the event on the calendar
-				// the last `true` argument determines if the event "sticks" (https://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-				$('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-
-				// is the "remove after drop" checkbox checked?
-				if ($('#drop-remove').is(':checked')) {
-					// if so, remove the element from the "Draggable Events" list
-					$(this).remove();
-				}
-
-			},
-
-			events: [
-				{
-					title: 'All Day Event',
-					start: new Date(y, m, 1)
-				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: new Date(y, m, d-3, 16, 0),
-					allDay: false,
-					className: 'info'
-				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: new Date(y, m, d+4, 16, 0),
-					allDay: false,
-					className: 'info'
-				},
-				{
-					title: 'Meeting',
-					start: new Date(y, m, d, 10, 30),
-					allDay: false,
-					className: 'important'
-				},
-				{
-					title: 'Lunch',
-					start: new Date(y, m, d, 12, 0),
-					end: new Date(y, m, d, 14, 0),
-					allDay: false,
-					className: 'important'
-				},
-				{
-					title: 'Birthday Party',
-					start: new Date(y, m, d+1, 19, 0),
-					end: new Date(y, m, d+1, 22, 30),
-					allDay: false,
-				},
-				{
-					title: 'Click for Google',
-					start: new Date(y, m, 28),
-					end: new Date(y, m, 29),
-					url: 'https://google.com/',
-					className: 'success'
-				}
-			],
-		});
-
-
-	});
-
-</script>
-<style>
-
-	body {
-		margin-top: 40px;
-		text-align: center;
-		font-size: 14px;
-		font-family: "Helvetica Nueue",Arial,Verdana,sans-serif;
-		background-color: #DDDDDD;
-		}
-
-	#wrap {
-		width: 1100px;
-		margin: 0 auto;
-		}
-
-	#external-events {
-		float: left;
-		width: 150px;
-		padding: 0 10px;
-		text-align: left;
-		}
-
-	#external-events h4 {
-		font-size: 16px;
-		margin-top: 0;
-		padding-top: 1em;
-		}
-
-	.external-event { /* try to mimick the look of a real event */
-		margin: 10px 0;
-		padding: 2px 4px;
-		background: #3366CC;
-		color: #fff;
-		font-size: .85em;
-		cursor: pointer;
-		}
-
-	#external-events p {
-		margin: 1.5em 0;
-		font-size: 11px;
-		color: #666;
-		}
-
-	#external-events p input {
-		margin: 0;
-		vertical-align: middle;
-		}
-
-	#calendar {
-/* 		float: right; */
-        margin: 0 auto;
-		width: 900px;
-		background-color: #FFFFFF;
-		  border-radius: 6px;
-        box-shadow: 0 1px 2px #C3C3C3;
-		}
-
-</style>
-
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NKDMSK6');</script>
-
-</head>
-<body>
-
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
-<div id='wrap'>
-<div id='calendar'></div>
-<div style='clear:both'></div>
-</div>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-46172202-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"783793b3599234bd","version":"2022.11.3","r":1,"token":"1b7cbb72744b40c580f8633c6b62637e","si":100}' crossorigin="anonymous"></script>
-</body>
-</html>
-		<!--  end contents -->
-
+        <!-- begin page content -->
+     	<section>
+			<div class="pxp-container">
+				<div class="container">
 			
+			        <!-- 일자 클릭시 메뉴오픈 -->
+			        <div id="contextMenu" class="dropdown clearfix">
+			            <ul class="dropdown-menu dropNewEvent" role="menu" aria-labelledby="dropdownMenu"
+			                style="display:block;position:static;margin-bottom:5px;">
+			                <li><a tabindex="-1" href="#">일정등록1 </a></li>
+			                <li><a tabindex="-1" href="#">일정등록2 </a></li>
+			                <li><a tabindex="-1" href="#">일정등록3 </a></li>
+			                <li><a tabindex="-1" href="#">일정등록4 </a></li>
+			                <li class="divider"></li>
+			                <li><a tabindex="-1" href="#" data-role="close">Close</a></li>
+			            </ul>
+			        </div>
+			
+			        <div id="wrapper">
+			            <div id="loading"></div>
+			            <div id="calendar"></div>
+			        </div>
+			
+			
+			        <!-- 일정 추가 MODAL -->
+			        <div class="modal fade" tabindex="-1" role="dialog" id="eventModal">
+			            <div class="modal-dialog" role="document">
+			                <div class="pxp-user-modal modal-content">
+			                    <div class="modal-header">
+			                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			                        <h4 class="modal-title"></h4>
+			                    </div>
+			                    <div class="pxp-user-modal modal-body">
+			                    
+<!-- 
+src\main\resources\static\fullcal\js\addEvent.js 
+82번 라인에서 수정하면 처리 가능
+        //새로운 일정 저장
+        $.ajax({
+            type: "get",
+            url: "",
+            data: {
+                //.....
+            },
+            success: function (response) {
+                //DB연동시 중복이벤트 방지를 위한
+                //$('#calendar').fullCalendar('removeEvents');
+                //$('#calendar').fullCalendar('refetchEvents');
+            }
+        });
+-->
+			                    
+<!-- 								    <form id="save-event" th:action="@{/addToDoList}" name="save-event" method="post"> -->
+								    <form th:action= "@{/addToDoList}"  method="post">
+								    
+								    <!-- to_do_list_code 일정코드 todo005 로 테스트 -->
+								    	<!-- <input type="hidden" name="toDoListCode" value="세션아이디변수명"> -->
+								    	 <div class="row">
+			                            <div class="col-xs-12"> 
+			                             <label class="col-xs-4 new-date" style="width:25%;" for="toDoListCode">일정코드</label>
+								    	<input type="text" name="toDoListCode" >
+								    	</div>
+			                        </div>
+								    <!-- li_code 자격증 코드 li002 로 테스트 -->					
+								     <div class="row">
+			                            <div class="col-xs-12"> 
+			                             <label class="col-xs-4 new-date" style="width:25%;" for="liCode">자격증코드</label>
+								    			<input type="text" name="liCode" >
+		 								</div>
+			                        </div>
+
+			                              <div class="row">
+			                            <div class="col-xs-12"> 
+			                                <label class="col-xs-4 new-date" style="width:25%;" for="memId">아이디</label>
+			                                <input class="inputModal" type="text"  name="memId" id="memId"
+			                                    required="required" />
+			                            </div>
+			                        </div>
+			                          <div class="row">
+			                            <div class="col-xs-12">
+			                                <label class="col-xs-4 new-date" style="width:25%;" for="liName">자격증이름</label>
+			                                <input class="inputModal" type="text" name="liName" id="liName"
+			                                    required="required" />
+			                            </div>
+			                        </div>
+			
+			                        <div class="row">
+			                            <div class="col-xs-12">
+			                                <label class="col-xs-4 new-date" style="width:25%;" for="toDoListTitle">제목</label>
+			                                <input class="inputModal" type="text"  name="toDoListTitle" id="toDoListTitle"
+			                                    required="required" />
+			                            </div>
+			                        </div>
+			                        <div class="row">
+			                            <div class="col-xs-12">
+			                                <label class="col-xs-4 new-date" style="width:25%;" for="edit-start">시작</label>
+			                                <input class="inputModal" type="date" name="toDoListDay" id="toDoListDay" />
+			                            </div>
+			                        </div>
+			                        <div class="row">
+			                            <div class="col-xs-12">
+			                                <label class="col-xs-4 new-date" style="width:25%;" for="edit-end">끝</label>
+			                                <input class="inputModal" type="date" name="toDoListRegTime" id="toDoListRegTime" />
+			                            </div>
+			                        </div>
+			                        
+<!-- 			                        
+			                        <div class="row">
+			                            <div class="col-xs-12">
+			                                <label class="col-xs-4 new-date" style="width:25%;" for="edit-type">구분</label>
+			                                <select class="inputModal" type="text" name="edit-type" id="edit-type">
+			                                    <option value="카테고리1">카테고리1</option>
+			                                    <option value="카테고리2">카테고리2</option>
+			                                    <option value="카테고리3">카테고리3</option>
+			                                    <option value="카테고리4">카테고리4</option>
+			                                </select>
+			                            </div>
+			                        </div>
+			                        <div class="row">
+			                            <div class="col-xs-12">
+			                                <label class="col-xs-4 new-date" style="width:25%;" for="edit-color">색상</label>
+			                                <select class="inputModal" name="color" id="edit-color">
+			                                    <option value="#D25565" style="color:#D25565;">빨간색</option>
+			                                    <option value="#9775fa" style="color:#9775fa;">보라색</option>
+			                                    <option value="#ffa94d" style="color:#ffa94d;">주황색</option>
+			                                    <option value="#74c0fc" style="color:#74c0fc;">파란색</option>
+			                                    <option value="#f06595" style="color:#f06595;">핑크색</option>
+			                                    <option value="#63e6be" style="color:#63e6be;">연두색</option>
+			                                    <option value="#a9e34b" style="color:#a9e34b;">초록색</option>
+			                                    <option value="#4d638c" style="color:#4d638c;">남색</option>
+			                                    <option value="#495057" style="color:#495057;">검정색</option>
+			                                </select>
+			                            </div>
+			                        </div>
+			                      
+			                       -->
+			                      
+			                    </div>
+			                    <div class="modal-footer modalBtnContainer-addEvent">
+			                        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+			                        <!-- <button type="submit" class="btn btn-primary" id="save-event">저장 1 </button> -->
+			                        <input type="submit"  value="저장">
+<!-- 			                        <button type="button" class="btn btn-primary" id="save-event">저장 1 </button> -->
+			                    </div>
+			                    
+<!-- 			                    
+			                    <div class="modal-footer modalBtnContainer-modifyEvent">
+			                        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			                        <button type="button" class="btn btn-danger" id="deleteEvent">삭제</button>
+			                        <button type="button" class="btn btn-primary" id="updateEvent">저장 2 </button>
+			                       </div> -->
+			                       
+			                       
+			                    </form>
+			                    
+			                    
+			                    
+			                </div><!-- /.modal-content -->
+			            </div><!-- /.modal-dialog -->
+			        </div><!-- /.modal -->
+			
+			        <div class="panel panel-default">
+			
+			     
+			        </div>
+			        <!-- /.filter panel -->
+			    </div>
+			    <!-- /.container -->
+			</div>
+		</section>
+             <br><br>
+        <!-- end page content -->  
+        
 		<!-- begin footer -->
 		<div th:replace="~{member/fragments/contentsFooter :: footerFragment}"></div>
 		<!-- end footer -->
+	
 			
 	<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/js/owl.carousel.min.js}"></script>
     <script th:src="@{/js/nav.js}"></script>
     <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/fullcal/vendor/js/moment.min.js}"></script>
+    <script th:src="@{/fullcal/vendor/js/fullcalendar.min.js}"></script>
+    <script th:src="@{/fullcal/vendor/js/ko.js}"></script>
+    <script th:src="@{/fullcal/vendor/js/select2.min.js}"></script>
+    <script th:src="@{/fullcal/vendor/js/bootstrap-datetimepicker.min.js}"></script>
+    <script th:src="@{/fullcal/js/main.js}"></script>
+    <script th:src="@{/fullcal/js/addEvent.js}"></script>
+    <script th:src="@{/fullcal/js/editEvent.js}"></script>
+    <script th:src="@{/fullcal/js/etcSetting.js}"></script>
+  
+
+  
 </body>
 </html>

@@ -7,17 +7,26 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import ks45team04.sos.admin.dto.LicenseMain;
 import ks45team04.sos.admin.dto.LicenseSub;
+import ks45team04.sos.admin.mapper.LicenseSubMapper;
 import ks45team04.sos.admin.service.LicenseSubService;
 
 @Controller
 public class ALicenseSubController {
 	
 private final LicenseSubService licenseSubService;
+private final LicenseSubMapper licenseSubMapper;
 
-	public ALicenseSubController(LicenseSubService licenseSubService) {
+
+	public ALicenseSubController(LicenseSubService licenseSubService
+								,LicenseSubMapper licenseSubMapper) {
+		
 		this.licenseSubService = licenseSubService;
+		this.licenseSubMapper = licenseSubMapper;
 	}
 	
 	
@@ -25,7 +34,7 @@ private final LicenseSubService licenseSubService;
 		@PostMapping("/deletelicenseSub")
 		public String deletelicenseSub(LicenseSub LicenseSub) {
 				
-		return "";
+		return "redirect:/";
 		}
 			
 			
@@ -41,33 +50,60 @@ private final LicenseSubService licenseSubService;
 	
 		// 자격증 중분류 정부 수정 처리
 		@PostMapping("/modifylicenseSub")
-		public String modifylicenseSub(LicenseSub LicenseSub) {
+		public String modifylicenseSub(LicenseSub licenseSub) {
+			System.out.println(licenseSub);
+			
+			licenseSubService.modifyLicenseSub(licenseSub);
 				
-				return "";
+				return "redirect:/licenseSubList";
 			}
 		
 		
 		// 자격증 중분류 정보 수정 화면
 		@GetMapping("/modifylicenseSub")
-		public String modifylicenseSub(Model model) {
-				model.addAttribute("title", "자격증 중분류 등록");
+		public String modifylicenseSub(@RequestParam(value="lscCode") String lscCode
+									  ,Model model) {
+			
+			LicenseSub licenseSub = licenseSubService.getLicenseSubInfoByCode(lscCode);
+			
+			model.addAttribute("title", "자격증 중분류 등록");
+			model.addAttribute("licenseSubInfo", licenseSub);
 				
 			return "admin/licenseSub/license_sub_modify";
 			}
 		
-	
+		//관리자 아이디 인증
+		@GetMapping("/lscIdCheck")
+		@ResponseBody
+		public boolean idCheck(@RequestParam(value="inputId") String inputId) {
+			
+			boolean isChecked = licenseSubMapper.getIdCheck(inputId);
+			
+			return isChecked;
+		}
+		
+		
 		// 자격증 중분류 정부 등록 처리
 		@PostMapping("/addlicenseSub")
 		public String addlicenseSub(LicenseSub LicenseSub) {
 			
-			return "";
+			licenseSubService.addLicenseSub(LicenseSub);
+			
+			return "redirect:/licenseSubList";
 		}
 	
 	
 		// 자격증 중분류 정보 등록 화면
 		@GetMapping("/addlicenseSub")
 		public String addlicenseSub(Model model) {
+			
+			List<LicenseSub> getLicenseSubList = licenseSubMapper.getLicenseSubList();
+			List<LicenseMain> licenseMainList = licenseSubService.licenseMainList();
+			System.out.println(licenseMainList);
+			
 			model.addAttribute("title", "자격증 중분류 등록");
+			model.addAttribute("getLicenseSubList", getLicenseSubList);
+			model.addAttribute("licenseMainList", licenseMainList);
 			
 			return "admin/licenseSub/license_sub_insert";
 			
@@ -76,9 +112,11 @@ private final LicenseSubService licenseSubService;
 	
 		// 자격증 중분류 목록 조회
 		@GetMapping("/licenseSubList")
-		public String licenseSubList(Model model) {
+		public String licenseSubList(Model model
+									,@RequestParam(value="searchKey", required = false) String searchKey
+								    ,@RequestParam(value="searchValue", required = false) String searchValue) {
 			
-			List<LicenseSub> licenseSubList = licenseSubService.LicenseSubList();
+			List<LicenseSub> licenseSubList = licenseSubService.LicenseSubList(searchKey, searchValue);
 			
 			model.addAttribute("title", "자격증 중분류 조회");
 			model.addAttribute("licenseSubList", licenseSubList);

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team04.sos.member.mapper.PlannerMapper">
+	
+	<resultMap type="ks45team04.sos.member.dto.DDay" 		id="dDayDetailListResultMap">
+		<id property="dDayCode" 											column="d_day_code"/>
+		<result property="memId" 											column="mem_id"/>
+		<result property="liCode" 											column="li_code"/>
+		<result property="liName" 											column="li_name"/>
+		<result property="dDayContent" 									column="d_day_content"/>
+		<result property="dDayDate" 										column="d_day_date"/>
+		<result property="dDayWriteDate" 								column="d_day_write_date"/>
+	</resultMap>
+
+
+	<resultMap type="ks45team04.sos.member.dto.ToDoList" 				id="toDoListDetailListResultMap">
+		<id property="toDoListCode" 													column="to_do_list_code"/>
+		<result property="memId" 														column="mem_id"/>
+		<result property="liCode" 														column="li_code"/>
+		<result property="liName" 														column="li_name"/>
+		<result property="toDoListTitle" 												column="to_do_list_title"/>
+		<result property="toDoListDay" 												column="to_do_list_day"/>
+		<result property="toDoListRegTime" 											column="to_do_list_reg_time"/>
+		<result property="totalDayStudyTime" 										column="total_day_study_time"/>
+	</resultMap>
+	
+	
+	<select id="getDDayByCode" parameterType="String" resultMap="dDayDetailListResultMap">
+		/* 디데이 상세보기 */
+		SELECT
+			 d_day_code
+			,mem_id
+			,li_code
+			,li_name
+			,d_day_content
+			,d_day_date
+			,d_day_write_date
+		FROM
+			d_day
+		WHERE
+			d_day_code = #{d_day_code};
+	</select>
+	
+		<update id="modifyToDoListStopWatch" parameterType="String">
+		/* 특정 일정 총공부시간 수정*/
+		UPDATE 
+			to_do_list
+		SET 
+			 total_day_study_time = #{stopwatchTime}
+			
+		WHERE 
+			to_do_list_code= #{toDoListCode};
+		</update>
+	
+		<select id="dDayDetailList" resultMap="dDayDetailListResultMap">
+			/* 디데이 상세 조회 */
+			
+		SELECT
+			*
+		FROM
+			d_day AS dd;
+
+			
+		</select>
+		
+	
+		<delete id="deleteToDoListByCode" parameterType="String">
+		/* 일정코드로 일정삭제 */
+		DELETE
+		FROM 
+			to_do_list
+		WHERE 
+			to_do_list_code = #{toDoListCode};
+	</delete>
+	
+	<update id="modifyToDoList" parameterType="String">
+		/* 특정 일정 정보 수정*/
+		UPDATE 
+			to_do_list
+		SET 
+			 li_name = #{liName}
+			,to_do_list_title = #{toDoListTitle}
+		WHERE 
+			to_do_list_code= #{toDoListCode};
+		</update>
+		
+		<select id="getToDoListByCode" parameterType="String" resultMap="toDoListDetailListResultMap">
+			/* 특정 일정 정보 조회 */
+			SELECT
+				 td.to_do_list_code
+				,td.mem_id
+				,td.li_code
+				,td.li_name
+				,td.to_do_list_title
+				,td.to_do_list_day
+				,td.to_do_list_reg_time
+				,td.total_day_study_time
+			FROM
+				to_do_list AS td
+			WHERE
+				td.to_do_list_code = #{toDoListCode};
+		</select>
+		
+	<insert id="addToDoList" parameterType="ks45team04.sos.member.dto.ToDoList">
+		/* 일정 등록 */
+		INSERT INTO to_do_list
+		( to_do_list_code
+		 ,mem_id
+		 ,li_code
+		 ,li_name
+		 ,to_do_list_title
+		 ,to_do_list_day
+		 ,to_do_list_reg_time
+		 ,total_day_study_time) 
+		VALUES 
+		(#{toDoListCode}, #{memId}, #{liCode},#{liName}, #{toDoListTitle}, #{toDoListDay},NOW(), 
+			#{toDayStudyTime});
+			
+	</insert>
+	
+	<select id="toDoListDetailList" resultMap="toDoListDetailListResultMap">
+			/* 일정 상세 조회 */
+			
+		SELECT
+			*
+		FROM
+			to_do_list AS td;
+
+			
+	</select>
+	
+	
+</mapper>

@@ -1,51 +1,88 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  class="pxp-root" >
-<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  layout:decorate="~{admin/layout/adminDefault}">
 
-    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
-    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-    <body style="background-color: var(--pxpMainColorLight);">
-        <div class="pxp-dashboard-content">
-        
-        <!-- begin aside -->
-		<div th:replace="~{admin/fragments/adminAside :: asideFragment}"></div>
-		<!-- end aside -->
-		
-        <!-- begin header -->
-		<div th:replace="~{admin/fragments/adminHeader :: headerFragment}"></div>
-		<!-- end header -->
-		
-		<!-- begin contents --> 
-            <div class="pxp-dashboard-content-details">
-                  
-             <h1>point_fee_rate_modify.html</h1>     
-
-            </div>
-        <!-- end contents -->     
-            
-        <!-- begin footer -->
-			<div th:replace="~{admin/fragments/adminFooter :: footerFragment}"></div>
-		<!-- end footer -->
-        </div>
-        <script src="js/jquery-3.4.1.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/nav.js"></script>
-        <script src="js/Chart.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	<script>
+		$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+			$('#resetBtn').click(function(){
+				location.href='/pointFeeRateList';
+			});
+		});
+	
+	</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+		<h1>포인트 수수료율 수정</h1>
+			<p class="pxp-text-light">Point fee rate.</p>
+            <form id="modifyPointFeeRateForm" th:action="@{/modifyPointFeeRate}" method="post">
+            	<div class="row mt-4 mt-lg-5">
+            	<div class="row justify-content-between align-content-center">
+                        <!-- <div class="col-auto order-2 order-sm-1"> -->
+                    <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
+               		<div class="col-md-6">
+               			<div class="row">
+                			<div class="col-md-6">
+		               		<div class="mb-3">
+		           				<label for="pointFeeRateId" class="form-label">등록자 아이디</label>
+		              		</div>
+		              			<input type="text" id="pointFeeRateId" name="pointFeeRateId" class="form-control" placeholder="등록자 아이디"
+		              				   th:value ="${pointFeeRateInfo.pointFeeRateId}" readonly="readonly">
+		                	</div>
+		                </div>
+		                
+		                
+		                <div class="mb-3">
+		                </div>
+		                
+		            	
+		            	
+		              	<div class="row">
+		              		<div class="mb-3">
+		                      	<label for="pointFeeRateCode" class="form-label">수수료율 코드</label>
+		                         <input type="text" id="pointFeeRateCode" name="pointFeeRateCode" class="form-control" placeholder="수수료율 코드를 입력해주세요"
+										th:value ="${pointFeeRateInfo.pointFeeRateCode}" readonly="readonly">
+		                      </div>
+		                </div>
+		            
+		              	<div class="row">
+		                	<div class="mb-3">
+		                         <label for="pointFeeRateContents" class="form-label">수수료 적용 내용</label>
+		                         <input type="text" id="pointFeeRateContents" name="pointFeeRateContents" class="form-control" placeholder="수수료 적용 내용을 입력해주세요"
+										th:value ="${pointFeeRateInfo.pointFeeRateContents}">
+		                     </div>
+		              	</div>
+		              	<div class="row">
+		                	<div class="mb-3">
+		                    	<label for="pointFeeRate" class="form-label">수수료율</label>
+		                    	<input type="text" id="pointFeeRate" name="pointFeeRate" class="form-control" placeholder="수수료율을 입력해주세요"
+									   th:value ="${pointFeeRateInfo.pointFeeRate}">
+		                    </div>
+		                </div>
+					</div>
+					
+		            	</div>
+		            	</div>
+		            	
+	              <div class="mt-4 mt-lg-5">
+	                  <button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">Save</button>
+	                  <button type="reset" id="resetBtn" class="btn rounded-pill pxp-section-cta">Cancel</button>
+				</div>
+				</div>
+				
+				
+        	</form>
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
 </html>

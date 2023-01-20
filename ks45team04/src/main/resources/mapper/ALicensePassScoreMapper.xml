@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team04.sos.admin.mapper.LicensePassScoreMapper">
+	<resultMap type="LicensePassScore" id="licensePassScoreResultMap">
+		<id 	property="liPScoreCode" 			column="li_p_score_code"/>
+		<result property="liCode" 					column="li_code"/>		
+		<result property="liName" 					column="li_name"/>		
+		<result property="liPStandardScore" 		column="li_p_standard_score"/>		
+		<result property="liPScoreRegId" 			column="li_p_score_reg_id"/>		
+		<result property="liPScoreRegDateTime" 		column="li_p_score_reg_datetime"/>	
+	</resultMap>
+	<resultMap type="LicenseInfo" id="licenseInfoResultMap">
+		<id property="liCode" 				column="li_code"/>
+		<result property="lmcCode" 			column="lmc_code"/>
+		<result property="lmcName" 			column="lmc_name"/>
+		<result property="lscCode" 			column="lsc_code"/>
+		<result property="lscName" 			column="lsc_name"/>
+		<result property="liName" 			column="li_name"/>
+		<result property="liOverview" 		column="li_overview"/>
+		<result property="liQualification" 	column="li_qualification"/>
+		<result property="liRegId" 			column="li_reg_id"/>
+		<result property="liRegDatetime" 	column="li_reg_datetime"/>
+	</resultMap>
+		<resultMap type="LicenseMain" id="licenseMainResultMap">
+		<id property="lmcCode" 				column="lmc_code"/>
+		<result property="lmcRegId" 		column="lmc_reg_id"/>
+		<result property="lmcName" 			column="lmc_name"/>
+		<result property="lmcRegDatetime" 	column="lmc_reg_datetime"/>
+	</resultMap>
+	<resultMap type="LicenseSub" id="licenseSubResultMap">
+		<id property="lscCode" 				column="lsc_code"/>
+		<result property="lmcCode" 			column="lmc_code"/>
+		<result property="lmcName" 			column="lmc_name"/>
+		<result property="lscName" 			column="lsc_name"/>
+		<result property="lscRegId" 		column="lsc_reg_id"/>
+		<result property="lscRegDatetime" 	column="lsc_reg_datetime"/>
+	</resultMap>
+	<resultMap type="SubjectPassScore" id="subjectPassScoreResultMap">
+		<id 	property="lsPScoreCode" 			column="ls_p_score_code"/>
+		<result property="liCode" 					column="li_code"/>
+		<result property="lsCode" 					column="ls_code"/>
+		<result property="lsName" 					column="ls_name"/>
+		<result property="lsTotalQuestionNum" 		column="ls_total_question_num"/>
+		<result property="lsPStandardScore" 		column="ls_p_standard_score"/>
+		<result property="lsPScoreRegId" 			column="ls_p_score_reg_id"/>
+		<result property="lsPScoreRegDateTime" 		column="ls_p_score_reg_datetime"/>
+	</resultMap>
+	
+	
+	<update id="modifyLicensePassScore" parameterType="LicensePassScore">
+		/* 특정 자격증합격기준점수 수정 */
+		UPDATE license_pass_score
+		SET 
+			 li_p_standard_score = #{liPStandardScore}
+			,li_p_score_reg_id = #{liPScoreRegId}
+			,li_p_score_reg_datetime = CURDATE()
+		WHERE 
+			li_p_score_code = #{liPScoreCode};
+	</update>
+
+	<select id="getLicensePassScoreByCode" parameterType="String" resultMap="licensePassScoreResultMap">
+		/* 특정 자격증합격기준점수 조회 */
+		SELECT
+			 lp.li_p_score_code
+			,lp.li_code
+			,lp.li_name
+			,lp.li_p_standard_score
+			,lp.li_p_score_reg_id
+			,lp.li_p_score_reg_datetime
+		FROM
+			license_pass_score AS lp
+		WHERE
+			li_p_score_code = #{liPScoreCode};
+	</select>
+	
+	<insert id="addLicensePassScore" parameterType="LicensePassScore">
+		/* 자격증별 합격기준 점수 등록 */
+		INSERT INTO license_pass_score
+		(li_p_score_code, li_code, li_name, li_p_standard_score, li_p_score_reg_id, li_p_score_reg_datetime)
+		VALUES
+		(#{liPScoreCode}, #{liCode}, #{liName}, #{liPStandardScore}, #{liPScoreRegId}, CURDATE());
+	</insert>
+
+	<select id="getNewLiPassScoreCode" parameterType="String" resultType="String">
+		/* 자격증 합격기준점수코드 자동생성 */
+		SELECT
+			CASE
+			WHEN COUNT(1) = 0 THEN CONCAT(#{li_pass_score}, '_1')
+		ELSE
+			CONCAT('li_pass_score_', MAX(CAST(SUBSTRING_INDEX(${liPScoreCode}, 'li_pass_score_', -1)AS UNSIGNED))+1)
+			END AS newCode
+		FROM
+			${li_pass_score};
+	</select>
+	
+	<select id="getLicenseList" resultMap="licenseInfoResultMap" parameterType="String">
+		/* 자격증 중분류별 자격증 목록 조회*/				
+		SELECT 
+			 li.li_code
+			,li.lmc_code
+			,li.lmc_name
+			,li.lsc_code
+			,li.lsc_name
+			,li.li_name
+			,li.li_overview
+			,li.li_qualification
+			,li.li_reg_id
+			,li.li_reg_date
+		FROM
+			license_info AS li
+		WHERE 
+			li.lsc_code = #{lscCode};	
+	</select>
+	<select id="getLicenseSubList" resultMap="licenseSubResultMap" parameterType="String">
+		/* 자격증 대분류별 중분류 목록 조회*/				
+		SELECT 
+			 ls.lsc_code
+			,ls.lmc_code
+			,ls.lmc_name
+			,ls.lsc_name
+			,ls.lsc_reg_id
+			,ls.lsc_reg_datetime 
+		FROM
+			license_sub_category AS ls
+		WHERE 
+			ls.lmc_code = #{lmcCode};
+	</select>
+	<select id="getLicenseMainList" resultMap="licenseMainResultMap">
+		/* 자격증 대분류 목록 조회 */
+		SELECT 
+			 lm.lmc_code
+			,lm.lmc_reg_id
+			,lm.lmc_name
+			,lm.lmc_reg_datetime
+		FROM
+			license_main_category AS lm;	
+	</select>	
+	<select id="getLicensePassScoreList" resultType="LicensePassScore" parameterType="Map" resultMap="licensePassScoreResultMap">
+		/* 자격증별  합격기준 점수 조회 */
+		SELECT
+			 li_p_score_code
+			,li_code
+			,li_name
+			,li_p_standard_score
+			,li_p_score_reg_id
+			,li_p_score_reg_datetime
+		FROM
+			license_pass_score	
+		<where>
+			<if  test="searchKey != null and searchKey != ''">
+				${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
+			</if>
+		</where>
+		<if test="startRowNum != null and startRowNum > -1">		
+			LIMIT #{startRowNum}, #{rowPerPage};
+		</if>		
+	</select>
+	<select id="getLiPScoreCnt" resultType ="int">
+		/* 자격증합격기준점수 테이블의 전체 행의 갯수 */
+		SELECT
+			COUNT(1)
+		FROM
+			license_pass_score;
+	</select>
+</mapper>

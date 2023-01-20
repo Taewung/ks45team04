@@ -17,6 +17,8 @@
     <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
     <link rel="stylesheet" th:href="@{/css/animate.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    
+    
 </head>
 
 <body>
@@ -26,19 +28,21 @@
 		<div th:replace="~{member/fragments/contentsHeader :: headerFragment}"></div>
 		<!-- end header -->			
 		
-		<!--  begin contents -->
-		여기에 만들면됨미다
-		<!--  end contents -->
+		<!-- begin contents --> 
+         <th:block layout:fragment="customContents"></th:block>  	   
+        <!-- end contents --> 
 
-			
 		<!-- begin footer -->
 		<div th:replace="~{member/fragments/contentsFooter :: footerFragment}"></div>
 		<!-- end footer -->
 			
-	<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
-    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/js/owl.carousel.min.js}"></script>
-    <script th:src="@{/js/nav.js}"></script>
-    <script th:src="@{/js/main.js}"></script>
+	 <script src="js/jquery-3.4.1.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/nav.js"></script>
+        <script src="js/Chart.min.js"></script>
+        <script src="js/main.js"></script>
+        <th:block layout:fragment="customJs"></th:block> 
+        <th:block layout:fragment="customScript"></th:block> 
 </body>
 </html>

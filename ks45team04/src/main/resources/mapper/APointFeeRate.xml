@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team04.sos.admin.mapper.PointFeeRateMapper">
+	
+	<resultMap type="PointFeeRate" id="pointFeeRateResultMap">
+		<id property="pointFeeRateCode" 			column="point_fee_rate_code"/>
+		<result property="pointFeeRate" 			column="point_fee_rate"/>
+		<result property="pointFeeRateContents" 	column="point_fee_rate_contents"/>
+		<result property="pointFeeRateId" 			column="point_fee_rate_id"/>
+		<result property="pointFeeRateDatetime" 	column="point_fee_rate_datetime"/>
+	</resultMap>
+	
+	<update id="modifyPointFeeRate" parameterType="PointFeeRate">
+	/* 특정 포인트 적립 기준 수정*/
+	UPDATE 
+			point_fee_rate
+	SET 
+			point_fee_rate_contents = #{pointFeeRateContents},
+			point_fee_rate = #{pointFeeRate}
+	WHERE 
+			point_fee_rate_code= #{pointFeeRateCode};
+	
+	</update>
+	
+	<select id="getPointFeeRateByCode" parameterType="String" resultMap="pointFeeRateResultMap">
+		/* 특정 포인트 적립 기준 정보 조회 */
+		SELECT
+			 *
+		FROM
+			point_fee_rate
+		WHERE
+			point_fee_rate_code = #{pointFeeRateCode};
+	</select>
+	
+	
+	<select id="getPointFeeRateIdCheck" parameterType="String" resultType="boolean">
+		/* 관리자 아이디 인증 */
+			SELECT
+				if(COUNT(point_fee_rate_id) > 0, 1, 0)
+			FROM
+				point_fee_rate
+			WHERE
+				point_fee_rate_id = #{pointFeeRateId};
+	</select>
+	
+	<insert id="addPointFeeRate" parameterType="PointFeeRate">
+		/* 포인트 수수료율 등록 */
+		INSERT INTO point_fee_rate
+		(
+			point_fee_rate_code, 
+			point_fee_rate_contents, 
+			point_fee_rate, 
+			point_fee_rate_id, 
+			point_fee_rate_datetime
+		)VALUES(
+			sf_point_fee_rate_code(), #{pointFeeRateContents}, #{pointFeeRate}, #{pointFeeRateId}, NOW()
+		);
+	</insert>
+	
+		<select id="pointFeeRateList" resultMap="pointFeeRateResultMap">
+		/*포인트 수수료율 내역 조회*/
+		SELECT
+			point_fee_rate_code,
+			point_fee_rate,
+			point_fee_rate_contents,
+			point_fee_rate_id,
+			point_fee_rate_datetime
+		FROM
+			point_fee_rate
+		<where>
+			<if test="searchKey != null and searchKey != ''">
+				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
+			</if>
+		</where>
+	</select>
+</mapper>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{admin/layout/adminDefault}">
+
+	<!-- script start -->
+    <th:block layout:fragment="customScript">
+		<script>
+		</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->s
+	<th:block layout:fragment="customContents">
+	    <h1>답안등록</h1>
+	    <p class="pxp-text-light">Add Answer</p>	    
+	        <form id="addAnswerForm" th:action="@{/addAnswer}" method="post" th:object="${questionCodeForQSet}">
+	             <div class="row mt-4 mt-lg-5">                 
+                        <div class="col-md-6 col-xxl-3">
+                             <div class="mb-3 questionCode">
+	                            <label for="questionCode" class="form-label">문제코드</label>
+	                            <input type="text" id="questionCode" class="form-control" th:value="*{questionCode}" name="questionCode" readonly = "readonly"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 answer">
+	                            <label for="answer" class="form-label">답안</label>
+	                            <input type="text" id="answer" class="form-control" name="answer" placeholder="답안을 입력해주세요."/>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 answerState">
+								<label for="answerState" class="form-label">정답여부</label>
+	                               <select id="answerState" class="form-select" name="answerState">
+	                            		<option>오답</option>
+	                            		<option>정답</option>
+	                               </select>
+                            </div>
+                        </div>
+                    </div>
+	             <div class="row mt-4 mt-lg-5">
+	             <!-- 등록/취소버튼 start -->			 
+				<div class="mt-4 mt-lg-5">
+					<button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>
+					<a th:href="@{/answerList(questionCode=*{questionCode})}" class="btn rounded-pill pxp-section-cta-o ms-3">취소</a>                                                
+				</div>  
+				<!-- 등록/취소버튼 end -->                                     
+	             </div>                                   
+	         </form>
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	</th:block>
+	<!-- customJs end -->
+</html>

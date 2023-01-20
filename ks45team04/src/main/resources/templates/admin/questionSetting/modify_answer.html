@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{admin/layout/adminDefault}">
+
+	<!-- script start -->
+    <th:block layout:fragment="customScript">
+		<script>
+		</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->s
+	<th:block layout:fragment="customContents">
+	    <h1>답안수정</h1>
+	    <p class="pxp-text-light">Modify Answer</p>	    
+	        <form id="modifyAnswer" th:action="@{/modifyAnswer}" method="post" >
+	        	<th:block th:object="${answerByCode}">        	
+	             <div class="row mt-4 mt-lg-5">                 
+                        <div class="col-md-6 col-xxl-3">
+                             <div class="mb-3 questionCode">
+	                            <label for="questionCode" class="form-label">문제코드</label>
+	                            <input type="text" id="questionCode" class="form-control" th:value="*{questionCode}" name="questionCode" readonly/>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                             <div class="mb-3 answerCode">
+	                            <label for="answerCode" class="form-label">답안코드</label>
+	                            <input type="text" id="answerCode" class="form-control" th:value="*{answerCode}" name="answerCode" readonly/>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 answer">
+	                            <label for="answer" class="form-label">답안</label>
+	                            <input type="text" id="answer" class="form-control"  th:value="*{answer}" name="answer" placeholder="답안을 입력해주세요."/>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xxl-3">
+                            <div class="mb-3 answerState">
+								<label for="answerState" class="form-label">정답여부</label>
+	                               <select id="answerState" class="form-select"  th:value="*{answerState}" name="answerState">
+	                            		<option>정답</option>
+	                            		<option>오답</option>
+	                               </select>
+                            </div>
+                        </div>
+                    </div>
+	             <div class="row mt-4 mt-lg-5">
+	             <div class="mt-4 mt-lg-5">
+	                  <button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">수정</button>
+					  <a th:href="@{/answerList(questionCode=*{questionCode})}" class="btn rounded-pill pxp-section-cta-o ms-3">취소</a>                                                
+	             	</div>                                      
+	             </div>                                   
+	        	</th:block>
+	         </form>
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	</th:block>
+	<!-- customJs end -->
+</html>

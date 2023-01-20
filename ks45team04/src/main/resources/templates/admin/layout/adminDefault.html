@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  class="pxp-root" >
-<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -30,10 +30,8 @@
 		<!-- end header -->
 		
 		<!-- begin contents --> 
-            <div class="pxp-dashboard-content-details">
-                  
-             <h1>디폴트</h1>     
-
+            <div class="pxp-dashboard-content-details" style="margin-left:30px">
+             <th:block layout:fragment="customContents"></th:block>     
             </div>
         <!-- end contents -->     
             
@@ -47,5 +45,7 @@
         <script src="js/nav.js"></script>
         <script src="js/Chart.min.js"></script>
         <script src="js/main.js"></script>
+        <th:block layout:fragment="customJs"></th:block> 
+        <th:block layout:fragment="customScript"></th:block> 
     </body>
 </html>

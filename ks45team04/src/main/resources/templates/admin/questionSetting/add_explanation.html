@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{admin/layout/adminDefault}">
+
+	<!-- script start -->
+    <th:block layout:fragment="customScript">
+		<script>
+		</script>
+	</th:block> 
+	<!-- script end -->
+	
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+		<h1>해설등록</h1>
+		<p class="pxp-text-light">Add Explanation</p>
+		<form id="addExplanationForm" th:action="@{/addExplanation}" method="post" th:object="${questionCodeForQSet}"> 
+			<div class="mt-4 mt-lg-5">
+				<!-- 문제코드 start -->
+				<div class="row mt-4 mt-lg-5 " >
+					<div class="mb-3 questionCode">
+						<label for="questionCode" class="form-label">문제코드</label>
+						<input type="text" id="questionCode" class="form-control" th:value="*{questionCode}" name="questionCode" readonly = "readonly"/>
+					</div>
+				</div>
+				<!-- 문제코드 end -->
+				<!-- 해설입력란 start -->                 
+				<div class="row mt-4 mt-lg-5">
+					<div class="mb-3 explanation">
+						<textarea type="text" class="form-control" id="explanation" name="explanation" placeholder="해설를 입력해주세요."></textarea>
+					</div>
+				</div>
+				<!-- 해설입력란 end -->                 
+			</div>
+			<!-- 등록/취소버튼 start -->
+			<div class="mt-4 mt-lg-5">
+				<button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>
+				<a th:href="@{/explanationList(questionCode=*{questionCode})}" class="btn rounded-pill pxp-section-cta-o ms-3">취소</a>
+			</div>
+			<!-- 등록/취소버튼 end -->                                                              
+		</form>
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	</th:block>
+	<!-- customJs end -->
+</html>

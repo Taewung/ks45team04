@@ -1,48 +1,153 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  class="pxp-root" >
-<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
-    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-
-<body>
-	<div class="pxp-preloader"><span>Loading...</span></div>
+	  layout:decorate="~{member/layout/contentDefault}">
+	<head>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+	</head>
+	<!-- script start -->
+	<th:block layout:fragment="customScript">
+	</th:block> 
+	<!-- script end -->
 	
-		<!-- begin header -->
-		<div th:replace="~{member/fragments/contentsHeader :: headerFragment}"></div>
-		<!-- end header -->			
-		
-		<!--  begin contents -->
-		<section>
-			<div class="pxp-container">
-				note_detail.html
-			</div>
-		</section>
-		<!--  end contents -->
+	<!-- customContents start -->
+	<th:block layout:fragment="customContents">
+         <!-- 노트 상세정보 start -->
+          <section class="pxp-page-header-simple" style="background-color: var(--pxpMainColorLight);">
+            <div class="pxp-container">
+                <h1>100% 합격보장!</h1><br>
+                <h3><div class="pxp-hero-subtitle pxp-text-ligh" style="text-align:center;">합격을 위한 한걸음!</div></h3>
+            </div>
+        </section>
+         <section>
+            <div class="pxp-container">
+                <div class="pxp-single-candidate-container pxp-has-columns">
+                    <div class="row">
+                        <div class="col-lg-7 col-xl-8 col-xxl-9">
+                            <div class="pxp-single-candidate-hero pxp-cover pxp-boxed" style="background-image: url(images/ph-big.jpg);">
+                                <div class="pxp-hero-opacity"></div>
+                                <div class="pxp-single-candidate-hero-caption">
+                                    <div class="pxp-container">
+                                        <div class="pxp-single-candidate-hero-content">
+                                            <div class="pxp-single-candidate-hero-avatar" style="background-image: url(images/ph-small.jpg);"></div>
+                                            <div class="pxp-single-candidate-hero-name">
+                                                <h1>Rebecca Eason</h1>
+                                                <div class="pxp-single-candidate-hero-title">UX/UI Designer</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-			
-		<!-- begin footer -->
-		<div th:replace="~{member/fragments/contentsFooter :: footerFragment}"></div>
-		<!-- end footer -->
-			
-	<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
-    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/js/owl.carousel.min.js}"></script>
-    <script th:src="@{/js/nav.js}"></script>
-    <script th:src="@{/js/main.js}"></script>
-</body>
+                            <section class="mt-4 mt-lg-5">
+                            <div class="pxp-container">
+						    <div class="pxp-container">
+						        <div class="pxp-single-candidate-container pxp-has-columns">
+						            <div class="row">
+						                <div class="col-lg-7 col-xl-8 col-xxl-9">
+						                <div class="pxp-single-candidate-content">
+						                  <h2><i class="bi bi-info-circle"></i>&nbsp;&nbsp;노트 설명</h2>
+						                  <h3><p th:text="${noteInfo.noteInfo}"></p></h3>
+						                </div>
+						                </div>                
+						               </div>
+						                </div>
+						            </div>
+						        </div>
+                            </section>
+                        </div>
+                        <div class="col-lg-8 col-xl-5 col-xxl-3" >
+                            <div class="pxp-single-job-side-panel mt-5 mt-lg-0">
+                                <div class="mt-4">
+                                    <h2><i class="bi bi-info-circle"></i>&nbsp;&nbsp;노트 정보</h2>
+                                    <h4><div class="pxp-single-candidate-side-info-label pxp-text-light"></div></h4>
+                                </div><br>
+                                <div>
+                                    <h4><div class="pxp-single-candidate-side-info-data"></div><i class="bi bi-caret-right-fill"></i>&nbsp;노트 작성자</h4>
+                                    <h5><div class="pxp-single-candidate-side-info-label pxp-text-light"
+                                    	 th:text="${noteInfo.noteWriterId}"></div></h5>
+                                </div>
+                                <div class="mt-4">
+                                     <h4><div class="pxp-single-candidate-side-info-data"></div><i class="bi bi-caret-right-fill"></i>&nbsp;노트 이름</h4>
+                                     <h5><div class="pxp-single-candidate-side-info-label pxp-text-light"
+                                    	 th:text="${noteInfo.noteName}"></div></h5>
+                                </div>
+                                <div class="mt-4">
+                                    <h4><div class="pxp-single-candidate-side-info-data"></div><i class="bi bi-caret-right-fill"></i>&nbsp;관련 자격증</h4>
+                                    <h5><div class="pxp-single-candidate-side-info-label pxp-text-light"
+                                    	 th:text="${noteInfo.liName}"></div></h5>
+                                </div>
+                                <div class="mt-4">
+                                    <h4><div class="pxp-single-candidate-side-info-data"></div><i class="bi bi-caret-right-fill"></i>&nbsp;노트 가격</h4>
+                                    <h5><div class="pxp-single-candidate-side-info-label pxp-text-light"
+                                    	 th:text="${noteInfo.notePrice}"></div></h5>
+                                </div>
+                                 <div class="row mt-4 mt-lg-5">
+			                   		<div class="mt-4 mt-lg-5">
+			                        	<a th:href="@{/payInsert(noteWriterId=${noteInfo.noteWriterId})}" id="submitBtn" class="btn rounded-pill pxp-section-cta">결제하기</a>
+		                    		</div>                                      
+                          	  </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 노트 상세정보 end -->
+        <br><br><br>
+        <!-- 노트 리뷰start -->
+        <div class="pxp-container" id="licenseInfoList">
+            <div class="pxp-container">
+                <div class="pxp-single-candidate-container pxp-has-columns">
+                    <div class="row">
+                        <div class="col-lg-7 col-xl-8 col-xxl-9">
+                        <div class="pxp-single-candidate-content">
+                         <h2><i class="bi bi-info-circle"></i>&nbsp;&nbsp;노트 리뷰</h2>
+                        </div>
+                        <table class="table table-hover align-middle">                      	
+                            <thead>                    
+                                <tr>
+                                    <th style="width: 15%;">리뷰작성자아이디</th>
+                                    <th style="width: 15%;">리뷰내용</th>
+                                    <th style="width: 15%;">리뷰점수</th>
+                                </tr>
+                            </thead>    
+                            <tbody>
+                                <tr th:if="${not #lists.isEmpty(noteReviewList)}"
+									th:each="l : ${noteReviewList}">
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.notePurchaseReview.noteReviewWriter}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.notePurchaseReview.noteReviewContent}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.notePurchaseReview.noteReviewScore}"></div></td>                      
+                                </tr>
+                                <tr th:unless="${not #lists.isEmpty(noteReviewList)}">
+									<td colspan="9">등록된 리뷰가 없습니다.</td>
+								</tr>                    
+                            </tbody>
+                        </table>
+                        </div>                
+                       <br><br></div>
+                            </section>
+                        </div><br><br>
+                    	</div>
+                	</div>
+           		</div>
+            </div>
+                <div class="mt-4 mt-lg-5">  
+                    <!-- 목록 start -->                   
+                    <div class="table-responsive">
+                        
+                    </div>
+                <!-- 목록 end -->    
+                </div>
+        
+        <!-- 노트 리뷰 end -->
+       
+	</th:block>
+	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+	
+	</th:block>
+	<!-- customJs end -->
 </html>
