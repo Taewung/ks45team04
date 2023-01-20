@@ -12,11 +12,83 @@
 	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
+		<section class="pxp-page-header-simple" style="background-color: var(--pxpMainColorLight);">
+            <div class="pxp-container">
+                <h1>100% 합격보장!</h1><br>
+                <h3><div class="pxp-hero-subtitle pxp-text-ligh" style="text-align:center;">합격을 위한 한걸음!</div></h3><br><br>
+            </div>
+           <h1><a th:href="@{/AcceptanceList}">합격자 리뷰</a></h1>
+        </section><br><br><br>
 		<section>
+		
 	    	<div class="pxp-container">
-				acceptance_review_list.html
+	    	<!-- 검색 start -->
+				 <div>
+				  <form th:action="@{/AcceptanceList}" method="GET">
+				    <div class="row justify-content-between align-content-center">
+				        <div class="col-auto order-2 order-sm-1">
+				            <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
+				                <div class="pxp-company-dashboard-jobs-search mb-3">
+				                <select class="form-select" style="width:200px;" name="searchKey">
+				                    <option value="liName">자격증이름</option>
+				                    <option value="pmId">작성자</option>
+				               </select>&nbsp;&nbsp;
+				                    <div class="col-auto order-1 order-sm-2">
+				                        <div class="pxp-company-dashboard-jobs-search-search-form">
+				                            <div class="input-group">
+				                                <span class="input-group-text"><span class="fa fa-search"></span></span>
+				                                <input type="text" class="form-control" placeholder="검색어를 입력해주세요." name="searchValue">
+				                                <button class="btn ms-2" type="submit">검색</button>
+				                            </div>
+				                        </div>
+				                    </div>
+				                </div>              
+				            </div>
+				        </div>
+				   	</div>
+				 </form>
+				 </div>
+                    <!-- 검색 end --> 
+				<div class="table-responsive">
+                        <table class="table table-hover align-middle">                      	
+                            <thead>                    
+                                <tr>
+                                    <th style="width: 15%;">합격자격증</th>
+                                    <th style="width: 15%;">작성자</th>                                
+                                    <th style="width: 40%;">리뷰내용</th>
+                                 
+                                </tr>
+                            </thead>    
+                            <tbody>
+                                <tr th:if="${not #lists.isEmpty(acceptanceReviewList)}"
+									th:each="l : ${acceptanceReviewList}">
+                                    <td><div class="pxp-company-dashboard-job-title" th:text="${l.liName}"></div>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.pmId}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.arContent}"></div></td>
+                                </tr>
+                                <tr th:unless="${not #lists.isEmpty(acceptanceReviewList)}">
+									<td colspan="9">등록된 자격증 정보가 없습니다.</td>
+								</tr>                    
+                            </tbody>
+                        </table><br>
+						<!-- page 넘김 start -->
+                        <div class="row mt-4 mt-lg-5 justify-content-center align-items-center" >
+                            <div class="col-auto">
+                                <nav class="mt-3 mt-sm-0" aria-label="Jobs list pagination">
+                                    <ul class="pagination pxp-pagination">
+                                        <li class="page-item active" aria-current="page">
+                                            <span class="page-link">1</span>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <!-- page 넘김 end -->
+                    </div>
 			</div>
-		</section>
+		</section><br><br><br>
 	</th:block>
 	<!-- customContents end -->
 	
