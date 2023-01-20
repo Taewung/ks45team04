@@ -2,10 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{member/layout/contentDefault}">
-	  
+	<head>
+		<link rel="stylesheet" th:href="@{/css/examAnswer.css}">
+	</head>  
 	<!-- script start -->
 	<th:block layout:fragment="customScript">
 	<script>
+	
 	</script>
 	</th:block> 
 	<!-- script end -->
@@ -69,6 +72,12 @@
         <br><br><br><br><br>
 	</th:block>
 	<!-- customContents end -->
+	
+	<!-- customJs start -->
+	<th:block layout:fragment="customJs">
+		<script src="js/examAnswer.js"></script>
+	</th:block>
+	<!-- customJs end -->
 
 </html>
 

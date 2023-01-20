@@ -5,8 +5,130 @@
 
 	<!-- script start -->
 	<th:block layout:fragment="customScript">
-	<script>
-	</script>
+<script>
+			$(function(){
+				function validationCheck(data){
+					if(typeof data == 'undefined' || data == '' || data == null || data == '대분류'){	
+						return false;
+					}
+					return true;
+				}
+				// 자격증 대분류값 선택
+				$(document).on('change','#licenseMainCategory', function(){
+					$('#licenseSubCategory').prop('disabled', false);
+					let lmcCode = $(this).val();
+					
+					if(validationCheck(lmcCode)){						
+						var request = $.ajax({
+						  url: '/getSubListForChallenge',
+						  method: 'GET',
+						  data: { 'lmcCode' : lmcCode },
+						  dataType: 'json'
+						});	
+						// 대분류값 선택 성공시 중분류명 조회
+						request.done(function( data ) {
+						  console.log(data);
+						  $('#licenseSubCategory').children().remove();
+						  $('#licenseSubCategory').append(`<option selected>중분류</option>`);
+						  for(let subCategory of data){							  
+							  $('#licenseSubCategory').append(`<option value="${subCategory.lscCode}">${subCategory.lscName}</option>`);							 
+						  }
+						});
+						// 대분류값 선택 실패시
+						request.fail(function( jqXHR, textStatus ) {
+						  alert( "Request failed: " + textStatus );
+						});
+					}
+					
+				});
+				//대분류값 선택없이 중분류값 선택시
+				$(document).on('click','.licenseSubCategoryDiv', function(){
+					let isDisabled = $('#licenseSubCategory').prop('disabled');
+					if(isDisabled) {
+						alert('대분류를 선택해주세요');
+						return false;
+					}
+				});
+				// 자격증 중분류값 선택시 자격증코드,자격증명 조회
+				$(document).on('change','#licenseSubCategory', function(){
+					$('#licenseCategory').prop('disabled', false);
+					let lscCode = $(this).val();
+					
+					if(validationCheck(lscCode)){						
+						var request = $.ajax({
+						  url: '/getLicenseListForChallenge',
+						  method: 'GET',
+						  data: { 'lscCode' : lscCode },
+						  dataType: 'json'
+						});
+					// 중분류값 선택 성공시 
+					request.done(function( data ) {
+						  console.log(data);
+						  $('#licenseCategory').children().remove();
+						  $('#licenseCategory').append(`<option selected>자격증명</option>`);
+						  for(let licenseCategory of data){
+							  $('#licenseCategory').append(`<option value="${licenseCategory.liCode}" name="liName">${licenseCategory.liName}</option>`);								  
+						  }						  									
+						});
+					// 중분류 선택 실패시
+					request.fail(function( jqXHR, textStatus ) {
+						  alert( "Request failed: " + textStatus );
+						});
+					}
+				});
+				// 중분류값 선택없이 자격증명 선택시
+				$(document).on('click','.licenseCategoryDiv', function(){
+					let isDisabled = $('#licenseCategory').prop('disabled');
+					if(isDisabled) {
+						alert('중분류를 선택해주세요');
+						return false;
+					}
+				});
+				// 중분류값 선택없이 자격증코드 선택시
+				$(document).on('click','.liCodeCategoryDiv', function(){
+					let isDisabled = $('#liCodeCategory').prop('disabled');
+					if(isDisabled) {
+						alert('중분류를 선택해주세요');
+						return false;
+					}
+				});
+				// 자격증값 선택시 자격증코드조회
+				$(document).on('change','#licenseCategory', function(){
+					let getLiCode = $("#licenseCategory option:selected").val();	
+					console.log(getLiCode)
+					const addExamHref = '/addExamAnswer?liCode='+getLiCode;
+					$('#startBtn').click(function(){						
+						location.href=addExamHref;
+					});
+				});
+			});
+
+			$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+				function validateValue(checkValue) {
+					if(    typeof checkValue == 'undefined' 
+							|| checkValue == null 
+							|| checkValue == ''					){
+						return true;
+					}
+					return false;
+					
+				}			
+
+				$(document).on('click', '#startBtn', function(){
+					
+					$('#startBtn input').each(function(idx, item){
+						let checkValue = $(item).val();
+						let labelValue = $(item).parents('.mb-3').find('label').text();
+						if(validateValue(checkValue)){							
+							alert(`${labelValue}를 입력해주세요`);
+							$(item).focus();					
+							return false;
+						}						
+					});				
+				});
+			});
+	
+		</script>
 	</th:block> 
 	<!-- script end -->
 	
@@ -15,39 +137,33 @@
 		<section>
 			<div class="pxp-container">
 				<br><br><br>
-				<h1><strong>기출문제 생성</strong></h1>
+				<h1><strong>기출문제 선택</strong></h1>
                 <div class="pxp-hero-subtitle pxp-text-light">Add exam paper</div>
                 <br>
                 <div class="pxp-hero-form pxp-hero-form-round pxp-large mt-3 mt-lg-4">
-                    <form class="row gx-3 align-items-center">
-                        <div class="col-md-6 col-xxl-3">
-                            <div class="input-group mb-3 mb-lg-0">
-                                <span class="input-group-text"><span class="fa fa-check"></span></span>
-                                <select  id="licenseMainCategory" class="form-select" name="mainCate">
-                                	<option th:if="${not #lists.isEmpty(licenseMainList)}" th:each="l : ${licenseMainList}" th:value="${l.lmcCode}" th:text="${l.lmcName}"></option>
-                             	</select>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xxl-3 pxp-has-left-border">
-                            <div class="mb-3 licenseSubCategoryDiv">
-	                        	<label for="licenseSubCategory" class="form-label">중분류</label>
-	                        	<select id="licenseSubCategory" class="form-select" name="subCate" disabled="disabled"></select>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xxl-3 pxp-has-left-border">
-                            <div class="input-group mb-3 mb-lg-0">
-                                <span class="input-group-text"><span class="fa fa-check"></span></span>
-                                <select class="form-select">
-                                    <option selected>자격증명</option>
-                                    <option>자격증명</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-auto">
-                            <button type="button" onclick="location.href='/addExamAnswer'">시험지생성</button>
-                        </div>    
+                <form class="row gx-3 align-items-center">
+                    <div class="col-md-6 col-xxl-3">
+						<select  id="licenseMainCategory" class="form-select" name="mainCate">
+							<option selected>대분류</option>
+							<option th:if="${not #lists.isEmpty(mainListForExam)}" th:each="l : ${mainListForExam}" th:value="${l.lmcCode}" th:text="${l.lmcName}"></option>
+						</select>
+					</div>
+					<div class="col-md-6 col-xxl-3">
+						<div class="mb-3 licenseSubCategoryDiv">
+							<select id="licenseSubCategory" class="form-select" name="lscName" disabled="disabled"></select>
+						</div>
+					</div>
+					<div class="col-md-6 col-xxl-3">
+						<div class="mb-3 licenseCategoryDiv">
+							<select id="licenseCategory" class="form-select" name="liName" disabled="disabled"></select>
+						</div>
+					</div>  
+					<div class="col-12 col-lg-auto">						
+						<!-- <a id="startBtn" class="btn rounded-pill pxp-section-cta">시작</a> -->
+						<button type="button" id="startBtn" class="btn rounded-pill pxp-section-cta">시작</button>
+                    </div> 
                     </form>
-                </div>
+                </div>          
 			</div>
 		</section>
 		<br><br><br><br>
