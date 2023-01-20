@@ -116,13 +116,16 @@
 		(#{questionCode},#{liCode},#{lsCode},#{liName},#{lsSubject},#{lsName},#{question},#{questionScore},#{questionRegId},NOW());
 	</insert>
 	<select id="getNewQuestionCode" parameterType="String" resultType="String">
-		/* 문제코드 자동생성 */
-		SELECT
-			CASE
-			WHEN COUNT(1) = 0 THEN CONCAT(#{question}, '_1')
-		ELSE
-			CONCAT('question_', MAX(CAST(SUBSTRING_INDEX(${questionCode}, 'question_', -1)AS UNSIGNED))+1)
-			END AS newCode
+		/* 문제코드 자동생성 */			
+		SELECT 
+			CASE 
+			WHEN COUNT(1) = 0
+				THEN 'question_001'
+			WHEN (MAX(CAST(SUBSTRING_INDEX(${questionCode}, 'question_', -1)AS UNSIGNED)+1) > 999)
+				THEN CONCAT('question_', MAX(CAST(SUBSTRING_INDEX(${questionCode}, 'question_', -1)AS UNSIGNED))+1)
+			ELSE 
+				CONCAT('question_', LPAD(MAX(CAST(SUBSTRING_INDEX(${questionCode}, 'question_', -1)AS UNSIGNED))+1, 3, 0))
+			END as qCode
 		FROM
 			${question};
 	</select>
@@ -247,12 +250,15 @@
 	</insert>
 	<select id="getNewAnswerCode" parameterType="String" resultType="String">
 		/* 답안코드 자동생성 */
-		SELECT
-			CASE
-			WHEN COUNT(1) = 0 THEN CONCAT(#{answer}, '_1')
-		ELSE
-			CONCAT('answer_', MAX(CAST(SUBSTRING_INDEX(${answerCode}, 'answer_', -1)AS UNSIGNED))+1)
-			END AS newCode
+		SELECT 
+			CASE 
+			WHEN COUNT(1) = 0
+				THEN 'answer_001'
+			WHEN (MAX(CAST(SUBSTRING_INDEX(${answerCode}, 'answer_', -1)AS UNSIGNED)+1) > 999)
+				THEN CONCAT('answer_', MAX(CAST(SUBSTRING_INDEX(${answerCode}, 'answer_', -1)AS UNSIGNED))+1)
+			ELSE 
+				CONCAT('answer_', LPAD(MAX(CAST(SUBSTRING_INDEX(${answerCode}, 'answer_', -1)AS UNSIGNED))+1, 3, 0))
+			END as qCode
 		FROM
 			${answer};
 	</select>
@@ -305,12 +311,15 @@
 	</insert>
 	<select id="getNewExplainCode" parameterType="String" resultType="String">
 		/* 해설코드 자동생성 */
-		SELECT
-			CASE
-			WHEN COUNT(1) = 0 THEN CONCAT('explain', '_1')
-		ELSE
-			CONCAT('explain_', MAX(CAST(SUBSTRING_INDEX(${explainCode}, 'explain_', -1)AS UNSIGNED))+1)
-			END AS newCode
+		SELECT 
+			CASE 
+			WHEN COUNT(1) = 0
+				THEN 'explain_001'
+			WHEN (MAX(CAST(SUBSTRING_INDEX(${explainCode}, 'explain_', -1)AS UNSIGNED)+1) > 999)
+				THEN CONCAT('explain_', MAX(CAST(SUBSTRING_INDEX(${explainCode}, 'explain_', -1)AS UNSIGNED))+1)
+			ELSE 
+				CONCAT('explain_', LPAD(MAX(CAST(SUBSTRING_INDEX(${explainCode}, 'explain_', -1)AS UNSIGNED))+1, 3, 0))
+			END as eCode
 		FROM
 			${explanation};
 	</select>

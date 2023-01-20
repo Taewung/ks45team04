@@ -26,9 +26,6 @@
 	                </a>
                 </th:block>
                 <th:block th:unless="${not #lists.isEmpty(explanationList)}">
-                	 <a th:href="@{/modifyExplanation(explainCode=${l.explainCode})}">
-	               		<li><button title="Edit" id="emptyBtn"><span class="fa fa-pencil"></span></button></li>
-	                </a>
                 </th:block>
                 <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>                                              
             </ul>

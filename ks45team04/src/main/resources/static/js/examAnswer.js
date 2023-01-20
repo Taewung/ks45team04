@@ -28,7 +28,7 @@
   // Display initial question
   displayNext();
   
-  // Click handler for the 'next' button
+  // 다음버튼 클릭 시 
   $('#next').on('click', function (e) {
     e.preventDefault();
     
@@ -38,16 +38,16 @@
     }
     choose();
     
-    // If no user selection, progress is stopped
+    // 답안 미선택시 
     if (isNaN(selections[questionCounter])) {
-      alert('Please make a selection!');
+      alert('답안을 선택해주세요.');
     } else {
       questionCounter++;
       displayNext();
     }
   });
   
-  // Click handler for the 'prev' button
+  // 이전버튼 클릭 시
   $('#prev').on('click', function (e) {
     e.preventDefault();
     
@@ -59,7 +59,7 @@
     displayNext();
   });
   
-  // Click handler for the 'Start Over' button
+  // 시험 종료버튼 클릭 시
   $('#start').on('click', function (e) {
     e.preventDefault();
     
@@ -149,7 +149,7 @@
     });
   }
   
-  // Computes score and returns a paragraph element to be displayed
+  // 결과확인
   function displayScore() {
     var score = $('<p>',{id: 'question'});
     
@@ -160,8 +160,8 @@
       }
     }
     
-    score.append('You got ' + numCorrect + ' questions out of ' +
-                 questions.length + ' right!!!');
+    score.append(' 정답 수:' + numCorrect + '  / 총 문항 수: ' +
+                 questions.length);
     return score;
   }
 })();
