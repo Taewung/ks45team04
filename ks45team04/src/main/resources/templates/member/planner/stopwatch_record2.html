@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  class="pxp-root" >
+<!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
+<head>
+
+<meta charset="UTF-8">
+<title>StopWatch</title>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="/stopjs/stopwatch.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
+    <link rel="stylesheet" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+
+	.sc{
+		
+		}
+
+ 	.box{
+		width: 300px;
+		height: 300px;
+		margin-left: 600px;
+		
+	}
+	.timerBox{
+	
+	margin: 50px auto;
+		width: 280px;
+		outline: 2px solid black;
+	}
+	.timerBox .time{
+		font-size: 50pt;
+		color: #4C4C4C;
+		text-align: center;
+		font-family: sans-serif;
+	}
+	.btnBox{
+		margin: 50px auto;
+		text-align: center;
+	}
+	.btnBox .fa{
+		margin: 0px 5px;
+		font-size: 50pt;
+		color: skyblue;
+		cursor: pointer;
+	}
+</style>
+</head>
+
+<body>
+	<div class="pxp-preloader"><span>Loading...</span></div>
+	
+		<!-- begin header -->
+		<div th:replace="~{member/fragments/contentsHeader :: headerFragment}"></div>
+		<!-- end header -->			
+		
+		<!--  begin contents -->
+		   <div class="table-responsive">
+                        <table class="table table-hover align-middle">                      	
+                            <thead>                    
+                                <tr>
+                                    <th class="text-center" style="width: 10%;">자격증 이름</th>
+                                    <th class="text-center" style="width: 13%;">제목</th>
+		 						</tr>
+                            </thead>    
+                            <tbody>
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <tr th:if="${not #lists.isEmpty(toDoListDetailList)}"
+									th:each="l : ${toDoListDetailList}">
+                                    	<td>
+	                                     	<input type="hidden"  th:value="${l.toDoListCode}" name="toDoListCode" readonly="readonly" />
+                                    		<div class="pxp-company-dashboard-job-title  text-center" th:text="${l.toDoListCode}">
+                                    	</div>
+                                    	<td><div class="pxp-company-dashboard-job-category text-center" th:text="${l.liName}"></div></td>
+                                    	<td><div class="pxp-company-dashboard-job-category text-center" th:text="${l.toDoListTitle}"></div></td>
+                            
+                              </tr>
+                                <tr th:unless="${not #lists.isEmpty(toDoListDetailList)}">
+									<td colspan="9">등록된 정보가 없습니다.</td>
+								</tr>                    
+                                  
+                                </tr>                      
+                            </tbody>
+                        </table>
+                            
+                            
+                            
+			<br><br><br><br><section class="sc">
+			<h1>
+				<div class="pxp-container">
+					<div id='box' class="box">
+						<div id='timerBox' class="timerBox">
+							<input type="hidden" id="toDoListCode" th:value="${toDoListCode}"/>
+							<div id="time" class="time" th:text="${stopwatchTime != null ? stopwatchTime : '00:00:00'}">00:00:00</div>
+						</div>
+						<div class="btnBox">
+							<i id="startbtn" class="fa fa-play" aria-hidden="true"></i>
+							<i id="pausebtn" class="fa fa-pause" aria-hidden="true"></i>
+							<i id="stopbtn" class="fa fa-stop" aria-hidden="true"></i>
+						</div>
+					</div>
+				</div>
+			</h1>
+			</section>
+		<!--  end contents -->
+
+			
+		<!-- begin footer -->
+		<div th:replace="~{member/fragments/contentsFooter :: footerFragment}"></div>
+		<!-- end footer -->
+			
+	<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/js/nav.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+    <script>
+    	$(function(){
+    		
+    		$(document).on('click', '#pausebtn', function(){
+    			let stopwatchTime = $('#time').text();
+    			console.log(stopwatchTime);
+    			let toDoListCode = $('#toDoListCode').val();
+    			const formStopWatch = $('<form/>', {action : '/recordStopwatch', method : 'POST'});
+    			formStopWatch.append($('<input />', {type:'hidden', name : 'toDoListCode', value : toDoListCode}));
+    			formStopWatch.append($('<input />', {type:'hidden', name : 'stopwatchTime', value : stopwatchTime}));
+    			$(formStopWatch).appendTo('body');
+    			formStopWatch.submit();
+    		});
+    	})
+    </script>
+</body>
+</html>
