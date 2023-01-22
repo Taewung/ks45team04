@@ -13,7 +13,7 @@
 		</script>
 	</th:block> 
 	<th:block layout:fragment="customContents">
-		<h1>투두리스트 수정</h1>
+	
 		<form id="modifyToDoListForm" th:action="@{/modifyToDoList}" name="myform" method="post">
               <div class="row mt-4 mt-lg-5">
                   <div class="col-xxl-8" style=" margin-left: 650px;">
@@ -65,7 +65,16 @@
                                   		 th:value="${toDoList.toDoListTitle}">
                               </div>
                           </div>
-                      </div>                      
+                      </div>    
+                       <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="toDoListDay" class="form-label"><h6>실행날짜</h6></label>
+                                  <input type="date" id="toDoListDay" class="form-control" name="toDoListDay" placeholder="실행날짜" 
+                                  		 th:value="${toDoList.toDoListDay}">
+                              </div>
+                          </div>
+                      </div>                          
                    
                       
                   </div>

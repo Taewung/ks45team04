@@ -14,11 +14,38 @@
 	<th:block layout:fragment="customContents">
 		<section>
 			<div class="pxp-container">
-				<h1>일정목록</h1>
-                <p class="pxp-text-light"></p>
+				<h1><a th:href="@{/detailToDoList}">일정목록</a></h1>
+                <!-- 검색 start -->
+                <br><br><br>
+				 <div>
+				  <form th:action="@{/toDoListSearch}" method="GET">
+				    <div class="row justify-content-between align-content-center">
+				        <div class="col-auto order-2 order-sm-1">
+				            <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
+				                <div class="pxp-company-dashboard-jobs-search mb-3">
+				                <select class="form-select" style="width:200px;" name="searchKey">
+				                    <option value="liName">자격증이름</option>
+				                    <option value="toDoListTitle">제목</option>
+				               </select>&nbsp;&nbsp;
+				                    <div class="col-auto order-1 order-sm-2">
+				                        <div class="pxp-company-dashboard-jobs-search-search-form">
+				                            <div class="input-group">
+				                                <span class="input-group-text"><span class="fa fa-search"></span></span>
+				                                <input type="text" class="form-control" placeholder="검색어를 입력해주세요." name="searchValue">
+				                                <button class="btn ms-2" type="submit">검색</button>
+				                            </div>
+				                        </div>
+				                    </div>
+				                </div>              
+				            </div>
+				        </div>
+				   	</div>
+				 </form>
+				 </div>
+                    <!-- 검색 end --> 
 
                 <div class="mt-4 mt-lg-5">
-                    
+                   
                     <!-- 목록 start -->                   
                     <div class="table-responsive">
                         <table class="table table-hover align-middle">                      	
@@ -41,8 +68,8 @@
                                 <tr>
                                     <td>
                                     </td>
-                                    <tr th:if="${not #lists.isEmpty(toDoListDetailList)}"
-									th:each="l : ${toDoListDetailList}">
+                                    <tr th:if="${not #lists.isEmpty(toDoListSearch)}"
+									th:each="l : ${toDoListSearch}">
                                     	<td>
 	                                     	<input type="hidden"  th:value="${l.toDoListCode}" name="toDoListCode" readonly="readonly" />
                                     		<div class="pxp-company-dashboard-job-title  text-center" th:text="${l.toDoListCode}">
@@ -79,7 +106,7 @@
 	                                        </div>
 	                                    </td> -->
                                 </tr>
-                                <tr th:unless="${not #lists.isEmpty(toDoListDetailList)}">
+                                <tr th:unless="${not #lists.isEmpty(toDoListSearch)}">
 									<td colspan="9">등록된 정보가 없습니다.</td>
 								</tr>                    
                                    

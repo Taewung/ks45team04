@@ -49,10 +49,10 @@
 			to_do_list
 		SET 
 			 total_day_study_time = #{stopwatchTime}
-			
 		WHERE 
 			to_do_list_code= #{toDoListCode};
 		</update>
+
 	
 		<select id="dDayDetailList" resultMap="dDayDetailListResultMap">
 			/* 디데이 상세 조회 */
@@ -75,13 +75,14 @@
 			to_do_list_code = #{toDoListCode};
 	</delete>
 	
-	<update id="modifyToDoList" parameterType="String">
+	<update id="modifyToDoList" parameterType="ks45team04.sos.member.dto.ToDoList">
 		/* 특정 일정 정보 수정*/
 		UPDATE 
 			to_do_list
 		SET 
 			 li_name = #{liName}
 			,to_do_list_title = #{toDoListTitle}
+			,to_do_list_day = #{toDoListDay}
 		WHERE 
 			to_do_list_code= #{toDoListCode};
 		</update>
@@ -115,8 +116,8 @@
 		 ,to_do_list_reg_time
 		 ,total_day_study_time) 
 		VALUES 
-		(#{toDoListCode}, #{memId}, #{liCode},#{liName}, #{toDoListTitle}, #{toDoListDay},NOW(), 
-			#{toDayStudyTime});
+		(sf_to_do_list_code(), #{memId}, #{liCode},#{liName}, #{toDoListTitle}, #{toDoListDay},NOW(), 
+			#{totalDayStudyTime});
 			
 	</insert>
 	
