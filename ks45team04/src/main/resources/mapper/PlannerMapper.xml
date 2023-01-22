@@ -26,6 +26,21 @@
 		<result property="totalDayStudyTime" 										column="total_day_study_time"/>
 	</resultMap>
 	
+	<insert id="addDDay" parameterType="ks45team04.sos.member.dto.DDay">
+		/* 디데이 등록 */
+		INSERT INTO d_day
+		( d_day_code
+		 ,mem_id
+		 ,li_code
+		 ,li_name
+		 ,d_day_content
+		 ,d_day_date
+		 ,d_day_write_date
+		) 
+		VALUES 
+		(sf_d_day_code(), #{memId}, #{liCode}, #{liName}, #{dDayContent},#{dDayDate}, now());
+	</insert>
+	
 	
 	<select id="getDDayByCode" parameterType="String" resultMap="dDayDetailListResultMap">
 		/* 디데이 상세보기 */

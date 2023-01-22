@@ -18,7 +18,11 @@ public class PlannerService {
 	}
 
 	
-	
+	/**
+	 * 디데이 등록
+	 * @param dDay
+	 * @return
+	 */
 	public int addDDay(DDay dDay) {
 		
 		return plannerMapper.addDDay(dDay);

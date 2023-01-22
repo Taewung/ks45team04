@@ -167,7 +167,17 @@ public class PlannerController {
 		return "member/planner/study_list";
 	}
 
-	// 디데이 등록
+	//디데이 등록 처리
+	@PostMapping("/addDDay")
+	public String addDDay(DDay dDay) {
+		
+		
+		plannerService.addDDay(dDay);
+		
+		return "redirect:/detailDDay";
+	}
+	
+	// 디데이 등록 화면
 	@GetMapping("/addDDay")
 	public String addDDay(Model model) {
 		model.addAttribute("title", "디데이 등록");
