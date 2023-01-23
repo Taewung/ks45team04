@@ -96,7 +96,7 @@
 				lsc.lmc_code = lmc.lmc_code
 	</select>
 
-	<select id="LicenseSubList" resultMap="licenseSubResultMap">
+	<select id="LicenseSubList" resultMap="licenseSubResultMap" parameterType="Map">
 		/* 자격증 중분류 목록 조회*/	
 		SELECT
 			*
@@ -111,6 +111,21 @@
 			${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
 			</if>
 		</where>
+		<if test="startRowNum != null and startRowNum > -1">		
+			LIMIT #{startRowNum}, #{rowPerPage};
+		</if>
 			
 	</select>
+	
+	<select id="getLicenseSubCnt" resultType ="int">	
+   /* 자격증 중분류 테이블의 전체 행의 갯수 */		
+	SELECT			
+	     COUNT(1)		
+   FROM			
+        license_sub_category;		
+</select>
 </mapper>
+
+
+
+

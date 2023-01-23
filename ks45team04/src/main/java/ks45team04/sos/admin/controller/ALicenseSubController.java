@@ -1,6 +1,7 @@
 package ks45team04.sos.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ks45team04.sos.admin.dto.LicenseMain;
+import ks45team04.sos.admin.dto.LicensePassScore;
 import ks45team04.sos.admin.dto.LicenseSub;
 import ks45team04.sos.admin.mapper.LicenseSubMapper;
 import ks45team04.sos.admin.service.LicenseSubService;
@@ -113,13 +115,23 @@ private final LicenseSubMapper licenseSubMapper;
 		// 자격증 중분류 목록 조회
 		@GetMapping("/licenseSubList")
 		public String licenseSubList(Model model
+									,@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage
 									,@RequestParam(value="searchKey", required = false) String searchKey
-								    ,@RequestParam(value="searchValue", required = false) String searchValue) {
+									,@RequestParam(value="searchValue", required = false, defaultValue = "") String searchValue) {
 			
-			List<LicenseSub> licenseSubList = licenseSubService.LicenseSubList(searchKey, searchValue);
+			Map<String, Object> paramMap = licenseSubService.LicenseSubList(currentPage, searchKey, searchValue);
+			int lastPage = (int) paramMap.get("lastPage");
+			List<LicenseSub> licenseSubList = (List<LicenseSub>) paramMap.get("licenseSubList");
+			int startPageNum = (int) paramMap.get("startPageNum");
+			int endPageNum = (int) paramMap.get("endPageNum");
 			
-			model.addAttribute("title", "자격증 중분류 조회");
+			model.addAttribute("title", "자격증별 합격기준점수 목록");
+			model.addAttribute("currentPage", currentPage);
 			model.addAttribute("licenseSubList", licenseSubList);
+			model.addAttribute("lastPage", lastPage);
+			model.addAttribute("startPageNum", startPageNum);
+			model.addAttribute("endPageNum", endPageNum);
+			
 			
 			return "admin/licenseSub/license_sub_list";
 			

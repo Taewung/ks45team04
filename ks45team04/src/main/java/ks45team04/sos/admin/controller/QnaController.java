@@ -1,6 +1,7 @@
 package ks45team04.sos.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ks45team04.sos.admin.dto.LicenseSub;
 import ks45team04.sos.admin.dto.Qna;
 import ks45team04.sos.admin.mapper.AQnaMapper;
 import ks45team04.sos.admin.service.AQnaService;
@@ -160,14 +162,23 @@ public class QnaController {
 		// qna 질문 및 답변 목록 조회
 				@GetMapping("/QnaQuestionList")
 				public String QnaList(Model model
+									,@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage
 									,@RequestParam(value="searchKey", required = false) String searchKey
-								    ,@RequestParam(value="searchValue", required = false) String searchValue) {
+									,@RequestParam(value="searchValue", required = false, defaultValue = "") String searchValue) {
 					
-				List<Qna> QnaList = aqnaService.QnaList(searchKey, searchValue);
-				
-				
-					model.addAttribute("title", "qna 질문 조회");
-					model.addAttribute("QnaList", QnaList);
+					Map<String, Object> paramMap = aqnaService.QnaList(currentPage, searchKey, searchValue);
+					int lastPage = (int) paramMap.get("lastPage");
+					List<Qna> qnaList = (List<Qna>) paramMap.get("qnaList");
+					int startPageNum = (int) paramMap.get("startPageNum");
+					int endPageNum = (int) paramMap.get("endPageNum");
+					
+					model.addAttribute("title", "자격증별 합격기준점수 목록");
+					model.addAttribute("currentPage", currentPage);
+					model.addAttribute("qnaList", qnaList);
+					model.addAttribute("lastPage", lastPage);
+					model.addAttribute("startPageNum", startPageNum);
+					model.addAttribute("endPageNum", endPageNum);
+					
 					
 					return "admin/QnA/qna_question.list";
 				}

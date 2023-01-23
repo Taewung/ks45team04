@@ -1,6 +1,8 @@
 package ks45team04.sos.admin.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -79,7 +81,23 @@ private final LicenseInfoMapper licenseInfoMapper;
 	 * 자격증 정보 목록 조회
 	 * @return List<LicenseInfo>
 	 */
-	public List<LicenseInfo> LicenseInfoList(String searchKey, String searchValue){
+	public Map<String, Object> licenseInfoList(int currentPage, String searchKey, String searchValue){
+		// 보여질 행의 갯수
+		int rowPerPage = 5;
+		
+		//  보여질 행의 시작점s
+		int startRowNum = (currentPage - 1) * rowPerPage;
+		
+		// 마지막페이지 
+		// 1. 테이블의 전체 행의 갯수
+		double rowCnt = licenseInfoMapper.getLicenseInfoCnt();
+		// 2. 마지막페이지
+		int lastPage = (int) Math.ceil(rowCnt/rowPerPage);
+		
+		// 보여질 페이지 번호 구현
+		// 보여질 페이지 번호 초기화
+		int startPageNum = 1;
+		int endPageNum = (int) Math.ceil(rowCnt/rowPerPage);
 		
 		if(searchKey != null) {
 			switch (searchKey) {
@@ -102,9 +120,24 @@ private final LicenseInfoMapper licenseInfoMapper;
 		}
 		
 		
-		List<LicenseInfo> licenseInfoList = licenseInfoMapper.LicenseInfoList(searchKey, searchValue);
+		// 조회 시 Limit 인수 파라미터 셋팅
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("startRowNum", startRowNum);
+		paramMap.put("rowPerPage", rowPerPage);
+		paramMap.put("searchKey", searchKey);
+		paramMap.put("searchValue", searchValue);
 		
-		return licenseInfoList;
+		// data => 전체 문제 목록 조회 get
+		List<LicenseInfo> licenseInfoList = licenseInfoMapper.LicenseInfoList(paramMap);
+		
+		// controller에 전달하기 위한 파라미터 셋팅
+		paramMap.clear();
+		paramMap.put("licenseInfoList", licenseInfoList);
+		paramMap.put("lastPage", lastPage);
+		paramMap.put("startPageNum", startPageNum);
+		paramMap.put("endPageNum", endPageNum);
+				
+		return paramMap;
 	}
 	
 	

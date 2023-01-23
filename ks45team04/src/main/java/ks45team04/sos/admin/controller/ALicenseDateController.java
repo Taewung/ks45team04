@@ -1,6 +1,7 @@
 package ks45team04.sos.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import ks45team04.sos.admin.dto.LicenseDate;
 import ks45team04.sos.admin.dto.LicenseInfo;
+import ks45team04.sos.admin.dto.LicenseSub;
 import ks45team04.sos.admin.mapper.LicenseDateMapper;
 import ks45team04.sos.admin.service.LicenseDateService;
 
@@ -103,14 +105,23 @@ private final LicenseDateMapper licenseDateMapper;
 			// 자격증 일정 조회
 			@GetMapping("/licenseDateList")
 			public String licenseDateList(Model model
-										 ,@RequestParam(value="searchKey", required = false) String searchKey
-									     ,@RequestParam(value="searchValue", required = false) String searchValue) {		
+										,@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage
+										,@RequestParam(value="searchKey", required = false) String searchKey
+										,@RequestParam(value="searchValue", required = false, defaultValue = "") String searchValue) {		
+					
 				
+				Map<String, Object> paramMap = licenseDateService.licenseDateList(currentPage, searchKey, searchValue);
+				int lastPage = (int) paramMap.get("lastPage");
+				List<LicenseDate> licenseDateList = (List<LicenseDate>) paramMap.get("licenseDateList");
+				int startPageNum = (int) paramMap.get("startPageNum");
+				int endPageNum = (int) paramMap.get("endPageNum");
 				
-				List<LicenseDate> licenseDateList = licenseDateService.licenseDateList(searchKey, searchValue);
-				
-				model.addAttribute("title", "자격증 일정 조회");
+				model.addAttribute("title", "자격증 과목 목록 조회");
+				model.addAttribute("currentPage", currentPage);
 				model.addAttribute("licenseDateList", licenseDateList);
+				model.addAttribute("lastPage", lastPage);
+				model.addAttribute("startPageNum", startPageNum);
+				model.addAttribute("endPageNum", endPageNum);
 					
 				return "admin/licenseDate/license_date_list.html";
 			}
