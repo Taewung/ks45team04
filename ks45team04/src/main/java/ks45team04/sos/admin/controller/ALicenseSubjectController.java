@@ -1,6 +1,7 @@
 package ks45team04.sos.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ks45team04.sos.admin.dto.LicenseInfo;
+import ks45team04.sos.admin.dto.LicenseSub;
 import ks45team04.sos.admin.dto.LicenseSubject;
 import ks45team04.sos.admin.mapper.LicenseSubjectMapper;
 import ks45team04.sos.admin.service.LicenseSubService;
@@ -107,13 +109,22 @@ public class ALicenseSubjectController {
 	// 자격증 과목 조회
 	@GetMapping("/licenseSubjectList")
 	public String licenseSubjectList(Model model
+									,@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage
 									,@RequestParam(value="searchKey", required = false) String searchKey
-								    ,@RequestParam(value="searchValue", required = false) String searchValue) {
+									,@RequestParam(value="searchValue", required = false, defaultValue = "") String searchValue) {
 		
-		List<LicenseSubject> licenseSubjectList = licenseSubjectService.LicenseSubjectList(searchKey, searchValue);
+		Map<String, Object> paramMap = licenseSubjectService.LicenseSubjectList(currentPage, searchKey, searchValue);
+		int lastPage = (int) paramMap.get("lastPage");
+		List<LicenseSubject> licenseSubjectList = (List<LicenseSubject>) paramMap.get("licenseSubjectList");
+		int startPageNum = (int) paramMap.get("startPageNum");
+		int endPageNum = (int) paramMap.get("endPageNum");
 		
-		model.addAttribute("title", "자격증 과목 조회");
+		model.addAttribute("title", "자격증별 합격기준점수 목록");
+		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("licenseSubjectList", licenseSubjectList);
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
 		
 		return "admin/licenseSubject/license_subject_list";
 		

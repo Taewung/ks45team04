@@ -105,7 +105,7 @@
 			license_date
 	</select>
 	
-	<select id="LicenseDateList" resultMap="licenseDateResultMap">
+	<select id="LicenseDateList" resultMap="licenseDateResultMap" parameterType="Map">
 		/* 자격증 일정 목록 조회*/
 		SELECT
 				*
@@ -116,8 +116,31 @@
 			${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
 			</if>
 		</where>
+		<if test="startRowNum != null and startRowNum > -1">		
+			LIMIT #{startRowNum}, #{rowPerPage};
+		</if>
 	</select>
+	
+	<select id="getLicenseDateCnt" resultType ="int">	
+	   /* 자격증 일정 테이블의 전체 행의 갯수 */		
+		SELECT			
+		     COUNT(1)		
+	   FROM			
+	        license_date	
+	</select>
+	
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
