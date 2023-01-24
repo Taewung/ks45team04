@@ -167,6 +167,29 @@ public class PlannerController {
 		return "member/planner/study_list";
 	}
 
+	
+	// 디데이 정보 수정 처리
+		@PostMapping("/modifyDDay")
+		public String modifyDDay(DDay dDay) {
+
+			plannerService.modifyDDay(dDay);
+
+			return "redirect:/detailDDay";
+		}
+
+	
+	// 디데이 수정 화면
+		@GetMapping("/modifyDDay")
+		public String modifyDDay(@RequestParam(value = "dDayCode") String dDayCode, Model model) {
+			DDay dDay = plannerService.getDDayByCode(dDayCode);
+
+			model.addAttribute("title", "디데이 정보 수정");
+			model.addAttribute("dDay", dDay);
+
+			return "member/planner/d_day_modify";
+		}
+	
+	
 	//디데이 등록 처리
 	@PostMapping("/addDDay")
 	public String addDDay(DDay dDay) {
@@ -184,12 +207,7 @@ public class PlannerController {
 		return "member/planner/d_day_insert";
 	}
 
-	// 디데이 수정
-	@GetMapping("/modifyDDay")
-	public String modifyDDay(Model model) {
-		model.addAttribute("title", "디데이 수정");
-		return "member/planner/d_day_modify";
-	}
+	
 
 	// 디데이 삭제
 	@GetMapping("/deleteDDay")
@@ -207,15 +225,15 @@ public class PlannerController {
 		return "member/planner/d_day_detail";
 	}
 	
-	// 디데이 보기
-	@GetMapping("/DDayDDay")
-	
-	public String DDayDDay(@RequestParam(value="dDayCode" ,required = false) String dDayCode
-				,Model model) {
-		DDay dDay = plannerService.getDDayByCode(dDayCode);
-			model.addAttribute("ddayInfo", dDay);
-			
-			return "member/planner/d_day_d_day";
-		}
+//	// 디데이 보기
+//	@GetMapping("/DDayDDay")
+//	
+//	public String DDayDDay(@RequestParam(value="dDayCode" ,required = false) String dDayCode
+//				,Model model) {
+//		DDay dDay = plannerService.getDDayByCode(dDayCode);
+//			model.addAttribute("ddayInfo", dDay);
+//			
+//			return "member/planner/d_day_d_day";
+//		}
 
 }

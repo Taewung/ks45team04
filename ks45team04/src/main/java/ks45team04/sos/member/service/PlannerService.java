@@ -17,6 +17,16 @@ public class PlannerService {
 		this.plannerMapper = plannerMapper;
 	}
 
+	/**
+	 * 특정 디데이 수정
+	 * @param toDoList
+	 * @return
+	 */
+	public int modifyDDay(DDay dDay) {
+		
+		return plannerMapper.modifyDDay(dDay);
+	}
+	
 	
 	/**
 	 * 디데이 등록
@@ -29,7 +39,11 @@ public class PlannerService {
 	}
 	
 	
-	
+	/**
+	 * 코드별 디데이
+	 * @param dDayCode
+	 * @return
+	 */
 	public DDay getDDayByCode(String dDayCode) {
 		
 		return plannerMapper.getDDayByCode(dDayCode);
