@@ -12,7 +12,33 @@
 		<result property="dDayContent" 									column="d_day_content"/>
 		<result property="dDayDate" 										column="d_day_date"/>
 		<result property="dDayWriteDate" 								column="d_day_write_date"/>
+	<association property="licenseInfo" javaType="LicenseInfo">
+			<id property="liCode" 					column="li_code" />
+			<result property="lmcCode" 				column="lmc_code" />
+			<result property="lmcName" 				column="lmc_name" />
+			<result property="lscCode" 				column="lsc_code" />
+			<result property="liName" 				column="li_name" />
+			<result property="lscName" 				column="lsc_name" />
+			<result property="liOverview" 			column="li_overview" />
+			<result property="liQualification" 		column="li_qualification" />
+			<result property="liRegId" 				column="li_reg_id" />
+			<result property="liRegDatetime" 		column="li_reg_date" />
+		</association>	
+	
 	</resultMap>
+	
+		<resultMap type="licenseInfo" id="LicenseInfomap">
+			<id property="liCode" 					column="li_code" />
+			<result property="lmcCode" 				column="lmc_code" />
+			<result property="lmcName" 				column="lmc_name" />
+			<result property="lscCode" 				column="lsc_code" />
+			<result property="liName" 				column="li_name" />
+			<result property="lscName" 				column="lsc_name" />
+			<result property="liOverview" 			column="li_overview" />
+			<result property="liQualification" 		column="li_qualification" />
+			<result property="liRegId" 				column="li_reg_id" />
+			<result property="liRegDatetime" 		column="li_reg_date" />
+		</resultMap>	
 
 
 	<resultMap type="ks45team04.sos.member.dto.ToDoList" 				id="toDoListDetailListResultMap">
@@ -26,6 +52,9 @@
 		<result property="totalDayStudyTime" 										column="total_day_study_time"/>
 	</resultMap>
 	
+	
+	
+	
 	<update id="modifyDDay" parameterType="ks45team04.sos.member.dto.DDay">
 		/* 특정 디데이 정보 수정*/
 		UPDATE 
@@ -37,6 +66,33 @@
 		WHERE 
 			d_day_code= #{dDayCode};
 		</update>
+	<select id="getliName" parameterType="String" resultMap="LicenseInfomap">
+			/* 자격증 코드별 목록 조회 */
+			SELECT 
+			 li.li_code
+			,li.lmc_code
+			,li.lmc_name
+			,li.lsc_code
+			,li.lsc_name
+			,li.li_name
+			,li.li_overview
+			,li.li_qualification
+			,li.li_reg_id
+			,li.li_reg_date
+		FROM
+			license_info AS li
+		WHERE 
+			li.li_code = #{liCode};	
+			
+	</select>
+	
+	<select id="licenseInfoList" resultMap="LicenseInfomap">
+			/* 공부노트등록을 위한 자격증 목록 조회 */
+			SELECT
+			*
+			from
+			license_info;
+	</select>
 	
 	<insert id="addDDay" parameterType="ks45team04.sos.member.dto.DDay">
 		/* 디데이 등록 */
