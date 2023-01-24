@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.member.dto.DDay;
 import ks45team04.sos.member.dto.ToDoList;
 import ks45team04.sos.member.mapper.PlannerMapper;
@@ -25,6 +26,26 @@ public class PlannerService {
 	public int modifyDDay(DDay dDay) {
 		
 		return plannerMapper.modifyDDay(dDay);
+	}
+	
+	public LicenseInfo getliName(String liCode) {
+		
+		LicenseInfo getliName = plannerMapper.getliName(liCode);
+		
+		return getliName;
+		
+	}
+	
+	
+	/**
+	 * 노트 등록을 위한 자격증 정보 조회
+	 * @param Note
+	 */
+	public List<LicenseInfo> licenseInfoList(){
+		
+		List<LicenseInfo> licenseInfoList = plannerMapper.licenseInfoList();
+		
+		return licenseInfoList;
 	}
 	
 	
