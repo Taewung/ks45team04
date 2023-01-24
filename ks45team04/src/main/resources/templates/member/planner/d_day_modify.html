@@ -11,6 +11,40 @@
 			location.href = '/detailDDay';
 		});
 	});
+
+	//노트이름 자동등록
+    function validationCheck(data){
+        if(typeof data == 'undefined' ||  data == ''  || data == null || data == '대분류'){
+			           return false;
+			       }
+			     return true;
+		    }
+		
+			$(document).on('change','#liCode', function(){
+			
+			let liCode = $(this).val();
+				console.log(liCode);
+			
+			if(validationCheck(liCode)){						
+				var request = $.ajax({
+				  url: '/getliCode',
+				  method: 'GET',
+				  data: { 'liCode' : liCode },
+				  dataType: 'json'
+				});
+			
+				request.done(function( data ) {
+					  console.log(data);
+					  let liName = data.liName
+					  $('input[name=liName]').attr('value',liName);
+					  
+					});
+				// 중분류 선택 실패시
+				request.fail(function( jqXHR, textStatus ) {
+					  alert( "Request failed: " + textStatus );
+					});
+				}
+			});
 	</script>
 	</th:block> 
 	<!-- script end -->
@@ -43,12 +77,12 @@
                                   		 th:value="${dDay.memId}">
                               </div>
                           </div>
-                      </div><br><br>
+                      </div>
                       <div class="row">
                           <div class="col-sm-6">
-                              <div class="mb-3">
-                                  <label for="liCode" class="form-label"><h6>자격증 코드</h6></label>
-                                  <input type="text" id="liCode" class="form-control" name="liCode" placeholder="자격증 코드" readonly="readonly"
+                              <div class="mb-3" >
+                                  <label for="getliName" class="form-label"><h6>자격증 코드</h6></label>
+                                  <input type="text" id="liName" class="form-control" name="liName" placeholder="자격증 코드" 
                                   		 th:value="${dDay.liCode}">
                               </div>
                           </div>
@@ -56,9 +90,15 @@
                       <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3">
-                                  <label for="liName" class="form-label"><h6>자격증 이름</h6></label>
-                                  <input type="text" id="liName" class="form-control" name="liName" placeholder="자격증 이름" 
-                                  		 th:value="${dDay.liName}">
+                                   <label for="liCode" class="form-label"><h6>자격증 이름</h6></label>
+                                  <select class="form-select" id="liCode" name="liCode">
+                             		 <th:block th:if="${not #lists.isEmpty(licenseInfoList)}" 
+										  th:each="l : ${licenseInfoList}">								
+									<option th:value="${l.liCode}">[[${l.liName}]]</option>
+									</th:block>
+									<th:block th:unless="${not #lists.isEmpty(licenseInfoList)}">								
+									<option>등록된 정보가 없습니다.</option>
+                               		</select>
                               </div>
                           </div>
                       </div>
