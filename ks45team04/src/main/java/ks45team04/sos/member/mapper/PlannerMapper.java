@@ -10,6 +10,9 @@ import ks45team04.sos.member.dto.ToDoList;
 @Mapper	
 public interface PlannerMapper {
 	
+	//특정 디데이 수정
+		public int modifyDDay(DDay dDay);
+	
 	//디데이 상세 조회
 		public DDay getDDayByCode(String dDayCode);
 	

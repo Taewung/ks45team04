@@ -10,6 +10,18 @@
 				location.href = '/detailDDay';
 			});
 		});
+		
+		
+		// 노트이름 클릭시 노트코드 자동 등록
+		$(function(){
+			$('#liName').val($('#liCode option:selected').text());
+			$(document).on('change', '#liCode', function(){
+				//console.log($('#liCode option:selected').text());
+				let selectedLiName = $('#liCode option:selected').text();
+				$('#liName').val(selectedLiName);
+			});
+		});
+		
 		</script>
 	</th:block> 
 	<th:block layout:fragment="customContents">
