@@ -11,6 +11,9 @@ import ks45team04.sos.member.dto.ToDoList;
 @Mapper	
 public interface PlannerMapper {
 	
+	// 디데이 코드로 디데이 삭제
+		public int deleteDDayByCode(String dDayCode);
+	
 	// 디데이 등록을 위한 자격증 코드별 이름
 		public LicenseInfo getliName(String liCode);
 	

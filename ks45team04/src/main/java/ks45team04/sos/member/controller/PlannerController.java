@@ -186,16 +186,18 @@ public class PlannerController {
 		@GetMapping("/modifyDDay")
 		public String modifyDDay(@RequestParam(value = "dDayCode") String dDayCode, Model model) {
 			DDay dDay = plannerService.getDDayByCode(dDayCode);
+			List<LicenseInfo> licenseInfoList = plannerService.licenseInfoList();
 
 			model.addAttribute("title", "디데이 정보 수정");
 			model.addAttribute("dDay", dDay);
+			model.addAttribute("licenseInfoList", licenseInfoList);
 
 			return "member/planner/d_day_modify";
 		}
 	
 		
 	// 디데이 등록 코드별 이름
-		@GetMapping("/getliCode")
+		@GetMapping("/getliName")
 		    @ResponseBody
 		    public LicenseInfo getliName(@RequestParam(value="liCode") String liCode) {
 			LicenseInfo getliName = plannerService.getliName(liCode);
@@ -230,12 +232,17 @@ public class PlannerController {
 
 	
 
-	// 디데이 삭제
+	// 일정 삭제 처리
 	@GetMapping("/deleteDDay")
-	public String deleteDDay(Model model) {
-		model.addAttribute("title", "디데이 삭제");
-		return "member/planner/d_day_delete";
+	public String deleteDDayByCode(DDay dDay, RedirectAttributes reAttr) {
+		String dDayCode = dDay.getdDayCode();
+		String redirectURI = "redirect:/detailDDay";
+
+		plannerService.deleteDDayByCode(dDayCode);
+
+		return redirectURI;
 	}
+		
 
 	// 디데이 상세
 	@GetMapping("/detailDDay")

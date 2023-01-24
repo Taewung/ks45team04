@@ -40,7 +40,7 @@
 			
 			if(validationCheck(liCode)){						
 				var request = $.ajax({
-				  url: '/getliCode',
+				  url: '/getliName',
 				  method: 'GET',
 				  data: { 'liCode' : liCode },
 				  dataType: 'json'
@@ -100,8 +100,8 @@
                       </div>
                        <div class="row">
                           <div class="col-sm-6">
-                              <div class="mb-3" hidden>
-                                    <label for="getliCode" class="form-label">자격증코드</label>
+                              <div class="mb-3" >
+                                    <label for="getliName" class="form-label">자격증코드</label>
                                    <input type="text" id="liName" class="form-control" name="liName" />
                               </div >
                           </div>

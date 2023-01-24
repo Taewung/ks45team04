@@ -53,6 +53,15 @@
 	</resultMap>
 	
 	
+	<delete id="deleteDDayByCode" parameterType="String">
+		/* 디데이코드로 디데이삭제 */
+		DELETE
+		FROM 
+			d_day
+		WHERE 
+			d_day_code = #{dDayCode};
+	</delete>
+	
 	
 	
 	<update id="modifyDDay" parameterType="ks45team04.sos.member.dto.DDay">

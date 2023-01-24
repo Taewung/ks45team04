@@ -18,6 +18,19 @@ public class PlannerService {
 		this.plannerMapper = plannerMapper;
 	}
 
+	
+	
+	/**
+	 * 특정 디데이 삭제
+	 * @param dDayCode
+	 */
+	public void deleteDDayByCode(String dDayCode) {
+		
+		plannerMapper.deleteDDayByCode(dDayCode);
+		
+	}
+	
+	
 	/**
 	 * 특정 디데이 수정
 	 * @param toDoList
