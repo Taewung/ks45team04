@@ -101,17 +101,7 @@ public class PassScoreController {
 		log.info("자격증정보 : {}", liCodeForLsPScore);
 		log.info("과목합격기준점수목록 : {}", liCode);
 	return "admin/passScore/subject_pass_score_list";
-	}
-	// 자격증별 합격기준점수 상세정보 조회
-	@GetMapping("/checkLicensePassScore")
-	public String checkLicensePassScore(@RequestParam(value="liPScoreCode", required=false) String liPScoreCode
-										,Model model) {
-		LicensePassScore licensePassScoreByCode = licensePassScoreService.getLicensePassScoreByCode(liPScoreCode);
-		model.addAttribute("title", "자격증합격점수상세조회");
-		model.addAttribute("licensePassScoreByCode", licensePassScoreByCode);
-		return "admin/passScore/check_license_pass_score";
-	}
-	
+	}	
 	/* ***************************자격증합격기준점수******************************** */
 	
 	// 특정 자격증합격기준점수 수정
