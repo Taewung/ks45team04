@@ -9,7 +9,7 @@ import ks45team04.sos.member.dto.MPointSaveStandard;
 @Mapper
 public interface MPointSaveStandardMapper {
 
-	//포인트 적립 기준 내역 조회
+	//포인트 적립 기준 조회
 	public List<MPointSaveStandard> mPointSaveStandardList();
 
 	

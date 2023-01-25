@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ks45team04.sos.admin.dto.PointFeeRate;
 import ks45team04.sos.admin.dto.PointRefundApproval;
@@ -61,10 +62,14 @@ public class APointController {
 	
 	// 포인트 적립 기준 삭제
 	@GetMapping("deletePointSaveStandard")
-	public String deletePointSaveStandard(Model model) {
-		model.addAttribute("title", "포인트 적립 기준 삭제");
+	public String deletePointSaveStandard(PointSaveStandard pointSaveStandard, RedirectAttributes reAttr) {
+		
+		String pointSaveStandardCode = pointSaveStandard.getPointSaveStandardCode();
+		String redirectURI = "redirect:/pointSaveStandardList";
 
-		return "admin/point/point_save_standard_delete";
+		pointSaveStandardService.deletePointSaveStandard(pointSaveStandardCode);
+		
+		return redirectURI;
 	}
 	
 	//포인트 적립 기준 수정 처리
@@ -88,6 +93,7 @@ public class APointController {
 
 		return "admin/point/point_save_standard_modify";
 	}
+	
 	//포인트 적립 기준 등록 관리자 인증
 	@GetMapping("/pointSaveStandardIdCheck")
 	@ResponseBody
@@ -102,8 +108,10 @@ public class APointController {
 	@PostMapping("/addPointSaveStandard")
 	public String addPointSaveStandard(PointSaveStandard PointSaveStandard) {
 		
-		System.out.println(PointSaveStandard);
-		
+		//포인트 적립 등록 코드 자동생성
+		String newPointSaveStandardCode = pointSaveStandardService.getPointSaveStandardCode("pointSaveStandard","pointSaveStandardCode");
+				
+		PointSaveStandard.setPointSaveStandardCode(newPointSaveStandardCode);
 		pointSaveStandardService.addPointSaveStandard(PointSaveStandard);
 		
 		return "redirect:/pointSaveStandardList";
@@ -138,13 +146,17 @@ public class APointController {
 	
 	// 포인트 수수료율 삭제
 	@GetMapping("/deletePointfeeRate")
-	public String deletePointfeeRate(Model model) {
-		model.addAttribute("title", "포인트 수수료율 삭제");
+	public String deletePointfeeRate(PointFeeRate pointFeeRate, RedirectAttributes reAttr) {
+		
+		String pointFeeRateCode = pointFeeRate.getPointFeeRateCode();
+		String redirectURI = "redirect:/pointFeeRateList";
+		
+		pointFeeRateService.deletePointfeeRate(pointFeeRateCode);
 
-		return "admin/point/point_fee_rate_delete";
+		return redirectURI;
 	}
 	
-	// 포인트 수수료율 수정 처리 화면
+	// 포인트 수수료율 수정 처리
 	@PostMapping("/modifyPointFeeRate")
 	public String modifyPointFeeRate(PointFeeRate pointFeeRate) {
 		
@@ -166,7 +178,7 @@ public class APointController {
 		return "admin/point/point_fee_rate_modify";
 	}
 	
-	//포인트 수수율 등록 관리자 인증
+	//포인트 수수료율 등록 관리자 인증
 	@GetMapping("/pointFeeRateIdCheck")
 	@ResponseBody
 	public boolean pointFeeRateIdCheck(@RequestParam(value="inputId") String inputId){
@@ -177,7 +189,7 @@ public class APointController {
 	}
 
 	
-	// 포인트 수수료율 조회
+	// 포인트 수수료율 조회 및 검색
 	@GetMapping("/pointFeeRateList")
 	public String pointFeeRateList(Model model,
 								   @RequestParam(value="searchKey", required = false) String searchKey,
@@ -195,7 +207,11 @@ public class APointController {
 	// 포인트 수수료율 등록 처리
 	@PostMapping("/addPointFeeRate")
 	public String addPointFeeRate(PointFeeRate PointFeeRate) {
-		System.out.println(PointFeeRate);
+
+		//포인트 적립 등록 코드 자동생성
+		String newPointFeeRateCode = pointFeeRateService.getPointFeeRateCode("pointFeeRate","pointFeeRateCode");
+		
+		PointFeeRate.setPointFeeRateCode(newPointFeeRateCode);
 		pointFeeRateService.addPointFeeRate(PointFeeRate);
 		
 		return "redirect:/pointFeeRateList";
@@ -271,6 +287,16 @@ public class APointController {
 		return "admin/point/point_save_use_list";
 	}
 
+	/*
+	 * // 포인트 환급 승인 내역 삭제
+	 * 
+	 * @GetMapping("/deletePointRefundApproval") public String
+	 * deletePointRefundApproval(Model model) { model.addAttribute("title",
+	 * "포인트 환급 승인 내역 삭제");
+	 * 
+	 * return "admin/point/point_refund_approval_delete"; }
+	 */
+	
 	// 포인트 환급 승인 내역 수정 처리
 	@PostMapping("/modifyPointRefundApproval")
 	public String modifyPointRefundApproval(PointRefundApproval pointRefundApproval) {
@@ -307,13 +333,7 @@ public class APointController {
 		return "admin/point/point_refund_approval_list";
 	}
 	
-	// 포인트 환급 승인 내역 삭제
-	@GetMapping("/deletePointRefundApproval")
-	public String deletePointRefundApproval(Model model) {
-		model.addAttribute("title", "포인트 환급 승인 내역 삭제");
 
-		return "admin/point/point_refund_approval_delete";
-	}
 	
 	
 //	  //포인트 적립/사용 내역 수정

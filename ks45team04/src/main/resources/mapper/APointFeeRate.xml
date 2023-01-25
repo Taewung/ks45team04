@@ -12,6 +12,27 @@
 		<result property="pointFeeRateDatetime" 	column="point_fee_rate_datetime"/>
 	</resultMap>
 	
+	<delete id="deletePointFeeRateByCode" parameterType="String">
+		/* 포인트 수수료율 코드로 삭제 */
+		DELETE
+		FROM 
+			point_fee_rate
+		WHERE 
+			point_fee_rate_code = #{pointFeeRateCode};
+	</delete>
+	
+	<select id="getPointFeeRateCode" parameterType="String" resultType="String">
+		/* 포인트 적립 기준 코드 자동생성 */
+		SELECT
+    		CASE
+    		WHEN COUNT(1) = 0 THEN CONCAT('point_fee_rate', '_001')
+		ELSE
+    		CONCAT('point-fee-rate-', LPAD(MAX(CAST(SUBSTRING_INDEX(point_fee_rate_code, 'point-fee-rate-', -1)AS UNSIGNED))+1, 3, 0))
+    	END AS newCode
+		FROM
+    		point_fee_rate;
+	</select>
+	
 	<update id="modifyPointFeeRate" parameterType="PointFeeRate">
 	/* 특정 포인트 적립 기준 수정*/
 	UPDATE 
@@ -59,7 +80,7 @@
 		);
 	</insert>
 	
-		<select id="pointFeeRateList" resultMap="pointFeeRateResultMap">
+	<select id="pointFeeRateList" resultMap="pointFeeRateResultMap">
 		/*포인트 수수료율 내역 조회*/
 		SELECT
 			point_fee_rate_code,

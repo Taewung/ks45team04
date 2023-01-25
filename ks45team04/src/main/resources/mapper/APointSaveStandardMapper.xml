@@ -11,6 +11,27 @@
 		<result property="pointSaveStandardId" 			column="point_save_standard_id"/>
 	</resultMap>
 	
+	<delete id="deletePointSaveSatandardByCode" parameterType="String">
+		/* 포인트 적립 기준 코드로 삭제 */
+		DELETE
+		FROM 
+			point_save_standard
+		WHERE 
+			point_save_standard_code = #{pointSaveStandardCode};
+	</delete>
+	
+	<select id="getPointSaveStandardCode" parameterType="String" resultType="String">
+		/* 포인트 적립 기준 코드 자동생성 */
+		SELECT
+    		CASE
+    		WHEN COUNT(1) = 0 THEN CONCAT('point_save_standard', '_001')
+		ELSE
+    		CONCAT('point-save-standard-', LPAD(MAX(CAST(SUBSTRING_INDEX(point_save_standard_code, 'point-save-standard-', -1)AS UNSIGNED))+1, 3, 0))
+    	END AS newCode
+		FROM
+    		point_save_standard;
+	</select>
+	
 	 <select id="getPointSaveStandardContent" resultType="String" >
 		/* 포인트 적립 기준 내용 조회*/
 		SELECT 
@@ -28,7 +49,6 @@
 				save_point = #{savePoint}
 		WHERE 
 				point_save_standard_code= #{pointSaveStandardCode};
-		
 	</update>
 	
 	<select id="getPointSaveStandardByCode" parameterType="String" resultMap="pointSaveStandardResultMap">
@@ -73,7 +93,6 @@
 				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
 			</if>
 		</where>
-			
 	</select>
 	
 	<!-- <select id="pointSaveStandardContentList" resultMap="pointSaveStandardContentResultMap">

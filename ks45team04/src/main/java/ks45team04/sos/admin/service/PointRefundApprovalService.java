@@ -20,18 +20,33 @@ public class PointRefundApprovalService {
 		this.pointRefundApprovalMapper = pointRefundApprovalMapper;
 	}
 
-	//특정 포인트 환급 승인 내역 수정
+
+	/**
+	 * 포인트 환급 승인 수정 
+	 * @param pointRefundApproval
+	 * @return modifyPointRefundApproval
+	 */
 	public int modifyPointRefundApproval(PointRefundApproval pointRefundApproval) {
 		
 		return pointRefundApprovalMapper.modifyPointRefundApproval(pointRefundApproval);
 	}
 	
-	//특정 포인트 환급 승인 내역 조회
+	/**
+	 * 특정 포인트 환급 승인 내역 조회
+	 * @param pointRefundCode
+	 * @return getPointRefundApprovalByCode
+	 */
 	public PointRefundApproval getPointRefundApprovalInfoByCode(String pointRefundCode) {
 		
 		return pointRefundApprovalMapper.getPointRefundApprovalByCode(pointRefundCode);
 	}
-	//포인트 환급 승인 내역 조회(검색)
+
+	/**
+	 * 포인트 환급 승인 내역 조회(검색)
+	 * @param searchKey
+	 * @param searchValue
+	 * @return pointRefundApprovalList
+	 */
 	public List<PointRefundApproval> PointRefundApprovalList(String searchKey, String searchValue){
 		
 		if(searchKey != null) {
