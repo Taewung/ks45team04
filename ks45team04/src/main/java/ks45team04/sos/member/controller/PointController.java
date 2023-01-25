@@ -47,7 +47,7 @@ public class PointController {
 		return "member/point/mpoint_save_standard_list";
 	}
 	
-	//포인트 환급 수수료율 조회
+	//포인트 수수료율 조회
 	@GetMapping("/mpointFeeRateList")
 	public String mpointFeeRateList(Model model) {
 		model.addAttribute("title", "포인트 환급 수수료율 조회");

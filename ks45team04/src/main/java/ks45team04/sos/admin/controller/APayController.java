@@ -22,7 +22,7 @@ public class APayController {
 		this.payService = payService;
 	}
 	
-	//결제 취소(삭제)
+	//결제 삭제
 	@GetMapping("/payDelete")
 	public String payDelete(Model model) {
 		model.addAttribute("title", "결제 취소(삭제)");

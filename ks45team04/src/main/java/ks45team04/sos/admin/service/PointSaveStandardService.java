@@ -21,38 +21,80 @@ public class PointSaveStandardService {
 		this.pointSaveStandardMapper = pointSaveStandardMapper;
 	}
 	
+	/**
+	 * 포인트 적립 기준 등록 코드 자동 생성
+	 * @param pointSaveStandard
+	 * @param pointSaveStandardCode
+	 * @return newPointSaveStandarCode
+	 */
+	public String getPointSaveStandardCode(String pointSaveStandard, String pointSaveStandardCode) {
+		
+		String newPointSaveStandarCode = pointSaveStandardMapper.getPointSaveStandardCode(pointSaveStandard, pointSaveStandardCode);
+		
+		return newPointSaveStandarCode;
+	}
+
+	/**
+	 * 포인트 적립 기준 삭제
+	 * @param pointSaveStandard
+	 * @return pointSaveStandard
+	 */
+	public void deletePointSaveStandard(String pointSaveStandardCode) {
+		
+		pointSaveStandardMapper.deletePointSaveSatandardByCode(pointSaveStandardCode);
+	}
 	
-	
-	// 포인트 적립 기준 수정
+	/**
+	 * 포인트 적립 기준 수정
+	 * @param pointSaveStandard
+	 * @return modifyPointSaveStandard
+	 */
 	public int modifyPointSaveStandard(PointSaveStandard pointSaveStandard) {
 		
 		return pointSaveStandardMapper.modifyPointSaveStandard(pointSaveStandard);
 	}
 	
-	//특정 포인트 적립 기준 내역 조회
+
+	/**
+	 * 특정 포인트 적립 기준 조회
+	 * @param pointSaveStandardCode
+	 * @return getPointSaveStandardByCode
+	 */
 	public PointSaveStandard getPointSaveStandardInfoByCode(String pointSaveStandardCode) {
 		
 		return pointSaveStandardMapper.getPointSaveStandardByCode(pointSaveStandardCode);
 	}
 	
-	// 포인트 적립 기준 등록
+
+	/**
+	 * 포인트 적립 기준 등록
+	 * @param pointSaveStandard
+	 * @return addPointSaveStandard
+	 */
 	public int addPointSaveStandard(PointSaveStandard pointSaveStandard) {
 		
 		return pointSaveStandardMapper.addPointSaveStandard(pointSaveStandard);
 	}
 
 	
-	//포인트 적립 기준 내용 내역 조회 
-		
+	/**
+	 * 포인트 적립 기준 내용 내역 조회 
+	 * @return pointSaveStandardContentList
+	 */
 	 public List<PointSaveStandard> getPointSaveStandardContent(){
 		  
 		List<PointSaveStandard> pointSaveStandardContentList = pointSaveStandardMapper.getPointSaveStandardContent();
 		  
-		  return pointSaveStandardContentList; }
+		  return pointSaveStandardContentList; 
+	}
 		 
 	 
-	
-	//포인트 적립 기준 내역 조회(검색)
+	/**
+	 * 포인트 적립 기준 내역 조회(검색)
+	 * @param searchKey
+	 * @param searchValue
+	 * @return pointSaveStandardList
+	 */
 	public List<PointSaveStandard> PointSaveStandardList(String searchKey, String searchValue){
 		
 		if(searchKey != null) {
@@ -71,5 +113,4 @@ public class PointSaveStandardService {
 		return pointSaveStandardList;
 	}
 
-	
 }

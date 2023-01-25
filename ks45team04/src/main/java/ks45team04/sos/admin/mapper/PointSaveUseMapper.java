@@ -11,7 +11,7 @@ import ks45team04.sos.admin.dto.PointSaveUse;
 @Mapper
 public interface PointSaveUseMapper {
 	
-	// 포인트 적립/사용 코드 자동생성
+	// 포인트 적립/사용 코드 자동 생성
 	public String getPointSaveUseCode(String pointSaveUse, String pointSaveUseCode);
 	
 	// 포인트 적립 기준 내용 조회

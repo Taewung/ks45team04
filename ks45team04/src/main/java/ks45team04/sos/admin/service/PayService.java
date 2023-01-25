@@ -16,7 +16,12 @@ public class PayService {
 		this.payMapper = payMapper;
 	}
 	
-	//결제 내역 조회
+	/**
+	 * 결제 내역 조회(검색)
+	 * @param searchKey
+	 * @param searchValue
+	 * @return payList
+	 */
 	public List<Pay> PayList(String searchKey, String searchValue){
 		
 		if(searchKey != null) {

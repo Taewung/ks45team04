@@ -19,7 +19,12 @@ public class PointSaveUseService {
 		this.pointSaveUseMapper = pointSaveUseMapper;
 	}
 
-	// 포인트 적립/사용 등록
+
+	/**
+	 * 포인트 적립/사용 등록
+	 * @param pointSaveUse
+	 * @return pointSaveUseAdd
+	 */
 	public int pointSaveUseadd(PointSaveUse pointSaveUse) {
 
 		return pointSaveUseMapper.pointSaveUseAdd(pointSaveUse);
