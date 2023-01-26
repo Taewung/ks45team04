@@ -62,7 +62,7 @@ public class AMembershipMemberController {
 	}
 	
 	
-	// 조회
+	// 멤버십 회원 조회
 	@GetMapping("/totalMembershipMemberList")
 	public String TotalMembershipMemberList(Model model
 			,@RequestParam(value="searchKey", required = false)String searchKey

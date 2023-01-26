@@ -17,6 +17,7 @@ import ks45team04.sos.admin.dto.LicenseMain;
 import ks45team04.sos.admin.dto.LicenseSub;
 import ks45team04.sos.admin.dto.LicenseSubject;
 import ks45team04.sos.member.dto.ChallengeGoal;
+import ks45team04.sos.member.dto.ChallengeState;
 import ks45team04.sos.member.service.ChallengeService;
 
 @Controller
@@ -29,6 +30,19 @@ public class ChallengeController {
 		this.challengeService = challengeService;
 	}
 
+	// 특정 회원 챌린지 도전 내역 화면
+//	@GetMapping("/challengeState")
+//	public String challengeState(@RequestParam(value="memId") String memId
+	//							,Model model) {
+	//	ChallengeState challengeState = challengeService.getChallengeState(memId);
+		
+//		 model.addAttribute("title", "챌린지 회원 도전 내역 조회");
+//		 model.addAttribute("challengeState", challengeState);
+		
+//		 return "member/challenge/challengeState";
+//	}
+	
+	
 	
 	  // 특정 과목정보 조회
 	  @GetMapping("/getSubjectInfoForChallenge")

@@ -55,6 +55,24 @@
 		<result property="lsRegDatetime" 	column="ls_reg_datetime"/>
 	</resultMap>
 	
+	
+	
+	<!-- 	<select id="getChallengeState" parameterType="String" resultMap="ChallengeResultMap">
+		/*특정 회원 챌린지 신청 내역정보 조회*/
+			SELECT
+				cg_goal_title,
+				cg_li_name,
+				cg_subject,
+				cg_content,
+				cg_study_time,
+				cg_start_datetime,
+				cg_end_datetime
+			FROM
+				challenge_goal
+			where
+				cg_id = #{cgId}; 
+	</select>   -->
+	
  	
  	<insert id="challengeGoal" parameterType="ChallengeGoal">
 		/* 챌린지 등록 */

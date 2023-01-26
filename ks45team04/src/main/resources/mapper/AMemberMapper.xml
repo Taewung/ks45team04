@@ -40,7 +40,7 @@
 
 
 	<select id="getTotalMemberInfo" parameterType="String" resultMap="MemberResultMap">
-			/* 특정 회원 목록 조회 */
+			/* 특정 회원 조회 */
 			SELECT
 				m.mem_id,
 				m.mem_pw,

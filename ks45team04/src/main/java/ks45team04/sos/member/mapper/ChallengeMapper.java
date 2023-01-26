@@ -9,17 +9,17 @@ import ks45team04.sos.admin.dto.LicenseMain;
 import ks45team04.sos.admin.dto.LicenseSub;
 import ks45team04.sos.admin.dto.LicenseSubject;
 import ks45team04.sos.member.dto.ChallengeGoal;
+import ks45team04.sos.member.dto.ChallengeState;
 
 @Mapper
 public interface ChallengeMapper {
 
-	
-	
+		//특정 회원 챌린지 진행 상태 조회
+		public ChallengeState getChallengeState(String memId);	
 	  	//챌린지 등록
 		public int challengeGoal(ChallengeGoal challengeGoal);
 		//챌린지코드 자동생성
 		public String getNewCgCode(String challenge, String cgCode);
-	 
 	  	// 자격증 대분류 목록조회
 	  	public List<LicenseMain> getMainListForChallenge();	
 	  	// 자격증 대분류별 중분류목록조회

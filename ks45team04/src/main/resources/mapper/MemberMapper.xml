@@ -22,6 +22,17 @@
 		</collection>
 	</resultMap>
 	
+	<delete id="removeMemberById" parameterType="String">
+	/*회원 탈퇴*/
+	DELETE
+	FROM
+		member
+	WHERE	
+	mem_id = #{memId};	
+	</delete>
+	
+	
+	
 	<update id ="modifyMemberInfo" parameterType="Member">
 	/*특정 회원 정보 수정*/
 	UPDATE

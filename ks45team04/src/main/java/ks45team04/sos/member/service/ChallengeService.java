@@ -9,6 +9,7 @@ import ks45team04.sos.admin.dto.LicenseMain;
 import ks45team04.sos.admin.dto.LicenseSub;
 import ks45team04.sos.admin.dto.LicenseSubject;
 import ks45team04.sos.member.dto.ChallengeGoal;
+import ks45team04.sos.member.dto.ChallengeState;
 import ks45team04.sos.member.mapper.ChallengeMapper;
 
 @Service
@@ -20,9 +21,19 @@ public class ChallengeService {
 		this.challengeMapper = challengeMapper;
 	}
 
-		
+
+/**
+ * 챌린지 내역 조회	
+ * @param memId
+ * @return
+ */
+	public ChallengeState getChallengeState(String memId) {
+	
+		return challengeMapper.getChallengeState(memId);
+}
+	
 	/**
-	* 문제 등록
+	* 챌린지 등록
 	* 
 	* @param challenge
 	*/
@@ -33,7 +44,7 @@ public class ChallengeService {
 	  
 	  
 	 /**
-		 * 문제코드 자동생성
+		 * 챌린지코드 자동생성
 		 * 
 		 * @param challenge
 		 * @param cgCode
