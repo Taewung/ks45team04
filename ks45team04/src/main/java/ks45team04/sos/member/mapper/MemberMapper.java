@@ -11,6 +11,14 @@ import ks45team04.sos.member.dto.MMember;
 @Mapper
 public interface MemberMapper {
 	
+	
+	
+	//findid findpw
+	
+	
+	//회원탈퇴
+	public int removeMemberById(String memId);
+	
 	//자동완성 코드
 	public String getloginLogoutCode(String login_logout, String loginLogoutCode);
 	

@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,6 +57,47 @@ private static final Logger log = LoggerFactory.getLogger(MemberController.class
  * 
  * return "redirect:/"; }
  */
+
+
+
+	@PostMapping("/removeMember")
+	public String removeMember(@RequestParam(value="memId") String memId,
+								@RequestParam(value="memPw") String memPw,
+								RedirectAttributes reAttr) {
+		log.info("memId : {}, memPw :{}", memId, memPw);
+		
+		Map<String, Object> checkResult = memberService.checkPwByMemId(memId, memPw);
+		
+		boolean isChecked = (boolean) checkResult.get("result");
+		
+		String redirectURI ="redirect:/myPage";
+		
+		if(!isChecked) {
+			redirectURI="redirect:/member/removeMember/" + memId;
+			reAttr.addAttribute("msg", "입력하신 회원의 정보가 일치하지 않습니다.");
+		}else {
+			MMember mmember = (MMember) checkResult.get("memInfo");
+			memberService.removeMember(mmember);
+		}
+		return redirectURI;
+	}
+
+	@GetMapping("/removeMember")
+	public String removeMember(@RequestParam(value="msg", required = false) String msg,
+								HttpSession session,
+								Model model) {
+	
+    	LoginInfo loginInfo = (LoginInfo) session.getAttribute("S_MEM_INFO");
+    	String memId = (String) session.getAttribute("SID");		
+		model.addAttribute("title", "회원 탈퇴");
+		model.addAttribute("memId", memId);
+		if(msg != null) model.addAttribute("msg", msg);
+		
+		return  "member/member/remove_member";
+	}			
+
+
+
 
 
 	@GetMapping("/logout")
@@ -216,7 +258,7 @@ private static final Logger log = LoggerFactory.getLogger(MemberController.class
     	return "member/member/modify_member_info";
     }
     
- /**   //특정 회원 상세 조회 화면
+    //특정 회원 상세 조회 화면
     @GetMapping("/memberInfo")
     public String memberInfo(@RequestParam(value="memId") String memId
     		,Model model) {
@@ -228,7 +270,7 @@ private static final Logger log = LoggerFactory.getLogger(MemberController.class
     	
     	return "member/member/memberInfo";
     }
-*/
+
 
 	//회원 개인 목록 조회
 //	@GetMapping("/memberList")
@@ -250,14 +292,7 @@ private static final Logger log = LoggerFactory.getLogger(MemberController.class
 	
     
     
-    
-	
-	@GetMapping("/removeMember")
-	public String removeMember(Model model) {
-		model.addAttribute("title", "회원 탈퇴");
-		return  "member/member/remove_member";		
-	}			
-	
+
 	
 	@GetMapping("/findId")
 	public String findId(Model model) {
