@@ -80,8 +80,7 @@
                                 <tr>
                                     <td>
                                     </td>
-                                    <tr th:if="${not #lists.isEmpty(toDoListDetailList)}"
-									th:each="l : ${toDoListDetailList}">
+                                   <form id="getToDoListByCodeForm" action="/getToDoListByCode" class="row" method="GET" role="form" >
                                     	<td>
 	                                     	<input type="hidden"  th:value="${l.toDoListCode}" name="toDoListCode" readonly="readonly" />
                                     		<div class="pxp-company-dashboard-job-title  text-center" th:text="${l.toDoListCode}">
@@ -90,13 +89,14 @@
                                     	<td><div class="pxp-company-dashboard-job-category text-center" th:text="${l.toDoListTitle}"></div></td>
                             
                               </tr>
-                                <tr th:unless="${not #lists.isEmpty(toDoListDetailList)}">
+                                <tr th:unless="${not #lists.isEmpty(getToDoListByCode)}">
 									<td colspan="9">등록된 정보가 없습니다.</td>
 								</tr>                    
                                   
                                 </tr>                      
                             </tbody>
                         </table>
+                        </form>
                             
                             
                             

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team04.sos.member.mapper.StudyBoardMapper">
+		<resultMap type="StudyBoard" id="StudyBoardmap">
+			<id property="sbCode" 					column="sb_code" />
+			<result property="memId" 				column="mem_id" />
+			<result property="liCode" 				column="li_code" />
+			<result property="liName" 				column="li_name" />
+			<result property="sbTitle" 				column="sb_title" />
+			<result property="sbContent" 				column="sb_content" />
+			<result property="sbRegDate" 			column="sb_reg_date" />
+		
+		</resultMap>	
+		
+		
+		
+		<insert id="addStudyBoard" parameterType="StudyBoard">
+			/* 스터디모집 게시판 등록 */
+			INSERT INTO d_day
+			( sb_code
+			 ,mem_id
+			 ,li_code
+			 ,li_name
+			 ,sb_title
+			 ,sb_content
+			 ,sb_reg_date
+			) 
+			VALUES 
+			(sf_sb_code(), #{memId}, #{liCode}, #{liName}, #{sb_title},#{sb_content}, now());
+		</insert>	
+	
+	
+		<select id="studyBoardList" resultMap="StudyBoardmap">
+			/* 스터디모집 게시판 상세 조회 */
+			
+			SELECT
+				*
+			FROM
+				study_board ;
+		</select>
+		
+		
+</mapper>
