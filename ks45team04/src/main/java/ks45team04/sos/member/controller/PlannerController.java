@@ -197,6 +197,7 @@ public class PlannerController {
 			DDay dDay = plannerService.getDDayByCode(dDayCode);
 			List<LicenseInfo> licenseInfoList = plannerService.licenseInfoList();
 
+			log.info("특정디데이 정보 : {}", dDay);
 			model.addAttribute("title", "디데이 정보 수정");
 			model.addAttribute("dDay", dDay);
 			model.addAttribute("licenseInfoList", licenseInfoList);
