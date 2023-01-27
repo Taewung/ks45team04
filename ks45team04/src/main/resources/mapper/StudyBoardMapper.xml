@@ -13,12 +13,58 @@
 			<result property="sbRegDate" 			column="sb_reg_date" />
 		
 		</resultMap>	
+		<resultMap type="licenseInfo" id="LicenseInfomap">
+			<id property="liCode" 					column="li_code" />
+			<result property="lmcCode" 				column="lmc_code" />
+			<result property="lmcName" 				column="lmc_name" />
+			<result property="lscCode" 				column="lsc_code" />
+			<result property="liName" 				column="li_name" />
+			<result property="lscName" 				column="lsc_name" />
+			<result property="liOverview" 			column="li_overview" />
+			<result property="liQualification" 		column="li_qualification" />
+			<result property="liRegId" 				column="li_reg_id" />
+			<result property="liRegDatetime" 		column="li_reg_date" />
+		</resultMap>	
 		
+		<select id="getLiNameForExam"  parameterType="String" resultMap="LicenseInfomap">
+			/* 자격증 코드별 목록 조회 */
+			SELECT 
+			 li.li_code
+			,li.lmc_code
+			,li.lmc_name
+			,li.lsc_code
+			,li.lsc_name
+			,li.li_name
+			,li.li_overview
+			,li.li_qualification
+			,li.li_reg_id
+			,li.li_reg_date
+		FROM
+			license_info as li
+		WHERE
+			li.code = #{liCode};	
+	</select>
 		
+		<select id="getLiInfoForStudy"  resultMap="LicenseInfomap">
+			/* 자격증 코드별 목록 조회 */
+			SELECT 
+			 li.li_code
+			,li.lmc_code
+			,li.lmc_name
+			,li.lsc_code
+			,li.lsc_name
+			,li.li_name
+			,li.li_overview
+			,li.li_qualification
+			,li.li_reg_id
+			,li.li_reg_date
+		FROM
+			license_info as li;		
+	</select>
 		
 		<insert id="addStudyBoard" parameterType="StudyBoard">
 			/* 스터디모집 게시판 등록 */
-			INSERT INTO d_day
+			INSERT INTO study_board
 			( sb_code
 			 ,mem_id
 			 ,li_code
@@ -28,7 +74,7 @@
 			 ,sb_reg_date
 			) 
 			VALUES 
-			(sf_sb_code(), #{memId}, #{liCode}, #{liName}, #{sb_title},#{sb_content}, now());
+			(sf_study_board_code(), #{memId}, #{liCode}, #{liName}, #{sbTitle},#{sbContent}, now());
 		</insert>	
 	
 	

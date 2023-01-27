@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -28,17 +29,35 @@ public class StudyBoardController {
 		this.studyBoardService = studyBoardService;
 		this.studyBoardMapper = studyBoardMapper;
 	}
-	
-	
+
+	// 디데이 등록 코드별 이름
+	@GetMapping("/getliNameForStudy")
+	    @ResponseBody
+	    public LicenseInfo getLiNameForStudy(@RequestParam(value="liCode") String liCode) {
+		LicenseInfo liNameForStudy = studyBoardService.getLiNameForStudy(liCode);
+	       
+		log.info("디데이 등록 코드별 이름 : {}", liNameForStudy);
+		
+	        return liNameForStudy;
+	    }
+
+	//스터디 게시판 등록 처리
+	@PostMapping("/addStudyBoard") 
+	public String addStudyBoard(StudyBoard studyBoard) {
+			
+		studyBoardService.addStudyBoard(studyBoard);
+		 
+		log.info("스터디 게시판 등록 처리 : {}", studyBoard);
+		return "redirect:/listStudyBoard";
+	}
 	
 	//스터디 게시판 등록 화면
 	@GetMapping("/addStudyBoard")
 	public String addStudyBoard(Model model) {
-		
-		
-	
-		model.addAttribute("title", "스터디게시판 등록");
-		
+	 List<LicenseInfo> liInfoForStudy = studyBoardService.getLiInfoForStudy();
+	 model.addAttribute("liInfoForStudy", liInfoForStudy);
+     model.addAttribute("title", "스터디게시판 등록");
+     log.info("자격증 정보 목록 : {}", liInfoForStudy);	
 	
 		return "member/studyBoard/study_board_insert";
 	}

@@ -17,7 +17,26 @@ public class StudyBoardService {
 		this.studyBoardMapper = studyBoardMapper;
 	}
 	
-
+	/**
+	 * 스터디 등록을 위한 노트 코드별 노트이름 조회
+	 * @param liCode
+	 * @return
+	 */
+	public LicenseInfo getLiNameForStudy(String liCode) {
+		LicenseInfo liNameForStudy = studyBoardMapper.getLiNameForExam(liCode);
+		return liNameForStudy;
+	}
+	
+	   /**
+	    *  스터디 등록을 위한 자격증 정보 목록조회
+	    * @return
+	    */
+		public List<LicenseInfo> getLiInfoForStudy() {
+		
+			List<LicenseInfo> liInfoForStudy = studyBoardMapper.getLiInfoForStudy();
+		
+		return liInfoForStudy;		
+	}
 	
 	/**
 	 * 스터데 게시판 등록
