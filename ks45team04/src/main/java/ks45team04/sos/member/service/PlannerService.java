@@ -41,6 +41,12 @@ public class PlannerService {
 		return plannerMapper.modifyDDay(dDay);
 	}
 	
+	
+	/**
+	 * 디데이 등록을 위한 노트 코드별 노트이름 조회
+	 * @param liCode
+	 * @return
+	 */
 	public LicenseInfo getliName(String liCode) {
 		
 		LicenseInfo getliName = plannerMapper.getliName(liCode);
@@ -51,7 +57,7 @@ public class PlannerService {
 	
 	
 	/**
-	 * 노트 등록을 위한 자격증 정보 조회
+	 * 디데이 등록을 위한 자격증 정보 조회
 	 * @param Note
 	 */
 	public List<LicenseInfo> licenseInfoList(){

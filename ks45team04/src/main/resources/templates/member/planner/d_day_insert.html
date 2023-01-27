@@ -5,11 +5,23 @@
 <!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
 	<th:block layout:fragment="customScript">
 		<script>
-		$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+		// 취소 버튼 클릭시 리다이렉트
+		$(function(){
 			$('#resetBtn').click(function(){
 				location.href = '/detailDDay';
 			});
 		});
+		
+		$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+			function validateValue(checkValue) {
+				if(    typeof checkValue == 'undefined' 
+						|| checkValue == null 
+						|| checkValue == ''					){
+					return true;
+				}
+				return false;
+				
+			}
 		
 		
 		// 노트이름 클릭시 노트코드 자동 등록
@@ -60,6 +72,30 @@
 			});
 		
 		
+		/* 유효성검사를 구현하시오. (#submitBtn 를 클릭 시) */
+		$('#submitBtn').click(function(){
+			let isSubmit = true;
+			
+			$('#addDDayForm input').each(function(idx, item){
+				let checkValue = $(item).val();
+				let labelValue = $(item).parent('.mb-3').find('label').text();
+				if(validateValue(checkValue)){
+					
+					alert(`${labelValue}를 입력해주세요`);
+					$(item).focus();
+					isSubmit = false;
+					return false;
+				}
+				
+			});   
+
+			if(isSubmit) $('#addDDayForm').submit();
+			});
+		});
+		
+		
+	
+		
 		</script>
 	</th:block> 
 	<th:block layout:fragment="customContents">
@@ -100,7 +136,7 @@
                       </div>
                        <div class="row">
                           <div class="col-sm-6">
-                              <div class="mb-3" >
+                              <div class="mb-3" hidden >
                                     <label for="getliName" class="form-label">자격증코드</label>
                                    <input type="text" id="liName" class="form-control" name="liName" />
                               </div >
@@ -127,7 +163,7 @@
                   </div>
               </div>
               <div class="mt-4 mt-lg-5" style=" margin-left: 850px;">
-                  <button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>&nbsp;&nbsp;
+                  <button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta submitBtn ">등록</button>&nbsp;&nbsp;
                   <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
                   
               </div>

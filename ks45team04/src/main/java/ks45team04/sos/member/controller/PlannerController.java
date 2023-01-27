@@ -96,6 +96,15 @@ public class PlannerController {
 //		model.addAttribute("toDoListInfo", "일정 삭제");
 //		return "member/planner/to_do_list_delete";
 //	}
+	
+	// 코드별 일정 조회
+		@GetMapping("/getToDoListByCode")
+		public String getToDoListByCode(Model model,@RequestParam(name="toDoListCode", required = false) String toDoListCode) {
+			model.addAttribute("title", "코드별 일정 조회");
+			model.addAttribute("toDoListCode", toDoListCode);
+			
+			return "member/planner/stopwatch_record";
+		}
 
 	// 일정 조회
 	@GetMapping("/listToDoList")
@@ -253,15 +262,15 @@ public class PlannerController {
 		return "member/planner/d_day_detail";
 	}
 	
-//	// 디데이 보기
-//	@GetMapping("/DDayDDay")
-//	
-//	public String DDayDDay(@RequestParam(value="dDayCode" ,required = false) String dDayCode
-//				,Model model) {
-//		DDay dDay = plannerService.getDDayByCode(dDayCode);
-//			model.addAttribute("ddayInfo", dDay);
-//			
-//			return "member/planner/d_day_d_day";
-//		}
+	// 디데이 보기
+	@GetMapping("/DDayDDay")
+	
+	public String DDayDDay(@RequestParam(value="dDayCode" ,required = false) String dDayCode
+				,Model model) {
+		DDay dDay = plannerService.getDDayByCode(dDayCode);
+			model.addAttribute("ddayInfo", dDay);
+			
+			return "member/planner/d_day_d_day";
+		}
 
 }
