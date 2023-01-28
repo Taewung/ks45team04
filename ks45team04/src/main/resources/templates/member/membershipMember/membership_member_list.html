@@ -36,18 +36,15 @@
                                 </tr>
                             </thead>    
                             <tbody>
-                            <th:block th:if="${not #lists.isEmpty(MembershipMemberList)}" th:each="mml:${MembershipMemberList}">
+                            <th:block th:if="${not #lists.isEmpty(mmembershipMemberList)}" th:each="mml:${mmembershipMemberList}">
                                 <tr>
-                                    <td>
-                                        <a href="@{/MembershipMemberList(mmId=${mml.mmId})}" class="pxp-company-dashboard-job-title"
-                                        	th:text="${mml.mmId}">                                           
-                                        </a>
-                                    </td>
+
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${mml.mmId}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-category" th:text="${mml.mmMembershipCode}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-category" th:text="${mml.mmMembershipPeriod}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${mml.mmMembershipStartDatetime}"></div></td>
-                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${mml.mmMembershipEndDatetime}"></div></td>
-                                    <td><div class="pxp-company-dashboard-subscriptions-status" th:text="${mml.mmMembershipState}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${mml.mmPeriod}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${mml.mmStartDatetime}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-date mt-1" th:text="${mml.mmEndDatetime}"></div></td>
+                                    <td><div class="pxp-company-dashboard-subscriptions-status" th:text="${mml.mmState}"></div></td>
                                     <td>
                                         <div class="pxp-dashboard-table-options">
                                             <ul class="list-unstyled">
