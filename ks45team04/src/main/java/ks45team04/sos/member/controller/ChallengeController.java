@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jakarta.servlet.http.HttpSession;
 import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.admin.dto.LicenseMain;
 import ks45team04.sos.admin.dto.LicenseSub;
 import ks45team04.sos.admin.dto.LicenseSubject;
+import ks45team04.sos.member.dto.ChallengeFinish;
 import ks45team04.sos.member.dto.ChallengeGoal;
 import ks45team04.sos.member.dto.ChallengeState;
+import ks45team04.sos.member.dto.LoginInfo;
 import ks45team04.sos.member.service.ChallengeService;
 
 @Controller
@@ -41,6 +44,47 @@ public class ChallengeController {
 		
 //		 return "member/challenge/challengeState";
 //	}
+	
+
+		//챌린지 결과 조회
+		@GetMapping("/challengeFinish")
+		public String challengeFinish(HttpSession session,
+										@RequestParam(value="cgCode", required = false)String cfCgCode,
+										Model model) {
+			
+		    //LoginInfo loginInfo = (LoginInfo) session.getAttribute("S_MEM_INFO");
+		    //String cfId = (String) session.getAttribute("SID");
+		    
+		    ChallengeFinish challengeFinish = challengeService.challengeFinish(cfCgCode);
+		    
+			model.addAttribute("title", "챌린지 이력");
+			model.addAttribute("challengeFinish", challengeFinish);
+			log.info("ChallengeFinish : {}", challengeFinish);
+			return "member/challenge/challenge_finish";
+			}
+	
+	
+	
+	
+	
+		//챌린지 도전내역 조회
+		@GetMapping("/challengeHistory")
+		public String challengeHistory(HttpSession session,
+										@RequestParam(value="memId", required = false) String memId
+										,Model model) {
+		
+	    LoginInfo loginInfo = (LoginInfo) session.getAttribute("S_MEM_INFO");
+	    String cgId = (String) session.getAttribute("SID");
+	    
+		List<ChallengeGoal> ChallengeHistory = challengeService.ChallengeHistory(loginInfo.getLoginLogoutId());
+		
+		
+		model.addAttribute("title", "챌린지 이력");
+		model.addAttribute("ChallengeHistory", ChallengeHistory);
+		log.info("challengeHistory : {}", ChallengeHistory);
+		return "member/challenge/challenge_history";
+		}
+	
 	
 	
 	
@@ -110,11 +154,6 @@ public class ChallengeController {
 	
 	
 	
-	
-	
-	
-	
-	
 	@GetMapping("/challengeState")
 	public String challengeState(Model model) {
 		model.addAttribute("title", "챌린지 수행 내역 및 진행 상태 조회");
@@ -131,12 +170,6 @@ public class ChallengeController {
 	public String challengeDataCal(Model model) {
 		model.addAttribute("title", "챌린지 진행 일수 계산");
 		return "member/challenge/challenge_data_cal";
-	}
-
-	@GetMapping("/challengeHistory")
-	public String challengeHistory(Model model) {
-		model.addAttribute("title", "개인 챌린지 도전 내역 조회");
-		return "member/challenge/challenge_history";
 	}
 
 	@GetMapping("/challengeSuccessorfailuerState")

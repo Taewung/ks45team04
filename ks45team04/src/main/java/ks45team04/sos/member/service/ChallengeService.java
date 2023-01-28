@@ -2,18 +2,23 @@ package ks45team04.sos.member.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.admin.dto.LicenseMain;
 import ks45team04.sos.admin.dto.LicenseSub;
 import ks45team04.sos.admin.dto.LicenseSubject;
+import ks45team04.sos.member.dto.ChallengeFinish;
 import ks45team04.sos.member.dto.ChallengeGoal;
 import ks45team04.sos.member.dto.ChallengeState;
 import ks45team04.sos.member.mapper.ChallengeMapper;
 
 @Service
 public class ChallengeService {
+	
+	private static final Logger log = LoggerFactory.getLogger(ChallengeService.class);
 
 	private final ChallengeMapper challengeMapper;
 
@@ -21,7 +26,34 @@ public class ChallengeService {
 		this.challengeMapper = challengeMapper;
 	}
 
+	/**
+	 * 챌린지 결과 조회
+	 * @param memId
+	 * @return
+	 */
+	public ChallengeFinish challengeFinish(String cfCgCode) {
+	//	ChallengeFinish challengeFinish =challengeMapper.ChallengeFinish(memId);
+	//	if(cfState='성공'){
+			
+		//}else if(cfState='진행'){
+			
+	//	}else(cfState='실패'){
+			
+		//}
+		return challengeMapper.ChallengeFinish(cfCgCode);
+	}
 
+	/**
+	 * 챌린지 도전 내역
+	 * @return
+	 */
+	public List<ChallengeGoal> ChallengeHistory(String memId) {
+		
+	List<ChallengeGoal> ChallengeHistory = challengeMapper.ChallengeHistory(memId);
+	
+	return ChallengeHistory;
+	}
+	
 /**
  * 챌린지 내역 조회	
  * @param memId
@@ -37,8 +69,9 @@ public class ChallengeService {
 	* 
 	* @param challenge
 	*/
-	public void challengeGoal(ChallengeGoal challengeGoal
-			){challengeMapper.challengeGoal(challengeGoal);
+	public void challengeGoal(ChallengeGoal challengeGoal){
+		log.info("challengeGoal : {}", challengeGoal);
+			challengeMapper.challengeGoal(challengeGoal);
 	  }
 	  
 	  

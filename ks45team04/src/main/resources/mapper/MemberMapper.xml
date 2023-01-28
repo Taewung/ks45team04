@@ -28,7 +28,7 @@
 	FROM
 		member
 	WHERE	
-	mem_id = #{memId};	
+		mem_id = #{memId};	
 	</delete>
 	
 	

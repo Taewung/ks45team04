@@ -9,21 +9,21 @@
 	</script>
 	</th:block> 
 	<!-- script end -->
-	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
+	        <section class="pxp-page-header-simple" style="background-color: var(--pxpMainColorLight);">
+	          <div class="pxp-container">
 				<h1><strong>챌린지 도전 내역</strong></h1>
                 <p class="pxp-text-light">Challenge History</p>
-
+                </div>
+			</section>
+        <section class="mt-100">  			
                 <div class="mt-4 mt-lg-5">
-                    <!-- 목록 start -->                   
+                    <!-- 목록 start -->     
                     <div class="table-responsive">
                         <table class="table table-hover align-middle">                      	
                             <thead>                    
                                 <tr>
-                                    <th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>
-
-                                    <th style="width: 5%;">번호</th>
                                     <th style="width: 19%;">챌린지 목표</th>
                                     <th style="width: 10%;">자격증</th>
                                     <th style="width: 7%;">과목</th>
@@ -31,51 +31,39 @@
                                     <th style="width: 10%;">목표공부시간</th>
                                     <th style="width: 14%;">챌린지시작일시</th>
                                     <th style="width: 14%;">챌린지종료일시</th>
-                                    <th style="width: 13%;">성공여부</th>
+                                    <th style="width: 14%;">성공여부조회</th>
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>    
                             <tbody>
-                                <tr>
-                                    <td><input type="checkbox" class="form-check-input"></td>
+ 		                          <tr th:if="${not #lists.isEmpty(ChallengeHistory)}" th:each="cg : ${ChallengeHistory}">
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cg.cgGoalTitle}"></div></td>                                  
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cg.cgLiName}"></div></td>  
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cg.cgLiSubject}"></div></td>  
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cg.cgContent}"></div></td>  
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cg.cgStudyTime}"></div></td>  
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cg.cgStartDatetime}"></div></td>  
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${cg.cgEndDatetime}"></div></td>  
                                     <td>
-                                        <a href="#">
-                                            <div class="pxp-company-dashboard-job-title">1</div>                                           
-                                        </a>
-                                    </td>
-                                    <td><div class="pxp-company-dashboard-job-category">정보처리기사 한번에 합격하기!</div></td>                                    
-                                    <td><div class="pxp-company-dashboard-job-category">정보처리기사</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">1과목</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">두번은 없다.</div></td>
-                                    <td><div class="pxp-company-dashboard-job-category">10:00</div></td>
-                                    <td><div class="pxp-company-dashboard-job-date mt-1">2022/09/01 at 22:20 pm</div></td>
-                                    <td><div class="pxp-company-dashboard-job-date mt-1">2022/09/08 at 22:20 pm</div></td>
-                                    <td><div class="pxp-company-dashboard-subscriptions-status"><span class="badge rounded-pill bg-danger">Expired</span></div></td>                                                  
+                                    	<a class="btn rounded-pill pxp-section-cta" type="button" th:href="@{/challengeFinish(cgCode=${cg.cgCode})}">확인</a>
+                                    </td>  
                                     <td>
                                         <div class="pxp-dashboard-table-options">
                                             <ul class="list-unstyled">
                                             </ul>
                                         </div>
                                     </td>
+                                </tr>
+                                <tr th:unless="${not #lists.isEmpty(ChallengeHistory)}">
+                                	<td colspan="7">등록된 목록이 없습니다.</td>
                                 </tr>                      
                             </tbody>
                         </table>
-						<!-- page 넘김 start -->
-                            <div class="col-auto">
-                                <nav class="mt-3 mt-sm-0" aria-label="Jobs list pagination">
-                                    <ul class="pagination pxp-pagination">
-                                        <li class="page-item active" aria-current="page">
-                                            <span class="page-link">1</span>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        <!-- page 넘김 end -->
                     </div>
+ 
                 <!-- 목록 end -->    
                 </div>
+             </section>                 
 	</th:block>
 	<!-- customContents end -->
 	

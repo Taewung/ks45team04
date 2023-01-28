@@ -21,11 +21,11 @@ public class MMembershipMemberService {
 	 * 멤버십 회원 조회
 	 * @return List<MMembershipMember>
 	 */
-	public List<MMembershipMember> MembershipMemberList() {
+	public List<MMembershipMember> MembershipMemberList(String memId) {
 
-		List<MMembershipMember> mmembershipMemberList = mmembershipMemberMapper.MembershipMemberList();
+		List<MMembershipMember> MembershipMemberList = mmembershipMemberMapper.MembershipMemberList(memId);
 		
-		return mmembershipMemberList;
+		return MembershipMemberList;
 	}
 	
 	
