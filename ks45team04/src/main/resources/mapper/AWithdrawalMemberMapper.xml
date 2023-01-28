@@ -26,7 +26,6 @@
 			wm.wdm_email,
 			wm.wdm_birth,
 			wm.wdm_phone,
-			wm.wdm_total_point,
 			wm.wdm_reg_datetime,
 			wm.wdm_datetime
 			FROM
@@ -48,7 +47,6 @@
 			wm.wdm_email,
 			wm.wdm_birth,
 			wm.wdm_phone,
-			wm.wdm_total_point,
 			wm.wdm_reg_datetime,
 			wm.wdm_datetime
 			FROM

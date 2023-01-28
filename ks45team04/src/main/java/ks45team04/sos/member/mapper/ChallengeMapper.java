@@ -4,16 +4,22 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import ks45team04.sos.admin.dto.CheatMember;
 import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.admin.dto.LicenseMain;
 import ks45team04.sos.admin.dto.LicenseSub;
 import ks45team04.sos.admin.dto.LicenseSubject;
+import ks45team04.sos.member.dto.ChallengeFinish;
 import ks45team04.sos.member.dto.ChallengeGoal;
 import ks45team04.sos.member.dto.ChallengeState;
 
 @Mapper
 public interface ChallengeMapper {
-
+	
+		//부정 회원 상세 정보 조회
+		public ChallengeFinish ChallengeFinish(String cfCgCode);	
+		//챌린지 도전 내역
+		public List<ChallengeGoal> ChallengeHistory(String memId);
 		//특정 회원 챌린지 진행 상태 조회
 		public ChallengeState getChallengeState(String memId);	
 	  	//챌린지 등록

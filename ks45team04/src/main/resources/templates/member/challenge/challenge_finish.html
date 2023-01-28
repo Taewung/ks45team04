@@ -9,9 +9,10 @@
 	</script>
 	</th:block> 
 	<!-- script end -->
-	
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
+		<th:block th:object="${challengeFinish}">
+			<div class="pxp-container" th:if="*{cfState == '성공'}">
                 <h3 class="pxp-section-h2 text-center">챌린지 성공!!!!</h3>
                 <p class="pxp-text-light text-center">고생 많으셨어요~~</p>
                 <div class="row justify-content-evenly mt-4 mt-md-5 pxp-animate-in pxp-animate-in-top">
@@ -20,16 +21,24 @@
                             <div class="pxp-services-1-item-icon">
                                 <img src="images/challengesucces.png" alt="challengeSucces">
                             </div>
-                            <div class="pxp-services-1-item-cta">
-                                <a href="#">뽀너스 300포인트!!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pxp-container" th:if="*{cfState == '진행'}">
+                <h3 class="pxp-section-h2 text-center">챌린지 진행중!!</h3>
+                <p class="pxp-text-light text-center">조금만 더 힘내요!!!</p>
+                <div class="row justify-content-evenly mt-4 mt-md-5 pxp-animate-in pxp-animate-in-top">
+                    <div class="col-lg-4 col-xl-3 pxp-services-1-item-container">
+                        <div class="pxp-services-1-item text-center pxp-animate-icon">
+                            <div class="pxp-services-1-item-icon">
+                                <img src="images/challengeLoading.png" alt="challengeLoading">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-            <div class="pxp-container">
+            <div class="pxp-container" th:if="*{cfState == '실패'}">
                 <h3 class="pxp-section-h2 text-center">챌린지 실패!!!!</h3>
                 <p class="pxp-text-light text-center">아쉬워요~~</p>
                 <div class="row justify-content-evenly mt-4 mt-md-5 pxp-animate-in pxp-animate-in-top">
@@ -39,12 +48,13 @@
                                 <img src="images/challengefail.png" alt="challengeFail">
                             </div>
                             <div class="pxp-services-1-item-cta">
-                                <a href="#">다시 한번 도전해봐요!!</a>
+                                <a href="/challengGoal">다시 한번 도전해봐요!!</a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>	
+            </div>
+        </th:block>	
 	</th:block>
 	<!-- customContents end -->
 	
