@@ -9,7 +9,8 @@ import ks45team04.sos.member.dto.AcceptanceReview;
 
 @Mapper
 public interface AcceptanceReviewMapper {
-
+	
+	//합격자 리뷰 목록 조회
 	public List<AcceptanceReview> acceptanceReviewList(String searchKey, String searchValue);
 	
 	

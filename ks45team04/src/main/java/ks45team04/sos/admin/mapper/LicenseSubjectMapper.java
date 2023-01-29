@@ -33,6 +33,6 @@ public interface LicenseSubjectMapper {
 	// 자격증 과목 목록 조회
 	public List<LicenseSubject> LicenseSubjectList(Map<String,Object> paramMap);
 
-	// 자격증 과목 테이블 전체 행의 갯구
+	// 자격증 과목 테이블 전체 행의 갯수
 	public int getLicenseSubjectCnt();
 }

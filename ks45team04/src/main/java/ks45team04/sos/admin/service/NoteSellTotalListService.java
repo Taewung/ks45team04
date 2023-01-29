@@ -16,7 +16,7 @@ public class NoteSellTotalListService {
 		this.noteSellTotalListMapper = noteSellTotalListMapper;
 	}
 
-	// 자격증 대분류 목록 조회
+	// 노트 판매내역 조회
 		public List<NoteSellTotalList> NoteSellTotalList(){
 			
 			List<NoteSellTotalList> noteSellTotalList = noteSellTotalListMapper.NoteSellTotalList();

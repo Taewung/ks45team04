@@ -149,10 +149,14 @@ public class QnaController {
 			return "admin/QnA/qna_question_insert";
 		}
 	
-		// qna 질문 상세보기 화면
+		// qna 질문 상세보기 화면, 마이페이지에서 관리자가 등록한 답글 조회
 		@GetMapping("/qnaQuestionDetail")
 		public String qnaQuestionDetail(Model model) {
+			
+			List<Qna> getQnaAnswerList = aqnaService.getQnaList();
+			
 			model.addAttribute("title", "qna 질문 상세보기");
+			model.addAttribute("getQnaAnswerList", getQnaAnswerList);
 			
 			return "admin/QnA/qna_question_detail";
 			
