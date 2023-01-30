@@ -214,7 +214,7 @@ public class QuestionSettingService {
 	 */
 	public Map<String, Object> getQuestionList(int currentPage, String searchKey, String searchValue){ 
 		// 보여질 행의 갯수
-		int rowPerPage = 10;
+		int rowPerPage = 7;
 		
 		//  보여질 행의 시작점
 		int startRowNum = (currentPage - 1) * rowPerPage;

@@ -16,7 +16,8 @@
                 <div class="pxp-dashboard-table-options">                             
                 	<ul class="list-unstyled">
                 	<p class="pxp-text-light">Exam Result</p>
-                	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                 	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                 	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                 	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
@@ -32,73 +33,40 @@
                 	<h2><strong><span class="fa fa-check"></span>자격증</strong></h2>
                         <div class="col-md-6 col-xxl-3">
                             <label for="pxp-company-job-experience" class="form-label">대분류</label>
-                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
+                            <input type="text" id="pxp-company-job-experience" class="form-control"  th:value="전기.전자.정보" disabled>
                         </div>
                         <div class="col-md-6 col-xxl-3">
                             <label for="pxp-company-job-experience" class="form-label">중분류</label>
-                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
+                            <input type="text" id="pxp-company-job-experience" class="form-control" th:value="국가기술자격" disabled>
                         </div>                     
                         <div class="col-md-6 col-xxl-3">
                             <label for="pxp-company-job-experience" class="form-label">자격증명</label>
-                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
-                        </div>
-                        <div class="col-md-6 col-xxl-3">
-                            <label for="pxp-company-job-experience" class="form-label">시험유형</label>
-                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
+                            <input type="text" id="pxp-company-job-experience" class="form-control" th:value="정보처리기사" disabled>
                         </div>
                     </div>
                     <!-- 자격증 end -->                      
-                    <!-- 과목 start --> 
-                    <div class="row mt-4 mt-lg-5">
-                    <h2><strong><span class="fa fa-check"></span>과목</strong></h2>
-                        <div class="col-md-6 col-xxl-3">
-                            <label for="pxp-company-job-experience" class="form-label">과목</label>
-                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
-                        </div>
-                        <div class="col-md-6 col-xxl-3">
-                            <label for="pxp-company-job-experience" class="form-label">과목명</label>
-                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
-                        </div>
-                      <!-- 과목 end -->   
                     <!-- start --> 
                     <div class="row mt-4 mt-lg-5">
-                    <h2><strong><span class="fa fa-check"></span>문항</strong></h2>
-                        <div class="col-md-6 col-xxl-3">
-                            <label for="pxp-company-job-experience" class="form-label">총문항수</label>
-                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
-                        </div>
-                        <div class="col-md-6 col-xxl-3">
-                            <label for="pxp-company-job-experience" class="form-label">정답수</label>
-                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
-                        </div>
-                        <div class="col-md-6 col-xxl-3">
-                            <label for="pxp-company-job-experience" class="form-label">오답수</label>
-                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
-                        </div>
+
                       <!-- end -->   
                     <!-- start --> 
                     <div class="row mt-4 mt-lg-5">
                     <h2><strong><span class="fa fa-check"></span>점수</strong></h2>
                         <div class="col-md-6 col-xxl-3">
-                            <label for="pxp-company-job-experience" class="form-label">획득점수</label>
-                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
+                            <label for="pxp-company-job-experience" class="form-label">획득 평균점수</label>
+                            <input type="text" id="pxp-company-job-experience" class="form-control"  th:value="78점" disabled>
                         </div>
                         <div class="col-md-6 col-xxl-3">
-                            <label for="pxp-company-job-experience" class="form-label">합격점수</label>
-                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
+                            <label for="pxp-company-job-experience" class="form-label">합격기준점수</label>
+                            <input type="text" id="pxp-company-job-experience" class="form-control" th:value="60점" disabled>
                         </div>
                         <div class="col-md-6 col-xxl-3">
                             <label for="pxp-company-job-experience" class="form-label">합격여부</label>
-                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
-                        </div>
-                        <div class="col-md-6 col-xxl-3">
-                            <label for="pxp-company-job-experience" class="form-label">풀이시간</label>
-                            <input type="text" id="pxp-company-job-experience" class="form-control" disabled>
+                            <input type="text" id="pxp-company-job-experience" class="form-control" th:value="합격" disabled>
                         </div>
                       <!-- end -->   
 	                   <div class="mt-4 mt-lg-5">
-	                        <button type="button" onclick="location.href='/examResultList'" class="btn rounded-pill pxp-section-cta">목록으로</button>
-	                        <button type="button" onclick="location.href='/wrongAnswerList'" class="btn rounded-pill pxp-section-cta-o ms-3">오답확인</button>
+	                        <button type="button" onclick="location.href='/examResultList'" class="btn rounded-pill pxp-section-cta">목록으로</button>	                       
                        </div>                                       
                     	</div>
                     </div>
