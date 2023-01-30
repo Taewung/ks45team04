@@ -13,8 +13,24 @@
 	</resultMap>
 	
 
+	<insert id="addMembership" parameterType="String">
+		/* 회원 가입 */
+		INSERT INTO membership
+		(membership_code, membership_period, membership_amount, membership_reg_manager, membership_reg_datetime)
+		VALUES
+		(sf_new_membership_code(), #{membershipPeriod}, #{membershipAmount}, #{membershipRegManager}, now());
+	</insert>
+
+	<select id="getMembershipList" resultMap="MembershipResultMap">
+			/*멤버십 추가를 위한 목록 조회*/
+			SELECT
+			*
+			FROM
+			membership
+	</select>	
+	
 	<update id="modifyMembershipInfo" parameterType="String">
-			/* 특정 멤버십 정보 수정 */
+		/* 특정 멤버십 정보 수정 */
 		UPDATE 
 			membership
 		SET 

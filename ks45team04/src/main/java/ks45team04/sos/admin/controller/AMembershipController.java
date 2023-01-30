@@ -30,9 +30,26 @@ public AMembershipController(@Qualifier("adminMembershipService") MembershipServ
 
 private static final Logger log = LoggerFactory.getLogger(AMembershipController.class);
 	
+
+	//회원가입 처리
+	@PostMapping("/addMembership")
+	public String addMembership(Membership membership) {
+		
+		membershipService.addMembership(membership);
+		
+		log.info("멤버십 추가 : {}", membership);	
+		
+		return "redirect:/membershipList";
+	}
+
+	//회원가입 화면
 	@GetMapping("/addMembership")
 	public String addMembership(Model model) {
+		List<Membership> getMemberShipList = membershipService.getMemberShipList();
+		
 		model.addAttribute("title", "멤버십 등록 화면");
+		model.addAttribute("getMemberShipList", getMemberShipList);
+		
 		return  "admin/membership/add_membership";		
 	}
 
