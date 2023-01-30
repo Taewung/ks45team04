@@ -70,7 +70,7 @@ private static final Logger log = LoggerFactory.getLogger(MemberController.class
 		
 		boolean isChecked = (boolean) checkResult.get("result");
 		
-		String redirectURI ="redirect:/myPage";
+		String redirectURI ="redirect:/main";
 		
 		if(!isChecked) {
 			redirectURI="redirect:/member/removeMember/" + memId;
@@ -82,6 +82,7 @@ private static final Logger log = LoggerFactory.getLogger(MemberController.class
 		return redirectURI;
 	}
 
+	
 	@GetMapping("/removeMember")
 	public String removeMember(@RequestParam(value="msg", required = false) String msg,
 								HttpSession session,
@@ -92,7 +93,7 @@ private static final Logger log = LoggerFactory.getLogger(MemberController.class
 		model.addAttribute("title", "회원 탈퇴");
 		model.addAttribute("memId", memId);
 		if(msg != null) model.addAttribute("msg", msg);
-		
+		session.invalidate();
 		return  "member/member/remove_member";
 	}			
 
