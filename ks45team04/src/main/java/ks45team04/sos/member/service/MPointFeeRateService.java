@@ -18,7 +18,7 @@ public class MPointFeeRateService {
 		this.mPointFeeRateMapper = mPointFeeRateMapper;
 	}
 	
-	//포인트 적립 기준 조회
+	//포인트 수수료율 조회
 	public List<MPointFeeRate> MPointFeeRateList(){
 		
 		List<MPointFeeRate> mPointFeeRateList = mPointFeeRateMapper.mPointFeeRateList();

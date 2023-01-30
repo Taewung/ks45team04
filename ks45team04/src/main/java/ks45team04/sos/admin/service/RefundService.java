@@ -16,7 +16,16 @@ public class RefundService {
 		this.refundMapper = refundMapper;
 	}
 
-
+	/**
+	 * 환불 신청 내역 삭제
+	 * @param refundCode
+	 * @return refundCode
+	 */
+	public void deleteRefundByCode(String refundCode) {
+		
+		refundMapper.deleteRefundByCode(refundCode);
+	}
+	
 	/**
 	 * 승인 내역 수정
 	 * @param refund

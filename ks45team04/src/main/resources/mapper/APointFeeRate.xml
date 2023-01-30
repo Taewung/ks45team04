@@ -73,10 +73,9 @@
 			point_fee_rate_code, 
 			point_fee_rate_contents, 
 			point_fee_rate, 
-			point_fee_rate_id, 
-			point_fee_rate_datetime
+			point_fee_rate_id
 		)VALUES(
-			sf_point_fee_rate_code(), #{pointFeeRateContents}, #{pointFeeRate}, #{pointFeeRateId}, NOW()
+			sf_point_fee_rate_code(), #{pointFeeRateContents}, #{pointFeeRate}, #{pointFeeRateId}
 		);
 	</insert>
 	
@@ -86,8 +85,7 @@
 			point_fee_rate_code,
 			point_fee_rate,
 			point_fee_rate_contents,
-			point_fee_rate_id,
-			point_fee_rate_datetime
+			point_fee_rate_id
 		FROM
 			point_fee_rate
 		<where>

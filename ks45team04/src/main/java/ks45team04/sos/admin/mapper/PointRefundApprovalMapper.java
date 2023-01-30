@@ -10,6 +10,9 @@ import ks45team04.sos.admin.dto.PointRefundApproval;
 @Mapper
 public interface PointRefundApprovalMapper {
 	
+	//포인트 환급 신청 내역 삭제
+	public int deletePointRefundApprovalByCode(String pointRefundCode);
+	
 	//특정 포인트 환급 신청 내역 수정
 	public int modifyPointRefundApproval(PointRefundApproval pointRefundApproval);
 	

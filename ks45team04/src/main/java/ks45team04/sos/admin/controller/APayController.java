@@ -22,14 +22,6 @@ public class APayController {
 		this.payService = payService;
 	}
 	
-	//결제 삭제
-	@GetMapping("/payDelete")
-	public String payDelete(Model model) {
-		model.addAttribute("title", "결제 취소(삭제)");
-		
-		return "admin/pay/pay_delete";
-	}
-	
 	//결제 내역 조회(검색)
 	@GetMapping("/payList")
 	public String payList(Model model

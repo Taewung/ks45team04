@@ -20,7 +20,7 @@
 	</resultMap>
 		
 	<select id="getMRefundCode" parameterType="String" resultType="String">
-		/* 포인트 적립 코드 자동생성 */
+		/* 포인트 환불 신청 코드 자동생성 */
 		SELECT
     		CASE
     		WHEN COUNT(1) = 0 THEN CONCAT('refund', '-001')
@@ -55,7 +55,6 @@
 			refund_state
 		FROM
 			refund_info;
-	
 	</select>
 	
 	

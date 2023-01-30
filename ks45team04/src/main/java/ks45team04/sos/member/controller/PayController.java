@@ -45,7 +45,6 @@ public class PayController {
 		return "member/pay/pay_insert";
 			
 	}
-	
 
 	//결제 내역 상세 조회
 	@GetMapping("/payDetailList")
