@@ -13,36 +13,48 @@
 	<!-- customContents start -->
 	<th:block layout:fragment="customContents">
          <h1>1:1 문의 조회</h1>
-         <p class="pxp-text-light">Remove Member</p>
+        <div class="table-responsive">
+                        <table class="table table-hover align-middle">                      	
+                            <thead>                    
+                                <tr>
+                             	    <th style="width: 13%;">문의자</th>
+                                    <th style="width: 13%;">문의유형</th>
+                                    <th style="width: 15%;">문의제목</th>
+                                    <th style="width: 20%;">문의내용</th>
+                                    <th style="width: 10%;">문의일시</th>
+                                    <th style="width: 20%;">답변내용</th>
+                                    <th style="width: 10%;">답변일시</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>    
+                            <tbody>
+                                <tr th:if="${not #lists.isEmpty(getQnaAnswerList)}"
+									th:each="l : ${getQnaAnswerList}"> 
+									<td><div class="pxp-company-dashboard-job-category" th:text="${l.questionId}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.qnaType}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.questionTitle}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.questionContent}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.questionDatetime}"></div></td>
+                                    <td><div class="pxp-company-dashboard-job-category" th:text="${l.answerContent}"></div></td> 
+                                     <td><div class="pxp-company-dashboard-job-category" th:text="${l.answerDatetime}"></div></td>           
+           
+                                    
+                                    <td>
+                                        <div class="pxp-dashboard-table-options">
+                                            <ul class="list-unstyled">                                      
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr th:unless="${not #lists.isEmpty(getQnaAnswerList)}">
+									<td colspan="9">등록된 정보가 없습니다.</td>
+								</tr>                    
+                            </tbody>
+                        </table>
+						
+                    </div>
 
-         <form>
-             <div class="row mt-4 mt-lg-5" >
-                 <div class="col-md-6">
-                     <div class="mb-3">
-                         <label for="pxp-company-old-password" class="form-label">PW</label>
-                         <input type="password" id="pxp-company-old-password" class="form-control" placeholder="PW를 입력해주세요">
-                     </div>
-                     
-                 <div class="row mt-10 mt-lg-3" style="line-height: 1">
-                 <div class="col-xxl-10">
-                     <div class="mb-3">                        
-                     <label for="pxp-company-job-category" class="form-label">탈퇴 사유</label>
-                         <select id="pxp-company-job-category" class="form-select">
-                             <option>서비스가 마음에 들지 않음</option>
-                             <option>자격증 합격</option>
-                             <option>기타</option>
-                         </select>
-                         </div>
-                         </div>
-                                                  
-                 </div>
-             </div>
-             <br>
-             <div class="mt-4 mt-lg-2">
-                 <a href="/main" class="btn rounded-pill pxp-section-cta"  onclick="if(!confirm('정말 탈퇴하시겠습니까?')){return false;}">탈퇴하기</a>
-             </div>
-             </div>
-         </form>
+     
 	</th:block>
 	<!-- customContents end -->
 	

@@ -94,9 +94,9 @@
 				
 				$(document).on('click', '.searchBtn', function(){
 					 
-					if($("#licenseMainCategory").val() == ""){
+					if($("#licenseSubCategory").val() == ""){
 					    alert("정보를 선택해주세요.");
-					    $("#licenseMainCategory").focus();
+					    $("#licenseSubCategory").focus();
 					    return false;
 					}
 					
@@ -111,10 +111,11 @@
 	<th:block layout:fragment="customContents">
 	<section class="pxp-page-header-simple" style="background-color: var(--pxpMainColorLight);">
             <div class="pxp-container">
-                <h1>100% 합격보장!</h1><br>
-                <h3><div class="pxp-hero-subtitle pxp-text-ligh" style="text-align:center;">합격을 위한 한걸음!</div></h3><br><br>
+                <h1>100% 합격보장<br><span style="color: var(--pxpMainColor);">자격증</span> 취득 플랫폼</h1><br>
             </div>
-            <h1><i class="bi bi-caret-down-fill"></i>&nbsp;&nbsp;자격증정보&nbsp;&nbsp;<i class="bi bi-caret-down-fill"></i></h1> 
+            <div class="pxp-container">
+            <h2><i class="bi bi-caret-down-fill"></i>&nbsp;&nbsp;자격증 정보&nbsp;&nbsp;<i class="bi bi-caret-down-fill"></i></h2> 
+             </div>
         </section>			
 	 <form id="licenseInfoDetail" th:action="@{/licenseInfoDetail}" method="Get">
 	<div class="row mt-4 mt-lg-5" style="margin:40px">            
