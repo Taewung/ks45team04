@@ -70,6 +70,7 @@
 			d_day
 		SET 
 			 li_name = #{liName}
+			 ,li_code = #{liCode}
 			,d_day_content = #{dDayContent}
 			,d_day_date = #{dDayDate}
 		WHERE 
