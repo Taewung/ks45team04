@@ -16,7 +16,10 @@ public class MPointSaveStandardService {
 		this.mPointSaveStandardMapper = mPointSaveStandardMapper;
 	}
 	
-	//포인트 적립 기준 조회
+	/**
+	 * 포인트 적립 기준 조회
+	 * @return mPointSaveStandardList
+	 */
 	public List<MPointSaveStandard> MPointSaveStandardList(){
 		
 		List<MPointSaveStandard> mPointSaveStandardList = mPointSaveStandardMapper.mPointSaveStandardList();

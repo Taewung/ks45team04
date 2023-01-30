@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import ks45team04.sos.admin.dto.PointSaveStandard;
 import ks45team04.sos.admin.dto.PointSaveUse;
 import ks45team04.sos.admin.mapper.PointSaveUseMapper;
 
@@ -29,16 +28,6 @@ public class PointSaveUseService {
 
 		return pointSaveUseMapper.pointSaveUseAdd(pointSaveUse);
 	}
-
-	/**
-	 * 포인트 적립 기준 내용 목록 조회
-	 * 
-	 * @return List<PointSaveStandard>
-	 *//*
-		 * public List<PointSaveStandard> getPointSaveStandardContent(){
-		 * List<PointSaveStandard> pointSaveUseContent =
-		 * pointSaveUseMapper.getPointSaveContent(); return pointSaveUseContent; }
-		 */
 
 	/**
 	 * pointSaveUseCode 자동생성

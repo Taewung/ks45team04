@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ks45team04.sos.member.dto.MPointRefund;
@@ -67,9 +68,18 @@ public class PointController {
 		return "member/point/point_save_use_list";
 	}
 	
-	//포인트 환급 신청(등록)
+	//포인트 환급 신청 등록 처리
+	@PostMapping("/pointRefundRequest")
+	public String pointRefundRequest(MPointRefund mPointRefund) {
+		mPointRefundService.addPointRefund(mPointRefund);
+		
+		return "redirect:/pointRefundList";
+	}
+	
+	//포인트 환급 신청 등록 화면
 	@GetMapping("/pointRefundRequest")
 	public String pointRefundRequest(Model model) {
+		
 		model.addAttribute("title", "포인트 환급 신청(등록)");
 		
 		return "member/point/point_refund_request";

@@ -14,7 +14,7 @@
 		<result property="payCompleteDatetime" 	column="pay_complete_datetime"/>
 	</resultMap>
 	
-		<select id="getMPayByCode" parameterType="String" resultMap="mPayResultMap">
+	<select id="getMPayByCode" parameterType="String" resultMap="mPayResultMap">
 		/* 결제내역 상세보기 */
 		SELECT
 			 pay_complete_code
@@ -42,7 +42,6 @@
 			pay_complete_datetime	
 		FROM
 			pay_complete;
-	
 	</select>
 	
 

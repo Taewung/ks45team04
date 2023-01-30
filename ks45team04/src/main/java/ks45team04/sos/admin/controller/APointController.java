@@ -61,7 +61,7 @@ public class APointController {
 	}
 	
 	// 포인트 적립 기준 삭제
-	@GetMapping("deletePointSaveStandard")
+	@GetMapping("/deletePointSaveStandard")
 	public String deletePointSaveStandard(PointSaveStandard pointSaveStandard, RedirectAttributes reAttr) {
 		
 		String pointSaveStandardCode = pointSaveStandard.getPointSaveStandardCode();
@@ -286,16 +286,19 @@ public class APointController {
 		
 		return "admin/point/point_save_use_list";
 	}
-
-	/*
-	 * // 포인트 환급 승인 내역 삭제
-	 * 
-	 * @GetMapping("/deletePointRefundApproval") public String
-	 * deletePointRefundApproval(Model model) { model.addAttribute("title",
-	 * "포인트 환급 승인 내역 삭제");
-	 * 
-	 * return "admin/point/point_refund_approval_delete"; }
-	 */
+	
+	 // 포인트 환급 승인 내역 삭제
+	 @GetMapping("/deletePointRefundApproval") 
+	 public String deletePointRefundApproval(PointRefundApproval pointRefundApproval, RedirectAttributes reAttr) {
+		 
+		 String pointRefundCode = pointRefundApproval.getPointRefundCode();
+		 String redirectURI = "redirect:/pointRefundApprovalList";
+		 
+		 pointRefundApprovalService.deletePointRefundApproval(pointRefundCode);
+	 
+		 return redirectURI; 
+	}
+	 
 	
 	// 포인트 환급 승인 내역 수정 처리
 	@PostMapping("/modifyPointRefundApproval")

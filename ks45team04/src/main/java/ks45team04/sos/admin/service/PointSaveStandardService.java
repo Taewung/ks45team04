@@ -36,8 +36,8 @@ public class PointSaveStandardService {
 
 	/**
 	 * 포인트 적립 기준 삭제
-	 * @param pointSaveStandard
-	 * @return pointSaveStandard
+	 * @param pointSaveStandardCode
+	 * @return pointSaveStandardCode
 	 */
 	public void deletePointSaveStandard(String pointSaveStandardCode) {
 		

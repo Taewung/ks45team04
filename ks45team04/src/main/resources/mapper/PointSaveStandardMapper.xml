@@ -11,15 +11,11 @@
 		<result property="pointSaveStandardId" 			column="point_save_standard_id"/>
 	</resultMap>
 	
-	
-	
-	
 	<select id="mPointSaveStandardList" resultMap="mPointSaveStandardResultMap">
 		/* 포인트 적립 기준 내역 조회*/
 		SELECT
 			*
 		FROM
 			point_save_standard;
-			
 	</select>
 </mapper>

@@ -9,6 +9,9 @@ import ks45team04.sos.admin.dto.Refund;
 @Mapper
 public interface RefundMapper {
 
+	//환불 신청 내역 삭제
+	public int deleteRefundByCode(String refundCode);
+	
 	//특정 환불 신청 내역 수정
 	public int modifyRefundApproval(Refund refund);
 	

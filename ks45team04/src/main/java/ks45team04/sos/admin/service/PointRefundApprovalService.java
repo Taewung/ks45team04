@@ -20,6 +20,16 @@ public class PointRefundApprovalService {
 		this.pointRefundApprovalMapper = pointRefundApprovalMapper;
 	}
 
+	/**
+	 * 포인트 환급 신청 내역 삭제
+	 * @param pointRefundCode
+	 * @return 
+	 */
+	public void deletePointRefundApproval(String pointRefundCode) {
+		
+		pointRefundApprovalMapper.deletePointRefundApprovalByCode(pointRefundCode);
+		
+	}
 
 	/**
 	 * 포인트 환급 승인 수정 

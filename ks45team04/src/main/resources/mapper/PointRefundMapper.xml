@@ -18,12 +18,21 @@
 		<result property="refundState" 				column="refund_state"/>
 	</resultMap>
 	
+	<insert id="addPointRefund" parameterType="PointSaveStandard">
+		/* 포인트 환급 신청 등록 */
+		INSERT INTO point_refund
+		(
+			point_refund_code, refund_request_point, point_refund_fee, refund_point
+		)VALUES(
+			sf_point_refund_code(), #{refundRequestPoint}, #{pointRefundFee}, #{refundPoint}
+		);
+	</insert>
+	
 	<select id="mPointRefundList" resultMap="mPointRefundResultMap">
 		/* 포인트 환급 신청 내역 조회*/
 		SELECT
 			*
 		FROM
 			point_refund;
-			
 	</select>
 </mapper>
