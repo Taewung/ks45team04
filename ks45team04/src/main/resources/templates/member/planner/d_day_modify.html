@@ -23,11 +23,13 @@
 			$(document).on('change','#liCode', function(){
 			
 			let liCode = $(this).val();
-				console.log(liCode);
+			console.log(liCode);
+			let liName = $('#liName');
+			liName.val(liCode);
 			
 			if(validationCheck(liCode)){						
 				var request = $.ajax({
-				  url: '/getliCode',
+				  url: '/getliName',
 				  method: 'GET',
 				  data: { 'liCode' : liCode },
 				  dataType: 'json'
@@ -36,7 +38,8 @@
 				request.done(function( data ) {
 					  console.log(data);
 					  let liName = data.liName
-					  $('input[name=liName]').attr('value',liName);
+					  // $('input[name=liName]').attr('value',liName);
+					  $('#liName').val(liName);
 					  
 					});
 				// 중분류 선택 실패시
@@ -54,6 +57,8 @@
 		<section>
 			<div class="pxp-container">
 			<form id="modifyDDayForm" th:action="@{/modifyDDay}" name="myform" method="post">
+				<input type="hidden" id="liName" class="form-control" name="liName" placeholder="자격증 코드" 
+                                  		 th:value="${dDay.liName}">
               <div class="row mt-4 mt-lg-5">
                   <div class="col-xxl-8" style=" margin-left: 530px;">
                       <div class="row">
@@ -78,15 +83,15 @@
                               </div>
                           </div>
                       </div>
-                      <div class="row">
+               <!--        <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3" >
                                   <label for="getliName" class="form-label"><h6>자격증 코드</h6></label>
                                   <input type="text" id="liName" class="form-control" name="liName" placeholder="자격증 코드" 
-                                  		 th:value="${dDay.liCode}">
+                                  		 th:value="${dDay.liName}">
                               </div>
                           </div>
-                      </div>
+                      </div> -->
                       <div class="row">
                           <div class="col-sm-6">
                               <div class="mb-3">
@@ -94,7 +99,8 @@
                                   <select class="form-select" id="liCode" name="liCode">
                              		 <th:block th:if="${not #lists.isEmpty(licenseInfoList)}" 
 										  th:each="l : ${licenseInfoList}">								
-									<option th:value="${l.liCode}">[[${l.liName}]]</option>
+									<option th:if = "${l.liCode.equals(dDay.liCode)}" th:value="${l.liCode}" selected>[[${l.liName}]]</option>
+									<option th:unless = "${l.liCode.equals(dDay.liCode)}" th:value="${l.liCode}" >[[${l.liName}]]</option>
 									</th:block>
 									<th:block th:unless="${not #lists.isEmpty(licenseInfoList)}">								
 									<option>등록된 정보가 없습니다.</option>

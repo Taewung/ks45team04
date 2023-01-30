@@ -184,7 +184,7 @@ public class PlannerController {
 	// 디데이 정보 수정 처리
 		@PostMapping("/modifyDDay")
 		public String modifyDDay(DDay dDay) {
-
+			log.info("post modifyDDay : {}", dDay);
 			plannerService.modifyDDay(dDay);
 
 			return "redirect:/detailDDay";
