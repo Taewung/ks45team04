@@ -12,16 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.admin.dto.LicenseMain;
 import ks45team04.sos.admin.dto.LicensePassScore;
 import ks45team04.sos.admin.dto.LicenseSub;
 import ks45team04.sos.admin.dto.LicenseSubject;
-import ks45team04.sos.admin.dto.Question;
 import ks45team04.sos.admin.dto.SubjectPassScore;
 import ks45team04.sos.admin.service.LicensePassScoreService;
-import ks45team04.sos.admin.service.LicenseSubjectService;
 import ks45team04.sos.admin.service.SubjectPassScoreService;
 
 @Controller
@@ -180,4 +177,5 @@ public class PassScoreController {
 		
 		return "admin/passScore/license_pass_score_list";
 	}
+	
 }

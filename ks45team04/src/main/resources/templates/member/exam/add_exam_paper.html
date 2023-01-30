@@ -64,11 +64,12 @@
 					// 중분류값 선택 성공시 
 					request.done(function( data ) {
 						  console.log(data);
+						  // 자격증 목록조회
 						  $('#licenseCategory').children().remove();
 						  $('#licenseCategory').append(`<option selected>자격증명</option>`);
 						  for(let licenseCategory of data){
 							  $('#licenseCategory').append(`<option value="${licenseCategory.liCode}" name="liName">${licenseCategory.liName}</option>`);								  
-						  }						  									
+						  }	
 						});
 					// 중분류 선택 실패시
 					request.fail(function( jqXHR, textStatus ) {
@@ -84,25 +85,84 @@
 						return false;
 					}
 				});
-				// 중분류값 선택없이 자격증코드 선택시
-				$(document).on('click','.liCodeCategoryDiv', function(){
-					let isDisabled = $('#liCodeCategory').prop('disabled');
-					if(isDisabled) {
-						alert('중분류를 선택해주세요');
-						return false;
-					}
-				});
-				// 자격증값 선택시 자격증코드조회
-				$(document).on('change','#licenseCategory', function(){
-					let getLiCode = $("#licenseCategory option:selected").val();	
-					console.log(getLiCode)
-					const addExamHref = '/addExamAnswer?liCode='+getLiCode;
-					$('#startBtn').click(function(){						
-						location.href=addExamHref;
-					});
-				});
-			});
 
+				// 자격증값 선택시 
+				// 자격증별 과목목록조회 
+				$(document).on('change','#licenseCategory', function(){
+					let liCode = $(this).val();					
+					console.log('자격증코드: ' + liCode);
+					
+					// 시작버튼클릭시
+					$(document).on('click', '#startBtn', function(){
+						
+					if(validationCheck(liCode)){						
+						var request = $.ajax({
+						  url: '/getSubjectListForExam',
+						  method: 'GET',
+						  data: { 'liCode' : liCode },
+						  dataType: 'json'
+						});
+					// 과목목록조회 성공시 
+					request.done(function( data ) {
+						console.log(data);	
+						
+						// 자격증과목별 문제조회 
+			
+							let liCode = data[0].liCode;
+							console.log(liCode);
+							 console.log('자격증코드: '+liCode)
+							 
+							 if(validationCheck(liCode)){						
+									var request = $.ajax({
+									  url: '/getQuestionForExam',
+									  method: 'GET',
+									  data: { 'liCode' : liCode},
+									  dataType: 'json'
+									});
+							 		// 문제조회 성공시
+							 		request.done(function( data ) {
+							 		const today = new Date();
+							 		let qList = [];
+							 			for(let q of data){
+											  let qInfo = {};
+											  qInfo['문제그룹코드'] = 'exam'+'-'+`${q.liCode}`+'-'+`${q.lsCode}`+'-'+today.toISOString().substring(0, 10).split("-").join("");
+										      qInfo['자격증코드'] = `${q.liCode}`;
+										      qInfo['과목코드'] = `${q.lsCode}`;
+										      qInfo['문제코드'] = `${q.questionCode}`;
+										      qInfo['문제'] = `${q.question}`;
+										      qInfo['등록자'] = `${q.questionRegId}`;
+										      
+										      qList.push(qInfo);
+										}
+							 			 console.log(qList);
+							 			 
+							 			 let param = {list: JSON.stringify(qList) };
+							 			 
+							 			$.ajax({
+							 					type : "POST",
+							 					url : "/addExamPaper",
+							 					 dataType : "json",
+							 					data: param,
+							 					success : function(data) {
+							 						console.log(data);
+							 					},
+							 					error : function(e) {}
+							 			});		
+									});	
+									// 문제조회 실패시
+									request.fail(function( jqXHR, textStatus ) {
+								   		alert( "Request failed: " + textStatus );
+									});					 
+						 	}	
+						});
+					// 과목목록조회 실패시
+					request.fail(function( jqXHR, textStatus ) {
+						  alert( "Request failed: " + textStatus );
+						});
+					}
+					});	
+				});		
+			});
 			$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
 				function validateValue(checkValue) {
 					if(    typeof checkValue == 'undefined' 
@@ -110,12 +170,9 @@
 							|| checkValue == ''					){
 						return true;
 					}
-					return false;
-					
+					return false;				
 				}			
-
-				$(document).on('click', '#startBtn', function(){
-					
+				$(document).on('click', '#startBtn', function(){					
 					$('#startBtn input').each(function(idx, item){
 						let checkValue = $(item).val();
 						let labelValue = $(item).parents('.mb-3').find('label').text();
@@ -150,23 +207,21 @@
 					</div>
 					<div class="col-md-6 col-xxl-3">
 						<div class="mb-3 licenseSubCategoryDiv">
-							<select id="licenseSubCategory" class="form-select" name="lscName" disabled="disabled"></select>
+							<select id="licenseSubCategory" class="form-select"  disabled="disabled"></select>
 						</div>
 					</div>
 					<div class="col-md-6 col-xxl-3">
 						<div class="mb-3 licenseCategoryDiv">
-							<select id="licenseCategory" class="form-select" name="liName" disabled="disabled"></select>
+							<select id="licenseCategory" class="form-select" disabled="disabled"></select>
 						</div>
 					</div>  
-					<div class="col-12 col-lg-auto">						
-						<!-- <a id="startBtn" class="btn rounded-pill pxp-section-cta">시작</a> -->
-						<button type="button" id="startBtn" class="btn rounded-pill pxp-section-cta">시작</button>
+					<div class="col-12 col-lg-auto">											
+						<a id="startBtn" th:href="@{/addExamAnswer}" type="button" class="btn rounded-pill pxp-section-cta">시작</a>		   
                     </div> 
                     </form>
                 </div>          
 			</div>
 		</section>
-		<br><br><br><br>
 	</th:block>
 	<!-- customContents end -->
 	
