@@ -112,12 +112,14 @@ public class NoteController {
 		
 	// 판매노트 목록 조회
 	@GetMapping("/noteList")
-	public String noteList(Model model) {
+	public String getnoteList(Model model
+						  ,@RequestParam(value="searchKey", required = false) String searchKey
+						  ,@RequestParam(value="searchValue", required = false, defaultValue = "") String searchValue) {
 		
-		List<Note> noteList = mNoteService.noteList();
+		List<Note> getnoteList = mNoteService.getnoteList(searchKey, searchValue);
 		
 		model.addAttribute("title", "판매노트 목록 조회");
-		model.addAttribute("noteList", noteList);
+		model.addAttribute("noteList", getnoteList);
 		
 		return "member/note/note_list";
 

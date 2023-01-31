@@ -12,7 +12,6 @@ import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.admin.dto.LicenseMain;
 import ks45team04.sos.admin.dto.LicensePassScore;
 import ks45team04.sos.admin.dto.LicenseSub;
-import ks45team04.sos.admin.dto.Question;
 import ks45team04.sos.admin.mapper.LicensePassScoreMapper;
 
 

@@ -70,11 +70,25 @@ public class MNoteService {
 	 * 공부노트 목록 조회
 	 * @return List<Note>
 	 */
-	public List<Note> noteList(){
+	public List<Note> getnoteList(String searchKey, String searchValue){
 		
-		List<Note> noteList = mNoteMapper.noteList();
+		if(searchKey != null) {
+			switch (searchKey) {
+			case "liName":
+				searchKey = "li_name";
+				break;
+			case "noteName":
+				searchKey = "note_name";
+				break;
+			case "noteWriterId":
+				searchKey = "note_writer_id";
+				break;
+			}
+		}
 		
-		return noteList;
+		List<Note> getnoteList = mNoteMapper.getnoteList(searchValue, searchValue);
+		
+		return getnoteList;
 	}
 	
 }

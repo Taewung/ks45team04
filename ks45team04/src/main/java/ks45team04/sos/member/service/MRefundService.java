@@ -22,7 +22,7 @@ public class MRefundService {
 		this.mPayMapper = mPayMapper;
 	}
 	/**
-	 * refundCode 자동 생성
+	 * 환불 신청 코드 자동 생성
 	 * 
 	 * @param refundInfo
 	 * @param refundCode
@@ -33,19 +33,30 @@ public class MRefundService {
 		return newRefundCode;
 	}
 	
-	//회원 환불 신청 등록(수정)
+	/**
+	 * 회원 환불 신청 등록
+	 * @param mRefund
+	 * @return refundRequest
+	 */
 	public int refundRequest(MRefund mRefund) {
 		
 		return mRefundMapper.refundRequest(mRefund);
 	}
-	
-	//특정 결제내역 조회
+
+	/**
+	 * 특정 결제 내역 조회 
+	 * @param payCompleteCode
+	 * @return getMPayByCode
+	 */
 	public MPay getMPayInfoByCode(String payCompleteCode) {
 		
 		return mPayMapper.getMPayByCode(payCompleteCode);
 	}
 	
-	//회원 환불 승인 내역 조회
+	/**
+	 * 회원 환불 승인 내역 조회 
+	 * @return mRefundList
+	 */
 	public List<MRefund> MRefundList(){
 	
 		List<MRefund> mRefundList = mRefundMapper.mRefundList();

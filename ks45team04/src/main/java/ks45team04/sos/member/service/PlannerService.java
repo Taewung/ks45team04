@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.member.dto.DDay;
 import ks45team04.sos.member.dto.ToDoList;
 import ks45team04.sos.member.mapper.PlannerMapper;
@@ -19,13 +20,70 @@ public class PlannerService {
 
 	
 	
+	/**
+	 * 특정 디데이 삭제
+	 * @param dDayCode
+	 */
+	public void deleteDDayByCode(String dDayCode) {
+		
+		plannerMapper.deleteDDayByCode(dDayCode);
+		
+	}
+	
+	
+	/**
+	 * 특정 디데이 수정
+	 * @param toDoList
+	 * @return
+	 */
+	public int modifyDDay(DDay dDay) {
+		
+		return plannerMapper.modifyDDay(dDay);
+	}
+	
+	
+	/**
+	 * 디데이 등록을 위한 노트 코드별 노트이름 조회
+	 * @param liCode
+	 * @return
+	 */
+	public LicenseInfo getliName(String liCode) {
+		
+		LicenseInfo getliName = plannerMapper.getliName(liCode);
+		
+		return getliName;
+		
+	}
+	
+	
+	/**
+	 * 디데이 등록을 위한 자격증 정보 조회
+	 * @param Note
+	 */
+	public List<LicenseInfo> licenseInfoList(){
+		
+		List<LicenseInfo> licenseInfoList = plannerMapper.licenseInfoList();
+		
+		return licenseInfoList;
+	}
+	
+	
+	/**
+	 * 디데이 등록
+	 * @param dDay
+	 * @return
+	 */
 	public int addDDay(DDay dDay) {
 		
 		return plannerMapper.addDDay(dDay);
 	}
 	
 	
-	
+	/**
+	 * 코드별 디데이
+	 * @param dDayCode
+	 * @return
+	 */
 	public DDay getDDayByCode(String dDayCode) {
 		
 		return plannerMapper.getDDayByCode(dDayCode);

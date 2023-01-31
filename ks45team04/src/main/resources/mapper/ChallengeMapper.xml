@@ -54,7 +54,63 @@
 		<result property="lsRegId" 			column="ls_reg_id"/>
 		<result property="lsRegDatetime" 	column="ls_reg_datetime"/>
 	</resultMap>
+	<resultMap type="ChallengeFinish" id="challengeFinishResultMap">
+		<id property="cfCode"						column="cf_code"/>
+		<result property="cfCgCode" 				column="cf_cg_code"/>
+		<result property="cfId" 					column="cf_id"/>
+		<result property="cfStudyTime" 				column="cf_study_time"/>
+		<result property="cfCgStudyTime" 			column="cf_cg_study_time"/>
+		<result property="cfCgEndDatetime" 			column="cf_cg_end_datetime"/>
+		<result property="cfState" 					column="cf_state"/>
+		<result property="cfEndDatetime" 			column="cf_end_datetime"/>		
+		<result property="cfSavepoint" 				column="cf_savepoint"/>		
+		<result property="cfPointDetailGroup" 		column="cf_point_detail_group"/>		
+	</resultMap>
 	
+	
+	<!-- 	<select id="getChallengeState" parameterType="String" resultMap="ChallengeResultMap">
+		/*특정 회원 챌린지 신청 내역정보 조회*/
+			SELECT
+				cg_goal_title,
+				cg_li_name,
+				cg_subject,
+				cg_content,
+				cg_study_time,
+				cg_start_datetime,
+				cg_end_datetime
+			FROM
+				challenge_goal
+			where
+				cg_id = #{cgId}; 
+	</select>   -->
+	
+	<select id="ChallengeFinish" resultMap="challengeFinishResultMap">
+		/*챌린지 성공 여부 조회*/
+		SELECT
+			cf_state
+		FROM
+			challenge_finish
+		WHERE
+			cf_cg_code = #{cfCgCode};
+	</select>
+	
+	
+	<select id="ChallengeHistory" resultMap="challengeResultMap">
+		/*특정 회원의 챌린지 도전 내역 조회 */
+		SELECT
+			cg_goal_title,
+			cg_li_name,
+			cg_li_subject,			
+			cg_content,			
+			cg_study_time,
+			cg_start_datetime,
+			cg_end_datetime,
+			cg_code
+		from
+			challenge_goal
+		where
+			cg_id = #{cgId};		
+	</select>
  	
  	<insert id="challengeGoal" parameterType="ChallengeGoal">
 		/* 챌린지 등록 */

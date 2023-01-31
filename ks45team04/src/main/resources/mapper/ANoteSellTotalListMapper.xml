@@ -16,7 +16,7 @@
 	</resultMap>
 	
 	<select id="NoteSellTotalList" resultMap="noteSellTotalListResultMap">
-			
+			/* 공부노트 판매 내역 조회 */
 	SELECT
 		*
 	FROM

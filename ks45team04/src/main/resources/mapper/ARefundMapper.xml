@@ -17,6 +17,15 @@
 		<result property="refundApprovalId" 	column="refund_approval_id"/>
 	</resultMap>
 	
+	<delete id="deleteRefundByCode" parameterType="String">
+		/* 환불 신청 코드로 삭제 */
+		DELETE
+		FROM 
+			refund_info
+		WHERE 
+			refund_code = #{refundCode};
+	</delete>
+	
 	<update id="modifyRefundApproval" parameterType="Refund">
 		/* 특정 환불 승인 내역 수정*/
 		UPDATE 
@@ -25,7 +34,6 @@
 				refund_state = #{refundState}
 		WHERE 
 				refund_code= #{refundCode};
-	
 	</update>
 	
 	<select id="getRefundByCode" parameterType="String" resultMap="refundResultMap">

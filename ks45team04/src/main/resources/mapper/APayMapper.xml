@@ -31,7 +31,6 @@
 				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
 			</if>
 		</where>
-	
 	</select>
 	
 	

@@ -6,6 +6,85 @@
 	<!-- script start -->
 	<th:block layout:fragment="customScript">
 	<script>
+	$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+		function validateValue(checkValue) {
+			if(    typeof checkValue == 'undefined' 
+					|| checkValue == null 
+					|| checkValue == ''					){
+				return true;
+			}
+			return false;
+			
+		}
+	
+		// 취소 버튼 클릭시 리다이렉트
+		$(function(){
+			$('#resetBtn').click(function(){
+				location.href = '/customerCenter';
+			});
+		});
+	
+		
+		$('#submitBtn').click(function(){
+			let isSubmit = true;
+			
+			const $addQnaQuestionFormInputs = $('#addQnaQuestionForm input');
+			const $addQnaQuestionFormTextarea = $('#addQnaQuestionForm textarea');
+			for(let addQnaQuestionFormInput of $addQnaQuestionFormInputs){
+				
+				let checkValue = $(addQnaQuestionFormInput).val();
+				let labelValue = $(addQnaQuestionFormInput).parent('.mb-3').find('label').text();
+				if(validateValue(checkValue)){
+					
+					alert(`${labelValue}를 입력해주세요`);
+					$(addQnaQuestionFormInput).focus();
+					isSubmit = false;
+					return false;
+				}
+			}
+			for(let addQnaQuestionFormTextarea of $addQnaQuestionFormTextarea){
+				
+				let checkValue = $(addQnaQuestionFormTextarea).val();
+				let labelValue = $(addQnaQuestionFormTextarea).parent('.mb-3').find('label').text();
+				if(validateValue(checkValue)){
+					
+					alert(`${labelValue}를 입력해주세요`);
+					$(addQnaQuestionFormTextarea).focus();
+					isSubmit = false;
+					return false;
+				}
+			}
+			/* $('#addQnaQuestionForm input').each(function(idx, item){
+				let checkValue = $(item).val();
+				let labelValue = $(item).parent('.mb-3').find('label').text();
+				if(validateValue(checkValue)){
+					
+					alert(`${labelValue}를 입력해주세요`);
+					$(item).focus();
+					isSubmit = false;
+					return false;
+				}
+				
+			});   
+			$('#addQnaQuestionForm textarea').each(function(idx, item){
+				let checkValue = $(item).val();
+				let labelValue = $(item).parent('.mb-3').find('label').text();
+				if(validateValue(checkValue)){
+					
+					alert(`${labelValue}를 입력해주세요`);
+					$(item).focus();
+					isSubmit = false;
+					return false;
+				}
+				
+			});    */
+
+			if(isSubmit) $('#addMemberShipForm').submit();
+		});
+		
+		
+	});
+	
 	</script>
 	</th:block> 
 	<!-- script end -->
@@ -14,35 +93,36 @@
 	<th:block layout:fragment="customContents">  
                 <h1>멤버십 등록</h1>
                 <p class="pxp-text-light">Add Membership</p>
-                <form>
+                <form  id="addMemberShipForm" th:action="@{/addMembership}" name="myform" method="post">
                     <div class="row mt-2 mt-lg-3">
                         <div class="col-xxl-3">
                             <div class="mb-1">
-                                <label for="pxp-candidate-Password" class="form-label">멤버십명</label>
-                                <input type="text" id="pxp-candidate-Password" class="form-control" placeholder="멤버십 명">
+                                <label for="membershipPeriod" class="form-label">멤버십기간</label>
+                                <input type="text" name="membershipPeriod" id="membershipPeriod" class="form-control membershipPeriod" placeholder="멤버십 기간">
                             </div>
                          </div>                            
                      </div>                 
                     <div class="row mt-1 mt-lg-3">
                         <div class="col-xxl-3">
                             <div class="mb-1">
-                                <label for="pxp-candidate-Password" class="form-label">기간</label>
-                                <input type="text" id="pxp-candidate-Password" class="form-control" placeholder="기간">
+                                <label for="membershipAmount" class="form-label">멤버십금액</label>
+                                <input type="text" name="membershipAmount" id="membershipAmount" class="form-control membershipAmount" placeholder="멤버십금액">
                             </div>
                          </div>                            
                      </div>
                     <div class="row mt-1 mt-lg-3">
                         <div class="col-xxl-3">
                             <div class="mb-1">
-                                <label for="pxp-candidate-Password" class="form-label">가격</label>
-                                <input type="text" id="pxp-candidate-Password" class="form-control" placeholder="가격">
+                                <label for="membershipRegManager" class="form-label">멤버십등록자</label>
+                                <input type="text" name="membershipRegManager" id="membershipRegManager" class="form-control membershipRegManager" placeholder="멤버십등록자">
                             </div>
                          </div>                            
                      </div>                                               
                                                      
 
                     <div class="mt-2 mt-lg-4">
-                            <a href="/memberShipList" class="btn rounded-pill pxp-section-cta">등록하기</a></button>  &emsp;&emsp;
+                         <button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta">등록</button>&nbsp;&nbsp;
+            			 <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
                     </div>   
 	</th:block>
 	<!-- customContents end -->

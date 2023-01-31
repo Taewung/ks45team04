@@ -1,6 +1,7 @@
 package ks45team04.sos.admin.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -33,6 +34,8 @@ public interface LicenseInfoMapper {
 	public List<LicenseInfo> getLicenseInfoList();
 	
 	// 자격증 정보 목록 조회
-	public List<LicenseInfo> LicenseInfoList(String searchKey, String searchValue);
+	public List<LicenseInfo> LicenseInfoList(Map<String,Object> paramMap);
 
+	//자격증 정보 테이블 전체 행의 갯수
+	public int getLicenseInfoCnt();
 }

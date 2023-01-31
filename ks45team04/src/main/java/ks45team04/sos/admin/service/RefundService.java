@@ -16,19 +16,42 @@ public class RefundService {
 		this.refundMapper = refundMapper;
 	}
 
-	//환불 승인 내역 수정
+	/**
+	 * 환불 신청 내역 삭제
+	 * @param refundCode
+	 * @return refundCode
+	 */
+	public void deleteRefundByCode(String refundCode) {
+		
+		refundMapper.deleteRefundByCode(refundCode);
+	}
+	
+	/**
+	 * 승인 내역 수정
+	 * @param refund
+	 * @return modifyRefundApproval
+	 */
 	public int modifyRefundApproval(Refund refund) {
 		
 		return refundMapper.modifyRefundApproval(refund);
 	}
 	
-	//특정 환불 승인 내역 조회
+	/**
+	 * 특정 환불 승인 내역 조회
+	 * @param refundCode
+	 * @return getRefundByCode
+	 */
 	public Refund getRefundInfoByCode(String refundCode) {
 		
 		return refundMapper.getRefundByCode(refundCode);
 	}
 	
-	//환불 승인 내역 조회
+	/**
+	 * 환불 승인 내역 조회(검색)
+	 * @param searchKey
+	 * @param searchValue
+	 * @return refundList
+	 */
 	public List<Refund> RefundList(String searchKey, String searchValue){
 		
 		if(searchKey != null) {

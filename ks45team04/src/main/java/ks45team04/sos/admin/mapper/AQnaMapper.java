@@ -1,6 +1,7 @@
 package ks45team04.sos.admin.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -23,5 +24,8 @@ public interface AQnaMapper {
 	public List<Qna> getQnaList();
 	
 	//1:1 문의 질문 및 답변 목록 조회
-	public List<Qna> QnaList(String searchKey, String searchValue);
+	public List<Qna> QnaList(Map<String,Object> paramMap);
+	
+	// 1:1문의 테이블 전체 행의 갯수 
+	public int getQnaCnt();
 }

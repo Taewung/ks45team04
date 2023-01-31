@@ -75,7 +75,7 @@
                                         <a th:href="@{/modifyPointRefundApproval(pointRefundCode=${l.pointRefundCode})}">
                                             <li><button title="Approval"><span class="fa fa-check"></span></button></li>
                                          </a>
-                                         <a href="/deletePointRefundApproval">
+                                         <a th:href="@{/deletePointRefundApproval(pointRefundCode=${l.pointRefundCode})}">
                                             <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
                                        	 </a>
                                         </ul>

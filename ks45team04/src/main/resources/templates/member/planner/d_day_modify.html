@@ -6,6 +6,48 @@
 	<!-- script start -->
 	<th:block layout:fragment="customScript">
 	<script>
+	$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+		$('#resetBtn').click(function(){
+			location.href = '/detailDDay';
+		});
+	});
+
+	//노트이름 자동등록
+    function validationCheck(data){
+        if(typeof data == 'undefined' ||  data == ''  || data == null || data == '대분류'){
+			           return false;
+			       }
+			     return true;
+		    }
+		
+			$(document).on('change','#liCode', function(){
+			
+			let liCode = $(this).val();
+			console.log(liCode);
+			let liName = $('#liName');
+			liName.val(liCode);
+			
+			if(validationCheck(liCode)){						
+				var request = $.ajax({
+				  url: '/getliName',
+				  method: 'GET',
+				  data: { 'liCode' : liCode },
+				  dataType: 'json'
+				});
+			
+				request.done(function( data ) {
+					  console.log(data);
+					  let liName = data.liName
+					  // $('input[name=liName]').attr('value',liName);
+					  $('#liName').val(liName);
+					  
+					});
+				// 중분류 선택 실패시
+				request.fail(function( jqXHR, textStatus ) {
+					  alert( "Request failed: " + textStatus );
+					});
+				}
+			});
 	</script>
 	</th:block> 
 	<!-- script end -->
@@ -14,7 +56,86 @@
 	<th:block layout:fragment="customContents">
 		<section>
 			<div class="pxp-container">
-				d_day_modify.html
+			<form id="modifyDDayForm" th:action="@{/modifyDDay}" name="myform" method="post">
+				<input type="hidden" id="liName" class="form-control" name="liName" placeholder="자격증 코드" 
+                                  		 th:value="${dDay.liName}">
+              <div class="row mt-4 mt-lg-5">
+                  <div class="col-xxl-8" style=" margin-left: 530px;">
+                      <div class="row">
+                      </div>
+                      <div class="row">
+                      </div><br>
+                      <div class="row">
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="dDayCode" class="form-label"><h6>디데이 코드</h6></label>
+                                  <input type="text" id="dDayCode" class="form-control" name="dDayCode" placeholder="디데이코드" readonly="readonly"
+                                  		 th:value="${dDay.dDayCode}">
+                              </div>
+                          </div>
+                      </div>
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="memId" class="form-label"><h4>회원 아이디</h4></label>
+                                  <input type="text" id="memId" class="form-control" name="memId" placeholder="회원 아이디" readonly="readonly"
+                                  		 th:value="${dDay.memId}">
+                              </div>
+                          </div>
+                      </div>
+               <!--        <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3" >
+                                  <label for="getliName" class="form-label"><h6>자격증 코드</h6></label>
+                                  <input type="text" id="liName" class="form-control" name="liName" placeholder="자격증 코드" 
+                                  		 th:value="${dDay.liName}">
+                              </div>
+                          </div>
+                      </div> -->
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                   <label for="liCode" class="form-label"><h6>자격증 이름</h6></label>
+                                  <select class="form-select" id="liCode" name="liCode">
+                             		 <th:block th:if="${not #lists.isEmpty(licenseInfoList)}" 
+										  th:each="l : ${licenseInfoList}">								
+									<option th:if = "${l.liCode.equals(dDay.liCode)}" th:value="${l.liCode}" selected>[[${l.liName}]]</option>
+									<option th:unless = "${l.liCode.equals(dDay.liCode)}" th:value="${l.liCode}" >[[${l.liName}]]</option>
+									</th:block>
+									<th:block th:unless="${not #lists.isEmpty(licenseInfoList)}">								
+									<option>등록된 정보가 없습니다.</option>
+                               		</select>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="dDayContent" class="form-label"><h6>디데이제목/내용</h6></label>
+                                  <input type="text" id="dDayContent" class="form-control" name="dDayContent" placeholder="디데이제목/내용" 
+                                  		 th:value="${dDay.dDayContent}">
+                              </div>
+                          </div>
+                      </div>    
+                       <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="dDayDate" class="form-label"><h6>목표날짜</h6></label>
+                                  <input type="date" id="dDayDate" class="form-control" name="dDayDate" placeholder="목표날짜" 
+                                  		 th:value="${dDay.dDayDate}">
+                              </div>
+                          </div>
+                      </div>                          
+                   
+                      
+                  </div>
+              </div>
+              <div class="mt-4 mt-lg-5" style=" margin-left: 700px;">
+                  <button type="submit" id="submitBtn" class="btn rounded-pill pxp-section-cta">수정</button>&nbsp;&nbsp;
+                  <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
+                  
+              </div>
+          </form>
 			</div>
 		</section>
 	</th:block>

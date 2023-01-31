@@ -16,7 +16,19 @@ public class MPointRefundService {
 		this.mPointRefundMapper = mPointRefundMapper;
 	}
 	
-	//포인트 환급 내역 조회
+	/**
+	 * 포인트 환급 신청 등록
+	 * @param mPointRefund
+	 * @return mPointRefund
+	 */
+	public int addPointRefund(MPointRefund mPointRefund) {
+		
+		return mPointRefundMapper.addPointRefund(mPointRefund);
+	}
+	/**
+	 * 포인트 환급 내역 조회
+	 * @return mPointRefundList
+	 */
 	public List<MPointRefund> MPointRefundList(){
 		
 		List<MPointRefund> mPointRefundList = mPointRefundMapper.mPointRefundList();

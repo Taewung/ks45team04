@@ -16,14 +16,20 @@ public class MPayService {
 		this.mPayMapper = mPayMapper;
 	}
 	
-	
-	//회원 결제 내역 상세보기
+	/**
+	 * 회원 결제 내역 상세보기
+	 * @param payCompleteCode
+	 * @return payCompleteCode
+	 */
 	public MPay getMPayByCode(String payCompleteCode) {
 		
 		return mPayMapper.getMPayByCode(payCompleteCode);
 	}
 	
-	//회원 결제 내역 조회
+	/**
+	 * 회원 결제 내역 조회
+	 * @return mPayList
+	 */
 	public List<MPay> MPayList(){
 		
 		List<MPay> mPayList = mPayMapper.mPayList();

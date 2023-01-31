@@ -50,7 +50,6 @@
                                     <th style="width: 10%;">사용포인트</th>
                                     <th style="width: 10%;">결제금액</th>
                                     <th style="width: 20%;">결제일시</th>
-                                    <th style="width: 10%;">삭제</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -63,15 +62,6 @@
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${l.payUsePoint}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${#numbers.formatInteger(l.finalPayPrice, 3, 'COMMA')}"></div></td>
                                     <td><div class="pxp-company-dashboard-job-status" th:text="${l.payCompleteDatetime}"></div></td>
-                                    <td>
-                                        <div class="pxp-dashboard-table-options">
-                                            <ul class="list-unstyled">
-                                            <a href="/payDelete">
-                                                <li><button title="Delete"><span class="fa fa-trash-o"></span></button></li>
-                                             </a>
-                                            </ul>
-                                        </div>
-                                    </td>
                                 </tr>
                                 <tr th:unless="${not #lists.isEmpty(payList)}">
 									<td colspan="9">조회된 결제 내역이 없습니다.</td>

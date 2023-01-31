@@ -78,76 +78,92 @@ public Map<String, Object> getLoginHistory(int currentPage){
 	return paramMap;
 }
 
-/**
- * 회원정보(비밀번호) 확인
- * @param memberId, memberPw
- * @return
- */
-public Map<String, Object> checkPwByMemId(String memId, String memPw) {
-	
-	Map<String, Object> resultMap = new HashMap<String, Object>();
-	
-	boolean result = false;
-	
-	MMember mmember = memberMapper.MemberList(memId);
-	if(mmember != null) {
-		String checkPw = mmember.getMemPw();
-		log.info("mmember = {}", mmember);
-		if(memPw.equals(checkPw)) {
-			result = true;
+	/**
+	 * 회원 탈퇴
+	 * @param mmember
+	 * @return
+	 */
+	public int removeMember(MMember mmember) {
+		int result =0;
+		log.info("탈퇴회원의 정보 : {}", mmember);
+		String memId = mmember.getMemId();
+		
+		result += memberMapper.removeMemberById(memId);
+		
+		return result;
+	}
+
+
+	/**
+	 * 회원정보(비밀번호) 확인
+	 * @param memberId, memberPw
+	 * @return
+	 */
+	public Map<String, Object> checkPwByMemId(String memId, String memPw) {
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		boolean result = false;
+		
+		MMember mmember = memberMapper.MemberList(memId);
+		if(mmember != null) {
+			String checkPw = mmember.getMemPw();
+			log.info("mmember = {}", mmember);
+			if(memPw.equals(checkPw)) {
+				result = true;
+			}
 		}
+		
+		resultMap.put("result", result);
+		resultMap.put("memInfo", mmember);
+		
+		return resultMap;
 	}
-	
-	resultMap.put("result", result);
-	resultMap.put("memInfo", mmember);
-	
-	return resultMap;
-}
 
-/**
- * 회원 상세 조회
- * @param memId
- * @return
- */
-public MMember getMemberInfo(String memId) {
-	
-	return memberMapper.getMemberInfo(memId);
-}
-
-/**
- * 개인 회원 정보 수정
- * @param mmember
- * @return
- */
-public int modifyMemberInfo(MMember mmember) {
-	
-	return memberMapper.modifyMemberInfo(mmember);
-}
-
-
-/**
- * 개인 회원 정보 조회
- * @param memId
- * @return
- */
-public MMember MemberList(String memId) {
-	
-	return  memberMapper.MemberList(memId);
-}
-
-
-
-/**
- * 	
- * @param mmember
- * 
- */
-	//회원가입 처리
-	public void addMember(MMember mmember){
-		log.info("addMember : {}", mmember);
-	    memberMapper.addMember(mmember);
-	
+	/**
+	 * 회원 상세 조회
+	 * @param memId
+	 * @return
+	 */
+	public MMember getMemberInfo(String memId) {
+		
+		return memberMapper.getMemberInfo(memId);
 	}
+
+	/**
+	 * 개인 회원 정보 수정
+	 * @param mmember
+	 * @return
+	 */
+	public int modifyMemberInfo(MMember mmember) {
+		
+		return memberMapper.modifyMemberInfo(mmember);
+	}
+
+
+	/**
+	 * 로그인 / 개인 회원 정보 조회
+	 * @param memId
+	 * @return
+	 */
+	public MMember MemberList(String memId) {
+		
+		return  memberMapper.MemberList(memId);
+	}
+
+
+
+	/**
+	 * 	
+	 * @param mmember
+	 * 
+	 */
+		//회원가입 처리
+		public void addMember(MMember mmember){
+			log.info("addMember : {}", mmember);
+		    memberMapper.addMember(mmember);
+		
+		}
 	
     // 중복 회원 아이디 체크
 	public int checkId(String memId){

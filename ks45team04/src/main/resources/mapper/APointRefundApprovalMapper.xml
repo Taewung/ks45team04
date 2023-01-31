@@ -20,6 +20,15 @@
 		<result property="refundApprovalDatetime" 	column="refund_approval_datetime"/>
 	</resultMap>
 	
+	<delete id="deletePointRefundApprovalByCode" parameterType="String">
+		/* 포인트 환급 신청 코드로 삭제 */
+		DELETE
+		FROM 
+			point_refund
+		WHERE 
+			point_refund_code = #{pointRefundCode};
+	</delete>
+	
 	<update id="modifyPointRefundApproval" parameterType="PointRefundApproval">
 		/* 특정 환불 승인 내역 수정*/
 		UPDATE 
@@ -52,7 +61,6 @@
 				${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
 			</if>
 		</where>
-			
 	</select>
 	
 </mapper>

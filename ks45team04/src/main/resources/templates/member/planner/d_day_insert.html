@@ -1,79 +1,175 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  class="pxp-root" >
+	 layout:decorate="~{member/layout/contentDefault}">
 <!-- fragments/head.html(html확장자를 제외한 경로) :: (해당 html안에 선언된 조각변수 이름 -->
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
-    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-    <link rel="stylesheet" th:href="@{/css/examAnswer.css}">
-    <link rel="stylesheet" th:href="@{/dday/dday.css}">
-</head>
-
-<body>
-	<div class="pxp-preloader"><span>Loading...</span></div>
-	
-		<!-- begin header -->
-		<div th:replace="~{member/fragments/contentsHeader :: headerFragment}"></div>
-		<!-- end header -->			
+	<th:block layout:fragment="customScript">
+		<script>
+		// 취소 버튼 클릭시 리다이렉트
+		$(function(){
+			$('#resetBtn').click(function(){
+				location.href = '/detailDDay';
+			});
+		});
 		
-		<!-- begin contents --> 
-         <th:block layout:fragment="customContents">
-         
-             <main>
-      <h1 class="head"><span>D-Day</span></h1>
-
-      <form id="countdown-form">
-       <div class="name">
-          <input type="text" name="eventName" id="eventName" />
-          <label for="eventName" class="label"
-            ><span>디데이 이름</span></label
-          >
-        </div>
-        
-
-        <input type="date" name="endDate" id="end" />
-        <button>추가</button>
-      </form>
-
-      <section class="result">
-        <p class="days">00<span>일</span></p>
-        <p class="hours">00 <span>시간</span></p>
-        <p class="minutes">00 <span>분</span></p>
-        <p class="seconds">00 <span>초</span></p>
-      </section>
-    </main>
-         
-         
-         </th:block>  	   
-        <!-- end contents --> 
-
-		<!-- begin footer -->
-		<div th:replace="~{member/fragments/contentsFooter :: footerFragment}"></div>
-		<!-- end footer -->
+		$(function(){ // 요소가 렌더링이 되고나서 실행해 주세요
+			function validateValue(checkValue) {
+				if(    typeof checkValue == 'undefined' 
+						|| checkValue == null 
+						|| checkValue == ''					){
+					return true;
+				}
+				return false;
+				
+			}
+		
+		
+		// 노트이름 클릭시 노트코드 자동 등록
+		//$(function(){
+		//	$('#liName').val($('#liCode option:selected').text());
+			//$(document).on('change', '#liCode', function(){
+				//console.log($('#liCode option:selected').text());
+			//	let selectedLiName = $('#liCode option:selected').text();
+				//$('#liName').val(selectedLiName);
+			//});
+		//});
+		
+		
+		//노트이름 자동등록
+		
+                function validationCheck(data){
+                    if(typeof data == 'undefined' ||  data == ''  || data == null || data == '대분류'){
+                        return false;
+                    }
+                    return true;
+                }
+		
+		
+		$(document).on('change','#liCode', function(){
 			
-	<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
-    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/js/owl.carousel.min.js}"></script>
-    <script th:src="@{/js/nav.js}"></script>
-    <script th:src="@{/js/main.js}"></script>
-     <script th:src="@{/dday/dday.js}"></script>
-    
-    
-    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
-	<script type="text/javascript" src='questions.json'></script>
-	<script type='text/javascript' src='jsquiz.js'></script>
-	<script type='text/javascript' src='/js/examAnswer.js'></script>
-</body>
+			let liCode = $(this).val();
+				console.log(liCode);
+			
+			if(validationCheck(liCode)){						
+				var request = $.ajax({
+				  url: '/getliName',
+				  method: 'GET',
+				  data: { 'liCode' : liCode },
+				  dataType: 'json'
+				});
+	
+				request.done(function( data ) {
+					  console.log(data);
+					  let liName = data.liName
+					  $('input[name=liName]').attr('value',liName);
+					  
+					});
+				// 중분류 선택 실패시
+				request.fail(function( jqXHR, textStatus ) {
+					  alert( "Request failed: " + textStatus );
+					});
+				}
+			});
+		
+		
+		/* 유효성검사를 구현하시오. (#submitBtn 를 클릭 시) */
+		$('#submitBtn').click(function(){
+			let isSubmit = true;
+			
+			$('#addDDayForm input').each(function(idx, item){
+				let checkValue = $(item).val();
+				let labelValue = $(item).parent('.mb-3').find('label').text();
+				if(validateValue(checkValue)){
+					
+					alert(`${labelValue}를 입력해주세요`);
+					$(item).focus();
+					isSubmit = false;
+					return false;
+				}
+				
+			});   
+
+			if(isSubmit) $('#addDDayForm').submit();
+			});
+		});
+		
+		
+	
+		
+		</script>
+	</th:block> 
+	<th:block layout:fragment="customContents">
+	
+		<form id="addDDayForm" th:action="@{/addDDay}" name="myform" method="post">
+              <div class="row mt-4 mt-lg-5">
+                  <div class="col-xxl-8" style=" margin-left: 650px;">
+                      <div class="row">
+                      </div>
+                      <div class="row">
+                      </div><br>
+                      <div class="row">
+                      <div class="row">
+                        
+                      </div>
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="memId" class="form-label" ><h4>회원 아이디</h4></label>
+                                  <input type="text" id="memId" class="form-control" name="memId" placeholder="회원 아이디"  value="id006">
+                              </div>
+                          </div>
+                     
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="liCode" class="form-label"><h6>자격증 이름</h6></label>
+                                  <select class="form-select" id="liCode" name="liCode">
+                             		 <th:block th:if="${not #lists.isEmpty(licenseInfoList)}" 
+										  th:each="l : ${licenseInfoList}">								
+									<option th:value="${l.liCode}">[[${l.liName}]]</option>
+									</th:block>
+									<th:block th:unless="${not #lists.isEmpty(licenseInfoList)}">								
+									<option>등록된 정보가 없습니다.</option>
+                               		</select>
+                               		  
+                              </div>
+                          </div>
+                      </div>
+                       <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3" hidden >
+                                    <label for="getliName" class="form-label">자격증코드</label>
+                                   <input type="text" id="liName" class="form-control" name="liName" />
+                              </div >
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="dDayContent" class="form-label"><h6>디데이제목/내용</h6></label>
+                                  <input type="text" id="dDayContent" class="form-control" name="dDayContent" placeholder="디데이제목/내용">
+                              </div>
+                          </div>
+                      </div>    
+                       <div class="row">
+                          <div class="col-sm-6">
+                              <div class="mb-3">
+                                  <label for="dDayDate" class="form-label"><h6>목표날짜</h6></label>
+                                  <input type="date" id="dDayDate" class="form-control" name="dDayDate" placeholder="목표날짜">
+                              </div>
+                          </div>
+                      </div>                          
+                   
+                      
+                  </div>
+              </div>
+              <div class="mt-4 mt-lg-5" style=" margin-left: 850px;">
+                  <button type="button" id="submitBtn" class="btn rounded-pill pxp-section-cta submitBtn ">등록</button>&nbsp;&nbsp;
+                  <button type="reset"  id="resetBtn"  class="btn rounded-pill pxp-section-cta">취소</button>
+                  
+              </div>
+          </form>
+	<br>
+	</th:block>
+	
+	
 </html>

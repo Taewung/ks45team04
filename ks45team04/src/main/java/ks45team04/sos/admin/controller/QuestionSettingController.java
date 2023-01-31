@@ -138,7 +138,7 @@ public class QuestionSettingController {
 	}
 	
 	/* ------------------답안------------------ */
-	// 답안수정 처리
+	// 특정 답안수정 처리
 	@PostMapping("/modifyAnswer")
 	public String modifyAnswer(Answer answer) {
 		answer.setAnswerRegId("id002"); 
@@ -147,7 +147,7 @@ public class QuestionSettingController {
 		String qCode = answer.getQuestionCode();
 		return "redirect:/answerList?questionCode="+qCode;
 	}
-	// 답안수정 화면
+	// 특정 답안수정 화면
 	@GetMapping("/modifyAnswer")
 	public String modifyAnswer(Model model, @RequestParam(value="answerCode", required=false) String answerCode) {
 		Answer answerByCode = questionSettingService.getAnswerByCode(answerCode);
@@ -230,7 +230,7 @@ public class QuestionSettingController {
 		log.info("특정 문제코드 조회 : {}", questionCodeForQSet);
 		return "admin/questionSetting/add_explanation";
 	}
-	// 문제코드별 해설목록
+	// 문제코드별 해설목록 조회
 	@GetMapping("/explanationList")
 	public String explanationList(@RequestParam(value="questionCode", required=false) String questionCode, Model model) {
 		Question questionCodeForQSet = questionSettingService.getQuestionCodeForQSet(questionCode);

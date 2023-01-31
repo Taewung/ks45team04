@@ -227,16 +227,26 @@
         </section>
 	<form id="challengeGoalForm" th:action="@{/challengeState}" method="get">
         <section class="mt-100">
+             <!-- 챌린지 제목 입력 start -->
             <div class="pxp-container">
-             <!-- 챌린지 목표 제목 입력 start -->
                <div class="row mt-4 mt-lg-5">
-                 <h2><strong><span class="fa fa-check"></span>&nbsp;챌린지 목표</strong></h2>	                    
+                 <h2><strong><span class="fa fa-check"></span>&nbsp;챌린지 제목</strong></h2>	                    
 	               <div class="mb-3">
-		             <textarea class="form-control" id="pxp-company-job-description" placeholder="챌린지 목표를 입력해주세요."></textarea>
+		             <textarea class="form-control" id="cgGoalTitle" name="cgGoalTitle "placeholder="챌린지 제목을 입력해주세요."></textarea>
 	               </div>	                        
                </div>
                </div>
-              <!-- 챌린지 목표 제목 입력 end --> 
+              <!-- 챌린지 목표 입력 end --> 
+             <!-- 챌린지 목표 입력 start -->
+            <div class="pxp-container">
+               <div class="row mt-4 mt-lg-5">
+                 <h2><strong><span class="fa fa-check"></span>&nbsp;챌린지 목표</strong></h2>	                    
+	               <div class="mb-3">
+		             <textarea class="form-control" id="cgContent" name="cgContent" placeholder="챌린지 목표를 입력해주세요."></textarea>
+	               </div>	                        
+               </div>
+               </div>
+              <!-- 챌린지 목표 입력 end --> 
 
                     <!-- 자격증선택 start -->                
  			<!-- 자격증선택 start -->
@@ -310,7 +320,7 @@
 		                    </div>
 		                    <!-- 목록 start -->                   
 		                    <div class="table-responsive">
-		                        <table class="table table-hover align-middle">                      	
+		                        <table class="table table-hover align-middle" name="cgStudyTime" id="cgStudyTime">                      	
 		                            <thead>                    
 		                                <tr>
 		                                    <th style="width: 50%">시간</th>

@@ -1,6 +1,7 @@
 package ks45team04.sos.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -121,17 +122,23 @@ private final LicenseInfoMapper licenseInfoMapper;
 		// 자격증 정보 조회
 		@GetMapping("/licenseInofoList")
 		public String licenseInofoList(Model model
+									  ,@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage
 									  ,@RequestParam(value="searchKey", required = false) String searchKey
-								      ,@RequestParam(value="searchValue", required = false) String searchValue) {
+									  ,@RequestParam(value="searchValue", required = false, defaultValue = "") String searchValue) {
 			
-			List<LicenseInfo> licenseInfoList = licenseInfoService.LicenseInfoList(searchKey, searchValue);
-			System.out.println(licenseInfoList);
+			Map<String, Object> paramMap = licenseInfoService.licenseInfoList(currentPage, searchKey, searchValue);
+			int lastPage = (int) paramMap.get("lastPage");
+			List<LicenseInfo> licenseInfoList = (List<LicenseInfo>) paramMap.get("licenseInfoList");
+			int startPageNum = (int) paramMap.get("startPageNum");
+			int endPageNum = (int) paramMap.get("endPageNum");
 			
-			model.addAttribute("title", "자격증 정보 조회");
+			model.addAttribute("title", "자격증별 합격기준점수 목록");
+			model.addAttribute("currentPage", currentPage);
 			model.addAttribute("licenseInfoList", licenseInfoList);
-			
-					
-			
+			model.addAttribute("lastPage", lastPage);
+			model.addAttribute("startPageNum", startPageNum);
+			model.addAttribute("endPageNum", endPageNum);
+
 			return "admin/licenseInfo/license_info_list";
 		}
 

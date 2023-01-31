@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import ks45team04.sos.admin.controller.QuestionSettingController;
+import ks45team04.sos.admin.dto.LicenseInfo;
 import ks45team04.sos.member.dto.DDay;
 import ks45team04.sos.member.dto.Note;
 import ks45team04.sos.member.dto.ToDoList;
@@ -22,7 +26,7 @@ import ks45team04.sos.member.service.PlannerService;
 
 @Controller
 public class PlannerController {
-	
+	private static final Logger log = LoggerFactory.getLogger(QuestionSettingController.class);
 	private final 	PlannerService plannerService;
 	private final 	PlannerMapper plannerMapper;
 
@@ -92,6 +96,15 @@ public class PlannerController {
 //		model.addAttribute("toDoListInfo", "일정 삭제");
 //		return "member/planner/to_do_list_delete";
 //	}
+	
+	// 코드별 일정 조회
+		@GetMapping("/getToDoListByCode")
+		public String getToDoListByCode(Model model,@RequestParam(name="toDoListCode", required = false) String toDoListCode) {
+			model.addAttribute("title", "코드별 일정 조회");
+			model.addAttribute("toDoListCode", toDoListCode);
+			
+			return "member/planner/stopwatch_record";
+		}
 
 	// 일정 조회
 	@GetMapping("/listToDoList")
@@ -167,26 +180,79 @@ public class PlannerController {
 		return "member/planner/study_list";
 	}
 
-	// 디데이 등록
+	
+	// 디데이 정보 수정 처리
+		@PostMapping("/modifyDDay")
+		public String modifyDDay(DDay dDay) {
+			log.info("post modifyDDay : {}", dDay);
+			plannerService.modifyDDay(dDay);
+
+			return "redirect:/detailDDay";
+		}
+
+	
+	// 디데이 수정 화면
+		@GetMapping("/modifyDDay")
+		public String modifyDDay(@RequestParam(value = "dDayCode") String dDayCode, Model model) {
+			DDay dDay = plannerService.getDDayByCode(dDayCode);
+			List<LicenseInfo> licenseInfoList = plannerService.licenseInfoList();
+
+			log.info("특정디데이 정보 : {}", dDay);
+			model.addAttribute("title", "디데이 정보 수정");
+			model.addAttribute("dDay", dDay);
+			model.addAttribute("licenseInfoList", licenseInfoList);
+
+			return "member/planner/d_day_modify";
+		}
+	
+		
+	// 디데이 등록 코드별 이름
+		@GetMapping("/getliName")
+		    @ResponseBody
+		    public LicenseInfo getliName(@RequestParam(value="liCode") String liCode) {
+			LicenseInfo getliName = plannerService.getliName(liCode);
+		       
+			log.info("디데이 등록 코드별 이름 : {}", getliName);
+			
+		        return getliName;
+		    }
+	
+	//디데이 등록 처리
+	@PostMapping("/addDDay")
+	public String addDDay(DDay dDay) {
+		
+		plannerService.addDDay(dDay);
+		
+		log.info("디데이 등록처리 : {}", dDay);
+		return "redirect:/detailDDay";
+	}
+	
+	// 디데이 등록 화면
 	@GetMapping("/addDDay")
 	public String addDDay(Model model) {
+		List<LicenseInfo> licenseInfoList = plannerService.licenseInfoList();
+		
+		model.addAttribute("licenseInfoList", licenseInfoList);
 		model.addAttribute("title", "디데이 등록");
+		
+		log.info("라이센스인포 이름 : {}", licenseInfoList);
+		
 		return "member/planner/d_day_insert";
 	}
 
-	// 디데이 수정
-	@GetMapping("/modifyDDay")
-	public String modifyDDay(Model model) {
-		model.addAttribute("title", "디데이 수정");
-		return "member/planner/d_day_modify";
-	}
+	
 
-	// 디데이 삭제
+	// 일정 삭제 처리
 	@GetMapping("/deleteDDay")
-	public String deleteDDay(Model model) {
-		model.addAttribute("title", "디데이 삭제");
-		return "member/planner/d_day_delete";
+	public String deleteDDayByCode(DDay dDay, RedirectAttributes reAttr) {
+		String dDayCode = dDay.getdDayCode();
+		String redirectURI = "redirect:/detailDDay";
+
+		plannerService.deleteDDayByCode(dDayCode);
+
+		return redirectURI;
 	}
+		
 
 	// 디데이 상세
 	@GetMapping("/detailDDay")

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ks45team04.sos.admin.dto.Refund;
 import ks45team04.sos.admin.mapper.RefundMapper;
@@ -24,6 +25,17 @@ public class ARefundController {
 		this.refundService = refundService;
 	}
 
+	//환불 신청 내역 삭제
+	@GetMapping("/deleteRefundApproval")
+	public String deleteRefundApproval(Refund refund, RedirectAttributes reAttr) {
+		
+		String refundCode = refund.getRefundCode();
+		String redirectURI = "redirect:/refundApproval";
+		
+		refundService.deleteRefundByCode(refundCode);
+		
+		return redirectURI;
+	}
 	//환불 승인 수정 처리
 	@PostMapping("/modifyRefundApproval")
 	public String modifyRefundApproval(Refund refund) {
