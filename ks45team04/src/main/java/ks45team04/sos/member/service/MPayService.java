@@ -17,6 +17,16 @@ public class MPayService {
 	}
 	
 	
+	public int notePayInsert(MPay mPay) {
+		
+		mPay.setFinalPayPrice(mPay.getTotalPayPrice() - mPay.getPayUsePoint());
+		
+		System.out.println(mPay);
+		
+		return 0;
+	}
+	
+	
 	//회원 결제 내역 상세보기
 	public MPay getMPayByCode(String payCompleteCode) {
 		
