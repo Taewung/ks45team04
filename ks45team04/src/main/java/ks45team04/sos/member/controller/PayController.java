@@ -5,8 +5,11 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpSession;
+import ks45team04.sos.member.dto.LoginInfo;
 import ks45team04.sos.member.dto.MPay;
 import ks45team04.sos.member.dto.Note;
 import ks45team04.sos.member.mapper.MNoteMapper;
@@ -35,10 +38,28 @@ public class PayController {
 	}
 	
 	//결제창 처리
+	@PostMapping("/payInsert")
+	public String payInsert(MPay mPay, HttpSession session) {
+		System.out.println(mPay + "mPay~~~~~~~~~~~~~~~~~~~");
+		
+		String loginId = (String) session.getAttribute("SID");
+		
+		mPay.setPayId(loginId);
+		
+		mPayService.notePayInsert(mPay);
+		
+		return "redirect:/noteList";
+		
+	}
+	
+	//결제창 화면
 	@GetMapping("/payInsert")
 	public String payInsert(@RequestParam(value="noteWriterId") String noteWriterId
 							,Model model) {
 		Note note = mNoteService.getNoteById(noteWriterId);
+		
+		String totalPrice = note.getNotePrice().substring(0,  note.getNotePrice().length() - 1);
+		note.setNotePrice(totalPrice);
 		
 		model.addAttribute("noteInfo", note);
 		
